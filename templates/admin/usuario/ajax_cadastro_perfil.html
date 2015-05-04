@@ -1,0 +1,58 @@
+<!-- BEGIN BLOCK_CREA -->
+<div class="form-group">
+		<label for="senha"><i class='fa'></i><b>Registro (CREA) - Engenheiros</b></label>
+		<input type="text" id="registro" name="registro" placeholder="Registro (CREA) - Engenheiros" value="{registro}" class="form-control" />
+		</div>
+<!-- END BLOCK_CREA -->
+<!-- BEGIN BLOCK_NOTCREA -->
+	<input type="hidden" id="registro" name="registro" value="{registro}"/>
+
+<!-- END BLOCK_NOTCREA -->
+<!-- BEGIN BLOCK_EMPRESA -->
+<div class="form-group">
+	<label for="empresa"><i class='fa'></i><b>Empresa</b></label>
+	<select name="empresa" id="empresa" class="required form-control">
+		<option value="" >Selecione</option>
+		<!-- BEGIN BLOCK_ITEM_EMP -->
+		<option value="{idItem}" {checkItem}>{labelItem}</option>
+		<!-- END BLOCK_ITEM_EMP -->
+	</select>
+</div>
+<!-- END BLOCK_EMPRESA -->
+<!-- BEGIN BLOCK_COND -->
+<div class="form-group">
+	<label for="condominio"><i class='fa'></i><b>Condomínio</b></label>
+	<select name="condominio" id="condominio" class="required form-control">
+		<option value="" >Selecione</option>
+		<!-- BEGIN BLOCK_ITEM_COND -->
+		<option value="{idItem}" {checkItem}>{labelItem}</option>
+		<!-- END BLOCK_ITEM_COND -->
+	</select>
+</div>
+<script>
+	$(document).ready(function() {
+
+		$("#empresa").change(function(){
+			condominioPorEmpresa();
+		});
+
+		function condominioPorEmpresa(){
+
+			$.ajax({
+				url : "ajax/usuario_condominio.php?iduser={iduser}",
+				type : "POST",
+				data : {
+					idEmp : $("#empresa").val()
+				},
+				dataType : "html"
+			}).done(function(msg) {
+				$("#condominio").html(msg);
+			});
+		}
+
+	condominioPorEmpresa();
+		
+	});
+</script>
+<!-- END BLOCK_COND -->
+

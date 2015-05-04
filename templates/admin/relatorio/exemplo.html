@@ -1,0 +1,109 @@
+<form role="form" method="post" action="mpdf/relatorios/log.php" id="frmEdit" target="_blank">
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title"></h3>
+		</div>
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="empresa"><i class='fa'></i><b>Empresa</b></label>
+						<select name="empresa" id="empresa"  class="form-control">
+							<option value="">Selecione a Empresa</option>
+							<!-- BEGIN BLOCK_ITEM_EMPRESA -->
+							<option value="{ID_EMPRESA}">{NOME_EMPRESA}</option>
+							<!-- END BLOCK_ITEM_EMPRESA -->
+						</select>
+					</div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="condominio"><i class='fa'></i><b>Condomínio</b></label>
+						<select name="condominio" id="condominio"  class="form-control">
+							<option value="" selected>Selecione o Condomínio</option>
+							<!-- BEGIN BLOCK_ITEM_CONDOMINIO -->
+							<option value="{ID_CONDOMINIO}">{NOME_CONDOMINIO}</option>
+							<!-- END BLOCK_ITEM_CONDOMINIO -->
+						</select>
+					</div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="usuario"><i class='fa'></i><b>Usuário</b></label>
+						<select name="usuario" id="usuario"  class="form-control">
+							<option value="" selected>Selecione o usuario</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="periodo"><i class='fa'></i><b>Período:</b></label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<input type="text" name="periodo" id="periodo" class="form-control pull-right">
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="cpf"><i class='fa'></i><b>Texto</b></label>
+						<input type="text" id="texto" name="texto" placeholder="Digite um trecho da log que deseja"  class="form-control"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer text-center">
+			<button class="btn btn-info" type="submit">
+				Gerar
+			</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	$(function() {
+		$('#periodo').daterangepicker();
+
+		$("#condominio").change(function() {
+			$.ajax({
+				url : "ajax/usuariosPorCondominio.php",
+				type : "POST",
+				data : {
+					condominio : $(this).val(),
+					empresa : $("#empresa").val()
+				},
+				dataType : "html"
+			}).done(function(msg) {
+				$("#usuario").html(msg);
+			});
+
+
+		});
+
+		$("#empresa").change(function() {
+			$.ajax({
+				url : "ajax/condominiosPorEmpresa.php",
+				type : "POST",
+				data : {
+					empresa : $(this).val()
+				},
+				dataType : "html"
+			}).done(function(msg) {
+				$("#condominio").html(msg);
+			});
+			$.ajax({
+				url : "ajax/usuariosPorCondominio.php",
+				type : "POST",
+				data : {
+					empresa : $(this).val()
+				},
+				dataType : "html"
+			}).done(function(msg) {
+				$("#usuario").html(msg);
+			});
+
+		});
+	});
+</script>

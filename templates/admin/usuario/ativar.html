@@ -1,0 +1,64 @@
+<div class="header">
+	Habilitar usuário
+</div>
+<form class="form-signin" action="usuario-doativar" method="post" id="frmAtivaUsuario" name="frmAtivaUsuario">
+     <input type="hidden" name="id" id="id" value="{id}"/>
+	<div class="body bg-gray">
+		<div class="form-group">
+			<img src="img/logo.png" alt="Gestor Cadmo" class="img-thumbnail">
+		</div>
+		<div class="form-group">
+			<label>Crie seu login</label>
+			 <input type="text"  name="login" id="login" autofocus="" required="" placeholder="Login" class="required form-control" value="" autocomplete="off">
+		</div>
+		<div class="form-group">
+			<label>Insira sua senha</label>
+			 <input type="password"  name="senha" id="senha" autofocus="" required="" placeholder="Senha" class="required form-control" value="" autocomplete="off">
+		</div>
+		<div class="form-group">
+			<label>Repita a senha</label>
+			 <input type="password"  name="senha2" id="senha2" autofocus="" required="" placeholder="Senha" class="required form-control" value="" autocomplete="off">
+		</div>
+	</div>
+	<div class="footer">
+		<button type="submit" class="btn btn-success btn-block">
+			Ativar Usuário
+		</button>
+		<a class="btn btn-lg btn-default btn-block" href="index.php">Voltar</a>
+	</div>
+</form>
+<script>
+	$(document).ready(function() {
+		$("#frmAtivaUsuario").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			rules : {
+				senha2 : {
+					equalTo : '[name="senha"]'
+				},
+				login: {
+                        required: true,
+                         remote: {
+							url: "ajax/usuario_verificaLogin.php?idUser="+$("#id").val()+"&login="+$("#login").val(),
+							type: "get",
+							}
+						}
+			},
+			messages: {
+					login: {
+					remote: "Login já existe no sistema"
+					}
+				}
+		});
+	});
+</script>

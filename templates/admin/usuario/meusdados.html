@@ -1,0 +1,147 @@
+<form role="form" method="post" action="usuario-action" id="frmEditDados" enctype="multipart/form-data">
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title">{LABEL}</h3>
+	</div>
+	<div class="box-body">
+
+
+			<input type="hidden" name="acao" value="{ACAO}"/>
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="cpf"><i class='fa'></i><b>CPF</b></label>
+						<input type="text" id="cpf" name="cpf" placeholder="CPF" value="{cpf}" class="required cpf form-control" data-inputmask='"mask": "999.999.999-99"' data-mask/>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="nome"><i class='fa'></i><b>Nome</b></label>
+						<input type="text" id="nome" name="nome" placeholder="Nome" value="{nome}" class="required form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="telefone"><i class='fa'></i><b>Telefone</b></label>
+						<input type="text" id="telefone" name="telefone" placeholder="Telefone fixo" value="{telefone}" class="required form-control" data-inputmask='"mask": "(99) 9999-99999"' data-mask/>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="celular"><i class='fa'></i><b>Celular</b></label>
+						<input type="text" id="celular" name="celular" placeholder="Celular" value="{celular}" class="required form-control" data-inputmask='"mask": "(99) 9999-99999"' data-mask/>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="email"><i class='fa'></i><b>E-mail</b></label>
+						<input type="email" id="email" name="email" placeholder="E-mail" value="{email}" class=" email required form-control email" autocomplete="off"/>
+					</div>
+				</div>
+				<div class="col-md-3 col-xs-12">
+					<div class="form-group">
+						<label for="email"><i class='fa'></i><b>Log-in</b></label>
+						<input type="text" id="login" name="login" placeholder="Login de acesso" value="{login}" class="required form-control"/>
+					</div>
+				</div>
+				<div class="col-md-3 col-xs-12 text-left">
+					<label for="senha"><i class='fa'></i><b>Senha</b></label>
+						<input type="password" id="senha" name="senha" placeholder="Senha" value="{senha}" class="form-control"  autocomplete="off"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="assinatura"><i class='fa'></i><b>Assinatura</b></label>
+						<input type="file"  name="assinatura" id="assinatura"/>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="foto"><i class='fa'></i><b>Foto</b></label>
+						<input type="file"  name="foto" id="foto"/>
+					</div>
+				</div>
+
+			</div>	
+
+	</div>
+<div class="box-footer text-center">
+	<button class="btn btn-success" type="submit">Salvar</button>
+	<button class="btn btn-default btVoltar" type="button">Voltar</button>
+
+</div>
+
+</div>
+</form>
+<script>
+$(document).ready(function() {
+
+$("#assinatura").fileinput({
+				 initialPreview: [
+					<!-- BEGIN BLOCK_ASS -->"{ASS_USER}",<!-- END BLOCK_ASS -->
+			],
+			overwriteInitial: true,
+			maxFileSize: 2000,
+			maxFilesNum: 1,
+			allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+			previewClass: "bg-warning",
+			allowedFileTypes: ["image"],
+			showUpload: false,
+			showCaption: false
+		});
+		$("#foto").fileinput({
+				 initialPreview: [
+					<!-- BEGIN BLOCK_IMG -->"{IMG_USER}",<!-- END BLOCK_IMG -->
+			],
+			overwriteInitial: true,
+			maxFileSize: 2000,
+			maxFilesNum: 1,
+			allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+			previewClass: "bg-warning",
+			allowedFileTypes: ["image"],
+			showUpload: false,
+			showCaption: false
+		});
+
+
+$("#frmEditDados").validate({
+				errorClass : "help-inline",
+				errorElement : "div",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).parents('.form-group').addClass('has-error');
+					$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).parents('.form-group').removeClass('has-error');
+					$(element).parents('.form-group').addClass('has-success');
+					$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+					$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+				},
+				rules: {
+                   login: {
+                        required: true,
+                         remote: {
+							url: "ajax/usuario_verificaLogin.php?idUser={idUser}&login="+$("#login").val(),
+							type: "get",
+							}
+						}
+            	},
+            	 messages: {
+					login: {
+					remote: "Login já existe no sistema"
+					}
+				}
+			});
+
+
+
+
+});
+</script>

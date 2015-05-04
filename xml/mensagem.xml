@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Exemplos de mensagens:
+<mensagem id="1" type="suscess">Mensagem de teste</mensagem>>
+-->
+<mensagens>
+<mensagem id="1" type="danger">Usuário não encontrado.</mensagem>
+<mensagem id="2" type="danger">Senha inválida.</mensagem>
+<mensagem id="3" type="danger">Email já cadastrado no sistema.</mensagem>
+<mensagem id="4" type="success">Usuário cadastrado com sucesso.</mensagem>
+<mensagem id="5" type="success">Usuário alterado com sucesso.</mensagem>
+<mensagem id="6" type="danger">Usuário não autenticado.</mensagem>
+<mensagem id="7" type="danger">Usuário não tem permissão para acessar a funcionalidade.</mensagem>
+<mensagem id="8" type="success">Usuário excluído com sucesso.</mensagem>
+<mensagem id="9" type="success">Perfil Alterado com sucesso.</mensagem>
+<mensagem id="10" type="danger">CNPJ já cadastrado no sistema.</mensagem>
+<mensagem id="11" type="success">Condomínio incluído com sucesso.</mensagem>
+<mensagem id="12" type="success">Condomínio alterado com sucesso.</mensagem>
+<mensagem id="13" type="success">Condomínio excluído com sucesso.</mensagem>
+<mensagem id="14" type="danger">Número para o condomínio já cadastrado no sistema.</mensagem>
+<mensagem id="15" type="success">Unidade Autônoma incluída com sucesso.</mensagem>
+<mensagem id="16" type="success">Unidade Autônoma alterada com sucesso.</mensagem>
+<mensagem id="17" type="success">Unidade Autônoma excluída com sucesso.</mensagem>
+<mensagem id="18" type="success">Uma nova senha foi gerada e enviada para {param1}.</mensagem>
+<mensagem id="19" type="warning">Estamos com problemas para processar essa operação no momento, por favor tente novamente mais tarde.</mensagem>
+<mensagem id="20" type="success">Profissional incluído com sucesso.</mensagem>
+<mensagem id="21" type="success">Profissional alterado com sucesso.</mensagem>
+<mensagem id="22" type="success">Profissional excluído com sucesso.</mensagem>
+<mensagem id="23" type="success">Pergunta incluída com sucesso.</mensagem>
+<mensagem id="24" type="success">Pergunta alterada com sucesso.</mensagem>
+<mensagem id="25" type="success">Pergunta excluída com sucesso.</mensagem>
+<mensagem id="26" type="success">Texto de Termo alterado com sucesso.</mensagem>
+<mensagem id="27" type="success">Advertência incluída com sucesso.</mensagem>
+<mensagem id="28" type="success">Advertência alterada com sucesso.</mensagem>
+<mensagem id="29" type="success">Advertência excluída com sucesso.</mensagem>
+<mensagem id="30" type="success">Empresa incluída com sucesso.</mensagem>
+<mensagem id="31" type="success">Empresa alterada com sucesso.</mensagem>
+<mensagem id="32" type="success">Empresa excluída com sucesso.</mensagem>
+<mensagem id="33" type="success">E-mail incluído com sucesso.</mensagem>
+<mensagem id="34" type="success">E-mail alterado com sucesso.</mensagem>
+<mensagem id="35" type="success">E-mail excluído com sucesso.</mensagem>
+<mensagem id="36" type="warning">Não é possível incluir um novo Texto de Termo sem um condomínio vinculado</mensagem>
+<mensagem id="37" type="warning">Não é possível incluir o novo Texto de Termo porque esse condomínio já possui um texto para esse Tipo de Termo.</mensagem>
+<mensagem id="38" type="success">Texto de Termo incluído com sucesso no condomínio.</mensagem>
+<mensagem id="39" type="success">Texto de Termo excluído com sucesso no condomínio.</mensagem>
+<mensagem id="40" type="warning">Não é possível excluir o novo Texto de Termo padrão.</mensagem>
+<mensagem id="41" type="success">Comunicação de Obra cadastrada com sucesso. Aguarde contato do Engenheiro responsável.</mensagem>
+<mensagem id="42" type="success">Classificação realizada com sucesso.</mensagem>
+<mensagem id="43" type="success">Mensagem enviada com sucesso.</mensagem>
+<mensagem id="44" type="success">Comunicação de Obra assinada com sucesso!</mensagem>
+<mensagem id="45" type="success">Termo de Autorização de Manutenção gerado com sucesso!</mensagem>
+<mensagem id="46" type="success">O aviso de conclusão de obra foi realizado com sucesso!</mensagem>
+<mensagem id="47" type="success">Termo de Conclusão de Manutenção gerado com sucesso!</mensagem>
+<mensagem id="48" type="success">Termo assinado com sucesso!</mensagem>
+<mensagem id="49" type="success">Lista de profissionais atualizada com sucesso!</mensagem>
+<mensagem id="50" type="success">Vistoria Agendada com sucesso!</mensagem>
+<mensagem id="51" type="success">Inclusão de documento realizada com sucesso!</mensagem>
+<mensagem id="52" type="success">Exclusão de documento realizada com sucesso!</mensagem>
+<mensagem id="53" type="success">Questionário de início de reforma cadastrado com sucesso!</mensagem>
+<mensagem id="54" type="success">Questionário de início de reforma assinado com sucesso!</mensagem>
+<mensagem id="55" type="success">Projeto aprovado com sucesso!</mensagem>
+<mensagem id="56" type="success">Termo de Conclusão de Reforma gerado com sucesso!</mensagem>
+<mensagem id="57" type="success">Vistoria salva com sucesso!</mensagem>
+<mensagem id="58" type="success">Vistoria excluída com sucesso!</mensagem>
+<mensagem id="59" type="warning">É necessário selecionar um condomínio para acessar essa funcionalidade!</mensagem>
+<mensagem id="60" type="danger">Usuário não está ativo no sistema</mensagem>
+<mensagem id="61" type="danger">Usuário já está ativo no sistema</mensagem>
+<mensagem id="62" type="success">Usuário habilitado no sistema com sucesso!</mensagem>
+<mensagem id="63" type="success">O aviso de conclusão de envio de documentos foi realizado com sucesso!</mensagem>
+<mensagem id="64" type="warning">Você deve selecionar o perfil que deseja editar usuários!</mensagem>
+<mensagem id="65" type="warning">Limite de cadastros atingido!</mensagem>
+<mensagem id="66" type="success">Análise de Projeto salva com sucesso!</mensagem>
+<mensagem id="67" type="success">Advertência Emitida com sucesso!</mensagem>
+<mensagem id="68" type="success">Senha redefinida com sucesso!</mensagem>
+<mensagem id="69" type="success">Tabela e preços atualizada com sucesso!</mensagem>
+<mensagem id="70" type="danger">Não é possível excluir esse registro pois o mesmo contém dados no sistema que não podem ser excluídos.</mensagem>
+<mensagem id="71" type="success">Advertência Liberada com sucesso!</mensagem>
+<mensagem id="72" type="success">O processo foi cancelado com sucesso!</mensagem>
+<mensagem id="73" type="success">A Cópia do questionário foi realizada com sucesso!</mensagem>
+<mensagem id="74" type="success">A Cópia do termo foi realizada com sucesso!</mensagem>
+<mensagem id="75" type="success">A obra foi suspensa com sucesso!</mensagem>
+<mensagem id="76" type="success">A obra foi retomada com sucesso!</mensagem>
+</mensagens>
+
+

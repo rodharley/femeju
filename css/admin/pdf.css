@@ -1,0 +1,142 @@
+body {
+	font-family: arial; 
+font-size: 9pt; 
+}
+.header{
+	
+width: 100%; 
+vertical-align: bottom;
+font-family: arial; 
+font-size: 9pt; 
+color: #000000;	
+border-bottom: #005888 2px solid;
+}
+.header tr td {
+border:none;
+padding:3px;
+}
+.header .leftHeader{
+	text-align: left;
+	width: 132px;
+}
+.header .rightHeader{
+	text-align: center;
+	width: 100px;
+}
+
+.header .centerHeader{
+	text-align: center;
+	font-size: 15pt;
+}
+.footer {
+	border-top: #005888 2px solid;
+	width:100%;
+}
+.footer tr td{
+	text-align: center;
+}
+.grade {
+	font-family: arial; 
+	font-size: 9pt; 
+	width: 100%;
+	margin-bottom: 10px;
+		
+}
+.grade tr th {
+border:#000000 solid 1px;
+padding:3px;
+text-align: right;
+font-weight:bold;
+background-color: #FFFFFF;
+}
+.grade .titulo{
+text-align: left;	
+}
+.grade tr td {
+border:#000000 solid 1px;
+padding:3px;
+text-align: left;
+background-color: #E8E8E8;
+}
+.tabelaLimpa{
+background-color:#FFFFFF;
+vertical-align: top;
+width: 100%;	
+}
+
+.vertical-top {
+	vertical-align: top;
+}
+.tabelaLimpa tr td {
+border:none;
+padding:3px;
+text-align: left;
+vertical-align: top;
+background-color: #FFFFFF;
+}
+
+.texto-right {
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+.tabelaAssinatura{
+	width:100%;	
+	margin-top: 10px;
+}
+.tabelaAssinatura tr th{
+	vertical-align: top;
+}
+.assinatura{
+	border-bottom: 1px solid #000000;	
+	height: 120px;
+	text-align: center;
+}
+.infoAssinatura{
+	text-align: center;	
+}
+.termo {
+	text-align: justify;
+}
+
+
+
+.tabelaComum {
+	font-family: arial; 
+	font-size: 9pt; 
+	width: 100%;
+	margin-bottom: 10px;	
+		
+}
+.tabelaComum tr th {
+border:#000000 solid 1px;
+padding:3px;
+text-align: center;
+font-weight:bold;
+background-color: #E8E8E8;
+margin:0px;
+}
+.tabelaComum .titulo{
+text-align: center;	
+}
+.tabelaComum tr td {
+border:#000000 solid 1px;
+padding:3px;
+text-align: center;
+background-color: #FFFFFF;
+margin:0px;
+}
+.texto-direita {
+	text-align: right;
+}
+.text-right
+{
+	text-align: right;
+}
+a {
+	text-decoration: none;
+	color:#000000;
+}
+.pdfhidden{
+	display: none;
+}

@@ -1,0 +1,312 @@
+<div class="row">
+	<!-- BEGIN BLOCK_CONSULTA_UNIDADES -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-yellow">
+			<div class="inner">
+				<h4> Unidades </h4>
+				<p>
+					Clique aqui para visualizar suas unidades.
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-home"></i>
+			</div>
+			<a class="small-box-footer" href="unidade-listar?condominio={ID_CONDOMINIO_HASH}"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div><!-- ./col -->
+	<!-- END BLOCK_CONSULTA_UNIDADES -->
+	<!-- BEGIN BLOCK__UNIDADE_PROP -->
+	
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-aqua">
+			<div class="inner">
+				<h4> Comunicar Obra </h4>
+				<p>
+					Clique aqui se deseja comunicar uma obra
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-microphone"></i>
+			</div>
+			<a class="small-box-footer" href="processo-comunicar?id={ID_UNIDADE}"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div>
+	
+	<div class="col-lg-3 col-xs-6">		
+		<div class="small-box bg-yellow">
+			<div class="inner">
+				<h4>Advertências</h4>
+				<p>
+					Acesse as adivertências e multas aqui
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-bullhorn"></i>				
+			</div>
+			<a class="small-box-footer btAdvertencia" value="{ID_UNIDADE}" data-toggle="modal" data-target="#modalAdvertencia" href="#"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div>
+	<!-- END BLOCK__UNIDADE_PROP -->
+	<!-- BEGIN BLOCK_COMUNICAR -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-aqua">
+			<div class="inner">
+				<h4> Comunicar Obra </h4>
+				<p>
+					Clique aqui se deseja comunicar uma obra
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-microphone"></i>
+			</div>
+			<a class="small-box-footer" href="processo-comunicar"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div><!-- ./col -->
+	<!-- END BLOCK_COMUNICAR -->
+	<!-- BEGIN BLOCK_CONSULTA_PROCESSO -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h4> Consultar Processos </h4>
+				<p>
+					Clique aqui se deseja consultar processos em andamento.
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-inbox"></i>
+			</div>
+			<a class="small-box-footer" href="processo-consulta"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div><!-- ./col -->
+	<!-- END BLOCK_CONSULTA_PROCESSO -->
+	<!-- BEGIN BLOCK_AGENDA -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-yellow">
+			<div class="inner">
+				<h4> Agenda </h4>
+				<p>
+					Clique aqui para visualizar sua agenda.
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-calendar"></i>
+			</div>
+			<a class="small-box-footer" href="home-agenda"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div><!-- ./col -->
+	<!-- END BLOCK_AGENDA -->
+	<!-- BEGIN BLOCK_PROFISSIONAIS_BTN -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-red">
+			<div class="inner">
+				<h4> Profissionais </h4>
+				<p>
+					Cadastros de profissionais disponíveis no sistema Gestor Cadmo
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+			<a class="small-box-footer" href="home-profissionais"> Entrar <i class="fa fa-arrow-circle-right"></i> </a>
+		</div>
+	</div><!-- ./col -->
+
+	<!-- END BLOCK_PROFISSIONAIS_BTN -->
+</div>
+<!-- BEGIN BLOCK_GESTOR -->
+
+<!-- END BLOCK_GESTOR -->
+<!-- BEGIN BLOCK_ENG -->
+<h3>Empresa: {NOME_EMPRESA}</h3>
+<!-- END BLOCK_ENG -->
+<!-- BEGIN BLOCK_SINDICO -->
+<h3>Condomínio: {NOME_CONDOMINIO}</h3>
+<!-- END BLOCK_SINDICO -->
+<!-- BEGIN BLOCK_PROPRIETARIO -->
+<h3>Condomínio: {NOME_CONDOMINIO}</h3>
+<H4>Unidade: {NUMERO_UNIDADE}</H4>
+<!-- END BLOCK_PROPRIETARIO -->
+<!-- BEGIN BLOCK_PORTARIA -->
+<h3>Condomínio: {NOME_CONDOMINIO}</h3>
+<!-- END BLOCK_PORTARIA -->
+
+<div class="row">
+	<section class="col-lg-9 connectedSortable">
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Seus Processos</h3>
+			</div>
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>Número Processo</th>
+						<th>Unidade</th>
+						<th>Condomínio</th>
+						<th>Situação</th>
+						<th class="text-right">Ação</th>
+					</tr>
+					<!-- BEGIN BLOCK_PROCESSO -->
+					<tr>
+						<td>{NUMERO_PROCESSO}</td>
+						<td>{UNIDADE_PROCESSO}</td>
+						<td>{NOME_CONDOMINIO}</td>
+						<td>{STATUS_PROCESSO}</td>
+						<td class="text-right">
+						<div class="btn-group">
+							<!-- BEGIN BLOCK_ENTRA_PROCESSO -->
+							<a class="btn btn-default" href="processo-detalhe?id={ID_PROCESSO_HASH}" title="Entrar no Processo"><span class="fa fa-edit"></span></a>
+							<a class="btn btn-default" href="processo-profissionais?id={ID_PROCESSO_HASH}" title="Listar/Adicionar Profissionais"><span class="fa fa-user"></span></a>
+							<!-- END BLOCK_ENTRA_PROCESSO -->
+							<a class="btn btn-default btProfissionais" value="{ID_PROCESSO_HASH}" data-toggle="modal" data-target="#modalProfissionais" title="Visualizar Lista de Profissionais"><span class="fa fa-users"></span></a>
+						</div></td>
+					</tr>
+
+					<!-- END BLOCK_PROCESSO -->
+				</table>
+
+			</div>
+			<div class="box-footer"></div>
+		</div>
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Últimos Andamentos</h3>
+			</div>
+			<div class="box-body">
+				<ul class="timeline">
+					<!-- BEGIN BLOCK_TL -->
+					<li>
+						<i class="{ICONE_TL}"></i>
+						<div class="timeline-item">
+							<div class="timeline-header">
+								<span class="time"><i class="fa fa-clock-o"></i> {DIAS} dias atrás</span>
+							</div>
+							<div class="timeline-body">
+								<a href="processo-detalhe?id={ID_PROCESSO_TL}">{PROCESSO_TL}</a>
+								<br/>
+								<b>{TIPO_TL}</b>
+							</div>
+						</div>
+					</li>
+					<!-- END BLOCK_TL -->
+				</ul>
+
+			</div>
+			<div class="box-footer text-center">
+				<a href="#">Ver mais</a>
+			</div>
+		</div>
+
+	</section>
+	<section class="col-lg-3 connectedSortable">
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Agenda de Vistorias</h3>
+			</div>
+			<div class="box-body">
+				<ul class="todo-list">
+					<!-- BEGIN BLOCK_EVENTOS -->
+					<li>
+						<span class="handle"> <i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i> </span>
+						
+						<span class="text">{EVENTO_TITULO}</span>
+						<span class="btn btn-success"><i class="fa fa-clock-o"></i> {EVENTO_DATA}</span>						
+					</li>
+					<!-- END BLOCK_EVENTOS -->
+				</ul>
+			</div>
+			<div class="box-footer text-center">
+				<a href="home-agenda">Ver mais</a>
+			</div>
+		</div>
+	</section>
+
+</div>
+<div class="modal fade bs-example-modal-lg" id="modalProfissionais" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" id="contentProfissionais">
+
+		</div><!-- /.modal-dialog -->
+	</div>
+</div>
+<div class="modal fade bs-example-modal-lg" id="modalAdvertencia" tabindex="-1" role="dialog" aria-labelledby="advertencia" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title">Advertências</h4>
+			</div>
+			<div class="modal-body" id="boxadv">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Fechar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$(".btComunicarObra").click(function() {
+			window.location.href = 'processo-comunicar?id=' + $(this).attr("value");
+		});
+
+		$(".btAdvertencia").click(function() {
+			$.ajax({
+				url : "ajax/modal_advertencia.php",
+				data : {
+					idUnidade : $(this).attr("value")
+				},
+				type : "POST",
+				beforeSend : function() {
+					$('#boxadv').html('{LOADING}');
+				},
+			}).done(function(msg) {
+				$("#boxadv").html(msg);
+			});
+		});
+
+		$(".btProfissionais").click(function() {
+			$.ajax({
+				url : "ajax/lista_profissionais.php",
+				data : {
+					idProcesso : $(this).attr("value")
+				},
+				type : "POST",
+				beforeSend : function() {
+					$('#contentProfissionais').html('{LOADING}');
+				},
+			}).done(function(msg) {
+				$("#contentProfissionais").html(msg);
+			});
+		});
+		//Make the dashboard widgets sortable Using jquery UI
+		$(".connectedSortable").sortable({
+			placeholder : "sort-highlight",
+			connectWith : ".connectedSortable",
+			handle : ".box-header, .nav-tabs",
+			forcePlaceholderSize : true,
+			zIndex : 999999
+		}).disableSelection();
+		$(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
+		//jQuery UI sortable for the todo list
+		$(".todo-list").sortable({
+			placeholder : "sort-highlight",
+			handle : ".handle",
+			forcePlaceholderSize : true,
+			zIndex : 999999
+		}).disableSelection();
+
+	}); 
+</script>
+
