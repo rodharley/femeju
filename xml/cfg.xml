@@ -17,137 +17,18 @@ classe
 set
 <atrib tbname="" type="set" clrelation="vigencia" clorder="dataInicio" clfk="contrato">vigencias</atrib>
 -->
-<bd name="grc_azcontrol">
-	<class name="Acesso" tbname="grc_acesso" tbid="id" lazy="true">
+<bd name="epocca">
+	<class name="Acesso" tbname="fmj_acesso" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="grc_menu_id" type="fk" clrelation="Menu">menu</atrib>
-		<atrib tbname="grc_perfil_id" type="fk" clrelation="Perfil">perfil</atrib>		
+		<atrib tbname="fmj_menu_id" type="fk" clrelation="Menu">menu</atrib>
+		<atrib tbname="fmj_perfil_id" type="fk" clrelation="Perfil">perfil</atrib>		
 	</class>
-	<class name="Advertencia" tbname="grc_advertencia" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>		
-		<atrib tbname="nome" type="txt">nome</atrib>
-		<atrib tbname="tipo" type="int">tipo</atrib>
-		<atrib tbname="idcondominio" type="fk" clrelation="Condominio">condominio</atrib>			
-	</class>
-	<class name="AdvertenciaEmitida" tbname="grc_advertencia_unidade" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>		
-		<atrib tbname="data" type="txt">data</atrib>
-		<atrib tbname="valor" type="int">valor</atrib>
-		<atrib tbname="liberada" type="int">liberada</atrib>
-		<atrib tbname="idunidade" type="fk" clrelation="UnidadeAutonoma">unidade</atrib>
-		<atrib tbname="idemissor" type="fk" clrelation="Usuario">emissor</atrib>	
-		<atrib tbname="assinatura" type="txt">assinatura</atrib>
-		<atrib tbname="descricao" type="txt">descricao</atrib>
-		<atrib tbname="nome" type="txt">nome</atrib>
-		<atrib tbname="tipo" type="txt">tipo</atrib>
-	</class>
-	<class name="Agenda" tbname="grc_agenda" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="data" type="txt">data</atrib>
-		<atrib tbname="periodo" type="int">periodo</atrib>		
-		<atrib tbname="tipo" type="txt">tipo</atrib>
-		<atrib tbname="status" type="int">status</atrib>			
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>		
-	</class>
-	<class name="Anexo" tbname="grc_anexo" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="dataAnexo" type="txt">data</atrib>				
-		<atrib tbname="nome" type="txt">nome</atrib>		
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>	
-		<atrib tbname="tipo" type="fk" clrelation="TipoDocumento">tipo</atrib>		
-	</class>
-	<class name="AnaliseProjeto" tbname="grc_analise_projeto" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="dtCriacao" type="txt">dataCriacao</atrib>				
-		<atrib tbname="texto" type="txt">texto</atrib>		
-		<atrib tbname="idengenheiro" type="fk" clrelation="Usuario">engenheiro</atrib>
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>	
-		<atrib tbname="assinatura" type="txt">assinatura</atrib>
-		<atrib tbname="descricao" type="txt">descricao</atrib>			
-	</class>
-	<class name="Cidade" tbname="grc_cidade" tbid="id" lazy="true">
+	<class name="Cidade" tbname="fmj_cidade" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="idUf" type="fk" clrelation="Uf">uf</atrib>				
 	</class>
-	<class name="ComunicacaoObra" tbname="grc_comunicacao_obra" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="dtcriacao" type="txt">dataCriacao</atrib>
-		<atrib tbname="numero" type="txt">numero</atrib>
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>	
-		<atrib tbname="idengenheiro" type="fk" clrelation="Usuario">engenheiro</atrib>
-		<atrib tbname="assinaturaEnge" type="txt">assinaturaEnge</atrib>
-		<atrib tbname="assinaturaProp" type="txt">assinaturaProp</atrib>
-		<atrib tbname="descricaoEnge" type="txt">descricaoEnge</atrib>
-		<atrib tbname="descricaoProp" type="txt">descricaoProp</atrib>					
-	</class>
-	<class name="ComunicacaoPergunta" tbname="grc_comunicacao_obra_pergunta" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>
-		<atrib tbname="sub" type="int">sub</atrib>
-		<atrib tbname="subpergunta" type="txt">subPergunta</atrib>
-		<atrib tbname="resposta" type="txt">resposta</atrib>		
-		<atrib tbname="idcomunicacao" type="fk" clrelation="ComunicacaoObra">comunicacaoObra</atrib>				
-	</class>
-	<class name="Condominio" tbname="grc_condominio" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="nome" type="txt">nome</atrib>
-		<atrib tbname="cnpj" type="txt">cnpj</atrib>
-		<atrib tbname="bairro" type="txt">bairro</atrib>
-		<atrib tbname="logradouro" type="txt">logradouro</atrib>
-		<atrib tbname="cep" type="txt">cep</atrib>
-		<atrib tbname="cidade" type="fk" clrelation="Cidade">cidade</atrib>
-		<atrib tbname="empresa" type="fk" clrelation="Empresa">empresa</atrib>
-		<atrib tbname="valorprocesso" type="int">valorProcesso</atrib>
-		<atrib tbname="valorprocessoreforma" type="int">valorProcessoReforma</atrib>
-		<atrib tbname="idtipocobranca" type="fk" clrelation="TipoCobranca">tipoCobranca</atrib>		
-		<atrib tbname="qtdUnidade" type="int">qtdUnidade</atrib>
-		<atrib tbname="dtImplantacao" type="dat">dataImplantacao</atrib>
-		<atrib tbname="mandatoSindico" type="dat">mandatoSindico</atrib>
-		<atrib tbname="vencimento" type="int">vencimento</atrib>					
-	</class>
-	<class name="Disponibilidade" tbname="grc_disponibilidade" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="segunda" type="int">segunda</atrib>
-		<atrib tbname="terca" type="int">terca</atrib>
-		<atrib tbname="quarta" type="int">quarta</atrib>
-		<atrib tbname="quinta" type="int">quinta</atrib>
-		<atrib tbname="sexta" type="int">sexta</atrib>
-		<atrib tbname="sabado" type="int">sabado</atrib>
-		<atrib tbname="idcondominio" type="fk" clrelation="Condominio">condominio</atrib>									
-	</class>
-	<class name="Email" tbname="grc_email" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="assunto" type="txt">assunto</atrib>		
-		<atrib tbname="conteudo" type="txt">conteudo</atrib>
-		<atrib tbname="tipo" type="txt">tipo</atrib>		
-	</class>
-	<class name="Empresa" tbname="grc_empresa" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="nomeFantasia" type="txt">nomeFantasia</atrib>
-		<atrib tbname="razaoSocial" type="txt">razaoSocial</atrib>
-		<atrib tbname="cnpj" type="txt">cnpj</atrib>
-		<atrib tbname="bairro" type="txt">bairro</atrib>
-		<atrib tbname="logradouro" type="txt">logradouro</atrib>
-		<atrib tbname="telefone" type="txt">telefone</atrib>
-		<atrib tbname="registro" type="txt">registro</atrib>
-		<atrib tbname="cep" type="txt">cep</atrib>
-		<atrib tbname="cidade" type="fk" clrelation="Cidade">cidade</atrib>
-		<atrib tbname="qtdEngAdm" type="int">qtdEngAdm</atrib>
-		<atrib tbname="qtdEngMan" type="int">qtdEngMan</atrib>
-		<atrib tbname="qtdCondomino" type="int">qtdCondomino</atrib>
-		<atrib tbname="qtdUnidade" type="int">qtdUnidade</atrib>
-		<atrib tbname="logomarca" type="txt">logomarca</atrib>	
-		<atrib tbname="email" type="txt">email</atrib>	
-		<atrib tbname="valorprocesso" type="int">valorProcesso</atrib>
-		<atrib tbname="valorprocessoreforma" type="int">valorProcessoReforma</atrib>
-		<atrib tbname="idtipocobranca" type="fk" clrelation="TipoCobranca">tipoCobranca</atrib>	
-		<atrib tbname="vencimento" type="int">vencimento</atrib>
-							
-	</class>
-	<class name="Log" tbname="grc_log" tbid="id" lazy="true">
+	<class name="Log" tbname="fmj_log" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="ip" type="txt">ip</atrib>
 		<atrib tbname="url" type="txt">url</atrib>
@@ -156,7 +37,7 @@ set
 		<atrib tbname="data" type="txt">data</atrib>
 		<atrib tbname="idusuario" type="fk" clrelation="Usuario">usuario</atrib>		
 	</class>	
-	<class name="Menu" tbname="grc_menu" tbid="id" lazy="true">
+	<class name="Menu" tbname="fmj_menu" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="url" type="txt">url</atrib>
@@ -165,172 +46,17 @@ set
 		<atrib tbname="idMenuPai" type="fk" clrelation="Menu">menuPai</atrib>
 		<atrib tbname="" type="set" clrelation="Menu" clorder="id" clfk="menuPai">subMenus</atrib>
 	</class>
-	<class name="Perfil" tbname="grc_perfil" tbid="id" lazy="true">
+	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">descricao</atrib>	
 	</class>
-	<class name="Pergunta" tbname="grc_pergunta" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>
-		<atrib tbname="subpergunta" type="txt">subPergunta</atrib>	
-		<atrib tbname="sub" type="int">sub</atrib>			
-		<atrib tbname="tipo" type="fk" clrelation="TipoPergunta">tipo</atrib>
-		<atrib tbname="condominio" type="fk" clrelation="Condominio">condominio</atrib>		
-	</class>
-	<class name="Processo" tbname="grc_processo" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="dtcriacao" type="txt">dataCriacao</atrib>
-		<atrib tbname="dtinicioobra" type="txt">dataInicioObra</atrib>
-		<atrib tbname="dtfimobra" type="txt">dataFimObra</atrib>
-		<atrib tbname="dtconclusao" type="txt">dataConclusao</atrib>
-		<atrib tbname="bitconcluido" type="int">concluido</atrib>
-		<atrib tbname="bitsuspenso" type="int">suspenso</atrib>
-		<atrib tbname="valor" type="int">valor</atrib>
-		<atrib tbname="idunidade" type="fk" clrelation="UnidadeAutonoma">unidade</atrib>
-		<atrib tbname="idproprietario" type="fk" clrelation="Usuario">proprietario</atrib>
-		<atrib tbname="idstatus" type="fk" clrelation="StatusProcesso">status</atrib>
-		<atrib tbname="idtipoobra" type="fk" clrelation="TipoObra">tipo</atrib>				
-	</class>
-	<class name="ProcessoProfissional" tbname="grc_processo_profissional" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="liberado" type="int">situacao</atrib>		
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>
-		<atrib tbname="idprofissional" type="fk" clrelation="Profissional">profissional</atrib>				
-	</class>
-	<class name="ProcessoResponsavel" tbname="grc_processo_responsavel" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>		
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>
-		<atrib tbname="idprofissional" type="fk" clrelation="Profissional">profissional</atrib>
-		<atrib tbname="projeto" type="int">projeto</atrib>
-		<atrib tbname="execucao" type="int">execucao</atrib>				
-	</class>
-	<class name="Profissional" tbname="grc_profissional" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="nome" type="txt">nome</atrib>
-		<atrib tbname="telefone" type="txt">telefone</atrib>
-		<atrib tbname="celular" type="txt">celular</atrib>
-		<atrib tbname="empresa" type="txt">empresa</atrib>		
-		<atrib tbname="email" type="txt">email</atrib>
-		<atrib tbname="registro" type="txt">registro</atrib>
-		<atrib tbname="tipo" type="fk" clrelation="TipoProfissional">profissao</atrib>		
-	</class>
-	<class name="Questionario" tbname="grc_questionario" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="dtcriacao" type="txt">dataCriacao</atrib>
-		<atrib tbname="numero" type="txt">numero</atrib>
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>	
-		<atrib tbname="idengenheiro" type="fk" clrelation="Usuario">engenheiro</atrib>	
-		<atrib tbname="assinaturaEnge" type="txt">assinaturaEnge</atrib>
-		<atrib tbname="assinaturaProp" type="txt">assinaturaProp</atrib>
-		<atrib tbname="descricaoEnge" type="txt">descricaoEnge</atrib>
-		<atrib tbname="descricaoProp" type="txt">descricaoProp</atrib>				
-	</class>
-	<class name="QuestionarioPergunta" tbname="grc_questionario_pergunta" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>
-		<atrib tbname="sub" type="int">sub</atrib>
-		<atrib tbname="tipo" type="int">tipo</atrib>
-		<atrib tbname="subpergunta" type="txt">subPergunta</atrib>
-		<atrib tbname="resposta" type="txt">resposta</atrib>		
-		<atrib tbname="idquestionario" type="fk" clrelation="Questionario">questionario</atrib>				
-	</class>
-	
-	<class name="StatusProcesso" tbname="grc_status_processo" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TabelaPreco" tbname="grc_tabela_preco" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="min1" type="int">min1</atrib>		
-		<atrib tbname="max1" type="int">max1</atrib>
-		<atrib tbname="valor1" type="int" >valor1</atrib>
-		<atrib tbname="min2" type="int">min2</atrib>		
-		<atrib tbname="max2" type="int">max2</atrib>
-		<atrib tbname="valor2" type="int" >valor2</atrib>
-		<atrib tbname="min3" type="int">min3</atrib>		
-		<atrib tbname="max3" type="int">max3</atrib>
-		<atrib tbname="valor3" type="int" >valor3</atrib>
-		<atrib tbname="min4" type="int">min4</atrib>		
-		<atrib tbname="max4" type="int">max4</atrib>
-		<atrib tbname="valor4" type="int" >valor4</atrib>
-		<atrib tbname="min5" type="int">min5</atrib>		
-		<atrib tbname="max5" type="int">max5</atrib>
-		<atrib tbname="valor5" type="int" >valor5</atrib>
-		<atrib tbname="dtiniciovalidade" type="txt" >dataInicio</atrib>
-		<atrib tbname="idempresa" type="fk" clrelation="Empresa">empresa</atrib>
-		<atrib tbname="idcondominio" type="fk" clrelation="Condominio">condominio</atrib>		
-	</class>
-	<class name="Termo" tbname="grc_termo" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>		
-		<atrib tbname="data" type="txt">data</atrib>
-		<atrib tbname="idtipo" type="fk" clrelation="TipoTermo">tipo</atrib>
-		<atrib tbname="idsindico" type="fk" clrelation="Usuario">sindico</atrib>
-		<atrib tbname="idengenheiro" type="fk" clrelation="Usuario">engenheiro</atrib>
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>	
-		<atrib tbname="assinaturaEnge" type="txt">assinaturaEnge</atrib>
-		<atrib tbname="assinaturaSind" type="txt">assinaturaSind</atrib>
-		<atrib tbname="descricaoEnge" type="txt">descricaoEnge</atrib>
-		<atrib tbname="descricaoSind" type="txt">descricaoSind</atrib>		
-	</class>
-	<class name="TextoTermo" tbname="grc_texto_termo" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>		
-		<atrib tbname="tipo" type="fk" clrelation="TipoTermo">tipo</atrib>
-		<atrib tbname="condominio" type="fk" clrelation="Condominio">condominio</atrib>		
-	</class>
-	<class name="TipoCobranca" tbname="grc_tipo_cobranca" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TipoDocumento" tbname="grc_tipo_documento" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TipoObra" tbname="grc_tipo_obra" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TipoVistoria" tbname="grc_tipo_vistoria" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TipoPergunta" tbname="grc_tipo_pergunta" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TipoProfissional" tbname="grc_tipo_profissional" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TipoTermo" tbname="grc_tipo_termo" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
-	</class>
-	<class name="TimeLine" tbname="grc_timeline" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="data" type="txt">data</atrib>
-		<atrib tbname="tipo" type="txt">tipo</atrib>
-		<atrib tbname="texto" type="txt">texto</atrib>
-		<atrib tbname="usuario" type="fk" clrelation="Usuario">usuario</atrib>
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>	
-	</class>
-	<class name="UnidadeAutonoma" tbname="grc_unidade_autonoma" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="bloco" type="txt">bloco</atrib>
-		<atrib tbname="numero" type="txt">numero</atrib>
-		<atrib tbname="quartos" type="int">quartos</atrib>
-		<atrib tbname="area" type="int">area</atrib>
-		<atrib tbname="proprietario" type="fk" clrelation="Usuario">proprietario</atrib>
-		<atrib tbname="condominio" type="fk" clrelation="Condominio">condominio</atrib>							
-	</class>
-	<class name="Usuario" tbname="grc_usuario" tbid="id" lazy="true">
+	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="senha" type="txt">senha</atrib>
 		<atrib tbname="email" type="txt">email</atrib>
 		<atrib tbname="cpf" type="txt">cpf</atrib>
-		<atrib tbname="grc_perfil_id" type="fk" clrelation="Perfil">perfil</atrib>
+		<atrib tbname="fmj_perfil_id" type="fk" clrelation="Perfil">perfil</atrib>
 		<atrib tbname="empresa" type="fk" clrelation="Empresa">empresa</atrib>
 		<atrib tbname="condominio" type="fk" clrelation="Condominio">condominio</atrib>		
 		<atrib tbname="ativo" type="int">ativo</atrib>
@@ -341,27 +67,9 @@ set
 		<atrib tbname="registro" type="txt">registro</atrib>
 		<atrib tbname="login" type="txt">login</atrib>
 	</class>
-	<class name="Uf" tbname="grc_uf" tbid="id" lazy="true">
+	<class name="Uf" tbname="fmj_uf" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="uf" type="txt">uf</atrib>	
-	</class>
-	<class name="Vistoria" tbname="grc_vistoria" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="observacao" type="txt">observacao</atrib>		
-		<atrib tbname="data" type="txt">data</atrib>
-		<atrib tbname="estagio" type="txt">estagio</atrib>
-		<atrib tbname="dano" type="txt">dano</atrib>
-		<atrib tbname="aprovada" type="int">aprovada</atrib>
-		<atrib tbname="limpezainterna" type="int">limpezaIn</atrib>
-		<atrib tbname="limpezaexterna" type="int">limpezaEx</atrib>
-		<atrib tbname="idtipovistoria" type="fk" clrelation="TipoVistoria">tipo</atrib>		
-		<atrib tbname="idprocesso" type="fk" clrelation="Processo">processo</atrib>		
-	</class>
-	<class name="VistoriaFoto" tbname="grc_vistoria_foto" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="nome" type="txt">nome</atrib>		
-		<atrib tbname="tipo" type="txt">tipo</atrib>
-		<atrib tbname="idvistoria" type="fk" clrelation="Vistoria">vistoria</atrib>		
-	</class>
+	</class>	
 </bd>
