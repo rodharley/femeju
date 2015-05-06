@@ -5,7 +5,8 @@ define('USERNAME', 'root');
 define('PASSWORD', '');
 define('DATABASE', 'femeju');
 define('CARREGANDO', '<p align="center"><img src="img/ajax_loading.gif" height="32" /></p>');
-define('URI',$_SERVER['DOCUMENT_ROOT'].'femeju');
+define('URI',$_SERVER['DOCUMENT_ROOT'].'/femeju');
+define('URL','http://'.$_SERVER['HTTP_HOST'].'/femeju');
 define('REMETENTE','Rodrigo Cruz<rodrigo@azcontrol.com.br>');
 class Conexao
 {
