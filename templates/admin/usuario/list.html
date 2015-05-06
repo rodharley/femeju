@@ -2,12 +2,12 @@
 	$(document).ready(function() {
 		$('.excluir').click(function() {
 			if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
-				window.location.href = 'usuario-action?acao=excluir&id=' + $(this).attr("value");
+				window.location.href = 'admin_usuario-action?acao=excluir&id=' + $(this).attr("value");
 		});
 
 		$('.btRedefinir').click(function() {
 			if (confirm("Tem certeza que deseja redefinir a senha deste usuário?"))
-				window.location.href = 'usuario-action?acao=redefinir&id='+ $(this).attr("value");
+				window.location.href = 'admin_usuario-action?acao=redefinir&id='+ $(this).attr("value");
 		});
 		/*
 		 $('.data-table').dataTable({
@@ -81,7 +81,6 @@
 				<tr>
 					<th class="hidden-xs">CPF</th>
 					<th>Nome</th>
-					<th>Empresa</th>
 					<th class="hidden-xs">Situacão</th>
 					<th >Perfil</th>
 					<th style="width: 160px;" class="text-center hidden-xs">Ação</th>
@@ -93,13 +92,12 @@
 				<tr>
 					<td class="hidden-xs">{cpf}</td>
 					<td>{nome}</td>
-					<td>{empresa}</td>
 					<td class="hidden-xs">{situacao}</td>
 					<td>{perfil}</td>
 					<td class="text-right hidden-xs" >
 					<div class="btn-group">
 						<a type="button" class="btn btn-default btRedefinir" value="{ID_HASH}" title="Redefinir Senha" ><span class="fa fa-key"></span></a>
-						<a type="button" class="btn btn-default" href="usuario-editar?idPerfil={ID_PERFIL_HASH}&id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
+						<a type="button" class="btn btn-default" href="admin_usuario-editar?idPerfil={ID_PERFIL_HASH}&id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
 						<a class="btn btn-danger excluir" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
 					</div></td>
 					<td class="visible-xs">
@@ -112,7 +110,7 @@
 								<a type="button" class="btRedefinir" value="{ID_HASH}" title="Redefinir Senha" ><span class="fa fa-key"></span></a>
 							</li>
 							<li>
-								<a href="usuario-editar?idPerfil={ID_PERFIL_HASH}&id={ID_HASH}"><span class="fa fa-edit"></span> Editar</a>
+								<a href="admin_usuario-editar?idPerfil={ID_PERFIL_HASH}&id={ID_HASH}"><span class="fa fa-edit"></span> Editar</a>
 							</li>
 							<li class="divider"></li>
 							<li>
@@ -138,23 +136,10 @@
 	</div>
 	<!-- END BLOCK_PAGINACAO -->
 </div>
-<div class="row">
-	<div class="col-sm-3"></div>
-	<div class="col-sm-6">
-		<!-- BEGIN BLOCK_BARRA_PROGRESSO -->
-		<div class="clearfix">
-			<span class="pull-left">Quantidade: {QUANTIDADE}/{MAXIMO}</span>
-			<small class="pull-right">{LIMITE}%</small>
-		</div>
-		<div class="progress xs">
-			<div style="width: {LIMITE}%;" class="progress-bar progress-bar-green"></div>
-		</div>
-		<!-- END BLOCK_BARRA_PROGRESSO -->
-	</div>
-	<div class="col-sm-3 text-right">
-		<!-- BEGIN BLOCK_INCLUIR -->
-		<a class="btn btn-primary" href="usuario-editar?idPerfil={ID_PERFIL_HASH}"><i class="fa fa-plus"></i> Adicionar</a>
-		<!-- END BLOCK_INCLUIR -->
+<div class="row">	
+	<div class="col-sm-12 text-right">		
+		<a class="btn btn-primary" href="admin_usuario-editar"><i class="fa fa-plus"></i> Adicionar</a>
+		
 		<button class="btn btn-default btVoltar" type="button">
 				Voltar
 			</button>

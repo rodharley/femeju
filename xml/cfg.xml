@@ -57,15 +57,10 @@ set
 		<atrib tbname="email" type="txt">email</atrib>
 		<atrib tbname="cpf" type="txt">cpf</atrib>
 		<atrib tbname="fmj_perfil_id" type="fk" clrelation="Perfil">perfil</atrib>
-		<atrib tbname="empresa" type="fk" clrelation="Empresa">empresa</atrib>
-		<atrib tbname="condominio" type="fk" clrelation="Condominio">condominio</atrib>		
 		<atrib tbname="ativo" type="int">ativo</atrib>
 		<atrib tbname="foto" type="txt">foto</atrib>
-		<atrib tbname="assinatura" type="txt">assinatura</atrib>
 		<atrib tbname="telefone" type="txt">telefone</atrib>
-		<atrib tbname="celular" type="txt">celular</atrib>
-		<atrib tbname="registro" type="txt">registro</atrib>
-		<atrib tbname="login" type="txt">login</atrib>
+		<atrib tbname="celular" type="txt">celular</atrib>		
 	</class>
 	<class name="Uf" tbname="fmj_uf" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	

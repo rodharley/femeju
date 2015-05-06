@@ -10,7 +10,7 @@ class Perfil extends Persistencia{
 	var $descricao;
 	
 	function listarPorPerfil(){
-        return $this->getRows(0,999,array(),array("id"=>" >= ".$_SESSION['grc.userPerfilId']));        
+        return $this->getRows(0,999,array(),array("id"=>" >= ".$_SESSION['fmj.userPerfilId']));        
     }
     
     
@@ -31,8 +31,8 @@ class Perfil extends Persistencia{
 		$oAc->save();	
 		}
 		}
-		$_SESSION['grc.mensagem'] = 9;
-		header("Location:perfil-listar");
+		$_SESSION['fmj.mensagem'] = 9;
+		header("Location:admin_perfil-main");
 		exit();
 	}
 	

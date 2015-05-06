@@ -5,13 +5,13 @@ class Acesso extends Persistencia{
 	
 	
 	function limparAcessos($idPerfil){
-	$sql = "delete from grc_acesso where grc_perfil_id = ".$idPerfil;
+	$sql = "delete from fmj_acesso where fmj_perfil_id = ".$idPerfil;
 	$this->DAO_ExecutarQuery($sql);
 	return true; 	
 	}
 	
 	public function recuperaMenuAcessos($idPerfil){
-	$sql = "select * from grc_acesso where grc_perfil_id = ".$idPerfil;
+	$sql = "select * from fmj_acesso where fmj_perfil_id = ".$idPerfil;    
 	return $this->getSQL($sql);		
 		
 	}

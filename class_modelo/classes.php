@@ -1,5 +1,6 @@
 <?php
 require("negocio.acesso.php");
+require("negocio.email.php");
 require("negocio.menu.php");
 require("negocio.perfil.php");
 require("negocio.usuario.php");

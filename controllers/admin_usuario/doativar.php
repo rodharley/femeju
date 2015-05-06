@@ -1,6 +1,6 @@
 <?php 
-$TPL = NEW Template("templates/index.html");
-$TPL->addFile("CONTEUDO", "templates/usuario/ativar.html");
+$TPL = NEW Template("templates/admin/index.html");
+$TPL->addFile("CONTEUDO", "templates/admin/usuario/ativar.html");
 $user = new Usuario();
 if(isset($_REQUEST['id'])){
 $idUser = $_REQUEST['id'];
@@ -8,26 +8,25 @@ $user->getById($idUser);
 	if($user->id != null){
 		if($user->ativo == "0"){
 			$user->ativo = 1;
-			$user->login = $_REQUEST['login'];
 			$user->senha = md5($_REQUEST['senha']);
 			$user->save();
-			$_SESSION['grc.mensagem'] = 62;
-			$user->login($_POST['login'], $_POST['senha']);
-			header("Location:home-home");
+			$_SESSION['fmj.mensagem'] = 14;
+			$user->login($user->email, $_POST['senha']);
+			header("Location:admin_home-home");
 			exit();
 		}else{
-		$_SESSION['grc.mensagem'] = 61;
-		header("Location:index.php");
+		$_SESSION['fmj.mensagem'] = 13;
+		header("Location:admin_home-index");
 		exit();
 		}
 	}else{
-		$_SESSION['grc.mensagem'] = 1;
-		header("Location:index.php");
+		$_SESSION['fmj.mensagem'] = 1;
+		header("Location:admin_home-index");
 		exit();
 	}
 }else{
-	$_SESSION['grc.mensagem'] = 1;
-		header("Location:index.php");
+	$_SESSION['fmj.mensagem'] = 1;
+		header("Location:admin_home-index");
 		exit();
 }
 $TPL->show();

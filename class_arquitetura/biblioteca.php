@@ -599,8 +599,8 @@ function mail_html($destinatario,$origem, $titulo, $mensagem)
 	try{
 	$headers = "MIME-Version: 1.1\n";
 $headers .= "Content-type: text/html; charset=iso-8859-1\n";
-$headers .= "From: Gestor Cadmo <$origem>"."\n"; // remetente
-$headers .= "Return-Path: Gestor Cadmo <$origem>"."\n"; // return-path
+$headers .= "From: Femeju <$origem>"."\n"; // remetente
+$headers .= "Return-Path: Femeju <$origem>"."\n"; // return-path
 $email = mail("$destinatario", "$titulo", "$mensagem", $headers, "-r".$origem);	
 			
 	return $email;
@@ -956,7 +956,7 @@ if($file['name'] != ""){
 
 
 		if($file['size'] > 500000){
-		$_SESSION['grc.mensagem'] = 15;
+		$_SESSION['fmj.mensagem'] = 15;
 		return false;
 		}
 
@@ -964,7 +964,7 @@ if($file['name'] != ""){
 			return true;
 	    }// fim if 2 type file
 		else {
-		$_SESSION['grc.mensagem'] = 16;
+		$_SESSION['fmj.mensagem'] = 16;
 		return false;
 	 }
 
@@ -1388,20 +1388,20 @@ function trataRequestAntiInjection(){
 }
 
 function setMensagem($id,$param1 = null,$param2= null,$param3= null){
-	$_SESSION['grc.mensagem'] = $id;
+	$_SESSION['fmj.mensagem'] = $id;
 	if($param1 != null)
-		$_SESSION['grc.param1'] = $param1;
+		$_SESSION['fmj.param1'] = $param1;
 	if($param2 != null)
-		$_SESSION['grc.param2'] = $param2;
+		$_SESSION['fmj.param2'] = $param2;
 	if($param3 != null)
-		$_SESSION['grc.param3'] = $param3;
+		$_SESSION['fmj.param3'] = $param3;
 }
 
 function unSetMensagem(){
-	 unset($_SESSION['grc.mensagem']);
-	 unset($_SESSION['grc.param1']);
-	 unset($_SESSION['grc.param2']);
-	 unset($_SESSION['grc.param3']);
+	 unset($_SESSION['fmj.mensagem']);
+	 unset($_SESSION['fmj.param1']);
+	 unset($_SESSION['fmj.param2']);
+	 unset($_SESSION['fmj.param3']);
 }
 
 

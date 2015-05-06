@@ -4,7 +4,7 @@ try{
 	if(file_exists("controllers/"._CONTROLLER."/"._ACTION.".php")){
 		include("controllers/"._CONTROLLER."/"._ACTION.".php");
 	}else{
-	$TPL = new Template($root->URI."/templates/portal.html");
+	$TPL = new Template($root->URI."/templates/portal/index.html");
 
 	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro404.html");
 	$TPL->show();
@@ -13,10 +13,10 @@ try{
 
 
 }catch(Exception $e){
-	if(isset($_SESSION['grc.userId']))
-		$TPL = new Template($root->URI."/templates/main.html");
+	if(isset($_SESSION['fmj.userId']))
+		$TPL = new Template($root->URI."/templates/admin/main.html");
 	else
-		$TPL = new Template($root->URI."/templates/index.html");
+		$TPL = new Template($root->URI."/templates/admin/index.html");
 
 	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro500.html");
 	if ($root->desenvolvimento)

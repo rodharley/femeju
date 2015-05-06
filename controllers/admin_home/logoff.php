@@ -1,11 +1,11 @@
 <?php
-unset($_SESSION['grc.userId']);
-unset($_SESSION['grc.userNome']);
-unset($_SESSION['grc.userEmail']);
-unset($_SESSION['grc.userPerfil']);
-unset($_SESSION['grc.userAcesso']);
+unset($_SESSION['fmj.userId']);
+unset($_SESSION['fmj.userNome']);
+unset($_SESSION['fmj.userEmail']);
+unset($_SESSION['fmj.userPerfil']);
+unset($_SESSION['fmj.userAcesso']);
 session_destroy();
-header("Location:index.php");
+header("Location:admin_home-index");
 exit();
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 $menu = 37;
 include("includes/include.lock.php");
-$TPL = NEW Template("templates/main.html");
+$TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
 
 //INSTACIA CLASSES

@@ -15,8 +15,8 @@ class Log extends Persistencia{
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 		$this->url = $_SERVER['REQUEST_URI'];
 		$this->data = date("Y-m-d H:i:s");
-		if(isset($_SESSION['grc.userId'])){
-		$this->usuario = new Usuario($_SESSION['grc.userId']);
+		if(isset($_SESSION['fmj.userId'])){
+		$this->usuario = new Usuario($_SESSION['fmj.userId']);
 		}else{
 		$this->usuario = NULL;	
 		}
@@ -28,7 +28,7 @@ class Log extends Persistencia{
 	
 	public function pesquisa($texto = "",$empresa="",$condominio="",$usuario="",$periodo){
 			
-		$sql = "select  l.* from grc_log l inner join grc_usuario u on u.id = l.idusuario where 1 = 1 ";
+		$sql = "select  l.* from fmj_log l inner join fmj_usuario u on u.id = l.idusuario where 1 = 1 ";
 		if($texto != ""){
 			$sql .= " and l.texto like '%$texto%'";			
 		}

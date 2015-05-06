@@ -3,7 +3,7 @@
 define('SERVER', 'localhost');
 define('USERNAME', 'root');
 define('PASSWORD', '');
-define('DATABASE', 'gestorcadmo');
+define('DATABASE', 'femeju');
 define('CARREGANDO', '<p align="center"><img src="img/ajax_loading.gif" height="32" /></p>');
 define('URI',$_SERVER['DOCUMENT_ROOT'].'femeju');
 define('REMETENTE','Rodrigo Cruz<rodrigo@azcontrol.com.br>');

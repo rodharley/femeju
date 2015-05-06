@@ -14,8 +14,8 @@ include("../lib_relatorios.php");
 $conn = Conexao::init();
 $lib = new libRelatorio();
 $empresa  = new Empresa();
-if($_SESSION['grc.empresaId'] != 0){
-	$empresa->getById($_SESSION['grc.empresaId']);
+if($_SESSION['fmj.empresaId'] != 0){
+	$empresa->getById($_SESSION['fmj.empresaId']);
 	$logo = '../../img/logomarcas/'.$empresa->logomarca;
 }else{
 	$logo = '../../img/logo.png';

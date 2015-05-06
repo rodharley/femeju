@@ -1,5 +1,5 @@
 <?php
-$TPL = NEW Template("templates/index.html");
-$TPL->addFile("CONTEUDO", "templates/usuario/recuperarSenha.html");
+$TPL = NEW Template("templates/admin/index.html");
+$TPL->addFile("CONTEUDO", "templates/admin/usuario/recuperarSenha.html");
 $TPL->show();
 ?>

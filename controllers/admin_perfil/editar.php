@@ -1,7 +1,7 @@
 <?php
 $menu = 3;
 include("includes/include.lock.php");
-$TPL = NEW Template("templates/main.html");
+$TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
 //CONFIGURA O BREADCRUMB
@@ -17,7 +17,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
                 </section>';
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/perfil/edit.html");
+$TPL->addFile("CONTEUDO", "templates/admin/perfil/edit.html");
 $obj = new Perfil();
 
 $TPL->LABEL = "Editar Perfil";

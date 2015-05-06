@@ -1,48 +1,31 @@
 <?php
 class Usuario extends Persistencia {
-	var $perfil = NULL;
-	var $empresa = NULL;
-	var $condominio = NULL;
+	var $perfil = NULL;	
 	var $nome;
 	var $senha;
 	var $email;
 	var $ativo;
 	var $cpf;
-	var $foto;
-	var $assinatura;
+	var $foto;	
 	var $telefone;
 	var $celular;
-	var $registro;
+	
 
 	function LogOff() {
 		
 		//grava a log
 				$log = new Log();
 				$log->gerarLog("Sair do Sistema");
-		
-		unset($_SESSION['grc.empresaId']);
-		unset($_SESSION['grc.condominioId']);
-		unset($_SESSION['grc.userId']);
-		unset($_SESSION['grc.userLogin']);
-		unset($_SESSION['grc.userNome']);
-		unset($_SESSION['grc.userFoto']);
-		unset($_SESSION['grc.userPerfil']);
-		unset($_SESSION['grc.userPerfilId']);
-		unset($_SESSION['grc.menu']);
+		unset($_SESSION['fmj.userId']);
+		unset($_SESSION['fmj.userNome']);
+		unset($_SESSION['fmj.userFoto']);
+		unset($_SESSION['fmj.userPerfil']);
+		unset($_SESSION['fmj.userPerfilId']);
+		unset($_SESSION['fmj.menu']);
 	}
 
 	function recuperaTotal($busca = "") {
-		switch ($_SESSION['grc.userPerfilId']) {
-			case 0 :
-				$sql = "select count(id) as total from grc_usuario WHERE 1 = 1 ";
-				break;
-			case 1 :
-				$sql = "select count(id) as total from grc_usuario where empresa =" . $_SESSION['grc.empresaId'];
-				break;
-			default :
-				$sql = "select count(id) as total from grc_usuario where empresa =" . $_SESSION['grc.empresaId'] . " and grc_perfil_id > " . $_SESSION['grc.userPerfilId'];
-				break;
-		}
+				$sql = "select count(id) as total from fmj_usuario WHERE 1 = 1 ";
 		if ($busca != "")
 			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
 
@@ -52,17 +35,9 @@ class Usuario extends Persistencia {
 
 
 	function recuperaTotalPerfil($idPerfil, $busca = "") {
-		switch ($_SESSION['grc.userPerfilId']) {
-			case 0 :
-				$sql = "select count(id) as total from grc_usuario WHERE grc_perfil_id = $idPerfil";
-				break;
-			case 1 :
-				$sql = "select count(id) as total from grc_usuario where grc_perfil_id = $idPerfil and empresa =" . $_SESSION['grc.empresaId'];
-				break;
-			default :
-				$sql = "select count(id) as total from grc_usuario where  grc_perfil_id = $idPerfil and empresa =" . $_SESSION['grc.empresaId'];
-				break;
-		}
+		
+				$sql = "select count(id) as total from fmj_usuario WHERE fmj_perfil_id = $idPerfil";
+		
 		if ($busca != "")
 			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
 
@@ -72,19 +47,9 @@ class Usuario extends Persistencia {
 	
 	function listarUsuariosPerfil($idPerfil, $primeiro = 0, $quantidade = 9999, $busca = "") {
 
-		switch ($_SESSION['grc.userPerfilId']) {
-			case 0 :
-				$sql = "select * from grc_usuario where grc_perfil_id = $idPerfil";
-				break;
-			case 1 :
-				$sql = "select * from grc_usuario where grc_perfil_id = $idPerfil and empresa =" . $_SESSION['grc.empresaId'];
-
-				break;
-			default :
-				$sql = "select * from grc_usuario where grc_perfil_id = $idPerfil and empresa =" . $_SESSION['grc.empresaId'];
-				break;
-		}
-
+		
+				$sql = "select * from fmj_usuario where fmj_perfil_id = $idPerfil";
+		
 		if ($busca != "")
 			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
 
@@ -95,19 +60,8 @@ class Usuario extends Persistencia {
 
 	function listarUsuarios($primeiro = 0, $quantidade = 9999, $busca = "") {
 
-		switch ($_SESSION['grc.userPerfilId']) {
-			case 0 :
-				$sql = "select * from grc_usuario where 1 = 1";
-				break;
-			case 1 :
-				$sql = "select * from grc_usuario where empresa =" . $_SESSION['grc.empresaId'];
-
-				break;
-			default :
-				$sql = "select * from grc_usuario where empresa =" . $_SESSION['grc.empresaId'] . " and grc_perfil_id > " . $_SESSION['grc.userPerfilId'];
-				break;
-		}
-
+				$sql = "select * from fmj_usuario where 1 = 1";
+		
 		if ($busca != "")
 			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
 
@@ -119,7 +73,7 @@ class Usuario extends Persistencia {
 	function PesquisaPerfilEmpresaCondominio($empresa = "", $condominio = "",$perfil = "",$contador= false, $primeiro = 0, $quantidade = 99999) {
 		$sqlWhere = " where 1 = 1 ";
         if($perfil != "")
-            $sqlWhere .= "and grc_perfil_id = " . $perfil;
+            $sqlWhere .= "and fmj_perfil_id = " . $perfil;
         
         if ($empresa != "")
             $sqlWhere .= " and empresa = " . $empresa;
@@ -127,11 +81,11 @@ class Usuario extends Persistencia {
             $sqlWhere .= " and condominio = " . $condominio;
             
        if($contador){
-               $sql = "select count(*) as total from grc_usuario ";               
+               $sql = "select count(*) as total from fmj_usuario ";               
                $rs = $this -> DAO_ExecutarQuery($sql.$sqlWhere);
                 return $this -> DAO_Result($rs, "total", 0);               
        }   else{
-               $sql = "select * from grc_usuario ";
+               $sql = "select * from fmj_usuario ";
                $sqlOrder = "  order by nome limit $primeiro, $quantidade";
                return $this -> getSQL($sql.$sqlWhere.$sqlOrder);   
        }  
@@ -145,18 +99,18 @@ class Usuario extends Persistencia {
 
 	function listarUsuariosPorPerfil($perfil) {
 
-		switch ($_SESSION['grc.userPerfilId']) {
+		switch ($_SESSION['fmj.userPerfilId']) {
 			case 0 :
-				$sql = "select * from grc_usuario where grc_perfil_id = $perfil  order by nome";
+				$sql = "select * from fmj_usuario where fmj_perfil_id = $perfil  order by nome";
 				break;
 			case 1 :
-				$sql = "select * from grc_usuario where empresa = " . $_SESSION['grc.empresaId'] . " and grc_perfil_id = $perfil order by nome";
+				$sql = "select * from fmj_usuario where empresa = " . $_SESSION['fmj.empresaId'] . " and fmj_perfil_id = $perfil order by nome";
 				break;
 			case 2 :
-				$sql = "select * from grc_usuario where empresa = " . $_SESSION['grc.empresaId'] . " and grc_perfil_id = $perfil order by nome";
+				$sql = "select * from fmj_usuario where empresa = " . $_SESSION['fmj.empresaId'] . " and fmj_perfil_id = $perfil order by nome";
 				break;
 			default :
-				$sql = "select * from grc_usuario where condominio = " . $_SESSION['grc.condominioId'] . " and grc_perfil_id = $perfil";
+				$sql = "select * from fmj_usuario where condominio = " . $_SESSION['fmj.condominioId'] . " and fmj_perfil_id = $perfil";
 				break;
 		}
 
@@ -168,29 +122,29 @@ class Usuario extends Persistencia {
 			
 		
 		
-		if ($this -> recuperaPorLogin($login)) {
+		if ($this ->recuperaPorLogin($login)) {
+			    
 			if ($this -> ativo == 1) {
 				if ($this -> senha == md5($senha)) {
-					$_SESSION['grc.empresaId'] = $this -> empresa != null ? $this -> empresa -> id : 0;
-					$_SESSION['grc.condominioId'] = $this -> condominio != null ? $this -> condominio -> id : 0;
-					$_SESSION['grc.userLogin'] = $this -> login;
-					$_SESSION['grc.userId'] = $this -> id;
-					$_SESSION['grc.userNome'] = $this -> nome;
-					$_SESSION['grc.userPerfil'] = $this -> perfil -> descricao;
-					$_SESSION['grc.userFoto'] = $this -> foto;
-					$_SESSION['grc.userPerfilId'] = $this -> perfil -> id;					
+					$_SESSION['fmj.userId'] = $this -> id;
+					$_SESSION['fmj.userNome'] = $this -> nome;
+					$_SESSION['fmj.userPerfil'] = $this -> perfil -> descricao;
+					$_SESSION['fmj.userFoto'] = $this -> foto;
+					$_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;					
 					//grava a log
 				$log = new Log();
                 
 				$log->gerarLog("Entrou no Sistema");
 					
+                    
 					//carrega os itens de menu do perfil
-					$a = new Acesso();
-					$lista = $a -> recuperaMenuAcessos($this -> perfil -> id);
-					$_SESSION['grc.menu'] = "0";
+					$a = new Acesso();                    
+					$lista = $a -> recuperaMenuAcessos($this -> perfil -> id);					
+					$_SESSION['fmj.menu'] = "0";					
 					foreach ($lista as $key => $acesso) {
-						$_SESSION['grc.menu'] .= "," . $acesso -> menu -> id;
+						$_SESSION['fmj.menu'] .= "," . $acesso -> menu -> id;
 					}
+					
 					return true;
 				} else {
 					
@@ -198,7 +152,7 @@ class Usuario extends Persistencia {
 					$log = new Log();
 					$log->gerarLog("Tentativa de Login, senha inválida");
 					
-					$_SESSION['grc.mensagem'] = 2;
+					$_SESSION['fmj.mensagem'] = 2;
 					return false;
 				}
 			} else {
@@ -206,7 +160,7 @@ class Usuario extends Persistencia {
 					$log = new Log();
 					$log->gerarLog("Tentativa de Login, usuário inativo");
 				
-				$_SESSION['grc.mensagem'] = 60;
+				$_SESSION['fmj.mensagem'] = 12;
 				return false;
 			}
 		} else {
@@ -215,7 +169,7 @@ class Usuario extends Persistencia {
 					$log = new Log();
 					$log->gerarLog("Tentativa de Login, Login inválido");
 			
-			$_SESSION['grc.mensagem'] = 1;
+			$_SESSION['fmj.mensagem'] = 1;
 			return false;
 		}
 
@@ -228,23 +182,18 @@ class Usuario extends Persistencia {
 			foreach ($lista as $key => $user) {
 				$senha = $this -> makePassword(8);
 				$user -> senha = md5($senha);
-
 				$objEmail = new Email();
-				$objEmail -> getById(Email::RECUPERAR_SENHA);
-				$mensagem = str_replace("#URL#", $_SERVER['HTTP_HOST'],str_replace("#NOME#", $user -> nome,str_replace("#login#", $user -> login, str_replace("#novaSenha#", $senha, $objEmail -> conteudo))));
-				$tplEmail = new Template("templates/email.html");
-				$tplEmail -> ASSINATURA = Email::ASSINATURA;
-				$tplEmail -> MENSAGEM = $mensagem;
-				if ($this -> mail_html($email, $this -> remetente, $objEmail -> assunto, $tplEmail -> showString())) {
+				
+				if ($objEmail->enviarEmailNovaSenha($user->nome,$user->email,$senha)) {
 					$user -> save();
-					$_SESSION['grc.mensagem'] = 18;
+					$_SESSION['fmj.mensagem'] = 15;
 				} else {
-					$_SESSION['grc.mensagem'] = 19;
+					$_SESSION['fmj.mensagem'] = 11;
 				}
 			}
 
 		} else {
-			$_SESSION['grc.mensagem'] = 1;
+			$_SESSION['fmj.mensagem'] = 1;
 		}
 	}
 
@@ -254,7 +203,7 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaPorLogin($login, $idExclusao = "0") {
-		$this -> getRow(array("login" => "='" . $login . "'", "id" => "!=" . $idExclusao));
+	    $this -> getRow(array("email" => "='" . $login . "'", "id" => "!=" . $idExclusao));
 		if ($this -> id != NULL)
 			return true;
 		else
@@ -264,10 +213,10 @@ class Usuario extends Persistencia {
 	function Excluir($id) {
 	    $this->getById($this -> md5_decrypt($id));
 		if($this -> delete($this->id))
-		$_SESSION['grc.mensagem'] = 8;
+		$_SESSION['fmj.mensagem'] = 8;
         else
-        $_SESSION['grc.mensagem'] = 70;
-		header("Location:usuario-listar?idPerfil=".$this->md5_encrypt($this->perfil->id));
+        $_SESSION['fmj.mensagem'] = 17;
+		header("Location:admin_usuario-main");
 		exit();
 	}
 	function Redefinir($idUser){
@@ -279,8 +228,8 @@ class Usuario extends Persistencia {
 		
 		$email = new Email();
 		$email->enviarEmailRedefinirSenha($this->nome,$this->email,$this->id);
-		$_SESSION['grc.mensagem'] = 68;
-		header("Location:usuario-listar?idPerfil=".$this->md5_encrypt($this->perfil->id));
+		$_SESSION['fmj.mensagem'] = 10;
+		header("Location:admin_usuario-main");
 		exit();
 	}
 	function Incluir() {
@@ -290,73 +239,23 @@ class Usuario extends Persistencia {
 		$this -> perfil = $p;
 		//$senha = $_REQUEST['senha'] != "" ? $_REQUEST['senha'] : md5($this -> makePassword(8));
 		$this -> nome = $_REQUEST['nome'];
-		$this -> login = "";
 		$this -> cpf = $strCPF;
 		$this -> email = $_REQUEST['email'];
 		$this -> telefone = str_replace("_","",$_REQUEST['telefone']);
 		$this -> celular = str_replace("_","",$_REQUEST['celular']);
-		$this -> registro = $_REQUEST['registro'];
 		$this -> senha = "";
 		$this -> ativo = 0;
-		$this -> empresa = null;
-		$this -> condominio = null;
-		if (isset($_REQUEST['empresa'])) {
-			$e = new Empresa();
-			$e -> getById($_REQUEST['empresa']);
-			$this -> empresa = $e;
-
-		}
-		if (isset($_REQUEST['condominio'])) {
-			$c = new Condominio();
-			$c ->getById($_REQUEST['condominio']);
-			$this -> condominio = $c;
-
-		}
-
 		$this -> foto = "avatar.png";
 		if ($_FILES['foto']['name'] != "") {
 			//incluir imagem se ouver
 			$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
 			$this -> uploadImagem($_FILES['foto'], $nomefoto, "img/users/");
 			$this -> foto = $nomefoto;
-		}
-
-		//incluir assinatura se ouver
-		$this -> assinatura = "assinatura.jpg";
-		if ($_FILES['assinatura']['name'] != "") {			
-			$nomefoto = $this -> retornaNomeUnico($_FILES['assinatura']['name'], "img/assinaturas/");
-			$this -> SalvarAssinatura($_FILES['assinatura'], $nomefoto, "img/assinaturas/");
-			$this -> assinatura = $nomefoto;
-		}
-
+		}		
 		$this -> save();
-		$email = new Email();
-		switch ($this->perfil->id) {
-			case Perfil::GESTOR:
-				$email->enviarEmailCadastroAdm($this->nome,$this->email,$this->id);
-				break;
-			case Perfil::PROPRIETARIO:
-				$email->enviarEmailCadastroUsuario($c,$this->nome,$this->email,"Sem Unidade", $this->id);
-				break;
-			case Perfil::ENG_ADM:
-				$email->enviarEmailCadastroEngenheiro($e,$this->nome,$this->email,$this->id);
-				break;
-			case Perfil::ENG_MAN:
-				$email->enviarEmailCadastroEngenheiro($e,$this->nome,$this->email,$this->id);
-				break;
-			case Perfil::COND_ADM:
-				$email-> enviarEmailCadastroSindico($c, $this->nome,$this->email,$this->id);
-				break;
-			case Perfil::COND_MAN:
-				$email-> enviarEmailCadastroSindico($c, $this->nome,$this->email,$this->id);
-				break;
-			default:
-				$email->enviarEmailCadastroPorteiro($this->nome,$this->email,$this->id);
-				break;
-		}
-
-		$_SESSION['grc.mensagem'] = 4;
-		header("Location:usuario-listar?idPerfil=".$this->md5_encrypt($p -> id));
+        $email->enviarEmailNovoUsuario($this->nome,$this->email,$this->id);
+		$_SESSION['fmj.mensagem'] = 4;
+		header("Location:admin_usuario-main");
 		exit();
 
 	}
@@ -365,9 +264,9 @@ class Usuario extends Persistencia {
 
 	function Alterar() {
 		$strCPF = $this -> limpaCpf($_REQUEST['cpf']);
-		if ($this -> recuperaPorLogin($_REQUEST['login'], $_REQUEST['id'])) {
-			$_SESSION['grc.mensagem'] = 3;
-			header("Location:usuario-editar?id=" . $this -> md5_encrypt($_REQUEST['id']));
+		if ($this -> recuperaPorLogin($_REQUEST['email'], $_REQUEST['id'])) {
+			$_SESSION['fmj.mensagem'] = 3;
+			header("Location:admin_usuario-editar?id=" . $this -> md5_encrypt($_REQUEST['id']));
 			exit();
 		} else {
 			$this -> getById($_REQUEST['id']);
@@ -375,29 +274,15 @@ class Usuario extends Persistencia {
 			$p -> id = $_REQUEST['perfil'];
 			$this -> perfil = $p;
 			$this -> nome = $_REQUEST['nome'];
-			$this -> login = $_REQUEST['login'];
 			$this -> telefone = str_replace("_","",$_REQUEST['telefone']);
 			$this -> celular = str_replace("_","",$_REQUEST['celular']);
-			$this -> registro = $_REQUEST['registro'];
 			$this -> cpf = $strCPF;
 			$this -> email = $_REQUEST['email'];
 			if ($_REQUEST['senha'] != "")
 				$this -> senha = md5($_REQUEST['senha']);
 			$this -> ativo = $_REQUEST['ativo'];
 
-			if (isset($_REQUEST['empresa'])) {
-				$e = new Empresa();
-				$e -> id = $_REQUEST['empresa'];
-				$this -> empresa = $e;
-
-			}
-			if (isset($_REQUEST['condominio'])) {
-				$c = new Condominio();
-				$c -> id = $_REQUEST['condominio'];
-				$this -> condominio = $c;
-
-			}
-
+			
 			//incluir imagem se ouver
 			if ($_FILES['foto']['name'] != "") {
 				if ($this -> foto != "avatar.png")
@@ -405,19 +290,12 @@ class Usuario extends Persistencia {
 				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
 				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
 				$this -> foto = $nomefoto;
-			}
-
-			//incluir assinatura se ouver
-			if ($_FILES['assinatura']['name'] != "") {
-				$nomefoto = $this -> retornaNomeUnico($_FILES['assinatura']['name'], "img/assinaturas/");
-				$this -> SalvarAssinatura($_FILES['assinatura'], $nomefoto, "img/assinaturas/");
-				$this -> assinatura = $nomefoto;
-			}
+			}		
 
 			$this -> save();    
                     
-			$_SESSION['grc.mensagem'] = 5;
-			header("Location:usuario-listar?idPerfil=".$this->md5_encrypt($p -> id));
+			$_SESSION['fmj.mensagem'] = 5;
+			header("Location:admin_usuario-main?idPerfil=".$this->md5_encrypt($p -> id));
 			exit();
 		}
 	}
@@ -426,20 +304,17 @@ class Usuario extends Persistencia {
 		$return = $this -> createthumb($file['name'], $file['tmp_name'], $diretorio . $nome, 215, 215);
 	}
 
-	function SalvarAssinatura($file, $nome, $diretorio) {
-		$return = $this -> createthumb($file['name'], $file['tmp_name'], $diretorio . $nome, 215, 120);
-	}
+
 
 	function AlterarMeusDados() {
 		$strCPF = $this -> limpaCpf($_REQUEST['cpf']);
-		if ($this -> recuperaPorLogin($_REQUEST['login'], $_SESSION['grc.userId'])) {
-			$_SESSION['grc.mensagem'] = 3;
-			header("Location:usuario-dados");
+		if ($this -> recuperaPorLogin($_REQUEST['email'], $_SESSION['fmj.userId'])) {
+			$_SESSION['fmj.mensagem'] = 3;
+			header("Location:admin_usuario-dados");
 			exit();
 		} else {
-			$this -> getById($_SESSION['grc.userId']);
+			$this -> getById($_SESSION['fmj.userId']);
 			$this -> nome = $_REQUEST['nome'];
-			$this -> login = $_REQUEST['login'];
 			$this -> cpf = $strCPF;
 			$this -> email = $_REQUEST['email'];
 			$this -> telefone = $_REQUEST['telefone'];
@@ -455,17 +330,11 @@ class Usuario extends Persistencia {
 				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
 				$this -> foto = $nomefoto;
 			}
-
-			//incluir assinatura se ouver
-			if ($_FILES['assinatura']['name'] != "") {				
-				$nomefoto = $this -> retornaNomeUnico($_FILES['assinatura']['name'], "img/assinaturas/");
-				$this -> SalvarAssinatura($_FILES['assinatura'], $nomefoto, "img/assinaturas/");
-				$this -> assinatura = $nomefoto;
-			}
+			
 
 			$this -> save();
-			$_SESSION['grc.mensagem'] = 5;
-			header("Location:home-home");
+			$_SESSION['fmj.mensagem'] = 5;
+			header("Location:admin_home-home");
 			exit();
 		}
 	}
@@ -505,14 +374,11 @@ class Usuario extends Persistencia {
         if ($this -> recuperaPorLogin($login)) {
             if ($this -> ativo == 1) {
                 if ($this -> senha == $senha) {
-                    $_SESSION['grc.empresaId'] = $this -> empresa != null ? $this -> empresa -> id : 0;
-                    $_SESSION['grc.condominioId'] = $this -> condominio != null ? $this -> condominio -> id : 0;
-                    $_SESSION['grc.userLogin'] = $this -> login;
-                    $_SESSION['grc.userId'] = $this -> id;
-                    $_SESSION['grc.userNome'] = $this -> nome;
-                    $_SESSION['grc.userPerfil'] = $this -> perfil -> descricao;
-                    $_SESSION['grc.userFoto'] = $this -> foto;
-                    $_SESSION['grc.userPerfilId'] = $this -> perfil -> id;                  
+                    $_SESSION['fmj.userId'] = $this -> id;
+                    $_SESSION['fmj.userNome'] = $this -> nome;
+                    $_SESSION['fmj.userPerfil'] = $this -> perfil -> descricao;
+                    $_SESSION['fmj.userFoto'] = $this -> foto;
+                    $_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;                  
                     //grava a log
                 $log = new Log();
                 
@@ -521,9 +387,9 @@ class Usuario extends Persistencia {
                     //carrega os itens de menu do perfil
                     $a = new Acesso();
                     $lista = $a -> recuperaMenuAcessos($this -> perfil -> id);
-                    $_SESSION['grc.menu'] = "0";
+                    $_SESSION['fmj.menu'] = "0";
                     foreach ($lista as $key => $acesso) {
-                        $_SESSION['grc.menu'] .= "," . $acesso -> menu -> id;
+                        $_SESSION['fmj.menu'] .= "," . $acesso -> menu -> id;
                     }
                     return true;
                 } else {
@@ -532,7 +398,7 @@ class Usuario extends Persistencia {
                     $log = new Log();
                     $log->gerarLog("Tentativa de Login, senha inválida");
                     
-                    $_SESSION['grc.mensagem'] = 2;
+                    $_SESSION['fmj.mensagem'] = 2;
                     return false;
                 }
             } else {
@@ -540,7 +406,7 @@ class Usuario extends Persistencia {
                     $log = new Log();
                     $log->gerarLog("Tentativa de Login, usuário inativo");
                 
-                $_SESSION['grc.mensagem'] = 60;
+                $_SESSION['fmj.mensagem'] = 12;
                 return false;
             }
         } else {
@@ -549,7 +415,7 @@ class Usuario extends Persistencia {
                     $log = new Log();
                     $log->gerarLog("Tentativa de Login, Login inválido");
             
-            $_SESSION['grc.mensagem'] = 1;
+            $_SESSION['fmj.mensagem'] = 1;
             return false;
         }
 

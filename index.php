@@ -41,7 +41,7 @@ require("shutdow.php");
     print_r($e);
     exit();
     
-	if(isset($_SESSION['grc.userId']))
+	if(isset($_SESSION['fmj.userId']))
 		$TPL = new Template($root->URI."/templates/main.html");
 	else
 		$TPL = new Template($root->URI."/templates/index.html");

@@ -13,12 +13,12 @@ Exemplos de mensagens:
 <mensagem id="7" type="danger">Usuário não tem permissão para acessar a funcionalidade.</mensagem>
 <mensagem id="8" type="success">Usuário excluído com sucesso.</mensagem>
 <mensagem id="9" type="success">Perfil Alterado com sucesso.</mensagem>
-<mensagem id="10" type="success">Uma nova senha foi gerada e enviada para {param1}.</mensagem>
+<mensagem id="10" type="success">Redefinição de senha realizada com sucesso.</mensagem>
 <mensagem id="11" type="warning">Estamos com problemas para processar essa operação no momento, por favor tente novamente mais tarde.</mensagem>
 <mensagem id="12" type="danger">Usuário não está ativo no sistema</mensagem>
 <mensagem id="13" type="danger">Usuário já está ativo no sistema</mensagem>
 <mensagem id="14" type="success">Usuário habilitado no sistema com sucesso!</mensagem>
-<mensagem id="15" type="success">Senha redefinida com sucesso!</mensagem>
+<mensagem id="15" type="success">Senha alterada com sucesso!</mensagem>
 <mensagem id="16" type="success">Tabela e preços atualizada com sucesso!</mensagem>
 <mensagem id="17" type="danger">Não é possível excluir esse registro pois o mesmo contém dados no sistema que não podem ser excluídos.</mensagem>
 </mensagens>

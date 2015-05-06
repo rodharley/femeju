@@ -1,28 +1,30 @@
 <?php
 
-$TPL = NEW Template("templates/index.html");
-$TPL->addFile("CONTEUDO", "templates/usuario/ativar.html");
+$TPL = NEW Template("templates/admin/index.html");
+$TPL->addFile("CONTEUDO", "templates/admin/usuario/ativar.html");
 $user = new Usuario();
 if(isset($_REQUEST['id'])){
-$idUser = $user->md5_decrypt($_REQUEST['id']);	
+$idUser = $user->md5_decrypt($_REQUEST['id']);
+  	
 $user->getById($idUser);	
 	if($user->id == null){
-		$_SESSION['grc.mensagem'] = 1;
-		header("Location:index.php");
+		$_SESSION['fmj.mensagem'] = 1;
+		header("Location:admin_home-index");
 		exit();
 	}else{
 		if($user->ativo == "0"){
 				$TPL->id = $user->id;
+                $TPL->email = $user->email;
 		}else{
-			$_SESSION['grc.mensagem'] = 61;
-			header("Location:index.php");
+			$_SESSION['fmj.mensagem'] = 13;
+			header("Location:admin_home-index");
 			exit();
 		
 		}
 	}
 }else{
-	$_SESSION['grc.mensagem'] = 1;
-		header("Location:index.php");
+	$_SESSION['fmj.mensagem'] = 1;
+		header("Location:admin_home-index");
 		exit();
 }
 $TPL->show();

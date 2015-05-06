@@ -19,17 +19,17 @@ class Mensagem extends Persistencia
 				$this->id = $id;
 				$this->tipo = $elemento['type'];
 				$strmsg = $elemento[0];
-				if(isset($_SESSION['grc.param1'])){
-					$strmsg = str_replace("{param1}",$_SESSION['grc.param1'],$strmsg);
-					unset($_SESSION['grc.param1']);
+				if(isset($_SESSION['fmj.param1'])){
+					$strmsg = str_replace("{param1}",$_SESSION['fmj.param1'],$strmsg);
+					unset($_SESSION['fmj.param1']);
 				}
-				if(isset($_SESSION['grc.param2'])){
-					$strmsg = str_replace("{param2}",$_SESSION['grc.param2'],$strmsg);
-					unset($_SESSION['grc.param2']);
+				if(isset($_SESSION['fmj.param2'])){
+					$strmsg = str_replace("{param2}",$_SESSION['fmj.param2'],$strmsg);
+					unset($_SESSION['fmj.param2']);
 				}
-				if(isset($_SESSION['grc.param3'])){
-					$strmsg = str_replace("{param3}",$_SESSION['grc.param3'],$strmsg);
-					unset($_SESSION['grc.param3']);
+				if(isset($_SESSION['fmj.param3'])){
+					$strmsg = str_replace("{param3}",$_SESSION['fmj.param3'],$strmsg);
+					unset($_SESSION['fmj.param3']);
 				}
 				$this->mensagem = utf8_decode($strmsg);
 			}
@@ -37,7 +37,7 @@ class Mensagem extends Persistencia
 	}
 	
 	function echoMensagem(){
-	$this->getMensagem($_SESSION['grc.mensagem']);
+	$this->getMensagem($_SESSION['fmj.mensagem']);
 	$strReturn = "";
 	$tipo = $this->tipo;
 	
