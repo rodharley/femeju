@@ -46,6 +46,13 @@ set
 		<atrib tbname="idMenuPai" type="fk" clrelation="Menu">menuPai</atrib>
 		<atrib tbname="" type="set" clrelation="Menu" clorder="id" clfk="menuPai">subMenus</atrib>
 	</class>
+	<class name="Noticia" tbname="fmj_noticia" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="titulo" type="txt">titulo</atrib>
+		<atrib tbname="texto" type="txt">texto</atrib>
+		<atrib tbname="foto" type="txt">foto</atrib>
+		<atrib tbname="data" type="txt">data</atrib>		
+	</class>
 	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">descricao</atrib>	
