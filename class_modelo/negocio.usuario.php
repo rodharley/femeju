@@ -253,6 +253,7 @@ class Usuario extends Persistencia {
 			$this -> foto = $nomefoto;
 		}		
 		$this -> save();
+        $email = new Email();
         $email->enviarEmailNovoUsuario($this->nome,$this->email,$this->id);
 		$_SESSION['fmj.mensagem'] = 4;
 		header("Location:admin_usuario-main");
