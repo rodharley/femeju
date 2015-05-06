@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Maio-2015 às 20:11
+-- Generation Time: 06-Maio-2015 às 18:23
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES latin1 */;
 
 --
--- Database: `gestorcadmo`
+-- Database: `femeju`
 --
 
 -- --------------------------------------------------------
@@ -26,20 +26,33 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `fmj_acesso`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_acesso` (
+DROP TABLE IF EXISTS `fmj_acesso`;
+CREATE TABLE `fmj_acesso` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fmj_perfil_id` int(10) unsigned NOT NULL,
   `fmj_menu_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fmj_acessos_FKIndex1` (`fmj_menu_id`),
   KEY `fmj_acessos_FKIndex2` (`fmj_perfil_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=784 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=789 ;
 
+--
+-- Extraindo dados da tabela `fmj_acesso`
+--
 
+INSERT INTO `fmj_acesso` (`id`, `fmj_perfil_id`, `fmj_menu_id`) VALUES
+(786, 1, 1),
+(787, 1, 2),
+(788, 1, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `fmj_cidade`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_cidade` (
+DROP TABLE IF EXISTS `fmj_cidade`;
+CREATE TABLE `fmj_cidade` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `idUf` int(2) NOT NULL DEFAULT '0',
   `uf` varchar(4) NOT NULL DEFAULT '',
@@ -9783,7 +9796,8 @@ INSERT INTO `fmj_cidade` (`id`, `idUf`, `uf`, `nome`) VALUES
 -- Estrutura da tabela `fmj_log`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_log` (
+DROP TABLE IF EXISTS `fmj_log`;
+CREATE TABLE `fmj_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ip` varchar(50) NOT NULL,
   `navegador` varchar(100) NOT NULL,
@@ -9793,8 +9807,45 @@ CREATE TABLE IF NOT EXISTS `fmj_log` (
   `idusuario` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
+--
+-- Extraindo dados da tabela `fmj_log`
+--
+
+INSERT INTO `fmj_log` (`id`, `ip`, `navegador`, `url`, `data`, `texto`, `idusuario`) VALUES
+(6, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:32:48', 'Tentativa de Login, usuário inativo', NULL),
+(7, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:33:13', 'Tentativa de Login, usuário inativo', NULL),
+(8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:33:54', 'Tentativa de Login, usuário inativo', NULL),
+(9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:33:59', 'Tentativa de Login, usuário inativo', NULL),
+(10, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:37:12', 'Tentativa de Login, usuário inativo', NULL),
+(11, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:40:13', 'Tentativa de Login, senha inválida', NULL),
+(12, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:40:20', 'Entrou no Sistema', 5),
+(13, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:43:15', 'Tentativa de Login, senha inválida', 5),
+(14, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:43:21', 'Entrou no Sistema', 5),
+(15, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:44:35', 'Entrou no Sistema', 5),
+(16, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:44:44', 'Entrou no Sistema', 5),
+(17, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:46:07', 'Entrou no Sistema', 5),
+(18, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:46:22', 'Entrou no Sistema', 5),
+(19, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:47:07', 'Entrou no Sistema', 5),
+(20, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:47:20', 'Entrou no Sistema', 5),
+(21, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:47:33', 'Entrou no Sistema', 5),
+(22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:48:01', 'Entrou no Sistema', 5),
+(23, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:48:14', 'Entrou no Sistema', 5),
+(24, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:48:22', 'Entrou no Sistema', 5),
+(25, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:48:48', 'Entrou no Sistema', 5),
+(26, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 13:49:28', 'Entrou no Sistema', 5),
+(27, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 14:11:18', 'Entrou no Sistema', 5),
+(28, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 14:11:40', 'Entrou no Sistema', 5),
+(29, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 14:25:13', 'Entrou no Sistema', 5),
+(30, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 14:28:08', 'Entrou no Sistema', 5),
+(31, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-05 14:42:35', 'Entrou no Sistema', 5),
+(32, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-06 12:49:44', 'Tentativa de Login, usuário inativo', NULL),
+(33, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-06 12:49:51', 'Tentativa de Login, usuário inativo', NULL),
+(34, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-06 13:02:28', 'Entrou no Sistema', 5),
+(35, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-06 13:11:11', 'Tentativa de Login, senha inválida', NULL),
+(36, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-06 13:11:18', 'Entrou no Sistema', 5),
+(37, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0', '/femeju/admin_home-login', '2015-05-06 13:21:32', 'Entrou no Sistema', 5);
 
 -- --------------------------------------------------------
 
@@ -9802,7 +9853,8 @@ CREATE TABLE IF NOT EXISTS `fmj_log` (
 -- Estrutura da tabela `fmj_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_menu` (
+DROP TABLE IF EXISTS `fmj_menu`;
+CREATE TABLE `fmj_menu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idMenuPai` int(10) unsigned DEFAULT NULL,
   `nome` varchar(50) DEFAULT NULL,
@@ -9812,19 +9864,36 @@ CREATE TABLE IF NOT EXISTS `fmj_menu` (
   PRIMARY KEY (`id`),
   KEY `fmj_menu_FKIndex1` (`idMenuPai`),
   KEY `idMenuPai` (`idMenuPai`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=43 ;
 
+--
+-- Extraindo dados da tabela `fmj_menu`
+--
+
+INSERT INTO `fmj_menu` (`id`, `idMenuPai`, `nome`, `ordem`, `url`, `icone`) VALUES
+(1, NULL, 'Notícias', 1, 'admin_noticia-main', 'fa-newspaper-o'),
+(2, NULL, 'Usuários', 2, 'admin_usuario-main', 'fa-user'),
+(3, NULL, 'Perfis', 3, 'admin_perfil-main', 'fa-users');
+
+-- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `fmj_perfil`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_perfil` (
+DROP TABLE IF EXISTS `fmj_perfil`;
+CREATE TABLE `fmj_perfil` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
+--
+-- Extraindo dados da tabela `fmj_perfil`
+--
+
+INSERT INTO `fmj_perfil` (`id`, `nome`) VALUES
+(1, 'ADMINISTRADOR');
 
 -- --------------------------------------------------------
 
@@ -9832,7 +9901,8 @@ CREATE TABLE IF NOT EXISTS `fmj_perfil` (
 -- Estrutura da tabela `fmj_uf`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_uf` (
+DROP TABLE IF EXISTS `fmj_uf`;
+CREATE TABLE `fmj_uf` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `uf` varchar(10) NOT NULL DEFAULT '',
   `nome` varchar(20) NOT NULL DEFAULT '',
@@ -9878,7 +9948,8 @@ INSERT INTO `fmj_uf` (`id`, `uf`, `nome`) VALUES
 -- Estrutura da tabela `fmj_usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `fmj_usuario` (
+DROP TABLE IF EXISTS `fmj_usuario`;
+CREATE TABLE `fmj_usuario` (
   `fmj_perfil_id` int(10) unsigned NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `senha` varchar(40) DEFAULT NULL,
@@ -9888,22 +9959,18 @@ CREATE TABLE IF NOT EXISTS `fmj_usuario` (
   `foto` varchar(255) NOT NULL DEFAULT 'avatar.png',
   `telefone` varchar(30) DEFAULT NULL,
   `celular` varchar(30) DEFAULT NULL,
-  `registro` varchar(50) DEFAULT NULL,
-  `empresa` bigint(20) DEFAULT NULL,
-  `condominio` bigint(20) DEFAULT NULL,
-  `login` varchar(30) NOT NULL,
-  `assinatura` varchar(255) DEFAULT '',
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
-  KEY `fmj_usuario_FKIndex3` (`fmj_perfil_id`),
-  KEY `condominio` (`condominio`),
-  KEY `empresa` (`empresa`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  KEY `fmj_usuario_FKIndex3` (`fmj_perfil_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Extraindo dados da tabela `fmj_usuario`
 --
 
+INSERT INTO `fmj_usuario` (`fmj_perfil_id`, `nome`, `senha`, `ativo`, `email`, `cpf`, `foto`, `telefone`, `celular`, `id`) VALUES
+(1, 'ADMIN 1', 'e10adc3949ba59abbe56e057f20f883e', 1, 'rodrigo.cruz76@gmail.com', '00007311966', 'avatar.png', '(61) 3408-62123', '(61) 8432-85555', 5),
+(1, 'SHOICHI KISHI', 'e10adc3949ba59abbe56e057f20f883e', 1, 'kishi@epocca.com.br', '00007311966', 'avatar.png', '(12) 3223-23333', '(12) 3131-23323', 7);
 
 --
 -- Constraints for dumped tables
@@ -9940,3 +10007,6 @@ ALTER TABLE `fmj_menu`
 ALTER TABLE `fmj_usuario`
   ADD CONSTRAINT `fk_perfil_usuario` FOREIGN KEY (`fmj_perfil_id`) REFERENCES `fmj_perfil` (`id`);
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
