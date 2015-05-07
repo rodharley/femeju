@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-lg-12">
+        {BREADCRUMB}
+        <div class="page-header">
+            <h2>Notícias</h2>
+        </div>
+        <div class="row">
+            <!-- BEGIN BLOCK_NOTICIA -->
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="img/noticias/{imagem}" alt="{imagem}">
+                    <div class="caption">
+                        <blockquote>
+                            <p>
+                                {titulo}
+                            </p>
+                            <footer>
+                                {data}
+                            </footer>
+                        </blockquote>
+
+                        <p>
+                            <a href="portal_noticia-detalhe?id={idhash}" class="btn btn-primary" role="button">leia mais</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- END BLOCK_NOTICIA -->
+
+        </div>
+        <!-- BEGIN BLOCK_PAGINACAO -->
+        <nav>
+            <ul class="pager">
+                <li class="previous {DISABLEL}">
+                    <a href="#" class="paginar" value="{PAGINA_ANTERIOR}"><span aria-hidden="true">&larr;</span> Recentes</a>
+                </li>
+               <li class="center disabled">
+                    <a href="#">{PAGINA}</a>
+                </li>
+                <li class="next {DISABLER}">
+                    <a href="#" class="paginar" value="{PROXIMA_PAGINA}">Anteriores <span aria-hidden="true">&rarr;</span></a>
+                </li>
+            </ul>
+        </nav>
+        <!-- END BLOCK_PAGINACAO -->
+    </div>
+</div>
+<input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+<script>
+
+    function pesquisar(){
+            $.ajax({
+                url : "ajax/portal_noticia_paginar.php",
+                type : "POST",
+                data : {pagina:$("#pagina").val()},
+                beforeSend: function( ) {
+                    $('#contentPortal').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#contentPortal").html(msg);
+            });
+
+        }
+
+    $(document).ready(function() {
+        {EXECUTA_PESQUISA}        
+        $(".paginar").click(function() {
+            $("#pagina").val($(this).attr("value"));
+            pesquisar();
+        });
+    }); 
+</script>

@@ -41,7 +41,16 @@ class Noticia extends Persistencia {
         return $this -> getSQL($sql);
 
     }
-
+    function listar3PortalTotal(){
+        $sql = "select count(*) as total from fmj_noticia";
+        $rs = $this -> DAO_ExecutarQuery($sql);
+        return $this -> DAO_Result($rs, "total", 0);
+    }
+    
+    function listar3Portal($primeiro = 0, $quantidade = 9999){
+        $sql = "select * from fmj_noticia order by data desc limit $primeiro, $quantidade";
+        return $this->getSQL($sql);
+    }
     function Incluir() {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> texto = $_REQUEST['texto'];

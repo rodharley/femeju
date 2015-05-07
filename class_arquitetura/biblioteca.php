@@ -94,12 +94,16 @@ function ValidaData($dat){
 }
 
 
-function paginar ($total,$pagina){
+function paginar ($total,$pagina,$paginacao = ""){
 
+if($paginacao == "")
+     $qtdPagina = $this->PAGINACAO;
+else
+    $qtdPagina = $paginacao;
 if($pagina == "")
 $pagina = 1;
-$paginas = ceil($total / $this->PAGINACAO);
-$inicio =  $this->PAGINACAO *($pagina-1);
+$paginas = ceil($total / $qtdPagina);
+$inicio =  $qtdPagina *($pagina-1);
 if($pagina < $paginas)
 $proximaPagina = $pagina+1;
 else
@@ -109,7 +113,7 @@ if($pagina > 1)
 $paginaAnterior = $pagina-1;
 else
 $paginaAnterior = $pagina;
-return array('totalPaginas'=>$paginas,'primeiroRegistro'=>$inicio,'proximaPagina'=>$proximaPagina,'paginaAnterior'=>$paginaAnterior,'quantidadePorPagina'=>$this->PAGINACAO);
+return array('totalPaginas'=>$paginas,'primeiroRegistro'=>$inicio,'proximaPagina'=>$proximaPagina,'paginaAnterior'=>$paginaAnterior,'quantidadePorPagina'=>$qtdPagina);
 }
 
 
