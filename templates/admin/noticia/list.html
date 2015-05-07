@@ -1,7 +1,10 @@
 <script>
 	$(document).ready(function() {
 		
-
+        $('.excluir').click(function() {
+            if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+                window.location.href = 'admin_noticia-action?acao=excluir&id=' + $(this).attr("value");
+        });
 		$(".paginar").click(function(){
 			$("#pagina").val($(this).attr("value"));
 			pesquisar();
@@ -44,7 +47,7 @@
 					<td>{titulo}</td>
 					<td class="text-right hidden-xs" >
 					<div class="btn-group">
-						<a type="button" class="btn btn-default" href="admin_usuario-editar?idPerfil={ID_PERFIL_HASH}&id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
+						<a type="button" class="btn btn-default" href="admin_noticia-editar?id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
 						<a class="btn btn-danger excluir" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
 					</div></td>
 					<td class="visible-xs">
@@ -54,7 +57,7 @@
 						</button>
 						<ul class="dropdown-menu" role="menu">							
 							<li>
-								<a href="admin_usuario-editar?idPerfil={ID_PERFIL_HASH}&id={ID_HASH}"><span class="fa fa-edit"></span> Editar</a>
+								<a href="admin_noticia-editar?id={ID_HASH}"><span class="fa fa-edit"></span> Editar</a>
 							</li>
 							<li class="divider"></li>
 							<li>

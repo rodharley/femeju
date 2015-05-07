@@ -1405,8 +1405,6 @@ function unSetMensagem(){
 }
 
 
-
-
 function createthumb($orig_name, $name, $newname, $new_w, $new_h, $border=false, $transparency=true, $base64=false) {
     if(file_exists($newname))
         @unlink($newname);

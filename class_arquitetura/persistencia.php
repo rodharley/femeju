@@ -438,7 +438,7 @@ function xmlObject($elemento,$i,$objeto){
 								$sql .= ", ";
 							}else{
 								if($atributo['type'] == "txt" || $atributo['type'] == "dat")
-									$sql .= "'".$this->$atributo[0]."'";
+									$sql .= "'".$this->conn->real_escape_string($this->$atributo[0])."'";
 								else	
 									$sql .= $this->$atributo[0];
 								$sql .= ", ";
@@ -466,7 +466,7 @@ function xmlObject($elemento,$i,$objeto){
 								$campos .= ", ";
 							}else{
 								if($atributo['type'] == "txt" || $atributo['type'] == "dat")
-									$campos .= "'".$this->$atributo[0]."'";
+									$campos .= "'".$this->conn->real_escape_string($this->$atributo[0])."'";
 								else
 									$campos .= $this->$atributo[0];
 								$campos .= ", ";
