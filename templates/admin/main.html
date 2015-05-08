@@ -37,7 +37,7 @@
 		<link href="css/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
 		<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
-		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="js/plugins/jqValidation/jquery.validate.min.js" type="text/javascript"></script>
 		<script src="js/plugins/jqValidation/additional-methods.min.js" type="text/javascript"></script>
@@ -77,6 +77,8 @@
 		<script src="js/fileinput.js" type="text/javascript"></script>
 		<!-- Ion Slider -->
         <script src="js/plugins/ionslider/ion.rangeSlider.min.js" type="text/javascript"></script>
+        <!-- scrollflow -->
+        <script src="js/jquery.simple-scroll-follow.2.0.1.js" type="text/javascript"></script>        
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -145,9 +147,9 @@
 		</header>
 		<div class="wrapper row-offcanvas row-offcanvas-left">
 			<!-- Left side column. contains the logo and sidebar -->
-			<aside class="left-side sidebar-offcanvas">
+			<aside class="left-side sidebar-offcanvas" id="colunaLeft">
 				<!-- sidebar: style can be found in sidebar.less -->
-				<section class="sidebar">
+				<section class="sidebar" id="menuPrincipal" style="position: absolute;">
 					<!-- Sidebar user panel -->
 					<div class="user-panel">
 						<div class="pull-left image">
@@ -213,7 +215,9 @@
 <Script>
 	$(document).ready(function() {
 		$("[data-mask]").inputmask();
-
+       
+         $('#menuPrincipal').simpleScrollFollow();
+        
 		$(".btVoltar").click(function() {
 			history.back();
 		});

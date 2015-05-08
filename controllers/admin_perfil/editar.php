@@ -19,19 +19,29 @@ $TPL->BREADCRUMB = '<section class="content-header">
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/perfil/edit.html");
 $obj = new Perfil();
-
-$TPL->LABEL = "Editar Perfil";
-$TPL->ACAO = "editar";
-$TPL->id = $_REQUEST['id'];
-$obj->getById($obj->md5_decrypt($_REQUEST['id']));
-$TPL->nome = $obj->descricao;
 $objAcesso = new Acesso();
 $objMenu = new Menu();
-$listaAcessos = $objAcesso->recuperaMenuAcessos($obj->id);
+
+$TPL->LABEL = "Incluir Perfil";
+$TPL->ACAO = "incluir";
+$TPL->id = 0;
 $arrayMenusSelecionados = array();
-foreach($listaAcessos as $key => $m){
-	$arrayMenusSelecionados[] = $m->menu->id;
+
+
+if(isset($_REQUEST['id'])){
+    $TPL->LABEL = "Editar Perfil";
+    $TPL->ACAO = "editar";
+    $TPL->id = $_REQUEST['id'];
+    $obj->getById($obj->md5_decrypt($_REQUEST['id']));
+    $TPL->nome = $obj->descricao;
+    
+    $listaAcessos = $objAcesso->recuperaMenuAcessos($obj->id);
+    
+    foreach($listaAcessos as $key => $m){
+    	$arrayMenusSelecionados[] = $m->menu->id;
+    }
 }
+
 
 $menus = $objMenu->recuperaMenusCompletos(0);
  foreach($menus as $key => $m){
@@ -39,7 +49,7 @@ $menus = $objMenu->recuperaMenusCompletos(0);
 	$TPL->IDMENU = $m->id;
 	if(in_array($m->id, $arrayMenusSelecionados))
 		$TPL->CHECKMENU = 'checked="checked"';
- 	$submenus = $objMenu->recuperaMenusCompletos($m->id);
+	$submenus = $objMenu->recuperaMenusCompletos($m->id);
  	foreach($submenus as $key2 => $sm){
 		$TPL->DESC_SUBMENU_MENU = $sm->nome;
 		$TPL->IDSUBMENU = $sm->id;

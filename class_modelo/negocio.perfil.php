@@ -14,7 +14,7 @@ class Perfil extends Persistencia{
     }
     
     
-	public function alterar(){
+	public function Alterar(){
 		$oAcesso = new Acesso();
 		$idPerfil = $this->md5_decrypt($_POST['id']);
 		$this->getById($idPerfil);
@@ -36,5 +36,23 @@ class Perfil extends Persistencia{
 		exit();
 	}
 	
+    public function Incluir(){
+        $oAcesso = new Acesso();
+        $this->descricao = $_POST['descricao'];
+        $this->save();
+        if(isset($_REQUEST['menus'])){
+        foreach ($_REQUEST['menus'] as $key => $valor){
+        $oAc = new Acesso();
+        $m = new Menu();
+        $m->id = $valor;
+        $oAc->menu = $m;
+        $oAc->perfil = $this;
+        $oAc->save();   
+        }
+        }
+        $_SESSION['fmj.mensagem'] = 21;
+        header("Location:admin_perfil-main");
+        exit();
+    }
 }
 ?>

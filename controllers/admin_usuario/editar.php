@@ -30,7 +30,7 @@ $TPL->id = 0;
 $TPL->checksim = "checked='checked'";
 $TPL->checknao = "";
 $TPL->IMG_USER = "img/users/avatar.png";
-$TPL->carregando = $usu->carregando;
+
 $idPerfilUsu = 0;
 if(isset($_REQUEST['id'])){
 	$usu->getById($usu->md5_decrypt($_REQUEST['id']));

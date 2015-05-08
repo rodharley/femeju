@@ -190,30 +190,6 @@
 					}
 				}
 		});
-
-		$("#perfil").change(function(){
-			mudarPerfil();
-		});
-
-		function mudarPerfil(){
-			if($("#perfil").val() > 0){
-			$.ajax({
-				url : "ajax/usuario_perfil.php?iduser={id}",
-				type : "POST",
-				data : {
-					idperfil : $("#perfil").val()
-				},
-
-				beforeSend: function( ) {
-					$('#box_perfil').html('{carregando}');
-		  		},
-			}).done(function(msg) {
-				$("#box_perfil").html(msg);
-			});
-			}else{
-				$("#box_perfil").html('<input type="hidden" id="registro" name="registro" value="{registro}"/>');
-			}
-		}
-		//mudarPerfil();
+		
 	});
 </script>

@@ -8,7 +8,10 @@ if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
 	case 'editar' :
 		$perfil->Alterar();
-		break;	
+		break;
+     case 'incluir' :
+        $perfil->Incluir();
+        break;  	
 }
 }
 

@@ -249,7 +249,7 @@ class Usuario extends Persistencia {
 		if ($_FILES['foto']['name'] != "") {
 			//incluir imagem se ouver
 			$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
-			$this -> uploadImagem($_FILES['foto'], $nomefoto, "img/users/");
+			$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
 			$this -> foto = $nomefoto;
 		}		
 		$this -> save();

@@ -24,7 +24,7 @@ Exemplos de mensagens:
 <mensagem id="18" type="success">Notícia cadastrada com sucesso.</mensagem>
 <mensagem id="19" type="success">Notícia alterada com sucesso.</mensagem>
 <mensagem id="20" type="success">Notícia excluída com sucesso.</mensagem>
-
+<mensagem id="21" type="success">Perfil Incluído com sucesso.</mensagem>
 </mensagens>
 
 
