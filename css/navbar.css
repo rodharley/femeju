@@ -10,20 +10,37 @@ body {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), 0 0 50px rgba(0, 0, 0, 0.1) inset;
     box-sizing: border-box;  
     overflow: hidden;
-    min-height: 1000px;
+    min-height: 700px;
         
 }
 
-.barraLateral {
-    background-image: linear-gradient(to bottom, #007CC3 0px, #005197 100%);
-    background-repeat: repeat-x;
-    min-height: 800px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 6px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
+.navbar-femeju {
+	background-color: transparent !important;
+	background: transparent;
+    border-color: transparent !important;
+    box-shadow: none;
 }
 
+.backgroundL {
+	background-image: linear-gradient(to bottom, #0093DD 0px, #173885 100%);
+    background-repeat: repeat-x;
+    min-height: 700px;
+}
+.backgroundR {
+	background-image: linear-gradient(to bottom, #173885 0px, #0093DD 100%);
+    background-repeat: repeat-x;
+    min-height: 700px;
+}
+.backgroundC {
+	background-image: linear-gradient(to bottom, #173885 0px, #0093DD 10%, #173885 50%, #0093DD 90%, #173885 100%);
+    background-repeat: repeat-x;
+    border-left: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    min-height: 700px;
+}
 .btn-laterais{
-margin-bottom:2em;
+margin-top:0.5em;
+margin-bottom:0.6em;
 color:#ffffff;
 font-weight:bold;
 }
@@ -54,10 +71,27 @@ margin-top:1em;
     padding:0.3em;
     
 }
+.btn-l {
+	background-image: linear-gradient(to bottom, #0694DC 0px, #71C4F0 100%);
+    background-repeat: repeat-x;    
+    border:1px #42B8F8 solid;
+    padding:0.2em;
+    border-radius: 4px;
+}
+.btn-r {
+	background-image: linear-gradient(to bottom, #66B5E0 0px, #264C93 100%);
+    background-repeat: repeat-x;    
+    border:1px #42B8F8 solid;
+    padding:0.2em;
+    border-radius: 4px;
+}
 .btn-padrao{
-min-width:7em;
+background-color:#017CC0;	
+min-width:5em;
 padding:0.3em;
 text-align: center;
+border-style:inset;
+border-color: #005DA7;
 }
 
 .banners{
@@ -99,5 +133,61 @@ text-align: center;
     
 }
 .text-muted {
-    color: #777;
+	font-size : 0.7em;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align:left;
+}
+
+/*noticias*/
+.noticia-home {
+	background-size:cover;
+	background-repeat: no-repeat;	
+	margin:1em;
+	height: 20em;
+	border:solid 1px #FFFFFF;
+}
+.noticia-titulo-home{
+	padding: 1em;
+	font-size: 1.2em;
+	color:#FFFFFF;
+	font-weight: bold;
+	text-shadow: 1px 1px #000000;
+}
+/*destaques*/
+#destaques {
+	
+}
+#destaques fieldset {
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #666666;
+	padding: 0.5em;
+	font-size: 0.8em;
+	color:#FFFFFF;
+	min-height: 11em;
+		
+}
+#destaques legend {
+	margin-bottom: 0px;
+	font-size: 1em;
+	color:#FFFFFF;
+	font-weight: bold;
+	text-align: center;
+	border-image: none;
+    border-style: none none none;
+}
+
+#destaques a {
+	color:#FFFFFF;
+	
+}
+#destaques a:hover{
+	
+	text-decoration: underline;
+}
+.rodape{
+	bottom: 0;	   
+    position: absolute;
 }

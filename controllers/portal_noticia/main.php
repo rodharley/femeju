@@ -8,7 +8,7 @@ $TPL->BREADCRUMB = '<ol class="breadcrumb">
                                     <a href="portal_home-index">Home</a>
                                 </li>
                                 <li class="active">
-                                    <a href="#">Notícias</a>
+                                    <a href="#">Notícias 2</a>
                                 </li>
                             </ol>';
 $TPL->LOADING = $obj->carregando;
