@@ -1,11 +1,16 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  background: url("../img/backgrounds/6813149-textured-backgrounds.jpg") repeat scroll 0 0 #f2f2f4;
+  /*background: url("../img/backgrounds/6813149-textured-backgrounds.jpg") repeat scroll 0 0 #f2f2f4;*/
+ background: #173885; /* Fallback background color for non supported browsers */ 
+background-image: -moz-radial-gradient(center 45deg,circle cover, #0093DD, #173885);
+background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#0093DD), to(#173885));
 }
 
 .wrapper {
-    background: none repeat scroll 0 0 white;
+    background: #173885; /* Fallback background color for non supported browsers */ 
+background-image: -moz-radial-gradient(center 45deg,circle cover, #0093DD, #173885);
+background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#0093DD), to(#173885));
     border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), 0 0 50px rgba(0, 0, 0, 0.1) inset;
     box-sizing: border-box;  
@@ -24,12 +29,13 @@ body {
 .backgroundL {
 	background-image: linear-gradient(to bottom, #0093DD 0px, #173885 100%);
     background-repeat: repeat-x;
-    min-height: 700px;
+    height: 100%;
+    
 }
 .backgroundR {
 	background-image: linear-gradient(to bottom, #173885 0px, #0093DD 100%);
     background-repeat: repeat-x;
-    min-height: 700px;
+    height: 100%;
 }
 .backgroundC {
 	background-image: linear-gradient(to bottom, #173885 0px, #0093DD 10%, #173885 50%, #0093DD 90%, #173885 100%);
@@ -192,4 +198,10 @@ text-align: center;
 	bottom: 0;	   
     position: absolute;
     width: 100%;
+}
+.page-header h2 {
+	color:#FFFFFF;
+}
+.page-header h2 small {
+	color:#FFFFFF;
 }

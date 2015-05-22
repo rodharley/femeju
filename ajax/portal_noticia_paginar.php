@@ -2,6 +2,7 @@
 include("configuraAjaxSemLogin.php");
 $TPL = new Template("../templates/portal/noticia/main.html");
 $obj = new Noticia();
+
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $totalPesquisa = $obj->listar3PortalTotal();
 $configPaginacao = $obj->paginar($totalPesquisa,$pagina,3);
