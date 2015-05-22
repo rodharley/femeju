@@ -1,7 +1,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  background: url("../img/backgrounds/texturetastic_gray.png") repeat scroll 0 0 #f2f2f4;
+  background: url("../img/backgrounds/6813149-textured-backgrounds.jpg") repeat scroll 0 0 #f2f2f4;
 }
 
 .wrapper {
@@ -167,6 +167,7 @@ text-align: center;
 	font-size: 0.8em;
 	color:#FFFFFF;
 	min-height: 11em;
+	margin: 1em;
 		
 }
 #destaques legend {
@@ -190,4 +191,5 @@ text-align: center;
 .rodape{
 	bottom: 0;	   
     position: absolute;
+    width: 100%;
 }
