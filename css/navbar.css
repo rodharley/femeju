@@ -1,7 +1,7 @@
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  /*background: url("../img/backgrounds/6813149-textured-backgrounds.jpg") repeat scroll 0 0 #f2f2f4;*/
+  padding-top: 2em;
+ /* padding-bottom: 20px;
+  background: url("../img/backgrounds/6813149-textured-backgrounds.jpg") repeat scroll 0 0 #f2f2f4;*/
  background: #173885; /* Fallback background color for non supported browsers */ 
 background-image: -moz-radial-gradient(center 45deg,circle cover, #0093DD, #173885);
 background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#0093DD), to(#173885));
@@ -15,7 +15,7 @@ background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#0093DD
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), 0 0 50px rgba(0, 0, 0, 0.1) inset;
     box-sizing: border-box;  
     overflow: hidden;
-    min-height: 700px;
+    min-height: 606px;
         
 }
 
@@ -42,13 +42,14 @@ background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#0093DD
     background-repeat: repeat-x;
     border-left: solid 1px #FFFFFF;
     border-right: solid 1px #FFFFFF;
-    min-height: 700px;
+    min-height: 606px;
 }
 .btn-laterais{
-margin-top:0.5em;
-margin-bottom:0.6em;
+margin-top:0.2em;
+margin-bottom:0.2em;
 color:#ffffff;
 font-weight:bold;
+font-size: 0.8em;
 }
 
 .navbar {
@@ -150,7 +151,7 @@ text-align: center;
 	background-size:cover;
 	background-repeat: no-repeat;	
 	margin:1em;
-	height: 20em;
+	height: 15em;
 	border:solid 1px #FFFFFF;
 }
 .noticia-titulo-home{
@@ -165,10 +166,8 @@ text-align: center;
 	
 }
 #destaques fieldset {
-	border-left: 1px solid #FFFFFF;
-	border-right: 1px solid #FFFFFF;
-	border-top: 1px solid #FFFFFF;
-	border-bottom: 1px solid #666666;
+	border: 1px solid #FFFFFF;
+	
 	padding: 0.5em;
 	font-size: 0.8em;
 	color:#FFFFFF;
