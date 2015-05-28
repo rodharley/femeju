@@ -19,6 +19,16 @@
             <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
+                        <label for="principal"><i class='fa'></i><b>Página Principal</b></label><br/>
+                        <input type="radio" name="principal" value="1"class="form-control" {checkedEsquerdo}/> Lado Esquerdo &nbsp; &nbsp;
+                        <input type="radio" name="principal" value="2"class="form-control" {checkedDireito}/> Lado Direito &nbsp; &nbsp;
+                        <input type="radio" name="principal" value="0"class="form-control" {checkedNenhum}/> Nenhum
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
                         <label for="texto"><i class='fa'></i><b>Matéria</b></label>
                         <div id="summernote">{texto}
                         </div>

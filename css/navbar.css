@@ -205,3 +205,6 @@ text-align: center;
 .page-header h2 small {
 	color:#FFFFFF;
 }
+.btEntraNoticia {
+	cursor: pointer;	
+}

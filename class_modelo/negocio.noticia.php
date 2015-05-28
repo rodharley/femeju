@@ -4,6 +4,7 @@ class Noticia extends Persistencia {
     var $texto;
     var $foto;
     var $data;
+    var $principal;
 
     function pesquisarTotal($titulo = "", $texto = "", $periodo = "") {
         $sql = "select count(id) as total from fmj_noticia where 1 = 1";
@@ -51,17 +52,30 @@ class Noticia extends Persistencia {
         $sql = "select * from fmj_noticia order by data desc limit $primeiro, $quantidade";
         return $this->getSQL($sql);
     }
+    
+    function removePrincipal($principal){
+        $sql = "update fmj_noticia set principal = 0 where principal = ".$principal;
+        $this->DAO_ExecutarDelete($sql);
+    }
+    
     function Incluir() {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> texto = $_REQUEST['texto'];
         $this -> foto = "";
         $this -> data = date("Y-m-d H:i:s");
+        $this->principal = $_REQUEST['principal'];
         if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
             $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/noticias/");
             $this -> uploadImagem($_FILES['foto'], $nomefoto, "img/noticias/");
             $this -> foto = $nomefoto;
         }
+        
+        if($_REQUEST['principal'] != 0){
+            $this->removePrincipal($_REQUEST['principal']);
+        }
+        
+        
         $this -> save();
         $_SESSION['fmj.mensagem'] = 18;
         header("Location:admin_noticia-main");
@@ -75,7 +89,7 @@ class Noticia extends Persistencia {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> texto = $_REQUEST['texto'];
         $this -> data = date("Y-m-d H:i:s");
-
+        $this->principal = $_REQUEST['principal'];
         //incluir imagem se ouver
         if ($_FILES['foto']['name'] != "") {
             if ($this -> foto != "")
@@ -84,7 +98,11 @@ class Noticia extends Persistencia {
             $this -> uploadImagem($_FILES['foto'], $nomefoto, "img/noticias/");
             $this -> foto = $nomefoto;
         }
-
+        
+        if($_REQUEST['principal'] != 0){
+            $this->removePrincipal($_REQUEST['principal']);
+        }
+        
         $this -> save();
 
         $_SESSION['fmj.mensagem'] = 19;
@@ -108,6 +126,10 @@ class Noticia extends Persistencia {
             $_SESSION['fmj.mensagem'] = 17;
         header("Location:admin_noticia-main");
         exit();
+    }
+    
+    function recuperaNoticiaPrincipal($tipo){
+        return $this->getRow(array("principal"=>"=".$tipo));
     }
 
 }

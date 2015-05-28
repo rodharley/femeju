@@ -1,19 +1,15 @@
 <div class="row">
-    <div class="col-lg-6 col-md-12 col-sm-12">
-        <div class="noticia-home" style="background-image: url('img/noticias/noticia1.png');">
+    <!-- BEGIN BLOCK_NOTICIA -->
+    <div class="col-lg-6 col-md-12 col-sm-12 btEntraNoticia" id="{idNoticia}" >
+        <div class="noticia-home" style="background-image: url('img/noticias/{imagem}');">
             <div class="pull-left noticia-titulo-home" >
-                João Silva Conquista Mundial
+                {titulo}
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-12 col-sm-12">
-        <div class="noticia-home" style="background-image: url('img/noticias/noticia2.png');">
-            <div class="pull-left noticia-titulo-home" >
-                Seleção Brasileira Escalada
-            </div>
-        </div>
-    </div>
+    <!-- END BLOCK_NOTICIA -->    
 </div>
+
 <div class="row" id="destaques">
     <div class="col-lg-12 col-md-12 col-sm-12">
     <table width="100%">
@@ -82,3 +78,12 @@
     </table>
     </div>
     </div>
+    <script>
+    $(document).ready(function() {
+        
+       
+        $(".btEntraNoticia").click(function() {
+            window.location.href = 'portal_noticia-detalhe?id='+$(this).attr("id");
+        });
+        });
+</script>

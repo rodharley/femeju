@@ -28,6 +28,10 @@ $TPL->LABEL = "Nova Notícia";
 $TPL->ACAO = "incluir";
 $TPL->id = 0;
 $TPL->IMG_NOTICIA = "";
+$TPL->checkedNenhum = "checked='checked'";
+$TPL->checkedEsquerdo = "";
+$TPL->checkedDireito = "";
+
 if(isset($_REQUEST['id'])){
 	$noticia->getById($noticia->md5_decrypt($_REQUEST['id']));
 	$TPL->titulo = $noticia->titulo;
@@ -40,6 +44,18 @@ if(isset($_REQUEST['id'])){
 		$TPL->IMG_NOTICIA = "<img src='img/noticias/".$noticia->foto."' class='file-preview-image' alt='".$noticia->foto."' title='".$noticia->foto."'>";
 		$TPL->block("BLOCK_IMG");
 	}
+
+    if($noticia->principal == 1){
+        $TPL->checkedNenhum = "";
+        $TPL->checkedEsquerdo = "checked='checked'";
+        $TPL->checkedDireito = "";
+    }
+    
+    if($noticia->principal == 2){
+        $TPL->checkedNenhum = "";
+        $TPL->checkedEsquerdo = "";
+        $TPL->checkedDireito = "checked='checked'";
+    }
 	
 }
 

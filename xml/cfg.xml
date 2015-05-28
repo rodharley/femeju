@@ -90,7 +90,8 @@ set
 		<atrib tbname="titulo" type="txt">titulo</atrib>
 		<atrib tbname="texto" type="txt">texto</atrib>
 		<atrib tbname="foto" type="txt">foto</atrib>
-		<atrib tbname="data" type="txt">data</atrib>		
+		<atrib tbname="data" type="txt">data</atrib>
+		<atrib tbname="principal" type="int">principal</atrib>				
 	</class>
 	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
