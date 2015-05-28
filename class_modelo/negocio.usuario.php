@@ -70,54 +70,7 @@ class Usuario extends Persistencia {
 
 	}
 
-	function PesquisaPerfilEmpresaCondominio($empresa = "", $condominio = "",$perfil = "",$contador= false, $primeiro = 0, $quantidade = 99999) {
-		$sqlWhere = " where 1 = 1 ";
-        if($perfil != "")
-            $sqlWhere .= "and fmj_perfil_id = " . $perfil;
-        
-        if ($empresa != "")
-            $sqlWhere .= " and empresa = " . $empresa;
-        if ($condominio != "")
-            $sqlWhere .= " and condominio = " . $condominio;
-            
-       if($contador){
-               $sql = "select count(*) as total from fmj_usuario ";               
-               $rs = $this -> DAO_ExecutarQuery($sql.$sqlWhere);
-                return $this -> DAO_Result($rs, "total", 0);               
-       }   else{
-               $sql = "select * from fmj_usuario ";
-               $sqlOrder = "  order by nome limit $primeiro, $quantidade";
-               return $this -> getSQL($sql.$sqlWhere.$sqlOrder);   
-       }  
-            
-		
-        
-        
-		
-
-	}
-
-	function listarUsuariosPorPerfil($perfil) {
-
-		switch ($_SESSION['fmj.userPerfilId']) {
-			case 0 :
-				$sql = "select * from fmj_usuario where fmj_perfil_id = $perfil  order by nome";
-				break;
-			case 1 :
-				$sql = "select * from fmj_usuario where empresa = " . $_SESSION['fmj.empresaId'] . " and fmj_perfil_id = $perfil order by nome";
-				break;
-			case 2 :
-				$sql = "select * from fmj_usuario where empresa = " . $_SESSION['fmj.empresaId'] . " and fmj_perfil_id = $perfil order by nome";
-				break;
-			default :
-				$sql = "select * from fmj_usuario where condominio = " . $_SESSION['fmj.condominioId'] . " and fmj_perfil_id = $perfil";
-				break;
-		}
-
-		return $this -> getSQL($sql);
-
-	}
-
+	
 	function login($login, $senha) {
 			
 		
@@ -253,6 +206,11 @@ class Usuario extends Persistencia {
 			$this -> foto = $nomefoto;
 		}		
 		$this -> save();
+        
+        //altera as permissoes de academias
+            $this->apagaPermissoes();
+            $this->salvaPermissoes($_REQUEST['academias']);
+        
         $email = new Email();
         $email->enviarEmailNovoUsuario($this->nome,$this->email,$this->id);
 		$_SESSION['fmj.mensagem'] = 4;
@@ -294,17 +252,18 @@ class Usuario extends Persistencia {
 			}		
 
 			$this -> save();    
-                    
+            
+            //altera as permissoes de academias
+            $this->apagaPermissoes();
+            $this->salvaPermissoes($_REQUEST['academias']);
+                                
 			$_SESSION['fmj.mensagem'] = 5;
 			header("Location:admin_usuario-main?idPerfil=".$this->md5_encrypt($p -> id));
 			exit();
 		}
 	}
 
-	function salvarFoto($file, $nome, $diretorio) {
-		$return = $this -> createthumb($file['name'], $file['tmp_name'], $diretorio . $nome, 215, 215);
-	}
-
+	
 
 
 	function AlterarMeusDados() {
@@ -340,33 +299,21 @@ class Usuario extends Persistencia {
 		}
 	}
 
-	function listarDestinatariosPorProcesso($idProcesso) {
-		$processo = new Processo();
-		$processo -> getById($idProcesso);
-
-		$this -> getById($processo -> proprietario -> id);
-
-		$condominio = new Condominio;
-		$condominio -> getById($processo -> unidade -> condominio -> id);
-
-		$listaDest = $this -> nome . "<" . $this -> email . ">";
-		//recuperar o sindico e adms do processo
-
-		$lista = $this -> getRows(0, 999, array(), array("condominio" => "=" . $processo -> unidade -> condominio -> id, "perfil" => "in(" . Perfil::COND_ADM . "," . Perfil::COND_MAN . ")"));
-
-		foreach ($lista as $key => $user) {
-			$listaDest .= "," . $user -> nome . "<" . $user -> email . ">";
-		}
-		//recupera os engenheiros do condominio
-		$lista = $this -> getRows(0, 999, array(), array("perfil" => "in(" . Perfil::ENG_ADM . "," . Perfil::ENG_MAN . ")", "empresa" => "=" . $condominio -> empresa -> id));
-		foreach ($lista as $key => $user) {
-			$listaDest .= "," . $user -> nome . "<" . $user -> email . ">";
-		}
-
-		return $listaDest;
-
-	}
+	
+    public function apagaPermissoes(){
+        $SQL = "delete from fmj_permissao where idUsuario = ".$this->id;
+        $this->DAO_ExecutarDelete($SQL);
+    }
     
+    public function salvaPermissoes($permissoes){
+        $arrayP = explode(",", $permissoes);
+        foreach ($arrayP as $key => $value) {
+            $p = new Permissao();
+            $p->usuario = $this;
+            $p->academia = new Academia($value);
+            $p->save();
+        }
+    }
     function loginMd5($param1, $param2) {
             
        $login = $this->md5_decrypt($param1);

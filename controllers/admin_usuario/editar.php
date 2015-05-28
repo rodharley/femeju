@@ -6,7 +6,8 @@ include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
 
 $usu = new Usuario();
-
+$lacademia = new Academia();
+$perfil = new Perfil();
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
 			                        <h1>
@@ -32,6 +33,7 @@ $TPL->checknao = "";
 $TPL->IMG_USER = "img/users/avatar.png";
 
 $idPerfilUsu = 0;
+$listaAcademias = array();
 if(isset($_REQUEST['id'])){
 	$usu->getById($usu->md5_decrypt($_REQUEST['id']));
 	$TPL->cpf = $usu->cpf;
@@ -56,10 +58,15 @@ if(isset($_REQUEST['id'])){
 		$TPL->IMG_USER = "<img src='img/users/".$usu->foto."' class='file-preview-image' alt='".$usu->foto."' title='".$usu->foto."'>";
 		$TPL->block("BLOCK_IMG");
 	}
-
+    
+    //permissoes
+    $rsPermissoes = $lacademia->listaPermissoes($usu->id);
+    foreach ($rsPermissoes as $key => $permissao) {
+        array_push($listaAcademias,$permissao->id);
+    }
 	$TPL->block("BLOCK_EDIT");
 }
-$perfil = new Perfil();
+
 $rsPerfil = $perfil->getRows(0,999,array("id"=>"asc"),array());
  foreach($rsPerfil as $key => $p){
  	$TPL->idItem = $p->id;
@@ -70,6 +77,17 @@ $rsPerfil = $perfil->getRows(0,999,array("id"=>"asc"),array());
 		$TPL->checkItem = "";
 	$TPL->block("BLOCK_ITEM");
  }
+
+
+$rsAcademias = $lacademia->getRows();
+foreach ($rsAcademias as $key => $lacademia) {
+    $TPL->idAcademia = $lacademia->id;
+    $TPL->lblAcademia = $lacademia->nome;
+    if(array_search($lacademia->id, $listaAcademias) !== false)
+        $TPL->academiaChecked = 'checked="checked"';    
+    $TPL->block("BLOCK_ACADEMIA");     
+    $TPL->clear("academiaChecked");
+}
 
 
 

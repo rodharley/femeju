@@ -1,11 +1,14 @@
 <?php
+require("negocio.academia.php");
 require("negocio.acesso.php");
+require("negocio.atleta.php");
 require("negocio.cidade.php");
 require("negocio.email.php");
 require("negocio.log.php");
 require("negocio.menu.php");
 require("negocio.noticia.php");
 require("negocio.perfil.php");
+require("negocio.permissao.php");
 require("negocio.usuario.php");
 require("negocio.uf.php");
 ?>

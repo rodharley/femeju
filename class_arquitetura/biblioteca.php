@@ -8,6 +8,11 @@ function retorna_hora($data){
 	return substr($data, 10);
 }
 
+function salvarFoto($file, $nome, $diretorio) {
+        $return = $this -> createthumb($file['name'], $file['tmp_name'], $diretorio . $nome, 215, 215);
+    }
+
+
 function limpaCpf($cpf){
 return str_replace(".","",str_replace("-","", str_replace("/","", $cpf)));
 }

@@ -18,10 +18,49 @@ set
 <atrib tbname="" type="set" clrelation="vigencia" clorder="dataInicio" clfk="contrato">vigencias</atrib>
 -->
 <bd name="epocca">
+	<class name="Academia" tbname="fmj_academia" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="nome" type="txt">nome</atrib>
+		<atrib tbname="logradouro" type="txt">logradouro</atrib>
+		<atrib tbname="registro" type="txt">registro</atrib>
+		<atrib tbname="telComercial" type="txt">telComercial</atrib>
+		<atrib tbname="cep" type="txt">cep</atrib>
+		<atrib tbname="bairro" type="txt">bairro</atrib>
+		<atrib tbname="idCidade" type="fk" clrelation="Cidade">cidade</atrib>				
+	</class>
 	<class name="Acesso" tbname="fmj_acesso" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="fmj_menu_id" type="fk" clrelation="Menu">menu</atrib>
 		<atrib tbname="fmj_perfil_id" type="fk" clrelation="Perfil">perfil</atrib>		
+	</class>
+	<class name="Atleta" tbname="fmj_atleta" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="nome" type="txt">nome</atrib>
+		<atrib tbname="sobrenome" type="txt">sobrenome</atrib>
+		<atrib tbname="email" type="txt">email</atrib>
+		<atrib tbname="sexo" type="txt">sexo</atrib>
+		<atrib tbname="nomePai" type="txt">nomePai</atrib>
+		<atrib tbname="nomeMae" type="txt">nomeMae</atrib>
+		<atrib tbname="rg" type="txt">rg</atrib>
+		<atrib tbname="cpf" type="txt">cpf</atrib>
+		<atrib tbname="rgEmissor" type="txt">rgEmissor</atrib>		
+		<atrib tbname="logradouro" type="txt">logradouro</atrib>
+		<atrib tbname="bairro" type="txt">bairro</atrib>
+		<atrib tbname="cep" type="txt">cep</atrib>
+		<atrib tbname="telResidencial" type="txt">telResidencial</atrib>
+		<atrib tbname="telComercial" type="txt">telComercial</atrib>
+		<atrib tbname="telCelular" type="txt">telCelular</atrib>
+		<atrib tbname="foto" type="txt">foto</atrib>
+		<atrib tbname="situacaoFEMEJU" type="int">situacaoFEMEJU</atrib>
+		<atrib tbname="situacaoCBJ" type="int">situacaoCBJ</atrib>
+		<atrib tbname="einstrutor" type="int">einstrutor</atrib>
+		<atrib tbname="rgData" type="dat">rgData</atrib>
+		<atrib tbname="dataNascimento" type="dat">dataNascimento</atrib>
+		<atrib tbname="dataInscricao" type="dat">dataInscricao</atrib>
+		<atrib tbname="idCidadeNascimento" type="fk" clrelation="Cidade">cidadeNascimento</atrib>
+		<atrib tbname="idCidadeEndereco" type="fk" clrelation="Cidade">cidadeEndereco</atrib>
+		<atrib tbname="idAcademia" type="fk" clrelation="Cidade">academia</atrib>
+		<atrib tbname="idInstrutor" type="fk" clrelation="Cidade">instrutor</atrib>				
 	</class>
 	<class name="Cidade" tbname="fmj_cidade" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -56,6 +95,11 @@ set
 	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">descricao</atrib>	
+	</class>
+	<class name="Permissao" tbname="fmj_permissao" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="idAcademia" type="fk" clrelation="Academia">academia</atrib>
+		<atrib tbname="idUsuario" type="fk" clrelation="Usuario">usuario</atrib>		
 	</class>
 	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
