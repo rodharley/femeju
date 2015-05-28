@@ -73,10 +73,9 @@ class Atleta extends Persistencia {
             $this -> foto = $nomefoto;
         }     
         
-        $this->conn->connection->autocommit(false);
-        $this->conn->connection->begin_transaction();          
+        //$this->conn->connection->autocommit(false);
         $this -> save();        
-        $this->conn->connection->commit();        
+        //$this->conn->connection->commit();        
         $_SESSION['fmj.mensagem'] = 22;
         header("Location:admin_home-home");
         exit();
