@@ -150,11 +150,21 @@ text-align: center;
 /*noticias*/
 .noticia-home {
 	background-size:cover;
-	background-repeat: no-repeat;	
+	background-repeat: no-repeat;
+	background-position:center;	
 	margin:1em;
 	height: 15em;
 	border:solid 1px #FFFFFF;
 }
+
+.thumbnail .noticia-main {
+	background-size:cover;
+	background-repeat: no-repeat;	
+	background-position:center;
+	height: 10em;
+	
+}
+
 .noticia-titulo-home{
 	padding: 1em;
 	font-size: 1.2em;
