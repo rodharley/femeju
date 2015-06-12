@@ -219,7 +219,41 @@ class Usuario extends Persistencia {
 
 	}
 
-	
+	function IncluirPortal() {
+        $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+        $p = new Perfil();
+        
+        if($_REQUEST['perfil'] != 2 && $_REQUEST['perfil'] != 3){
+            $_SESSION['fmj.mensagem'] = 24;
+        header("Location:portal_servicos-entrar");
+        exit();
+        }
+        
+        $p -> id = $_REQUEST['perfil'];
+        $this -> perfil = $p;        
+        $this -> nome = $_REQUEST['nome'];
+        $this -> cpf = $strCPF;
+        $this -> email = $_REQUEST['email'];
+        $this -> telefone = str_replace("_","",$_REQUEST['telefone']);
+        $this -> celular = str_replace("_","",$_REQUEST['celular']);
+        $this -> senha = "";
+        $this -> ativo = 0;
+        $this -> foto = "avatar.png";
+        if ($_FILES['foto']['name'] != "") {
+            //incluir imagem se ouver
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
+            $this -> foto = $nomefoto;
+        }       
+        $this -> save();
+        
+        $email = new Email();
+        $email->enviarEmailNovoUsuarioPortal($this->nome,$this->email,$this->id);
+        $_SESSION['fmj.mensagem'] = 25;
+        header("Location:portal_servicos-entrar");
+        exit();
+
+    }
 
 	function Alterar() {
 		$strCPF = $this -> limpaCpf($_REQUEST['cpf']);

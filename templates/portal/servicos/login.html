@@ -1,0 +1,45 @@
+<div class="login-box">
+    <form action="portal_servicos-login" method="post" id="frm">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="login"><i class='fa'></i><b>Login(E-mail)</b></label>
+                    <input type="email" name="login" class="required email form-control" placeholder="Login de Acesso" required="" autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <label for="senha"><i class='fa'></i><b>Senha</b></label>
+                    <input type="password" name="senha" class="required form-control" placeholder="senha" required="" autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Entrar
+                    </button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default btn-block" id="btnNovoUsuario">
+                        Novo Usuário
+                    </button>
+                </div>
+                <input type="hidden" name="url" value="{URL}"/>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+	$(document).ready(function() {
+		$("#frm").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+			}
+		});
+		$("#btnNovoUsuario").click(function(){
+		    window.location.href="portal_servicos-novoUsuario";
+		});
+	}); 
+</script>

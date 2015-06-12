@@ -26,6 +26,9 @@ Exemplos de mensagens:
 <mensagem id="20" type="success">Notícia excluída com sucesso.</mensagem>
 <mensagem id="21" type="success">Perfil Incluído com sucesso.</mensagem>
 <mensagem id="22" type="success">Atleta cadastrado com sucesso.</mensagem>
+<mensagem id="23" type="warning">Para acessar a funcionalidade você deve autenticar ou criar um novo usuário.</mensagem>
+<mensagem id="24" type="danger">Perfil não Autorizado.</mensagem>
+<mensagem id="25" type="success">Usuário Cadastrado com sucesso.Verifique seu email para ativar sua conta.</mensagem>
 </mensagens>
 
 

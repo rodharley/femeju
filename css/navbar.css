@@ -46,7 +46,7 @@ background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#0093DD
     min-height: 606px;
 }
 .btn-laterais{
-margin-top:0.2em;
+margin-top:0.5em;
 margin-bottom:0.2em;
 color:#ffffff;
 font-weight:bold;
@@ -95,13 +95,16 @@ margin-top:1em;
 }
 .btn-padrao{
 background-color:#017CC0;	
-min-width:5em;
+min-width:3em;
 padding:0.3em;
 text-align: center;
 border-style:inset;
 border-color: #005DA7;
 }
 
+.btn-padrao div img {
+	width: 2.5em;
+}
 .banners{
 	border-top:1px #007CC3 dashed;
 	margin-top:60px;
@@ -217,4 +220,43 @@ text-align: center;
 }
 .btEntraNoticia {
 	cursor: pointer;	
+}
+.login-box {
+    margin: 90px auto 0;
+    width: 360px;
+}
+/* 
+   All form elements including input, select, textarea etc.
+-----------------------------------------------------------------
+*/
+.form-control {
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  box-shadow: none;
+}
+.form-control:focus {
+  border-color: #3c8dbc !important;
+  box-shadow: none;
+}
+.form-group.has-success label {
+  color: #00a65a;
+}
+.form-group.has-success .form-control {
+  border-color: #00a65a !important;
+  box-shadow: none;
+}
+.form-group.has-warning label {
+  color: #f39c12;
+}
+.form-group.has-warning .form-control {
+  border-color: #f39c12 !important;
+  box-shadow: none;
+}
+.form-group.has-error label {
+  color: #f56954;
+}
+.form-group.has-error .form-control {
+  border-color: #f56954 !important;
+  box-shadow: none;
 }
