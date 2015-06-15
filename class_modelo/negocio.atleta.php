@@ -81,5 +81,69 @@ class Atleta extends Persistencia {
         exit();
 
     }
+
+function IncluirPortal() {
+        $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+        $cidadeNascimento = $_REQUEST['cidadeNascimento'] != "" ? new Cidade($_REQUEST['cidadeNascimento']) : null;
+        $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
+        $instrutor = $_REQUEST['instrutor'] != "" ? new Atleta($_REQUEST['instrutor']) : null;        
+        
+        $this->nome = $_REQUEST['nome'];
+        $this->sobrenome = $_REQUEST['sobrenome'];
+        $this->email = $_REQUEST['email'];
+        $this->sexo = $_REQUEST['sexo'];
+        $this->nomePai = $_REQUEST['nomePai'];
+        $this->nomeMae = $_REQUEST['nomeMae'];
+        $this->rg = $_REQUEST['rg'];
+        $this->cpf = $strCPF;
+        $this->rgEmissor = $_REQUEST['rgLocal'];
+        $this->logradouro = $_REQUEST['localidade'];
+        $this->bairro = $_REQUEST['bairro'];
+        $this->cep = $_REQUEST['cep'];
+        $this->telResidencial = $this->limpaDigitos($_REQUEST['residencial']);
+        $this->telComercial = $this->limpaDigitos($_REQUEST['comercial']);
+        $this->telCelular = $this->limpaDigitos($_REQUEST['celular']);        
+        $this->situacaoFEMEJU = 0;
+        $this->situacaoCBJ = 0;
+        $this->einstrutor = $_REQUEST['einstrutor'];
+        $this->rgData = $this->convdata($_REQUEST['rgDataExpedicao'], "ntm");
+        $this->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
+        $this->dataInscricao = date("Y-m-d");
+        $this->cidadeNascimento = $cidadeNascimento;
+        $this->cidadeEndereco = $cidadeEndereco;
+        
+        //cadastra a academia e o instrutor
+        if($_REQUEST['idAcademia'] != "0")
+        $academia = new Academia($_REQUEST['idAcademia']);
+        else{
+            $academia = new Academia();
+            $academia->nome = $_REQUEST['nomeAcademia'];
+            $academia->registro = $_REQUEST['registroAcademia'];
+            $academia->bairro = $_REQUEST['bairroAcademia'];
+            $academia->logradouro = $_REQUEST['logradouroAcademia'];
+            $academia->cep = $_REQUEST['cepAcademia'];
+            $academia->telComercial = $_REQUEST['telefoneAcademia'];
+            $academia->cidade = new Cidade($_REQUEST['cidadeAcademia']);
+            $academia->save();            
+        }
+        $this->academia = $academia;
+        $this->instrutor = $instrutor;
+        
+        $this -> foto = "atleta.png";
+        if ($_FILES['foto']['name'] != "") {
+            //incluir imagem se ouver
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/atletas/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/atletas/");
+            $this -> foto = $nomefoto;
+        }     
+        
+        //$this->conn->connection->autocommit(false);
+        $this -> save();        
+        //$this->conn->connection->commit();        
+        $_SESSION['fmj.mensagem'] = 22;
+        header("Location:portal_servicos-main");
+        exit();
+
+    }
 }
 ?>

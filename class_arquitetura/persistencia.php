@@ -520,5 +520,28 @@ function xmlObject($elemento,$i,$objeto){
 			}
 		}
 	}
+    
+    function objectToArray($obj){
+            
+        $jsonarray = array();
+        foreach ($obj as $key => $value) {
+           if (!is_object($value)){
+            $jsonarray[$key] = utf8_encode($value);
+           }else{
+               $jsonarray[$key] = $this->objectToArray($value);
+           }                        
+        } 
+        
+        unset($jsonarray['conn']);
+        unset($jsonarray['remetente']);
+        unset($jsonarray['carregando']);
+        unset($jsonarray['URI']);
+        unset($jsonarray['desenvolvimento']);
+        unset($jsonarray['mensagem']);
+        unset($jsonarray['HASH_URL']);
+        unset($jsonarray['PAGINACAO']);
+              
+        return $jsonarray;
+    }
 }
 ?>
