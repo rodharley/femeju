@@ -23,7 +23,7 @@ function enviarEmailNovoUsuario($nome, $email,$idUsuario){
         return $this -> mail_html($email, $this -> remetente, "FEMEJU - Cadastramento no Sistema", $tplEmail -> showString());
 }
 function enviarEmailNovoUsuarioPortal($nome, $email,$idUsuario){
-        $mensagem = "Sr(a). $nome, você foi cadastrado como usuário do sistema FEMEJU. Clique <a href='".URL . "portal_servicos-ativar?id=" . $this -> md5_encrypt($idUsuario)."'>Aqui</a> para ativar seu usuário.";
+        $mensagem = "Sr(a). $nome, você foi cadastrado como usuário do sistema FEMEJU. Clique <a href='".URL . "/portal_servicos-ativar?id=" . $this -> md5_encrypt($idUsuario)."'>Aqui</a> para ativar seu usuário.";
         $tplEmail = new Template("templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);
         $tplEmail -> MENSAGEM = $mensagem;
