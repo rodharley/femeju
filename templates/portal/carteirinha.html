@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta content="" name="description">
+        <meta content="" name="author">
+        <link rel="icon" href="img/icon.png">
+
+        <title>FEMEJU - Federação Metropolitana de Judô</title>
+
+    </head>
+    <style>
+		body {
+			font-family: sans-serif;
+			-webkit-text-size-adjust: 100%;
+			-ms-text-size-adjust: 100%;
+			font-size: 0.7em;
+			color: #666666;
+		}
+		#carteira {
+			background-image: url(img/carteirinha.jpg);
+			background-repeat: no-repeat;
+			width: 804px;
+			height: 260px;
+		}
+		#nome {
+		    font-size: 1.3em;
+		    font-weight: bold;
+		    color:#000000;
+		    top:190px;
+		    left: 430px;
+		}
+        #qrcode{
+            top:180px;
+            left: 700px;
+        }
+        .foto {
+            left: 675px;
+            top:28px;
+        }
+    
+		.campo {
+			position: absolute;
+			float: left;
+		}
+		.campo1 {
+			left: 25px;
+		}
+		.campo2 {
+			left: 175px;
+		}
+		.campo3 {
+			left: 299px;
+		}
+		.campo5 {
+            left: 430px;
+        }
+        .campo6 {
+            left: 675px;
+        }
+		.linha1 {
+			top: 38px;
+		}
+		.linha2 {
+			top: 68px;
+		}
+		.linha3 {
+			top: 104px;
+		}
+		.linha4 {
+            top: 142px;
+        }
+        .linha5 {
+            top: 174px;
+        }
+        .linha6 {
+            top: 204px;
+        }
+		.linha {
+			margin-left: -15px;
+			margin-right: -15px;
+		}
+
+		.linha::after {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+		*::after, *::before {
+			box-sizing: border-box;
+		}
+    </style>
+    <body>
+        <div id="carteira">
+            <div class="linha">
+                <div id="nacionalidade" class="linha1 campo campo1">
+                    Brasileiro
+                </div>
+                <div id="naturalidade" class="linha1 campo campo2">
+                    São Paulo
+                </div>
+            </div>
+            <div class="linha">
+                <div id="identidade" class="linha2 campo campo1">
+                    3.443.868
+                </div>
+                <div id="cpf" class="linha2 campo campo2">
+                    000.073.119-66
+                </div>
+                <div id="dtNascimento" class="linha2 campo campo3">
+                    12/03/1976
+                </div>
+                <div id="foto" class="foto campo">
+                    <img src="img/atletas/atleta.png" width="120" height="144">
+                </div>
+            </div>
+
+            <div class="linha">
+                <div id="" class="linha3 campo campo1">
+                   Hercules Armenio C. Cruz e Eliana Almeida C. Cruz
+                </div>                
+            </div>
+            <div class="linha">
+                <div id="" class="linha4 campo campo1">
+                   Acorpore Brasil
+                </div>                
+            </div>
+            <div class="linha">
+                <div id="" class="linha5 campo campo1">
+                    3242342
+                </div>
+                <div id="" class="linha5 campo campo2">
+                    343443
+                </div>
+                <div id="" class="linha5 campo campo3">
+                    12/03/1976
+                </div>
+            </div>
+            <div class="linha">
+                <div id="nome" class="campo">
+                    Rodrigo Armênio Camilo Cruz<br/>
+                    Reg. nº: 3445455-2
+                </div>
+                <div id="qrcode" class="campo">
+                    <img src="img/qrcode.png" width="70">
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </body>
+</html>
