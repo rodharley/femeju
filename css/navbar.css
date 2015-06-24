@@ -160,7 +160,7 @@ border-color: #005DA7;
 }
 
 .btn-padrao div img {
-	width: 2.5em;
+	width: 3.5em;
 }
 .banners{
 	border-top:1px #007CC3 dashed;
@@ -212,8 +212,8 @@ text-align: center;
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-position:center;	
-	margin:1em;
-	height: 15em;
+	margin:0em;
+	height: 21em;
 	border:solid 1px #FFFFFF;
 }
 
@@ -223,6 +223,9 @@ text-align: center;
 	background-position:center;
 	height: 10em;
 	
+}
+.btEntraNoticia{
+	margin-top:0.5em;
 }
 
 .noticia-titulo-home{
@@ -316,4 +319,30 @@ text-align: center;
 .form-group.has-error .form-control {
   border-color: #f56954 !important;
   box-shadow: none;
+}
+.menu-principal li {
+	float:left;
+	
+}
+.menu-principal{
+	list-style: outside none none;
+	padding-left: 0;
+	float: left;
+    margin: 0;
+    margin-top:5px;
+}
+.menu-principal > li {
+	border-right: 1px solid #FFFFFF;
+}
+.menu-principal > li > a {
+    padding: 10px;
+    
+    line-height: 20px;
+    display: block;    
+    position: relative;    
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.menu-principal > li > a:hover {
+    text-decoration: underline;
 }
