@@ -7,8 +7,13 @@ if(count($arrayControls) == 2){
 define('_CONTROLLER', substr(strrchr($arrayControls[0],"/"),1));
 define ('_ACTION', $arrayControls[1]);
 }else{
-define('_CONTROLLER','portal_home');
-define ('_ACTION', 'index');
+    if(count($arrayControls) == 1){
+        define('_CONTROLLER', substr(strrchr($arrayControls[0],"/"),1));
+        define ('_ACTION', 'main');
+    }else{
+        define('_CONTROLLER','portal_home');
+        define ('_ACTION', 'index');
+    }
 }
 }else{
 define('_CONTROLLER','portal_home');

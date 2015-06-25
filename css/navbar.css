@@ -320,6 +320,7 @@ text-align: center;
   border-color: #f56954 !important;
   box-shadow: none;
 }
+/* menu principal */
 .menu-principal li {
 	float:left;
 	
@@ -346,3 +347,63 @@ text-align: center;
 .menu-principal > li > a:hover {
     text-decoration: underline;
 }
+/* icone de filebrowser */
+.fb_doc {
+	background-position: -23px -47px;
+}
+.fb_xls {
+	 background-position: -103px -47px; 
+}
+.fb_ppt {
+	 background-position: -183px -47px; 
+}
+.fb_pdf {
+	 background-position: -263px -47px; 
+}
+.fb_zip {
+	 background-position: -343px -47px; 
+}
+.fb_css {
+	 background-position: -423px -47px; 
+}
+.fb_htm {
+	 background-position: -503px -47px; 
+}
+.fb_mp3 {
+	 background-position: -583px -47px; 
+}
+
+.fb_jpg {
+	background-position: -23px -142px;
+}
+.fb_eps {
+	 background-position: -103px -142px; 
+}
+.fb_psd {
+	 background-position: -183px -142px; 
+}
+.fb_png {
+	 background-position: -263px -142px; 
+}
+.fb_avi {
+	 background-position: -343px -142px; 
+}
+.fb_wav {
+	 background-position: -423px -142px; 
+}
+.fb_dll {
+	 background-position: -503px -142px; 
+}
+.fb_txt {
+	 background-position: -583px -142px; 
+}
+.fb_icon{
+ background-image: url("../img/file-type-icons-1.jpg");    
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 65px;
+    line-height: 65px;
+    margin-top: 0px;
+    vertical-align: middle;
+    width: 51px;
+  }

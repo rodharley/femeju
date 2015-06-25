@@ -11,4 +11,5 @@ require("negocio.perfil.php");
 require("negocio.permissao.php");
 require("negocio.usuario.php");
 require("negocio.uf.php");
+require("negocio.fileBrowser.php");
 ?>
