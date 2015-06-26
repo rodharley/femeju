@@ -88,18 +88,18 @@
                             Notícias
                         </div>
                         <div class="btn-laterais">
-                            <button type="button" class="btn btn-padrao btn-md">
+                            <a href="portal_calendario" class="btn btn-padrao btn-md">
                                 <div class="btn-l"><img src="img/icones/calendario.png" />
                                 </div>
-                            </button>
+                            </a>
                             <br/>
                             Calendário
                         </div>
                         <div class="btn-laterais">
-                            <button type="button" class="btn btn-padrao btn-md">
+                            <a href="portal_galeria" class="btn btn-padrao btn-md">
                                 <div class="btn-l"><img src="img/icones/galeria.png" />
                                 </div>
-                            </button>
+                            </a>
                             <br/>
                             Galeria
                         </div>
@@ -145,15 +145,15 @@
                                         </button>
                                     </div>
                                     <div class="navbar-collapse collapse" id="navbar">
-                                        <ul class="menu-principal">
+                                        <ul class="nav navbar-nav">
                                             <li class="active">
-                                                <a href="#">HOME</a>
+                                                <a href="index.php">HOME</a>
                                             </li>
                                             <li>
-                                                <a href="#">FEMEJU</a>
+                                                <a href="portal_femeju">FEMEJU</a>
                                             </li>
                                             <li>
-                                                <a href="#">CONTATO</a>
+                                                <a href="portal_contato">CONTATO</a>
                                             </li>
                                             <li class="dropdown visible-sm visible-xs">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">SERVIÇOS <span class="caret"></span></a>
@@ -197,17 +197,19 @@
                                                         <a href="portal_documentos-competicoes">Competições</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">Links</a>
+                                                        <a href="portal_links">Links</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                         </ul>
                                         <div class="nav navbar-nav navbar-right">
-                                            <form role="search" class="navbar-form">
+                                            <form role="search" class="navbar-form" target="_blank" action="https://www.google.com.br/" id="frmPesquisa">
                                                 <div class="input-group">
-                                                    <input type="text" name="q" placeholder="Pesquisar..." class="form-control">
+                                                    <input type="hidden" name="gws_rd" value="ssl">
+                                                    <input type="hidden" name="safe" value="off">
+                                                    <input type="text" name="q" id="q" placeholder="Pesquisar..." class="form-control">
                                                     <div class="input-group-btn">
-                                                        <button type="submit" class="btn btn-default">
+                                                        <button type="button" class="btn btn-default bt_pesquisar">
                                                             <i class="glyphicon glyphicon-search"></i>
                                                         </button>
                                                     </div>
@@ -285,11 +287,11 @@
                             Competições
                         </div>
                         <div class="btn-laterais">
-                            <button type="button" class="btn btn-padrao btn-md">
+                            <a href="portal_links" class="btn btn-padrao btn-md">
                                 <div class="btn-r">
                                     <img src="img/icones/links.png" />
                                 </div>
-                            </button>
+                            </a>
                             <br/>
                             Links
                         </div>
@@ -310,19 +312,30 @@
                         </div>
                         <div class="col-md-4 col-sm-12 col-lg-3">
                             <div aria-label="..." role="group" class="btn-group pull-right sociais">
-                                <button class="btn btn-default btn-social btn-xs" type="button"><img src="img/icones/twitter.png">
-                                </button>
-                                <button class="btn btn-default btn-social btn-xs" type="button"><img src="img/icones/facebook.png">
-                                </button>
-                                <button class="btn btn-default btn-social btn-xs" type="button"><img src="img/icones/rss.png">
-                                </button>
-                                <button class="btn btn-default btn-social btn-xs" type="button"><img src="img/icones/instagran.png">
-                                </button>
+                                <a target="_blank" class="btn btn-default btn-social btn-xs" href="http://www.twitter.com"><img src="img/icones/twitter.png">
+                                </a>
+                                <a target="_blank" class="btn btn-default btn-social btn-xs" href="http://www.facebook.com.br/femeju"><img src="img/icones/facebook.png">
+                                </a>
+                                <a target="_blank" class="btn btn-default btn-social btn-xs" href="http://www.femeju.com.br/femeju/rss"><img src="img/icones/rss.png">
+                                </a>
+                                <a target="_blank" class="btn btn-default btn-social btn-xs" href="http://www.instagran.com/femeju"><img src="img/icones/instagran.png">
+                                </a>
                             </div>
 
                         </div>
                     </div>
         </div>
+        <script>
+
+    $(document).ready(function() {
+            
+        $(".bt_pesquisar").click(function() {
+            $("#q").val($("#q").val()+"+site:judobrasilia.com.br");
+            $("#frmPesquisa").submit();
+            $("#q").val("");
+        });
+    }); 
+</script>
 
     </body>
 </html>

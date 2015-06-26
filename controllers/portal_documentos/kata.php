@@ -30,5 +30,6 @@ foreach ($arr as $key => $value) {
 }
 
 $TPL->FB_TITULO = "Kata";
+$TPL->FB_LOGO = "kata";
 $TPL->show();
 ?>
