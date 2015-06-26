@@ -3129,8 +3129,8 @@ function dir_list_form() {
             parent.frame1.location.href='".addslashes($path_info["basename"])."?action=3&current_dir=".addslashes($current_dir)."&filename='+escape(arg);
         }
         function upload(){
-            var w = 400;
-            var h = 250;
+            var w = 500;
+            var h = 400;
             window.open('".addslashes($path_info["basename"])."?action=10&current_dir=".addslashes($current_dir)."', '', 'width='+w+',height='+h+',fullscreen=no,scrollbars=no,resizable=yes,status=no,toolbar=no,menubar=no,location=no');
         }
         function execute_cmd(){
@@ -3551,7 +3551,7 @@ function upload_form(){
             $test_js .= "(document.upload_form.file$x.value.length>0)||";
         }
         echo "
-        <input type=button value=\"".et('Send')."\" onclick=\"test_upload_form()\"></nobr>
+        <br/><br/><input type=button value=\"".et('Send')."\" onclick=\"test_upload_form()\"></nobr>
         <tr><td> <td><input type=checkbox name=fechar value=\"1\"> <a href=\"JavaScript:troca();\">".et('AutoClose')."</a>
         <tr><td colspan=2> </td></tr>
         </form>
