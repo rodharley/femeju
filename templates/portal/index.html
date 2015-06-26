@@ -203,10 +203,8 @@
                                             </li>
                                         </ul>
                                         <div class="nav navbar-nav navbar-right">
-                                            <form role="search" class="navbar-form" target="_blank" action="https://www.google.com.br/" id="frmPesquisa">
-                                                <div class="input-group">
-                                                    <input type="hidden" name="gws_rd" value="ssl">
-                                                    <input type="hidden" name="safe" value="off">
+                                            <form role="search" class="navbar-form" method="get" target="_blank" action="https://www.google.com.br/search?ie=utf-8&oe=utf-8&gws_rd=cr&ei=iYGNVY3WBYGLNsS_gtAD" id="frmPesquisa">
+                                                <div class="input-group">                                                    
                                                     <input type="text" name="q" id="q" placeholder="Pesquisar..." class="form-control">
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default bt_pesquisar">
@@ -301,6 +299,7 @@
                 </div>
             </div>            
         </div>
+        <div id="retornoPesquisa"></div>
         <div class="container">
         <div class="row">
                         <div class="col-md-8 col-sm-12 col-lg-9">
@@ -332,7 +331,19 @@
         $(".bt_pesquisar").click(function() {
             $("#q").val($("#q").val()+"+site:judobrasilia.com.br");
             $("#frmPesquisa").submit();
+            //$("#q").val("");
+            /*$.ajax({
+                url:'ajax/json_pesquisagoogle.php',
+                type:'get',
+                async:false,
+                data:{pesquisa:$("#q").val()},
+                dataType:'html'
+            }).done(function(data){
+                $("#retornoPesquisa").html(data);
+                                
+            });*/
             $("#q").val("");
+            //$("#retornoPesquisa").html($("#ires").html());   
         });
     }); 
 </script>
