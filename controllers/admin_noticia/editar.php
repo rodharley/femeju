@@ -33,14 +33,15 @@ $TPL->checkedEsquerdo = "";
 $TPL->checkedDireito = "";
 $TPL->checkedPC = "";
 $TPL->checkedD = "";
-$TPL->checkedN = "";
 $TPL->checkedP = "";
 $TPL->checkedDI = "";
 
 if(isset($_REQUEST['id'])){
 	$noticia->getById($noticia->md5_decrypt($_REQUEST['id']));
 	$TPL->titulo = $noticia->titulo;
+    $TPL->sumario = $noticia->sumario;
 	$TPL->texto = $noticia->texto;
+    $TPL->data = $noticia->convdata(substr($noticia->data,0,10),"mtn");
 	$TPL->id = $noticia->id;
 	$TPL->IMG_NOTICIA = "img/noticias/".$noticia->foto;
 	$TPL->LABEL = "Alterar Notícia ".$noticia->titulo;
@@ -67,10 +68,7 @@ if(isset($_REQUEST['id'])){
         $TPL->checkedD = "checked='checked'";
         $TPL->checkedNenhum = "";
     }
-    if($noticia->principal == 5){
-        $TPL->checkedN = "checked='checked'";
-        $TPL->checkedNenhum = "";
-    }
+    
     if($noticia->principal == 6){
         $TPL->checkedP = "checked='checked'";
         $TPL->checkedNenhum = "";

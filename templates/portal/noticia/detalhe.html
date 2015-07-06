@@ -1,29 +1,27 @@
 <div class="row">
-    <div class="col-lg-12">   
+    <div class="col-lg-12">
         <div class="page-header">
             <div class="pull-right">
-                                <img src="img/icones/noticias.png" />
-                            </div>
+                <img src="img/icones/noticias.png" />
+            </div>
             <h2>Notícias</h2>
-        </div>     
-         <div class="panel panel-default">  
-             <div class="panel-heading">
-                 <h2>{titulo}
-            <br/>
-            <small>Brasília, {data}</small></h2>
-             </div>       
-          <div class="panel-body"> 
+        </div>
+
+        <h3>{titulo}
+        <br/>
+        <small>Brasília, {data}</small></h3>
+        <p>{SUMARIO}</p>
         <div class="row">
             <div class="col-lg-12">
-                <p class="text-left"><img src="img/noticias/{foto}" alt="..." class="img-responsive img-rounded" align="texttop"  style="vertical-align: text-top; height:20em;display:inline;">
-                {texto}
+                <p>
+                    <!-- BEGIN  BLOCK_IMG --><img src="img/noticias/{foto}" alt="..." class="img-responsive" align="left"  style="margin:1em; vertical-align: text-top; width:50%;display:inline;"/>
+                    <!-- END  BLOCK_IMG -->
+                    {texto}
                 </p>
                 <p>
-                    <a type="submit" class="btn btn-default" href="portal_noticia-main">Voltar</a>
+                    <a type="submit" class="btn btn-default btn-xs" href="portal_noticia-main">Voltar</a>
                 </p>
             </div>
-        </div>
-        </div>
         </div>
     </div>
 </div>

@@ -9,6 +9,9 @@ $obj = new Noticia();
                             $TPL->foto = $obj->foto;
                             $TPL->titulo = $obj->titulo;
                             $TPL->texto = $obj->texto;
+                            $TPL->SUMARIO = $obj->sumario;
                             $TPL->data = $obj->convdata($obj->data,"mtnh");
+                            if($obj->foto != "")
+                                $TPL->block("BLOCK_IMG");
                             $TPL->show();
 ?>

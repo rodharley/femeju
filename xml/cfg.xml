@@ -88,6 +88,7 @@ set
 	<class name="Noticia" tbname="fmj_noticia" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="titulo" type="txt">titulo</atrib>
+		<atrib tbname="sumario" type="txt">sumario</atrib>
 		<atrib tbname="texto" type="txt">texto</atrib>
 		<atrib tbname="foto" type="txt">foto</atrib>
 		<atrib tbname="data" type="txt">data</atrib>

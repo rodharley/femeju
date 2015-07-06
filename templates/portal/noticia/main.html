@@ -4,36 +4,49 @@
             <div class="pull-right">
                                 <img src="img/icones/noticias.png" />
                             </div>
-            <h2>Notícias</h2>
+            <h2>Notícias {ANO}</h2>
         </div>
-        <div class="panel panel-default">         
-          <div class="panel-body">               
-            <div class="row">
-            <!-- BEGIN BLOCK_NOTICIA -->
-
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <div class="noticia-main" style="background-image: url('img/noticias/{imagem}');">                        
+            <!-- BEGIN BLOCK_NOTICIA_P1 -->
+            <div class="row">            
+                <div class="col-sm-12">
+                <div class="etiqueta">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="thumbnoticia" style="background-image: url('img/noticias/{imagem}');">
+                        </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="caption">
+                                <h5>{titulo}</h5>
+                                <p>{sumario}</p>
+                                <p>{data}</p>
+                                <p><a href="portal_noticia-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a></p>
+                              </div>
+                        </div>
+                        </div>              
                     </div>
-                    <div class="caption">
-                        <blockquote>
-                            <p>
-                                {titulo}
-                            </p>
-                            <footer>
-                                {data}
-                            </footer>
-                        </blockquote>
-
-                        <p>
-                            <a href="portal_noticia-detalhe?id={idhash}" class="btn btn-primary" role="button">leia mais</a>
-                        </p>
                     </div>
-                </div>
-            </div>
-            <!-- END BLOCK_NOTICIA -->
-
-        </div>
+            </div>            
+            <!-- END BLOCK_NOTICIA_P1 -->
+            <!-- BEGIN BLOCK_NOTICIA_P2 -->
+            <div class="row">            
+                <div class="col-sm-12">
+                <div class="etiqueta">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="caption">
+                                <h5>{titulo}</h5>
+                                <p>{sumario}</p>
+                                <p>{data}</p>
+                                <p><a href="portal_noticia-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a></p>
+                              </div>
+                        </div>
+                        </div>              
+                    </div>
+                    </div>
+            </div>            
+            <!-- END BLOCK_NOTICIA_P2 -->
+        
         <!-- BEGIN BLOCK_PAGINACAO -->
         <nav>
             <ul class="pager">
@@ -43,6 +56,11 @@
                <li class="center disabled">
                     <a href="#">{PAGINA}</a>
                 </li>
+                <!-- BEGIN BLOCK_ANO -->
+                <li class="center">
+                    <a href="#" class="anualizar" value="{ANO_V}">{ANO_V}</a>
+                </li>
+                <!-- END BLOCK_ANO -->
                 <li class="next {DISABLER}">
                     <a href="#" class="paginar" value="{PROXIMA_PAGINA}">Anteriores <span aria-hidden="true">&rarr;</span></a>
                 </li>
@@ -55,16 +73,16 @@
         
        
         
-    </div>
-</div>
+   
 <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+<input type="hidden" value="{ANO}" id="ano" name="ano"/>
 <script>
 
     function pesquisar(){
             $.ajax({
                 url : "ajax/portal_noticia_paginar.php",
                 type : "POST",
-                data : {pagina:$("#pagina").val()},
+                data : {pagina:$("#pagina").val(),ano:$("#ano").val()},
                 beforeSend: function( ) {
                     $('#contentPortal').html('{LOADING}');
                 },
@@ -78,6 +96,11 @@
         {EXECUTA_PESQUISA}        
         $(".paginar").click(function() {
             $("#pagina").val($(this).attr("value"));
+            pesquisar();
+        });
+        $(".anualizar").click(function() {
+            $("#pagina").val("1");
+            $("#ano").val($(this).attr("value"));
             pesquisar();
         });
     }); 

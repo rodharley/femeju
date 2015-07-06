@@ -44,6 +44,8 @@ margin-bottom: 1em;
 }
 .colunac{ 
 	padding-top:1em;
+	height:83vh;
+	overflow-y: auto;
 	}
 .colunar{
 	border-left: solid 1px #E08E0B;
@@ -89,6 +91,18 @@ border-top: solid 1px #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+/* etiquetas dos formatos de posts */
+.etiqueta{
+	background-color: #FFFFFF;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+	min-height: 6em;
+	border: solid 1px #e8e8e8;
+	border-right: solid 4px #E08E0B;
+	margin-bottom: 1em;
+	padding: 1em;
+}
+
+
 /*noticias*/
 .noticia-home {
 	background-size:cover;
@@ -104,13 +118,19 @@ border-top: solid 1px #fff;
 	cursor: pointer;
 }
 
-.thumbnail .noticia-main {
+.etiqueta .thumbnoticia {
 	background-size:cover;
 	background-repeat: no-repeat;	
 	background-position:center;
-	height: 10em;
-	
+	height: 6em;
+	width: 100%;
 }
+
+.etiqueta .caption{
+	border-left: solid 4px #e8e8e8;
+	padding-left: 0.5em;
+}
+
 .btEntraNoticia{
 	margin-top:0.5em;
 }
@@ -140,26 +160,6 @@ border-top: solid 1px #fff;
 	border-top: dashed 1px #E8e8e8; 
 	
 }
-#destaques fieldset {
-	border: 1px solid #000;
-	
-	padding: 0.5em;
-	font-size: 0.8em;
-	color:#666666;
-	min-height: 11em;
-	margin: 1em;
-		
-}
-#destaques legend {
-	margin-bottom: 0px;
-	font-size: 1em;
-	color:#666666;
-	font-weight: bold;
-	text-align: center;
-	border-image: none;
-    border-style: none none none;
-}
-
 #destaques a {
 	color:#666666;
 	
@@ -168,6 +168,8 @@ border-top: solid 1px #fff;
 	
 	text-decoration: underline;
 }
+
+
 
 /* icone de filebrowser */
 .fb_doc {

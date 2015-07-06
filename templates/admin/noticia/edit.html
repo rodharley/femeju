@@ -11,8 +11,24 @@
             <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
-                        <label for="nome"><i class='fa'></i><b>Título</b></label>
+                        <label for="titulo"><i class='fa'></i><b>Título</b></label>
                         <input type="text" id="titulo" name="titulo" placeholder="Título da Matéria" value="{titulo}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="sumario"><i class='fa'></i><b>Sumário</b></label>
+                        <input type="text" id="sumario" name="sumario" placeholder="Sumário da Matéria" value="{sumario}" maxlength="200" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="sumario"><i class='fa'></i><b>Data da Publicação</b></label>
+                        <input type="text" id="data" name="data" value="{data}" class="required form-control"/>
                     </div>
                 </div>
             </div>
@@ -24,7 +40,6 @@
                         <input type="radio" name="principal" value="2"class="form-control" {checkedDireito}/> Lado Direito &nbsp; &nbsp;
                         <input type="radio" name="principal" value="3"class="form-control" {checkedPC}/> Próxima Competição &nbsp; &nbsp;
                         <input type="radio" name="principal" value="4"class="form-control" {checkedD}/> Destaque &nbsp; &nbsp;
-                        <input type="radio" name="principal" value="5"class="form-control" {checkedN}/> Novidades &nbsp; &nbsp;
                         <input type="radio" name="principal" value="6"class="form-control" {checkedP}/> Presidente &nbsp; &nbsp;
                         <input type="radio" name="principal" value="7"class="form-control" {checkedDI}/> Diretoria &nbsp; &nbsp;
                         <input type="radio" name="principal" value="0"class="form-control" {checkedNenhum}/> Nenhum
@@ -68,6 +83,8 @@
 <script src="js/summernote.min.js"></script>
 <script>
 	$(document).ready(function() {
+        
+        $('#data').datepicker();
         
         $('#summernote').summernote({
             height : 300, // set editor height
