@@ -1,6 +1,6 @@
 <?php
 
-$TPL = NEW Template("templates/admin/index.html");
+$TPL = NEW Template("templates/portal/layout.html");
 $TPL->addFile("CONTEUDO", "templates/portal/servicos/ativar.html");
 $user = new Usuario();
 if(isset($_REQUEST['id'])){

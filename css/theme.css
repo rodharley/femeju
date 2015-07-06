@@ -40,7 +40,7 @@ margin-bottom: 1em;
 .colunal{
 	border-right: solid 1px #E08E0B;
 	background-color: #EFEFEF;
-	height:90vh;
+	height:83vh;
 }
 .colunac{ 
 	padding-top:1em;
@@ -48,7 +48,7 @@ margin-bottom: 1em;
 .colunar{
 	border-left: solid 1px #E08E0B;
 	background-color: #EFEFEF;
-	height:90vh;
+	height:83vh;
 }
 
 .btn-laterais{
@@ -63,8 +63,11 @@ border-top: solid 1px #fff;
 }
 
 .btn-laterais:hover{
-	border-top: solid 1px #E08E0B;
-	border-bottom: solid 1px #E08E0B;
+	background-color: #E08E0B;
+	border: solid 1px #FFF;
+	color: #FFFFFF;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+	cursor: pointer;
 }
 
 .btn-padrao {
@@ -80,9 +83,10 @@ border-top: solid 1px #fff;
     background-color: #f5f5f5;
     bottom: 0;
     height: 60px;
-    position: absolute;
+    position: relative;
     width: 100%;
     padding-top:10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 /*noticias*/
@@ -92,7 +96,12 @@ border-top: solid 1px #fff;
 	background-position:center;	
 	margin:0em;
 	height: 15em;
-	border:solid 2px #E08E0B;
+	border:solid 2px #E08E0B;	
+}
+
+.noticia-home:hover{
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+	cursor: pointer;
 }
 
 .thumbnail .noticia-main {
@@ -117,8 +126,18 @@ border-top: solid 1px #fff;
 #destaques {
 	margin-top: 2em;
 }
+
+#destaques h4 {
+	min-height: 2em;
+}
 #destaques .itemDestaque{
 	border-right: solid 1px #E08E0B;
+	min-height: 12em; 
+	border-top: dashed 1px #E8e8e8;
+}
+#destaques .itemDestaqueFinal{
+	min-height: 12em;
+	border-top: dashed 1px #E8e8e8; 
 	
 }
 #destaques fieldset {
@@ -148,4 +167,104 @@ border-top: solid 1px #fff;
 #destaques a:hover{
 	
 	text-decoration: underline;
+}
+
+/* icone de filebrowser */
+.fb_doc {
+	background-position: -23px -47px;
+}
+.fb_xls {
+	 background-position: -103px -47px; 
+}
+.fb_ppt {
+	 background-position: -183px -47px; 
+}
+.fb_pdf {
+	 background-position: -263px -47px; 
+}
+.fb_zip {
+	 background-position: -343px -47px; 
+}
+.fb_css {
+	 background-position: -423px -47px; 
+}
+.fb_htm {
+	 background-position: -503px -47px; 
+}
+.fb_mp3 {
+	 background-position: -583px -47px; 
+}
+
+.fb_jpg {
+	background-position: -23px -142px;
+}
+.fb_eps {
+	 background-position: -103px -142px; 
+}
+.fb_psd {
+	 background-position: -183px -142px; 
+}
+.fb_png {
+	 background-position: -263px -142px; 
+}
+.fb_avi {
+	 background-position: -343px -142px; 
+}
+.fb_wav {
+	 background-position: -423px -142px; 
+}
+.fb_dll {
+	 background-position: -503px -142px; 
+}
+.fb_txt {
+	 background-position: -583px -142px; 
+}
+.fb_icon{
+ background-image: url("../img/file-type-icons-1.jpg");    
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 65px;
+    line-height: 65px;
+    margin-top: 0px;
+    vertical-align: middle;
+    width: 51px;
+  }
+  .login-box {
+    margin: 90px auto 0;
+    width: 360px;
+}
+/* 
+   All form elements including input, select, textarea etc.
+-----------------------------------------------------------------
+*/
+.form-control {
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  box-shadow: none;
+}
+.form-control:focus {
+  border-color: #3c8dbc !important;
+  box-shadow: none;
+}
+.form-group.has-success label {
+  color: #00a65a;
+}
+.form-group.has-success .form-control {
+  border-color: #00a65a !important;
+  box-shadow: none;
+}
+.form-group.has-warning label {
+  color: #f39c12;
+}
+.form-group.has-warning .form-control {
+  border-color: #f39c12 !important;
+  box-shadow: none;
+}
+.form-group.has-error label {
+  color: #f56954;
+}
+.form-group.has-error .form-control {
+  border-color: #f56954 !important;
+  box-shadow: none;
 }
