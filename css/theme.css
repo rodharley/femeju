@@ -18,7 +18,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;  
     overflow: hidden;
-    min-height: 600px;
+    
     margin-top:65px;
     padding-left: 0px;
     padding-right: 0px;
@@ -52,7 +52,7 @@ margin-bottom: 1em;
 
 
 .colunal{
-	border-right: solid 1px #E08E0B;
+	border-right: solid 1px #C1C1C1;
 	background-color: #EFEFEF;
 	height:100%;
 	padding: 0.5em;
@@ -70,7 +70,7 @@ margin-bottom: 1em;
 	padding-right:2em;
 	}
 .colunar{
-	border-left: solid 1px #E08E0B;
+	border-left: solid 1px #C1C1C1;
 	background-color: #EFEFEF;	
 	height:100%;
 	padding: 0.5em;
@@ -107,7 +107,6 @@ border-top: solid 1px #fff;
 	width: 2.4em;
 }
 
-
 .footer {
     background-color: #f5f5f5;
     bottom: 0;
@@ -123,6 +122,21 @@ border-top: solid 1px #fff;
 .text-footer {
 	font-size: 10px;
 }
+
+.boxbanners{
+	background-color: #E08E0B;
+	border: 1px solid #FFFFFF;
+    box-shadow:0 20px 20px rgba(0, 0, 0, 0.6);
+    
+}
+.boxbanners table {
+	
+}
+.boxbanners table tr td {
+	vertical-align: middle;
+	padding:0.9em;
+}
+
 
 /* etiquetas dos formatos de posts */
 .divisao{
