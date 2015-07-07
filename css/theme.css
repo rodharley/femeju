@@ -18,17 +18,29 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;  
     overflow: hidden;
-    min-height: 606px;
-    margin-top:9vh;
+    min-height: 600px;
+    margin-top:65px;
+    padding-left: 0px;
+    padding-right: 0px;
     
         
 }
-
+.marca {
+	padding:7px;
+	padding-left: 14px;
+	padding-right: 14px;
+}
+.marca small {
+	font-size: 14px;
+}
+.menu {
+	margin-top: 5px;
+}
 .header{
-	min-height: 60px;
+	min-height: 65px;
 	border-bottom: solid 3px #E08E0B;
-	height: 9vh;
-	padding-top:2vh;
+	height: 65px;
+	padding-top:7px;
 	background-image: url('../img/backgrounds/irongrip.png');
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 0, 0, 0.3) inset, 0 0 20px rgba(0, 0, 0, 0.3) inset, 0 0 20px rgba(0, 0, 0, 0.3) inset;
 }
@@ -37,20 +49,35 @@ margin-right:1em;
 margin-bottom: 1em;
 }
 
+
+
 .colunal{
 	border-right: solid 1px #E08E0B;
 	background-color: #EFEFEF;
-	height:83vh;
+	height:100%;
+	padding: 0.5em;
+	padding-left:2em;
+	padding-right:2em;
+	vertical-align: top;
+	width: 16.66%;
 }
 .colunac{ 
 	padding-top:1em;
-	height:83vh;
-	overflow-y: auto;
+	height:100%;
+	padding: 0.5em;
+	vertical-align: top;
+	padding-left:2em;
+	padding-right:2em;
 	}
 .colunar{
 	border-left: solid 1px #E08E0B;
-	background-color: #EFEFEF;
-	height:83vh;
+	background-color: #EFEFEF;	
+	height:100%;
+	padding: 0.5em;
+	vertical-align: top;
+	width: 16.66%;
+	padding-left:2em;
+	padding-right:2em;
 }
 
 .btn-laterais{
@@ -84,11 +111,17 @@ border-top: solid 1px #fff;
 .footer {
     background-color: #f5f5f5;
     bottom: 0;
-    height: 60px;
-    position: relative;
-    width: 100%;
-    padding-top:10px;
+    height: 50px;
+    position: bottom: auto;
+    top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-50));
+    left: expression(eval(document.documentElement.scrollLeft));
+    width: expression(eval(document.documentElement.clientWidth));
+    
+    padding-top:5px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.text-footer {
+	font-size: 10px;
 }
 
 /* etiquetas dos formatos de posts */
@@ -155,6 +188,7 @@ border-top: solid 1px #fff;
 /*destaques*/
 #destaques {
 	margin-top: 2em;
+	padding:1em;
 }
 
 #destaques h4 {
