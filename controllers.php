@@ -4,7 +4,7 @@ try{
 	if(file_exists("controllers/"._CONTROLLER."/"._ACTION.".php")){
 		include("controllers/"._CONTROLLER."/"._ACTION.".php");
 	}else{
-	$TPL = new Template($root->URI."/templates/portal/index.html");
+	$TPL = new Template($root->URI."/templates/portal/layout.html");
 
 	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro404.html");
 	$TPL->show();

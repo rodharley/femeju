@@ -1,0 +1,114 @@
+<form role="form" method="post" action="admin_calendario-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
+    
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+            
+            <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" name="acao" value="{ACAO}"/>
+            <input type="hidden" name="formato" value="{ID_FORMATO}"/>
+            <input type="hidden" name="categoria" id="categoria" value="{ID_CATEGORIA}" />
+            <div class="row">
+                <div class="col-md-12 col-xs-12" id="calendario">
+                    <div class="form-group">
+                        <label for="sumario"><i class='fa'></i><b>Formato Selecionado</b></label>
+                <div class="divisao">
+                {FORMATO}    
+                </div>
+                </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="titulo"><i class='fa'></i><b>Título</b></label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título da Matéria" value="{titulo}" class="{titulo_required} form-control"/>
+                    </div>
+                </div>
+            </div>
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="sumario"><i class='fa'></i><b>Mensagem</b></label>
+                        <input type="text" id="mensagem" name="mensagem" placeholder="Mensagem do post" value="{mensagem}" maxlength="200" class="{mensagem_required} form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="sumario"><i class='fa'></i><b>Data da Publicação</b></label>
+                        <input type="text" id="data" name="data" value="{data}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="foto"><i class='fa'></i><b>Foto</b></label>
+                        <input type="file" name="foto" id="foto" class="{foto_required}"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="arquivo"><i class='fa'></i><b>Arquivo</b></label>
+                        <input type="file"  name="arquivo" id="arquivo" class="{arquivo_required}"/>
+                    </div>
+                </div>
+            </div>         
+
+        </div>
+        <div class="box-footer text-center">
+            <a class="btn btn-success" id="save">
+                Salvar
+            </a>
+            <button class="btn btn-default btVoltar" type="button">
+                Voltar
+            </button>
+        </div>
+
+    </div>
+</form>
+
+<script>
+	$(document).ready(function() {
+        
+        $('#data').datepicker();
+        
+        
+        
+        $("#save").click(function() {
+            $("#frmEdit").submit();
+        });
+        
+		$("#foto").fileinput({
+		initialPreview: [
+		<!-- BEGIN BLOCK_IMG -->"{IMG_IMAGEM}",<!-- END BLOCK_IMG -->
+		], overwriteInitial: true,
+		maxFileSize: 2000,
+		maxFilesNum: 1,
+		allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+		previewClass: "bg-warning",
+		allowedFileTypes: ["image"],
+		showUpload: false,
+		showCaption: false
+	});
+
+        $("#arquivo").fileinput({
+        initialPreview: [
+        <!-- BEGIN BLOCK_ARQ -->"{IMG_ARQUIVO}",<!-- END BLOCK_ARQ -->
+        ], overwriteInitial: true,
+        maxFileSize: 2000,
+        maxFilesNum: 1,
+        previewClass: "bg-warning",
+        showUpload: false,
+        showCaption: false
+    });
+
+	
+	});
+</script>

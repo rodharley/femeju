@@ -29,6 +29,10 @@ Exemplos de mensagens:
 <mensagem id="23" type="warning">Para acessar a funcionalidade você deve autenticar ou criar um novo usuário.</mensagem>
 <mensagem id="24" type="danger">Perfil não Autorizado.</mensagem>
 <mensagem id="25" type="success">Usuário Cadastrado com sucesso.Verifique seu email para ativar sua conta.</mensagem>
+<mensagem id="26" type="success">Post cadastrado com sucesso.</mensagem>
+<mensagem id="27" type="success">Post alterado com sucesso.</mensagem>
+<mensagem id="28" type="success">Post excluído com sucesso.</mensagem>
+
 </mensagens>
 
 

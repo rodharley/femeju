@@ -103,6 +103,16 @@ set
 		<atrib tbname="idAcademia" type="fk" clrelation="Academia">academia</atrib>
 		<atrib tbname="idUsuario" type="fk" clrelation="Usuario">usuario</atrib>		
 	</class>
+	<class name="Post" tbname="fmj_post" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="titulo" type="txt">titulo</atrib>
+		<atrib tbname="mensagem" type="txt">mensagem</atrib>
+		<atrib tbname="arquivo" type="txt">arquivo</atrib>
+		<atrib tbname="imagem" type="txt">imagem</atrib>
+		<atrib tbname="data" type="txt">data</atrib>
+		<atrib tbname="categoria" type="int">categoria</atrib>
+		<atrib tbname="formato" type="int">formato</atrib>				
+	</class>
 	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">nome</atrib>
