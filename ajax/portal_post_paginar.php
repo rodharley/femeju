@@ -4,15 +4,17 @@ $TPL = new Template("../templates/portal/post/main.html");
 
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $categoria = isset($_REQUEST['categoria']) ? $_REQUEST['categoria'] : 1;
-$ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : "";
+$ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : Date("Y");
 
 $obj = new Post();
 $objCat = new Categoria($categoria);
 $objFormato = new Formato();
 
-$totalPesquisa = $obj->listar3PortalTotal($ano);
+
+
+$totalPesquisa = $obj->listar3PortalTotal($ano,$categoria);
 $configPaginacao = $obj->paginar($totalPesquisa,$pagina,3);
-$rspost = $obj->listar3Portal($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$ano);
+$rspost = $obj->listar3Portal($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$ano,$categoria);
 $ARRano = $obj->listarArrayAnos($categoria);
 foreach ($rspost as $key => $post) {
         
@@ -28,7 +30,7 @@ $TPL->PROXIMA_PAGINA = $configPaginacao['proximaPagina'];
 $TPL->PAGINA = $pagina;
 $TPL->ANO = $ano;
 $TPL->CATEGORIA = $objCat->id;   
-
+$TPL->TITULO = $objCat->retornaDescricao($objCat->id);
 foreach ($ARRano as $key => $ano) {
         $TPL->ANO_V = $ano;
         $TPL->block("BLOCK_ANO");

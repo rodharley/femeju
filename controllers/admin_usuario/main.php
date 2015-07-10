@@ -17,7 +17,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 			                            <small>Lista de Usuários</small>
 			                        </h1>
 			                        <ol class="breadcrumb">
-			                            <li><a href="admin_home-home"><i class="fa fa-dashboard"> </i> Home</a></li>
+			                            <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
 			                            <li><a href="admin_perfil-main"><i class="fa fa-user"> </i> Usuário</a></li>
 			                             <li class="active">Listar</li>
 			                        </ol>

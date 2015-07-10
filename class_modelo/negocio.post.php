@@ -44,6 +44,7 @@ class Post extends Persistencia {
             $arrayData = explode("-", str_replace(" ", "", $periodo));
             $sql .= " and data between '" . $this -> convdata($arrayData[0], "ntm") . " 00:00:00' and '" . $this -> convdata($arrayData[1], "ntm") . " 23:59:59' ";
         }
+        
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
@@ -67,18 +68,20 @@ class Post extends Persistencia {
         return $this -> getSQL($sql);
 
     }
-    function listar3PortalTotal($ano = "" ){
-        $sql = "select count(*) as total from fmj_post";
-        if($ano != "")
-        $sql .= " where Year(data) = ".$ano;
+    function listar3PortalTotal($ano = "",$categoria ){
+        $sql = "select count(*) as total from fmj_post where categoria = $categoria";
+        if($ano == "")
+            $ano = Date("Y");
+        $sql .= " and Year(data) = ".$ano;
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
     
-    function listar3Portal($primeiro = 0, $quantidade = 9999,$ano = ""){
-        $sql = "select * from fmj_post "; 
-        if($ano != "")
-        $sql .= " where Year(data) = ".$ano;
+    function listar3Portal($primeiro = 0, $quantidade = 9999,$ano = "",$categoria){
+        $sql = "select * from fmj_post where categoria = $categoria"; 
+        if($ano == "")
+            $ano = Date("Y");
+        $sql .= " and Year(data) = ".$ano;
         $sql .= " order by data desc limit $primeiro, $quantidade";
         return $this->getSQL($sql);
     }
@@ -90,7 +93,7 @@ class Post extends Persistencia {
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
         $this -> imagem = "";
         $this -> arquivo = "";
-        $this -> categoria = $_REQUEST['categoria'];
+        $this -> categoria = $this->md5_decrypt($_REQUEST['categoria']);
         $this -> formato = $_REQUEST['formato'];
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
@@ -120,8 +123,7 @@ class Post extends Persistencia {
         $this -> mensagem = $_REQUEST['mensagem'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
         $this -> imagem = "";
-        $this -> arquivo = "";
-        $this -> categoria = $_REQUEST['categoria'];
+        $this -> arquivo = "";        
         $this -> formato = $_REQUEST['formato'];
         
         $obCat = new Categoria();

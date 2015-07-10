@@ -1,5 +1,5 @@
 <form role="form" method="post" action="admin_post-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" name="categoria" id="categoria" value="{ID_CATEGORIA}" />
+    
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Escolha o Formato do post</h3>
@@ -58,11 +58,7 @@
             
             
         </div>
-        <div class="box-footer text-center">
-            
-        </div>
-
-    </div>
+          </div>
 </form>
 <script>
 	$(document).ready(function() {
@@ -70,7 +66,7 @@
         
         $(".etiqueta").click(function() {       
             
-            window.location.href= 'admin_calendario-editar?formato='+$(this).attr("value");
+            window.location.href= 'admin_post-editar?categoria={ID_CATEGORIA_HASH}&formato='+$(this).attr("value");
         });        
 		
 	

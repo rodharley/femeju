@@ -9,7 +9,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
                         Painel de Controle
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="home-home"><i class="fa fa-dashboard"> </i> Home</a></li>
+                        <li><a href="home-home"><i class="fa fa-home"> </i> Home</a></li>
                         <li class="active">Painel de Controle</li>
                     </ol>
                 </section>';

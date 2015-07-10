@@ -9,7 +9,7 @@ $categoria = isset($_REQUEST['categoria']) ? $_REQUEST['categoria'] : 1;
 
 $pasta = $objCat->retornaPasta($categoria);
 $TPL->PASTA = $pasta;
-
+$TPL->ID_CATEGORIA_HASH = $post->md5_encrypt($categoria);
 $totalPesquisa = $post->pesquisarTotal($_REQUEST['titulo'],$_REQUEST['texto'],$_REQUEST['periodo'],$categoria);
 $configPaginacao = $post->paginar($totalPesquisa,$pagina);
 $alist = $post->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['titulo'],$_REQUEST['texto'],$_REQUEST['periodo'],$categoria);

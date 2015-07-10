@@ -1,27 +1,30 @@
 <?php
-$menu = 6;
+$post = new Post();
+$idcat = $post->md5_decrypt($_REQUEST['categoria']); 
+$menu = $idcat;
+ 
 include("includes/include.lock.php");
 //INSTACIA CLASSES
-$obj = new Post();
+$objCat = new Categoria($idcat);
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
 	case 'editar' :
-		$obj->Alterar();
+		$post->Alterar();
 		$_SESSION['fmj.mensagem'] = 27;
         break;
 	case 'incluir' :
-		$obj->Incluir();
+		$post->Incluir();
         $_SESSION['fmj.mensagem'] = 26;
         break;
 	case 'excluir' :
-		if($obj->Excluir($_REQUEST['id']))
+		if($post->Excluir($_REQUEST['id']))
         $_SESSION['fmj.mensagem'] = 28;
         else
         $_SESSION['fmj.mensagem'] = 17;        
         break;		
 }
 }
-header("Location:admin_calendario-main");
+header("Location:admin_post-".$objCat->retornaPasta($objCat->id));
 exit();
 ?>
