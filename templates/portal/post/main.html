@@ -11,7 +11,23 @@
            <div class="col-sm-12" id="post">               
                 <!-- BEGIN BLOCK_POST -->
                 <div class="divisao">
-                {ETIQUETA}
+                <div class="etiqueta">                    
+                     <div class="row">
+                    <!-- BEGIN BLOCK_POST_IMAGEM --> 	
+                    <div class="col-lg-2" >
+                        <div class="thumb" style="background-image: url('{post_imagem}');"></div>
+                    </div>
+                    <!-- END BLOCK_POST_IMAGEM -->
+                    <div class="col-lg-10" >
+                        <span class="data pull-right">{post_data}</span>
+                        <p>{post_titulo}</p>
+                        <p><small>{post_mensagem}</small></p>
+                        <!-- BEGIN BLOCK_POST_ARQUIVO -->
+                        <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
+                        <!-- END BLOCK_POST_ARQUIVO -->                        
+                    </div>           
+                    </div>
+                </div>
                 </div>
                 <!-- END BLOCK_POST -->                
            </div>

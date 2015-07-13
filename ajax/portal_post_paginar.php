@@ -17,9 +17,21 @@ $configPaginacao = $obj->paginar($totalPesquisa,$pagina,3);
 $rspost = $obj->listar3Portal($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$ano,$categoria);
 $ARRano = $obj->listarArrayAnos($categoria);
 foreach ($rspost as $key => $post) {
-        
-    $template = $objFormato->retornaTemplate($post->formato,"img/".$objCat->pasta."/".$post->imagem,$post->titulo,$post->mensagem,"documentos/".$objCat->pasta."/".$post->arquivo,"fb_".$obj->retornaTipo($post->arquivo),$post->arquivo,$obj->convdata($post->data,"mtn"));
-    $TPL->ETIQUETA = $template;
+    $TPL->post_data = $obj->convdata($post->data,"mtn");
+	$TPL->post_titulo = $post->titulo;
+	$TPL->post_mensagem = $post->mensagem;	
+    if($post->imagem != ""){
+		$TPL->post_imagem = "img/".$objCat->pasta."/".$post->imagem;
+		$TPL->block("BLOCK_POST_IMAGEM");		
+	}
+	if($post->arquivo != ""){
+		$TPL->post_link = "documentos/".$objCat->pasta."/".$post->arquivo;
+		$TPL->post_tipoArquivo = "fb_".$obj->retornaTipo($post->arquivo);
+		$TPL->post_arquivo = $post->arquivo;
+		$TPL->block("BLOCK_POST_ARQUIVO");
+	}    
+    //$template = $objFormato->retornaTemplate($post->formato,"img/".$objCat->pasta."/".$post->imagem,$post->titulo,$post->mensagem,"documentos/".$objCat->pasta."/".$post->arquivo,"fb_".$obj->retornaTipo($post->arquivo),$post->arquivo,$obj->convdata($post->data,"mtn"));
+    //$TPL->ETIQUETA = $template;
     $TPL->block("BLOCK_POST");
     
 }

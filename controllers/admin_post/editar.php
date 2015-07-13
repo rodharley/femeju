@@ -7,7 +7,7 @@ $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
 $formato = new Formato();
-$objCat = new Categoria();
+$objCat = new Categoria($idcat);
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
 			                        <h1>
