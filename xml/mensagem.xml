@@ -32,6 +32,7 @@ Exemplos de mensagens:
 <mensagem id="26" type="success">Post cadastrado com sucesso.</mensagem>
 <mensagem id="27" type="success">Post alterado com sucesso.</mensagem>
 <mensagem id="28" type="success">Post excluído com sucesso.</mensagem>
+<mensagem id="29" type="success">Página alerada com sucesso.</mensagem>
 
 </mensagens>
 

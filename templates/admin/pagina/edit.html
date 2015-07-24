@@ -1,0 +1,62 @@
+<form role="form" method="post" action="admin_pagina-action" id="frmEdit">
+    
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+            
+            <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" name="acao" value="{ACAO}"/>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="titulo"><i class='fa'></i><b>Título</b></label>
+                        <div id="summernote">{texto}
+                        </div>
+                        <input type="text" name="texto" id="texto" value="" class="required" style="width: 0px; border:none;"/>
+                    </div>
+                </div>
+            </div>                       
+                     
+
+        </div>
+        <div class="box-footer text-center">
+            <a class="btn btn-success" id="save">
+                Salvar
+            </a>
+            <button class="btn btn-default btVoltar" type="button">
+                Voltar
+            </button>
+        </div>
+
+    </div>
+</form>
+<link href="css/summernote.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<script src="js/summernote.min.js"></script>
+<script>
+	$(document).ready(function() {
+        
+        $('#summernote').summernote({
+            height : 300, // set editor height
+
+            minHeight : null, // set minimum height of editor
+            maxHeight : null, // set maximum height of editor
+
+            focus : true,                 // set focus to editable area after initializing summernote
+        });
+        
+        $("#save").click(function() {
+            var aHTML = $('#summernote').code();
+            
+            $("#texto").val(aHTML);
+            if($("#texto").val() == "<br>")
+                $("#texto").val("");
+            
+            $("#frmEdit").submit();
+        });
+
+	
+	});
+</script>

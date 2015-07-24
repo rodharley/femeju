@@ -94,10 +94,15 @@ set
 		<atrib tbname="data" type="txt">data</atrib>
 		<atrib tbname="principal" type="int">principal</atrib>				
 	</class>
+	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>	
+		<atrib tbname="conteudo" type="txt">conteudo</atrib>
+		<atrib tbname="nome" type="txt">nome</atrib>	
+	</class>
 	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">descricao</atrib>	
-	</class>
+	</class>	
 	<class name="Permissao" tbname="fmj_permissao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="idAcademia" type="fk" clrelation="Academia">academia</atrib>

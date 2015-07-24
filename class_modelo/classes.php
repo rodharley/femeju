@@ -7,6 +7,7 @@ require("negocio.email.php");
 require("negocio.log.php");
 require("negocio.menu.php");
 require("negocio.noticia.php");
+require("negocio.pagina.php");
 require("negocio.perfil.php");
 require("negocio.permissao.php");
 require("negocio.post.php");
