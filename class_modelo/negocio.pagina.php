@@ -4,6 +4,7 @@ class Pagina extends Persistencia{
 	const DIRETORIA = 2;		
 	var $conteudo;
     var $nome;
+    var $titulo;
 	
 	
 	public function Alterar(){

@@ -97,7 +97,8 @@ set
 	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="conteudo" type="txt">conteudo</atrib>
-		<atrib tbname="nome" type="txt">nome</atrib>	
+		<atrib tbname="nome" type="txt">nome</atrib>
+		<atrib tbname="titulo" type="txt">titulo</atrib>	
 	</class>
 	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	

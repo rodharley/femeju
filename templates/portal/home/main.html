@@ -14,7 +14,7 @@
     <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque">
     
            <!-- BEGIN BLOCK_NOTICIA3 -->
-            <h4>Próxima competição</h4>
+            <h4>Próxima Competição</h4>
                 <p>
                    {TITULO3}
                 </p>
@@ -33,24 +33,24 @@
             <!-- END BLOCK_NOTICIA4 -->
            </div>    
     <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque">
-                 <!-- BEGIN BLOCK_NOTICIA6 -->
+                 
             <h4>Presidente</h4>
                 <p>
-                    {TITULO6}
+                    Informações da Presidência
                 </p>
-                <a href="#" class="btEntraNoticia" id="{IDNOTICIA6}">leia mais</a>
+                <a href="#" class="btEntraPagina" id="1">leia mais</a>
            
-            <!-- END BLOCK_NOTICIA6 -->
+            
            </div>
     <div class="col-lg-3 col-md-3 col-sm-3 itemDestaqueFinal">
-                <!-- BEGIN BLOCK_NOTICIA7 -->
+            
             <h4>Diretoria</h4>
                 <p>
-                    {TITULO7}
+                    Informações da diretoria
                 </p>
-                <a href="#" class="btEntraNoticia" id="{IDNOTICIA7}">leia mais</a>
+                <a href="#" class="btEntraPagina" id="2">leia mais</a>
        
-            <!-- END BLOCK_NOTICIA7 -->
+            
            </div>
     
     </div>
@@ -61,6 +61,9 @@
        
         $(".btEntraNoticia").click(function() {
             window.location.href = 'portal_noticia-detalhe?id='+$(this).attr("id");
+        });
+         $(".btEntraPagina").click(function() {
+            window.location.href = 'portal_pagina-main?id='+$(this).attr("id");
         });
         });
 </script>
