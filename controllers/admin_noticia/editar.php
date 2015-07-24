@@ -33,8 +33,6 @@ $TPL->checkedEsquerdo = "";
 $TPL->checkedDireito = "";
 $TPL->checkedPC = "";
 $TPL->checkedD = "";
-$TPL->checkedP = "";
-$TPL->checkedDI = "";
 
 if(isset($_REQUEST['id'])){
 	$noticia->getById($noticia->md5_decrypt($_REQUEST['id']));
@@ -67,16 +65,8 @@ if(isset($_REQUEST['id'])){
     if($noticia->principal == 4){
         $TPL->checkedD = "checked='checked'";
         $TPL->checkedNenhum = "";
-    }
-    
-    if($noticia->principal == 6){
-        $TPL->checkedP = "checked='checked'";
-        $TPL->checkedNenhum = "";
-    }
-    if($noticia->principal == 7){
-        $TPL->checkedDI = "checked='checked'";
-        $TPL->checkedNenhum = "";
-    }
+    }    
+   
 	
 }
 
