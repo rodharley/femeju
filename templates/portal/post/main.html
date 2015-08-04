@@ -13,21 +13,21 @@
                 <div class="divisao">
                 <div class="etiqueta">                    
                      <div class="row">
-                    <!-- BEGIN BLOCK_POST_IMAGEM --> 	
+                    <!-- BEGIN BLOCK_POST_IMAGEM -->
                     <div class="col-lg-2" >
-                        <div class="thumb" style="background-image: url('{post_imagem}');"></div>
+                        <div class="thumb" style="background-image: url('{post_imagem}');"> </div>
                     </div>
-                    <div class="col-lg-10" >
                     <!-- END BLOCK_POST_IMAGEM -->
-                    <!-- BEGIN BLOCK_POST_SEM_IMAGEM -->
-                    <div class="col-lg-12" >
-                    <!-- END BLOCK_POST_SEM_IMAGEM -->	
+                    <div class="col-lg-10" >
                         <span class="data pull-right">{post_data}</span>
                         <p>{post_titulo}</p>
-                        <p><small>{post_mensagem}</small></p>
+                        <p><small>{post_mensagem}</small></p>                        
                         <!-- BEGIN BLOCK_POST_ARQUIVO -->
                         <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
-                        <!-- END BLOCK_POST_ARQUIVO -->                        
+                        <!-- END BLOCK_POST_ARQUIVO -->
+                         <!-- BEGIN BLOCK_POST_DETALHE -->                           
+                        <a href="portal_post-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a>
+                        <!-- END BLOCK_POST_DETALHE -->                     
                     </div>           
                     </div>
                 </div>

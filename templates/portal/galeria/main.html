@@ -4,20 +4,33 @@
             <div class="pull-right">
                                 <img src="img/icones/galeria.png" />
                             </div>
-            <h2>Galeria</h2>
+            <h2>Galeria - {ANO}</h2>
         </div>
-        <div class="panel panel-default">         
-          <div class="panel-body">               
-            <div class="row">
-            <div class="col-lg-12">
-                 <div class="col-sm-12" id="post">               
-                <!-- BEGIN BLOCK_GALERIA -->
+        
+         <div class="row">            
+           <div class="col-sm-12" id="post">               
+                <!-- BEGIN BLOCK_POST -->
                 <div class="divisao">
-                
+                <div class="etiqueta">                    
+                     <div class="row">
+                    
+                    <div class="col-lg-2" >                       
+                        <div class="thumb" style="background-image: url('img/galeria/{imagem}');"> </div>                        
+                    </div>
+                    
+                    <div class="col-lg-10" >
+                        <span class="data pull-right">{post_data}</span>
+                        <h5>{post_titulo}</h5> 
+                        <p><a class="btn btn-default" href='portal_galeria-detalhe?id={ID_HASH}'>Visualizar</a></p>
+                    </div>           
+                    </div>
                 </div>
-                <!-- END BLOCK_GALERIA -->                
+                </div>
+                <!-- END BLOCK_POST -->                
            </div>
-                 <nav>
+        </div>
+        
+         <nav>
             <ul class="pager">
                 <li class="previous {DISABLEL}">
                     <a href="#" class="paginar" value="{PAGINA_ANTERIOR}"><span aria-hidden="true">&larr;</span> Recentes</a>
@@ -34,12 +47,38 @@
                     <a href="#" class="paginar" value="{PROXIMA_PAGINA}">Anteriores <span aria-hidden="true">&rarr;</span></a>
                 </li>
             </ul>
-        </nav>         
-                
-            </div>
-          </div>
-        </div>
-      </div>
- </div>     
- </div> 
+        </nav>                    
+        
+     </div>
+ </div>
+<input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+<input type="hidden" value="{ANO}" id="ano" name="ano"/>
+<script>
 
+    function pesquisar(){
+            $.ajax({
+                url : "ajax/portal_galeria_paginar.php",
+                type : "POST",
+                data : {pagina:$("#pagina").val(),ano:$("#ano").val()},
+                beforeSend: function( ) {
+                    $('#contentPortal').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#contentPortal").html(msg);
+            });
+
+        }
+
+    $(document).ready(function() {
+        {EXECUTA_PESQUISA}        
+        $(".paginar").click(function() {
+            $("#pagina").val($(this).attr("value"));
+            pesquisar();
+        });
+        $(".anualizar").click(function() {
+            $("#pagina").val("1");
+            $("#ano").val($(this).attr("value"));
+            pesquisar();
+        });
+    }); 
+</script>

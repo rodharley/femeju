@@ -8,9 +8,6 @@ $ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : Date("Y");
 
 $obj = new Post();
 $objCat = new Categoria($categoria);
-$objFormato = new Formato();
-
-
 
 $totalPesquisa = $obj->listar3PortalTotal($ano,$categoria);
 $configPaginacao = $obj->paginar($totalPesquisa,$pagina,3);
@@ -20,20 +17,20 @@ foreach ($rspost as $key => $post) {
     $TPL->post_data = $obj->convdata($post->data,"mtn");
 	$TPL->post_titulo = $post->titulo;
 	$TPL->post_mensagem = $post->mensagem;	
+    if($post->texto != ""){
+        $TPL->idhash = $post->md5_encrypt($post->id);
+        $TPL->block("BLOCK_POST_DETALHE");
+    }
     if($post->imagem != ""){
 		$TPL->post_imagem = "img/".$objCat->pasta."/".$post->imagem;
 		$TPL->block("BLOCK_POST_IMAGEM");		
-	}else{
-		$TPL->block("BLOCK_POST_SEM_IMAGEM");
 	}
 	if($post->arquivo != ""){
 		$TPL->post_link = "documentos/".$objCat->pasta."/".$post->arquivo;
 		$TPL->post_tipoArquivo = "fb_".$obj->retornaTipo($post->arquivo);
 		$TPL->post_arquivo = $post->arquivo;
 		$TPL->block("BLOCK_POST_ARQUIVO");
-	}    
-    //$template = $objFormato->retornaTemplate($post->formato,"img/".$objCat->pasta."/".$post->imagem,$post->titulo,$post->mensagem,"documentos/".$objCat->pasta."/".$post->arquivo,"fb_".$obj->retornaTipo($post->arquivo),$post->arquivo,$obj->convdata($post->data,"mtn"));
-    //$TPL->ETIQUETA = $template;
+	}
     $TPL->block("BLOCK_POST");
     
 }

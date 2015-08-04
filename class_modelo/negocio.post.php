@@ -2,11 +2,11 @@
 class Post extends Persistencia {
     var $titulo;
     var $mensagem;
+    var $texto;
     var $arquivo;
     var $imagem;
     var $data;
-    var $categoria;
-    var $formato;
+    var $categoria;    
     
     function retornaTipo($filename){
       $arr = explode(".", $filename);
@@ -73,6 +73,7 @@ class Post extends Persistencia {
         if($ano == "")
             $ano = Date("Y");
         $sql .= " and Year(data) = ".$ano;
+        
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
@@ -82,6 +83,7 @@ class Post extends Persistencia {
         if($ano == "")
             $ano = Date("Y");
         $sql .= " and Year(data) = ".$ano;
+        
         $sql .= " order by data desc limit $primeiro, $quantidade";
         return $this->getSQL($sql);
     }
@@ -90,11 +92,11 @@ class Post extends Persistencia {
     function Incluir() {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> mensagem = $_REQUEST['mensagem'];
+        $this -> texto = $_REQUEST['texto'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
         $this -> imagem = "";
         $this -> arquivo = "";
         $this -> categoria = $this->md5_decrypt($_REQUEST['categoria']);
-        $this -> formato = $_REQUEST['formato'];
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
         
@@ -121,13 +123,20 @@ class Post extends Persistencia {
         $this -> getById($_REQUEST['id']);
         $this -> titulo = $_REQUEST['titulo'];
         $this -> mensagem = $_REQUEST['mensagem'];
+        $this -> texto = $_REQUEST['texto'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
-        $this -> imagem = "";
-        $this -> arquivo = "";        
-        $this -> formato = $_REQUEST['formato'];
-        
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
+        
+        if(!isset($_REQUEST['haveimagem']) && $this -> imagem != ""){
+            $this -> apagaImagem($this -> imagem, "img/".$pasta."/");  
+            $this -> imagem = ""; 
+        }
+        
+        if(!isset($_REQUEST['havearquivo']) && $this -> arquivo != ""){
+            $this -> apagaImagem($this -> arquivo, "documentos/".$pasta."/");
+            $this -> arquivo = "";   
+        }
         
         //incluir imagem se ouver
         if ($_FILES['foto']['name'] != "") {

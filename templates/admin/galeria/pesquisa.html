@@ -1,27 +1,18 @@
 <form role="form" method="post" action="#" id="frmPesquisa">
 	<input type="hidden" name="pagina" id="pagina" value="1" />
-	<input type="hidden" name="categoria" id="categoria" value="{ID_CATEGORIA}" />
 	<div class="box box-primary">
 		<div class="box-header">
-			<h3 class="box-title">Pesquisa {NOME_CATEGORIA}</h3>
+			<h3 class="box-title">Pesquisa Notícias</h3>
 		</div>
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12 col-xs-12">
 					<div class="form-group">
 						<label for="descricao"><i class='fa'></i><b>Título</b></label>
-						<input type="text" id="titulo" name="titulo" placeholder="Título do post" value="" class="form-control"/>
+						<input type="text" id="titulo" name="titulo" placeholder="Título da Noticia" value="" class="form-control"/>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group">
-						<label for="descricao"><i class='fa'></i><b>Mensagem</b></label>
-						<input type="text" id="texto" name="texto" placeholder="Texto do post" value="" class="form-control"/>
-					</div>
-				</div>
-			</div>
+			</div>			
 			<div class="row">
 				<div class="col-md-12 col-xs-12">
 					<div class="form-group">
@@ -42,7 +33,7 @@
 			<button class="btn btn-success" type="button" id="btPesquisar">
 				Pesquisar
 			</button>
-			<a class="btn btn-primary" href="admin_post-editar?categoria={ID_CATEGORIA_HASH}"><i class="fa fa-plus"></i> Adicionar</a>
+			<a class="btn btn-primary" href="admin_galeria-editar"><i class="fa fa-plus"></i> Adicionar</a>
 			<button class="btn btn-default btVoltar" type="button">
 				Voltar
 			</button>
@@ -60,7 +51,7 @@
 
 	function pesquisar(){
 			$.ajax({
-				url : "ajax/admin_post_pesquisar.php",
+				url : "ajax/admin_galeria_pesquisar.php",
 				type : "POST",
 				data : $("#frmPesquisa").serialize(),
 

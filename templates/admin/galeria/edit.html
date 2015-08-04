@@ -1,0 +1,114 @@
+<form role="form" method="post" action="admin_galeria-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+
+            <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" name="acao" id="acao" value="{ACAO}"/>
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="titulo"><i class='fa'></i><b>Título</b></label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título da Galeria" value="{titulo}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="sumario"><i class='fa'></i><b>Data da Publicação</b></label>
+                        <input type="text" id="data" name="data" value="{data}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer text-center">
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+            <a class="btn btn-success" id="save"> Salvar </a>
+        </div>
+
+    </div>
+<div id="uploads">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Imagens:</h3>
+        </div>
+    <div class="box-body">
+        
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="form-group">
+                    <label for="imagens"><i class='fa'></i><b>Adicionar Imagens:</b></label>
+                    <input type="file"  name="imagens[]" id="imagens" multiple="multiple"/>
+                    <a class="btn btn-primary" id="addImages" > Enviar Fotos </a>
+                </div>
+            </div>        
+            
+        </div>
+       <div class="row" id="thumbs">  
+        </div>
+    </div> 
+          
+
+    </div>
+    </div>
+</form>
+
+<script>
+	
+
+	function carregaImagens() {
+		$.ajax({
+			url : 'ajax/admin_imagensGaleria.php',
+			data : $("#frmEdit").serialize(),
+			type : 'POST',
+		}).done(function(html) {
+			$("#thumbs").html(html);
+		});
+	}
+
+
+	$(document).ready(function() {
+        if($("#acao").val() == 'incluir')
+            $("#uploads").hide('slow');
+        else
+            carregaImagens();
+            
+		$('#data').datepicker();
+		
+		$("#addImages").click(function(){
+		    $("#acao").val('addImagem');
+		    $("#frmEdit").submit();
+		});
+		
+		$("#save").click(function() {
+			if ($("#frmEdit").valid()) {
+				$.ajax({
+					url : 'ajax/admin_salvaGaleria.php',
+					data : $("#frmEdit").serialize(),
+					type : 'POST'
+				}).done(function(id) {
+					$("#id").val(id);
+					$("#acao").val('editar');
+					$("#uploads").show('slow');
+
+				});
+			}
+		});
+
+		$("#imagens").fileinput({
+			maxFileSize : 2000,
+			maxFilesNum : 30,
+			allowedFileExtensions : ["jpg", "jpeg", "gif", "png"],
+			previewClass : "bg-warning",
+			allowedFileTypes : ["image"],
+			showUpload : false,
+			showCaption : false
+		});
+	}); 
+</script>

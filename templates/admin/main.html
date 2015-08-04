@@ -78,7 +78,9 @@
 		<!-- Ion Slider -->
         <script src="js/plugins/ionslider/ion.rangeSlider.min.js" type="text/javascript"></script>
         <!-- scrollflow -->
-        <script src="js/jquery.simple-scroll-follow.2.0.1.js" type="text/javascript"></script>        
+        <script src="js/jquery.simple-scroll-follow.2.0.1.js" type="text/javascript"></script>
+        <script src="js/plugins/jquery.blockUI.js" type="text/javascript"></script>
+                
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -213,7 +215,11 @@
 </html>
 
 <Script>
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	$(document).ready(function() {
+	    
+	    
+	    
 		$("[data-mask]").inputmask();
        
          $('#menuPrincipal').simpleScrollFollow();
@@ -227,7 +233,10 @@
 				$(this).val($(this).val().toUpperCase());
 			}
 		});
-*/
+*/      
+
+        
+        
 		if ($("#frmEdit").length) {
 			$("#frmEdit").validate({
 			    
@@ -246,5 +255,5 @@
 			});
 		}
 	});
-
+    
 </Script>

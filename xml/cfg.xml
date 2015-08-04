@@ -67,6 +67,16 @@ set
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="idUf" type="fk" clrelation="Uf">uf</atrib>				
 	</class>
+	<class name="Galeria" tbname="fmj_galeria" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="titulo" type="txt">titulo</atrib>
+		<atrib tbname="data" type="txt">data</atrib>				
+	</class>
+	<class name="GaleriaImagem" tbname="fmj_galeria_imagem" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="idGaleria" type="fk" clrelation="Galeria">galeria</atrib>
+		<atrib tbname="imagem" type="txt">imagem</atrib>				
+	</class>
 	<class name="Log" tbname="fmj_log" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="ip" type="txt">ip</atrib>
@@ -113,11 +123,11 @@ set
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="titulo" type="txt">titulo</atrib>
 		<atrib tbname="mensagem" type="txt">mensagem</atrib>
+		<atrib tbname="texto" type="txt">texto</atrib>
 		<atrib tbname="arquivo" type="txt">arquivo</atrib>
 		<atrib tbname="imagem" type="txt">imagem</atrib>
 		<atrib tbname="data" type="txt">data</atrib>
-		<atrib tbname="categoria" type="int">categoria</atrib>
-		<atrib tbname="formato" type="int">formato</atrib>				
+		<atrib tbname="categoria" type="int">categoria</atrib>						
 	</class>
 	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	

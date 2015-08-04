@@ -1,7 +1,7 @@
 <?php
 class Biblioteca {
 
-var $HASH_URL = 'grcglauco';
+var $HASH_URL = 'jemejubruno';
 var $PAGINACAO = 10;
 
 function retorna_hora($data){

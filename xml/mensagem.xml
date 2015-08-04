@@ -33,6 +33,9 @@ Exemplos de mensagens:
 <mensagem id="27" type="success">Post alterado com sucesso.</mensagem>
 <mensagem id="28" type="success">Post excluído com sucesso.</mensagem>
 <mensagem id="29" type="success">Página alerada com sucesso.</mensagem>
+<mensagem id="30" type="success">Imagens incluídas com sucesso.</mensagem>
+<mensagem id="31" type="success">Imagem excluida com sucesso.</mensagem>
+<mensagem id="32" type="success">Galeria excluida com sucesso.</mensagem>
 
 </mensagens>
 

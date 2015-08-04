@@ -1,5 +1,5 @@
 <?php
-$menu = 2;
+$menu = 1;
 include("configuraAjax.php");
 $TPL = new Template("../templates/admin/noticia/list.html");
 $noticia = new Noticia();

@@ -1,0 +1,27 @@
+<!-- BEGIN BLOCK_IMAGEM -->
+<div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img src="img/galeria/{IMAGEM}" alt="{IMAGEM}">
+      <div class="caption">
+        <p><a href="#" class="btn btn-danger btn-xs btn_excluir_imagem" role="button" value='{ID_IMG_HASH}'><span class="fa fa-trash-o"> </span></a></p>
+      </div>
+    </div>
+  </div>
+  <!-- END BLOCK_IMAGEM -->
+  <script>
+      $(document).ready(function() {
+           $('.btn_excluir_imagem').click(function() {
+            if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+                $.ajax({
+                    url : 'ajax/admin_salvaGaleria.php',
+                    data : {acao:'excluirImg',
+                            id:$(this).attr("value")},
+                    type : 'POST'
+                }).done(function(id) {
+                    carregaImagens();
+                });                
+                
+        });
+      });
+  </script>
+  
