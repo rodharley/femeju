@@ -42,6 +42,7 @@ $TPL->PAGINA = $pagina;
 $TPL->ANO = $ano;
 $TPL->CATEGORIA = $objCat->id;   
 $TPL->TITULO = $objCat->retornaDescricao($objCat->id);
+$TPL->ICONE = $objCat->retornaPasta($objCat->id);
 foreach ($ARRano as $key => $ano) {
         $TPL->ANO_V = $ano;
         $TPL->block("BLOCK_ANO");
