@@ -149,7 +149,7 @@ border-top: solid 1px #fff;
 	min-height: 6em;
 	border: solid 1px #e8e8e8;
 	border-right: solid 4px #E08E0B;	
-	padding: 1em;
+	padding: 0.5em;
 }
 .etiqueta .thumb {
 	background-size:cover;
@@ -310,6 +310,35 @@ border-top: solid 1px #fff;
     margin: 90px auto 0;
     width: 360px;
 }
+
+
+/*galeria de imagens
+*/
+#galeria ul {
+          padding:0 0 0 0;
+          margin:0 0 0 0;
+      }
+#galeria ul li {
+          list-style:none;
+          margin-bottom:25px;
+      }
+#galeria ul li img {
+          cursor: pointer;
+          border: solid 2px #FFFFFF;
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.6), 0 0 3px rgba(0, 0, 0, 0.1);
+      }
+   .controls{
+    width:50px;
+    display:block;
+    font-size:11px;
+    padding-top:8px;
+    font-weight:bold;
+}
+.next {
+    float:right;
+    text-align:right;
+}
+
 /* 
    All form elements including input, select, textarea etc.
 -----------------------------------------------------------------

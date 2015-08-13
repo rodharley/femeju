@@ -22,8 +22,9 @@ foreach ($rspost as $key => $post) {
         $TPL->block("BLOCK_POST_DETALHE");
     }
     if($post->imagem != ""){
-		$TPL->post_imagem = "img/".$objCat->pasta."/".$post->imagem;
-		$TPL->block("BLOCK_POST_IMAGEM");		
+		$TPL->post_imagem = "img/".$objCat->pasta."/".$post->imagem;				
+	}else{
+	    $TPL->post_imagem = "img/icon.png";
 	}
 	if($post->arquivo != ""){
 		$TPL->post_link = "documentos/".$objCat->pasta."/".$post->arquivo;

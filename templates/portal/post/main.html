@@ -4,7 +4,7 @@
             <div class="pull-right">
                                 <img src="img/icones/{ICONE}.png" />
                             </div>
-            <h2>{TITULO} - {ANO}</h2>
+            <h2>{TITULO} {ANO}</h2>
         </div>
         
          <div class="row">            
@@ -13,13 +13,15 @@
                 <div class="divisao">
                 <div class="etiqueta">                    
                      <div class="row">
-                    <!-- BEGIN BLOCK_POST_IMAGEM -->
+                    
                     <div class="col-lg-2" >
+                        
                         <div class="thumb" style="background-image: url('{post_imagem}');"> </div>
+                        
                     </div>
-                    <!-- END BLOCK_POST_IMAGEM -->
+                    
                     <div class="col-lg-10" >
-                        <span class="data pull-right">{post_data}</span>
+                        <small class="pull-right">{post_data}</small>
                         <p>{post_titulo}</p>
                         <p><small>{post_mensagem}</small></p>                        
                         <!-- BEGIN BLOCK_POST_ARQUIVO -->

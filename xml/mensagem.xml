@@ -36,6 +36,11 @@ Exemplos de mensagens:
 <mensagem id="30" type="success">Imagens incluídas com sucesso.</mensagem>
 <mensagem id="31" type="success">Imagem excluida com sucesso.</mensagem>
 <mensagem id="32" type="success">Galeria excluida com sucesso.</mensagem>
+<mensagem id="33" type="success">Diretoria incluída com sucesso.</mensagem>
+<mensagem id="34" type="success">Diretoria alterada com sucesso.</mensagem>
+<mensagem id="35" type="success">Diretoria excluida com sucesso.</mensagem>
+<mensagem id="36" type="warning">Nenhuma diretoria foi encontrada vinculada ao seu usuário.</mensagem>
+
 
 </mensagens>
 

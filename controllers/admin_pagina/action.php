@@ -1,7 +1,6 @@
 <?php
 $pagina = new Pagina();
 $menu = 16;
- 
 include("includes/include.lock.php");
 //INSTACIA CLASSES
 //ACOES

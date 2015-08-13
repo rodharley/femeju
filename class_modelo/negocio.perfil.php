@@ -1,12 +1,5 @@
 <?php
 class Perfil extends Persistencia{
-	const GESTOR = 0;	
-	const ENG_ADM = 1;
-	const ENG_MAN = 2;
-	const COND_ADM = 3;
-	const COND_MAN = 4;
-	const COND_PORT = 5;
-	const PROPRIETARIO = 6;	
 	var $descricao;
 	
 	function listarPorPerfil(){

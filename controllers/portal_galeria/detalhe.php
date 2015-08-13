@@ -7,14 +7,11 @@ $objImg = new GaleriaImagem();
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $rsimg = $objImg->listaFotos($obj->id);
 foreach ($rsimg as $key => $value) {
-    $TPL->ATIVO = '';
-    if($key === 0){
-        $TPL->ATIVO = "active";
-    }
+    
     $TPL->IMAGEM = $value->imagem;
-    $TPL->KEY = $key;
+    
 	$TPL->block("BLOCK_ITEM");
-    $TPL->block("BLOCK_IND");
+    
 }
 
 $TPL->show();

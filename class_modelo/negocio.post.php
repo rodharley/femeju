@@ -7,7 +7,7 @@ class Post extends Persistencia {
     var $imagem;
     var $data;
     var $categoria;    
-    
+    var $ordem;
     function retornaTipo($filename){
       $arr = explode(".", $filename);
       $retorno = "txt";
@@ -18,6 +18,11 @@ class Post extends Persistencia {
       return $retorno;
   }
     
+    function excluirPostsCategoria($categoria){
+            $SQL = "delete from fmj_post where categoria = $categoria";
+        $this->DAO_ExecutarDelete($SQL);
+        return true;
+    }
     
     function listarArrayAnos($categoria){
         $SQL = "select Year(data) as ano from fmj_post where categoria = $categoria group by Year(data) order by ano desc";
@@ -70,9 +75,8 @@ class Post extends Persistencia {
     }
     function listar3PortalTotal($ano = "",$categoria ){
         $sql = "select count(*) as total from fmj_post where categoria = $categoria";
-        if($ano == "")
-            $ano = Date("Y");
-        $sql .= " and Year(data) = ".$ano;
+        if($ano != "")            
+            $sql .= " and Year(data) = ".$ano;
         
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
@@ -80,11 +84,10 @@ class Post extends Persistencia {
     
     function listar3Portal($primeiro = 0, $quantidade = 9999,$ano = "",$categoria){
         $sql = "select * from fmj_post where categoria = $categoria"; 
-        if($ano == "")
-            $ano = Date("Y");
-        $sql .= " and Year(data) = ".$ano;
+        if($ano != "")            
+            $sql .= " and Year(data) = ".$ano;
         
-        $sql .= " order by data desc limit $primeiro, $quantidade";
+        $sql .= " order by ordem, data desc limit $primeiro, $quantidade";
         return $this->getSQL($sql);
     }
     
@@ -93,12 +96,17 @@ class Post extends Persistencia {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> mensagem = $_REQUEST['mensagem'];
         $this -> texto = $_REQUEST['texto'];
+        $this -> ordem = $_REQUEST['ordem'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
         $this -> imagem = "";
         $this -> arquivo = "";
         $this -> categoria = $this->md5_decrypt($_REQUEST['categoria']);
+        if($this -> categoria < 20){
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
+        }else{
+           $pasta = "diretoria"; 
+        }
         
         if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
@@ -124,9 +132,15 @@ class Post extends Persistencia {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> mensagem = $_REQUEST['mensagem'];
         $this -> texto = $_REQUEST['texto'];
+        $this -> ordem = $_REQUEST['ordem'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
+        
+        if($this -> categoria < 20){
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
+        }else{
+           $pasta = "diretoria"; 
+        }
         
         if(!isset($_REQUEST['haveimagem']) && $this -> imagem != ""){
             $this -> apagaImagem($this -> imagem, "img/".$pasta."/");  

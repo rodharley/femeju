@@ -3,6 +3,7 @@ require("negocio.academia.php");
 require("negocio.acesso.php");
 require("negocio.atleta.php");
 require("negocio.cidade.php");
+require("negocio.diretoria.php");
 require("negocio.email.php");
 require("negocio.galeria.php");
 require("negocio.galeriaImagem.php");

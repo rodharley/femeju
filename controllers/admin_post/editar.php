@@ -37,6 +37,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->titulo = $post->titulo;
     $TPL->mensagem = $post->mensagem;
     $TPL->texto = $post->texto;
+    $TPL->ordem = $post->ordem;
 	$TPL->data = $post->convdata(substr($post->data,0,10),"mtn");
 	$TPL->IMG_IMAGEM = "img/".$pasta."/".$post->imagem;
     $TPL->IMG_ARQUIVO = "img/".$pasta."/".$post->arquivo;

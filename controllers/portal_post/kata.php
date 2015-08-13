@@ -4,7 +4,7 @@ $TPL = NEW Template("templates/portal/layout.html");
 include("includes/include.mensagem.php");
 $TPL->addFile("CONTEUDO", "templates/portal/post/main.html");
 $obj = new Post();
-$ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : Date("Y");
+$ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : "";
 $TPL->LOADING = $obj->carregando;
 $TPL->PAGINA = 1; 
 $TPL->CATEGORIA = $objCat->id;          
