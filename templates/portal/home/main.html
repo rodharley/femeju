@@ -11,44 +11,44 @@
 </div>
 
 <div class="row" id="destaques">
-    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque">
+    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque btEntraNoticia" id="{IDNOTICIA3}">
     
            <!-- BEGIN BLOCK_NOTICIA3 -->
             <h4>Próxima Competição</h4>
                 <p>
                    {TITULO3}
                 </p>
-                <a href="#" class="btEntraNoticia" id="{IDNOTICIA3}">leia mais</a>
+                <a href="#" >leia mais</a>
             
             <!-- END BLOCK_NOTICIA3 -->
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque">
+    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque btEntraNoticia" id="{IDNOTICIA4}">
                  <!-- BEGIN BLOCK_NOTICIA4 -->
             <h4>Destaque</h4>
                 <p>
                     {TITULO4}
                 </p>
-                <a href="#" class="btEntraNoticia" id="{IDNOTICIA4}">leia mais</a>
+                <a href="#" >leia mais</a>
             
             <!-- END BLOCK_NOTICIA4 -->
            </div>    
-    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque">
+    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaque btEntraPagina" id="1">
                  
             <h4>Presidente</h4>
                 <p>
                     Informações da Presidência
                 </p>
-                <a href="#" class="btEntraPagina" id="1">leia mais</a>
+                <a href="#" >leia mais</a>
            
             
            </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaqueFinal">
+    <div class="col-lg-3 col-md-3 col-sm-3 itemDestaqueFinal btNavega" id="portal_diretoria">
             
             <h4>Diretoria</h4>
                 <p>
                     Informações da diretoria
                 </p>
-                <a href="#" class="btEntraPagina" id="2">leia mais</a>
+                <a href="#">leia mais</a>
        
             
            </div>
@@ -58,6 +58,9 @@
     <script>
     $(document).ready(function() {
         
+       $(".btNavega").click(function() {
+            window.location.href = $(this).attr("id");
+        });
        
         $(".btEntraNoticia").click(function() {
             window.location.href = 'portal_noticia-detalhe?id='+$(this).attr("id");
