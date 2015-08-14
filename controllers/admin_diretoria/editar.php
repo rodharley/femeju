@@ -20,7 +20,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 $TPL->addFile("CONTEUDO", "templates/admin/diretoria/edit.html");
 $obj = new Diretoria();
 $objU = new Usuario();
-$idUser = 0;
+$idResp = 0;
 $rsUsers = $objU->getRows(0,999,array("nome"=>"asc"),array("ativo"=>"=1"));
 $TPL->LABEL = "Incluir Diretoria";
 $TPL->ACAO = "incluir";
@@ -34,15 +34,15 @@ if(isset($_REQUEST['id'])){
     $TPL->id = $_REQUEST['id'];
     $obj->getById($obj->md5_decrypt($_REQUEST['id']));
     $TPL->nome = $obj->descricao; 
-    $idUser = $obj->usuario->id;   
+    $idResp = $obj->usuario->id;   
     
 }
 foreach ($rsUsers as $key => $value) {
-	$TPL->NOME_USER= $value->nome;
-    $TPL->ID_USER = $value->id;
-    if($idUser == $value->id)
+	$TPL->NOME_RESP= $value->nome;
+    $TPL->ID_RESP = $value->id;
+    if($idResp == $value->id)
         $TPL->SELECTED = "selected='selected'";
-    $TPL->block("BLOCK_USER");
+    $TPL->block("BLOCK_RESP");
     $TPL->SELECTED = "";
 }
 
