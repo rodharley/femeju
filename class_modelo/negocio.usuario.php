@@ -1,21 +1,16 @@
 <?php
 class Usuario extends Persistencia {
 	var $perfil = NULL;	
-	var $nome;
 	var $senha;
-	var $email;
 	var $ativo;
-	var $cpf;
-	var $foto;	
-	var $telefone;
-	var $celular;
+	var $pessoa = null;
 	
 
 	function LogOff() {
 		
 		//grava a log
-				$log = new Log();
-				$log->gerarLog("Sair do Sistema");
+		$log = new Log();
+		$log->gerarLog("Sair do Sistema");
 		unset($_SESSION['fmj.userId']);
 		unset($_SESSION['fmj.userNome']);
 		unset($_SESSION['fmj.userFoto']);
@@ -25,9 +20,9 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaTotal($busca = "") {
-				$sql = "select count(id) as total from fmj_usuario WHERE 1 = 1 ";
+				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa WHERE 1 = 1 ";
 		if ($busca != "")
-			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
+			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
 
 		$rs = $this -> DAO_ExecutarQuery($sql);
 		return $this -> DAO_Result($rs, "total", 0);
@@ -36,10 +31,10 @@ class Usuario extends Persistencia {
 
 	function recuperaTotalPerfil($idPerfil, $busca = "") {
 		
-				$sql = "select count(id) as total from fmj_usuario WHERE fmj_perfil_id = $idPerfil";
+				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa WHERE u.idPerfil = $idPerfil";
 		
 		if ($busca != "")
-			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
+			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
 
 		$rs = $this -> DAO_ExecutarQuery($sql);
 		return $this -> DAO_Result($rs, "total", 0);
@@ -48,24 +43,24 @@ class Usuario extends Persistencia {
 	function listarUsuariosPerfil($idPerfil, $primeiro = 0, $quantidade = 9999, $busca = "") {
 
 		
-				$sql = "select * from fmj_usuario where fmj_perfil_id = $idPerfil";
+				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where u.idPerfil = $idPerfil";
 		
 		if ($busca != "")
-			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
+			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
 
-		$sql .= "  order by nome limit $primeiro, $quantidade";
+		$sql .= "  order by p.nome limit $primeiro, $quantidade";
 		return $this -> getSQL($sql);
 
 	}
 
 	function listarUsuarios($primeiro = 0, $quantidade = 9999, $busca = "") {
 
-				$sql = "select * from fmj_usuario where 1 = 1";
+				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where 1 = 1";
 		
 		if ($busca != "")
-			$sql .= " and (nome like '$busca%' or cpf like '$busca%')";
+			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
 
-		$sql .= "  order by nome limit $primeiro, $quantidade";
+		$sql .= "  order by p.nome limit $primeiro, $quantidade";
 		return $this -> getSQL($sql);
 
 	}
@@ -80,9 +75,9 @@ class Usuario extends Persistencia {
 			if ($this -> ativo == 1) {
 				if ($this -> senha == md5($senha)) {
 					$_SESSION['fmj.userId'] = $this -> id;
-					$_SESSION['fmj.userNome'] = $this -> nome;
+					$_SESSION['fmj.userNome'] = $this -> pessoa->nome;
 					$_SESSION['fmj.userPerfil'] = $this -> perfil -> descricao;
-					$_SESSION['fmj.userFoto'] = $this -> foto;
+					$_SESSION['fmj.userFoto'] = $this -> pessoa->foto;
 					$_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;					
 					//grava a log
 				$log = new Log();
@@ -156,10 +151,12 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaPorLogin($login, $idExclusao = "0") {
-	    $this -> getRow(array("email" => "='" . $login . "'", "id" => "!=" . $idExclusao));
-		if ($this -> id != NULL)
+	    $sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where p.email = '$login' and u.id != $idExclusao";
+	    $rs = $this->getSQL($sql);
+        if(count($rs) > 0){
+	       $this->getById($rs[0]->id);		
 			return true;
-		else
+		}else
 			return false;
 	}
 
@@ -174,13 +171,12 @@ class Usuario extends Persistencia {
 	}
 	function Redefinir($idUser){
 		$this->getById($this->md5_decrypt($idUser));
-		$this -> login = "";
 		$this -> senha = "";
 		$this -> ativo = 0;
 		$this -> save();
 		
 		$email = new Email();
-		$email->enviarEmailRedefinirSenha($this->nome,$this->email,$this->id);
+		$email->enviarEmailRedefinirSenha($this->pessoa->nome,$this->pessoa->email,$this->id);
 		$_SESSION['fmj.mensagem'] = 10;
 		header("Location:admin_usuario-main");
 		exit();
@@ -190,29 +186,34 @@ class Usuario extends Persistencia {
 		$p = new Perfil();
 		$p -> id = $_REQUEST['perfil'];
 		$this -> perfil = $p;
-		//$senha = $_REQUEST['senha'] != "" ? $_REQUEST['senha'] : md5($this -> makePassword(8));
-		$this -> nome = $_REQUEST['nome'];
-		$this -> cpf = $strCPF;
-		$this -> email = $_REQUEST['email'];
-		$this -> telefone = str_replace("_","",$_REQUEST['telefone']);
-		$this -> celular = str_replace("_","",$_REQUEST['celular']);
 		$this -> senha = "";
-		$this -> ativo = 0;
-		$this -> foto = "avatar.png";
+        $this -> ativo = 0;
+		//$senha = $_REQUEST['senha'] != "" ? $_REQUEST['senha'] : md5($this -> makePassword(8));
+		$pessoa = new Pessoa();
+		$pessoa->nome = $_REQUEST['nome'];
+		$pessoa-> cpf = $strCPF;
+		$pessoa-> email = $_REQUEST['email'];
+		$pessoa-> telResidencial = str_replace("_","",$_REQUEST['telefone']);
+		$pessoa-> telCelular = str_replace("_","",$_REQUEST['celular']);
+        $pessoa-> foto = "avatar.png";
+		
+		
 		if ($_FILES['foto']['name'] != "") {
 			//incluir imagem se ouver
 			$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
 			$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
-			$this -> foto = $nomefoto;
-		}		
+			$pessoa-> foto = $nomefoto;
+		}	
+        $pessoa->save();
+        $this->pessoa = $pessoa;	
 		$this -> save();
         
         //altera as permissoes de academias
-            $this->apagaPermissoes();
-            $this->salvaPermissoes($_REQUEST['academias']);
+        //    $this->apagaPermissoes();
+        //    $this->salvaPermissoes($_REQUEST['academias']);
         
         $email = new Email();
-        $email->enviarEmailNovoUsuario($this->nome,$this->email,$this->id);
+        $email->enviarEmailNovoUsuario($this->pessoa->nome,$this->pessoa->email,$this->id);
 		$_SESSION['fmj.mensagem'] = 4;
 		header("Location:admin_usuario-main");
 		exit();
@@ -266,11 +267,11 @@ class Usuario extends Persistencia {
 			$p = new Perfil();
 			$p -> id = $_REQUEST['perfil'];
 			$this -> perfil = $p;
-			$this -> nome = $_REQUEST['nome'];
-			$this -> telefone = str_replace("_","",$_REQUEST['telefone']);
-			$this -> celular = str_replace("_","",$_REQUEST['celular']);
-			$this -> cpf = $strCPF;
-			$this -> email = $_REQUEST['email'];
+			$this -> pessoa -> nome = $_REQUEST['nome'];
+			$this -> pessoa -> telResidencial = str_replace("_","",$_REQUEST['telefone']);
+			$this -> pessoa -> telCelular = str_replace("_","",$_REQUEST['celular']);
+			$this -> pessoa -> cpf = $strCPF;
+			$this -> pessoa -> email = $_REQUEST['email'];
 			if ($_REQUEST['senha'] != "")
 				$this -> senha = md5($_REQUEST['senha']);
 			$this -> ativo = $_REQUEST['ativo'];
@@ -278,18 +279,19 @@ class Usuario extends Persistencia {
 			
 			//incluir imagem se ouver
 			if ($_FILES['foto']['name'] != "") {
-				if ($this -> foto != "avatar.png")
-					$this -> apagaImagem($this -> foto, "img/users/");
+				if ($this ->  pessoa -> foto != "avatar.png")
+					$this -> apagaImagem($this -> pessoa-> foto, "img/users/");
 				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
 				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
-				$this -> foto = $nomefoto;
+				$this -> pessoa -> foto = $nomefoto;
 			}		
-
+            
+            $this -> pessoa ->save();    
 			$this -> save();    
             
             //altera as permissoes de academias
-            $this->apagaPermissoes();
-            $this->salvaPermissoes($_REQUEST['academias']);
+            //$this->apagaPermissoes();
+            //$this->salvaPermissoes($_REQUEST['academias']);
                                 
 			$_SESSION['fmj.mensagem'] = 5;
 			header("Location:admin_usuario-main?idPerfil=".$this->md5_encrypt($p -> id));
@@ -308,24 +310,24 @@ class Usuario extends Persistencia {
 			exit();
 		} else {
 			$this -> getById($_SESSION['fmj.userId']);
-			$this -> nome = $_REQUEST['nome'];
-			$this -> cpf = $strCPF;
-			$this -> email = $_REQUEST['email'];
-			$this -> telefone = $_REQUEST['telefone'];
-			$this -> celular = $_REQUEST['celular'];
+			$this -> pessoa-> nome = $_REQUEST['nome'];
+			$this -> pessoa->cpf = $strCPF;
+			$this -> pessoa->email = $_REQUEST['email'];
+			$this -> pessoa -> telResidencial = str_replace("_","",$_REQUEST['telefone']);
+            $this -> pessoa -> telCelular = str_replace("_","",$_REQUEST['celular']);
 			if ($_REQUEST['senha'] != "")
 				$this -> senha = md5($_REQUEST['senha']);
 
 			//incluir imagem se ouver
 			if ($_FILES['foto']['name'] != "") {
-				if ($this -> foto != "avatar.png")
-					$this -> apagaImagem($this -> foto, "img/users/");
+				if ($this -> pessoa -> foto != "avatar.png")
+					$this -> apagaImagem($this -> pessoa ->  foto, "img/users/");
 				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
 				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
-				$this -> foto = $nomefoto;
+				$this ->  pessoa -> foto = $nomefoto;
 			}
 			
-
+            $this->pessoa->Save();
 			$this -> save();
 			$_SESSION['fmj.mensagem'] = 5;
 			header("Location:admin_home-home");

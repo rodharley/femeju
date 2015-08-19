@@ -35,17 +35,17 @@ $TPL->IMG_USER = "img/users/avatar.png";
 $idPerfilUsu = 0;
 $listaAcademias = array();
 if(isset($_REQUEST['id'])){
-	$usu->getById($usu->md5_decrypt($_REQUEST['id']));
-	$TPL->cpf = $usu->cpf;
-	$TPL->nome = $usu->nome;
-	$TPL->email = $usu->email;
-	$TPL->telefone = $usu->telefone;
-	$TPL->celular = $usu->celular;
+	$usu->getById($usu->md5_decrypt($_REQUEST['id']));    
+	$TPL->cpf = $usu->pessoa->cpf;
+	$TPL->nome = $usu->pessoa->nome;
+	$TPL->email = $usu->pessoa->email;
+	$TPL->telefone = $usu->pessoa->telResidencial;
+	$TPL->celular = $usu->pessoa->telCelular;
 	$TPL->senha = "";
 	$TPL->id = $usu->id;
 	$idPerfilUsu = $usu->perfil->id;
-	$TPL->IMG_USER = "img/users/".$usu->foto;
-	$TPL->LABEL = "Alterar Usuário ".$usu->nome;
+	$TPL->IMG_USER = "img/users/".$usu->pessoa->foto;
+	$TPL->LABEL = "Alterar Usuário ".$usu->pessoa->nome;
 	$TPL->ACAO = "editar";
 
 	if($usu->ativo == "0"){
@@ -54,16 +54,16 @@ if(isset($_REQUEST['id'])){
 	}
 
 
-	if(strlen($usu->foto) > 0){
-		$TPL->IMG_USER = "<img src='img/users/".$usu->foto."' class='file-preview-image' alt='".$usu->foto."' title='".$usu->foto."'>";
+	if(strlen($usu->pessoa->foto) > 0){
+		$TPL->IMG_USER = "<img src='img/users/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";
 		$TPL->block("BLOCK_IMG");
 	}
     
-    //permissoes
+    /*/permissoes
     $rsPermissoes = $lacademia->listaPermissoes($usu->id);
     foreach ($rsPermissoes as $key => $permissao) {
         array_push($listaAcademias,$permissao->id);
-    }
+    }*/
 	$TPL->block("BLOCK_EDIT");
 }
 
@@ -78,7 +78,7 @@ $rsPerfil = $perfil->getRows(0,999,array("id"=>"asc"),array());
 	$TPL->block("BLOCK_ITEM");
  }
 
-
+/*
 $rsAcademias = $lacademia->getRows();
 foreach ($rsAcademias as $key => $lacademia) {
     $TPL->idAcademia = $lacademia->id;
@@ -87,7 +87,7 @@ foreach ($rsAcademias as $key => $lacademia) {
         $TPL->academiaChecked = 'checked="checked"';    
     $TPL->block("BLOCK_ACADEMIA");     
     $TPL->clear("academiaChecked");
-}
+}*/
 
 
 

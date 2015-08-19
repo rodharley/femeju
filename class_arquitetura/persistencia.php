@@ -233,8 +233,7 @@ function xmlObject($elemento,$i,$objeto){
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				$sql = "select ".$this->getFieldsList($elemento)." from ".$elemento['tbname']." where ".$elemento['tbid']." = $id";
-
-				$rs =  $this->DAO_ExecutarQuery($sql);
+                $rs =  $this->DAO_ExecutarQuery($sql);
 				if($this->DAO_NumeroLinhas($rs) > 0){
 					$arrayItem = $this->DAO_GerarArray($rs);
 					$this->setBean($arrayItem,$elemento);

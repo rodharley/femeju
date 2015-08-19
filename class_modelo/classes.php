@@ -13,6 +13,7 @@ require("negocio.noticia.php");
 require("negocio.pagina.php");
 require("negocio.perfil.php");
 require("negocio.permissao.php");
+require("negocio.pessoa.php");
 require("negocio.post.php");
 require("negocio.usuario.php");
 require("negocio.uf.php");

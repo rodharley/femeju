@@ -26,16 +26,16 @@ $TPL->ACAO = "meusDados";
 $TPL->IMG_USER = "img/avatar.png";
 $TPL->idUser = $_SESSION['fmj.userId'];
 	$usu->getById($_SESSION['fmj.userId']);
-	$TPL->cpf = $usu->cpf;
-	$TPL->nome = $usu->nome;
-	$TPL->email = $usu->email;
-	$TPL->telefone = $usu->telefone;
-	$TPL->celular = $usu->celular;
+	$TPL->cpf = $usu->pessoa->cpf;
+	$TPL->nome = $usu->pessoa->nome;
+	$TPL->email = $usu->pessoa->email;
+	$TPL->telefone = $usu->pessoa->telResidencial;
+	$TPL->celular = $usu->pessoa->telCelular;
 	$TPL->senha = "";
 	
    
-    if(strlen($usu->foto) > 0){
-        $TPL->IMG_USER = "<img src='img/users/".$usu->foto."' class='file-preview-image' alt='".$usu->foto."' title='".$usu->foto."'>";
+    if(strlen($usu->pessoa->foto) > 0){
+        $TPL->IMG_USER = "<img src='img/users/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";
         $TPL->block("BLOCK_IMG");
     }
 

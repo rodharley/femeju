@@ -35,8 +35,8 @@ $alist = $usu->listarUsuarios($configPaginacao['primeiroRegistro'],$configPagina
 
 if (count($alist) > 0) {
 foreach($alist as $key => $usuario){
-	$TPL->nome = $usuario->nome;
-	$TPL->cpf = $usu->formataCPFCNPJ($usuario->cpf);
+	$TPL->nome = $usuario->pessoa->nome;
+	$TPL->cpf = $usu->formataCPFCNPJ($usuario->pessoa->cpf);
 	$TPL->perfil = $usuario->perfil->descricao;
 	$TPL->situacao = $usuario->ativo == 1 ? "Ativo" : "Inativo";
 	$TPL->ID_HASH = $usu->md5_encrypt($usuario->id);
