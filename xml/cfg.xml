@@ -18,14 +18,26 @@ set
 <atrib tbname="" type="set" clrelation="vigencia" clorder="dataInicio" clfk="contrato">vigencias</atrib>
 -->
 <bd name="epocca">
-	<class name="Academia" tbname="fmj_academia" tbid="id" lazy="true">
+	<class name="Associacao" tbname="fmj_associacal" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="nome" type="txt">nome</atrib>
-		<atrib tbname="logradouro" type="txt">logradouro</atrib>
-		<atrib tbname="registro" type="txt">registro</atrib>
-		<atrib tbname="telComercial" type="txt">telComercial</atrib>
+		<atrib tbname="razaoSocial" type="txt">razaoSocial</atrib>
+		<atrib tbname="telefone1" type="txt">telefone1</atrib>
+		<atrib tbname="telefone2" type="txt">telefone2</atrib>
+		<atrib tbname="endereco" type="txt">endereco</atrib>
+		<atrib tbname="descricao" type="txt">descricao</atrib>		
 		<atrib tbname="cep" type="txt">cep</atrib>
 		<atrib tbname="bairro" type="txt">bairro</atrib>
+		<atrib tbname="responsavel" type="txt">responsavel</atrib>
+		<atrib tbname="celular" type="txt">celular</atrib>
+		<atrib tbname="dataFiliacao" type="txt">dataFiliacao</atrib>
+		<atrib tbname="bitAtivo" type="int">ativo</atrib>
+		<atrib tbname="sigla" type="txt">sigla</atrib>
+		<atrib tbname="cnpj" type="txt">cnpj</atrib>
+		<atrib tbname="logomarca" type="txt">logomarca</atrib>
+		<atrib tbname="website" type="txt">website</atrib>
+		<atrib tbname="midiaSocial" type="txt">midiaSocial</atrib>
+		<atrib tbname="email" type="txt">email</atrib>
 		<atrib tbname="idCidade" type="fk" clrelation="Cidade">cidade</atrib>				
 	</class>
 	<class name="Acesso" tbname="fmj_acesso" tbid="id" lazy="true">

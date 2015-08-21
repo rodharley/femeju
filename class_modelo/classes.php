@@ -1,6 +1,6 @@
 <?php
-require("negocio.academia.php");
 require("negocio.acesso.php");
+require("negocio.associacao.php");
 require("negocio.atleta.php");
 require("negocio.cidade.php");
 require("negocio.diretoria.php");
