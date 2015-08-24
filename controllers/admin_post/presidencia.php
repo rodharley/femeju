@@ -1,5 +1,5 @@
 <?php
-$idcat = Categoria::TREINAMENTOS; 
+$idcat = Categoria::PRESIDENCIA; 
 $menu = $idcat; 
 include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");

@@ -7,8 +7,9 @@ class Categoria{
     const DOCUMENTOS = 11;
     const RANKING = 12;
     const BOLSA_ATLETA = 13;
-    const TREINAMENTOS = 14;
+    const PRESIDENCIA = 14;
     const COMPETICOES = 15;
+    const ARBITRAGEM = 16;
     
     var $id;
     var $pasta;
@@ -41,8 +42,11 @@ class Categoria{
                 case $this::BOLSA_ATLETA:
                 return 'bolsaatleta';
                 break;
-                case $this::TREINAMENTOS:
-                return 'treinamentos';
+                case $this::PRESIDENCIA:
+                return 'presidencia';
+                break;
+                case $this::ARBITRAGEM:
+                return 'arbitragem';
                 break;
                 case $this::COMPETICOES:
                 return 'competicoes';
@@ -77,8 +81,11 @@ class Categoria{
                 case $this::BOLSA_ATLETA:
                 return 'Bolsa Atleta';
                 break;
-                case $this::TREINAMENTOS:
-                return 'Treinamentos';
+                case $this::PRESIDENCIA:
+                return 'Presidência';
+                break;
+                case $this::ARBITRAGEM:
+                return 'Arbitragem';
                 break;
                 case $this::COMPETICOES:
                 return 'Competições';

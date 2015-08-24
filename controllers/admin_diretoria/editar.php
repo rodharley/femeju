@@ -4,6 +4,7 @@ include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
+
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
@@ -21,7 +22,7 @@ $TPL->addFile("CONTEUDO", "templates/admin/diretoria/edit.html");
 $obj = new Diretoria();
 $objU = new Usuario();
 $idResp = 0;
-$rsUsers = $objU->getRows(0,999,array("nome"=>"asc"),array("ativo"=>"=1"));
+$rsUsers = $objU->listarUsuarios(0,999,"");
 $TPL->LABEL = "Incluir Diretoria";
 $TPL->ACAO = "incluir";
 $TPL->id = 0;
@@ -38,12 +39,15 @@ if(isset($_REQUEST['id'])){
     
 }
 foreach ($rsUsers as $key => $value) {
-	$TPL->NOME_RESP= $value->nome;
+	if($value->ativo == 1){    
+	$TPL->NOME_RESP= $value->pessoa->nome;
     $TPL->ID_RESP = $value->id;
     if($idResp == $value->id)
         $TPL->SELECTED = "selected='selected'";
     $TPL->block("BLOCK_RESP");
+    }
     $TPL->SELECTED = "";
+    
 }
 
 $TPL->show();

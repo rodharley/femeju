@@ -1,17 +1,15 @@
 <?php
+$objCat = new Categoria(Categoria::PRESIDENCIA);
 $TPL = NEW Template("templates/portal/layout.html");
 include("includes/include.mensagem.php");
-$TPL->addFile("CONTEUDO", "templates/portal/diretoria/posts.html");
+$TPL->addFile("CONTEUDO", "templates/portal/post/main.html");
 $obj = new Post();
-$objDir = new Diretoria();
-$idDiretoria = $obj->md5_decrypt($_REQUEST['id']);
-$objDir->getById($idDiretoria);
 $ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : Date("Y");
 $TPL->LOADING = $obj->carregando;
 $TPL->PAGINA = 1; 
-$TPL->CATEGORIA = $idDiretoria;          
+$TPL->CATEGORIA = $objCat->id;          
 $TPL->ANO = $ano;
-$TPL->TITULO = $objDir->descricao;
+$TPL->TITULO = $objCat->retornaDescricao($objCat->id);
 $TPL->EXECUTA_PESQUISA = 'pesquisar();';
 $TPL->show();
 ?>
