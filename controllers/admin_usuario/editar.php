@@ -6,7 +6,7 @@ include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
 
 $usu = new Usuario();
-$lacademia = new Academia();
+//$lacademia = new Academia();
 $perfil = new Perfil();
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
