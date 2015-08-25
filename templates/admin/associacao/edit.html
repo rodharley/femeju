@@ -160,9 +160,17 @@
                         <input type="url" id="midiaSocial" name="midiaSocial" value="{midiaSocial}" class="url form-control"/>
                     </div>
             </div> 
-            </div>             
-           
-            </div>          
+            </div>           
+        </fieldset>
+        <fieldset><legend>Fotos</legend>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                     <div class="form-group">
+                        <label for="Fotos"><i class='fa'></i><b>Fotos</b></label><BR>
+                        <input type="file"  name="fotos[]" id="fotos" multiple="multiple"/>
+                    </div>
+                </div>
+            </div>
         </fieldset> 
         </div>
         <div class="box-footer text-center">
@@ -203,7 +211,22 @@
 		showCaption: false
 	});
 
-
+    
+    $("#fotos").fileinput({
+        initialPreview: [
+        <!-- BEGIN BLOCK_FOTOS -->"{FOTOS}",<!-- END BLOCK_FOTOS -->
+        ], overwriteInitial: false,
+        maxFileSize: 2000,
+        maxFilesNum: 30,
+        allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+        previewClass: "bg-warning",
+        allowedFileTypes: ["image"],
+        showUpload: false,
+        showCaption: false,
+        showRemove: false
+    });
+    
+   
     $("#uf").change(function(){
             $.ajax({
                 url : "ajax/cidadesPorUf.php",
@@ -215,5 +238,17 @@
 
         });
 	
+	$(".btExcluirImagem").click(function(){
+	   if(confirm("Tem certeza que deseja excluir essa imagem?")){
+	       $.ajax({
+                url : "ajax/admin_asssociacao_apagar_imagem.php",
+                type : "POST",
+                data : {idImagem: $(this).val(),idAssociacao:$("#id").val()},                
+            }).done(function(msg) {
+                
+            });
+	     $(this).parent().hide('fade');  
+	   } 
+	});
 	});
 </script>

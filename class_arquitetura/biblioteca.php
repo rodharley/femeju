@@ -982,6 +982,30 @@ if($file['name'] != ""){
 	return false;
 	}
 }
+function uploadImagemArray($file,$key,$nomeImagem,$diretorio){
+
+if($file['name'][$key] != ""){
+        if($file["type"][$key] == "image/gif" || $file["type"][$key] == "image/pjpeg" || $file["type"][$key] == "image/jpeg" || $file["type"][$key] == "image/png"  || $file["type"][$key] == "image/x-png" ){
+        
+        
+        if($file['size'][$key] > 2000000){
+        $_SESSION['fmj.mensagem'] = 15;            
+        return false;
+        }
+            
+          copy($file['tmp_name'][$key],$diretorio."".$nomeImagem);
+            return true;
+        }// fim if 2 type file
+        else {
+        $_SESSION['fmj.mensagem'] = 16;
+        return false;
+     }
+
+    }// fim if 1 file name
+    else{
+    return false;
+    }
+}
 
 
 function uploadArquivo($file,$nomeImagem,$diretorio){

@@ -74,9 +74,11 @@ if(isset($_REQUEST['id'])){
 		$TPL->LOGOMARCA = "<img src='img/associacoes/".$objAssociacao->logomarca."' class='file-preview-image' alt='".$objAssociacao->logomarca."' title='".$objAssociacao->logomarca."'>";
 		$TPL->block("BLOCK_IMG");
 	}
-
- 
-   
+    
+    foreach ($objAssociacao->fotos as $key => $foto) {
+        $TPL->FOTOS = "<img src='img/associacoes/".$foto->imagem."' class='file-preview-image' alt='".$foto->imagem."' title='".$foto->imagem."'><br/><button value='".$foto->id."' class='btn btn-default btExcluirImagem' type='button'><i class='glyphicon glyphicon-ban-circle'></i> Apagar</button>";
+        $TPL->block("BLOCK_FOTOS");
+    }   
 	
 }
 

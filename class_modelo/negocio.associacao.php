@@ -20,6 +20,7 @@ class Associacao extends Persistencia {
     var $webSite;
     var $midiaSocial;
     var $ativo;
+    var $fotos = array();
 
 public function listaPermissoes($idUsuario){
     $sql = "select a.* from fmj_academia a inner join fmj_permissao p on a.id = p.idAcademia where p.idUsuario = $idUsuario";
@@ -85,8 +86,24 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $this -> logomarca = $nomefoto;
         }
         
-        return $this -> save();        
-
+        
+        
+        $idAssociacao = $this -> save();        
+        
+        if($_FILES['fotos']['name'][0] != ""){
+            
+        foreach ($_FILES['fotos']['name'] as $key => $value) {
+                $foto = new AssociacaoFoto();
+                //incluir imagem se ouver
+                $nomefoto = $this -> retornaNomeUnico($_FILES['fotos']['name'][$key], "img/associacoes/");
+                $this -> uploadImagemArray($_FILES['fotos'],$key, $nomefoto, "img/associacoes/");
+                $foto -> imagem = $nomefoto;
+                $foto -> associacao = $this;
+                $foto ->save();
+        }
+            
+        }
+        
     }
     
      function Alterar() {
@@ -114,11 +131,26 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         
          if ($_FILES['logomarca']['name'] != "") {
             if ($this -> logomarca != "")
-                $this -> apagaImagem($this -> foto, "img/associacoes/");
+                $this -> apagaImagem($this -> logomarca, "img/associacoes/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['logomarca']['name'], "img/associacoes/");
             $this -> uploadImagem($_FILES['logomarca'], $nomefoto, "img/associacoes/");
             $this -> logomarca = $nomefoto;
         }
+         
+         if($_FILES['fotos']['name'][0] != ""){
+            
+        foreach ($_FILES['fotos']['name'] as $key => $value) {            
+                $foto = new AssociacaoFoto();
+                //incluir imagem se ouver
+                $nomefoto = $this -> retornaNomeUnico($_FILES['fotos']['name'][$key], "img/associacoes/");
+                $this -> uploadImagemArray($_FILES['fotos'],$key, $nomefoto, "img/associacoes/");
+                $foto -> imagem = $nomefoto;
+                $foto -> associacao = $this;
+                $foto ->save();
+        }
+            
+        }
+         
          return $this -> save();
          
      }
