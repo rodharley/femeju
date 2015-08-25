@@ -493,7 +493,7 @@ function xmlObject($elemento,$i,$objeto){
 		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
-				$sql = "delete from ".$elemento['tbname']." where ".$elemento['tbid']." = $id";
+				$sql = "delete from ".$elemento['tbname']." where ".$elemento['tbid']." = $id";                
 				if(!$this->DAO_ExecutarDelete($sql)){
                 return false;
                 }else {

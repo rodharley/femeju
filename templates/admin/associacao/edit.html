@@ -1,0 +1,219 @@
+<form role="form" method="post" action="admin_associacao-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+
+            <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" name="acao" value="{ACAO}"/>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="nome"><i class='fa'></i><b>Nome</b></label>
+                        <input type="text" id="nome" name="nome" placeholder="Nome da associação" value="{nome}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="razaoSocial"><i class='fa'></i><b>Razão Social</b></label>
+                        <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Razão social da associação" value="{razaoSocial}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="ativo"><i class='fa'></i><b>Ativo</b></label><br/>
+                        <input type="radio" class="required form-control" name="ativo" value="1" {checkedAtivo}/> Ativo &nbsp;&nbsp;<input type="radio" class="required form-control"  name="ativo" value="0" {checkedInativo}/> Inativo
+                    </div>
+                </div>
+            </div>
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="descricao"><i class='fa'></i><b>Descrição</b></label>
+                        <input type="text" id="descricao" name="descricao" placeholder="Descrição" value="{descricao}" maxlength="200" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="cnpj"><i class='fa'></i><b>CNPJ</b></label>
+                        <input type="text" id="cnpj" name="cnpj" value="{cnpj}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="sigla"><i class='fa'></i><b>Sigla</b></label>
+                        <input type="text" id="sigla" name="sigla" value="{sigla}" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="dataFiliacao"><i class='fa'></i><b>Data da filiação</b></label>
+                        <input type="text" id="dataFiliacao" name="dataFiliacao" value="{dataFiliacao}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                     <div class="form-group">
+                        <label for="logomarca"><i class='fa'></i><b>Logomarca</b></label><BR>
+                        <input type="file"  name="logomarca" id="logomarca"/>
+                    </div>
+                </div>
+            </div>
+            <fieldset><legend>Endereço</legend>
+                <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="endereco"><i class='fa'></i><b>Logradouro</b></label>
+                        <input type="text" id="endereco" name="endereco" value="{endereco}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="bairro"><i class='fa'></i><b>Bairro</b></label>
+                        <input type="text" id="bairro" name="bairro" value="{bairro}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="uf"><i class='fa'></i><b>Estado</b></label>
+                         <select name="uf" id="uf" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_UF -->
+                            <option value="{id_uf}" {selectedUf}>{uf}</option>
+                            <!-- END BLOCK_UF -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="cidade"><i class='fa'></i><b>Cidade</b></label>
+                        <select name="cidade" id="cidade" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_CIDADE -->
+                            <option value="{id_cidade}" {selectedCidade}>{nome_cidade}</option>
+                            <!-- END BLOCK_CIDADE -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="cep"><i class='fa'></i><b>CEP</b></label>
+                        <input type="text" id="cep" name="cep" value="{cep}" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+             <fieldset><legend>Responsável</legend>
+            <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="responsavel"><i class='fa'></i><b>Nome</b></label>
+                        <input type="text" id="responsavel" name="responsavel" value="{responsavel}" class="required form-control"/>
+                    </div>
+            </div>
+             <div class="col-md-6 col-xs-6">
+                 <div class="form-group">
+                        <label for="celular"><i class='fa'></i><b>Telefone</b></label>
+                        <input type="text" id="celular" name="celular" value="{celular}" class="required form-control"/>
+                    </div>
+            </div>
+            </div>          
+        </fieldset>
+<fieldset><legend>Contato</legend>
+            <div class="row">
+            <div class="col-md-4 col-xs-4">
+                <div class="form-group">
+                        <label for="telefone1"><i class='fa'></i><b>Telefone 1</b></label>
+                        <input type="text" id="telefone1" name="telefone1" value="{telefone1}" class="required form-control"/>
+                    </div>
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <div class="form-group">
+                        <label for="telefone2"><i class='fa'></i><b>Telefone 2</b></label>
+                        <input type="text" id="telefone2" name="telefone2" value="{telefone2}" class="form-control"/>
+                    </div>
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <div class="form-group">
+                        <label for="telefone2"><i class='fa'></i><b>E-mail</b></label>
+                        <input type="email" id="email" name="email" value="{email}" class="email form-control"/>
+                    </div>
+            </div>
+            </div>   
+             <div class="row">
+                <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="midiaSocial"><i class='fa'></i><b>Web Site</b></label>
+                        <input type="url" id="website" name="website" value="{website}" class=" url form-control"/>
+                    </div>
+            </div>
+             <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="midiaSocial"><i class='fa'></i><b>Mídia Social</b></label>
+                        <input type="url" id="midiaSocial" name="midiaSocial" value="{midiaSocial}" class="url form-control"/>
+                    </div>
+            </div> 
+            </div>             
+           
+            </div>          
+        </fieldset> 
+        </div>
+        <div class="box-footer text-center">
+            <a class="btn btn-success" id="save">
+                Salvar
+            </a>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </div>
+</form>
+<script>
+	$(document).ready(function() {
+        
+        $('#dataFiliacao').datepicker();
+        $("#cnpj").inputmask({ mask: "99.999.999-9999-99"});
+        $("#celular").inputmask({ mask: "9999-99999"});
+        $("#telefone1").inputmask({ mask: "9999-99999"});
+        $("#cep").inputmask({ mask: "99.999-999"});
+        $("#telefone2").inputmask({ mask: "9999-99999"});
+        $("#save").click(function() {
+            
+            $("#frmEdit").submit();
+        });
+        
+		$("#logomarca").fileinput({
+		initialPreview: [
+		<!-- BEGIN BLOCK_IMG -->"{LOGOMARCA}",<!-- END BLOCK_IMG -->
+		], overwriteInitial: true,
+		maxFileSize: 2000,
+		maxFilesNum: 1,
+		allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+		previewClass: "bg-warning",
+		allowedFileTypes: ["image"],
+		showUpload: false,
+		showCaption: false
+	});
+
+
+    $("#uf").change(function(){
+            $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                data : {uf: $(this).val()},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+            });
+
+        });
+	
+	});
+</script>

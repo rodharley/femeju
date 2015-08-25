@@ -9,6 +9,16 @@ body {
     text-rendering: optimizelegibility;
 }
 
+fieldset {
+	margin-top: 1em;	
+} 
+legend {
+	padding: 0.5em;
+	font-size: 1.2em;
+	font-weight: bold;
+	color:#E08E0B;
+}
+
 .wrapper {
     background: #ffffff; /* Fallback background color for non supported browsers */ 
 	/*background-image: -moz-radial-gradient(center 45deg,circle cover, #0093DD, #173885);

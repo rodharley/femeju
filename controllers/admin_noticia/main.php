@@ -22,9 +22,5 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/noticia/pesquisa.html");
-
-
-
-
 $TPL->show();
 ?>

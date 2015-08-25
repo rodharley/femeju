@@ -26,29 +26,113 @@ public function listaPermissoes($idUsuario){
     return $this->getSQL($sql);
 }
 
-function pesquisarTotal($nome = "") {
-        $sql = "select count(id) as total from ".$this::TABELA." where bitAtivo = 1 ";
-
+function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
+        $sql = "select count(id) as total from ".$this::TABELA." where 1 = 1 ";
+        if($ativo != "")
+            $sql .= " and bitAtivo = $ativo"; 
         if ($nome != "")
             $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%')";
-
-                $rs = $this -> DAO_ExecutarQuery($sql);
+        if ($sigla != "")
+            $sql .= " and ( sigla like '%$sigla%')";
+        $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
 
-    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "") {
+    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$sigla = "",$ativo = "") {
 
-        $sql = "select * from ".$this::TABELA." where bitAtivo = 1 ";
-
+        $sql = "select * from ".$this::TABELA." where 1 = 1 ";
+        
+        if($ativo != "")
+            $sql .= " and bitAtivo = $ativo";
+        
         if ($nome != "")
             $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%')";
-
+        
+        if ($sigla != "")
+            $sql .= " and ( sigla like '%$sigla%')";
+        
         $sql .= "  order by nome limit $primeiro, $quantidade";
         
         return $this -> getSQL($sql);
 
     }
+    
+    
+    function Incluir() {
+        $this -> nome = $_REQUEST['nome'];
+        $this -> descricao = $_REQUEST['descricao'];
+        $this -> razaoSocial = $_REQUEST['razaoSocial'];
+        $this->ativo = $_REQUEST['ativo'];
+        $this -> logomarca = "";
+        $this -> dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'],"ntm")." ".date("H:i:s");
+        $this->sigla = $_REQUEST['sigla'];
+        $this->cnpj = $this->limpaDigitos($_REQUEST['cnpj']);
+        $this->endereco = $_REQUEST['endereco'];
+        $this->bairro = $_REQUEST['bairro'];
+        $this->cep = $_REQUEST['cep'];
+        $this->cidade = new Cidade($_REQUEST['cidade']);
+        $this->responsavel = $_REQUEST['responsavel'];
+        $this->email = $_REQUEST['email'];
+        $this->webSite = $_REQUEST['website'];
+        $this->midiaSocial = $_REQUEST['midiaSocial'];
+        $this->celular = $this->limpaDigitos($_REQUEST['celular']);
+        $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
+        $this->telefone2 = $this->limpaDigitos($_REQUEST['telefone2']);
+        if ($_FILES['logomarca']['name'] != "") {
+            //incluir imagem se ouver
+            $nomefoto = $this -> retornaNomeUnico($_FILES['logomarca']['name'], "img/associacoes/");
+            $this -> uploadImagem($_FILES['logomarca'], $nomefoto, "img/associacoes/");
+            $this -> logomarca = $nomefoto;
+        }
+        
+        return $this -> save();        
 
+    }
+    
+     function Alterar() {
+        $this -> getById($_REQUEST['id']);
+        
+        $this -> nome = $_REQUEST['nome'];
+        $this -> descricao = $_REQUEST['descricao'];
+        $this -> razaoSocial = $_REQUEST['razaoSocial'];
+        $this->ativo = $_REQUEST['ativo'];
+        $this -> dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'],"ntm")." ".date("H:i:s");
+        $this->sigla = $_REQUEST['sigla'];
+        $this->cnpj = $this->limpaDigitos($_REQUEST['cnpj']);
+        $this->endereco = $_REQUEST['endereco'];
+        $this->bairro = $_REQUEST['bairro'];
+        $this->cep = $_REQUEST['cep'];
+        $this->cidade = new Cidade($_REQUEST['cidade']);
+        $this->responsavel = $_REQUEST['responsavel'];
+        $this->email = $_REQUEST['email'];
+        $this->webSite = $_REQUEST['website'];
+        $this->midiaSocial = $_REQUEST['midiaSocial'];
+        $this->celular = $this->limpaDigitos($_REQUEST['celular']);
+        $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
+        $this->telefone2 = $this->limpaDigitos($_REQUEST['telefone2']);
+          
+        
+         if ($_FILES['logomarca']['name'] != "") {
+            if ($this -> logomarca != "")
+                $this -> apagaImagem($this -> foto, "img/associacoes/");
+            $nomefoto = $this -> retornaNomeUnico($_FILES['logomarca']['name'], "img/associacoes/");
+            $this -> uploadImagem($_FILES['logomarca'], $nomefoto, "img/associacoes/");
+            $this -> logomarca = $nomefoto;
+        }
+         return $this -> save();
+         
+     }
+
+function Excluir($id) {
+        $this -> getById($this -> md5_decrypt($id));
+        if ($this -> delete($this -> id)){
+            $_SESSION['fmj.mensagem'] = 39;
+            if ($this -> logomarca != "")
+                $this -> apagaImagem($this -> logomarca, "img/associacoes/");
+        }else
+            $_SESSION['fmj.mensagem'] = 17;
+        
+    }
    
 }
 ?>

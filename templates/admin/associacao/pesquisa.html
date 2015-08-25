@@ -1,0 +1,67 @@
+<form role="form" method="post" action="#" id="frmPesquisa">
+	<input type="hidden" name="pagina" id="pagina" value="1" />
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">Pesquisa Associações</h3>
+		</div>
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="descricao"><i class='fa'></i><b>Nome</b></label>
+						<input type="text" id="nome" name="nome" placeholder="Nome da Associação" value="" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="descricao"><i class='fa'></i><b>Sigla</b></label>
+						<input type="text" id="sigla" name="sigla" placeholder="Sigla da Associação" value="" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="panel-footer text-right">
+			<button class="btn btn-success" type="button" id="btPesquisar">
+				Pesquisar
+			</button>
+			<a class="btn btn-primary" href="admin_associacao-editar"><i class="fa fa-plus"></i> Adicionar</a>
+			<button class="btn btn-default btVoltar" type="button">
+				Voltar
+			</button>
+		</div>
+
+	</div>
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">Resultado</h3>
+		</div>
+		<div class="box-body" id="resultado"></div>
+	</div>
+</form>
+<script>
+
+	function pesquisar(){
+			$.ajax({
+				url : "ajax/admin_associacao_pesquisar.php",
+				type : "POST",
+				data : $("#frmPesquisa").serialize(),
+
+				beforeSend: function( ) {
+					$('#resultado').html('{LOADING}');
+		  		},
+			}).done(function(msg) {
+				$("#resultado").html(msg);
+			});
+
+		}
+
+	$(document).ready(function() {
+
+		$("#btPesquisar").click(function() {
+			pesquisar();
+		});
+	}); 
+</script>

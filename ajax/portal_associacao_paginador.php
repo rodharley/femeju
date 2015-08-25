@@ -3,9 +3,9 @@ include("configuraAjaxSemLogin.php");
 $TPL = new Template("../templates/portal/associacao/main.html");
 $assoc = new Associacao();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
-$totalPesquisa = $assoc->pesquisarTotal($_REQUEST['nome']);
+$totalPesquisa = $assoc->pesquisarTotal($_REQUEST['nome'],"",1);
 $configPaginacao = $assoc->paginar($totalPesquisa,$pagina);
-$alist = $assoc->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],utf8_decode($_REQUEST['nome']));
+$alist = $assoc->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],utf8_decode($_REQUEST['nome']),"",1);
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){

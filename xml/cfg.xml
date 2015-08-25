@@ -18,7 +18,7 @@ set
 <atrib tbname="" type="set" clrelation="vigencia" clorder="dataInicio" clfk="contrato">vigencias</atrib>
 -->
 <bd name="epocca">
-	<class name="Associacao" tbname="fmj_associacal" tbid="id" lazy="true">
+	<class name="Associacao" tbname="fmj_associacao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="razaoSocial" type="txt">razaoSocial</atrib>
@@ -35,7 +35,7 @@ set
 		<atrib tbname="sigla" type="txt">sigla</atrib>
 		<atrib tbname="cnpj" type="txt">cnpj</atrib>
 		<atrib tbname="logomarca" type="txt">logomarca</atrib>
-		<atrib tbname="website" type="txt">website</atrib>
+		<atrib tbname="website" type="txt">webSite</atrib>
 		<atrib tbname="midiaSocial" type="txt">midiaSocial</atrib>
 		<atrib tbname="email" type="txt">email</atrib>
 		<atrib tbname="idCidade" type="fk" clrelation="Cidade">cidade</atrib>				
