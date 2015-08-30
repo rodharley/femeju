@@ -32,7 +32,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         if($ativo != "")
             $sql .= " and bitAtivo = $ativo"; 
         if ($nome != "")
-            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%')";
+            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%' or endereco like '%$nome%' or bairro like '%$nome%' or responsavel like '%$nome%')";
         if ($sigla != "")
             $sql .= " and ( sigla like '%$sigla%')";
         $rs = $this -> DAO_ExecutarQuery($sql);
@@ -47,7 +47,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $sql .= " and bitAtivo = $ativo";
         
         if ($nome != "")
-            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%')";
+            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%' or endereco like '%$nome%' or bairro like '%$nome%' or responsavel like '%$nome%')";
         
         if ($sigla != "")
             $sql .= " and ( sigla like '%$sigla%')";

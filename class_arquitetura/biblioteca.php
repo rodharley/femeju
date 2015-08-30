@@ -82,7 +82,7 @@ return  $str;
 }
 
 function limpaDigitos($texto){
-return str_replace(".","",str_replace("-","",str_replace("/","",str_replace("_","",$texto))));
+return str_replace(".","",str_replace("-","",str_replace("/","",str_replace("_","",str_replace("(","",str_replace(")","",$texto))))));
 }
 
 
@@ -1008,7 +1008,16 @@ function uploadArquivo($file,$nomeImagem,$diretorio){
 }
 
 
+function formataTelefone($tel){
 
+$p1 = substr($tel,0,2);
+
+$p2 = substr($tel,2,5);
+$p3 = substr($tel,7);
+
+return '('.$p1.') '.$p2."-".$p3;
+
+}
 
 function formataCep($cep){
 
