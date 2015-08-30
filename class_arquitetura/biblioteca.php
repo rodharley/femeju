@@ -963,13 +963,7 @@ function uploadImagem($file,$nomeImagem,$diretorio){
 if($file['name'] != ""){
 		if($file["type"] == "image/gif" || $file["type"] == "image/pjpeg" || $file["type"] == "image/jpeg" || $file["type"] == "image/png"  || $file["type"] == "image/x-png" ){
 
-
-		if($file['size'] > 500000){
-		$_SESSION['fmj.mensagem'] = 15;
-		return false;
-		}
-
-		  copy($file['tmp_name'],$diretorio."".$nomeImagem);
+		copy($file['tmp_name'],$diretorio."".$nomeImagem);
 			return true;
 	    }// fim if 2 type file
 		else {
@@ -986,13 +980,7 @@ function uploadImagemArray($file,$key,$nomeImagem,$diretorio){
 
 if($file['name'][$key] != ""){
         if($file["type"][$key] == "image/gif" || $file["type"][$key] == "image/pjpeg" || $file["type"][$key] == "image/jpeg" || $file["type"][$key] == "image/png"  || $file["type"][$key] == "image/x-png" ){
-        
-        
-        if($file['size'][$key] > 2000000){
-        $_SESSION['fmj.mensagem'] = 15;            
-        return false;
-        }
-            
+         
           copy($file['tmp_name'][$key],$diretorio."".$nomeImagem);
             return true;
         }// fim if 2 type file

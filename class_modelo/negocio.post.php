@@ -134,7 +134,6 @@ class Post extends Persistencia {
         $this -> texto = $_REQUEST['texto'];
         $this -> ordem = $_REQUEST['ordem'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
-        
         if($this -> categoria < 20){
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
