@@ -96,7 +96,7 @@ class Post extends Persistencia {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> mensagem = $_REQUEST['mensagem'];
         $this -> texto = $_REQUEST['texto'];
-        $this -> ordem = $_REQUEST['ordem'];
+        $this -> ordem = $_REQUEST['ordem']  == "" ? 999 : $_REQUEST['ordem'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
         $this -> imagem = "";
         $this -> arquivo = "";
@@ -132,7 +132,7 @@ class Post extends Persistencia {
         $this -> titulo = $_REQUEST['titulo'];
         $this -> mensagem = $_REQUEST['mensagem'];
         $this -> texto = $_REQUEST['texto'];
-        $this -> ordem = $_REQUEST['ordem'];
+        $this -> ordem = $_REQUEST['ordem']  == "" ? 999 : $_REQUEST['ordem'];
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
         if($this -> categoria < 20){
         $obCat = new Categoria();
