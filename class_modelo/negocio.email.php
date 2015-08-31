@@ -37,6 +37,12 @@ function enviarEmailNovaSenha($nome, $email,$senha){
         return $this -> mail_html($email, $this -> remetente, "FEMEJU - Nova Senha", $tplEmail -> showString());
 }
 
+function enviarEmailPortal($email,$mensagem){
+        $tplEmail = new Template("../templates/padrao/email.html");
+        $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);        
+        $tplEmail -> MENSAGEM = $email."<br/>".$mensagem;        
+        return $this -> mail_html($this -> remetente, $this -> remetente, "FEMEJU - Email do portal", $tplEmail -> showString());
+}
 
 }
 ?>

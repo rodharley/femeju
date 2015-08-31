@@ -610,7 +610,7 @@ function mail_html($destinatario,$origem, $titulo, $mensagem)
 $headers .= "Content-type: text/html; charset=iso-8859-1\n";
 $headers .= "From: Femeju <$origem>"."\n"; // remetente
 $headers .= "Return-Path: Femeju <$origem>"."\n"; // return-path
-$email = mail("$destinatario", "$titulo", "$mensagem", $headers, "-r".$origem);	
+$email = @mail("$destinatario", "$titulo", "$mensagem", $headers, "-r".$origem);	
 			
 	return $email;
 	}catch(exception $e){
