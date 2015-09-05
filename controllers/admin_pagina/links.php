@@ -20,7 +20,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 $pagina = new Pagina();
 $pagina->getById(Pagina::LINKS);
 $TPL->addFile("CONTEUDO", "templates/admin/pagina/edit.html");
-$TPL->LABEL = "Diretoria";
+$TPL->LABEL = "Links";
 $TPL->texto = $pagina->conteudo;
 $TPL->ACAO = "editar";
 $TPL->id = $pagina->id;
