@@ -14,7 +14,60 @@
             </small>
             <h3>{NOME_ASSOCIACAO}</h3>
          </div>
-         </div>   
+         </div>  
+         <fieldset><legend>Contato</legend>
+            <div class="row">
+            <div class="col-lg-4"><label>Telefone:</label>
+              <p>{TELEFONE1}</p>
+            </div>
+             <div class="col-lg-4"><label>Telefone 2:</label>
+              <p>{TELEFONE2}</p>
+            </div>
+            <div class="col-lg-4"><label>E-mail:</label>
+              <p>{EMAIL}</p>
+            </div>
+            </div>   
+             <div class="row">
+                 <div class="col-lg-6"><label>Website:</label>
+              <p><a href="http://{WEB_SITE}" target="_blank">{WEB_SITE}</a></p>
+            </div>
+            <div class="col-lg-6"><label>Mídia social:</label>
+              <p><a href="http://{URL_MIDIA}" target="_blank"><img src="img/icones/facebook_associacao.png" width="32"></a></p>
+            </div>             
+           
+            </div>          
+        </fieldset> 
+        <fieldset><legend>Responsável</legend>
+            <div class="row">
+            <div class="col-lg-6"><label>Nome:</label>
+              <p>{NOME_RESPONSAVEL}</p>
+            </div>
+             <div class="col-lg-6"><label>Celular:</label>
+              <p>{CELULAR}</p>
+            </div>
+            </div>          
+        </fieldset>  
+        <fieldset><legend>Endereço</legend>
+            <div class="row">
+            <div class="col-lg-6"><label>Logradouro:</label>
+              <p>{ENDERECO}</p>
+            </div>
+             <div class="col-lg-6"><label>Bairro:</label>
+              <p>{BAIRRO}</p>
+            </div>
+            </div>  
+            <div class="row">
+            <div class="col-lg-6"><label>Cidade:</label>
+              <p>{CIDADE}</p>
+            </div>
+             <div class="col-lg-4"><label>CEP:</label>
+              <p>{CEP}</p>
+            </div>
+             <div class="col-lg-2"><label>Estado:</label>
+              <p>{ESTADO}</p>
+            </div>
+            </div>   
+        </fieldset>
          <fieldset><legend>Dados</legend>
          <div class="row">
             <div class="col-lg-12"><label>Descrição:</label>
@@ -38,59 +91,19 @@
             </div>
         </div>
         </fieldset>
-        <fieldset><legend>Endereço</legend>
-            <div class="row">
-            <div class="col-lg-6"><label>Logradouro:</label>
-              <p>{ENDERECO}</p>
-            </div>
-             <div class="col-lg-6"><label>Bairro:</label>
-              <p>{BAIRRO}</p>
-            </div>
-            </div>  
-            <div class="row">
-            <div class="col-lg-6"><label>Cidade:</label>
-              <p>{CIDADE}</p>
-            </div>
-             <div class="col-lg-4"><label>CEP:</label>
-              <p>{CEP}</p>
-            </div>
-             <div class="col-lg-2"><label>Estado:</label>
-              <p>{ESTADO}</p>
-            </div>
-            </div>   
+        <fieldset><legend>Fotos</legend>
+         <div id="galeria">
+       <ul class="row">
+           <!-- BEGIN BLOCK_FOTO -->
+          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+              <img class="img-responsive" width="100%" src="img/associacoes/{IMAGEM_FOTO}" alt="{IMAGEM_FOTO}"/>              
+          </li>          
+          <!-- END BLOCK_FOTO -->      
+     </ul>     
+</div>    
         </fieldset>
-        <fieldset><legend>Responsável</legend>
-            <div class="row">
-            <div class="col-lg-6"><label>Nome:</label>
-              <p>{NOME_RESPONSAVEL}</p>
-            </div>
-             <div class="col-lg-6"><label>Telefone:</label>
-              <p>{CELULAR}</p>
-            </div>
-            </div>          
-        </fieldset>
-        <fieldset><legend>Contato</legend>
-            <div class="row">
-            <div class="col-lg-4"><label>Telefone:</label>
-              <p>{TELEFONE1}</p>
-            </div>
-             <div class="col-lg-4"><label>Telefone:</label>
-              <p>{TELEFONE2}</p>
-            </div>
-            <div class="col-lg-4"><label>E-mail:</label>
-              <p>{EMAIL}</p>
-            </div>
-            </div>   
-             <div class="row">
-                 <div class="col-lg-6"><label>Website:</label>
-              <p><a href="http://{WEB_SITE}" target="_blank">{WEB_SITE}</a></p>
-            </div>
-            <div class="col-lg-6"><label>Mídia social:</label>
-              <p><a href="http://{URL_MIDIA}" target="_blank"><img src="img/icones/facebook_associacao.png" width="32"></a></p>
-            </div>             
-           
-            </div>          
-        </fieldset> 
+        
+        
         <div class="row">
             <div class="col-lg-12">                
                 <p class="text-center">
@@ -101,3 +114,77 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalImagem" tabindex="-1" role="dialog" aria-labelledby="modalImagemLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+              
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
+          $(document).ready(function(){
+           $('li img').on('click',function(){
+                var src = $(this).attr('src');
+                var img = '<img src="' + src + '" class="img-responsive"/>';
+                
+                
+                  //Start of new code
+                var index = $(this).parent('li').index();
+                var html = '';
+                html += img;
+                html += '<div style="height:25px;clear:both;display:block;">';
+                html += '<a class="controls next" href="'+ (index+2) + '">next &raquo;</a>';
+                html += '<a class="controls previous" href="' + (index) + '">&laquo; prev</a>';
+                html += '</div>';
+                //End of new code
+                
+                
+                $('#modalImagem').modal();
+                $('#modalImagem').on('shown.bs.modal', function(){
+                    $('#modalImagem .modal-body').html(html);
+                      //this will hide or show the right links:
+                    $('a.controls').trigger('click');
+                });
+                $('#modalImagem').on('hidden.bs.modal', function(){
+                    $('#modalImagem .modal-body').html('');
+                });
+           });
+           
+           
+           
+        });
+        $(document).on('click', 'a.controls', function(){
+           //this is where we add our logic
+           var index = $(this).attr('href');
+            var src = $('ul.row li:nth-child('+ index +') img').attr('src');
+            $('.modal-body img').attr('src', src);
+            
+            var newPrevIndex = parseInt(index) - 1;
+var newNextIndex = parseInt(newPrevIndex) + 2;
+ 
+if($(this).hasClass('previous')){
+    $(this).attr('href', newPrevIndex);
+    $('a.next').attr('href', newNextIndex);
+}else{
+    $(this).attr('href', newNextIndex);
+    $('a.previous').attr('href', newPrevIndex);
+}
+            
+            var total = $('ul.row li').length + 1;
+//hide next button
+if(total === newNextIndex){
+    $('a.next').hide();
+}else{
+    $('a.next').show();
+}
+//hide previous button
+if(newPrevIndex === 0){
+    $('a.previous').hide();
+}else{
+    $('a.previous').show();
+}
+           return false;
+        });
+    </script>
