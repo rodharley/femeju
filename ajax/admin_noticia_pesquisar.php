@@ -10,7 +10,7 @@ $alist = $noticia->pesquisar($configPaginacao['primeiroRegistro'],$configPaginac
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
-    $TPL->foto = $n->foto;
+    $TPL->foto = $n->foto != "" ? $n->foto : 'thumb_noticia.png';
     $TPL->titulo = $n->titulo;
     $TPL->data = $noticia->convdata($n->data,"mtnh");
     $TPL->ID_HASH = $noticia->md5_encrypt($n->id);

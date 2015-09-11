@@ -1,6 +1,7 @@
 <?php
 $objCat = new Categoria(Categoria::PRESIDENCIA);
 $TPL = NEW Template("templates/portal/layout.html");
+include("includes/include.montaMenuPortal.php");
 include("includes/include.mensagem.php");
 $TPL->addFile("CONTEUDO", "templates/portal/post/main.html");
 $obj = new Post();

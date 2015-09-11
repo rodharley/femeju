@@ -1,6 +1,7 @@
 <?php
 
 $TPL = NEW Template("templates/portal/layout.html");
+include("includes/include.montaMenuPortal.php");
 $TPL->addFile("CONTEUDO", "templates/portal/servicos/ativar.html");
 $user = new Usuario();
 if(isset($_REQUEST['id'])){

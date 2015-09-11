@@ -43,6 +43,7 @@ Exemplos de mensagens:
 <mensagem id="37" type="success">Associação incluída com sucesso.</mensagem>
 <mensagem id="38" type="success">Associação alterada com sucesso.</mensagem>
 <mensagem id="39" type="success">Associação excluida com sucesso.</mensagem>
+<mensagem id="40" type="success">Configurações alteradas com sucesso.</mensagem>
 
 </mensagens>
 

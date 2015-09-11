@@ -85,6 +85,11 @@ set
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="idUf" type="fk" clrelation="Uf">uf</atrib>				
 	</class>
+	<class name="Configuracoes" tbname="fmj_configuracoes" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="valor" type="txt">valor</atrib>				
+	</class>
 	<class name="Diretoria" tbname="fmj_diretoria" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="descricao" type="txt">descricao</atrib>

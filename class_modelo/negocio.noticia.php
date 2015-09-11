@@ -95,10 +95,7 @@ class Noticia extends Persistencia {
         }
         
         
-        $this -> save();
-        $_SESSION['fmj.mensagem'] = 18;
-        header("Location:admin_noticia-main");
-        exit();
+        
 
     }
 
@@ -125,9 +122,7 @@ class Noticia extends Persistencia {
         
         $this -> save();
 
-        $_SESSION['fmj.mensagem'] = 19;
-        header("Location:admin_noticia-main");
-        exit();
+        
 
     }
 
@@ -144,8 +139,7 @@ class Noticia extends Persistencia {
             $_SESSION['fmj.mensagem'] = 20;
         else
             $_SESSION['fmj.mensagem'] = 17;
-        header("Location:admin_noticia-main");
-        exit();
+        
     }
     
     function recuperaNoticiaPrincipal($tipo){

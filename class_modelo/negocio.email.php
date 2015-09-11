@@ -38,10 +38,21 @@ function enviarEmailNovaSenha($nome, $email,$senha){
 }
 
 function enviarEmailPortal($email,$mensagem){
+    $objConf = new Configuracoes();
+    $objConf->getById(Configuracoes::ID_EMAIL_CONTATO);
         $tplEmail = new Template("../templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);        
         $tplEmail -> MENSAGEM = $email."<br/>".$mensagem;        
-        return $this -> mail_html($this -> remetente, $this -> remetente, "FEMEJU - Email do portal", $tplEmail -> showString());
+        return $this -> mail_html($objConf->valor, $this -> remetente, "FEMEJU - Email do portal", $tplEmail -> showString());
+}
+
+function enviarEmailPush($mensagem){
+    $objConf = new Configuracoes();
+    $objConf->getById(Configuracoes::ID_EMAIL_PUSH);
+        $tplEmail = new Template("templates/padrao/email.html");
+        $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);        
+        $tplEmail -> MENSAGEM = $mensagem;        
+        return $this -> mail_html($objConf->valor, $this -> remetente, "FEMEJU - Notificação de Alteração", $tplEmail -> showString());
 }
 
 }
