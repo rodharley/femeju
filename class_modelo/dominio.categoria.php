@@ -7,10 +7,10 @@ class Categoria{
     const DOCUMENTOS = 11;
     const RANKING = 12;
     const BOLSA_ATLETA = 13;
-    const PRESIDENCIA = 14;
+    const PRESIDENCIA = 24;
     const COMPETICOES = 15;
-    const ARBITRAGEM = 16;
-    
+    const ARBITRAGEM = 14;
+    const AFEMEJU = 21;
     var $id;
     var $pasta;
     
@@ -51,6 +51,9 @@ class Categoria{
                 case $this::COMPETICOES:
                 return 'competicoes';
                 break;
+                case $this::AFEMEJU:
+                return 'afemeju';
+                break;
             default:
                 return 'calendario';
                 break;
@@ -89,6 +92,9 @@ class Categoria{
                 break;
                 case $this::COMPETICOES:
                 return 'Competições';
+                break;
+                case $this::AFEMEJU:
+                return 'A Femeju';
                 break;
             default:
                 return 'Calendário';
