@@ -10,7 +10,7 @@ $alist = $assoc->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->NOME = $n->nome;
-    $TPL->CNPJ = $n->cnpj;
+	$TPL->DESCRICAO = $n->descricao;    
     $TPL->LOGOTIPO = $n->logomarca != "" ? $n->logomarca : "nologo.png";
         
     
@@ -19,7 +19,7 @@ foreach($alist as $key => $n){
     
 }
 }
-$TPL->NOME = utf8_decode($_REQUEST['nome']);
+$TPL->NOME_P = utf8_decode($_REQUEST['nome']);
 $TPL->TOTAL_PAGINAS = $configPaginacao['totalPaginas'];
 $TPL->PAGINA_ANTERIOR = $configPaginacao['paginaAnterior'];
 $TPL->PROXIMA_PAGINA = $configPaginacao['proximaPagina'];

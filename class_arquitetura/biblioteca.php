@@ -82,7 +82,7 @@ return  $str;
 }
 
 function limpaDigitos($texto){
-return str_replace(".","",str_replace("-","",str_replace("/","",str_replace("_","",$texto))));
+return str_replace(".","",str_replace("-","",str_replace("/","",str_replace("_","",str_replace("(","",str_replace(")","",str_replace("+","",str_replace(" ","",$texto))))))));
 }
 
 
@@ -610,7 +610,7 @@ function mail_html($destinatario,$origem, $titulo, $mensagem)
 $headers .= "Content-type: text/html; charset=iso-8859-1\n";
 $headers .= "From: Femeju <$origem>"."\n"; // remetente
 $headers .= "Return-Path: Femeju <$origem>"."\n"; // return-path
-$email = mail("$destinatario", "$titulo", "$mensagem", $headers, "-r".$origem);	
+$email = @mail("$destinatario", "$titulo", "$mensagem", $headers, "-r".$origem);	
 			
 	return $email;
 	}catch(exception $e){
@@ -963,13 +963,7 @@ function uploadImagem($file,$nomeImagem,$diretorio){
 if($file['name'] != ""){
 		if($file["type"] == "image/gif" || $file["type"] == "image/pjpeg" || $file["type"] == "image/jpeg" || $file["type"] == "image/png"  || $file["type"] == "image/x-png" ){
 
-
-		if($file['size'] > 500000){
-		$_SESSION['fmj.mensagem'] = 15;
-		return false;
-		}
-
-		  copy($file['tmp_name'],$diretorio."".$nomeImagem);
+		copy($file['tmp_name'],$diretorio."".$nomeImagem);
 			return true;
 	    }// fim if 2 type file
 		else {
@@ -986,13 +980,7 @@ function uploadImagemArray($file,$key,$nomeImagem,$diretorio){
 
 if($file['name'][$key] != ""){
         if($file["type"][$key] == "image/gif" || $file["type"][$key] == "image/pjpeg" || $file["type"][$key] == "image/jpeg" || $file["type"][$key] == "image/png"  || $file["type"][$key] == "image/x-png" ){
-        
-        
-        if($file['size'][$key] > 2000000){
-        $_SESSION['fmj.mensagem'] = 15;            
-        return false;
-        }
-            
+         
           copy($file['tmp_name'][$key],$diretorio."".$nomeImagem);
             return true;
         }// fim if 2 type file
@@ -1020,7 +1008,16 @@ function uploadArquivo($file,$nomeImagem,$diretorio){
 }
 
 
+function formataTelefone($tel){
 
+$p1 = substr($tel,0,2);
+$p2 = substr($tel,2,2);
+$p3 = substr($tel,4,5);
+$p4 = substr($tel,9);
+
+return '+'.$p1.' '.$p2." ".$p3."-".$p4;
+
+}
 
 function formataCep($cep){
 

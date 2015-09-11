@@ -120,7 +120,7 @@
             </div>
              <div class="col-md-6 col-xs-6">
                  <div class="form-group">
-                        <label for="celular"><i class='fa'></i><b>Telefone</b></label>
+                        <label for="celular"><i class='fa'></i><b>Celular</b></label>
                         <input type="text" id="celular" name="celular" value="{celular}" class="required form-control"/>
                     </div>
             </div>
@@ -151,13 +151,13 @@
                 <div class="col-md-6 col-xs-6">
                 <div class="form-group">
                         <label for="midiaSocial"><i class='fa'></i><b>Web Site</b></label>
-                        <input type="url" id="website" name="website" value="{website}" class=" url form-control"/>
+                        <input type="text" id="website" name="website" value="{website}" class="form-control"/>
                     </div>
             </div>
              <div class="col-md-6 col-xs-6">
                 <div class="form-group">
                         <label for="midiaSocial"><i class='fa'></i><b>Mídia Social</b></label>
-                        <input type="url" id="midiaSocial" name="midiaSocial" value="{midiaSocial}" class="url form-control"/>
+                        <input type="text" id="midiaSocial" name="midiaSocial" value="{midiaSocial}" class="form-control"/>
                     </div>
             </div> 
             </div>           
@@ -189,10 +189,10 @@
         
         $('#dataFiliacao').datepicker();
         $("#cnpj").inputmask({ mask: "99.999.999-9999-99"});
-        $("#celular").inputmask({ mask: "9999-99999"});
-        $("#telefone1").inputmask({ mask: "9999-99999"});
+        $("#celular").inputmask({ mask: "+99 99 99999-9999"});
+        $("#telefone1").inputmask({ mask: "+99 99 99999-9999"});
         $("#cep").inputmask({ mask: "99.999-999"});
-        $("#telefone2").inputmask({ mask: "9999-99999"});
+        $("#telefone2").inputmask({ mask: "+99 99 99999-9999"});
         $("#save").click(function() {
             
             $("#frmEdit").submit();

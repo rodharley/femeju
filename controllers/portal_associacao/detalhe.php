@@ -18,11 +18,17 @@ $TPL->ESTADO = $obj->cidade->uf->uf;
 $TPL->CEP = $obj->formataCep($obj->cep);
 $TPL->DATA_FILIACAO = $obj->convdata($obj->dataFiliacao,"mtn");
 $TPL->NOME_RESPONSAVEL = $obj->responsavel;
-$TPL->CELULAR = $obj->celular;
-$TPL->TELEFONE1 = $obj->telefone1;
-$TPL->TELEFONE2 = $obj->telefone2;
+$TPL->CELULAR = $obj->formataTelefone($obj->celular);
+$TPL->TELEFONE1 = $obj->formataTelefone($obj->telefone1);
+$TPL->TELEFONE2 = $obj->formataTelefone($obj->telefone2);
 $TPL->EMAIL = $obj->email;     
 $TPL->URL_MIDIA = $obj->midiaSocial; 
-$TPL->WEB_SITE = $obj->webSite;            
+$TPL->WEB_SITE = $obj->webSite;   
+
+//fotos
+foreach ($obj->fotos as $key => $foto) {
+        $TPL->IMAGEM_FOTO = $foto->imagem;
+        $TPL->block("BLOCK_FOTO");
+    }            
 $TPL->show();
 ?>

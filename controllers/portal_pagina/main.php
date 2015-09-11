@@ -6,6 +6,8 @@ $obj = new Pagina();
 $obj->getById($_REQUEST['id']);                            
 $TPL->texto = $obj->conteudo;
 $TPL->titulo = $obj->titulo;
-$TPL->data = date("d/m/Y H:i:s");
+$TPL->LOADING = $obj->carregando;
+if($obj->id == Pagina::CONTATO)
+	$TPL->block("BLOCK_EMAIL");
 $TPL->show();
 ?>

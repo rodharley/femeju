@@ -1,5 +1,5 @@
 <?php
-$menu = 17; 
+$menu = 21; 
 include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
@@ -20,7 +20,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 $pagina = new Pagina();
 $pagina->getById(Pagina::AFEMEJU);
 $TPL->addFile("CONTEUDO", "templates/admin/pagina/edit.html");
-$TPL->LABEL = "Diretoria";
+$TPL->LABEL = "A Femeju";
 $TPL->texto = $pagina->conteudo;
 $TPL->ACAO = "editar";
 $TPL->id = $pagina->id;

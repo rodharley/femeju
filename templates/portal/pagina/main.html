@@ -6,10 +6,12 @@
             </div>
             <h2>{titulo}</h2>
         </div>
-        <div class="etiqueta">    
-        <small class="pull-right">Brasília, {data}</small>
+        <div class="divisao">
+        <div class="etiqueta">  
+        	
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12">         	
+            	
                 <p>                    
                     {texto}
                 </p>
@@ -19,5 +21,84 @@
             </div>
         </div>
         </div>
+        </div>
+        <!-- BEGIN BLOCK_EMAIL -->
+        <div class="divisao">
+        <div class="etiqueta">  
+        	
+        <div class="row">
+            <div class="col-lg-12">         	
+            	<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Entre em Contato<br/> <small>Envie-nos uma mensagem</small></h3>
+  </div>
+  <div class="panel-body">
+    <form action="#" id="frmEmail">
+  <div class="form-group">
+    <label for="email">Seu E-mail</label>
+    <input type="email" class="form-control required email" id="email" name="email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="texto">Mensagem</label>
+    <textarea name="texto" id="texto" class="form-control required"></textarea>
+  </div>
+  <div class="row"><div class="col-md-2">
+  	<button type="button" class="btn btn-default" id="btEnviarEmail">Enviar</button>
+  </div><div class="col-md-10">
+  	<span id="carregaEmail"></span>
+  </div></div>
+</form>
+  </div>
+</div>
+                
+            </div>
+        </div>
+        </div>
+        </div>
+        <!-- END BLOCK_EMAIL -->
+        
     </div>
 </div>
+<script>
+	$(document).ready(function() {
+	     
+		
+		
+		$("#btEnviarEmail").click(function(){
+			if($("#frmEmail").valid()){
+			$.ajax({
+				url : "ajax/portal_enviar_email.php",
+				type : "POST",
+				data : $("#frmEmail").serialize(),
+
+				beforeSend: function( ) {
+					$('#carregaEmail').html('{LOADING}');
+		  		},
+			}).done(function(msg) {
+				$("#carregaEmail").html(msg);
+				$("#frmEmail").trigger("reset");
+			});
+			}
+		});
+		
+		if ($("#frmEmail").length) {
+			$("#frmEmail").validate({
+			    
+				errorClass : "help-inline",
+				errorElement : "div",
+				highlight : function(element, errorClass, validClass) {
+					$(element).parents('.form-group').addClass('has-error');
+					$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).parents('.form-group').removeClass('has-error');
+					$(element).parents('.form-group').addClass('has-success');
+					$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+					$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+				}
+			});
+		}
+
+	});
+     
+</script>
