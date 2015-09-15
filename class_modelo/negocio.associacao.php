@@ -12,8 +12,7 @@ class Associacao extends Persistencia {
     var $bairro;
     var $cidade = NULL;
     var $cep;
-    var $responsavel;
-    var $celular;
+    var $responsavel = NULL;
     var $telefone1;
     var $telefone2;
     var $email;
@@ -32,7 +31,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         if($ativo != "")
             $sql .= " and bitAtivo = $ativo"; 
         if ($nome != "")
-            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%' or endereco like '%$nome%' or bairro like '%$nome%' or responsavel like '%$nome%')";
+            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%' or endereco like '%$nome%' or bairro like '%$nome%')";
         if ($sigla != "")
             $sql .= " and ( sigla like '%$sigla%')";
         $rs = $this -> DAO_ExecutarQuery($sql);
@@ -47,13 +46,12 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $sql .= " and bitAtivo = $ativo";
         
         if ($nome != "")
-            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%' or endereco like '%$nome%' or bairro like '%$nome%' or responsavel like '%$nome%')";
+            $sql .= " and ( nome like '%$nome%' or razaoSocial like '%$nome%' or endereco like '%$nome%' or bairro like '%$nome%')";
         
         if ($sigla != "")
             $sql .= " and ( sigla like '%$sigla%')";
         
-        $sql .= "  order by nome limit $primeiro, $quantidade";
-        
+        $sql .= "  order by nome limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
 
     }
@@ -72,11 +70,9 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->bairro = $_REQUEST['bairro'];
         $this->cep = $_REQUEST['cep'];
         $this->cidade = new Cidade($_REQUEST['cidade']);
-        $this->responsavel = $_REQUEST['responsavel'];
         $this->email = $_REQUEST['email'];
         $this->webSite = $_REQUEST['website'];
         $this->midiaSocial = $_REQUEST['midiaSocial'];
-        $this->celular = $this->limpaDigitos($_REQUEST['celular']);
         $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
         $this->telefone2 = $this->limpaDigitos($_REQUEST['telefone2']);
         if ($_FILES['logomarca']['name'] != "") {
@@ -85,9 +81,46 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $this -> uploadImagem($_FILES['logomarca'], $nomefoto, "img/associacoes/");
             $this -> logomarca = $nomefoto;
         }
+        $objPessoa = new Pessoa();
+        $objUser =new Usuario();
+        $objPerfil = new Perfil();
+        $objPerfil -> id = 3;
+        $objUser -> perfil = $objPerfil;
+        if($_REQUEST['id_responsavel'] != ""){
+            //recupera responsavel
+            $objPessoa->getById($_REQUEST['id_responsavel']);
+            $objPessoa->nome = $_REQUEST['nome_responsavel'];
+            $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
+            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $id = $objPessoa->save();
+            if(!$objUser->recuperaPorIdPessoa($objPessoa->id)){
+                $objUser -> senha = "";
+                $objUser -> ativo = 0;
+                $objUser -> pessoa = $objPessoa;
+                $objUser -> save();
+                $email = new Email();
+                $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
+            }
+            
+        }else{
+            //novo responsavel
+            
+            $objPessoa->nome = $_REQUEST['nome_responsavel'];
+            $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
+            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $id = $objPessoa->save();     
+            
+            $objUser -> senha = "";
+            $objUser -> ativo = 0;
+            $objUser -> pessoa = $objPessoa;
+            $objUser -> save();
+            $email = new Email();
+            $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
+        }
         
-        
-        
+        $this->responsavel = $objUser;        
         $idAssociacao = $this -> save();        
         
         if($_FILES['fotos']['name'][0] != ""){
@@ -120,11 +153,9 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->bairro = $_REQUEST['bairro'];
         $this->cep = $_REQUEST['cep'];
         $this->cidade = new Cidade($_REQUEST['cidade']);
-        $this->responsavel = $_REQUEST['responsavel'];
         $this->email = $_REQUEST['email'];
         $this->webSite = $_REQUEST['website'];
         $this->midiaSocial = $_REQUEST['midiaSocial'];
-        $this->celular = $this->limpaDigitos($_REQUEST['celular']);
         $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
         $this->telefone2 = $this->limpaDigitos($_REQUEST['telefone2']);
           
@@ -150,6 +181,50 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         }
             
         }
+
+
+        $objPessoa = new Pessoa();
+        $objUser =new Usuario();
+        $objPerfil = new Perfil();
+        $objPerfil -> id = 3;
+        $objUser -> perfil = $objPerfil;
+        if($_REQUEST['id_responsavel'] != ""){
+            //recupera responsavel
+            $objPessoa->getById($_REQUEST['id_responsavel']);
+            $objPessoa->nome = $_REQUEST['nome_responsavel'];
+            $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
+            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $id = $objPessoa->save();
+            if(!$objUser->recuperaPorIdPessoa($objPessoa->id)){
+                $objUser -> senha = "";
+                $objUser -> ativo = 0;
+                $objUser -> pessoa = $objPessoa;
+                $objUser -> save();
+                $email = new Email();
+                $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
+            }
+            
+        }else{
+            //novo responsavel            
+            $objPessoa->nome = $_REQUEST['nome_responsavel'];
+            $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
+            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $id = $objPessoa->save();     
+            
+            $objUser -> senha = "";
+            $objUser -> ativo = 0;
+            $objUser -> pessoa = $objPessoa;
+            $objUser -> save();
+            $email = new Email();
+            $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
+        }
+        
+        $this->responsavel = $objUser;        
+        $idAssociacao = $this -> save();       
+        
+        
          
          return $this -> save();
          

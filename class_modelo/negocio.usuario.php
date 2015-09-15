@@ -159,7 +159,17 @@ class Usuario extends Persistencia {
 		}else
 			return false;
 	}
-
+    
+    function recuperaPorIdPessoa($idPessoa) {
+        $sql = "select u.* from fmj_usuario u where u.idPessoa = $idPessoa";
+        $rs = $this->getSQL($sql);
+        if(count($rs) > 0){
+           $this->getById($rs[0]->id);      
+            return true;
+        }else
+            return false;
+    }
+    
 	function Excluir($id) {
 	    $this->getById($this -> md5_decrypt($id));
 		if($this -> delete($this->id))

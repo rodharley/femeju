@@ -1,3 +1,5 @@
+<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
+<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
 <form role="form" method="post" action="admin_associacao-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
     <div class="box box-primary">
         <div class="box-header">
@@ -115,16 +117,32 @@
             <div class="col-md-6 col-xs-6">
                 <div class="form-group">
                         <label for="responsavel"><i class='fa'></i><b>Nome</b></label>
-                        <input type="text" id="responsavel" name="responsavel" value="{responsavel}" class="required form-control"/>
+                        <input type="text" id="nome_responsavel" name="nome_responsavel" value="{nome_responsavel}" class="required form-control"/>
+                         <input type="hidden" id="id_responsavel" name="id_responsavel" value="{id_responsavel}" class="form-control"/>
+                    </div>
+            </div>
+             <div class="col-md-6 col-xs-6">
+                 <div class="form-group">
+                        <label for="celular"><i class='fa'></i><b>Sobrenome</b></label>
+                        <input type="text" id="sobrenome_responsavel" name="sobrenome_responsavel" value="{sobrenome_responsavel}" class="required form-control"/>
+                    </div>
+            </div>
+            </div>  
+            <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="responsavel"><i class='fa'></i><b>E-mail</b></label>
+                        <input type="text" id="email_responsavel" name="email_responsavel" value="{email_responsavel}" class="required form-control"/>
+                         
                     </div>
             </div>
              <div class="col-md-6 col-xs-6">
                  <div class="form-group">
                         <label for="celular"><i class='fa'></i><b>Celular</b></label>
-                        <input type="text" id="celular" name="celular" value="{celular}" class="required form-control"/>
+                        <input type="text" id="celular_responsavel" name="celular_responsavel" value="{celular_responsavel}" class="required form-control"/>
                     </div>
             </div>
-            </div>          
+            </div>           
         </fieldset>
 <fieldset><legend>Contato</legend>
             <div class="row">
@@ -185,11 +203,35 @@
     </div>
 </form>
 <script>
+
 	$(document).ready(function() {
+        var options = {
+    script: "ajax/json_pessoas.php?",
+    varname: "busca",
+    json: true,
+    maxresults: 35,
+    callback: function (obj) {
+        var pessoa; 
+        $.ajax({
+            url:'ajax/json_pessoa.php',
+            data:{id:obj.id}
+            }).done(function(retorno){
+                pessoa = JSON.parse(retorno);
+                document.getElementById("id_responsavel").value =pessoa.id;        
+                document.getElementById("sobrenome_responsavel").value =pessoa.sobrenome;
+                document.getElementById("nome_responsavel").value =pessoa.nome;
+                document.getElementById("email_responsavel").value =pessoa.email;
+                document.getElementById("celular_responsavel").value =pessoa.telCelular;
+            });
+        
+         }
+    
+};
+var as = new bsn.AutoSuggest('nome_responsavel', options);
         
         $('#dataFiliacao').datepicker();
         $("#cnpj").inputmask({ mask: "99.999.999-9999-99"});
-        $("#celular").inputmask({ mask: "+99 99 99999-9999"});
+        $("#celular_responsavel").inputmask({ mask: "+99 99 99999-9999"});
         $("#telefone1").inputmask({ mask: "+99 99 99999-9999"});
         $("#cep").inputmask({ mask: "99.999-999"});
         $("#telefone2").inputmask({ mask: "+99 99 99999-9999"});

@@ -14,7 +14,7 @@ foreach($alist as $key => $n){
     $TPL->nome = $n->nome;
     $TPL->situacao = $n->ativo == 1 ? "Ativo" : "Inativo";
     $TPL->colorSituacao = $n->ativo == 1 ? "success" : "danger";
-    $TPL->responsavel = $n->responsavel;
+    $TPL->responsavel = $n->responsavel->pessoa->nome;
     $TPL->ID_HASH = $objAssociacao->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
     

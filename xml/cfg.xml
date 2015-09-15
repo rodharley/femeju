@@ -27,9 +27,7 @@ set
 		<atrib tbname="endereco" type="txt">endereco</atrib>
 		<atrib tbname="descricao" type="txt">descricao</atrib>		
 		<atrib tbname="cep" type="txt">cep</atrib>
-		<atrib tbname="bairro" type="txt">bairro</atrib>
-		<atrib tbname="responsavel" type="txt">responsavel</atrib>
-		<atrib tbname="celular" type="txt">celular</atrib>
+		<atrib tbname="bairro" type="txt">bairro</atrib>		
 		<atrib tbname="dataFiliacao" type="txt">dataFiliacao</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="sigla" type="txt">sigla</atrib>
@@ -39,6 +37,7 @@ set
 		<atrib tbname="midiaSocial" type="txt">midiaSocial</atrib>
 		<atrib tbname="email" type="txt">email</atrib>
 		<atrib tbname="idCidade" type="fk" clrelation="Cidade">cidade</atrib>
+		<atrib tbname="idResponsavel" type="fk" clrelation="Usuario">responsavel</atrib>
 		<atrib tbname="" type="set" clrelation="AssociacaoFoto" clorder="imagem" clfk="associacao">fotos</atrib>				
 	</class>
 	<class name="AssociacaoFoto" tbname="fmj_associacao_fotos" tbid="id" lazy="true">
