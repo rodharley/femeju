@@ -22,7 +22,7 @@ switch ($_REQUEST['acao']){
         $objEmail->enviarEmailPush("Inclusão de Post:".$objCat->retornaDescricao($idcat)." - ".$_REQUEST['titulo']);
         break;
 	case 'excluir' :
-        $post->getById($_REQUEST['id']);
+        $post->getById($post -> md5_decrypt($_REQUEST['id']));
 		if($post->Excluir($_REQUEST['id'])){
         $_SESSION['fmj.mensagem'] = 28;
         $objEmail->enviarEmailPush("Exclusão de Post:".$objCat->retornaDescricao($post->id)." - ".$post->titulo);

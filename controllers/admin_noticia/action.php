@@ -24,7 +24,7 @@ switch ($_REQUEST['acao']){
         
         break;
 	case 'excluir' :
-        $obj->getById($_REQUEST['id']);
+        $obj->getById($obj -> md5_decrypt($_REQUEST['id']));
 		$obj->Excluir($_REQUEST['id']);
         $objEmail->enviarEmailPush("Exclusão de Notícia: ".$obj->titulo);
         header("Location:admin_noticia-main");
