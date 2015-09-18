@@ -30,7 +30,10 @@ $alist = $diretoria->getRows();
 $TPL->QUANTIDADE = count($alist);
 foreach($alist as $key => $diretoriaario){
 	$TPL->descricao = $diretoriaario->descricao;
+	if($diretoriaario->usuario->pessoa != null)
 	$TPL->responsavel = $diretoriaario->usuario->pessoa->nome;
+else
+	$TPL->responsavel = "Não Selecionado";
 	$TPL->ID_HASH = $diretoria->md5_encrypt($diretoriaario->id);
 	$TPL->block("BLOCK_ITEM_LISTA");
 }
