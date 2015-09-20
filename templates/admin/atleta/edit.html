@@ -1,0 +1,153 @@
+<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
+<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
+<form role="form" method="post" action="admin_associacao-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+
+            <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" name="acao" value="{ACAO}"/>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="nome"><i class='fa'></i><b>Nome</b></label>
+                        <input type="text" id="nome" name="nome" placeholder="Nome da associação" value="{nome}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="razaoSocial"><i class='fa'></i><b>Sobre Nome</b></label>
+                        <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobre nome do atleta" value="{sobrenome}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="ativo"><i class='fa'></i><b>Ativo</b></label><br/>
+                        <input type="radio" class="required form-control" name="ativo" value="1" {checkedAtivo}/> Ativo &nbsp;&nbsp;<input type="radio" class="required form-control"  name="ativo" value="0" {checkedInativo}/> Inativo
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="associacao"><i class='fa'></i><b>Associação</b></label>
+                        <select name="associacao" id="associacao" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_AS -->
+                            <option value="{ID_AS}" {SELECTED_AS}>{DESC_AS}</option>
+                            <!-- END BLOCK_AS -->
+                        </select>
+                    </div>
+            </div> 
+                <div class="col-md-6 col-xs-6">
+                     <div class="form-group">
+                        <label for="Foto"><i class='fa'></i><b>Foto</b></label><BR>
+                        <input type="file"  name="foto" id="foto"/>
+                    </div>
+                </div>
+                
+            </div>  
+                  
+            <fieldset><legend>Endereço</legend>
+                <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="endereco"><i class='fa'></i><b>Logradouro</b></label>
+                        <input type="text" id="endereco" name="endereco" value="{endereco}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="bairro"><i class='fa'></i><b>Bairro</b></label>
+                        <input type="text" id="bairro" name="bairro" value="{bairro}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="uf"><i class='fa'></i><b>Estado</b></label>
+                         <select name="uf" id="uf" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_UF -->
+                            <option value="{id_uf}" {selectedUf}>{uf}</option>
+                            <!-- END BLOCK_UF -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="cidade"><i class='fa'></i><b>Cidade</b></label>
+                        <select name="cidade" id="cidade" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_CIDADE -->
+                            <option value="{id_cidade}" {selectedCidade}>{nome_cidade}</option>
+                            <!-- END BLOCK_CIDADE -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="cep"><i class='fa'></i><b>CEP</b></label>
+                        <input type="text" id="cep" name="cep" value="{cep}" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+            
+        </div>
+        <div class="box-footer text-center">
+            <a class="btn btn-success" id="save">
+                Salvar
+            </a>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </div>
+</form>
+<script>
+
+	$(document).ready(function() {
+     
+
+        $("#save").click(function() {
+            
+            $("#frmEdit").submit();
+        });
+        
+
+    
+    $("#foto").fileinput({
+        initialPreview: [
+        <!-- BEGIN BLOCK_FOTOS -->"{FOTO}",<!-- END BLOCK_FOTOS -->
+        ], overwriteInitial: false,
+        maxFileSize: 2000,
+        maxFilesNum: 30,
+        allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+        previewClass: "bg-warning",
+        allowedFileTypes: ["image"],
+        showUpload: false,
+        showCaption: false,
+        showRemove: false,
+        language: 'pt-BR'
+    });
+    
+   
+    $("#uf").change(function(){
+            $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                data : {uf: $(this).val()},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+            });
+
+        });
+
+	});
+</script>

@@ -1,12 +1,12 @@
 <?php
-$menu = 25;
+$menu = 27;
 include("configuraAjax.php");
-$TPL = new Template("../templates/admin/associacao/list.html");
-$objAssociacao = new Associacao();
+$TPL = new Template("../templates/admin/atleta/list.html");
+$obj = new Atleta();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
-$totalPesquisa = $objAssociacao->pesquisarTotal($_REQUEST['nome'],$_REQUEST['sigla']);
-$configPaginacao = $objAssociacao->paginar($totalPesquisa,$pagina);
-$alist = $objAssociacao->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['nome'],$_REQUEST['sigla']);
+$totalPesquisa = $obj->pesquisarTotal($_REQUEST['nome'],$_REQUEST['sigla']);
+$configPaginacao = $obj->paginar($totalPesquisa,$pagina);
+$alist = $obj->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['nome'],$_REQUEST['sigla']);
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
@@ -15,7 +15,7 @@ foreach($alist as $key => $n){
     $TPL->situacao = $n->ativo == 1 ? "Ativo" : "Inativo";
     $TPL->colorSituacao = $n->ativo == 1 ? "success" : "danger";
     $TPL->responsavel = $n->responsavel->pessoa->nome;
-    $TPL->ID_HASH = $objAssociacao->md5_encrypt($n->id);
+    $TPL->ID_HASH = $obj->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
     
 }

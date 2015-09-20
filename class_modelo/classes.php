@@ -7,6 +7,7 @@ require("negocio.cidade.php");
 require("negocio.configuracoes.php");
 require("negocio.diretoria.php");
 require("negocio.email.php");
+require("negocio.graduacao.php");
 require("negocio.galeria.php");
 require("negocio.galeriaImagem.php");
 require("negocio.log.php");

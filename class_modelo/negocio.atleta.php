@@ -1,37 +1,42 @@
 <?php
 class Atleta extends Persistencia {
-   var $nome;
-        var $sobrenome;
-        var $email;
-        var $sexo;
-        var $nomePai;
-        var $nomeMae;
-        var $rg;
-        var $cpf;
-        var $rgEmissor;      
-        var $logradouro;
-        var $bairro;
-        var $cep;
-        var $telResidencial;
-        var $telComercial;
-        var $telCelular;
-        var $foto;
-        var $situacaoFEMEJU;
-        var $situacaoCBJ;
-        var $einstrutor;
-        var $rgData;
-        var $dataNascimento;
-        var $dataInscricao;
-        var $cidadeNascimento = null;
-        var $cidadeEndereco = null;
-        var $academia = null;
-        var $instrutor = null;
-        
-   public function listaTodosInstrutores(){
-       return $this->getRows(0,999,array("nome"=>"asc"),array("einstrutor"=>"=1"));
-       
-   }
+	const TABELA = "fmj_atleta";
+   var $dataFiliacao;   
+   var $dataEmissaoCarteira;
+   var $registroConfederacao;
+   var $ativo;
+   var $graduacao = NULL;
+   var $associacao = NULL;        
+   var $pessoa = NULL;
     
+	function pesquisarTotal($nome = "",$associacao = "",$ativo = "") {
+        $sql = "select count(a.id) as total from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao where 1 = 1 ";
+        if($ativo != "")
+            $sql .= " and a.bitAtivo = $ativo"; 
+        if ($nome != "")
+            $sql .= " and ( p.nome like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+        if ($associacao != "")
+            $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
+        $rs = $this -> DAO_ExecutarQuery($sql);
+        return $this -> DAO_Result($rs, "total", 0);
+    }
+
+    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$ativo = "") {
+
+        $sql = "select * from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
+        
+        if($ativo != "")
+            $sql .= " and a.bitAtivo = $ativo"; 
+        if ($nome != "")
+            $sql .= " and ( p.nome like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+        if ($associacao != "")
+            $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
+        
+        $sql .= "  order by p.nome limit $primeiro, $quantidade";        
+        return $this -> getSQL($sql);
+
+    }
+	
     function Incluir() {
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
         $cidadeNascimento = $_REQUEST['cidadeNascimento'] != "" ? new Cidade($_REQUEST['cidadeNascimento']) : null;

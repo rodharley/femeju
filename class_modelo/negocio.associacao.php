@@ -21,9 +21,8 @@ class Associacao extends Persistencia {
     var $ativo;
     var $fotos = array();
 
-public function listaPermissoes($idUsuario){
-    $sql = "select a.* from fmj_academia a inner join fmj_permissao p on a.id = p.idAcademia where p.idUsuario = $idUsuario";
-    return $this->getSQL($sql);
+public function listaAtivas(){
+    return $this->getRows(0,9999,array(),array("ativo"=>"=1"));
 }
 
 function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {

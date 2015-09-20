@@ -1,6 +1,6 @@
 <?php
 $menu = 0;
-//include("includes/include.lock.php");
+include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");

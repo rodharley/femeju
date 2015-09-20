@@ -1,6 +1,6 @@
 <?php
 class Pessoa extends Persistencia {
-		
+		const TABELA = "fmj_pessoa";
 	   var $nome;
         var $sobrenome;
         var $endereco;
@@ -13,5 +13,8 @@ class Pessoa extends Persistencia {
         var $dataNascimento;
         var $foto;
         var $cpf;
+		var $nacionalidade;
+		var $sexo;
+		var $naturalidade = null;
 }
 ?>
