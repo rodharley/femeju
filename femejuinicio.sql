@@ -9956,7 +9956,7 @@ CREATE TABLE `fmj_usuario` (
   `ativo` tinyint(1) NOT NULL,
   `email` varchar(255) NOT NULL,
   `cpf` varchar(14) NOT NULL,
-  `foto` varchar(255) NOT NULL DEFAULT 'avatar.png',
+  `foto` varchar(255) NOT NULL DEFAULT 'pessoa.png',
   `telefone` varchar(30) DEFAULT NULL,
   `celular` varchar(30) DEFAULT NULL,
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -9969,8 +9969,8 @@ CREATE TABLE `fmj_usuario` (
 --
 
 INSERT INTO `fmj_usuario` (`fmj_perfil_id`, `nome`, `senha`, `ativo`, `email`, `cpf`, `foto`, `telefone`, `celular`, `id`) VALUES
-(1, 'ADMIN 1', 'e10adc3949ba59abbe56e057f20f883e', 1, 'rodrigo.cruz76@gmail.com', '00007311966', 'avatar.png', '(61) 3408-62123', '(61) 8432-85555', 5),
-(1, 'SHOICHI KISHI', 'e10adc3949ba59abbe56e057f20f883e', 1, 'kishi@epocca.com.br', '00007311966', 'avatar.png', '(12) 3223-23333', '(12) 3131-23323', 7);
+(1, 'ADMIN 1', 'e10adc3949ba59abbe56e057f20f883e', 1, 'rodrigo.cruz76@gmail.com', '00007311966', 'pessoa.png', '(61) 3408-62123', '(61) 8432-85555', 5),
+(1, 'SHOICHI KISHI', 'e10adc3949ba59abbe56e057f20f883e', 1, 'kishi@epocca.com.br', '00007311966', 'pessoa.png', '(12) 3223-23333', '(12) 3131-23323', 7);
 
 --
 -- Constraints for dumped tables

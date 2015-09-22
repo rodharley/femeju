@@ -44,7 +44,11 @@ Exemplos de mensagens:
 <mensagem id="38" type="success">Associação alterada com sucesso.</mensagem>
 <mensagem id="39" type="success">Associação excluida com sucesso.</mensagem>
 <mensagem id="40" type="success">Configurações alteradas com sucesso.</mensagem>
-
+<mensagem id="41" type="success">Atleta incluído com sucesso.</mensagem>
+<mensagem id="42" type="success">Atleta alterado com sucesso.</mensagem>
+<mensagem id="43" type="success">Atleta excluido com sucesso.</mensagem>
+<mensagem id="44" type="warning">Falha ao incluir atleta, pessoa ja cadastrada como atleta.</mensagem>
+<mensagem id="45" type="warning">O atleta foi excluído, porém os dados pessoais não foram deletados porque os mesmos estão relacionados a outras atividades no sistema.</mensagem>
 </mensagens>
 
 

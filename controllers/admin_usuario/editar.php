@@ -30,7 +30,7 @@ $TPL->ACAO = "incluir";
 $TPL->id = 0;
 $TPL->checksim = "checked='checked'";
 $TPL->checknao = "";
-$TPL->IMG_USER = "img/users/avatar.png";
+$TPL->IMG_USER = "img/pessoas/pessoa.png";
 
 $idPerfilUsu = 0;
 $listaAcademias = array();
@@ -44,7 +44,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->senha = "";
 	$TPL->id = $usu->id;
 	$idPerfilUsu = $usu->perfil->id;
-	$TPL->IMG_USER = "img/users/".$usu->pessoa->foto;
+	$TPL->IMG_USER = "img/pessoas/".$usu->pessoa->foto;
 	$TPL->LABEL = "Alterar Usuário ".$usu->pessoa->nome;
 	$TPL->ACAO = "editar";
 
@@ -55,7 +55,7 @@ if(isset($_REQUEST['id'])){
 
 
 	if(strlen($usu->pessoa->foto) > 0){
-		$TPL->IMG_USER = "<img src='img/users/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";
+		$TPL->IMG_USER = "<img src='img/pessoas/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";
 		$TPL->block("BLOCK_IMG");
 	}
     

@@ -205,13 +205,13 @@ class Usuario extends Persistencia {
 		$pessoa-> email = $_REQUEST['email'];
 		$pessoa-> telResidencial = str_replace("_","",$_REQUEST['telefone']);
 		$pessoa-> telCelular = str_replace("_","",$_REQUEST['celular']);
-        $pessoa-> foto = "avatar.png";
+        $pessoa-> foto = "pessoa.png";
 		
 		
 		if ($_FILES['foto']['name'] != "") {
 			//incluir imagem se ouver
-			$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
-			$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
+			$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+			$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
 			$pessoa-> foto = $nomefoto;
 		}	
         $pessoa->save();
@@ -249,11 +249,11 @@ class Usuario extends Persistencia {
         $this -> celular = str_replace("_","",$_REQUEST['celular']);
         $this -> senha = "";
         $this -> ativo = 0;
-        $this -> foto = "avatar.png";
+        $this -> foto = "pessoa.png";
         if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
-            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
-            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
             $this -> foto = $nomefoto;
         }       
         $this -> save();
@@ -289,10 +289,10 @@ class Usuario extends Persistencia {
 			
 			//incluir imagem se ouver
 			if ($_FILES['foto']['name'] != "") {
-				if ($this ->  pessoa -> foto != "avatar.png")
-					$this -> apagaImagem($this -> pessoa-> foto, "img/users/");
-				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
-				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
+				if ($this ->  pessoa -> foto != "pessoa.png")
+					$this -> apagaImagem($this -> pessoa-> foto, "img/pessoas/");
+				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
 				$this -> pessoa -> foto = $nomefoto;
 			}		
             
@@ -330,10 +330,10 @@ class Usuario extends Persistencia {
 
 			//incluir imagem se ouver
 			if ($_FILES['foto']['name'] != "") {
-				if ($this -> pessoa -> foto != "avatar.png")
-					$this -> apagaImagem($this -> pessoa ->  foto, "img/users/");
-				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/users/");
-				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/users/");
+				if ($this -> pessoa -> foto != "pessoa.png")
+					$this -> apagaImagem($this -> pessoa ->  foto, "img/pessoas/");
+				$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+				$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
 				$this ->  pessoa -> foto = $nomefoto;
 			}
 			

@@ -2,25 +2,29 @@
 $menu = 28;
 include("includes/include.lock.php");
 //INSTACIA CLASSES
-$obj = new Associacao();
+$obj = new Atleta();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
 	case 'editar' :
-		$obj->Alterar();
-        $_SESSION['fmj.mensagem'] = 38;
-        header("Location:admin_associacao-main");
+		$conn->connection->autocommit(false);
+        $conn->connection->begin_transaction(); 
+        $obj->Alterar();
+        $conn->connection->commit();
+        header("Location:admin_atleta-main");
         exit();
-		break;
+        break;
 	case 'incluir' :
+        $conn->connection->autocommit(false);
+        $conn->connection->begin_transaction(); 
 		$obj->Incluir();
-        $_SESSION['fmj.mensagem'] = 37;
-        header("Location:admin_associacao-main");
+        $conn->connection->commit();
+        header("Location:admin_atleta-main");
         exit();
 		break;
 	case 'excluir' :
 		$obj->Excluir($_REQUEST['id']);
-        header("Location:admin_associacao-main");
+        header("Location:admin_atleta-main");
         exit();
 		break;		
 }

@@ -1,3 +1,5 @@
 <?php
-$conn->commit();
+echo "commit aqui";
+$conn->connection->commit();
+exit();
 ?>

@@ -23,7 +23,7 @@ $usu = new Usuario();
 
 $TPL->LABEL = "Editar Meus dados";
 $TPL->ACAO = "meusDados";
-$TPL->IMG_USER = "img/avatar.png";
+$TPL->IMG_USER = "img/pessoa.png";
 $TPL->idUser = $_SESSION['fmj.userId'];
 	$usu->getById($_SESSION['fmj.userId']);
 	$TPL->cpf = $usu->pessoa->cpf;
@@ -35,7 +35,7 @@ $TPL->idUser = $_SESSION['fmj.userId'];
 	
    
     if(strlen($usu->pessoa->foto) > 0){
-        $TPL->IMG_USER = "<img src='img/users/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";
+        $TPL->IMG_USER = "<img src='img/pessoas/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";
         $TPL->block("BLOCK_IMG");
     }
 

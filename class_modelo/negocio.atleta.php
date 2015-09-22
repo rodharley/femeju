@@ -8,6 +8,17 @@ class Atleta extends Persistencia {
    var $graduacao = NULL;
    var $associacao = NULL;        
    var $pessoa = NULL;
+   
+   function recuperaPorIdPessoa($idPessoa) {
+        $id = isset($idPessoa) ? $idPessoa == "" ? "0" : $idPessoa  : "0";
+        $sql = "select u.* from ".$this::TABELA." u where u.idPessoa = $id";
+        $rs = $this->getSQL($sql);
+        if(count($rs) > 0){
+           $this->getById($rs[0]->id);      
+            return true;
+        }else
+            return false;
+    }
     
 	function pesquisarTotal($nome = "",$associacao = "",$ativo = "") {
         $sql = "select count(a.id) as total from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao where 1 = 1 ";
@@ -23,7 +34,7 @@ class Atleta extends Persistencia {
 
     function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$ativo = "") {
 
-        $sql = "select * from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
+        $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
         
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
@@ -39,116 +50,116 @@ class Atleta extends Persistencia {
 	
     function Incluir() {
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
-        $cidadeNascimento = $_REQUEST['cidadeNascimento'] != "" ? new Cidade($_REQUEST['cidadeNascimento']) : null;
+        $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
         $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
-        $academia = $_REQUEST['academia'] != "" ? new Academia($_REQUEST['academia']) : null;
-        $instrutor = $_REQUEST['instrutor'] != "" ? new Atleta($_REQUEST['instrutor']) : null;
+        $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
+        $graduacao = $_REQUEST['associacao'] != "" ? new Graduacao($_REQUEST['associacao']) : null;
+        $pessoa = new Pessoa();
         
-        $this->nome = $_REQUEST['nome'];
-        $this->sobrenome = $_REQUEST['sobrenome'];
-        $this->email = $_REQUEST['email'];
-        $this->sexo = $_REQUEST['sexo'];
-        $this->nomePai = $_REQUEST['nomePai'];
-        $this->nomeMae = $_REQUEST['nomeMae'];
-        $this->rg = $_REQUEST['rg'];
-        $this->cpf = $strCPF;
-        $this->rgEmissor = $_REQUEST['rgLocal'];
-        $this->logradouro = $_REQUEST['localidade'];
-        $this->bairro = $_REQUEST['bairro'];
-        $this->cep = $_REQUEST['cep'];
-        $this->telResidencial = $this->limpaDigitos($_REQUEST['residencial']);
-        $this->telComercial = $this->limpaDigitos($_REQUEST['comercial']);
-        $this->telCelular = $this->limpaDigitos($_REQUEST['celular']);        
-        $this->situacaoFEMEJU = $_REQUEST['femeju'];
-        $this->situacaoCBJ = $_REQUEST['cbj'];
-        $this->einstrutor = $_REQUEST['einstrutor'];
-        $this->rgData = $this->convdata($_REQUEST['rgDataExpedicao'], "ntm");
-        $this->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
-        $this->dataInscricao = date("Y-m-d");
-        $this->cidadeNascimento = $cidadeNascimento;
-        $this->cidadeEndereco = $cidadeEndereco;
-        $this->academia = $academia;
-        $this->instrutor = $instrutor;
-        
-        $this -> foto = "atleta.png";
-        if ($_FILES['foto']['name'] != "") {
+        if($this->recuperaPorIdPessoa($_REQUEST['idPessoa'])){
+           $_SESSION['fmj.mensagem'] = 44;
+           return false; 
+        }else{               
+            $pessoa->getById($_REQUEST['idPessoa']);
+            $pessoa->nome =  $_REQUEST['nome'];
+            $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
+            $pessoa->naturalidade = $cidadeNascimento;
+            $pessoa->email = $_REQUEST['email'];
+            $pessoa->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
+            $pessoa->sexo = $_REQUEST['sexo'];
+            $pessoa->cpf = $strCPF;
+            $pessoa->telCelular = $this->limpaDigitos($_REQUEST['telefoneCel']);
+            $pessoa->telResidencial = $this->limpaDigitos($_REQUEST['telefoneRes']);
+            $pessoa->endereco = $_REQUEST['endereco'];
+            $pessoa->bairro = $_REQUEST['bairro'];
+            $pessoa->cidade = $cidadeEndereco;
+            $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
+            $pessoa -> foto = "pessoa.png";
+            if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
-            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/atletas/");
-            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/atletas/");
-            $this -> foto = $nomefoto;
-        }     
-        
-        //$this->conn->connection->autocommit(false);
-        $this -> save();        
-        //$this->conn->connection->commit();        
-        $_SESSION['fmj.mensagem'] = 22;
-        header("Location:admin_home-home");
-        exit();
-
-    }
-
-function IncluirPortal() {
-        $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
-        $cidadeNascimento = $_REQUEST['cidadeNascimento'] != "" ? new Cidade($_REQUEST['cidadeNascimento']) : null;
-        $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
-        $instrutor = $_REQUEST['instrutor'] != "" ? new Atleta($_REQUEST['instrutor']) : null;        
-        
-        $this->nome = $_REQUEST['nome'];
-        $this->sobrenome = $_REQUEST['sobrenome'];
-        $this->email = $_REQUEST['email'];
-        $this->sexo = $_REQUEST['sexo'];
-        $this->nomePai = $_REQUEST['nomePai'];
-        $this->nomeMae = $_REQUEST['nomeMae'];
-        $this->rg = $_REQUEST['rg'];
-        $this->cpf = $strCPF;
-        $this->rgEmissor = $_REQUEST['rgLocal'];
-        $this->logradouro = $_REQUEST['localidade'];
-        $this->bairro = $_REQUEST['bairro'];
-        $this->cep = $_REQUEST['cep'];
-        $this->telResidencial = $this->limpaDigitos($_REQUEST['residencial']);
-        $this->telComercial = $this->limpaDigitos($_REQUEST['comercial']);
-        $this->telCelular = $this->limpaDigitos($_REQUEST['celular']);        
-        $this->situacaoFEMEJU = 0;
-        $this->situacaoCBJ = 0;
-        $this->einstrutor = $_REQUEST['einstrutor'];
-        $this->rgData = $this->convdata($_REQUEST['rgDataExpedicao'], "ntm");
-        $this->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
-        $this->dataInscricao = date("Y-m-d");
-        $this->cidadeNascimento = $cidadeNascimento;
-        $this->cidadeEndereco = $cidadeEndereco;
-        
-        //cadastra a academia e o instrutor
-        if($_REQUEST['idAcademia'] != "0")
-        $academia = new Academia($_REQUEST['idAcademia']);
-        else{
-            $academia = new Academia();
-            $academia->nome = $_REQUEST['nomeAcademia'];
-            $academia->registro = $_REQUEST['registroAcademia'];
-            $academia->bairro = $_REQUEST['bairroAcademia'];
-            $academia->logradouro = $_REQUEST['logradouroAcademia'];
-            $academia->cep = $_REQUEST['cepAcademia'];
-            $academia->telComercial = $_REQUEST['telefoneAcademia'];
-            $academia->cidade = new Cidade($_REQUEST['cidadeAcademia']);
-            $academia->save();            
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
+            $pessoa -> foto = $nomefoto;
+            }
+            $idPessoa = $pessoa->save();            
+            //salva o atleta
+            $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
+            $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
+            $this->registroConfederacao = $_REQUEST['registroConf'];
+            $this->ativo = $_REQUEST['ativo'];
+            $this->associacao = $associacao;
+            $this->graduacao = $graduacao;
+            $this->pessoa = $pessoa;
+            $this->save();
+            $_SESSION['fmj.mensagem'] = 41;
+            return true;
+            }
         }
-        $this->academia = $academia;
-        $this->instrutor = $instrutor;
         
-        $this -> foto = "atleta.png";
-        if ($_FILES['foto']['name'] != "") {
+        
+        function Alterar() {
+        $this->getById($_REQUEST['id']);
+        $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+        $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
+        $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
+        $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
+        $graduacao = $_REQUEST['graduacao'] != "" ? new Graduacao($_REQUEST['graduacao']) : null;
+        $pessoa = new Pessoa();
+                      
+            $pessoa->getById($this->pessoa->id);
+            $pessoa->nome =  $_REQUEST['nome'];
+            $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
+            $pessoa->naturalidade = $cidadeNascimento;
+            $pessoa->email = $_REQUEST['email'];
+            $pessoa->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
+            $pessoa->sexo = $_REQUEST['sexo'];
+            $pessoa->cpf = $strCPF;
+            $pessoa->telCelular = $this->limpaDigitos($_REQUEST['telefoneCel']);
+            $pessoa->telResidencial = $this->limpaDigitos($_REQUEST['telefoneRes']);
+            $pessoa->endereco = $_REQUEST['endereco'];
+            $pessoa->bairro = $_REQUEST['bairro'];
+            $pessoa->cidade = $cidadeEndereco;
+            $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
+            
+            if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
-            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/atletas/");
-            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/atletas/");
-            $this -> foto = $nomefoto;
-        }     
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
+            $pessoa -> foto = $nomefoto;
+            }
+            $idPessoa = $pessoa->save();            
+            //salva o atleta
+            $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
+            $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
+            $this->registroConfederacao = $_REQUEST['registroConf'];
+            $this->ativo = $_REQUEST['ativo'];
+            $this->associacao = $associacao;
+            $this->graduacao = $graduacao;
+            $this->pessoa = $pessoa;
+            $this->save();
+            $_SESSION['fmj.mensagem'] = 42;
+            return true;
+            
+        }
+function IncluirPortal() {
+       
+    }
+function Excluir($id) {
+        $this -> getById($this -> md5_decrypt($id));
+        if ($this -> delete($this -> id)){
+            $_SESSION['fmj.mensagem'] = 43;
+            if ($this -> pessoa ->foto != "")
+                $this -> apagaImagem($this -> pessoa ->foto, "img/pessoas/");
+            $pessoa = new Pessoa();
+            if(!$pessoa->delete($this->pessoa->id)){
+                $_SESSION['fmj.mensagem'] = 45;
+            }
+           
+        }else
+            $_SESSION['fmj.mensagem'] = 17;
         
-        //$this->conn->connection->autocommit(false);
-        $this -> save();        
-        //$this->conn->connection->commit();        
-        $_SESSION['fmj.mensagem'] = 22;
-        header("Location:portal_servicos-main");
-        exit();
-
     }
 }
 ?>

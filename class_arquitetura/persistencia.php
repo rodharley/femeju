@@ -237,10 +237,13 @@ function xmlObject($elemento,$i,$objeto){
 				if($this->DAO_NumeroLinhas($rs) > 0){
 					$arrayItem = $this->DAO_GerarArray($rs);
 					$this->setBean($arrayItem,$elemento);
+                    return true;
+				}else{
+				    return false;
 				}
 			}
 		}
-		return true;
+		
 		}else{
 			return false;
 		}

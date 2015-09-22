@@ -38,8 +38,8 @@ require("controllers.php");
 require("shutdow.php");
 }catch(Exception $e){
     
-    print_r($e);
-    exit();
+    //print_r($e);
+    //exit();
     
 	if(isset($_SESSION['fmj.userId']))
 		$TPL = new Template($root->URI."/templates/main.html");
@@ -49,7 +49,7 @@ require("shutdow.php");
 	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro500.html");
 	if ($root->desenvolvimento)
 		$TPL->ALERT = "Mensagem:".$e->getMessage()."<br/>"."Arquivo:".$e->getFile()."<br/>Linha:".$e->getLine();
-
+    $conn->connection->rollback();
 	$TPL->show();
 }
 

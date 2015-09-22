@@ -10,11 +10,11 @@ $alist = $obj->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
-    $TPL->logo = $n->logomarca != "" ? $n->logomarca : "nologo.png";
-    $TPL->nome = $n->nome;
-    $TPL->situacao = $n->ativo == 1 ? "Ativo" : "Inativo";
-    $TPL->colorSituacao = $n->ativo == 1 ? "success" : "danger";
-    $TPL->responsavel = $n->responsavel->pessoa->nome;
+    $TPL->FOTO = $n->pessoa->foto != "" ? $n->pessoa->foto : "pessoa.png";
+    $TPL->NOME = $n->pessoa->nome." ".$n->pessoa->sobrenome;
+    $TPL->SITUACAO = $n->ativo == 1 ? "Ativo" : "Inativo";
+    $TPL->COLOR_SITUACAO = $n->ativo == 1 ? "success" : "danger";
+    $TPL->ASSOCIACAO = $n->associacao->nome;
     $TPL->ID_HASH = $obj->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
     

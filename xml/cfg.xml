@@ -58,7 +58,7 @@ set
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>		
 		<atrib tbname="idPessoa" type="fk" clrelation="Pessoa">pessoa</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
-		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">idAssociacao</atrib>				
+		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">associacao</atrib>				
 	</class>
 	<class name="Cidade" tbname="fmj_cidade" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -78,6 +78,10 @@ set
 	<class name="Graduacao" tbname="fmj_graduacao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="faixa" type="txt">faixa</atrib>
+		<atrib tbname="imagem" type="txt">imagem</atrib>
+		<atrib tbname="idadeMin" type="int">idadeMin</atrib>
+		<atrib tbname="carenciaMin" type="int">carenciaMin</atrib>
 	</class>	
 	<class name="Galeria" tbname="fmj_galeria" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
