@@ -10,11 +10,9 @@ switch ($_REQUEST['acao']){
 		break;
 	case 'incluir' :
 		$usu->IncluirPortal();
+        
 		break;
-    case 'filiar' :
-        $atleta->IncluirPortal();
-        break;
-	case 'excluir' :
+    case 'excluir' :
 		$usu->Excluir($_REQUEST['id']);
 		break;
 	case 'redefinir':
@@ -22,7 +20,15 @@ switch ($_REQUEST['acao']){
 		break;	
 	case 'meusDados' :
 		$usu->AlterarMeusDados();
-		break;	
+		break;
+    case 'incluirAlteta' :
+        $atleta->Incluir();
+        header("Location:portal_servicos-main");
+        break;
+    case 'editarAtleta' :
+        $atleta->Alterar();
+        header("Location:portal_servicos-main");
+        break;	
 }
 }
 ?>

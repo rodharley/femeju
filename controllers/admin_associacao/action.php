@@ -7,13 +7,19 @@ $obj = new Associacao();
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
 	case 'editar' :
+        $conn->connection->autocommit(false);
+        $conn->connection->begin_transaction(); 
 		$obj->Alterar();
+         $conn->connection->commit();
         $_SESSION['fmj.mensagem'] = 38;
         header("Location:admin_associacao-main");
         exit();
 		break;
 	case 'incluir' :
+		$conn->connection->autocommit(false);
+        $conn->connection->begin_transaction();
 		$obj->Incluir();
+         $conn->connection->commit();
         $_SESSION['fmj.mensagem'] = 37;
         header("Location:admin_associacao-main");
         exit();

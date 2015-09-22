@@ -9,6 +9,10 @@ class Atleta extends Persistencia {
    var $associacao = NULL;        
    var $pessoa = NULL;
    
+   public function listaPorAssociacaoAtivos($associacao){
+    return $this->getRows(0,9999,array(),array("ativo"=>"=1","associacao"=>"=$associacao"));
+}
+   
    function recuperaPorIdPessoa($idPessoa) {
         $id = isset($idPessoa) ? $idPessoa == "" ? "0" : $idPessoa  : "0";
         $sql = "select u.* from ".$this::TABELA." u where u.idPessoa = $id";
@@ -87,7 +91,7 @@ class Atleta extends Persistencia {
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
             $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
             $this->registroConfederacao = $_REQUEST['registroConf'];
-            $this->ativo = $_REQUEST['ativo'];
+            $this->ativo = isset($_REQUEST['ativo'])?$_REQUEST['ativo']:"1";
             $this->associacao = $associacao;
             $this->graduacao = $graduacao;
             $this->pessoa = $pessoa;
@@ -125,6 +129,8 @@ class Atleta extends Persistencia {
             
             if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
+            if ($pessoa -> foto != "pessoa.png")
+                $this -> apagaImagem($this -> foto, "img/pessoas/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
             $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
             $pessoa -> foto = $nomefoto;
@@ -134,7 +140,7 @@ class Atleta extends Persistencia {
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
             $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
             $this->registroConfederacao = $_REQUEST['registroConf'];
-            $this->ativo = $_REQUEST['ativo'];
+            $this->ativo = isset($_REQUEST['ativo'])?$_REQUEST['ativo']:"1";
             $this->associacao = $associacao;
             $this->graduacao = $graduacao;
             $this->pessoa = $pessoa;

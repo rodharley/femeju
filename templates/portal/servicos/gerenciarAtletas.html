@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                                <img src="img/icones/servicos.png" />
+                            </div>
+            <h2>Serviços</h2>
+        </div>
+        <div class="panel panel-default">         
+          <div class="panel-body">  
+           <h4>Associação - <small>{ASSOCIACAO}</small></h4>   
+            <p class="text-right">
+                <a href="portal_servicos-selecionaAssociacao?serv=gerenciarAtletas" class="btn btn-default"><i class="glyphicon glyphicon-back"></i> Voltar</a>
+                <a href="portal_servicos-editaAtleta?associacao={ID_ASS_RASH}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Novo Atleta</a> </p>              
+            <ul class="list-group">
+  <li href="#" class="list-group-item active">
+   Menu Principal / Associação / Gerenciar Atletas
+  </li>
+  <!-- BEGIN BLOCK_ATLETA -->
+    <li class="list-group-item">
+        <span class="pull-right">
+            <div class="btn-group " role="group">
+  <a href="portal_servicos-editaAtleta?associacao={ID_ASS_RASH}&id={ID_RASH}" type="button" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+            </div>
+        </span>
+      <h4>{NOME_ATLETA} <small>{SOBRENOME_ATLETA}</small></h4>
+      <p>{FAIXA}</p>  
+        
+      
+      </li>
+  <!-- END BLOCK_ATLETA -->   
+</ul>       
+            
+          </div>
+        </div>
+        
+       
+        
+    </div>
+</div>

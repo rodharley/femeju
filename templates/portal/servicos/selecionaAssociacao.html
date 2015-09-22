@@ -10,17 +10,13 @@
           <div class="panel-body">               
             <div class="list-group">
   <a href="#" class="list-group-item active">
-    Menu
+    Selecione a Associação
   </a>
-    <a href="portal_servicos-selecionaAssociacao?serv=gerenciarAtletas" class="list-group-item">
+  <!-- BEGIN BLOCK_ASSOCIACAO -->
+    <a href="portal_servicos-{SERVICO}?associacao={ID_RASH}" class="list-group-item">
       <span class="glyphicon glyphicon-chevron-right"></span>
-      Gerenciar Atletas</a>
-   <a href="portal_servicos-carteira" class="list-group-item">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      Imprimir Carteririnha</a>
-    <a href="portal_servicos-logoff" class="list-group-item">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      Sair</a>
+      {NOME_ASSOCIACAO}</a>
+  <!-- END BLOCK_ASSOCIACAO -->   
 </div>       
             
           </div>

@@ -1,19 +1,42 @@
-<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
-<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
-<form role="form" method="post" action="admin_atleta-action" id="frmEditAtleta" enctype="multipart/form-data" autocomplete="off">
-    <div class="box box-primary">
-        <div class="box-header">
-            <h3 class="box-title">{LABEL}</h3>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                                <img src="img/icones/servicos.png" />
+                            </div>
+            <h2>Gerencia de Atletas</h2>
         </div>
-        <div class="box-body">
-
-            <input type="hidden" name="id" id="id" value="{id}"/>
-             <input type="hidden" name="idPessoa" id="idPessoa" value="{ID_PESSOA}"/>
-            <input type="hidden" name="acao" value="{ACAO}"/>
-           
-            <fieldset><legend>Dados Pessoais</legend>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" method="post" action="portal_servicos-action" id="frmEditAtleta" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="id" value="{id}"/>
+                    <input type="hidden" name="idPessoa" id="idPessoa" value="{ID_PESSOA}"/>
+                    <input type="hidden" name="acao" value="{ACAO}"/>       
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">{LABEL}</h3>
+                        </div>
+                        <div class="box-body">
+                              <fieldset>
+                                <legend>
+                                    Associação
+                                </legend>
+                                <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                        <label for="nomeAssociacao"><i class='fa'></i><b>Nome da Associação</b></label>
+                                        <input type="text" class="form-control" value="{NOME_ASSOCIACAO}" disabled/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 text-right">
+                                <img class="img-circle img-responsive right-side" src="img/associacoes/{LOGO_ASSOCIACAO}" style="width: 30%"/>
+                                </div>
+                                </div>
+                                </fieldset>
+                                    
+                               <fieldset><legend>Dados Pessoais</legend>
             <div class="row">
-                <div class="col-md-4 col-xs-4">
+                <div class="col-md-8 col-xs-8">
                     <div class="form-group">
                         <label for="nome"><i class='fa'></i><b>Nome</b></label>
                         <input type="text" id="nome" name="nome" placeholder="Nome do Atleta" value="{NOME}" class="required form-control"/>
@@ -25,12 +48,7 @@
                         <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobre nome do atleta" value="{SOBRE_NOME}" class="form-control"/>
                     </div>
                 </div>
-                <div class="col-md-4 col-xs-4">
-                    <div class="form-group">
-                        <label for="ativo"><i class='fa'></i><b>Ativo</b></label><br/>
-                        <input type="radio" class="required form-control" name="ativo" value="1" {CHECKED_ATIVO}/> Ativo &nbsp;&nbsp;<input type="radio" class="required form-control"  name="ativo" value="0" {CHECKED_INATIVO}/> Inativo
-                    </div>
-                </div>
+               
             </div>
             <div class="row">
                 <div class="col-md-4 col-xs-4">
@@ -79,6 +97,7 @@
                     <div class="form-group">
                         <label for="sexo"><i class='fa'></i><b>Sexo</b></label><br/>
                         <select class="form-control required" name="sexo">
+                            <option value="" selected>Selecione</option>
                             <option value="F" {SELECTED_FEMININO}>Feminino</option>
                             <option value="M" {SELECTED_MASCULINO}>Masculino</option>
                         </select>
@@ -114,7 +133,7 @@
                 </div>
                 
             </div>  
-            </fieldset>    
+            </fieldset> 
             <fieldset><legend>Endereço</legend>
                 <div class="row">
                 <div class="col-md-6 col-xs-6">
@@ -208,21 +227,36 @@
             </div> 
             </div>
         </div>
-        </fieldset>
-        <div class="box-footer text-center">
-            <button class="btn btn-success" id="save" type="submit">
+        </fieldset>                   
+                            
+
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                        <div class="panel-footer text-right">
+                            <button class="btn btn-success" id="save" type="submit">
                 Salvar
             </button>
             <button class="btn btn-default btVoltar" type="button">
                 Cancelar
             </button>
-        </div>
+                        </div>
 
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
-</form>
+</div>
+<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
+<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
 <script>
 
-	$(document).ready(function() {
+    $(document).ready(function() {
         $('#dataNascimento').datepicker();
         $('#dataFiliacao').datepicker();
         $('#dataEmissaoCarteira').datepicker();
@@ -337,5 +371,5 @@
             });
 
         });
-	});
+    });
 </script>

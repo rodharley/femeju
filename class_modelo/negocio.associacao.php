@@ -24,6 +24,9 @@ class Associacao extends Persistencia {
 public function listaAtivas(){
     return $this->getRows(0,9999,array(),array("ativo"=>"=1"));
 }
+public function listaPorResponsavelAtivas($responsavel){
+    return $this->getRows(0,9999,array(),array("ativo"=>"=1","responsavel"=>"=$responsavel"));
+}
 
 function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $sql = "select count(id) as total from ".$this::TABELA." where 1 = 1 ";
@@ -74,6 +77,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->midiaSocial = $_REQUEST['midiaSocial'];
         $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
         $this->telefone2 = $this->limpaDigitos($_REQUEST['telefone2']);
+        $this->logomarca = "nologo.png";
         if ($_FILES['logomarca']['name'] != "") {
             //incluir imagem se ouver
             $nomefoto = $this -> retornaNomeUnico($_FILES['logomarca']['name'], "img/associacoes/");
@@ -139,8 +143,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
     }
     
      function Alterar() {
-        $this -> getById($_REQUEST['id']);
-        
+        $this -> getById($_REQUEST['id']);        
         $this -> nome = $_REQUEST['nome'];
         $this -> descricao = $_REQUEST['descricao'];
         $this -> razaoSocial = $_REQUEST['razaoSocial'];
@@ -157,10 +160,8 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->midiaSocial = $_REQUEST['midiaSocial'];
         $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
         $this->telefone2 = $this->limpaDigitos($_REQUEST['telefone2']);
-          
-        
          if ($_FILES['logomarca']['name'] != "") {
-            if ($this -> logomarca != "")
+            if ($this -> logomarca != "nologo.png")
                 $this -> apagaImagem($this -> logomarca, "img/associacoes/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['logomarca']['name'], "img/associacoes/");
             $this -> uploadImagem($_FILES['logomarca'], $nomefoto, "img/associacoes/");
@@ -201,7 +202,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
                 $objUser -> pessoa = $objPessoa;
                 $objUser -> save();
                 $email = new Email();
-                $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
+                $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);            
             }
             
         }else{
