@@ -11,9 +11,11 @@ $uf = new Uf();
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/servicos/gerenciarAtletas.html");
-
-$rsAtletas = $atleta->listaPorAssociacaoAtivos($atleta->md5_decrypt($_REQUEST['associacao']));
-
+$idAssociacao = $atleta->md5_decrypt($_REQUEST['associacao']);
+$rsAtletas = $atleta->listaPorAssociacaoAtivos($idAssociacao);
+$associacao->getById($idAssociacao);
+$TPL->ASSOCIACAO = $associacao->nome;
+$TPL->ID_ASS_RASH = $_REQUEST['associacao'];
 foreach ($rsAtletas as $key => $a) {
 	$TPL->NOME_ATLETA = $a->pessoa->nome;
     $TPL->SOBRENOME_ATLETA = $a->pessoa->sobrenome;
@@ -21,7 +23,6 @@ foreach ($rsAtletas as $key => $a) {
     $TPL->ID_RASH = $associacao->md5_encrypt($a->id);
     $TPL->block("BLOCK_ATLETA");
 }
-$TPL->ASSOCIACAO = $a->associacao->nome;
-$TPL->ID_ASS_RASH = $_REQUEST['associacao'];
+
 $TPL->show();
 ?>
