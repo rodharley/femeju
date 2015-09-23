@@ -197,14 +197,19 @@
              <div class="col-md-6 col-xs-6">
                 <div class="form-group">
                         <label for="graduacao"><i class='fa'></i><b>Graduação</b></label>
+                        <input type="hidden" name="graduacao" id="graduacao" value="{GRADUACAO}" class="required form-control" />
                         <div class="row">
                             <div class="col-md-12 col-xs-12">
-                                <input type="hidden" name="graduacao" id="graduacao" value="{GRADUACAO}" class="required form-control" />
-                        <!-- BEGIN BLOCK_BELT -->
-                        <div class="btn btn-{BELT_BTN} bt_belt" value="{BELT_ID}"><img style="background:{BELT_COLOR}; width:50px; height: 20px;" src="img/icones/{BELT_IMG}"/><br/> {BELT_NAME}</div>
-                        <!-- END BLOCK_BELT -->
-                        </div>
-                    </div>
+                             <img id="belt_img_selected" style="background:{BELT_COLOR_SELECTED}; width:50px; height: 20px;" src="img/icones/belt_icon.png"/>
+                            <span id="belt_text_selected">{BELT_NAME_SELECTED}</span>   
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalGraduacao">
+                        <i class="fa fa-list"></i>
+                        Selecione
+                        </button>
+                        <button class="btn btn-success btn-xs"><i class="fa fa-list"></i> Histórico</button>
+                        
+                        </div></div>
+                       
             </div> 
             </div>
         </div>
@@ -220,10 +225,42 @@
 
     </div>
 </form>
+<div class="modal fade" id="modalGraduacao">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Selecione a Graduação</h4>
+      </div>
+      <div class="modal-body">
+      
+       <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <ul class="list-group">
+           <!-- BEGIN BLOCK_BELT -->
+          <li class="list-group-item bt_belt" value="{BELT_ID}" btext="{BELT_NAME}" bcolor="{BELT_COLOR}" >
+            <img style="background:{BELT_COLOR}; width:25px; height: 10px;" src="img/icones/belt_icon.png"/>
+             {BELT_FAIXA} - {BELT_NAME}
+          </li>
+           <!-- END BLOCK_BELT -->
+        </ul>                          
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <script>
 
 	$(document).ready(function() {
-        $('#dataNascimento').datepicker();
+	    
+	    $('#dataNascimento').datepicker();
         $('#dataFiliacao').datepicker();
         $('#dataEmissaoCarteira').datepicker();
         $("#cpf").inputmask({ mask: "999.999.999-99"});
@@ -289,7 +326,7 @@
         var as = new bsn.AutoSuggest('nome', options); 
          <!-- END BLOCK_NOVO_ATLETA -->
         $(".bt_belt").click(function(){
-            $( ".bt_belt" ).each(function() {
+            /*$( ".bt_belt" ).each(function() {
               $( this ).removeClass( "btn-primary" );  
               $( this ).addClass( "btn-default" );
               $( this ).find("img").attr("src",'img/icones/belt_icon.png');
@@ -297,8 +334,11 @@
             $( this ).addClass( "btn-primary" );
             $( this ).removeClass( "btn-default" );
            $( this ).find("img").attr("src",'img/icones/belt_icon_select.png');
-            
+            */
+           $("#belt_img_selected").css("background",$(this).attr("bcolor"));
+           $("#belt_text_selected").html($(this).attr("btext"));
             $("#graduacao").val($(this).attr("value"));
+            $("#modalGraduacao").modal('hide');
         });
     
     $("#foto").fileinput({

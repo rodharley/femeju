@@ -108,13 +108,11 @@ if(isset($_REQUEST['id'])){
 foreach ($listaGrad as $key => $value) {
     $TPL->BELT_COLOR = $value->imagem;
     if($selectedGrad == $value->id){
-        $TPL->BELT_BTN = "primary";
-        $TPL->BELT_IMG = "belt_icon_select.png";
-    }else{
-        $TPL->BELT_BTN = "default";
-        $TPL->BELT_IMG = "belt_icon.png";
+        $TPL->BELT_COLOR_SELECTED = $value->imagem;        
+        $TPL->BELT_NAME_SELECTED = $value->descricao;
     }
     $TPL->BELT_NAME = $value->descricao;
+    $TPL->BELT_FAIXA = $value->faixa;
     $TPL->BELT_ID = $value->id;
 	$TPL->block("BLOCK_BELT");
 }
