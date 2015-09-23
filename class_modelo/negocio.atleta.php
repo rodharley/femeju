@@ -12,6 +12,10 @@ class Atleta extends Persistencia {
    public function listaPorAssociacaoAtivos($associacao){
     return $this->getRows(0,9999,array(),array("ativo"=>"=1","associacao"=>"=$associacao"));
 }
+  
+  public function getId(){
+      return str_pad($this->id,5,"0",STR_PAD_LEFT);
+  }
    
    function recuperaPorIdPessoa($idPessoa) {
         $id = isset($idPessoa) ? $idPessoa == "" ? "0" : $idPessoa  : "0";

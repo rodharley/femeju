@@ -52,6 +52,9 @@
 		.campo2 {
 			left: 175px;
 		}
+		.campo7 {
+            left: 259px;
+        }
 		.campo3 {
 			left: 299px;
 		}
@@ -97,10 +100,10 @@
         <div id="carteira">
             <div class="linha">
                 <div id="nacionalidade" class="linha1 campo campo1">
-                    Brasileiro
+                    {NACIONALIDADE}
                 </div>
                 <div id="naturalidade" class="linha1 campo campo2">
-                    São Paulo
+                    {NATURALIDADE}
                 </div>
             </div>
             <div class="linha">
@@ -108,44 +111,53 @@
                     3.443.868
                 </div>
                 <div id="cpf" class="linha2 campo campo2">
-                    000.073.119-66
+                    {CPF}
                 </div>
                 <div id="dtNascimento" class="linha2 campo campo3">
-                    12/03/1976
+                    {DATA_NASCIMENTO}
                 </div>
                 <div id="foto" class="foto campo">
-                    <img src="img/atletas/atleta.png" width="120" height="144">
+                    <img src="img/pessoas/{FOTO}" width="120" height="144">
                 </div>
             </div>
 
             <div class="linha">
                 <div id="" class="linha3 campo campo1">
-                   Hercules Armenio C. Cruz e Eliana Almeida C. Cruz
+                   {FILIACAO}
                 </div>                
             </div>
             <div class="linha">
                 <div id="" class="linha4 campo campo1">
-                   Acorpore Brasil
+                   {ASSOCIACAO}
                 </div>                
             </div>
             <div class="linha">
                 <div id="" class="linha5 campo campo1">
-                    3242342
+                   
                 </div>
                 <div id="" class="linha5 campo campo2">
-                    343443
+                   {REGISTRO_CBJ}
                 </div>
                 <div id="" class="linha5 campo campo3">
-                    12/03/1976
+                    {DATA_REGISTRO}
+                </div>
+            </div>
+             <div class="linha">
+                <div id="" class="linha6 campo campo1">
+                    Brasília,{DATA_EMISSAO}
+                </div>
+                
+                <div id="" class="linha6 campo campo7 text-center">
+                   <img src="img/assinatura.png" width="100"/>
                 </div>
             </div>
             <div class="linha">
                 <div id="nome" class="campo">
-                    Rodrigo Armênio Camilo Cruz<br/>
-                    Reg. nº: 3445455-2
+                    {NOME}<br/>
+                    Reg. nº: {REGISTRO}
                 </div>
                 <div id="qrcode" class="campo">
-                    <img src="img/qrcode.png" width="70">
+                    <img src="qrcode.php?code={REGISTRO}" width="70">
                 </div>
                 
             </div>
