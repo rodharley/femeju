@@ -53,10 +53,12 @@ class Atleta extends Persistencia {
             return false;
     }
     
-	function pesquisarTotal($nome = "",$associacao = "",$ativo = "") {
+	function pesquisarTotal($nome = "",$associacao = "",$ativo = "",$naoverf = "") {
         $sql = "select count(a.id) as total from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao where 1 = 1 ";
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
+		if($naoverf != "")
+            $sql .= " and p.bitVerificado = $naoverf"; 
         if ($nome != "")
             $sql .= " and ( p.nome like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
@@ -65,10 +67,11 @@ class Atleta extends Persistencia {
         return $this -> DAO_Result($rs, "total", 0);
     }
 
-    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$ativo = "") {
+    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$ativo = "",$naoverf = "") {
 
         $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
-        
+        if($naoverf != "")
+            $sql .= " and p.bitVerificado = $naoverf";
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
         if ($nome != "")
