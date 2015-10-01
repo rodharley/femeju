@@ -22,6 +22,13 @@ switch ($_REQUEST['acao']){
         header("Location:admin_atleta-main");
         exit();
 		break;
+	case 'verificar' :
+        $conn->connection->autocommit(false);
+        $obj->Verificar($_REQUEST['id']);
+        $conn->connection->commit();
+        header("Location:admin_atleta-main");
+        exit();
+		break;
 	case 'excluir' :
 		$obj->Excluir($_REQUEST['id']);
         header("Location:admin_atleta-main");

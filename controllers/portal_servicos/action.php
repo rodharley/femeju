@@ -22,13 +22,9 @@ switch ($_REQUEST['acao']){
 		$usu->AlterarMeusDados();
 		break;
     case 'incluirAlteta' :
-        $atleta->Incluir();
+        $atleta->IncluirPortal();
         header("Location:portal_servicos-main");
-        break;
-    case 'editarAtleta' :
-        $atleta->Alterar();
-        header("Location:portal_servicos-main");
-        break;	
+        break;    
 }
 }
 ?>

@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="imagens"><i class='fa'></i><b>Adicionar Imagens:</b></label>
                     <input type="file"  name="imagens[]" id="imagens" multiple="multiple"/>
-                    <a class="btn btn-primary" id="addImages" > Enviar Fotos </a>
+                    <br/><a class="btn btn-primary" id="addImages" > Enviar Fotos </a>
                 </div>
             </div>        
             
@@ -102,11 +102,11 @@
 		});
 
 		$("#imagens").fileinput({
-			maxFileSize : 2000,
+			maxFileSize : 30000,
 			maxFilesNum : 30,
-			allowedFileExtensions : ["jpg", "jpeg", "gif", "png"],
+			allowedFileExtensions : ["jpg", "jpeg", "gif", "png","mp4"],
 			previewClass : "bg-warning",
-			allowedFileTypes : ["image"],
+			allowedFileTypes : ["image","video"],
 			showUpload : false,
 			showCaption : false
 		});

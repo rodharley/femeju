@@ -39,6 +39,9 @@ $selectedCidadeNaturalidade = 0;
 $selectedAs = 0;
 $TPL->CHECKED_ATIVO = "checked";
 $TPL->CHECKED_INATIVO = "";
+$TPL->CHECKED_ATLETA = "";
+$TPL->CHECKED_TECNICO = "";
+$TPL->CHECKED_ARBITRO = "";
 $listaUf = $uf->getRows();
 $listaGrad = $objGrad->getRows();
 $listaAssociacao = $objAssociacao->listaAtivas();
@@ -52,6 +55,16 @@ if(isset($_REQUEST['id'])){
     $TPL->SOBRE_NOME = $objAtleta->pessoa->sobrenome;
     $TPL->CHECKED_ATIVO = $objAtleta->ativo ? "checked" : "";
     $TPL->CHECKED_INATIVO = !$objAtleta->ativo ? "checked" : "";
+    $TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
+	$TPL->CHECKED_TECNICO = $objAtleta->bitTecnico ? "checked" : "";	
+	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : ""; 
+	$TPL->NUMERO_FEMEJU = $objAtleta->getId();
+	if($objAtleta->pessoa->bitVerificado)
+	$TPL->VERIFICADO  = "Sim";
+	else {
+		$TPL->block("BLOCK_VERIFICAR");
+	}
+	   
     $TPL->NACIONALIDADE = $objAtleta->pessoa->nacionalidade;
     $TPL->EMAIL = $objAtleta->pessoa->email;
     $TPL->DATA_NASCIMENTO = $objAtleta->convdata($objAtleta->pessoa->dataNascimento,"mtn");
@@ -66,6 +79,20 @@ if(isset($_REQUEST['id'])){
     $TPL->REGISTRO_CONF = $objAtleta->registroConfederacao;
     $TPL->DATA_FILIACAO = $objAtleta->convdata($objAtleta->dataFiliacao,"mtn");
     $TPL->DATA_EMISSAO_CART = $objAtleta->convdata($objAtleta->dataEmissaoCarteira,"mtn");        
+    $TPL->APELIDO = $objAtleta->pessoa->apelido;
+	$TPL->FILIACAO_PAI  = $objAtleta->pessoa->filiacaoPai;
+    $TPL->FILIACAO_MAE  = $objAtleta->pessoa->filiacaoMae;
+    $TPL->TELEFONE_COM = $objAtleta->pessoa->telComercial;
+	$TPL->WEB_SITE =  $objAtleta->pessoa->webSite;
+	$TPL->MIDIA_SOCIAL =  $objAtleta->pessoa->midiaSocial;
+	$TPL->VACINAS = $objAtleta->pessoa->vacinas;
+	$TPL->RG = $objAtleta->pessoa->rg;
+	$TPL->RG_ORGAO_EXP = $objAtleta->pessoa->rgOrgaoExpedidor;
+	$TPL->RG_DATA_EXP = $objAtleta->convdata($objAtleta->pessoa->rgDataExp,"mtn");
+	$TPL->PASSAPORTE = $objAtleta->pessoa->passaporte;
+	$TPL->PASSAPORTE_VAL = $objAtleta->convdata($objAtleta->pessoa->passaporteDataVal,"mtn");
+	$TPL->PASSAPORTE_ORGAO_EXP = $objAtleta->pessoa->passaporteOrgao;
+	$TPL->PASSAPORTE_DATA_EXP = $objAtleta->convdata($objAtleta->pessoa->passaporteDataExp,"mtn");
     $selectedUfNat = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->uf->id:0;
     $selectedUf = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->uf->id: 0;    
     $selectedGrad = $objAtleta->graduacao != null ? $objAtleta->graduacao->id : 0; 

@@ -15,7 +15,16 @@
                      <div class="row">
                     
                     <div class="col-lg-2" >                       
-                        <div class="thumb" style="background-image: url('img/galeria/{imagem}');"> </div>                        
+                        <div class="thumb"> 
+                        	<!-- BEGIN BLOCK_IMG -->
+      <img src="img/galeria/{IMAGEM}" alt="{IMAGEM}">
+      <!-- END BLOCK_IMG -->
+      <!-- BEGIN BLOCK_VIDEO -->
+      <video width="100%">
+  		<source src="img/galeria/{IMAGEM}" type="video/mp4">
+  		</video>
+      <!-- END BLOCK_VIDEO -->
+                        	</div>                        
                     </div>
                     
                     <div class="col-lg-10" >

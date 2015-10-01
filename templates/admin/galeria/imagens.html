@@ -1,7 +1,14 @@
 <!-- BEGIN BLOCK_IMAGEM -->
 <div class="col-sm-2 col-md-2">
     <div class="thumbnail">
+      <!-- BEGIN BLOCK_IMG -->
       <img src="img/galeria/{IMAGEM}" alt="{IMAGEM}">
+      <!-- END BLOCK_IMG -->
+      <!-- BEGIN BLOCK_VIDEO -->
+      <video height="130" controls>
+  		<source src="img/galeria/{IMAGEM}" type="video/mp4">
+  		</video>
+      <!-- END BLOCK_VIDEO -->
       <div class="caption">
         <p><a href="#" class="btn btn-danger btn-xs btn_excluir_imagem" role="button" value='{ID_IMG_HASH}'><span class="fa fa-trash-o"> </span></a></p>
       </div>

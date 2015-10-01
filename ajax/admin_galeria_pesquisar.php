@@ -13,6 +13,11 @@ if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $objImg = $img->retornaUmaImagem($n->id);
     $TPL->foto = $objImg->imagem;    
+	if(strtolower(substr($objImg->imagem,strlen($objImg->imagem)-3)) == "mp4"){
+    	$TPL->block("BLOCK_VIDEO");
+    }else{
+    	$TPL->block("BLOCK_IMG");
+    }
     $TPL->titulo = $n->titulo;
     $TPL->data = $galeria->convdata($n->data,"mtnh");
     $TPL->ID_HASH = $galeria->md5_encrypt($n->id);

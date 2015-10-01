@@ -49,6 +49,7 @@ Exemplos de mensagens:
 <mensagem id="43" type="success">Atleta excluido com sucesso.</mensagem>
 <mensagem id="44" type="warning">Falha ao incluir atleta, pessoa ja cadastrada como atleta.</mensagem>
 <mensagem id="45" type="warning">O atleta foi excluído, porém os dados pessoais não foram deletados porque os mesmos estão relacionados a outras atividades no sistema.</mensagem>
+<mensagem id="46" type="success">Atleta incluído na base com sucesso.</mensagem>
 </mensagens>
 
 

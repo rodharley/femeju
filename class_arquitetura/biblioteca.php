@@ -400,7 +400,7 @@ else
 
 
 		function convdata($dataentra,$tipo){
-
+		if(strlen($dataentra) > 0 ){
 		  if ($tipo == "mtn") {
 
 			$datasentra = explode("-",$dataentra);
@@ -452,10 +452,13 @@ else
 
 		  } else {
 
-			$datasaida = "erro";
+			$datasaida = "";
 
 		  }
-
+		
+		}else{
+			$datasaida = "";
+		}
 		  return $datasaida;
 
 		}

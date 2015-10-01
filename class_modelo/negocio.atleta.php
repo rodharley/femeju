@@ -5,6 +5,10 @@ class Atleta extends Persistencia {
    var $dataEmissaoCarteira;
    var $registroConfederacao;
    var $ativo;
+   var $numeroFemeju;
+   var $bitAtleta;
+   var $bitArbitro;
+   var $bitTecnico;
    var $graduacao = NULL;
    var $associacao = NULL;        
    var $pessoa = NULL;
@@ -14,7 +18,28 @@ class Atleta extends Persistencia {
 }
   
   public function getId(){
-      return str_pad($this->id,5,"0",STR_PAD_LEFT);
+      return strlen($this->numeroFemeju) > 0 ? str_pad($this->numeroFemeju,5,"0",STR_PAD_LEFT) : "";
+  }
+  
+  public function getSituacao(){
+  	if($this->pessoa->bitVerificado == 0)
+		return "Aguardando Verificação";
+	else if($this->ativo == 0)
+		return "Irregular";
+	else {
+		return "Regular";
+	}
+  }
+  
+  public function getProximoNumero(){
+  	$sql = "select max(numeroFemeju)+1 as numero from ".$this::TABELA;
+  	$rs = $this->DAO_ExecutarQuery($sql);
+	$numero = $this->DAO_Result($rs, "numero", 0);
+	if($numero == NULL)
+		return 1;
+	else {
+		return $numero;
+	}
   }
    
    function recuperaPorIdPessoa($idPessoa) {
@@ -56,6 +81,15 @@ class Atleta extends Persistencia {
 
     }
 	
+	function Verificar($id){
+		$this -> getById($id);
+		$this->numeroFemeju = $this->getProximoNumero();
+		$this->pessoa->bitVerificado = 1;
+		$this->pessoa->save();
+		$this->save();
+		$_SESSION['fmj.mensagem'] = 46;
+	}
+	
     function Incluir() {
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
         $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
@@ -84,6 +118,21 @@ class Atleta extends Persistencia {
             $pessoa->cidade = $cidadeEndereco;
             $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
             $pessoa -> foto = "pessoa.png";
+			$pessoa ->bitVerificado = 1;
+			$pessoa ->apelido = $_REQUEST['apelido'];
+			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
+			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
+			$pessoa ->rg = $_REQUEST['rg'];
+			$pessoa ->rgOrgaoExpedidor = $_REQUEST['rgOrgaoExpedidor'];
+			$pessoa ->rgDataExp = $this->convdata($_REQUEST['rgDataExp'], "ntm");
+			$pessoa ->passaporte = $_REQUEST['passaporte'];
+			$pessoa ->passaporteDataVal = $this->convdata($_REQUEST['passaporteDataVal'], "ntm");
+			$pessoa ->passaporteOrgao = $_REQUEST['passaporteOrgao'];
+			$pessoa ->passaporteDataExp = $this->convdata($_REQUEST['passaporteDataExp'], "ntm");		
+			$pessoa ->vacinas = $_REQUEST['vacinas'];
+			$pessoa ->webSite = $_REQUEST['webSite'];
+			$pessoa ->midiaSocial = $_REQUEST['midiaSocial'];
+			$pessoa ->telComercial  = $this->limpaDigitos($_REQUEST['telefoneCom']);			
             if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
             $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
@@ -92,6 +141,7 @@ class Atleta extends Persistencia {
             }
             $idPessoa = $pessoa->save();            
             //salva o atleta
+            $this->numeroFemeju = $this->getProximoNumero();
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
             $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
             $this->registroConfederacao = $_REQUEST['registroConf'];
@@ -99,6 +149,9 @@ class Atleta extends Persistencia {
             $this->associacao = $associacao;
             $this->graduacao = $graduacao;
             $this->pessoa = $pessoa;
+			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
+			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
+			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
             $this->save();
             $_SESSION['fmj.mensagem'] = 41;
             return true;
@@ -130,7 +183,20 @@ class Atleta extends Persistencia {
             $pessoa->bairro = $_REQUEST['bairro'];
             $pessoa->cidade = $cidadeEndereco;
             $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
-            
+            $pessoa ->apelido = $_REQUEST['apelido'];
+			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
+			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
+			$pessoa ->rg = $_REQUEST['rg'];
+			$pessoa ->rgOrgaoExpedidor = $_REQUEST['rgOrgaoExpedidor'];
+			$pessoa ->rgDataExp = $this->convdata($_REQUEST['rgDataExp'], "ntm");
+			$pessoa ->passaporte = $_REQUEST['passaporte'];
+			$pessoa ->passaporteDataVal = $this->convdata($_REQUEST['passaporteDataVal'], "ntm");
+			$pessoa ->passaporteOrgao = $_REQUEST['passaporteOrgao'];
+			$pessoa ->passaporteDataExp = $this->convdata($_REQUEST['passaporteDataExp'], "ntm");		
+			$pessoa ->vacinas = $_REQUEST['vacinas'];
+			$pessoa ->webSite = $_REQUEST['webSite'];
+			$pessoa ->midiaSocial = $_REQUEST['midiaSocial'];
+			$pessoa ->telComercial  = $this->limpaDigitos($_REQUEST['telefoneCom']);	
             if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
             if ($pessoa -> foto != "pessoa.png")
@@ -145,16 +211,84 @@ class Atleta extends Persistencia {
             $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
             $this->registroConfederacao = $_REQUEST['registroConf'];
             $this->ativo = isset($_REQUEST['ativo'])?$_REQUEST['ativo']:"1";
+			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
+			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
+			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
             $this->associacao = $associacao;
             $this->graduacao = $graduacao;
             $this->pessoa = $pessoa;
+			
             $this->save();
             $_SESSION['fmj.mensagem'] = 42;
             return true;
             
         }
 function IncluirPortal() {
-       
+       $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+        $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
+        $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
+        $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
+        $graduacao = $_REQUEST['associacao'] != "" ? new Graduacao($_REQUEST['associacao']) : null;
+        $pessoa = new Pessoa();
+        
+        if($this->recuperaPorIdPessoa($_REQUEST['idPessoa'])){
+           $_SESSION['fmj.mensagem'] = 44;
+           return false; 
+        }else{               
+            $pessoa->getById($_REQUEST['idPessoa']);
+            $pessoa->nome =  $_REQUEST['nome'];
+            $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
+            $pessoa->naturalidade = $cidadeNascimento;
+            $pessoa->email = $_REQUEST['email'];
+            $pessoa->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
+            $pessoa->sexo = $_REQUEST['sexo'];
+            $pessoa->cpf = $strCPF;
+            $pessoa->telCelular = $this->limpaDigitos($_REQUEST['telefoneCel']);
+            $pessoa->telResidencial = $this->limpaDigitos($_REQUEST['telefoneRes']);
+            $pessoa->endereco = $_REQUEST['endereco'];
+            $pessoa->bairro = $_REQUEST['bairro'];
+            $pessoa->cidade = $cidadeEndereco;
+            $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
+            $pessoa -> foto = "pessoa.png";
+			$pessoa ->bitVerificado = 0;
+			$pessoa ->apelido = $_REQUEST['apelido'];
+			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
+			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
+			$pessoa ->rg = $_REQUEST['rg'];
+			$pessoa ->rgOrgaoExpedidor = $_REQUEST['rgOrgaoExpedidor'];
+			$pessoa ->rgDataExp = $this->convdata($_REQUEST['rgDataExp'], "ntm");
+			$pessoa ->passaporte = $_REQUEST['passaporte'];
+			$pessoa ->passaporteDataVal = $this->convdata($_REQUEST['passaporteDataVal'], "ntm");
+			$pessoa ->passaporteOrgao = $_REQUEST['passaporteOrgao'];
+			$pessoa ->passaporteDataExp = $this->convdata($_REQUEST['passaporteDataExp'], "ntm");		
+			$pessoa ->vacinas = $_REQUEST['vacinas'];
+			$pessoa ->webSite = $_REQUEST['webSite'];
+			$pessoa ->midiaSocial = $_REQUEST['midiaSocial'];
+			$pessoa ->telComercial  = $this->limpaDigitos($_REQUEST['telefoneCom']);
+			if ($_FILES['foto']['name'] != "") {
+            //incluir imagem se ouver
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
+            $pessoa -> foto = $nomefoto;
+            }
+            $idPessoa = $pessoa->save();            
+            //salva o atleta
+            $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
+            $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
+            $this->registroConfederacao = $_REQUEST['registroConf'];
+            $this->ativo = 0;
+			$this->numeroFemeju = NULL;
+            $this->associacao = $associacao;
+            $this->graduacao = $graduacao;
+            $this->pessoa = $pessoa;
+			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
+			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
+			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
+            $this->save();
+            $_SESSION['fmj.mensagem'] = 41;
+            return true;
+            }
     }
 function Excluir($id) {
         $this -> getById($this -> md5_decrypt($id));

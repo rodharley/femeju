@@ -15,7 +15,13 @@ foreach ($rspost as $key => $post) {
     $img = $img->retornaUmaImagem($post->id);
     $TPL->post_data = $obj->convdata($post->data,"mtn");
 	$TPL->post_titulo = $post->titulo;
-    $TPL->imagem = $img->imagem;	
+    $TPL->IMAGEM = $img->imagem;
+    if(strtolower(substr($img->imagem,strlen($img->imagem)-3)) == "mp4"){
+    	$TPL->block("BLOCK_VIDEO");
+    }else{
+    	$TPL->block("BLOCK_IMG");
+    }
+    	
     $TPL->ID_HASH = $obj->md5_encrypt($post->id);
     $TPL->block("BLOCK_POST");
     

@@ -56,6 +56,10 @@ set
 		<atrib tbname="dataEmissaoCarteira" type="txt">dataEmissaoCarteira</atrib>	
 		<atrib tbname="registroConfederacao" type="txt">registroConfederacao</atrib>		
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>		
+		<atrib tbname="numeroFemeju" type="int">numeroFemeju</atrib>
+		<atrib tbname="bitAtleta" type="int">bitAtleta</atrib>
+		<atrib tbname="bitArbitro" type="int">bitArbitro</atrib>
+		<atrib tbname="bitTecnico" type="int">bitTecnico</atrib>
 		<atrib tbname="idPessoa" type="fk" clrelation="Pessoa">pessoa</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">associacao</atrib>				
@@ -145,14 +149,29 @@ set
 		<atrib tbname="idCidade" type="fk" clrelation="Cidade">cidade</atrib>
 		<atrib tbname="cep" type="txt">cep</atrib>
 		<atrib tbname="telCelular" type="txt">telCelular</atrib>
-		<atrib tbname="telResidencial" type="txt">telResidencial</atrib>
+		<atrib tbname="telResidencial" type="txt">telResidencial</atrib>		
 		<atrib tbname="email" type="txt">email</atrib>
 		<atrib tbname="dataNascimento" type="txt">dataNascimento</atrib>
 		<atrib tbname="foto" type="txt">foto</atrib>
 		<atrib tbname="cpf" type="txt">cpf</atrib>	
 		<atrib tbname="nacionalidade" type="txt">nacionalidade</atrib>	
+		<atrib tbname="bitVerificado" type="int">bitVerificado</atrib>
 		<atrib tbname="sexo" type="txt">sexo</atrib>	
-		<atrib tbname="idCidadeNaturalidade" type="fk" clrelation="Cidade">naturalidade</atrib>			
+		<atrib tbname="apelido" type="txt">apelido</atrib>
+		<atrib tbname="filiacaoPai" type="txt">filiacaoPai</atrib>
+		<atrib tbname="filiacaoMae" type="txt">filiacaoMae</atrib>
+		<atrib tbname="rg" type="txt">rg</atrib>
+		<atrib tbname="rgOrgaoExpedidor" type="txt">rgOrgaoExpedidor</atrib>
+		<atrib tbname="rgDataExp" type="txt">rgDataExp</atrib>
+		<atrib tbname="passaporte" type="txt">passaporte</atrib>
+		<atrib tbname="passaporteDataVal" type="txt">passaporteDataVal</atrib>
+		<atrib tbname="passaporteOrgao" type="txt">passaporteOrgao</atrib>
+		<atrib tbname="passaporteDataExp" type="txt">passaporteDataExp</atrib>			
+		<atrib tbname="vacinas" type="txt">vacinas</atrib>
+		<atrib tbname="webSite" type="txt">webSite</atrib>
+		<atrib tbname="midiaSocial" type="txt">midiaSocial</atrib>
+		<atrib tbname="telComercial" type="txt">telComercial</atrib>
+		<atrib tbname="idCidadeNaturalidade" type="fk" clrelation="Cidade">naturalidade</atrib>		
 	</class>
 	<class name="Post" tbname="fmj_post" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

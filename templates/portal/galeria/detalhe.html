@@ -12,7 +12,14 @@
        <ul class="row">
            <!-- BEGIN BLOCK_ITEM -->
           <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-              <img class="img-responsive" width="100%" src="img/galeria/{IMAGEM}" alt="{IMAGEM}"/>              
+          	<!-- BEGIN BLOCK_IMG -->
+      			<img class="img-responsive" width="100%" src="img/galeria/{IMAGEM}" alt="{IMAGEM}"/>
+      		<!-- END BLOCK_IMG -->
+      		<!-- BEGIN BLOCK_VIDEO -->
+      			<video width="100%">
+  						<source src="img/galeria/{IMAGEM}" type="video/mp4">
+  				</video>
+      		<!-- END BLOCK_VIDEO -->                            
           </li>          
           <!-- END BLOCK_ITEM -->      
      </ul>     
@@ -30,6 +37,30 @@
     </div><!-- /.modal -->
     <script>
           $(document).ready(function(){
+          	$('li video').on('click',function(){
+                var src = $(this).children("source").attr('src');
+                var img = '<video width="100%" controls><source src="'+src+'" type="video/mp4"></video>';
+                
+                
+                  //Start of new code
+                var index = $(this).parent('li').index();
+                var html = '';
+                html += img;
+               
+                
+                
+                $('#modalImagem').modal();
+                $('#modalImagem').on('shown.bs.modal', function(){
+                    $('#modalImagem .modal-body').html(html);
+                      //this will hide or show the right links:
+                    $('a.controls').trigger('click');
+                });
+                $('#modalImagem').on('hidden.bs.modal', function(){
+                    $('#modalImagem .modal-body').html('');
+                });
+           });
+          	
+          	
            $('li img').on('click',function(){
                 var src = $(this).attr('src');
                 var img = '<img src="' + src + '" class="img-responsive"/>';

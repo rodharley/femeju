@@ -24,15 +24,27 @@ $selectedUfNat = 0;
 $selectedCidade = 0;
 $selectedGrad = 0;
 $selectedCidadeNaturalidade = 0;
-$selectedAs = 0;
+$TPL->CHECKED_ATLETA = "";
+$TPL->CHECKED_TECNICO = "";
+$TPL->CHECKED_ARBITRO = "";
 $listaUf = $uf->getRows();
 $listaGrad = $objGrad->getRows();
 $listaAssociacao = $objAssociacao->listaAtivas();
-if(isset($_REQUEST['id'])){    
+$TPL->ID_ASSOCIACAO = $objAssociacao->id;
+if(isset($_REQUEST['id'])){
+	$TPL->DISABLED = "disabled";    
     $objAtleta->getById($objAtleta->md5_decrypt($_REQUEST['id']));    
     $TPL->LABEL = "Alterar Atleta";
-    $TPL->ACAO = "editarAtleta";
+    $TPL->ACAO = "";
     $TPL->id = $objAtleta->id;
+	$TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
+	$TPL->CHECKED_TECNICO = $objAtleta->bitTecnico ? "checked" : "";	
+	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : ""; 
+	if($objAtleta->numeroFemeju != NULL)
+	$TPL->NUMERO_FEMEJU = $objAtleta->getId();	
+	$TPL->SITUACAO = $objAtleta->getSituacao();
+	$TPL->block("BLOCK_STATUS");
+	
     $TPL->ID_PESSOA = $objAtleta->pessoa->id;
     $TPL->NOME = $objAtleta->pessoa->nome;
     $TPL->SOBRE_NOME = $objAtleta->pessoa->sobrenome;    
@@ -49,7 +61,21 @@ if(isset($_REQUEST['id'])){
     $TPL->CEP = $objAtleta->pessoa->cep;
     $TPL->REGISTRO_CONF = $objAtleta->registroConfederacao;
     $TPL->DATA_FILIACAO = $objAtleta->convdata($objAtleta->dataFiliacao,"mtn");
-    $TPL->DATA_EMISSAO_CART = $objAtleta->convdata($objAtleta->dataEmissaoCarteira,"mtn");        
+    $TPL->DATA_EMISSAO_CART = $objAtleta->convdata($objAtleta->dataEmissaoCarteira,"mtn");   
+	$TPL->APELIDO = $objAtleta->pessoa->apelido;
+	$TPL->FILIACAO_PAI  = $objAtleta->pessoa->filiacaoPai;
+    $TPL->FILIACAO_MAE  = $objAtleta->pessoa->filiacaoMae;
+    $TPL->TELEFONE_COM = $objAtleta->pessoa->telComercial;
+	$TPL->WEB_SITE =  $objAtleta->pessoa->webSite;
+	$TPL->MIDIA_SOCIAL =  $objAtleta->pessoa->midiaSocial;
+	$TPL->VACINAS = $objAtleta->pessoa->vacinas;
+	$TPL->RG = $objAtleta->pessoa->rg;
+	$TPL->RG_ORGAO_EXP = $objAtleta->pessoa->rgOrgaoExpedidor;
+	$TPL->RG_DATA_EXP = $objAtleta->convdata($objAtleta->pessoa->rgDataExp,"mtn");
+	$TPL->PASSAPORTE = $objAtleta->pessoa->passaporte;
+	$TPL->PASSAPORTE_VAL = $objAtleta->convdata($objAtleta->pessoa->passaporteDataVal,"mtn");
+	$TPL->PASSAPORTE_ORGAO_EXP = $objAtleta->pessoa->passaporteOrgao;
+	$TPL->PASSAPORTE_DATA_EXP = $objAtleta->convdata($objAtleta->pessoa->passaporteDataExp,"mtn");     
     $selectedUfNat = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->uf->id:0;
     $selectedUf = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->uf->id: 0;    
     $selectedGrad = $objAtleta->graduacao != null ? $objAtleta->graduacao->id : 0; 
@@ -85,6 +111,7 @@ if(isset($_REQUEST['id'])){
 }ELSE{
     $TPL->block("BLOCK_NOVO_ATLETA2");
     $TPL->block("BLOCK_NOVO_ATLETA");
+	$TPL->block("BLOCK_NEW");
 }
 foreach ($listaGrad as $key => $value) {
     $TPL->BELT_COLOR = $value->imagem;
@@ -112,14 +139,6 @@ foreach ($listaGrad as $key => $value) {
       $TPL->block("BLOCK_UF_NATURALIDADE");
   }    
  
- foreach ($listaAssociacao as $key => $value) {
-     $TPL->SELECTED_AS = "";
-      $TPL->DESC_AS = $value->nome;
-      $TPL->ID_AS = $value->id;
-      if($selectedAs == $value->id)
-        $TPL->SELECTED_AS = "selected";
-      $TPL->block("BLOCK_AS");
-  } 
 
 $TPL->show();
 ?>

@@ -15,6 +15,21 @@ class Pessoa extends Persistencia {
         var $cpf;
 		var $nacionalidade;
 		var $sexo;
+		var $bitVerificado;
 		var $naturalidade = null;
+		var $apelido;
+		var $filiacaoPai;
+		var $filiacaoMae;
+		var $rg;
+		var $rgOrgaoExpedidor;
+		var $rgDataExp;
+		var $passaporte;
+		var $passaporteDataVal;
+		var $passaporteOrgao;
+		var $passaporteDataExp;			
+		var $vacinas;
+		var $webSite;
+		var $midiaSocial;
+		var $telComercial;
 }
 ?>
