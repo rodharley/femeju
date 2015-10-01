@@ -1,0 +1,57 @@
+<script>
+	$(document).ready(function() {
+
+		$('.excluir').click(function() {
+			if (confirm("Tem certeza que deseja excluir esse registro do sistema?")){
+				$.ajax({
+        		url:"admin_atleta-action",
+        		type : "POST",
+        		data:{acao:"excluirH",idAtleta: $("#id").val(), idHistorico: $(this).attr("id")}
+	        	}).done(function(data){
+	        		$("#boxHistoricos").html(data);
+	        	});
+			}
+				
+		});
+		
+		$('.editar').click(function() {
+			
+				$.ajax({
+        		url:"ajax/admin_formHistoricoGraduacao.php",
+        		dataType:"html",
+        		type : "POST",
+        		data:{acao:"editarH",idAtleta: $("#id").val(), idHistorico: $(this).attr("id")}
+	        	}).done(function(data){
+	        		$("#boxHistoricos").html(data);
+	        	});
+			
+				
+		});
+
+	});
+
+</script>
+
+<table class="table table-striped table-hover data-table">
+            <thead>
+                <tr>
+                    <th>Faixa</th>
+                    <th>Data</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <!-- BEGIN BLOCK_ITEM_LISTA -->
+                <tr>
+                     <td>{FAIXA}</td>                   
+                    <td>{DATA}</td>
+                    <td class="text-right" >
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default editar" id="{ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></button>
+                        <button type="button" class="btn btn-danger excluir" "#"  id="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
+                    </div></td>
+                    
+                </tr>
+
+                <!-- END BLOCK_ITEM_LISTA -->
+            </tbody>
+        </table>

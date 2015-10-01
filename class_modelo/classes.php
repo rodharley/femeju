@@ -10,6 +10,7 @@ require("negocio.email.php");
 require("negocio.graduacao.php");
 require("negocio.galeria.php");
 require("negocio.galeriaImagem.php");
+require("negocio.historicoGraduacao.php");
 require("negocio.log.php");
 require("negocio.menu.php");
 require("negocio.noticia.php");

@@ -8,7 +8,9 @@ class Graduacao extends Persistencia {
 	var $ordem;
 	var $bitAtivo; 
 
-
+function listaAtivas(){
+	return $this->getRows(0,999,array("ordem"=>"ASC"),array("bitAtivo"=>"=1"));
+}
 	function Incluir() {     
         $this -> descricao = $_REQUEST['descricao'];
         $this -> faixa = $_REQUEST['faixa'];

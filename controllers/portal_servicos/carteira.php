@@ -14,6 +14,8 @@ $TPL->DATA_REGISTRO = $atleta->convdata($atleta->dataFiliacao, "mtn");
 $TPL->FOTO = $atleta->pessoa->foto;
 $TPL->REGISTRO_CBJ = $atleta->registroConfederacao;
 $TPL->REGISTRO = $atleta->getId(); 
+$TPL->RG = $atleta->pessoa->rg;
+$TPL->FILIACAO = $atleta->pessoa->filiacaoPai." e ".$atleta->pessoa->filiacaoMae;
 $TPL->DATA_EMISSAO = date("d",strtotime($atleta->dataEmissaoCarteira))." de ".$atleta->mesExtenso(date("m",strtotime($atleta->dataEmissaoCarteira)))." de ".date("Y",strtotime($atleta->dataEmissaoCarteira));
 $TPL->show();
 ?>

@@ -1,0 +1,85 @@
+<script>
+	$(document).ready(function() {
+		 $('#dataH').datepicker();
+		$('.excluir').click(function() {
+			if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+				window.location.href = 'admin_atleta-action?acao=excluir&id=' + $(this).attr("value");
+		});
+		
+		$("#btCancela").click(function(){
+			$.ajax({
+        		url:"ajax/admin_listHistoricoGraduacao.php",
+        		data:{idAtleta:$("#id").val()}
+        	}).done(function(data){
+        		$("#boxHistoricos").html(data);
+        	});
+		});
+		
+		$("#btSave").click(function(){			
+			if($("#frmEditHistorico").valid()){
+				$.ajax({
+        		url:"admin_atleta-action",
+        		type : "POST",
+        		data:$("#frmEditHistorico").serialize()
+        	}).done(function(data){
+        		$("#boxHistoricos").html(data);
+        	});
+        }
+		});
+		
+		
+		$("#frmEditHistorico").validate({
+            errorClass : "help-inline",
+            errorElement : "div",
+            highlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').addClass('has-error');
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+            },
+            unhighlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error');
+                $(element).parents('.form-group').addClass('has-success');
+                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+            }            
+        });
+	});
+
+</script>
+<form role="form" method="post" action="admin_atleta-action" id="frmEditHistorico" enctype="multipart/form-data" autocomplete="off">
+			<input type="hidden" name="id" id="id" value="{ID_HIST}"/>
+             <input type="hidden" name="idAtleta" id="idAtleta" value="{ID_ATLETA}"/>
+            <input type="hidden" name="acao"  value="{ACAO}"/>
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">{LABEL}</h3>
+		</div>
+		<div class="box-body">
+			<div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="data"><i class='fa'> </i><b>Data</b></label>
+                        <input type="text" id="dataH" name="dataH" placeholder="Data da Graduação" value="{DATA}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
+                        <select class="form-control required" name="graduacao">
+                        	<!-- BEGIN BLOCK_GRADUACAO -->
+                        	<option {SELECTED} value="{ID_GRADUACAO}">{LABEL_GRADUACAO}</option>
+                        	<!-- END BLOCK_GRADUACAO -->
+                        </select>
+                    </div>
+                </div>                 
+            </div>
+		</div>
+		<div class="box-footer text-right">
+            <button class="btn btn-success" id="btSave" type="button">
+                Salvar
+            </button>
+            <button class="btn btn-default" id="btCancela" type="button">
+                Cancelar
+            </button>
+        </div>
+	</div>
+</form>

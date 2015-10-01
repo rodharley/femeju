@@ -125,6 +125,9 @@ if(isset($_REQUEST['id'])){
                     $TPL->selectedCidade = "selected";
                   $TPL->block("BLOCK_CIDADE");
               }
+		
+		
+$TPL->block("BLOCK_HISTORICO");		
 }ELSE{
     $TPL->block("BLOCK_NOVO_ATLETA2");
     $TPL->block("BLOCK_NOVO_ATLETA");

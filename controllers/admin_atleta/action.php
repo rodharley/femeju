@@ -3,6 +3,7 @@ $menu = 28;
 include("includes/include.lock.php");
 //INSTACIA CLASSES
 $obj = new Atleta();
+$objH = new HistoricoGraduacao();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
@@ -33,7 +34,19 @@ switch ($_REQUEST['acao']){
 		$obj->Excluir($_REQUEST['id']);
         header("Location:admin_atleta-main");
         exit();
-		break;		
+		break;
+	case 'incluirH':
+		$objH->Incluir();
+		header("Location:ajax/admin_listHistoricoGraduacao.php?idAtleta=".$_REQUEST['idAtleta']);
+			break;
+	case 'editarH':
+		$objH->Alterar();
+		header("Location:ajax/admin_listHistoricoGraduacao.php?idAtleta=".$_REQUEST['idAtleta']);
+			break;
+	case 'excluirH':
+		$objH->Excluir($_REQUEST['idHistorico']);
+		header("Location:ajax/admin_listHistoricoGraduacao.php?idAtleta=".$_REQUEST['idAtleta']);
+			break;		
 }
 }
 ?>
