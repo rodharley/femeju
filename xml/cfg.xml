@@ -86,6 +86,8 @@ set
 		<atrib tbname="imagem" type="txt">imagem</atrib>
 		<atrib tbname="idadeMin" type="int">idadeMin</atrib>
 		<atrib tbname="carenciaMin" type="int">carenciaMin</atrib>
+		<atrib tbname="ordem" type="int">ordem</atrib>
+		<atrib tbname="bitAtivo" type="int">bitAtivo</atrib>
 	</class>	
 	<class name="Galeria" tbname="fmj_galeria" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

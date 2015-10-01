@@ -1,0 +1,53 @@
+body {
+padding-left: 5em;
+padding-right: 5em;
+padding-top:2em;
+padding-bottom: 2em;
+font-size: 8px;
+}
+
+.header {
+	border-bottom: 2px solid #CCCCCC;
+	height: 60px;
+	
+}
+
+.footer {
+	border-top: 2px solid #CCCCCC;
+	height: 60px;
+	text-align: center;
+	padding: 5px;
+	font-size: 2em;
+}
+.header-text {
+	padding-top:5px;	
+	margin-left: 60px;
+	font-size: 2em;
+}
+.logomarcaTopo {
+margin-right:1em;
+}
+.campo {
+	border-bottom: 1px solid #CCCCCC;
+	height: 3.6em;
+	margin-bottom: 1em;
+	
+}
+.campo2 {
+	border-bottom: 1px solid #CCCCCC;
+	height: 9em;
+	margin-bottom: 1em;
+	
+}
+fieldset {
+	border: 1px solid #EFEFEF;
+	padding: 0.8em;
+	margin-top: 2em;
+}
+legend {
+	font-size: 1.5em;
+	background: #E8E8E8;
+	padding: 0.5em;
+	font-weight: bold;
+	width: auto;
+}

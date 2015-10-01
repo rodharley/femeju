@@ -50,6 +50,9 @@ Exemplos de mensagens:
 <mensagem id="44" type="warning">Falha ao incluir atleta, pessoa ja cadastrada como atleta.</mensagem>
 <mensagem id="45" type="warning">O atleta foi excluído, porém os dados pessoais não foram deletados porque os mesmos estão relacionados a outras atividades no sistema.</mensagem>
 <mensagem id="46" type="success">Atleta incluído na base com sucesso.</mensagem>
+<mensagem id="47" type="success">Graduação incluída com sucesso.</mensagem>
+<mensagem id="48" type="success">Graduação alterada com sucesso.</mensagem>
+<mensagem id="49" type="success">Graduação excluida com sucesso.</mensagem>
 </mensagens>
 
 

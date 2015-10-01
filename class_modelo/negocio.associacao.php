@@ -234,7 +234,7 @@ function Excluir($id) {
         $this -> getById($this -> md5_decrypt($id));
         if ($this -> delete($this -> id)){
             $_SESSION['fmj.mensagem'] = 39;
-            if ($this -> logomarca != "")
+            if ($this -> logomarca != "nologo.png")
                 $this -> apagaImagem($this -> logomarca, "img/associacoes/");
         }else
             $_SESSION['fmj.mensagem'] = 17;
