@@ -206,7 +206,7 @@ class Usuario extends Persistencia {
 		$pessoa-> telResidencial = str_replace("_","",$_REQUEST['telefone']);
 		$pessoa-> telCelular = str_replace("_","",$_REQUEST['celular']);
         $pessoa-> foto = "pessoa.png";
-		
+		$pessoa->bitVerificado = 1;
 		
 		if ($_FILES['foto']['name'] != "") {
 			//incluir imagem se ouver

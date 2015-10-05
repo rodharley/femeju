@@ -18,7 +18,6 @@ switch ($_REQUEST['acao']){
 	case 'incluir' :
 		$obj->Incluir();
         $objEmail->enviarEmailPush("Inclusão de Notícia: ".$_REQUEST['titulo']);
-        $this -> save();
         $_SESSION['fmj.mensagem'] = 18;
         header("Location:admin_noticia-main");
         
