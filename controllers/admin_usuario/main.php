@@ -27,11 +27,22 @@ $TPL->BREADCRUMB = '<section class="content-header">
 $TPL->addFile("CONTEUDO", "templates/admin/usuario/list.html");
 $TPL->LOADING = $usu->carregando;
 $pesquisa = isset($_REQUEST['pesquisa']) ? $_REQUEST['pesquisa'] : "";
+$idperfil = isset($_REQUEST['perfil']) ? $_REQUEST['perfil'] : "0";
 $TPL->PESQUISA = $pesquisa;
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $totalPesquisa = $usu->recuperaTotal($pesquisa);
 $configPaginacao = $usu->paginar($totalPesquisa,$pagina);
 $alist = $usu->listarUsuarios($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$pesquisa);
+
+$rsPerfil = $perfil->getRows();
+foreach ($rsPerfil as $key => $value) {
+    $TPL->SELECTED_PERFIL = "";
+    $TPL->ID_PERFIL = $value->id;
+    $TPL->DESC_PERFIL = $value->descricao;
+    if($idperfil == $value->id)
+        $TPL->SELECTED_PERFIL = "SELECTED";
+	$TPL->block("ITEM_PERFIL");
+}
 
 if (count($alist) > 0) {
 foreach($alist as $key => $usuario){

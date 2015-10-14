@@ -18,8 +18,8 @@ $TPL->ESTADO = $obj->cidade->uf->uf;
 }
 $TPL->CEP = $obj->formataCep($obj->cep);
 $TPL->DATA_FILIACAO = $obj->convdata($obj->dataFiliacao,"mtn");
-$TPL->NOME_RESPONSAVEL = $obj->responsavel;
-$TPL->CELULAR = $obj->formataTelefone($obj->celular);
+$TPL->NOME_RESPONSAVEL = $obj->responsavel->pessoa->nome;
+$TPL->CELULAR = $obj->formataTelefone($obj->responsavel->pessoa->telCelular);
 $TPL->TELEFONE1 = $obj->formataTelefone($obj->telefone1);
 $TPL->TELEFONE2 = $obj->formataTelefone($obj->telefone2);
 $TPL->EMAIL = $obj->email;     

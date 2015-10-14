@@ -431,3 +431,7 @@ border-top: solid 1px #fff;
     }
   }
 }
+
+.clsDatePicker {
+    z-index: 100000;
+}

@@ -165,8 +165,7 @@ set
 		<atrib tbname="cpf" type="txt">cpf</atrib>	
 		<atrib tbname="nacionalidade" type="txt">nacionalidade</atrib>	
 		<atrib tbname="bitVerificado" type="int">bitVerificado</atrib>
-		<atrib tbname="sexo" type="txt">sexo</atrib>	
-		<atrib tbname="apelido" type="txt">apelido</atrib>
+		<atrib tbname="sexo" type="txt">sexo</atrib>		
 		<atrib tbname="filiacaoPai" type="txt">filiacaoPai</atrib>
 		<atrib tbname="filiacaoMae" type="txt">filiacaoMae</atrib>
 		<atrib tbname="rg" type="txt">rg</atrib>

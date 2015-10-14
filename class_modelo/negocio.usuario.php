@@ -19,11 +19,12 @@ class Usuario extends Persistencia {
 		unset($_SESSION['fmj.menu']);
 	}
 
-	function recuperaTotal($busca = "") {
+	function recuperaTotal($busca = "",$perfil = "") {
 				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa WHERE 1 = 1 ";
 		if ($busca != "")
 			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
-
+        if($perfil != "")
+        $sql .= " and (u.idPerfil = $perfil)";
 		$rs = $this -> DAO_ExecutarQuery($sql);
 		return $this -> DAO_Result($rs, "total", 0);
 	}
@@ -53,13 +54,14 @@ class Usuario extends Persistencia {
 
 	}
 
-	function listarUsuarios($primeiro = 0, $quantidade = 9999, $busca = "") {
+	function listarUsuarios($primeiro = 0, $quantidade = 9999, $busca = "", $perfil = "") {
 
 				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where 1 = 1";
 		
 		if ($busca != "")
 			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
-
+        if($perfil != "")
+        $sql .= " and (u.idPerfil = $perfil)";
 		$sql .= "  order by p.nome limit $primeiro, $quantidade";
 		return $this -> getSQL($sql);
 

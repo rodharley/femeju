@@ -14,9 +14,21 @@ $TPL->LOADING = $usu->carregando;
 $pesquisa = isset($_REQUEST['pesquisa']) ? $_REQUEST['pesquisa'] : "";
 $TPL->PESQUISA = $pesquisa;
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
-$totalPesquisa = $usu->recuperaTotal($pesquisa);
+$idperfil = isset($_REQUEST['perfil']) ? $_REQUEST['perfil'] : "0";
+$totalPesquisa = $usu->recuperaTotal($pesquisa,$idperfil);
 $configPaginacao = $usu->paginar($totalPesquisa,$pagina);
-$alist = $usu->listarUsuarios($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$pesquisa);
+$alist = $usu->listarUsuarios($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$pesquisa,$idperfil);
+
+
+$rsPerfil = $perfil->getRows();
+foreach ($rsPerfil as $key => $value) {
+    $TPL->SELECTED_PERFIL = "";
+    $TPL->ID_PERFIL = $value->id;
+    $TPL->DESC_PERFIL = $value->descricao;
+    if($idperfil == $value->id)
+        $TPL->SELECTED_PERFIL = "SELECTED";
+    $TPL->block("ITEM_PERFIL");
+}
 
 if (count($alist) > 0) {
 foreach($alist as $key => $usuario){

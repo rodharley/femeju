@@ -1012,12 +1012,17 @@ function uploadArquivo($file,$nomeImagem,$diretorio){
 
 
 function formataTelefone($tel){
-
+if(strlen($tel) > 12){
 $p1 = substr($tel,0,2);
 $p2 = substr($tel,2,2);
 $p3 = substr($tel,4,5);
 $p4 = substr($tel,9);
-
+}else{
+$p1 = substr($tel,0,2);
+$p2 = substr($tel,2,2);
+$p3 = substr($tel,4,4);
+$p4 = substr($tel,8);    
+}
 return '+'.$p1.' '.$p2." ".$p3."-".$p4;
 
 }

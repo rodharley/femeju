@@ -13,24 +13,18 @@
            
             <fieldset><legend>Dados Pessoais</legend>
             <div class="row">
-                <div class="col-md-3 col-xs-3">
+                <div class="col-md-5 col-xs-5">
                     <div class="form-group">
                         <label for="nome"><i class='fa'> </i><b>Nome</b></label>
                         <input type="text" id="nome" name="nome" placeholder="Nome do Atleta" value="{NOME}" class="required form-control"/>
                     </div>
                 </div>
-                <div class="col-md-3 col-xs-3">
+                <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="sobrenome"><i class='fa'> </i><b>Sobre Nome</b></label>
-                        <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobre nome do atleta" value="{SOBRE_NOME}" class="form-control"/>
+                        <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobre nome do atleta" value="{SOBRE_NOME}" class="required form-control"/>
                     </div>
-                </div>
-                 <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="sobrenome"><i class='fa'> </i><b>Apelido</b></label>
-                        <input type="text" id="apelido" name="apelido" placeholder="apelido do atleta" value="{APELIDO}" class="form-control"/>
-                    </div>
-                </div>
+                </div>                 
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="ativo"><i class='fa'> </i><b>Situação</b></label><br/>
@@ -97,6 +91,7 @@
                     <div class="form-group">
                         <label for="sexo"><i class='fa'> </i><b>Sexo</b></label><br/>
                         <select class="form-control required" name="sexo">
+                            <option value="" required>Selecione</option>
                             <option value="F" {SELECTED_FEMININO}>Feminino</option>
                             <option value="M" {SELECTED_MASCULINO}>Masculino</option>
                         </select>
@@ -106,19 +101,19 @@
             <div class="row">
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
-                        <label for="telefoneRes"><i class='fa'> </i><b>Telefone Residencial</b></label>
-                        <input type="text" id="telefoneRes" name="telefoneRes" value="{TELEFONE_RES}" class="form-control"/>
+                        <label for="telefoneRes"><i class='fa'> </i><b>Telefone 1</b></label>
+                        <input type="text" id="telefoneRes" name="telefoneRes" value="{TELEFONE_RES}" class="required form-control"/>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
-                        <label for="telefoneCel"><i class='fa'> </i><b>Telefone Celular</b></label>
+                        <label for="telefoneCel"><i class='fa'> </i><b>Telefone 2</b></label>
                         <input type="text" id="telefoneCel" name="telefoneCel" value="{TELEFONE_CEL}" class="form-control"/>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
-                        <label for="telefoneCom"><i class='fa'> </i><b>Telefone Comercial</b></label>
+                        <label for="telefoneCom"><i class='fa'> </i><b>Telefone 3</b></label>
                         <input type="text" id="telefoneCom" name="telefoneCom" value="{TELEFONE_COM}" class="form-control"/>
                     </div>
                 </div>
@@ -184,25 +179,25 @@
             	 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporte"><i class='fa'> </i><b>Passaporte</b></label>
-                        <input type="text" id="passaporte" name="passaporte" value="{PASSAPORTE}" class="required form-control"/>
+                        <input type="text" id="passaporte" name="passaporte" value="{PASSAPORTE}" class="form-control"/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporteDataVal"><i class='fa'> </i><b>Data Validade</b></label>
-                        <input type="text" id="passaporteDataVal" name="passaporteDataVal" value="{PASSAPORTE_VAL}" class="required form-control "/>
+                        <input type="text" id="passaporteDataVal" name="passaporteDataVal" value="{PASSAPORTE_VAL}" class="form-control "/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporteOrgao"><i class='fa'> </i><b>Orgão Espedidor</b></label>
-                        <input type="text" id="passaporteOrgao" name="passaporteOrgao" value="{PASSAPORTE_ORGAO_EXP}" class="required form-control "/>
+                        <input type="text" id="passaporteOrgao" name="passaporteOrgao" value="{PASSAPORTE_ORGAO_EXP}" class="form-control "/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporteDataExp"><i class='fa'> </i><b>Data Expedição</b></label>
-                        <input type="text" id="passaporteDataExp" name="passaporteDataExp" value="{PASSAPORTE_DATA_EXP}" class="required form-control"/>
+                        <input type="text" id="passaporteDataExp" name="passaporteDataExp" value="{PASSAPORTE_DATA_EXP}" class="form-control"/>
                     </div>
                 </div>
                 </div>
@@ -248,7 +243,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="cep"><i class='fa'> </i><b>CEP</b></label>
-                        <input type="text" id="cep" name="cep" value="{CEP}" class="form-control"/>
+                        <input type="text" id="cep" name="cep" value="{CEP}" class="required form-control"/>
                     </div>
                 </div>
             </div>
@@ -413,9 +408,9 @@
         $('#passaporteDataExp').datepicker();
         
         $("#cpf").inputmask({ mask: "999.999.999-99"});
-        $("#telefoneRes").inputmask({ mask: "+99 99 99999-9999"});
-        $("#telefoneCel").inputmask({ mask: "+99 99 99999-9999"});
-        $("#telefoneCom").inputmask({ mask: "+99 99 99999-9999"});
+        $("#telefoneRes").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+        $("#telefoneCel").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+        $("#telefoneCom").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#cep").inputmask({ mask: "99.999-999"});
         
         $("#btAddHistoricoGrad").click(function(){

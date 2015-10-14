@@ -138,7 +138,7 @@
             </div>
              <div class="col-md-6 col-xs-6">
                  <div class="form-group">
-                        <label for="celular"><i class='fa'></i><b>Celular</b></label>
+                        <label for="celular"><i class='fa'></i><b>Telefone 1</b></label>
                         <input type="text" id="celular_responsavel" name="celular_responsavel" value="{celular_responsavel}" class="required form-control"/>
                     </div>
             </div>
@@ -231,10 +231,10 @@ var as = new bsn.AutoSuggest('nome_responsavel', options);
         
         $('#dataFiliacao').datepicker();
         $("#cnpj").inputmask({ mask: "99.999.999-9999-99"});
-        $("#celular_responsavel").inputmask({ mask: "+99 99 99999-9999"});
-        $("#telefone1").inputmask({ mask: "+99 99 99999-9999"});
+        $("#celular_responsavel").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+        $("#telefone1").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#cep").inputmask({ mask: "99.999-999"});
-        $("#telefone2").inputmask({ mask: "+99 99 99999-9999"});
+        $("#telefone2").inputmask({ mask:["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#save").click(function() {
             
             $("#frmEdit").submit();

@@ -40,17 +40,11 @@ require("shutdow.php");
     
     //print_r($e);
     //exit();
-    
-	if(isset($_SESSION['fmj.userId']))
-		$TPL = new Template($root->URI."/templates/main.html");
-	else
-		$TPL = new Template($root->URI."/templates/index.html");
-
+    $TPL = new Template($root->URI."/templates/portal/layout.html");
 	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro500.html");
 	if ($root->desenvolvimento)
 		$TPL->ALERT = "Mensagem:".$e->getMessage()."<br/>"."Arquivo:".$e->getFile()."<br/>Linha:".$e->getLine();
-    $conn->connection->rollback();
-	$TPL->show();
+    $TPL->show();
 }
 
 ?>

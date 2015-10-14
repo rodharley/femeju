@@ -60,10 +60,16 @@
 	<div class="box-header">
 		<h3 class="box-title">Usuários {DESC_PERFIL}:</h3>
 		<div class="box-tools">
-			<form name="frmPesquisa" id="frmPesquisa" action="usuario-listar" method="post">
-			<div class="input-group">
-				<input type="hidden" name="idPerfil" value="{ID_PERFIL_HASH}"/>
-				<input type="text" name="pesquisa" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Pesquisar" value="{PESQUISA}"/>
+			<form name="frmPesquisa" id="frmPesquisa" action="usuario-listar" method="post" class="pull-right form form-inline">
+			    <label for="pefil">Perfil:</label>
+			    <select name="perfil" class="form-control input-sm">
+                    <option value="">Todos</option>
+                    <!-- BEGIN ITEM_PERFIL -->
+                    <option value="{ID_PERFIL}" {SELECTED_PERFIL}>{DESC_PERFIL}</option>
+                    <!-- END ITEM_PERFIL -->
+                </select>
+			<div class="input-group">				
+				<input type="text" name="pesquisa" class="form-control input-sm " style="width: 150px;" placeholder="Pesquisar" value="{PESQUISA}"/>
 				<div class="input-group-btn">
 					<button type="button" class="btn btn-sm btn-default paginar" value="1">
 						<i class="fa fa-search"></i>

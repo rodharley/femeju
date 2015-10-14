@@ -79,8 +79,7 @@ if(isset($_REQUEST['id'])){
     $TPL->REGISTRO_CONF = $objAtleta->registroConfederacao;
     $TPL->DATA_FILIACAO = $objAtleta->convdata($objAtleta->dataFiliacao,"mtn");
     $TPL->DATA_EMISSAO_CART = $objAtleta->convdata($objAtleta->dataEmissaoCarteira,"mtn");        
-    $TPL->APELIDO = $objAtleta->pessoa->apelido;
-	$TPL->FILIACAO_PAI  = $objAtleta->pessoa->filiacaoPai;
+    $TPL->FILIACAO_PAI  = $objAtleta->pessoa->filiacaoPai;
     $TPL->FILIACAO_MAE  = $objAtleta->pessoa->filiacaoMae;
     $TPL->TELEFONE_COM = $objAtleta->pessoa->telComercial;
 	$TPL->WEB_SITE =  $objAtleta->pessoa->webSite;

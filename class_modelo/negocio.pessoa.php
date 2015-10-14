@@ -16,8 +16,7 @@ class Pessoa extends Persistencia {
 		var $nacionalidade;
 		var $sexo;
 		var $bitVerificado;
-		var $naturalidade = null;
-		var $apelido;
+		var $naturalidade = null;		
 		var $filiacaoPai;
 		var $filiacaoMae;
 		var $rg;

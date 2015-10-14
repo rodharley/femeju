@@ -96,6 +96,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
             $objPessoa->email =  $_REQUEST['email_responsavel'];
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $objPessoa->bitVerificado = 1;
             $id = $objPessoa->save();
             if(!$objUser->recuperaPorIdPessoa($objPessoa->id)){
                 $objUser -> senha = "";
@@ -113,6 +114,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
             $objPessoa->email =  $_REQUEST['email_responsavel'];
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $objPessoa->bitVerificado = 1;
             $id = $objPessoa->save();     
             
             $objUser -> senha = "";
