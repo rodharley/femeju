@@ -94,7 +94,7 @@ class Noticia extends Persistencia {
             $this->removePrincipal($_REQUEST['principal']);
         }
         
-        
+        $this->save();
         
 
     }
