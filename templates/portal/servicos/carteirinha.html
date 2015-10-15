@@ -21,25 +21,26 @@
 			color: #666666;
 		}
 		#carteira {
-			background-image: url(img/carteirinha.jpg);
+			background-color: #0000FF;
+			background-image: url(img/carteirinha.png);
 			background-repeat: no-repeat;
-			width: 804px;
-			height: 260px;
+			width: 758px;
+			height: 246px;
 		}
 		#nome {
 		    font-size: 1.3em;
 		    font-weight: bold;
 		    color:#000000;
 		    top:190px;
-		    left: 430px;
+		    left: 410px;
 		}
         #qrcode{
-            top:180px;
-            left: 700px;
+            top:170px;
+            left: 660px;
         }
         .foto {
-            left: 675px;
-            top:28px;
+            left: 645px;
+            top:29px;
         }
     
 		.campo {
@@ -47,7 +48,7 @@
 			float: left;
 		}
 		.campo1 {
-			left: 25px;
+			left: 30px;
 		}
 		.campo2 {
 			left: 175px;
@@ -65,22 +66,22 @@
             left: 675px;
         }
 		.linha1 {
-			top: 38px;
+			top: 50px;
 		}
 		.linha2 {
-			top: 68px;
+			top: 95px;
 		}
 		.linha3 {
-			top: 104px;
+			top: 135px;
 		}
 		.linha4 {
-            top: 142px;
+            top: 180px;
         }
         .linha5 {
-            top: 174px;
+            top: 200px;
         }
         .linha6 {
-            top: 204px;
+            top: 300px;
         }
 		.linha {
 			margin-left: -15px;
@@ -95,62 +96,41 @@
 		*::after, *::before {
 			box-sizing: border-box;
 		}
-    </style>
+    </style>    
     <body>
         <div id="carteira">
             <div class="linha">
-                <div id="nacionalidade" class="linha1 campo campo1">
-                    {NACIONALIDADE}
+                <div id="associacao" class="linha1 campo campo1">
+                    {ASSOCIACAO} 
                 </div>
-                <div id="naturalidade" class="linha1 campo campo2">
-                    {NATURALIDADE}
                 </div>
-            </div>
             <div class="linha">
-                <div id="identidade" class="linha2 campo campo1">
-                    {RG}
-                </div>
-                <div id="cpf" class="linha2 campo campo2">
-                    {CPF}
-                </div>
-                <div id="dtNascimento" class="linha2 campo campo3">
-                    {DATA_NASCIMENTO}
+                <div id="nomeVERSO" class="linha2 campo campo1">
+                     {NOME}
                 </div>
                 <div id="foto" class="foto campo">
-                    <img src="img/pessoas/{FOTO}" width="120" height="144">
+                    <img src="img/pessoas/{FOTO}" width="100" height="134">
                 </div>
             </div>
 
             <div class="linha">
                 <div id="" class="linha3 campo campo1">
-                   {FILIACAO}
+                   {GRADUACAO}
                 </div>                
             </div>
             <div class="linha">
                 <div id="" class="linha4 campo campo1">
-                   {ASSOCIACAO}
-                </div>                
+                  Brasília,{DATA_EMISSAO}
+                </div>    
+                <div id="dtNascimento" class="linha4 campo campo2">
+                    {DATA_NASCIMENTO}
+                </div>            
             </div>
             <div class="linha">
-                <div id="" class="linha5 campo campo1">
-                   {REGISTRO}
-                </div>
                 <div id="" class="linha5 campo campo2">
-                   {REGISTRO_CBJ}
-                </div>
-                <div id="" class="linha5 campo campo3">
-                    {DATA_REGISTRO}
-                </div>
-            </div>
-             <div class="linha">
-                <div id="" class="linha6 campo campo1">
-                    Brasília,{DATA_EMISSAO}
-                </div>
-                
-                <div id="" class="linha6 campo campo7 text-center">
-                   <img src="img/assinatura.png" width="100"/>
-                </div>
-            </div>
+                  <img src="img/assinatura.png" width="100"/>
+                </div>                
+            </div>            
             <div class="linha">
                 <div id="nome" class="campo">
                     {NOME}<br/>
