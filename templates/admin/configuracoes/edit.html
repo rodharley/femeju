@@ -15,7 +15,33 @@
                     </div>
                 </div>
             </div>                       
-            <!-- END BLOCK_ITEM_CONF -->         
+            <!-- END BLOCK_ITEM_CONF -->  
+            <!-- BEGIN BLOCK_ITEM_CONF_UPLOAD -->
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="texto"><i class='fa'></i><b>{DESC_CONF}</b></label>
+                        <input type="file"  name="assinatura" id="assinatura"/>                        
+                    </div>
+                </div>
+            </div>                       
+            <!-- END BLOCK_ITEM_CONF_UPLOAD -->
+            <!-- BEGIN BLOCK_ITEM_CONF_COLOR -->
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                	<div class="form-group">
+                    <label>{DESC_CONF}</label>
+                    <div class="input-group my-colorpicker2">
+                      <input type="text" class="form-control required" value="{VALOR_CONF}" name='configuracao[]'>                      
+                      <div class="input-group-addon">
+                        <i></i>
+                      </div>
+                    </div><!-- /.input group -->
+                  </div>
+                   <input type="hidden" name="id[]" value="{ID_CONF}"/>
+                </div>
+            </div>                       
+            <!-- END BLOCK_ITEM_CONF_COLOR -->       
 
         </div>
         <div class="box-footer text-center">
@@ -29,3 +55,22 @@
 
     </div>
 </form>
+<script>
+      $(function () {
+         $(".my-colorpicker2").colorpicker();
+			$("#assinatura").fileinput({
+		initialPreview: [
+		<!-- BEGIN BLOCK_IMG -->"{ASSINATURA}",<!-- END BLOCK_IMG -->
+		], overwriteInitial: true,
+		maxFileSize: 2000,
+		maxFilesNum: 1,
+		allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+		previewClass: "bg-warning",
+		allowedFileTypes: ["image"],
+		showUpload: false,
+		showCaption: false,
+		language: 'pt-BR'
+	});
+
+      });
+    </script>

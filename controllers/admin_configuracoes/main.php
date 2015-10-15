@@ -24,11 +24,23 @@ $TPL->BREADCRUMB = '<section class="content-header">
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/configuracoes/edit.html");
 $rs = $obj->getRows();
+$TPL->ASSINATURA = "";
 foreach ($rs as $key => $value) {
     $TPL->VALOR_CONF = $value->valor;
     $TPL->DESC_CONF = $value->descricao;
     $TPL->ID_CONF = $value->id;
-	$TPL->block("BLOCK_ITEM_CONF");
+	if($value->id ==  10){
+		$TPL->block("BLOCK_ITEM_CONF_COLOR");
+	}elseif($value->id == 11){
+		if(strlen($value->valor) > 0){
+		$TPL->ASSINATURA = "<img src='img/".$value->valor."' class='file-preview-image' alt='".$value->valor."' title='".$value->valor."'>";
+		
+		$TPL->block("BLOCK_IMG");
+		}
+		$TPL->block("BLOCK_ITEM_CONF_UPLOAD");
+	}else{
+		$TPL->block("BLOCK_ITEM_CONF");
+	}
 }
    
 $TPL->show();

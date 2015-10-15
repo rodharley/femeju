@@ -9,6 +9,8 @@ class Configuracoes extends Persistencia {
     const ID_CABECALHO = 7;
     const ID_RODAPE = 8;
     const ID_TITULO = 9;
+	const ID_COR_CARTERINHA = 10;
+	const ID_ASSINATURA = 11;
    var $valor;
    var $descricao;     
         
@@ -18,6 +20,15 @@ class Configuracoes extends Persistencia {
           $this->valor = $_REQUEST['configuracao'][$key];
           $this->save();
       }
+	  
+	  if ($_FILES['assinatura']['name'] != "") {
+	  	 	$this->getById($this::ID_ASSINATURA);
+            $this -> apagaImagem($this -> valor, "img/");
+            $nomefoto = "assinatura.png";
+            $this -> uploadImagem($_FILES['assinatura'], $nomefoto, "img/");
+            $this -> valor = $nomefoto;			
+			$this->save();
+        }
   }
 }
 ?>
