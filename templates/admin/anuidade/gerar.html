@@ -1,0 +1,41 @@
+<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
+<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
+<form role="form" method="post" action="admin_anuidade-action" id="frmEdit" autocomplete="off">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Nova Anuidade</h3>
+        </div>
+        <div class="box-body">
+            <input type="hidden" name="acao" value="{ACAO}"/>
+            <div class="callout callout-info">
+                    <h4>Atenção</h4>
+                    <p>Ao Gerar nova anuidade todos os atletas ficarão com a situação Irregular para o ano gerado, se o ano for o mais atual a situação atual de todos os atletas também mudará</p>
+                  </div>
+            <div class="row">
+                <div class="col-md-5 col-xs-5">
+                    <div class="form-group">
+                        <label for="nome"><i class='fa'> </i><b>Ano</b></label>
+                        <input type="text" id="ano" name="ano" placeholder="Ano" value="{ANO}" class="required form-control"/>
+                    </div>
+                    
+                </div>               
+            </div>
+        <div class="box-footer text-center">
+            <button class="btn btn-success" id="save" type="submit">
+                Salvar
+            </button>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </div>
+</form>
+<script>
+
+	$(document).ready(function() {
+	    
+	    $("#ano").inputmask({ mask: "9999"});
+        
+	});
+</script>

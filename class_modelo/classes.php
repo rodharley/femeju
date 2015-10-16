@@ -2,6 +2,7 @@
 require("negocio.acesso.php");
 require("negocio.associacao.php");
 require("negocio.associacaoFoto.php");
+require("negocio.anuidade.php");
 require("negocio.atleta.php");
 require("negocio.cidade.php");
 require("negocio.configuracoes.php");
@@ -14,6 +15,7 @@ require("negocio.historicoGraduacao.php");
 require("negocio.log.php");
 require("negocio.menu.php");
 require("negocio.noticia.php");
+require("negocio.pagamento.php");
 require("negocio.pagina.php");
 require("negocio.perfil.php");
 require("negocio.permissao.php");

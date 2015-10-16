@@ -50,6 +50,13 @@ set
 		<atrib tbname="idMenu" type="fk" clrelation="Menu">menu</atrib>
 		<atrib tbname="idPerfil" type="fk" clrelation="Perfil">perfil</atrib>		
 	</class>
+	<class name="Anuidade" tbname="fmj_anuidade" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
+		<atrib tbname="situacao" type="int">situacao</atrib>
+		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
+		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>		
+	</class>
 	<class name="Atleta" tbname="fmj_atleta" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>		
 		<atrib tbname="dataFiliacao" type="txt">dataFiliacao</atrib>
@@ -63,7 +70,8 @@ set
 		<atrib tbname="idPessoa" type="fk" clrelation="Pessoa">pessoa</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">associacao</atrib>	
-		<atrib tbname="" type="set" clrelation="HistoricoGraduacao" clorder="data" clfk="atleta">graduacoes</atrib>			
+		<atrib tbname="" type="set" clrelation="HistoricoGraduacao" clorder="data" clfk="atleta">graduacoes</atrib>
+		<atrib tbname="" type="set" clrelation="Anuidade" clorder="anoReferencia" clfk="atleta">anuidades</atrib>			
 	</class>
 	<class name="Cidade" tbname="fmj_cidade" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -132,6 +140,10 @@ set
 		<atrib tbname="foto" type="txt">foto</atrib>
 		<atrib tbname="data" type="txt">data</atrib>
 		<atrib tbname="principal" type="int">principal</atrib>				
+	</class>
+	<class name="Pagamento" tbname="fmj_pagamento" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="valorTotal" type="int">valorTotal</atrib>				
 	</class>
 	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	

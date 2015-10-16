@@ -1,7 +1,7 @@
 <?php
 $menu = 27;
 include("configuraAjax.php");
-$TPL = new Template("../templates/admin/atleta/list.html");
+$TPL = new Template("../templates/admin/anuidade/list.html");
 $obj = new Atleta();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $naov = isset($_REQUEST['naoVerficado']) ? "0" : "";

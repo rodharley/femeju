@@ -13,8 +13,13 @@ class Atleta extends Persistencia {
    var $associacao = NULL;        
    var $pessoa = NULL;
    var $graduacoes;
+   var $anuidades;
    public function listaPorAssociacaoAtivos($associacao){
-    return $this->getRows(0,9999,array(),array("ativo"=>"=1","associacao"=>"=$associacao"));
+    return $this->getRows(0,99999,array(),array("ativo"=>"=1","associacao"=>"=$associacao"));
+}
+
+public function listaAtivos(){
+    return $this->getRows(0,99999,array(),array("ativo"=>"=1"));
 }
   
   public function getId(){
