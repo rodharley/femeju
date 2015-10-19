@@ -11,12 +11,18 @@ class Anuidade extends Persistencia{
            $obAtleta = new Atleta();
            $rs = $obAtleta->listaAtivos();
            foreach ($rs as $key => $value) {
+               if(!$this->getRow(array("anoReferencia"=>"=".$ano,"atleta"=>"=".$value->id))){
                $this->id = null;    
                $this->anoReferencia = $ano;
                 $this->pagamento = null;
                 $this->situacao = 0;
                $this->atleta = new Atleta($value->id);
                $this->save();
+               if($ano >= Date("Y")){
+                $value->ativo = 0;
+                $value->save();
+               }
+               }
            }
            
            $_SESSION['fmj.mensagem'] = 50;

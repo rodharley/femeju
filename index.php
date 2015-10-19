@@ -44,6 +44,7 @@ require("shutdow.php");
 	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro500.html");
 	if ($root->desenvolvimento)
 		$TPL->ALERT = "Mensagem:".$e->getMessage()."<br/>"."Arquivo:".$e->getFile()."<br/>Linha:".$e->getLine();
+    $conn->connection->rollback();
     $TPL->show();
 }
 
