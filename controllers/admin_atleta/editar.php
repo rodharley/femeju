@@ -52,6 +52,7 @@ if(isset($_REQUEST['id'])){
     $TPL->id = $objAtleta->id;
     $TPL->ID_PESSOA = $objAtleta->pessoa->id;
     $TPL->NOME = $objAtleta->pessoa->nome;
+    $TPL->NOME_MEIO = $objAtleta->pessoa->nomeMeio;
     $TPL->SOBRE_NOME = $objAtleta->pessoa->sobrenome;
     $TPL->CHECKED_ATIVO = $objAtleta->ativo ? "checked" : "";
     $TPL->CHECKED_INATIVO = !$objAtleta->ativo ? "checked" : "";

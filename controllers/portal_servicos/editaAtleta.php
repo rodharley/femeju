@@ -48,6 +48,7 @@ if(isset($_REQUEST['id'])){
     $TPL->ID_PESSOA = $objAtleta->pessoa->id;
     $TPL->NOME = $objAtleta->pessoa->nome;
     $TPL->SOBRE_NOME = $objAtleta->pessoa->sobrenome;    
+    $TPL->NOME_MEIO = $objAtleta->pessoa->nomeMeio;
     $TPL->NACIONALIDADE = $objAtleta->pessoa->nacionalidade;
     $TPL->EMAIL = $objAtleta->pessoa->email;
     $TPL->DATA_NASCIMENTO = $objAtleta->convdata($objAtleta->pessoa->dataNascimento,"mtn");

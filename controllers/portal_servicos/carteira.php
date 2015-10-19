@@ -10,7 +10,7 @@ $atleta->getById($atleta->md5_decrypt($_REQUEST['id']));
 
 $TPL->COR_CARTEIRINHA = $obj->valor;
 $TPL->DATA_NASCIMENTO = $atleta->convdata($atleta->pessoa->dataNascimento, "mtn");
-$TPL->NOME = $atleta->pessoa->nome." ".$atleta->pessoa->sobrenome;
+$TPL->NOME = $atleta->pessoa->nome." ".$atleta->pessoa->nomeMeio." ".$atleta->pessoa->sobrenome;
 $TPL->ASSOCIACAO = $atleta->associacao->nome;
 $TPL->FOTO = $atleta->pessoa->foto;
 $TPL->REGISTRO = $atleta->getId(); 

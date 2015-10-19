@@ -65,7 +65,7 @@ public function listaAtivos(){
 		if($naoverf != "")
             $sql .= " and p.bitVerificado = $naoverf"; 
         if ($nome != "")
-            $sql .= " and ( p.nome like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+            $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
             $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
         $rs = $this -> DAO_ExecutarQuery($sql);
@@ -80,7 +80,7 @@ public function listaAtivos(){
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
         if ($nome != "")
-            $sql .= " and ( p.nome like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+            $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
             $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
         
@@ -113,6 +113,7 @@ public function listaAtivos(){
             $pessoa->getById($_REQUEST['idPessoa']);
             $pessoa->nome =  $_REQUEST['nome'];
             $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
             $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
             $pessoa->naturalidade = $cidadeNascimento;
             $pessoa->email = $_REQUEST['email'];
@@ -126,8 +127,7 @@ public function listaAtivos(){
             $pessoa->cidade = $cidadeEndereco;
             $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
             $pessoa -> foto = "pessoa.png";
-			$pessoa ->bitVerificado = 1;
-			$pessoa ->apelido = $_REQUEST['apelido'];
+			$pessoa ->bitVerificado = 1;			
 			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
 			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
 			$pessoa ->rg = $_REQUEST['rg'];
@@ -179,6 +179,7 @@ public function listaAtivos(){
             $pessoa->getById($this->pessoa->id);
             $pessoa->nome =  $_REQUEST['nome'];
             $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
             $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
             $pessoa->naturalidade = $cidadeNascimento;
             $pessoa->email = $_REQUEST['email'];
@@ -190,9 +191,8 @@ public function listaAtivos(){
             $pessoa->endereco = $_REQUEST['endereco'];
             $pessoa->bairro = $_REQUEST['bairro'];
             $pessoa->cidade = $cidadeEndereco;
-            $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
-            $pessoa ->apelido = $_REQUEST['apelido'];
-			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
+            $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);        
+            $pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
 			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
 			$pessoa ->rg = $_REQUEST['rg'];
 			$pessoa ->rgOrgaoExpedidor = $_REQUEST['rgOrgaoExpedidor'];
@@ -246,6 +246,7 @@ function IncluirPortal() {
             $pessoa->getById($_REQUEST['idPessoa']);
             $pessoa->nome =  $_REQUEST['nome'];
             $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
             $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
             $pessoa->naturalidade = $cidadeNascimento;
             $pessoa->email = $_REQUEST['email'];
@@ -259,8 +260,7 @@ function IncluirPortal() {
             $pessoa->cidade = $cidadeEndereco;
             $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
             $pessoa -> foto = "pessoa.png";
-			$pessoa ->bitVerificado = 0;
-			$pessoa ->apelido = $_REQUEST['apelido'];
+			$pessoa ->bitVerificado = 0;			
 			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
 			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
 			$pessoa ->rg = $_REQUEST['rg'];

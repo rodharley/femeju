@@ -164,6 +164,7 @@ set
 	<class name="Pessoa" tbname="fmj_pessoa" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">nome</atrib>
+		<atrib tbname="nomeMeio" type="txt">nomeMeio</atrib>
 		<atrib tbname="sobrenome" type="txt">sobrenome</atrib>
 		<atrib tbname="endereco" type="txt">endereco</atrib>
 		<atrib tbname="bairro" type="txt">bairro</atrib>

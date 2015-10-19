@@ -3,6 +3,7 @@ class Pessoa extends Persistencia {
 		const TABELA = "fmj_pessoa";
 	   var $nome;
         var $sobrenome;
+        var $nomeMeio;
         var $endereco;
         var $bairro;
         var $cidade = null;

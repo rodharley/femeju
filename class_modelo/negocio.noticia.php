@@ -51,7 +51,7 @@ class Noticia extends Persistencia {
             $sql .= " and data between '" . $this -> convdata($arrayData[0], "ntm") . " 00:00:00' and '" . $this -> convdata($arrayData[1], "ntm") . " 23:59:59' ";
         }
 
-        $sql .= "  order by data limit $primeiro, $quantidade";
+        $sql .= "  order by data desc limit $primeiro, $quantidade";
         return $this -> getSQL($sql);
 
     }

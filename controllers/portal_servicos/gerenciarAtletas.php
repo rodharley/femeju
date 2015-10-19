@@ -18,7 +18,7 @@ $TPL->ASSOCIACAO = $associacao->nome;
 $TPL->ID_ASS_RASH = $_REQUEST['associacao'];
 foreach ($rsAtletas as $key => $a) {
 	$TPL->NOME_ATLETA = $a->pessoa->nome;
-    $TPL->SOBRENOME_ATLETA = $a->pessoa->sobrenome;
+    $TPL->SOBRENOME_ATLETA = $a->pessoa->nomeMeio." ".$a->pessoa->sobrenome;
     $TPL->FAIXA = $a->graduacao->faixa;
     $TPL->ID_RASH = $associacao->md5_encrypt($a->id);
     $TPL->block("BLOCK_ATLETA");

@@ -13,7 +13,7 @@ if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->FOTO = $n->pessoa->foto != "" ? $n->pessoa->foto : "pessoa.png";
     $TPL->NUMERO = $n->getId();
-   	$TPL->NOME = $n->pessoa->nome." ".$n->pessoa->sobrenome;
+   	$TPL->NOME = $n->pessoa->nome." ".$n->pessoa->nomeMeio." ".$n->pessoa->sobrenome;
     $TPL->SITUACAO = $n->ativo == 1 ? "Regular" : "Irregular";
     $TPL->COLOR_SITUACAO = $n->ativo == 1 ? "success" : "danger";
     $TPL->ASSOCIACAO = $n->associacao->nome;
