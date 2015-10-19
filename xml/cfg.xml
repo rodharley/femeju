@@ -83,6 +83,13 @@ set
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="valor" type="txt">valor</atrib>				
 	</class>
+	<class name="Custa" tbname="fmj_custas" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="titulo" type="txt">titulo</atrib>
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="valor" type="int">valor</atrib>
+		<atrib tbname="idGrupo" type="int">grupo</atrib>				
+	</class>
 	<class name="Diretoria" tbname="fmj_diretoria" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="descricao" type="txt">descricao</atrib>
@@ -143,7 +150,23 @@ set
 	</class>
 	<class name="Pagamento" tbname="fmj_pagamento" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="valorTotal" type="int">valorTotal</atrib>				
+		<atrib tbname="valorTotal" type="int">valorTotal</atrib>
+		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>
+		<atrib tbname="dataPagamento" type="txt">dataPagamento</atrib>
+		<atrib tbname="bitPago" type="int">bitPago</atrib>	
+		<atrib tbname="codigo" type="txt">codigo</atrib>		
+		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>				
+	</class>
+	<class name="PagamentoItem" tbname="fmj_pagamento_item" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="valor" type="int">valor</atrib>
+		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
+		<atrib tbname="idCusta" type="fk" clrelation="Custa">custa</atrib>
+		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>					
+	</class>
+	<class name="PagamentoTipo" tbname="fmj_tipo_pagamento" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>	
+		<atrib tbname="descricao" type="txt">descricao</atrib>	
 	</class>
 	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
@@ -205,6 +228,7 @@ set
 		<atrib tbname="categoria" type="int">categoria</atrib>
 		<atrib tbname="ordem" type="int">ordem</atrib>						
 	</class>
+	
 	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="senha" type="txt">senha</atrib>		
