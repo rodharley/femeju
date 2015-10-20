@@ -15,8 +15,24 @@ class Atleta extends Persistencia {
    var $graduacoes;
    var $anuidades;
    public function listaPorAssociacaoAtivos($associacao){
-    return $this->getRows(0,99999,array(),array("ativo"=>"=1","associacao"=>"=$associacao"));
+       $sql = "select a.* from fmj_atleta a inner join fmj_pessoa p on p.id = a.idPessoa where a.bitAtivo = 1 and a.idAssociacao = $associacao order by p.nome";
+       return $this->getSQL($sql);
 }
+
+public function listaPorAssociacao($associacao){
+       $sql = "select a.* from fmj_atleta a inner join fmj_pessoa p on p.id = a.idPessoa where a.idAssociacao = $associacao order by p.nome";
+       return $this->getSQL($sql);
+}
+
+public function listaPorArrayIds($arrayId){
+    $ids = "0";
+    foreach ($arrayId as $key => $value) {
+        $ids .= ",".$value;
+    }
+       $sql = "select a.* from fmj_atleta a inner join fmj_pessoa p on p.id = a.idPessoa where a.id in($ids) order by p.nome";
+       return $this->getSQL($sql);
+}
+
 
 public function listaAtivos(){
     return $this->getRows(0,99999,array(),array("ativo"=>"=1"));

@@ -31,5 +31,9 @@ class Pessoa extends Persistencia {
 		var $webSite;
 		var $midiaSocial;
 		var $telComercial;
+        
+        function getNomeCompleto(){
+            return $this->nome.(strlen($this->nomeMeio) > 0 ? " ".$this->nomeMeio:"").(strlen($this->sobrenome) > 0 ? " ".$this->sobrenome:"");
+        }
 }
 ?>

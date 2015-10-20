@@ -1,66 +1,82 @@
-<form role="form" method="post" action="#" id="frmPesquisa">
-	<input type="hidden" name="pagina" id="pagina" value="1" />
-	<div class="box box-primary">
-		<div class="box-header">
-			<h3 class="box-title">Pesquisa Atletas</h3>
-		</div>
-		<div class="box-body">
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group">
-						<label for="descricao"><i class='fa'></i><b>Nome</b></label>
-						<input type="text" id="nome" name="nome" placeholder="Nome do Atleta" value="" class="form-control"/>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group">
-						<label for="descricao"><i class='fa'></i><b>Associação</b></label>
-						<input type="text" id="sigla" name="sigla" placeholder="Nome da Associação" value="" class="form-control"/>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="panel-footer text-right">
-			<button class="btn btn-success" type="button" id="btPesquisar">
-				Pesquisar
-			</button>
-			<a class="btn btn-primary" href="admin_anuidade-gerar"><i class="fa fa-plus"></i> Nova Anuidade</a>
-			<button class="btn btn-default btVoltar" type="button">
-				Voltar
-			</button>
-		</div>
+<form role="form" method="post" action="admin_anuidade-guia" id="frmPesquisa">
+    <input type="hidden" name="pagina" id="pagina" value="1" />
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Pesquisa Atleta</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="associacao"><i class='fa'> </i><b>Associação</b></label>
+                        <Select name="associacao" id="associacao" class="form-control required">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_ASSOCIACAO -->
+                            <option value="{ASS_ID}">{ASS_LABEL}</option>
+                            <!-- END BLOCK_ASSOCIACAO -->
+                        </Select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="atleta"><i class='fa'> </i><b>Atleta</b></label>
+                        <Select name="atleta[]" id="atleta" class="form-control" multiple="multiple"></Select>
+                        <input type="checkbox" class="form-control" value="1" name="todos" id="todos" />
+                        Todos
+                    </div>
+                </div>
+            </div>
 
-	</div>
-	<div class="box box-primary">
-		<div class="box-header">
-			<h3 class="box-title">Resultado</h3>
-		</div>
-		<div class="box-body" id="resultado"></div>
-	</div>
+        </div>
+        <div class="panel-footer text-right">
+            <a class="btn btn-primary" href="admin_anuidade-gerar"><i class="fa fa-plus"> </i> Novo Ano</a>
+            <button class="btn btn-default btVoltar" type="button">
+                << Voltar
+            </button>
+            <button class="btn btn-success" type="submit" id="btPesquisar">
+                Avançar >>
+            </button>
+        </div>
+    </div>
 </form>
 <script>
-
-	function pesquisar(){
-			$.ajax({
-				url : "ajax/admin_anuidade_pesquisar.php",
-				type : "POST",
-				data : $("#frmPesquisa").serialize(),
-
-				beforeSend: function( ) {
-					$('#resultado').html('{LOADING}');
-		  		},
-			}).done(function(msg) {
-				$("#resultado").html(msg);
-			});
-
-		}
-
 	$(document).ready(function() {
+		$("#associacao").change(function() {
+			if ($(this).val() != "") {
+				$.ajax({
+					url : 'ajax/option_atletas_por_associacao.php',
+					data : {
+						associacao : $(this).val()
+					}
+				}).done(function(retorno) {
+					$("#atleta").html(retorno);
+				});
+			}
 
-		$("#btPesquisar").click(function() {
-			pesquisar();
 		});
+
+		$("#frmPesquisa").validate({
+		errorClass : "help-inline",
+		errorElement : "div",
+		highlight : function(element, errorClass, validClass) {
+		$(element).parents('.form-group').addClass('has-error');
+		$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+		},
+		unhighlight : function(element, errorClass, validClass) {
+		$(element).parents('.form-group').removeClass('has-error');
+		$(element).parents('.form-group').addClass('has-success');
+		$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+		$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+		},
+		rules : {
+		"atleta[]": {
+		required: function() {
+		      return !$("#todos").prop('checked');
+		  }
+		}
+		}});
+		
 	}); 
 </script>

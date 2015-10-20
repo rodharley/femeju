@@ -4,9 +4,25 @@ class Anuidade extends Persistencia{
 	var $atleta = NULL;
 	var $pagamento = NULL;
 	var $situacao;
-	
+	var $dataVencimento;
+    
+    function listaPorAtleta($idAtleta){
+        return $this->getRows(0,999,array("anoReferencia"=>"DESC"),array("atleta"=>"=".$idAtleta));
+    }
+    
+    function listaGrupoAno(){
+        $sql = "select * from fmj_anuidade where situacao = 0 group by anoReferencia";
+        return $this->getSQL($sql);
+    }
+    
+    function getOneByAno($ano){
+        //$sql = "select * from fmj_anuidade where situacao = 0 and anoReferencia = $ano limit 1";
+        return $this->getRow(array("anoReferencia"=>"= $ano"));
+    }
+    
 	function gerar(){
 	    $ano = $_REQUEST['ano'];
+        $vencimento = $this->convdata($_REQUEST['dataVencimento'], "ntm");
         if(strlen($ano) == 4 && is_numeric($ano) ){
            $obAtleta = new Atleta();
            $rs = $obAtleta->listaAtivos();
@@ -16,6 +32,7 @@ class Anuidade extends Persistencia{
                $this->anoReferencia = $ano;
                 $this->pagamento = null;
                 $this->situacao = 0;
+                $this->dataVencimento = $vencimento;
                $this->atleta = new Atleta($value->id);
                $this->save();
                if($ano >= Date("Y")){
@@ -32,5 +49,27 @@ class Anuidade extends Persistencia{
            return false; 
         }
 	}
+    
+    function atualizarAnuidades($idPagamento,$ano){
+         foreach ($_REQUEST['atleta'] as $key => $id) {
+             $this->getRow(array("anoReferencia"=>"=".$ano,"atleta"=>"=".$id));
+             $this->pagamento = new Pagamento($idPagamento);
+             $this->save();
+         }
+         return true;
+    }
+    
+    function geraItensPagamento(){
+        $itens = array();
+        
+        foreach ($_REQUEST['atleta'] as $key => $id) {
+            $item = new PagamentoItem();
+            $item->atleta = new Atleta($id);
+            $item->valor = $_REQUEST['valor_atleta'.$id];
+            $item->custa = new Custa($_REQUEST['custa'.$id]);
+            array_push($itens,$item);
+        }
+        return $itens;
+    }
 }
 ?>

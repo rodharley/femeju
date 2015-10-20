@@ -21,8 +21,13 @@ $TPL->BREADCRUMB = '<section class="content-header">
                                     </ol>
                 </section>';
 
-
 $TPL->addFile("CONTEUDO", "templates/admin/anuidade/pesquisa.html");
-$TPL->LOADING = $obj->carregando;
+
+$rsa = $obj->listaAtivas();
+foreach ($rsa as $key => $value) {
+	$TPL->ASS_ID = $value->id;
+    $TPL->ASS_LABEL = $value->nome;
+    $TPL->block("BLOCK_ASSOCIACAO");
+}
 $TPL->show();
 ?>

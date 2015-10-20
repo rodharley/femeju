@@ -1158,6 +1158,14 @@ body > .header .logo .icon {
   border-color: #f56954 !important;
   box-shadow: none;
 }
+.help-inline{
+	position: absolute;
+	
+	background-color: #f56954;
+	color:#FFFFFF;
+	padding: 0.3em;
+}
+
 /* Input group */
 .input-group .input-group-addon {
   border-radius: 0;
