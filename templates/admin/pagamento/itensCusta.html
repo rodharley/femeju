@@ -1,0 +1,69 @@
+<table class="table table-striped table-condensed">
+        <tr>
+            <th>Grupo</th><th>Titulo</th><th>Descrição</th><th>Valor</th><th>Ação</th>
+        </tr>
+        <!--BEGIN BLOCK_ITEM -->
+        <tr>
+            <td>{GRUPO}</td>
+            <td>{TITULO}</td>
+            <td>{DESCRICAO}</td>
+            <td>{VALOR}</td>
+            <td width="10%">
+            <div class="btn-group">
+                <a type="button" class="btn btn-default editar" href="#" value="{KEY}" title="Editar" ><span class="fa fa-edit"></span></a>
+                <a class="btn btn-danger excluir" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
+            </div></td>
+        </tr>
+        <!-- END BLOCK_ITEM -->
+    </table> 
+    <!-- BEGIN BLOCK_PAGINACAO -->
+
+        <ul class="pagination pagination-sm no-margin pull-ce">
+            <li>
+                <a href="#" value="{PAGINA_ANTERIOR}" class="paginar">&laquo;</a>
+            </li>
+            <li>
+                <a href="#">{PAGINA}/{TOTAL_PAGINAS}</a>
+            </li>
+            <li>
+                <a href="#" value="{PROXIMA_PAGINA}" class="paginar">&raquo;</a>
+            </li>
+        </ul>
+    <!-- END BLOCK_PAGINACAO -->
+    
+    <script>
+    $(document).ready(function() {
+    
+    var jsonStr = '{"itens":[{JSON}]}';
+    var objJson = JSON.parse(jsonStr);
+    
+     $(".editar").click(function(){
+        $("#idCusta").val(objJson.itens[$(this).attr("value")].id);
+        $("#titulo").val(objJson.itens[$(this).attr("value")].titulo);
+        $("#descricao").val(objJson.itens[$(this).attr("value")].descricao);
+        $("#valor").val(objJson.itens[$(this).attr("value")].valor);
+        $("#grupo").val(objJson.itens[$(this).attr("value")].grupo);
+        $("#situacao").val(objJson.itens[$(this).attr("value")].ativo);        
+        $("#acao").val("alterarCusta");
+        $("#modalEdit").modal();
+     });
+     
+       $('.excluir').click(function() {
+    if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+             $.ajax({
+                url: 'admin_pagamento-action',
+                data: {id:$(this).attr("value"),acao:"excluirCusta"},
+                type:"POST"
+            }).done(function(resposta){
+               if(resposta != "")
+                    alert(resposta);
+                    pesquisar();
+            });
+    });
+
+    $(".paginar").click(function(){
+    $("#pagina").val($(this).attr("value"));
+    pesquisar();
+    });            
+    });
+    </script>  

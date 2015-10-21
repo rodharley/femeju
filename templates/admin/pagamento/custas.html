@@ -1,0 +1,176 @@
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">Tabela de Custas</h3>
+        <div class="box-tools">
+            <form name="frmPesquisa" id="frmPesquisa" action="admin_pagamento-custas" method="post" class="pull-right form form-inline">
+                <label for="pefil">Situação:</label>
+                <input type="radio" class="form-control" value="1" name="ativo" {checked_ativo}/>
+                Ativo
+                <input type="radio" class="form-control" value="0" name="ativo" {checked_inativo}/>
+                Inativo
+                <button type="button" class="btn btn-sm btn-default paginar" value="1">
+                    <i class="fa fa-filter"> </i> Filtrar
+                </button>
+
+        </div>
+        <input type="hidden" name="pagina" id="pagina" value="{PAGINA}"/>
+        </form>
+    </div>
+    <div id="boxItens">
+        
+    </div>
+<div class="panel-footer text-right">
+        <button class="btn btn-default btVoltar" type="button">
+            Voltar
+        </button>
+        <button class="btn btn-primary" type="button" id="btNovo">
+            Nova Custa
+        </button>
+    </div>
+
+
+        
+    </div>
+    
+
+<div class="modal fade" id="modalEdit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar/Criar</h4>
+      </div>
+      <div class="modal-body" id="boxform">
+       <form name="frmEdit" id="frmEdit" action="#" method="post" class="form">
+            <input type="hidden" name="idCusta" id="idCusta" value=""/>
+             <input type="hidden" name="acao" id="acao" value=""/>      
+       <div class="row">
+        <div class="col-md-6 col-xs-6">
+             <div class="form-group">
+                 <label for="grupo"><i class='fa'> </i><b>Grupo de Custa</b></label>
+                        <Select name="grupo" id="grupo" class="form-control required">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_TIPO_CUSTA -->
+                            <option value="{ID_GRUPO}">{DESC_GRUPO}</option>
+                            <!-- END BLOCK_TIPO_CUSTA -->
+                        </Select> 
+                 
+                 
+             </div>    
+        </div>
+        <div class="col-md-6 col-xs-6">
+             <div class="form-group">
+                 <label for="situacao"><i class='fa'> </i><b>Situação</b></label><br/>                
+                 <Select name="situacao" id="situacao" class="form-control required">                           
+                            <option value="">Selecione</option>
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
+                        </Select> 
+             </div>    
+        </div>
+        </div>
+       <div class="row">
+        <div class="col-md-12 col-xs-12">
+             <div class="form-group">
+                 <label for="titulo"><i class='fa'> </i>Título</label>
+                 <input type="text" class="form-control required" name="titulo" id="titulo"/>
+                
+             </div>    
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12 col-xs-12">
+             <div class="form-group">
+                 <label for="descricao"><i class='fa'> </i>Descrição</label>
+                 <input type="text" class="form-control required" name="descricao" id="descricao"/>
+             </div>    
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6 col-xs-6">
+             <div class="form-group">
+                 <label for="valor"><i class='fa'> </i>Valor</label>
+                 <div class="input-group">
+                    <div class="input-group-addon">R$</div>
+                    <input type="text" class="form-control required" name="valor" id="valor"/>
+                
+                 </div>
+                 
+             </div>    
+        </div>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-primary" id="btSalvarCusta">Salvar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+   function pesquisar(){
+    $.ajax({
+    url : "ajax/admin_pagamento_custas.php",
+    type : "POST",
+    data : $("#frmPesquisa").serialize(),
+
+    beforeSend: function( ) {
+    $('#boxItens').html('{LOADING}');
+    },
+    }).done(function(msg) {
+    $("#boxItens").html(msg);
+    });
+
+    }
+    $(document).ready(function() {
+    
+    var jsonStr = '{"itens":[]}';
+    var objJson = JSON.parse(jsonStr);
+    
+    $("#btNovo").click(function(){
+        $("#idCusta").val("");
+        $("#acao").val("incluirCusta");
+        $("#titulo").val("");
+        $("#descricao").val("");
+        $("#valor").val("");
+        $("#grupo").val("");
+        $("#situacao").val("");
+        $("#modalEdit").modal();
+    });
+    
+    
+   
+
+    $("#btSalvarCusta").click(function(){
+        if($("#frmEdit").valid()){
+            $.ajax({
+                url: 'admin_pagamento-action',
+                data: $("#frmEdit").serialize(),
+                type:"POST"
+            }).done(function(resposta){
+               $("#modalEdit").modal('hide');
+                pesquisar();
+            });
+            
+        }
+   });
+        
+    $("#valor").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        });
+    
+    
+
+  
+   
+    
+    <!-- BEGIN BLOCK_PESQUISAR -->   pesquisar(); <!-- END BLOCK_PESQUISAR -->
+    });</script>

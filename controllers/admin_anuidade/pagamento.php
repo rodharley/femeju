@@ -25,7 +25,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 $TPL->addFile("CONTEUDO", "templates/admin/anuidade/pagamento.html");
 $obj->getById($_REQUEST['associacao']);
-$rsCustas = $objC->getRows(0,999,array(),array("grupo"=>"=".GrupoCusta::ANUIDADE));
+$rsCustas = $objC->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::ANUIDADE));
 
 
 //anuidade
