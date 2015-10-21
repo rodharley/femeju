@@ -4,6 +4,6 @@ class PagamentoItem extends Persistencia{
     var $atleta = null;
     var $custa = null;
     var $pagamento = null;
-    
+    var $descricaoItem;
 }
 ?>

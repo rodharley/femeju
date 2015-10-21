@@ -1195,7 +1195,7 @@ abstract class BoletoAbstract
             'codigo_banco_com_dv' => $this->getCodigoBancoComDv(),
             'especie' => static::$especie[$this->getMoeda()],
             'quantidade' => $this->getQuantidade(),
-            'data_vencimento' => $this->getContraApresentacao() ? 'Contra Apresenta&ccedil;&atilde;o' : $this->getDataVencimento()->format('d/m/Y'),
+            'data_vencimento' => $this->getContraApresentacao() ? 'Contra Apresentação' : $this->getDataVencimento()->format('d/m/Y'),
             'data_processamento'  => $this->getDataProcessamento()->format('d/m/Y'),
             'data_documento' => $this->getDataDocumento()->format('d/m/Y'),
             'pagamento_minimo' => static::formataDinheiro($this->getPagamentoMinimo()),

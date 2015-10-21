@@ -64,9 +64,12 @@ class Anuidade extends Persistencia{
         
         foreach ($_REQUEST['atleta'] as $key => $id) {
             $item = new PagamentoItem();
-            $item->atleta = new Atleta($id);
+            $atleta = new Atleta();
+            $atleta->getById($id);
+            $item->atleta = $atleta;
             $item->valor = $_REQUEST['valor_atleta'.$id];
             $item->custa = new Custa($_REQUEST['custa'.$id]);
+            $item->descricaoItem = $atleta->pessoa->getNomeCompleto();
             array_push($itens,$item);
         }
         return $itens;

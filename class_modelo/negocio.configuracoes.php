@@ -11,6 +11,12 @@ class Configuracoes extends Persistencia {
     const ID_TITULO = 9;
 	const ID_COR_CARTERINHA = 10;
 	const ID_ASSINATURA = 11;
+    const BRB_CC = 12;
+    const BRB_AG = 13;
+    const BRB_CA = 14;
+    const BRB_DV_CC = 15;
+    const BRB_DV_AG = 16;
+    const BRB_INSTRUCOES = 17;
    var $valor;
    var $descricao;     
         
@@ -29,6 +35,16 @@ class Configuracoes extends Persistencia {
             $this -> valor = $nomefoto;			
 			$this->save();
         }
+  }
+  
+  public function recuperaConfiguracoesBRB(){
+      $sql= "Select * from fmj_configuracoes where id in (12,13,14,15,16,17)";
+      $arrayValues = array();
+      $rs = $this->DAO_ExecutarQuery($sql);
+        while($linha = $this->DAO_GerarArray($rs)){
+           $arrayValues[$linha['id']] = $linha['valor'];
+        }
+       return $arrayValues;
   }
 }
 ?>

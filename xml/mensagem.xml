@@ -56,6 +56,7 @@ Exemplos de mensagens:
 <mensagem id="50" type="success">Anuidade gerada com sucesso!</mensagem>
 <mensagem id="51" type="error">Ano inválido!</mensagem>
 <mensagem id="52" type="success">Guia de Pagamento Gerada com sucesso!</mensagem>
+<mensagem id="53" type="success">Guia de Pagamento excluída com sucesso!</mensagem>
 </mensagens>
 
 

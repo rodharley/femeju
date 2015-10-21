@@ -17,11 +17,11 @@ $TPL->BREADCRUMB = '<section class="content-header">
                    <ol class="breadcrumb">
                                         <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
                                         <li><a href="admin_anuidade"><i class="fa fa-credit-card"> </i> Anuidade</a></li>
-                                         <li class="active">Pesquisa Atleta</li>
+                                         <li class="active">Gerar Guia de Pagamento</li>
                                     </ol>
                 </section>';
 
-$TPL->addFile("CONTEUDO", "templates/admin/anuidade/pesquisa.html");
+$TPL->addFile("CONTEUDO", "templates/admin/anuidade/main.html");
 
 $rsa = $obj->listaAtivas();
 foreach ($rsa as $key => $value) {

@@ -158,18 +158,21 @@ set
 		<atrib tbname="codigo" type="txt">codigo</atrib>	
 		<atrib tbname="idGrupo" type="int">grupo</atrib>	
 		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>		
-		<atrib tbname="idResponsavel" type="fk" clrelation="Usuario">tipo</atrib>		
+		<atrib tbname="idResponsavel" type="fk" clrelation="Usuario">responsavel</atrib>
+		<atrib tbname="" type="set" clrelation="PagamentoItem" clorder="descricaoItem" clfk="pagamento">itens</atrib>		
 	</class>
 	<class name="PagamentoItem" tbname="fmj_pagamento_item" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="valor" type="int">valor</atrib>
+		<atrib tbname="descricaoItem" type="txt">descricaoItem</atrib>
 		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
 		<atrib tbname="idCusta" type="fk" clrelation="Custa">custa</atrib>
 		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>					
 	</class>
 	<class name="PagamentoTipo" tbname="fmj_tipo_pagamento" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="imagem" type="txt">imagem</atrib>	
 	</class>
 	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	

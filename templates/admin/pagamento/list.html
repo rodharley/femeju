@@ -1,0 +1,81 @@
+<script>
+    $(document).ready(function() {
+        
+        $('.excluir').click(function() {
+            if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+                window.location.href = 'admin_pagamento-action?acao=excluir&id=' + $(this).attr("value");
+        });
+        $(".paginar").click(function(){
+            $("#pagina").val($(this).attr("value"));
+            pesquisar();
+        });
+       function pesquisar(){
+            $.ajax({
+                url : "ajax/admin_pagamento_pesquisar.php",
+                type : "POST",
+                data : $("#frmPesquisa").serialize(),
+
+                beforeSend: function( ) {
+                    $('#resultado').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#resultado").html(msg);
+            });
+
+        }
+
+    });
+
+</script>
+
+
+        <table class="table table-striped table-hover data-table">
+            <thead>
+                <tr>
+                    <th>Responsável</th>
+                    <th>Situação</th>
+                    <th>Valor</th>                 
+                    <th style="width: 160px;" class="text-center hidden-xs">Ação</th>
+                    <th class="visible-xs">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- BEGIN BLOCK_ITEM_LISTA -->
+                <tr>
+                    <td>{responsavel}</td>
+                    <td><span class="label label-{colorSituacao}">{situacao}</span></td>
+                    <td>{valor}</td>
+                    <td class="text-right hidden-xs" >
+                    <div class="btn-group">
+                        <a type="button" class="btn btn-default" href="admin_pagamento-guia?id={ID_HASH}" title="Detalhe" ><span class="fa fa-barcode"></span></a>
+                        <a class="btn btn-danger excluir" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
+                    </div></td>
+                    <td class="visible-xs">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="fa fa-list"></span><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">                          
+                            <li>
+                                <a href="admin_pagamento-guia?id={ID_HASH}"><span class="fa fa-barcode"></span> Editar</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" value="{ID_HASH}" class="excluir"><span class="fa fa-trash-o text-danger"></span> Excluir</a>
+                            </li>
+                        </ul>
+                    </div></td>
+                </tr>
+
+                <!-- END BLOCK_ITEM_LISTA -->
+            </tbody>
+        </table>
+    <!-- BEGIN BLOCK_PAGINACAO -->
+    
+                                        <ul class="pagination pagination-sm no-margin pull-ce">
+                                            <li><a href="#" value="{PAGINA_ANTERIOR}" class="paginar">&laquo;</a></li>
+                                            <li><a href="#">{PAGINA}/{TOTAL_PAGINAS}</a></li>
+                                            <li><a href="#" value="{PROXIMA_PAGINA}" class="paginar">&raquo;</a></li>
+                                        </ul>
+
+    <!-- END BLOCK_PAGINACAO -->

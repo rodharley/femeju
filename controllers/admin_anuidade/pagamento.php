@@ -23,7 +23,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
                                     </ol>
                 </section>';
 
-$TPL->addFile("CONTEUDO", "templates/admin/anuidade/guia.html");
+$TPL->addFile("CONTEUDO", "templates/admin/anuidade/pagamento.html");
 $obj->getById($_REQUEST['associacao']);
 $rsCustas = $objC->getRows(0,999,array(),array("grupo"=>"=".GrupoCusta::ANUIDADE));
 
