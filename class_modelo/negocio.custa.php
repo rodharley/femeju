@@ -28,8 +28,8 @@ class Custa extends Persistencia{
 
     }
     function incluir(){
-        $this->descricao = $_REQUEST['descricao'];
-        $this->titulo = $_REQUEST['titulo'];
+        $this->descricao = utf8_decode($_REQUEST['descricao']);
+        $this->titulo = utf8_decode($_REQUEST['titulo']);
         $this->grupo = $_REQUEST['grupo'];
         $this->valor = $this->money($_REQUEST['valor'], "bta");
         $this->ativo = $_REQUEST['situacao'];
@@ -37,8 +37,8 @@ class Custa extends Persistencia{
     }
     function alterar(){
         $this->getById($_REQUEST['idCusta']);
-        $this->descricao = $_REQUEST['descricao'];
-        $this->titulo = $_REQUEST['titulo'];
+        $this->descricao = utf8_decode($_REQUEST['descricao']);
+        $this->titulo = utf8_decode($_REQUEST['titulo']);
         $this->grupo = $_REQUEST['grupo'];
         $this->valor = $this->money($_REQUEST['valor'], "bta");
         $this->ativo = $_REQUEST['situacao'];
