@@ -18,6 +18,24 @@ set
 <atrib tbname="" type="set" clrelation="vigencia" clorder="dataInicio" clfk="contrato">vigencias</atrib>
 -->
 <bd name="epocca">
+	<class name="Ano" tbname="fmj_ano" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
+		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>		
+	</class>
+	<class name="Acesso" tbname="fmj_acesso" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="idMenu" type="fk" clrelation="Menu">menu</atrib>
+		<atrib tbname="idPerfil" type="fk" clrelation="Perfil">perfil</atrib>		
+	</class>
+	<class name="Anuidade" tbname="fmj_anuidade" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
+		<atrib tbname="situacao" type="int">situacao</atrib>
+		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>		
+		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
+		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>		
+	</class>
 	<class name="Associacao" tbname="fmj_associacao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="nome" type="txt">nome</atrib>
@@ -45,19 +63,7 @@ set
 		<atrib tbname="imagem" type="txt">imagem</atrib>
 		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">associacao</atrib>				
 	</class>
-	<class name="Acesso" tbname="fmj_acesso" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="idMenu" type="fk" clrelation="Menu">menu</atrib>
-		<atrib tbname="idPerfil" type="fk" clrelation="Perfil">perfil</atrib>		
-	</class>
-	<class name="Anuidade" tbname="fmj_anuidade" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
-		<atrib tbname="situacao" type="int">situacao</atrib>
-		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>		
-		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
-		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>		
-	</class>
+	
 	<class name="Atleta" tbname="fmj_atleta" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>		
 		<atrib tbname="dataFiliacao" type="txt">dataFiliacao</atrib>

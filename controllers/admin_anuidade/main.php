@@ -1,15 +1,15 @@
 <?php
 $menu = 31;
-include("includes/include.lock.php");
+include ("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
-include("includes/include.montaMenu.php");
+include ("includes/include.montaMenu.php");
 
 //INSTACIA CLASSES
 $obj = new Associacao();
-
-include("includes/include.mensagem.php");
+$objAn = new Ano();
+include ("includes/include.mensagem.php");
 //CONFIGURA O BREADCRUMB
-$TPL->BREADCRUMB = '<section class="content-header">
+$TPL -> BREADCRUMB = '<section class="content-header">
                     <h1>
                         Pagamento
                         <small>Anuidade</small>
@@ -21,13 +21,22 @@ $TPL->BREADCRUMB = '<section class="content-header">
                                     </ol>
                 </section>';
 
-$TPL->addFile("CONTEUDO", "templates/admin/anuidade/main.html");
+$TPL -> addFile("CONTEUDO", "templates/admin/anuidade/main.html");
 
-$rsa = $obj->listaAtivas();
-foreach ($rsa as $key => $value) {
-	$TPL->ASS_ID = $value->id;
-    $TPL->ASS_LABEL = $value->nome;
-    $TPL->block("BLOCK_ASSOCIACAO");
+//anuidade
+$rsAnos = $objAn -> listaAnuidades();
+foreach ($rsAnos as $key3 => $anuidade) {
+    $TPL -> ID_ANO = $anuidade -> anoReferencia;
+    $TPL -> LABEL_ANO = $anuidade -> anoReferencia;
+    $TPL -> block("BLOCK_ANO");
+
 }
-$TPL->show();
+
+$rsa = $obj -> listaAtivas();
+foreach ($rsa as $key => $value) {
+    $TPL -> ASS_ID = $value -> id;
+    $TPL -> ASS_LABEL = $value -> nome;
+    $TPL -> block("BLOCK_ASSOCIACAO");
+}
+$TPL -> show();
 ?>

@@ -6,6 +6,19 @@
         </div>
         <div class="box-body">
             <div class="row">
+                <div class="col-xs-12 col-md-4 col-lg-3">
+                    <div class="form-group">
+                        <label for="AnoReferencia"><i class='fa'> </i><b>Ano de Referencia</b></label>
+
+                        <select name="ano" id="ano" class="form-control required">
+                            <!-- BEGIN BLOCK_ANO -->
+                            <option value="{ID_ANO}">{LABEL_ANO}</option>
+                            <!-- END BLOCK_ANO -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="associacao"><i class='fa'> </i><b>Associação</b></label>
@@ -48,7 +61,8 @@
 				$.ajax({
 					url : 'ajax/option_atletas_por_associacao.php',
 					data : {
-						associacao : $(this).val()
+						associacao : $(this).val(),
+						ano: $("#ano").val()
 					}
 				}).done(function(retorno) {
 					$("#atleta").html(retorno);
@@ -58,25 +72,26 @@
 		});
 
 		$("#frmPesquisa").validate({
-		errorClass : "help-inline",
-		errorElement : "div",
-		highlight : function(element, errorClass, validClass) {
-		$(element).parents('.form-group').addClass('has-error');
-		$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
-		},
-		unhighlight : function(element, errorClass, validClass) {
-		$(element).parents('.form-group').removeClass('has-error');
-		$(element).parents('.form-group').addClass('has-success');
-		$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
-		$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
-		},
-		rules : {
-		"atleta[]": {
-		required: function() {
-		      return !$("#todos").prop('checked');
-		  }
-		}
-		}});
-		
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			rules : {
+				"atleta[]" : {
+					required : function() {
+						return !$("#todos").prop('checked');
+					}
+				}
+			}
+		});
+
 	}); 
 </script>

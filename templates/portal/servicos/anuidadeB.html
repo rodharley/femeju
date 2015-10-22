@@ -1,0 +1,199 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                <img src="img/icones/servicos.png" />
+            </div>
+            <h2>Anuidade de Atletas</h2>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" method="post" action="portal_servicos-action" id="frmEditAtleta">
+                    <input type="hidden" name="associacao" id="associacao" value="{ID_ASSOCIACAO}"/>
+                    <input type="hidden" name="acao" id="acao" value="guia" />
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">{LABEL}</h3>
+                        </div>
+                        <div class="box-body">
+                            <fieldset>
+                                <legend>
+                                    Associação
+                                </legend>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="nomeAssociacao"><i class='fa'> </i><b>Nome da Associação</b></label>
+                                            <input type="text" class="form-control" value="{NOME_ASSOCIACAO}" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12 text-right">
+                                        <img class="img-circle img-responsive right-side" src="img/associacoes/{LOGO_ASSOCIACAO}" style="width: 30%"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>
+                                    Ano de Referência
+                                </legend>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="AnoReferencia"><i class='fa'> </i><b>Ano de Referencia</b></label>
+                                            <input type="text" class="form-control disabled" value="{ANO}"  name="ano" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipoPagamento"><i class='fa'> </i><b>Tipo de Pagamento</b></label>
+                                    <div class="row">
+                                        <div class="col-xs-2 col-md-2 text-center">
+                                            <div class="thumbnail">
+                                                <img src="img/credit/boleto-brb.png" class="img-responsive" alt="boleto BRB">
+                                                <input type="radio" class="form-control required" value="1" name="tipoPagamento" checked/>
+                                                Boleto BRB
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-md-2 text-center">
+                                            <div class="thumbnail">
+                                                <img src="img/credit/boleto-femeju.png" class="img-responsive" alt="boleto Femeju">
+                                                <input type="radio" class="form-control required" value="2" name="tipoPagamento"/>
+                                                Boleto Femeju
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>
+                                    Atletas
+                                </legend>
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Atleta</th>
+                                                <th>Custa</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                            <!-- BEGIN BLOCK_ATLETAS -->
+                                            <tr>
+                                                <td>{ATLETA}
+                                                <input type="hidden" name="atleta[]" value="{ID_ATLETA}" />
+                                                </td>
+                                                <td>
+                                                <div class="form-group">
+                                                    <select name="custa{ID_ATLETA}" class="form-control required custa" id="{ID_ATLETA}">
+                                                        <option value=""></option>
+                                                        <!-- BEGIN BLOCK_CUSTA -->
+                                                        <option value="{ID_CUSTA}">{LABEL_CUSTA}</option>
+                                                        <!-- END BLOCK_CUSTA -->
+                                                    </select>
+                                                </div></td>
+                                                <td class="col-md-2"  class="text-right">
+                                                <input type="text" id="valordesc_atleta{ID_ATLETA}" name="valordesc_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right"/>
+                                                <input type="hidden" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" value="0" class="camposoma"/>
+                                                </td>
+                                            </tr>
+                                            <!-- END BLOCK_ATLETAS -->
+                                            <tr>
+                                                <td class="text-right" colspan="2"> Total:</td>
+                                                <td class="col-md-2"  class="text-right">
+                                                <input type="text" id="total" name="total" disabled="disabled" class="form-control text-right"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+
+                        </div>
+
+                        <div class="panel-footer text-right">
+                            <button class="btn btn-default btVoltar" type="button">
+                                << Voltar
+                            </button>
+                            <button class="btn btn-success" type="submit" id="btPesquisar">
+                                Gerar Guia
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	function somatotal() {
+		var total = 0;
+		$(".camposoma").each(function() {
+			total = total + eval($(this).val());
+		});
+		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+
+	}
+
+
+	$(document).ready(function() {
+
+		$(".custa").change(function() {
+			var atleta = $(this).attr("id");
+			if (atleta != "") {
+				$.ajax({
+					url : 'ajax/json_anuidade_valorCusta.php',
+					data : {
+						custa : $(this).val()
+					}
+				}).done(function(retorno) {
+					var json = JSON.parse(retorno);
+					$("#valordesc_atleta" + atleta).val(json.valorDesc);
+					$("#valor_atleta" + atleta).val(json.valor);
+					somatotal();
+				});
+			}
+
+		});
+
+		$("#ano").change(function() {
+
+			$.ajax({
+				url : 'ajax/option_atletas_por_associacao.php',
+				data : {
+					associacao : $("#associacao").val(),
+					ano : $(this).val()
+				}
+			}).done(function(retorno) {
+				$("#atleta").html(retorno);
+			});
+
+		});
+
+		$("#frmEditAtleta").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			rules : {
+				"atleta[]" : {
+					required : function() {
+						return !$("#todos").prop('checked');
+					}
+				}
+			}
+		});
+		somatotal();
+	}); 
+</script>

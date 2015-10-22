@@ -5,6 +5,14 @@
             <h3 class="box-title">Guia de Pagamento</h3>
         </div>
         <div class="box-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-4 col-lg-3">
+                    <div class="form-group">
+                        <label for="AnoReferencia"><i class='fa'> </i><b>Ano de Referencia</b></label>
+                        <input type="text" class="form-control disabled" value="{ANO}"  name="ano" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="tipoPagamento"><i class='fa'> </i><b>Tipo de Pagamento</b></label>
                 <div class="row">
@@ -18,20 +26,7 @@
                     </div>
                 </div>
             </div>
-             <div class="form-group">
-             <label for="AnoReferencia"><i class='fa'> </i><b>Ano de Referencia</b></label>
-              <div class="row">
-                    <div class="col-xs-12 col-md-4 col-lg-3">
-                        <select name="ano" class="form-control required">
-                        <option value=""></option>
-                        <!-- BEGIN BLOCK_ANO -->
-                        <option value="{ID_ANO}">{LABEL_ANO}</option>
-                        <!-- END BLOCK_ANO -->
-                    </select>
-                    </div>
-             </div>
-             </div>
-            <table class="table">
+             <table class="table">
                 <tr>
                     <th>Atleta</th>
                     <th>Custa</th>                   

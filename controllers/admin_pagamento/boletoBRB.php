@@ -65,4 +65,7 @@ $boleto = new Brb(array(
     //'valorUnitario' => 123.12,
     //'quantidade' => 1,
 ));
+$nossoNumero = $boleto->gerarNossoNumero();
+$pagamento->codigo = $nossoNumero;
+$pagamento->save();
 echo $boleto->getOutput();

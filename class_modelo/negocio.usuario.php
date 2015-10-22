@@ -17,6 +17,9 @@ class Usuario extends Persistencia {
 		unset($_SESSION['fmj.userPerfil']);
 		unset($_SESSION['fmj.userPerfilId']);
 		unset($_SESSION['fmj.menu']);
+        unset($_SESSION['start']);
+        unset($_SESSION['expire']);
+         session_destroy();
 	}
 
 	function recuperaTotal($busca = "",$perfil = "") {
@@ -80,7 +83,10 @@ class Usuario extends Persistencia {
 					$_SESSION['fmj.userNome'] = $this -> pessoa->nome;
 					$_SESSION['fmj.userPerfil'] = $this -> perfil -> descricao;
 					$_SESSION['fmj.userFoto'] = $this -> pessoa->foto;
-					$_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;					
+					$_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;		
+					$_SESSION['start'] = time(); // Taking now logged in time.
+                        // Ending a session in 30 minutes from the starting time.
+                    $_SESSION['expire'] = $_SESSION['start'] + (1800);			
 					//grava a log
 				$log = new Log();
                 

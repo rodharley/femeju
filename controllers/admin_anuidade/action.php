@@ -3,7 +3,7 @@ $menu = 31;
 include("includes/include.lock.php");
 //INSTACIA CLASSES
 $obj = new Anuidade();
-
+$objAno = new Ano();
 $pag = new Pagamento();
 
 //ACOES
@@ -17,14 +17,19 @@ switch ($_REQUEST['acao']){
         exit();
         break;
     case 'guia' :
+        if(isset($_REQUEST['atleta'])){
+        $objAno->getByAno($_REQUEST['ano']);
         $conn->connection->autocommit(false);
-        $itensPagamento = $obj->geraItensPagamento();
-        $obj->getOneByAno($_REQUEST['ano']);        
-        $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$obj->dataVencimento,$_SESSION['fmj.userId'],$itensPagamento);
-        $obj->atualizarAnuidades($idPagamento,$obj->anoReferencia);
+        $itensPagamento = $obj->geraItensPagamento();        
+        $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$_SESSION['fmj.userId'],$itensPagamento);
+        $obj->atualizarAnuidades($idPagamento,$objAno->anoReferencia);
          $_SESSION['fmj.mensagem'] = 52;
         $conn->connection->commit();
-        header("Location:admin_anuidade");
+        header("Location:admin_pagamento-guia?id=".$obj->md5_encrypt($idPagamento));
+        }else{
+         $_SESSION['fmj.mensagem'] = 55;
+         header("Location:admin_anuidade");   
+        }
         exit();
         break;			
 }

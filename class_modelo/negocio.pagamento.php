@@ -57,6 +57,18 @@ class Pagamento extends Persistencia{
         return $this -> DAO_Result($rs, "total", 0);
     }
 
+ function pesquisarPortalTotal($idResponsavel) {
+        $sql = "select count(p.id) as total from ".$this::TABELA." p where p.idResponsavel = $idResponsavel";
+        $rs = $this -> DAO_ExecutarQuery($sql);
+        return $this -> DAO_Result($rs, "total", 0);
+        
+    }
+ 
+ function pesquisarPortal($primeiro = 0, $quantidade = 9999, $idResponsavel) {
+        $sql = "select p.* from ".$this::TABELA." p where p.idResponsavel = $idResponsavel";
+        $rs = $this -> DAO_ExecutarQuery($sql);
+        return $this -> getSQL($sql);
+    }
     function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "") {
 
         $sql = "select p.* from ".$this::TABELA." p inner join fmj_usuario u on u.id = p.idResponsavel  inner join fmj_pessoa pe on pe.id = u.idPessoa where 1 = 1 ";

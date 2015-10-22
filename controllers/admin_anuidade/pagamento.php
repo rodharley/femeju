@@ -27,20 +27,12 @@ $TPL->addFile("CONTEUDO", "templates/admin/anuidade/pagamento.html");
 $obj->getById($_REQUEST['associacao']);
 $rsCustas = $objC->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::ANUIDADE));
 
+$TPL->ANO = $_REQUEST['ano'];
 
-//anuidade
-    $rsAnos = $objAn->listaGrupoAno();
-    foreach ($rsAnos as $key3 => $anuidade) {
-            if($anuidade->situacao == 0){    
-            $TPL->ID_ANO = $anuidade->anoReferencia;
-            $TPL->LABEL_ANO = $anuidade->anoReferencia;
-            $TPL->block("BLOCK_ANO");
-            }
-        }
 
 
 if(isset($_REQUEST['todos']))
-$rsAtletas = $objA->listaPorAssociacaoAtivos($obj->id);
+$rsAtletas = $objA->listaPorAnuidadeAssociacao($obj->id,$_REQUEST['ano']);
 else
 $rsAtletas = $objA->listaPorArrayIds($_REQUEST['atleta']);
 foreach ($rsAtletas as $key => $value) {

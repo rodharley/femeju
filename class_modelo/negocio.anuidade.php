@@ -1,5 +1,7 @@
 <?php
 class Anuidade extends Persistencia{
+    const TABELA ="fmj_anuidade";
+    
 	var $anoReferencia;
 	var $atleta = NULL;
 	var $pagamento = NULL;
@@ -10,22 +12,26 @@ class Anuidade extends Persistencia{
         return $this->getRows(0,999,array("anoReferencia"=>"DESC"),array("atleta"=>"=".$idAtleta));
     }
     
-    function listaGrupoAno(){
-        $sql = "select * from fmj_anuidade where situacao = 0 group by anoReferencia";
-        return $this->getSQL($sql);
-    }
-    
-    function getOneByAno($ano){
-        //$sql = "select * from fmj_anuidade where situacao = 0 and anoReferencia = $ano limit 1";
-        return $this->getRow(array("anoReferencia"=>"= $ano"));
-    }
     
 	function gerar(){
 	    $ano = $_REQUEST['ano'];
         $vencimento = $this->convdata($_REQUEST['dataVencimento'], "ntm");
+        $objAno = new Ano();
         if(strlen($ano) == 4 && is_numeric($ano) ){
+            
+            if($objAno->getRow(array("anoReferencia"=>"=".$ano))){
+                 $_SESSION['fmj.mensagem'] = 54;
+           return false; 
+            }else{  
+            
+            $objAno->dataVencimento = $vencimento;
+            $objAno->anoReferencia = $ano;
+            $objAno->save(); 
+            
+            
+            
            $obAtleta = new Atleta();
-           $rs = $obAtleta->listaAtivos();
+           $rs = $obAtleta->getRows();
            foreach ($rs as $key => $value) {
                if(!$this->getRow(array("anoReferencia"=>"=".$ano,"atleta"=>"=".$value->id))){
                $this->id = null;    
@@ -41,6 +47,7 @@ class Anuidade extends Persistencia{
                }
                }
            }
+            }
            
            $_SESSION['fmj.mensagem'] = 50;
             return true; 

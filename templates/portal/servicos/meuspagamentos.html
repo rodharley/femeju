@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                                <img src="img/icones/servicos.png" />
+                            </div>
+            <h2>Serviços</h2>
+        </div>
+        <div class="panel panel-default">         
+          <div class="panel-body">  
+            <ul class="list-group">
+  <li href="#" class="list-group-item active">
+   Menu Principal / Pagamentos
+  </li>
+  <!-- BEGIN BLOCK_ITEM_LISTA -->
+    <li class="list-group-item">
+        <span class="pull-right">
+            <div class="btn-group " role="group">
+  <a href="portal_servicos-guia?id={ID_HASH}" type="button" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
+            </div>
+        </span>
+      <h4>{DATA_VENC} - R$ {valor} - <span class="label label-{colorSituacao}">{situacao}</span></h4>
+      </li>
+  <!-- END BLOCK_ITEM_LISTA -->   
+</ul>       
+           
+            <!-- BEGIN BLOCK_PAGINACAO -->
+    
+                                        <ul class="pagination pagination-sm no-margin pull-ce">
+                                            <li><a href="#" value="{PAGINA_ANTERIOR}" class="paginar">&laquo;</a></li>
+                                            <li><a href="#">{PAGINA}/{TOTAL_PAGINAS}</a></li>
+                                            <li><a href="#" value="{PROXIMA_PAGINA}" class="paginar">&raquo;</a></li>
+                                        </ul>
+
+    <!-- END BLOCK_PAGINACAO --> 
+          </div>
+        </div>
+        
+       
+        
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        
+        $(".paginar").click(function(){
+            window.location.href = "portal_servicos-meuspagamentos?pagina="+$(this).attr("value")            
+        });      
+
+    });
+
+</script>

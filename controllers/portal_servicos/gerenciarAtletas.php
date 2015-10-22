@@ -12,7 +12,7 @@ $uf = new Uf();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/servicos/gerenciarAtletas.html");
 $idAssociacao = $atleta->md5_decrypt($_REQUEST['associacao']);
-$rsAtletas = $atleta->listaPorAssociacaoAtivos($idAssociacao);
+$rsAtletas = $atleta->listaPorAssociacao($idAssociacao);
 $associacao->getById($idAssociacao);
 $TPL->ASSOCIACAO = $associacao->nome;
 $TPL->ID_ASS_RASH = $_REQUEST['associacao'];
