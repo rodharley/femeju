@@ -60,6 +60,10 @@ Exemplos de mensagens:
 <mensagem id="54" type="warning">Anuidade já existente!</mensagem>
 <mensagem id="55" type="warning">Não é possível gerar guia de pagamento de anuidade sem atletas vinculados!</mensagem>
 <mensagem id="56" type="warning">Sua sessão expirou. Realize o login novamente.</mensagem>
+<mensagem id="57" type="success">Categoria incluída com sucesso.</mensagem>
+<mensagem id="58" type="success">Categoria alterada com sucesso.</mensagem>
+<mensagem id="59" type="success">Categoria excluida com sucesso.</mensagem>
+
 </mensagens>
 
 
