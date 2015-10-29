@@ -1,8 +1,8 @@
 <?php
-class GrupoCusta{
-	const ANUIDADE = 1;
-    const COMPETICAO = 2;
-    const OUTROS = 3;
+class TipoCampeonato{
+	const FECHADO = 1;
+    const ABERTO = 2;
+    
     var $id;
     var $descricao;
     
@@ -13,15 +13,12 @@ class GrupoCusta{
     
     function getDescricao($id){
         switch ($id) {
-            case $this::ANUIDADE:
-                return 'Anuidade';
+            case $this::FECHADO:
+                return 'Fechado';
                 break;
-            case $this::COMPETICAO:
-                return 'Competicao';
+            case $this::ABERTO:
+                return 'Aberto';
                 break;
-            case $this::OUTROS:
-                return 'Outros';
-                break;                
             default:
                 return '';
                 break;

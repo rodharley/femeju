@@ -1,0 +1,64 @@
+<form role="form" method="post" action="admin_competicao-action" id="frmEdit">
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title">{LABEL}</h3>
+	</div>
+	<div class="box-body">
+			<input type="hidden" name="acao" value="incluir"/>
+			<div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="titulo"><i class='fa'></i><b>Título</b></label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título da competição" value="" class="required form-control"/>
+                    </div>
+                    </div>
+                    </div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="descricao"><i class='fa'></i><b>Descrição</b></label>
+						<textarea type="text" id="descricao" name="descricao" placeholder="Descrição da competição" class="required form-control"></textarea> 
+					</div>
+				</div>
+			</div>
+			<div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="tipo"><i class='fa'></i><b>Tipo de Competição</b></label>
+                        <select name="tipo" id="tipo" class="form-control required">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_TIPO -->
+                            <option value="{ID_TIPO}">{DESC_TIPO}</option>
+                            <!-- END BLOCK_TIPO -->
+                        </select> 
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+			    <div class="col-md-6 col-xs-6">
+                      <div class="form-group">
+                      <label for="dataEvento"><i class='fa'></i><b>Data da Competição</b></label>
+                      <input id="dataEvento" type="text" name="dataEvento" value="" class="required form-control">
+                      </div>
+                    </div>
+			</div>
+
+			
+
+	</div>
+<div class="panel-footer text-center">
+	<button class="btn btn-default btVoltar" type="button"><< Voltar</button>
+	<button class="btn btn-success" type="submit" >Avançar >></button>
+	
+</div>
+
+</div>
+</form>
+<script>
+	$(document).ready(function() {
+
+	$("#dataEvento").datepicker();
+			
+		
+	});
+</script>

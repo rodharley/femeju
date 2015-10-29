@@ -1,25 +1,27 @@
 <?php
-$menu =36;
+$menu =37;
 include("includes/include.lock.php");
 //INSTACIA CLASSES
-$grad = new Classe();
+$comp = new Competicao();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
 	case 'editar' :
-		$grad->Alterar();
+		$comp->Alterar();
 		 $_SESSION['fmj.mensagem'] = 58;
         header("Location:admin_classe-main");
         exit();
 		break;
      case 'incluir' :
-        $grad->Incluir();
-		  $_SESSION['fmj.mensagem'] = 57;
-        header("Location:admin_classe-main");
+         $conn->connection->autocommit(false);
+        $idComp = $comp->Incluir();
+         $conn->connection->commit();
+		  $_SESSION['fmj.mensagem'] = 60;
+        header("Location:admin_competicao-configuracao?id=".$comp->md5_encrypt($idComp));
         exit();
         break;
 	case 'excluir' :
-        $grad->Excluir($_REQUEST['id']);
+        $comp->Excluir($_REQUEST['id']);
 		header("Location:admin_classe-main");
         exit();
         break;  	

@@ -1,5 +1,5 @@
 <?php
-$menu =29;
+$menu =35;
 include("includes/include.lock.php");
 //INSTACIA CLASSES
 $grad = new CategoriaPeso();
