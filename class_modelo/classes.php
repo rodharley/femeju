@@ -7,6 +7,7 @@ require("negocio.associacaoFoto.php");
 require("negocio.atleta.php");
 require("negocio.categoria.php");
 require("negocio.cidade.php");
+require("negocio.classe.php");
 require("negocio.configuracoes.php");
 require("negocio.custa.php");
 require("negocio.diretoria.php");
