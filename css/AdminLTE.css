@@ -2607,6 +2607,7 @@ Component: timeline
 /* skin-blue sidebar */
 .skin-blue .sidebar {
   border-bottom: 1px solid #fff;
+  width: 100%;
 }
 .skin-blue .sidebar > .sidebar-menu > li {
   border-top: 1px solid #fff;
