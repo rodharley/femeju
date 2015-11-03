@@ -1,0 +1,57 @@
+<table class="table table-striped table-condensed">
+        <tr>
+            <th>Título</th><th>Descrição</th><th>Ativo</th><th>Inscrição Aberta</th><th>Data</th><th>Ação</th>
+        </tr>
+        <!--BEGIN BLOCK_ITEM -->
+        <tr>
+            <td>{TITULO}</td>
+            <td>{DESCRICAO}</td>
+            <td><span class="label label-{COLOR_ATIVO}">{ATIVO}</span></td>
+            <td><span class="label label-{COLOR_INSCRICAO}">{INSCRICAO}</span></td>
+            <td>{DATA}</td>
+            <td width="10%">
+            <div class="btn-group">
+                <a type="button" class="btn btn-default" href="admin_competicao-configuracao?id={ID_HASH}" title="Configurar" ><span class="fa fa-gear"></span></a>
+                <a class="btn btn-danger excluir" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
+            </div></td>
+        </tr>
+        <!-- END BLOCK_ITEM -->
+    </table> 
+    <!-- BEGIN BLOCK_PAGINACAO -->
+
+        <ul class="pagination pagination-sm no-margin pull-ce">
+            <li>
+                <a href="#" value="{PAGINA_ANTERIOR}" class="paginar">&laquo;</a>
+            </li>
+            <li>
+                <a href="#">{PAGINA}/{TOTAL_PAGINAS}</a>
+            </li>
+            <li>
+                <a href="#" value="{PROXIMA_PAGINA}" class="paginar">&raquo;</a>
+            </li>
+        </ul>
+    <!-- END BLOCK_PAGINACAO -->
+    
+    <script>
+    $(document).ready(function() {
+    
+       $('.excluir').click(function() {
+    if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+             $.ajax({
+                url: 'admin_pagamento-action',
+                data: {id:$(this).attr("value"),acao:"excluirCusta"},
+                type:"POST"
+            }).done(function(resposta){
+               if(resposta != "")
+                    alert(resposta);
+                    pesquisar();
+            });
+    });
+
+    $(".paginar").click(function(){
+    $("#pagina").val($(this).attr("value"));
+    pesquisar();
+    });            
+    });
+    </script>  
+    

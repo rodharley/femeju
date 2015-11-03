@@ -1,64 +1,255 @@
-<form role="form" method="post" action="admin_competicao-action" id="frmEdit">
-<div class="box box-primary">
-	<div class="box-header">
-		<h3 class="box-title">{LABEL}</h3>
-	</div>
-	<div class="box-body">
-			<input type="hidden" name="acao" value="incluir"/>
-			<div class="row">
-                <div class="col-md-12 col-xs-12">
+<form role="form" method="post" action="admin_competicao-action" id="frmEdit" name="frmEdit">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Configurações</h3>
+        </div>
+        <div class="box-body">
+            <input type="hidden" name="acao" value="alterar"/>
+            <input type="hidden" name="id" id="id" value="{ID}"/>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="titulo"><i class='fa'></i><b>Título</b></label>
-                        <input type="text" id="titulo" name="titulo" placeholder="Título da competição" value="" class="required form-control"/>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título da competição" value="{TITULO}" class="required form-control"/>
                     </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="inscricao"><i class='fa'></i><b>Inscrições Abertas</b></label>
+                        <div class="checkbox">
+                            <input type="radio" class="required" name="inscricao" value="1" {checkedInscricaoOn}/>
+                            Sim &nbsp;&nbsp;
+                            <input type="radio" class="required"  name="inscricao" value="0" {checkedInscricaoOff}/>
+                            Não
+                        </div>
                     </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="ativo"><i class='fa'></i><b>Ativo</b></label>
+                        <div class="checkbox">
+                            <input type="radio" class="required" name="ativo" value="1" {checkedAtivo}/>
+                            Ativo &nbsp;&nbsp;
+                            <input type="radio" class="required"  name="ativo" value="0" {checkedInativo}/>
+                            Inativo
+                        </div>
                     </div>
-			<div class="row">
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group">
-						<label for="descricao"><i class='fa'></i><b>Descrição</b></label>
-						<textarea type="text" id="descricao" name="descricao" placeholder="Descrição da competição" class="required form-control"></textarea> 
-					</div>
-				</div>
-			</div>
-			<div class="row">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="descricao"><i class='fa'></i><b>Descrição</b></label>
+                        <textarea type="text" id="descricao" name="descricao" placeholder="Descrição da competição" class="required form-control">{DESCRICAO}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="tipo"><i class='fa'></i><b>Tipo de Competição</b></label>
                         <select name="tipo" id="tipo" class="form-control required">
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_TIPO -->
-                            <option value="{ID_TIPO}">{DESC_TIPO}</option>
+                            <option value="{ID_TIPO}" {SELECTED_TIPO}>{DESC_TIPO}</option>
                             <!-- END BLOCK_TIPO -->
-                        </select> 
+                        </select>
                     </div>
                 </div>
             </div>
-			<div class="row">
-			    <div class="col-md-6 col-xs-6">
-                      <div class="form-group">
-                      <label for="dataEvento"><i class='fa'></i><b>Data da Competição</b></label>
-                      <input id="dataEvento" type="text" name="dataEvento" value="" class="required form-control">
-                      </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="dataEvento"><i class='fa'></i><b>Data da Competição</b></label>
+                        <input id="dataEvento" type="text" name="dataEvento" value="{DATA}" class="required form-control">
                     </div>
-			</div>
-
-			
-
-	</div>
-<div class="panel-footer text-center">
-	<button class="btn btn-default btVoltar" type="button"><< Voltar</button>
-	<button class="btn btn-success" type="submit" >Avançar >></button>
-	
-</div>
-
-</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-success" type="submit" >
+                Salvar
+            </button>
+        </div>
+    </div>
 </form>
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">Categorias</h3>
+    </div>
+    <div class="box-body" id="boxItens"></div>
+    <div class="panel-footer text-right">
+        <button class="btn btn-default btVoltar" type="button">
+            Voltar
+        </button>
+        <button class="btn btn-primary" type="button" id="btNovo">
+            Nova Categoria
+        </button>
+    </div>
+
+</div>
+
+<div class="modal fade" id="modalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="frmEditCategoria" id="frmEditCategoria" action="#" method="post" class="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Editar/Criar Categoria</h4>
+                </div>
+                <div class="modal-body" id="boxform">
+
+                    <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID}"/>
+                    <input type="hidden" name="idGrupo" id="idGrupo" value=""/>
+                    <input type="hidden" name="acao" id="acaoCat" value=""/>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="grupo"><i class='fa'> </i><b>Categoria</b></label>
+                                <Select name="categoria" id="categoria" class="form-control required">
+                                    <option value="">Selecione</option>
+                                    <!-- BEGIN BLOCK_CAT -->
+                                    <option value="{ID_CAT}">{DESC_CAT}</option>
+                                    <!-- END BLOCK_CAT -->
+                                </Select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="classe"><i class='fa'> </i><b>Classe</b></label>
+                                <Select name="classe" id="classe" class="form-control required">
+                                    <option value="">Selecione</option> 
+                                    <!-- BEGIN BLOCK_CLA -->
+                                    <option value="{ID_CLA}">{DESC_CLA}</option>
+                                    <!-- END BLOCK_CLA -->                                   
+                                </Select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
+                                <Select name="graduacao" id="graduacao" class="form-control required">
+                                    <option value="">Selecione</option>      
+                                    <!-- BEGIN BLOCK_GRA -->
+                                    <option value="{ID_GRA}">{DESC_GRA}</option>
+                                    <!-- END BLOCK_GRA -->                              
+                                </Select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="valor"><i class='fa'> </i>Valor da Inscrição</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        R$
+                                    </div>
+                                    <input type="text" class="form-control required" name="valor" id="valor"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btSalvar">
+                        Salvar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Fechar
+                    </button>
+
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
+	function pesquisar() {
+		$.ajax({
+			url : "ajax/admin_competicao_categorias.php",
+			type : "POST",
+			data : {
+				id : $("#id").val()
+			},
+			beforeSend : function() {
+				$('#boxItens').html('{LOADING}');
+			},
+		}).done(function(msg) {
+			$("#boxItens").html(msg);
+		});
+
+	}
+
+
 	$(document).ready(function() {
 
-	$("#dataEvento").datepicker();
-			
-		
-	});
+		$("#dataEvento").datepicker();
+
+		var jsonStr = '{"itens":[]}';
+		var objJson = JSON.parse(jsonStr);
+
+		$("#btNovo").click(function() {
+			$("#acaoCat").val("incluirCat");
+			$("#categoria").val("");
+			$("#graduacao").val("");
+			$("#classe").val("");
+			$("#idGrupo").val("");
+			$("#valor").val("");
+			$("#modalEdit").modal();
+		});
+
+		$("#btSalvar").click(function() {
+			if ($("#frmEditCategoria").valid()) {
+				$.ajax({
+					url : 'admin_competicao-action',
+					data : $("#frmEditCategoria").serialize(),
+					type : "POST"
+				}).done(function(resposta) {
+					$("#modalEdit").modal('hide');
+					pesquisar();
+				});
+
+			}
+		});
+
+		$("#valor").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : "0"
+		});
+
+		$("#frmEditCategoria").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			}
+		});
+
+		pesquisar();
+	}); 
 </script>

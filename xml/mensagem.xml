@@ -64,6 +64,8 @@ Exemplos de mensagens:
 <mensagem id="58" type="success">Categoria alterada com sucesso.</mensagem>
 <mensagem id="59" type="success">Categoria excluida com sucesso.</mensagem>
 <mensagem id="60" type="success">Competição foi criada com sucesso! Configure agora de desejar as categorias envolvidas no evento.</mensagem>
+<mensagem id="61" type="success">Competição foi alterada com sucesso.</mensagem>
+<mensagem id="62" type="success">Competição foi excluída com sucesso.</mensagem>
 
 </mensagens>
 

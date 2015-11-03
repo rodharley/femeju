@@ -106,7 +106,10 @@ set
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="titulo" type="txt">titulo</atrib>
 		<atrib tbname="dataEvento" type="txt">dataEvento</atrib>
-		<atrib tbname="tipo" type="int">tipo</atrib>						
+		<atrib tbname="tipo" type="int">tipo</atrib>
+		<atrib tbname="bitAtivo" type="int">ativo</atrib>
+		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>			
+					
 	</class>
 	<class name="Configuracoes" tbname="fmj_configuracoes" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -149,8 +152,8 @@ set
 	</class>	
 	<class name="GrupoCompeticao" tbname="fmj_grupo_competicao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="idCompeticacao" type="fk" clrelation="Competicao">competicao</atrib>
-		<atrib tbname="idCategoria" type="fk" clrelation="Categoria">categoria</atrib>
+		<atrib tbname="idCompeticao" type="fk" clrelation="Competicao">competicao</atrib>
+		<atrib tbname="idCategoria" type="fk" clrelation="CategoriaPeso">categoria</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>
 		<atrib tbname="valor" type="int">valor</atrib>										

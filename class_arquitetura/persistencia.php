@@ -508,7 +508,7 @@ function xmlObject($elemento,$i,$objeto){
 	}
 
 	function getIdElementXML($class){
-		foreach($class->children() as $atributo){
+	    foreach($class->children() as $atributo){
 			if($atributo['type'] == "id")
 				return $atributo[0];
 			}

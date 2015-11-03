@@ -19,7 +19,53 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/competicao/configuracao.html");
+
 $obj = new Competicao();
+$obj->getById($obj->md5_decrypt($_REQUEST['id']));
+
+$TPL->LOADING = $obj->carregando;
+$TPL->TITULO = $obj->titulo;
+$TPL->DESCRICAO = $obj->descricao;
+$TPL->DATA = $obj->convdata($obj->dataEvento,"mtn");
+$TPL->ID = $obj->id;
+$TPL->checkedInscricaoOn = $obj->inscricaoAberta == 1 ? "checked" : "";
+$TPL->checkedInscricaoOff = $obj->inscricaoAberta == 0 ? "checked" : "";
+$TPL->checkedAtivo = $obj->ativo == 1 ? "checked" : "";
+$TPL->checkedInativo = $obj->ativo == 0 ? "checked" : "";
+
+$t = new TipoCampeonato(TipoCampeonato::ABERTO);
+$TPL->ID_TIPO = $t->id;
+$TPL->DESC_TIPO = $t->descricao;
+$TPL->SELECTED_TIPO = $obj->tipo == TipoCampeonato::ABERTO ? "selected":"";
+$TPL->block("BLOCK_TIPO");
+$t = new TipoCampeonato(TipoCampeonato::FECHADO);
+$TPL->ID_TIPO = $t->id;
+$TPL->DESC_TIPO = $t->descricao;
+$TPL->SELECTED_TIPO = $obj->tipo == TipoCampeonato::FECHADO ? "selected":"";
+$TPL->block("BLOCK_TIPO");
+
+$obCat = new CategoriaPeso();
+$obCla = new Classe();
+$obGra = new Graduacao();
+$rsCat = $obCat->getRows(0,999,array(),array("ativo"=>"=1"));
+foreach ($rsCat as $key => $value) {
+    $TPL->ID_CAT = $value->id;
+    $TPL->DESC_CAT = $value->descricao;
+    $TPL->block("BLOCK_CAT");
+}
+$rsCat = $obCla->getRows(0,999,array(),array("ativo"=>"=1"));
+foreach ($rsCat as $key => $value) {
+    $TPL->ID_CLA = $value->id;
+    $TPL->DESC_CLA = $value->descricao;
+    $TPL->block("BLOCK_CLA");
+}
+$rsCat = $obGra->getRows(0,999,array(),array("bitAtivo"=>"=1"));
+foreach ($rsCat as $key => $value) {
+    $TPL->ID_GRA = $value->id;
+    $TPL->DESC_GRA = $value->descricao;
+	$TPL->block("BLOCK_GRA");
+}
+
 
 $TPL->show();
 ?>

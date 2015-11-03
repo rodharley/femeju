@@ -6,10 +6,12 @@ $comp = new Competicao();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
-	case 'editar' :
-		$comp->Alterar();
-		 $_SESSION['fmj.mensagem'] = 58;
-        header("Location:admin_classe-main");
+	case 'alterar' :
+		$conn->connection->autocommit(false);
+        $idComp = $comp->Alterar();
+         $conn->connection->commit();
+		 $_SESSION['fmj.mensagem'] = 61;
+        header("Location:admin_competicao");
         exit();
 		break;
      case 'incluir' :
@@ -22,9 +24,24 @@ switch ($_REQUEST['acao']){
         break;
 	case 'excluir' :
         $comp->Excluir($_REQUEST['id']);
-		header("Location:admin_classe-main");
+		header("Location:admin_competicao");
         exit();
-        break;  	
+        break;  
+    case 'incluirCat' :
+        $conn->connection->autocommit(false);
+        $idComp = $comp->IncluirCategoria();
+         $conn->connection->commit();
+        break;	
+    case 'editarCat' :
+        $conn->connection->autocommit(false);
+        $idComp = $comp->AlterarCategoria();
+         $conn->connection->commit();
+        break;
+    case 'excluirCat' :
+        $conn->connection->autocommit(false);
+        $idComp = $comp->ExcluirCategoria();
+         $conn->connection->commit();
+        break;  
 }
 }
 
