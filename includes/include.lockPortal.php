@@ -1,7 +1,6 @@
 <?php
 if(!isset($_SESSION['fmj.userId'])){
-	$_SESSION['fmj.mensagem'] = 23;	
-    header("Location:portal_servicos-entrar");
+	header("Location:portal_servicos-entrar");
 	exit();
 }
 $now = time();

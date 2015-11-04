@@ -36,7 +36,8 @@ class Competicao extends Persistencia {
          $grupo->classe = new Classe($_REQUEST['classe']);
          $grupo->graduacao = new Graduacao($_REQUEST['graduacao']);
          $grupo->categoria = new Classe($_REQUEST['categoria']);
-         $grupo->valor = $this->money($_REQUEST['valor'], "bta");
+         $grupo->valor = $_REQUEST['valor'] == "" ? 0 : $this->money($_REQUEST['valor'], "bta");
+         $grupo->dobra = $_REQUEST['dobra'] == "" ? 0 : $this->money($_REQUEST['dobra'], "bta");
          $grupo->save();
          
      }
@@ -47,7 +48,8 @@ class Competicao extends Persistencia {
          $grupo->classe = new Classe($_REQUEST['classe']);
          $grupo->graduacao = new Graduacao($_REQUEST['graduacao']);
          $grupo->categoria = new Classe($_REQUEST['categoria']);
-         $grupo->valor = $this->money($_REQUEST['valor'], "bta");
+         $grupo->valor = $_REQUEST['valor'] == "" ? 0 : $this->money($_REQUEST['valor'], "bta");
+         $grupo->dobra = $_REQUEST['dobra'] == "" ? 0 : $this->money($_REQUEST['dobra'], "bta");
          $grupo->save();
          
      }
@@ -78,6 +80,9 @@ class Competicao extends Persistencia {
         $sql .= "  order by titulo, descricao limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
 
+    }
+    public function listaAtivasAbertas(){
+        return $this->getRows(0,999,array(),array("ativo"=>"=1","inscricaoAberta"=>"=1"));
     }
 }
 ?>

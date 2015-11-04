@@ -147,7 +147,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-xs-12">
+                        <div class="col-md-6 col-xs-6">
                             <div class="form-group">
                                 <label for="valor"><i class='fa'> </i>Valor da Inscrição</label>
                                 <div class="input-group">
@@ -155,6 +155,19 @@
                                         R$
                                     </div>
                                     <input type="text" class="form-control required" name="valor" id="valor"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="valor"><i class='fa'> </i>Valor da Dobra</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        R$
+                                    </div>
+                                    <input type="text" class="form-control" name="dobra" id="dobra"/>
 
                                 </div>
 
@@ -207,7 +220,8 @@
 			$("#graduacao").val("");
 			$("#classe").val("");
 			$("#idGrupo").val("");
-			$("#valor").val("");
+			$("#valor").val("0");
+			$("#dobra").val("0");
 			$("#modalEdit").modal();
 		});
 
@@ -234,6 +248,15 @@
 			prefix : "",
 			placeholder : "0"
 		});
+		$("#dobra").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        });
 
 		$("#frmEditCategoria").validate({
 			errorClass : "help-inline",

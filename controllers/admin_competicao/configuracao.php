@@ -12,7 +12,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
                     </h1>
                    <ol class="breadcrumb">
                                         <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
-                                        <li><a href="#"><i class="fa fa-trophy"> </i> Competições</a></li>
+                                        <li><a href="admin_competicao"><i class="fa fa-trophy"> </i> Competições</a></li>
                                          <li class="active">Configuração</li>
                                     </ol>
                 </section>';

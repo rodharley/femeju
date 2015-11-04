@@ -1,6 +1,6 @@
 <table class="table table-striped table-condensed">
         <tr>
-            <th>Categoria</th><th>Classe</th><th>Graduação</th><th>Valor</th><th>Ação</th>
+            <th>Categoria</th><th>Classe</th><th>Graduação</th><th>Valor</th><th>Dobra</th><th>Ação</th>
         </tr>
         <!--BEGIN BLOCK_ITEM -->
         <tr>
@@ -8,6 +8,7 @@
             <td>{CLASSE}</td>
             <td>{GRADUACAO}</td>
             <td>{VALOR}</td>
+            <td>{DOBRA}</td>
             <td width="10%">
             <div class="btn-group">
                 <a type="button" class="btn btn-default editar" href="#" value="{KEY}" title="Editar" ><span class="fa fa-edit"></span></a>
@@ -29,6 +30,7 @@
         $("#classe").val(objJson.itens[$(this).attr("value")].classe.id);
         $("#graduacao").val(objJson.itens[$(this).attr("value")].graduacao.id);
         $("#valor").val(objJson.itens[$(this).attr("value")].valor);
+        $("#dobra").val(objJson.itens[$(this).attr("value")].dobra);
         $("#modalEdit").modal();
      });
      

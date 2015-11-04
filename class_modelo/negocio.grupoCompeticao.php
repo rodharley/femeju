@@ -4,7 +4,7 @@ class GrupoCompeticao extends Persistencia {
     var $categoria =  NULL;
     var $classe = NULL;    
 	var $competicao = NULL;
-    VAR $valor  = NULL;
-
+    var $valor;
+    var $dobra;
 }
 ?>

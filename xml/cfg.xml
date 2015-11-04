@@ -156,7 +156,8 @@ set
 		<atrib tbname="idCategoria" type="fk" clrelation="CategoriaPeso">categoria</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>
-		<atrib tbname="valor" type="int">valor</atrib>										
+		<atrib tbname="valor" type="int">valor</atrib>
+		<atrib tbname="dobra" type="int">dobra</atrib>										
 	</class>
 	<class name="HistoricoGraduacao" tbname="fmj_historico_graduacao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

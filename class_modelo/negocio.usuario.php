@@ -203,6 +203,7 @@ class Usuario extends Persistencia {
 		$strCPF = $this -> limpaCpf($_REQUEST['cpf']);
 		$p = new Perfil();
 		$p -> id = $_REQUEST['perfil'];
+        $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
 		$this -> perfil = $p;
 		$this -> senha = "";
         $this -> ativo = 0;
@@ -215,7 +216,10 @@ class Usuario extends Persistencia {
 		$pessoa-> telCelular = str_replace("_","",$_REQUEST['celular']);
         $pessoa-> foto = "pessoa.png";
 		$pessoa->bitVerificado = 1;
-		
+		$pessoa->endereco = $_REQUEST['endereco'];
+        $pessoa->bairro = $_REQUEST['bairro'];
+        $pessoa->cidade = $cidadeEndereco;
+        $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);
 		if ($_FILES['foto']['name'] != "") {
 			//incluir imagem se ouver
 			$nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
@@ -284,12 +288,17 @@ class Usuario extends Persistencia {
 			$this -> getById($_REQUEST['id']);
 			$p = new Perfil();
 			$p -> id = $_REQUEST['perfil'];
+            $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
 			$this -> perfil = $p;
 			$this -> pessoa -> nome = $_REQUEST['nome'];
 			$this -> pessoa -> telResidencial = str_replace("_","",$_REQUEST['telefone']);
 			$this -> pessoa -> telCelular = str_replace("_","",$_REQUEST['celular']);
 			$this -> pessoa -> cpf = $strCPF;
 			$this -> pessoa -> email = $_REQUEST['email'];
+            $this-> pessoa->endereco = $_REQUEST['endereco'];
+            $this-> pessoa->bairro = $_REQUEST['bairro'];
+            $this-> pessoa->cidade = $cidadeEndereco;
+            $this-> pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);
 			if ($_REQUEST['senha'] != "")
 				$this -> senha = md5($_REQUEST['senha']);
 			$this -> ativo = $_REQUEST['ativo'];

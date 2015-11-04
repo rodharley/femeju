@@ -90,10 +90,55 @@
 					</div>
 				</div>
 			</div>
+			<fieldset><legend>Endereço</legend>
+                <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="endereco"><i class='fa'> </i><b>Logradouro</b></label>
+                        <input type="text" id="endereco" name="endereco" value="{ENDERECO}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="bairro"><i class='fa'> </i><b>Bairro</b></label>
+                        <input type="text" id="bairro" name="bairro" value="{BAIRRO}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="uf"><i class='fa'> </i><b>Estado</b></label>
+                         <select name="uf" id="uf" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_UF -->
+                            <option value="{id_uf}" {selectedUf}>{uf}</option>
+                            <!-- END BLOCK_UF -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="cidade"><i class='fa'> </i><b>Cidade</b></label>
+                        <select name="cidade" id="cidade" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_CIDADE -->
+                            <option value="{id_cidade}" {selectedCidade}>{nome_cidade}</option>
+                            <!-- END BLOCK_CIDADE -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="cep"><i class='fa'> </i><b>CEP</b></label>
+                        <input type="text" id="cep" name="cep" value="{CEP}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            </fieldset>
 			<div class="row">
-				<div class="col-md-6 col-xs-12 text-left">
+				<div class="col-md-12 col-xs-12 text-left">
 					<div class="form-group">
-
 						<label for="perfil"><i class='fa'></i><b>Perfil</b></label>
 						<select name="perfil" id="perfil" class="required form-control">
 							<!-- BEGIN BLOCK_ITEM -->
@@ -102,13 +147,7 @@
 						</select>
 					</div>
 
-				</div>
-				<div class="col-md-6 col-xs-12 text-left">
-					<label for="academia"><i class='fa'></i><b>Permissão de Academias</b></label><br/>
-                      <!-- BEGIN BLOCK_ACADEMIA -->
-                        <input type="checkbox" name="academias" value="{idAcademia}" {academiaChecked}> {lblAcademia}<br/>
-                      <!-- END BLOCK_ACADEMIA -->
-					</div>
+				</div>				
 			</div>
 
 		</div>
@@ -127,7 +166,7 @@
 	$(document).ready(function() {
 		
 		$("#cpf").inputmask({ mask: ["999.999.999-99","99.999.999/9999-99"] });
-		
+		$("#cep").inputmask({ mask: "99.999-999"});
 		$("#foto").fileinput({
 				 initialPreview: [
 					<!-- BEGIN BLOCK_IMG -->"{IMG_USER}",<!-- END BLOCK_IMG -->
@@ -192,5 +231,16 @@
 				}
 		});
 		
+		
+		  $("#uf").change(function(){
+            $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                data : {uf: $(this).val()},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+            });
+
+        });
 	});
 </script>

@@ -6,6 +6,8 @@ include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
 
 $usu = new Usuario();
+$uf = new Uf();
+$cidade = new Cidade();
 //$lacademia = new Academia();
 $perfil = new Perfil();
 //CONFIGURA O BREADCRUMB
@@ -23,7 +25,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/usuario/edit.html");
-
+$listaUf = $uf->getRows();
 
 $TPL->LABEL = "Novo Usuário";
 $TPL->ACAO = "incluir";
@@ -31,7 +33,8 @@ $TPL->id = 0;
 $TPL->checksim = "checked='checked'";
 $TPL->checknao = "";
 $TPL->IMG_USER = "img/pessoas/pessoa.png";
-
+$selectedUf = 0;
+$selectedCidade = 0;
 $idPerfilUsu = 0;
 $listaAcademias = array();
 if(isset($_REQUEST['id'])){
@@ -43,11 +46,15 @@ if(isset($_REQUEST['id'])){
 	$TPL->celular = $usu->pessoa->telCelular;
 	$TPL->senha = "";
 	$TPL->id = $usu->id;
+	$TPL->ENDERECO = $usu->pessoa->endereco;
+    $TPL->BAIRRO = $usu->pessoa->bairro;
+    $TPL->CEP = $usu->pessoa->cep;
 	$idPerfilUsu = $usu->perfil->id;
 	$TPL->IMG_USER = "img/pessoas/".$usu->pessoa->foto;
 	$TPL->LABEL = "Alterar Usuário ".$usu->pessoa->nome;
 	$TPL->ACAO = "editar";
-
+    $selectedUf = $usu->pessoa->cidade != null ? $usu->pessoa->cidade->uf->id: 0;
+    $selectedCidade = $usu->pessoa->cidade != null ? $usu->pessoa->cidade->id : 0;
 	if($usu->ativo == "0"){
 	$TPL->checknao = "checked='checked'";
 	$TPL->checksim = "";
@@ -59,11 +66,18 @@ if(isset($_REQUEST['id'])){
 		$TPL->block("BLOCK_IMG");
 	}
     
-    /*/permissoes
-    $rsPermissoes = $lacademia->listaPermissoes($usu->id);
-    foreach ($rsPermissoes as $key => $permissao) {
-        array_push($listaAcademias,$permissao->id);
-    }*/
+    //loop de cidade endereco
+    $listaCidade = $cidade->getRows(0,9999,array("nome"=>"ASC"),array("uf"=>"=".$selectedUf));
+        foreach ($listaCidade as $key => $value) {
+                 $TPL->selectedCidade = "";
+                  $TPL->nome_cidade = $value->nome;
+                  $TPL->id_cidade = $value->id;
+                  if($selectedCidade == $value->id)
+                    $TPL->selectedCidade = "selected";
+                  $TPL->block("BLOCK_CIDADE");
+              }
+    
+    
 	$TPL->block("BLOCK_EDIT");
 }
 
@@ -78,17 +92,15 @@ $rsPerfil = $perfil->getRows(0,999,array("id"=>"asc"),array());
 	$TPL->block("BLOCK_ITEM");
  }
 
-/*
-$rsAcademias = $lacademia->getRows();
-foreach ($rsAcademias as $key => $lacademia) {
-    $TPL->idAcademia = $lacademia->id;
-    $TPL->lblAcademia = $lacademia->nome;
-    if(array_search($lacademia->id, $listaAcademias) !== false)
-        $TPL->academiaChecked = 'checked="checked"';    
-    $TPL->block("BLOCK_ACADEMIA");     
-    $TPL->clear("academiaChecked");
-}*/
-
+foreach ($listaUf as $key => $value) {
+     $TPL->selectedUf = "";
+      $TPL->uf = $value->uf;
+      $TPL->id_uf = $value->id;
+      if($selectedUf == $value->id)
+        $TPL->selectedUf = "selected";
+      $TPL->block("BLOCK_UF");
+     
+  } 
 
 
 $TPL->show();
