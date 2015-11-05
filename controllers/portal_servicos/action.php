@@ -6,6 +6,8 @@ $atleta = new Atleta();
 $obj = new Anuidade();
 $objAno = new Ano();
 $pag = new Pagamento();
+$comp = new Competicao;
+$inscricao = new Inscricao();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
@@ -28,6 +30,14 @@ switch ($_REQUEST['acao']){
     case 'incluirAlteta' :
         $atleta->IncluirPortal();
         header("Location:portal_servicos-main");
+        break;
+    case 'inscricaof' :
+         $conn->connection->autocommit(false);
+        $comp->getById($_REQUEST['idCompeticao']);
+        $idPagamento = $comp->gerarInscricaoF();
+        $_SESSION['fmj.mensagem'] = 52;
+        header("Location:portal_servicos-guia?id=".$obj->md5_encrypt($idPagamento));
+        $conn->connection->commit();
         break;
     case 'guia' :
         if(isset($_REQUEST['atleta'])){

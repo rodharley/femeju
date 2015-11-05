@@ -110,7 +110,7 @@ set
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>			
 					
-	</class>
+	</class>	
 	<class name="Configuracoes" tbname="fmj_configuracoes" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="descricao" type="txt">descricao</atrib>
@@ -164,6 +164,22 @@ set
 		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="dataGraduacao" type="txt">data</atrib>				
+	</class>
+	<class name="Inscricao" tbname="fmj_inscricao_competicao" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="idCompeticao" type="fk" clrelation="Competicao">competicao</atrib>
+		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
+		<atrib tbname="idGrupoCompeticao" type="fk" clrelation="GrupoCompeticao">grupoCompeticao</atrib>
+		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>	
+		<atrib tbname="nomeAtleta" type="txt">nomeAtleta</atrib>
+		<atrib tbname="dobra" type="int">dobra</atrib>
+		<atrib tbname="valor" type="int">valor</atrib>
+		<atrib tbname="valorDobra" type="int">valorDobra</atrib>
+		<atrib tbname="situacao" type="int">situacao</atrib>
+		<atrib tbname="dataInscricao" type="txt">dataInscricao</atrib>
+		<atrib tbname="docAtleta" type="txt">docAtleta</atrib>
+		<atrib tbname="emailAtleta" type="txt">emailAtleta</atrib>
+		<atrib tbname="telefoneAtleta" type="txt">telefoneAtleta</atrib>			
 	</class>
 	<class name="Log" tbname="fmj_log" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

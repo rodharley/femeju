@@ -1,0 +1,237 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                <img src="img/icones/servicos.png" />
+            </div>
+            <h2>Inscrição</h2>
+        </div>
+        <div class="panel panel-default">
+            <form role="form" method="post" action="portal_servicos-action" id="frmInscricao">
+                <input type="hidden" name="idAssociacao" id="idAssociacao" value="{ID_ASSOCIACAO}"/>
+                <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+                <input type="hidden" name="acao" id="acao" value="inscricaof"/>
+                <div class="panel-heading">
+                    <h4>{LABEL}</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <legend>
+                            Competição
+                        </legend>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-8">
+                                <div class="form-group">
+                                    <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
+                                    <p class="form-control-static">{TITULO_COMP}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                <div class="form-group">
+                                    <label for="data"><i class='fa'> </i><b>Data</b></label>
+                                    <p class="form-control-static">{DATA_COMP}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>
+                            Configurar Atletas
+                        </legend>
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12">
+                                <table class="table">
+                                    <tr>
+                                        <th>Atleta</th>
+                                        <th>Categoria</th>
+                                        <th>Classe</th>
+                                        <th>Dobra</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                    <!-- BEGIN BLOCK_ATLETAS -->
+                                    <tr>
+                                        <td>
+                                        <input type="hidden" name="atleta[]" value="{ID_ATLETA}" class="form-control" />
+                                        {ATLETA} </td>
+                                        <td>
+                                        <div class="form-group">
+                                            <select name="categoria{ID_ATLETA}" id="categoria{ID_ATLETA}" class="form-control required categoria" idAtleta="{ID_ATLETA}" graduacao="{GRAD_ATLETA}">
+                                                <option value=""></option>
+                                                <!-- BEGIN BLOCK_CAT -->
+                                                <option value="{ID_CAT}">{LABEL_CAT}</option>
+                                                <!-- END BLOCK_CAT -->
+                                            </select>
+                                        </div></td>
+                                        <td>
+                                        <div class="form-group">
+                                            <select name="classe{ID_ATLETA}" class="form-control required classe" idAtleta="{ID_ATLETA}" id="classe{ID_ATLETA}">
+                                                <option value=""></option>
+                                            </select>
+                                        </div></td>
+                                        <td class="col-md-1"  class="text-center">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="dobra{ID_ATLETA}" id="dobra{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valorDobra="0" descValorDobra="0" valor="0" descValor="0" />
+                                        </div></td>
+                                        <td class="col-md-2"  class="text-right">
+                                        <input type="text" id="valordesc_atleta{ID_ATLETA}" name="valordesc_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right"/>
+                                        <input type="hidden" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" value="0" class="camposoma"/>
+                                        <input type="hidden" id="grupo{ID_ATLETA}" name="grupo{ID_ATLETA}" value="0"/>
+                                        </td>
+                                    </tr>
+                                    <!-- END BLOCK_ATLETAS -->
+                                    <tr>
+                                        <td class="text-right" colspan="4"> Total:</td>
+                                        <td class="col-md-2"  class="text-right">
+                                        <input type="text" id="total" name="total" disabled="disabled" class="form-control text-right"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>forma de Pagamento</legend>
+                        <div class="form-group">
+                                    <label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
+                                    <div class="row">
+                                        <div class="col-xs-2 col-md-2 text-center">
+                                            <div class="thumbnail">
+                                                <img src="img/credit/boleto-brb.png" class="img-responsive" alt="boleto BRB">
+                                                <input type="radio" class="form-control required" value="1" name="tipoPagamento" checked/>
+                                                Boleto BRB
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-md-2 text-center">
+                                            <div class="thumbnail">
+                                                <img src="img/credit/boleto-femeju.png" class="img-responsive" alt="boleto Femeju">
+                                                <input type="radio" class="form-control required" value="2" name="tipoPagamento"/>
+                                                Boleto Femeju
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </fieldset>
+                </div>
+                <div class="panel-footer text-right">
+                    <button class="btn btn-default btVoltar" type="button">
+                        <span class="glyphicon glyphicon-backward"> </span> Voltar
+                    </button>
+                    <button class="btn btn-success" type="button" id="btfinalizar">
+                        Finalizar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        
+    </div>
+</div>
+<script>
+	function somatotal() {
+		var total = 0;
+		$(".camposoma").each(function() {
+			total = total + eval($(this).val());
+		});
+		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+
+	}
+
+
+	$(document).ready(function() {
+	    
+	    $("#btfinalizar").click(function(){
+	        if($("#frmInscricao").valid()){
+	            if(confirm("Confirma a realização da inscrição dos atletas selecionados?")){
+	                 $("#frmInscricao").submit();
+	            }
+	        }
+	        
+	    });
+		$(".dobra").click(function() {
+			var atleta = $(this).attr("idAtleta");
+			if ($(this).prop("checked")) {
+				$("#valordesc_atleta" + atleta).val($(this).attr("descValorDobra"));
+				$("#valor_atleta" + atleta).val($(this).attr("valorDobra"));
+			} else {
+				$("#valordesc_atleta" + atleta).val($(this).attr("descValor"));
+				$("#valor_atleta" + atleta).val($(this).attr("valor"));
+			}
+			somatotal();
+		});
+		$(".categoria").change(function() {
+			var atleta = $(this).attr("idAtleta");
+			if ($(this).val() != "") {
+				$.ajax({
+					url : 'ajax/option_classe_de_grupo_competicao_por_categoria.php',
+					data : {
+						graduacao : $(this).attr("graduacao"),
+						categoria : $(this).val(),
+						competicao : $("#idCompeticao").val()
+					}
+				}).done(function(retorno) {
+					$("#classe" + atleta).html(retorno);
+				});
+			}
+
+		});
+
+		$(".classe").change(function() {
+			var atleta = $(this).attr("idAtleta");
+			if ($(this).val() != "") {
+				$.ajax({
+					url : 'ajax/json_grupo_competicao_valores.php',
+					data : {
+						graduacao : $("#categoria" + atleta).attr("graduacao"),
+						categoria : $("#categoria" + atleta).val(),
+						competicao : $("#idCompeticao").val(),
+						classe : $(this).val()
+					}
+				}).done(function(retorno) {
+					var json = JSON.parse(retorno);
+					if ($("#dobra" + atleta).prop("checked")) {
+						$("#valordesc_atleta" + atleta).val(json.dobraDesc);
+						$("#valor_atleta" + atleta).val(json.dobra);
+					} else {
+						$("#valordesc_atleta" + atleta).val(json.valorDesc);
+						$("#valor_atleta" + atleta).val(json.valor);
+
+					}
+					$("#dobra" + atleta).attr("valorDobra", json.dobra);
+					$("#dobra" + atleta).attr("descValorDobra", json.dobraDesc);
+					$("#dobra" + atleta).attr("valor", json.valor);
+					$("#dobra" + atleta).attr("descValor", json.valorDesc);
+					$("#grupo" + atleta).val(json.id);
+					
+				});
+			}else{
+			    $("#dobra" + atleta).attr("valorDobra", 0);
+                    $("#dobra" + atleta).attr("descValorDobra", 0);
+                    $("#dobra" + atleta).attr("valor", 0);
+                    $("#dobra" + atleta).attr("descValor", 0);
+                    $("#grupo" + atleta).val(0);
+                    $("#valordesc_atleta" + atleta).val(0);
+                        $("#valor_atleta" + atleta).val(0);
+                   
+			}
+             somatotal();
+		});
+
+		$("#frmInscricao").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			}
+		});
+		somatotal();
+	});
+
+</script>

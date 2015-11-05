@@ -84,5 +84,50 @@ class Competicao extends Persistencia {
     public function listaAtivasAbertas(){
         return $this->getRows(0,999,array(),array("ativo"=>"=1","inscricaoAberta"=>"=1"));
     }
+   
+   public function gerarInscricaoF()
+   {
+            $atleta = new Atleta();
+            $grupoC = new GrupoCompeticao();
+            $pag = new Pagamento();
+            $itensPagamento = array();
+            $idsInscricao = "0";
+            $insc = new Inscricao();
+             foreach ($_REQUEST['atleta' ] as $key => $id) {
+                $atleta->getById($id);
+                //salva a inscricao
+                $insc = new Inscricao();
+                $insc->atleta = $atleta;
+                $insc->nomeAtleta = $atleta->pessoa->getNomeCompleto();
+                $insc->docAtleta = $atleta->pessoa->rg;
+                $insc->telefoneAtleta = $atleta->pessoa->telCelular;
+                $insc->emailAtleta =$atleta->pessoa->email;
+                $insc->dataInscricao = date("Y-m-d");
+                $insc->situacao = 0;
+                $grupoC->getById($_REQUEST['grupo'.$id]);
+                $insc->valor = $grupoC->valor;
+                $insc->dobra = isset($_REQUEST['dobra'.$id]) ? 1 : 0;
+                $insc->valorDobra = isset($_REQUEST['dobra'.$id]) ? $grupoC->dobra : 0;
+                $insc->competicao = $this;
+                $insc->grupoCompeticao = $grupoC;
+                $idsInscricao .= ",".$insc->save();   
+                
+                
+                //gera o item de pagamento
+                $item = new PagamentoItem();  
+                $item->atleta = $atleta;
+                $item->valor = isset($_REQUEST['dobra'.$id]) ? $grupoC->valor+$grupoC->dobra : $grupoC->valor;
+                $item->custa = new Custa(1);
+                $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".$atleta->pessoa->getNomeCompleto();   
+                array_push($itensPagamento,$item);        
+                }
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$_SESSION['fmj.userId'],$itensPagamento);
+                $insc->atualizarPagamentos($idPagamento,$idsInscricao);
+                return $idPagamento;
+   }
+
+
 }
-?>
+
+
+            ?>

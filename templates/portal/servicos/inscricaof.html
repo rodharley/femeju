@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                <img src="img/icones/servicos.png" />
+            </div>
+            <h2>Inscrição</h2>
+        </div>
+        <div class="panel panel-default">
+            <form role="form" method="post" action="portal_servicos-inscricaofb" id="frmInscricao" class="form">
+                <input type="hidden" name="idAssociacao" id="idAssociacao" value="{ID_ASSOCIACAO}"/>
+                <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+                <div class="panel-heading">
+                    <h4>{LABEL}</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <legend>
+                            Competição
+                        </legend>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-8">
+                                <div class="form-group">
+                                    <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
+                                    <p class="form-control-static">{TITULO_COMP}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                <div class="form-group">
+                                    <label for="data"><i class='fa'> </i><b>Data</b></label>
+                                    <p class="form-control-static">{DATA_COMP}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            Atletas
+                        </legend>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="atleta"><i class='fa'> </i><b>Selecione</b></label>
+                                <Select name="atleta[]" id="atleta" class="form-control" multiple="multiple">
+                                    <!-- BEGIN BLOCK_ATLETAS -->
+                                    <option value="{ID_ATLETA}">{ATLETA}</option>
+                                    <!-- END BLOCK_ATLETAS -->
+
+                                </Select>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="1" name="todos" id="todos" />
+                                    Todos </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    </fieldset>
+                </div>
+                <div class="panel-footer text-right">
+                    <button class="btn btn-default btVoltar" type="button">
+                       <span class="glyphicon glyphicon-backward"> Voltar
+                    </button>
+                    <button class="btn btn-primary" type="submit" id="btAvancar">
+                        Avançar <span class="glyphicon glyphicon-forward">
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<script>
+	function somatotal() {
+		var total = 0;
+		$(".camposoma").each(function() {
+			total = total + eval($(this).val());
+		});
+		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+
+	}
+
+
+	$(document).ready(function() {
+
+		$("#frmInscricao").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			rules : {
+				"atleta[]" : {
+					required : function() {
+						return !$("#todos").prop('checked');
+					}
+				}
+			}
+		});
+		somatotal();
+	});
+
+</script>

@@ -18,6 +18,7 @@ require("negocio.galeriaImagem.php");
 require("negocio.graduacao.php");
 require("negocio.grupoCompeticao.php");
 require("negocio.historicoGraduacao.php");
+require("negocio.inscricao.php");
 require("negocio.log.php");
 require("negocio.menu.php");
 require("negocio.noticia.php");
@@ -34,4 +35,5 @@ require("negocio.uf.php");
 require("dominio.tipoCampeonato.php");
 require("dominio.categoria.php");
 require("dominio.grupoCusta.php");
+
 ?>
