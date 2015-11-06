@@ -22,7 +22,7 @@ $TPL->addFile("CONTEUDO", "templates/admin/competicao/configuracao.html");
 
 $obj = new Competicao();
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
-
+$obCusta = new Custa();
 $TPL->LOADING = $obj->carregando;
 $TPL->TITULO = $obj->titulo;
 $TPL->DESCRICAO = $obj->descricao;
@@ -43,6 +43,19 @@ $TPL->ID_TIPO = $t->id;
 $TPL->DESC_TIPO = $t->descricao;
 $TPL->SELECTED_TIPO = $obj->tipo == TipoCampeonato::FECHADO ? "selected":"";
 $TPL->block("BLOCK_TIPO");
+
+//lista de custas
+$rsCustas = $obCusta->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::COMPETICAO));
+foreach ($rsCustas as $key => $value) {
+    $TPL->ID_CUSTA = $value->id;
+    if($value->id == $obj->custa->id){
+        $TPL->SELECTED_CUSTA = 'selected="selected"';
+        $TPL->VALOR_CUSTA = $obj->custa->valor;
+    }else
+       $TPL->SELECTED_CUSTA = '';
+    $TPL->DESC_CUSTA = $value->titulo;
+    $TPL->block("BLOCK_CUSTA");
+}
 
 $obCat = new CategoriaPeso();
 $obCla = new Classe();

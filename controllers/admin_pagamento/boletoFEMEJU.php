@@ -14,14 +14,14 @@ foreach ($pagamento->itens as $key => $item) {
 require 'plugins/openboleto/autoloader.php';
 
 
-use OpenBoleto\Banco\Brb;
+use OpenBoleto\Banco\Femeju;
 use OpenBoleto\Agente;
 
 
 $sacado = new Agente($pagamento->responsavel->pessoa->getNomeCompleto(), $pagamento->responsavel->pessoa->cpf, $pagamento->responsavel->pessoa->endereco, $pagamento->responsavel->pessoa->bairro, $pagamento->responsavel->pessoa->cidade->nome, $pagamento->responsavel->pessoa->cidade->uf->uf);
 $cedente = new Agente('Femeju - Federação Metropolitana de Judo', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
-$boleto = new Brb(array(
+$boleto = new Femeju(array(
     // ParÃ¢metros obrigatÃ³rios
     'dataVencimento' => new DateTime($pagamento->dataVencimento),
     'valor' => $pagamento->valorTotal,

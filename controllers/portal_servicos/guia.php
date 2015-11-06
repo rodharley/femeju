@@ -23,6 +23,10 @@ $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
 $TPL->SITUACAO = $obj->bitPago == 1 ? "Pago" : "Em aberto";
 $TPL->COLOR_SITUACAO = $obj->bitPago == 1 ? "success" : "danger";
+
+//boleto
+$TPL->TIPO_PAG_ARQUIVO = $obj->tipo->arquivo;
+
 $rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$obj->id));    
 
 foreach ($rsItens as $key => $item) {

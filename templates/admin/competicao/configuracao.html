@@ -57,6 +57,19 @@
                     </div>
                 </div>
             </div>
+             <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="custa"><i class='fa'></i><b>Custa Associada</b></label>
+                        <select name="custa" id="custa" class="form-control required">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_CUSTA -->
+                            <option value="{ID_CUSTA}" {SELECTED_CUSTA}>{DESC_CUSTA}</option>
+                            <!-- END BLOCK_CUSTA -->
+                        </select> 
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
@@ -93,6 +106,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form name="frmEditCategoria" id="frmEditCategoria" action="#" method="post" class="form">
+                <input type="hidden" name="valorCusta" id="valorCusta" value="{VALOR_CUSTA}" />
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -220,8 +234,8 @@
 			$("#graduacao").val("");
 			$("#classe").val("");
 			$("#idGrupo").val("");
-			$("#valor").val("0");
-			$("#dobra").val("0");
+			$("#valor").val($("#valorCusta").val());
+			$("#dobra").val($("#valorCusta").val());
 			$("#modalEdit").modal();
 		});
 

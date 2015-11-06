@@ -6,7 +6,8 @@ class Pagamento extends Persistencia{
     var $dataVencimento;
     var $dataPagamento;
     var $bitPago;  
-    var $codigo;        
+    var $codigo; 
+    var $numeroFebraban;       
     var $tipo = NULL;
     var $responsavel = NULL;
     var $grupo;

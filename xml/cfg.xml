@@ -108,7 +108,8 @@ set
 		<atrib tbname="dataEvento" type="txt">dataEvento</atrib>
 		<atrib tbname="tipo" type="int">tipo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
-		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>			
+		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>	
+		<atrib tbname="idCusta" type="fk" clrelation="Custa">custa</atrib>			
 					
 	</class>	
 	<class name="Configuracoes" tbname="fmj_configuracoes" tbid="id" lazy="true">
@@ -214,7 +215,8 @@ set
 		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>
 		<atrib tbname="dataPagamento" type="txt">dataPagamento</atrib>
 		<atrib tbname="bitPago" type="int">bitPago</atrib>	
-		<atrib tbname="codigo" type="txt">codigo</atrib>	
+		<atrib tbname="codigo" type="txt">codigo</atrib>
+		<atrib tbname="numeroFebraban" type="txt">numeroFebraban</atrib>	
 		<atrib tbname="idGrupo" type="int">grupo</atrib>	
 		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>		
 		<atrib tbname="idResponsavel" type="fk" clrelation="Usuario">responsavel</atrib>
@@ -232,6 +234,7 @@ set
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="imagem" type="txt">imagem</atrib>	
+		<atrib tbname="arquivo" type="txt">arquivo</atrib>
 	</class>
 	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
@@ -308,3 +311,4 @@ set
 		<atrib tbname="uf" type="txt">uf</atrib>	
 	</class>	
 </bd>
+

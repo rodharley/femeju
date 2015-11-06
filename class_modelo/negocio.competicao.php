@@ -7,13 +7,15 @@ class Competicao extends Persistencia {
 	var $inscricaoAberta;
     var $ativo;
     var $tipo;
-    
+    VAR $custa = NULL;
     public function Incluir(){
         $this->descricao = $_REQUEST['descricao'];
         $this->tipo = $_REQUEST['tipo'];
         $this->titulo = $_REQUEST['titulo'];
+        $this->custa = new Custa($_REQUEST['custa']);
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
         $this->inscricaoAberta = 0;
+        $this->ativo = 1;
         return $this->save();
         
     }
@@ -23,6 +25,7 @@ class Competicao extends Persistencia {
         $this->descricao = $_REQUEST['descricao'];
         $this->tipo = $_REQUEST['tipo'];
         $this->titulo = $_REQUEST['titulo'];
+        $this->custa = new Custa($_REQUEST['custa']);
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
         $this->inscricaoAberta = $_REQUEST['inscricao'];
         $this->ativo = $_REQUEST['ativo'];
@@ -117,7 +120,7 @@ class Competicao extends Persistencia {
                 $item = new PagamentoItem();  
                 $item->atleta = $atleta;
                 $item->valor = isset($_REQUEST['dobra'.$id]) ? $grupoC->valor+$grupoC->dobra : $grupoC->valor;
-                $item->custa = new Custa(1);
+                $item->custa = $this->custa;
                 $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".$atleta->pessoa->getNomeCompleto();   
                 array_push($itensPagamento,$item);        
                 }

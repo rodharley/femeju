@@ -20,6 +20,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/competicao/nova_etapa1.html");
 $obj = new Competicao();
+$obCusta = new Custa();
 $t = new TipoCampeonato(TipoCampeonato::ABERTO);
 $TPL->ID_TIPO = $t->id;
 $TPL->DESC_TIPO = $t->descricao;
@@ -28,5 +29,13 @@ $t = new TipoCampeonato(TipoCampeonato::FECHADO);
 $TPL->ID_TIPO = $t->id;
 $TPL->DESC_TIPO = $t->descricao;
 $TPL->block("BLOCK_TIPO");
+
+//lista de custas
+$rsCustas = $obCusta->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::COMPETICAO));
+foreach ($rsCustas as $key => $value) {
+	$TPL->ID_CUSTA = $value->id;
+    $TPL->DESC_CUSTA = $value->titulo;
+    $TPL->block("BLOCK_CUSTA");
+}
 $TPL->show();
 ?>
