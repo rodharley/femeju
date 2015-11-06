@@ -79,7 +79,7 @@
                             <button class="btn btn-default btVoltar" type="button">
                                 <span class="glyphicon glyphicon-backward"> Voltar
                             </button>
-                            <button class="btn btn-primary" type="submit" id="btPesquisar">
+                            <button class="btn btn-primary" type="button" id="btAvancar">
                                 Avançar <span class="glyphicon glyphicon-forward">
                             </button>
                         </div>
@@ -109,6 +109,15 @@
             
 
         });
+        $("#btAvancar").click(function(){
+            if(document.getElementById("atleta").options.length ==0){
+                alert("Nenhum Atleta selecionado!");
+                return false;
+            }else{
+                $("#frmEditAtleta").submit();
+                return true;
+            }
+             });
         
 		$("#frmEditAtleta").validate({
 			errorClass : "help-inline",

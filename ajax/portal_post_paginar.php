@@ -1,6 +1,6 @@
 <?php
 include("configuraAjaxSemLogin.php");
-$TPL = new Template("../templates/portal/post/main.html");
+$TPL = new Template("../templates/portal/post/itens.html");
 
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $categoria = isset($_REQUEST['categoria']) ? $_REQUEST['categoria'] : 1;
@@ -41,9 +41,7 @@ $TPL->PAGINA_ANTERIOR = $configPaginacao['paginaAnterior'];
 $TPL->PROXIMA_PAGINA = $configPaginacao['proximaPagina'];
 $TPL->PAGINA = $pagina;
 $TPL->ANO = $ano;
-$TPL->CATEGORIA = $objCat->id;   
-$TPL->TITULO = $objCat->retornaDescricao($objCat->id);
-$TPL->ICONE = $objCat->retornaPasta($objCat->id);
+$TPL->CATEGORIA = $objCat->id;
 foreach ($ARRano as $key => $ano) {
         $TPL->ANO_V = $ano;
         $TPL->block("BLOCK_ANO");

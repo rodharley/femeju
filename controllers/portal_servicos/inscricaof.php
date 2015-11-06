@@ -9,7 +9,7 @@ $objAssociacao = new Associacao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objA = new Atleta();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/inscricaof.html");
+$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaof.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['idAssoc']));
 $objc->getById($objc->md5_decrypt($_REQUEST['idComp']));
 

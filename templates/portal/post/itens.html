@@ -1,13 +1,4 @@
-<div class="row">
-    <div class="col-lg-12">
-        <div class="page-header">
-            <div class="pull-right">
-                                <img src="img/icones/{ICONE}.png" />
-                            </div>
-            <h2>{TITULO} {ANO}</h2>
-        </div>
-        <div id="boxitens">
-         <div class="row">            
+<div class="row">            
            <div class="col-sm-12" id="post">               
                 <!-- BEGIN BLOCK_POST -->
                 <div class="divisao">
@@ -55,45 +46,7 @@
                     <a href="#" class="paginar" value="{PROXIMA_PAGINA}">Anteriores <span aria-hidden="true">&rarr;</span></a>
                 </li>
             </ul>
-        </nav>   
-        <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+        </nav> 
+                <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
 <input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
-<input type="hidden" value="{ANO}" id="ano" name="ano"/> 
-        </div>                
-        <div class="row">            
-           <div class="col-sm-12" class="text-center">
-               {BOTOES}
-               </div>
-               </div>
-     </div>
- </div>
-
-<script>
-
-    function pesquisar(){
-            $.ajax({
-                url : "ajax/portal_post_paginar.php",
-                type : "POST",
-                data : {pagina:$("#pagina").val(),ano:$("#ano").val(),categoria:$("#categoria").val()},
-                beforeSend: function( ) {
-                    $('#boxitens').html('{LOADING}');
-                },
-            }).done(function(msg) {
-                $("#boxitens").html(msg);
-            });
-
-        }
-
-    $(document).ready(function() {
-        {EXECUTA_PESQUISA}        
-        $(".paginar").click(function() {
-            $("#pagina").val($(this).attr("value"));
-            pesquisar();
-        });
-        $(".anualizar").click(function() {
-            $("#pagina").val("1");
-            $("#ano").val($(this).attr("value"));
-            pesquisar();
-        });
-    }); 
-</script>
+<input type="hidden" value="{ANO}" id="ano" name="ano"/>

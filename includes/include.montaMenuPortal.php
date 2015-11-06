@@ -29,4 +29,10 @@ foreach ($rs as $key => $value) {
             
 	}
 }
+if(isset($_SESSION['fmj.userNome'])){
+$TPL->NOME_USER = $_SESSION['fmj.userNome'];
+$TPL->block("BLOCK_USER");
+}else{
+    $TPL->block("BLOCK_LOGIN");
+}
 ?>

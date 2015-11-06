@@ -8,7 +8,7 @@ $objAn = new Ano();
 $objAssociacao = new Associacao();
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/anuidade.html");
+$TPL->addFile("CONTEUDO", "templates/portal/anuidade/anuidade.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['associacao']));
 $TPL->NOME_ASSOCIACAO = $objAssociacao->nome;
 $TPL->LOGO_ASSOCIACAO = $objAssociacao->logomarca;

@@ -7,15 +7,14 @@
             <h2>Competições em Andamento</h2>
         </div>
         <div class="panel panel-default">
+            <div class="panel-heading">
+                            <h4 class="box-title">{LABEL}</h4>
+                        </div>
+            
             <div class="panel-body">
-                <form role="form" method="post" action="portal_servicos-anuidadeB" id="frmEditAtleta">
                     <input type="hidden" name="associacao" id="associacao" value="{ID_ASSOCIACAO}"/>
                     <input type="hidden" name="idAssociacaoHash" id="idAssociacaoHash" value="{ID_ASSOCIACAO_HASH}"/>                    
-                    <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">{LABEL}</h3>
-                        </div>
-                        <div class="box-body">
+                    
                             <div class="list-group">
   <a href="#" class="list-group-item active">
     Inscrições abertas
@@ -31,14 +30,12 @@
 
                         </div>
 
-                        
+                       
                     </div>
 
-                </form>
+                
             </div>
         </div>
-    </div>
-</div>
 
 <script>
 	$(document).ready(function() {
@@ -58,27 +55,7 @@
 
         });
         
-		$("#frmEditAtleta").validate({
-			errorClass : "help-inline",
-			errorElement : "div",
-			highlight : function(element, errorClass, validClass) {
-				$(element).parents('.form-group').addClass('has-error');
-				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
-			},
-			unhighlight : function(element, errorClass, validClass) {
-				$(element).parents('.form-group').removeClass('has-error');
-				$(element).parents('.form-group').addClass('has-success');
-				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
-				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
-			},
-			rules : {
-                "atleta[]" : {
-                    required : function() {
-                        return !$("#todos").prop('checked');
-                    }
-                }
-            }
-		});
+		
 
 	}); 
 </script>

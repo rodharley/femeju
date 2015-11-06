@@ -10,7 +10,7 @@ $cidade = new Cidade();
 $objAssociacao = new Associacao();
 $objGrad = new Graduacao;
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/editaAtleta.html");
+$TPL->addFile("CONTEUDO", "templates/portal/atleta/editaAtleta.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['associacao']));
 $TPL->NOME_ASSOCIACAO = $objAssociacao->nome;
 $TPL->LOGO_ASSOCIACAO = $objAssociacao->logomarca;

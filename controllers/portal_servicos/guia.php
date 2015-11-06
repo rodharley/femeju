@@ -11,7 +11,7 @@ $objA = new Atleta();
 $objC = new Custa();
 $objAn = new Anuidade();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/guia.html");
+$TPL->addFile("CONTEUDO", "templates/portal/pagamento/guia.html");
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $TPL->ID_HASH = $obj->md5_encrypt($obj->id);
 $TPL->TIPO_CUSTA = $grupo->getDescricao($obj->grupo);

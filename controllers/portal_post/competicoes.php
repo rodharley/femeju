@@ -11,6 +11,8 @@ $TPL->PAGINA = 1;
 $TPL->CATEGORIA = $objCat->id;          
 $TPL->ANO = $ano;
 $TPL->TITULO = $objCat->retornaDescricao($objCat->id);
+$TPL->ICONE = $objCat->retornaPasta($objCat->id);
+$TPL->BOTOES = "<a class='btn btn-success' href='portal_servicos-inscricoes'/>Inscrições Abertas</a>";
 $TPL->EXECUTA_PESQUISA = 'pesquisar();';
 $TPL->show();
 ?>

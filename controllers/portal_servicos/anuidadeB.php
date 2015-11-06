@@ -10,7 +10,7 @@ $objA = new Atleta();
 $objC = new Custa();
 $objAn = new Anuidade();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/anuidadeB.html");
+$TPL->addFile("CONTEUDO", "templates/portal/anuidade/anuidadeB.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['idAssociacaoHash']));
 $rsCustas = $objC->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::ANUIDADE));
 $TPL->NOME_ASSOCIACAO = $objAssociacao->nome;

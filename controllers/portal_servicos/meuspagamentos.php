@@ -10,7 +10,7 @@ $associacao = new Associacao();
 $uf = new Uf();
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/meuspagamentos.html");
+$TPL->addFile("CONTEUDO", "templates/portal/pagamento/meuspagamentos.html");
 $objPag = new Pagamento();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $totalPesquisa = $objPag->pesquisarPortalTotal($_SESSION['fmj.userId']);

@@ -10,6 +10,7 @@ $TPL->LOADING = $obj->carregando;
 $TPL->PAGINA = 1; 
 $TPL->CATEGORIA = $objCat->id;          
 $TPL->ANO = $ano;
+$TPL->ICONE = $objCat->retornaPasta($objCat->id);
 $TPL->TITULO = $objCat->retornaDescricao($objCat->id);
 $TPL->EXECUTA_PESQUISA = 'pesquisar();';
 $TPL->show();

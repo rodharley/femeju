@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json", true);
 $menu = 0;
-include("configuraAjax.php");
+include("configuraAjaxSemLogin.php");
 
 $obj = new GrupoCompeticao();
 $lista = $obj->listar($_REQUEST['competicao'],$_REQUEST['graduacao'],$_REQUEST['categoria'],$_REQUEST['classe']);

@@ -1,5 +1,6 @@
 <?php
 class GrupoCompeticao extends Persistencia {
+    const TABELA = "fmj_grupo_competicao";
     var $graduacao = NULL;
     var $categoria =  NULL;
     var $classe = NULL;    
@@ -9,15 +10,22 @@ class GrupoCompeticao extends Persistencia {
   
      
       public function listar($idCompeticao,$idGraduacao ="",$idCategoria = "", $idClasse =""){
-          $arrayFiltro = array();
-          $arrayFiltro['competicao'] = "=".$idCompeticao;
-          if($idGraduacao != "")
-            $arrayFiltro['graduacao'] = "=".$idGraduacao;
-         if($idCategoria != "")
-            $arrayFiltro['categoria'] = "=".$idCategoria;
-         if($idClasse != "")
-            $arrayFiltro['classe'] = "=".$idClasse;
-        return $this->getRows(0,999,array(),$arrayFiltro);
+          $sql = "select * from ".$this::TABELA." where idCompeticao=".$idCompeticao;
+          $group = " group by idGraduacao";
+          if($idGraduacao != ""){
+            $sql .= " and idGraduacao = ".$idGraduacao;
+            $group .= " ,idCategoria ";
+          }  
+         if($idCategoria != ""){
+            $sql .= " and idCategoria = ".$idCategoria;
+            $group .= " ,idClasse";
+         }
+         if($idClasse != ""){
+            $sql .= " and idClasse = ".$idClasse;
+            
+         }
+         $sql = $sql.$group;
+         return $this->getSQL($sql);
     }
      
      

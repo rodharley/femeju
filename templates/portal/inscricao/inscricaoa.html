@@ -1,0 +1,287 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                <img src="img/icones/servicos.png" />
+            </div>
+            <h2>Inscrição</h2>
+        </div>
+        <div class="panel panel-default">
+            <form role="form" method="post" action="portal_servicos-inscricaoab" id="frmInscricao" class="form">
+                <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+                <div class="panel-heading">
+                    <h4>{LABEL}</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <legend>
+                            Competição
+                        </legend>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-8">
+                                <div class="form-group">
+                                    <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
+                                    <p class="form-control-static">{TITULO_COMP}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                <div class="form-group">
+                                    <label for="data"><i class='fa'> </i><b>Data</b></label>
+                                    <p class="form-control-static">{DATA_COMP}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                           Adicionar Atletas
+                        </legend>
+                    <button type="button" class="btn btn-success btn-sm" title="Adicionar Atleta" data-toggle="modal" data-target="#addatleta">
+  Adicionar <span class="glyphicon glyphicon-plus"> </span>
+</button>
+                    </fieldset>
+                </div>
+                <div class="panel-footer text-right">
+                    <button class="btn btn-default btVoltar" type="button">
+                       <span class="glyphicon glyphicon-backward"> </span> Voltar
+                    </button>
+                    <button class="btn btn-primary" type="button" id="btAvancar">
+                        Avançar <span class="glyphicon glyphicon-forward"> </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<div class="modal fade" id="addatleta">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form role="form" method="post" action="#" id="frmAtleta" name="frmAtleta">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Adicionar Atleta</h4>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="nome"><i class='fa'> </i><b>Nome Completo</b></label>
+                                <input type="text" name="nome" class="form-control required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="email"><i class='fa'> </i><b>E-mail</b></label>
+                                <input type="text" name="email" class="form-control email required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="documento"><i class='fa'> </i><b>Documento</b></label>
+                                <input type="text" name="documento" class="form-control required"/>
+                            </div>
+                        </div>                    
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="telefone"><i class='fa'> </i><b>Telefone</b></label>
+                                <input type="text" name="telefone" id="telefone" class="form-control required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
+                                <select id="graduacao" name="graduacao" class="form-control required">
+                                    <option value="">Selecione</option>
+                                    <!-- BEGIN BLOCK_GRA -->
+                                    <option value="{ID_GRA}">{DESC_GRA}</option>
+                                    <!-- END BLOCK_GRA -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
+                                <select id="categoria" name="categoria" class="form-control required">
+                                    <option value="">Selecione</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-xs-10">
+                            <div class="form-group">
+                                <label for="classe"><i class='fa'> </i><b>Classe</b></label>
+                                <select id="classe" name="classe" class="form-control required">
+                                    <option value="">Selecione</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-2">
+                            <div class="form-group">
+                                <label for="dobra"><i class='fa'> </i><b>Dobra</b></label>
+                                    <input type="checkbox" class="form-control" name="dobra" id="dobra" value="1" valorDobra="0" valor="0"/>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="dobra"><i class='fa'> </i><b>Valor</b></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        R$
+                                    </div>
+                                    <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="0"/>
+                                    <input type="hidden" id="grupo" name="grupo" value="0"/>
+                                </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                   
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-success" id="btAdicionar">Adicionar</button>
+      </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+	function somatotal() {
+        var total = 0;
+        $(".camposoma").each(function() {
+            total = total + eval($(this).val());
+        });
+        $("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+
+    }
+
+	$(document).ready(function() {
+        
+       $("#telefone").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+        
+       $("#valor").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        }); 
+        
+        $("#btAdicionar").click(function(){
+            if($("#frmAtleta").valid()){
+                if(confirm("Confirma a realização da inscrição dos atletas selecionados?")){
+                     $("#frmAtleta").submit();
+                }
+            }
+            
+        });
+        $("#dobra").click(function() {
+            if ($(this).prop("checked")) {
+                $("#valor").val($(this).attr("valorDobra"));
+            } else {
+                $("#valor").val($(this).attr("valor"));
+            }
+            
+        });
+        
+         $("#graduacao").change(function() {
+            
+            if ($(this).val() != "") {
+                $.ajax({
+                    url : 'ajax/option_grupo_competicao.php',
+                    data : {
+                        graduacao : $(this).val(),
+                        competicao : $("#idCompeticao").val(),
+                        nivel:1
+                    }
+                }).done(function(retorno) {
+                    $("#categoria").html(retorno);
+                });
+            }
+
+        });
+        
+        $("#categoria").change(function() {
+            
+            if ($(this).val() != "") {
+                $.ajax({
+                    url : 'ajax/option_grupo_competicao.php',
+                    data : {
+                        categoria : $(this).val(),
+                        graduacao : $("#graduacao").val(),
+                        competicao : $("#idCompeticao").val(),
+                        nivel:2
+                    }
+                }).done(function(retorno) {
+                    $("#classe").html(retorno);
+                });
+            }
+
+        });
+        
+        
+
+        $("#classe").change(function() {
+            
+            if ($(this).val() != "") {
+                $.ajax({
+                    url : 'ajax/json_grupo_competicao_valores.php',
+                    data : {
+                        graduacao : $("#graduacao").val(),
+                        categoria : $("#categoria").val(),
+                        competicao : $("#idCompeticao").val(),
+                        classe : $(this).val()
+                    }
+                }).done(function(retorno) {
+                    var json = JSON.parse(retorno);
+                    if ($("#dobra").prop("checked")) {
+                        $("#valor").val(json.dobra);                        
+                    } else {                        
+                        $("#valor").val(json.valor);
+                    }
+                    $("#dobra").attr("valorDobra",json.dobra);
+                    $("#dobra").attr("valor",json.valor);
+                    $("#grupo").val(json.id);
+                    
+                });
+            }else{
+                $("#grupo").val(0);
+                $("#valor").val(0);                   
+            }
+             
+        });
+
+        $("#frmAtleta").validate({
+            errorClass : "help-inline",
+            errorElement : "div",
+            highlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').addClass('has-error');
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+            },
+            unhighlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error');
+                $(element).parents('.form-group').addClass('has-success');
+                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+            }
+        });
+       
+		
+	});
+
+</script>

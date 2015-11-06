@@ -440,3 +440,11 @@ border-top: solid 1px #fff;
 	color:#ffffff;
 	padding: 0.3em;
 }
+.usuario-portal{
+	padding-top:1em;
+	color:#FFFFFF;
+}
+.usuario-portal a {
+	color:#ffffff;
+	text-decoration: underline;
+}
