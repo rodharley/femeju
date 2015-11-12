@@ -39,6 +39,9 @@ switch ($_REQUEST['acao']){
         header("Location:portal_servicos-guia?id=".$obj->md5_encrypt($idPagamento));
         $conn->connection->commit();
         break;
+    case 'inscricaoa' :
+        echo $_REQUEST['itens'];
+        break;
     case 'guia' :
         if(isset($_REQUEST['atleta'])){
         $objAno->getByAno($_REQUEST['ano']);

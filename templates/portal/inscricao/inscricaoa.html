@@ -7,7 +7,9 @@
             <h2>Inscrição</h2>
         </div>
         <div class="panel panel-default">
-            <form role="form" method="post" action="portal_servicos-inscricaoab" id="frmInscricao" class="form">
+            <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
+                <input type="hidden" name="acao" id="acao" value="inscricaoa"/>
+                <input type="hidden" name="itens" id="itens" value=""/>
                 <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
                 <div class="panel-heading">
                     <h4>{LABEL}</h4>
@@ -39,6 +41,37 @@
                     <button type="button" class="btn btn-success btn-sm" title="Adicionar Atleta" data-toggle="modal" data-target="#addatleta">
   Adicionar <span class="glyphicon glyphicon-plus"> </span>
 </button>
+<table class="table table-condensed table-striped" id="tblList">
+</table>
+<div class="row">
+    <div class="col-md-8 text-right"></div>
+    <div class="col-md-4 text-right">
+        <input type="text" disabled="disabled" class="form-control disabled text-right" name="total" id="total" value="R$ 0,00"/>
+    </div>
+    
+</div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>forma de Pagamento</legend>
+                        <div class="form-group">
+                                    <label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
+                                    <div class="row">
+                                        <div class="col-xs-2 col-md-2 text-center">
+                                            <div class="thumbnail">
+                                                <img src="img/credit/boleto-brb.png" class="img-responsive" alt="boleto BRB">
+                                                <input type="radio" class="form-control required" value="1" name="tipoPagamento" checked/>
+                                                Boleto BRB
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-md-2 text-center">
+                                            <div class="thumbnail">
+                                                <img src="img/credit/boleto-femeju.png" class="img-responsive" alt="boleto Femeju">
+                                                <input type="radio" class="form-control required" value="2" name="tipoPagamento"/>
+                                                Boleto Femeju
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                     </fieldset>
                 </div>
                 <div class="panel-footer text-right">
@@ -48,6 +81,7 @@
                     <button class="btn btn-primary" type="button" id="btAvancar">
                         Avançar <span class="glyphicon glyphicon-forward"> </span>
                     </button>
+                    
                 </div>
             </form>
         </div>
@@ -68,7 +102,7 @@
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
                                 <label for="nome"><i class='fa'> </i><b>Nome Completo</b></label>
-                                <input type="text" name="nome" class="form-control required"/>
+                                <input type="text" name="nome" id="nome" class="form-control required"/>
                             </div>
                         </div>
                     </div>
@@ -76,7 +110,7 @@
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
                                 <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                                <input type="text" name="email" class="form-control email required"/>
+                                <input type="text" name="email" id="email" class="form-control email required"/>
                             </div>
                         </div>
                     </div>
@@ -84,7 +118,7 @@
                         <div class="col-md-6 col-xs-6">
                             <div class="form-group">
                                 <label for="documento"><i class='fa'> </i><b>Documento</b></label>
-                                <input type="text" name="documento" class="form-control required"/>
+                                <input type="text" name="documento" id="documento" class="form-control required"/>
                             </div>
                         </div>                    
                         <div class="col-md-6 col-xs-6">
@@ -142,6 +176,7 @@
                                         R$
                                     </div>
                                     <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="0"/>
+                                    <input type="hidden" id="valorReal" name="valorReal" value="0"/>
                                     <input type="hidden" id="grupo" name="grupo" value="0"/>
                                 </div>
                                     
@@ -159,16 +194,126 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
-	function somatotal() {
+    function somatotal() {
         var total = 0;
-        $(".camposoma").each(function() {
-            total = total + eval($(this).val());
-        });
+        for(var i in atletas){
+            var atl = JSON.parse(atletas[i]);
+            total = total + eval(parseFloat(atl.valor));
+        }
         $("#total").val("R$ " + (total.format(2, 3, '.', ',')));
 
     }
+    
+    var atletas = [];
+     var json = {};
+    var selected_index = -1; 
+    function LimpaCampos(){
+        $("#nome").val("");
+        $("#email").val("");
+        $("#documento").val("");
+        $("#telefone").val("");
+        $("#grupo").val("0");
+        $("#valor").val("0");
+        $("#valorReal").val("0");
+        $("#dobra").prop("checked",false);
+        $("#dobra").attr("valorDobra",0);
+        $("#dobra").attr("valor",0);
+        $("#graduacao").val("");
+        $("#categoria").html("<option value=''>Selecione</option>");
+        $("#classe").html("<option value=''>Selecione</option>");
+        json = {};
+    }
+    
+    function AddAtleta(){
+        var isdobra = "Não";
+        if($("#dobra").prop("checked"))
+            isdobra = "Sim";
+        var atleta = JSON.stringify({
+            nome    : $("#nome").val(),
+            email  : $("#email").val(),
+            documento : $("#documento").val(),
+            telefone : $("#telefone").val(),
+            grupo : $("#grupo").val(),
+            valor : $("#valorReal").val(),
+            dobra : isdobra,
+            graduacao: json.graduacao,
+            categoria: json.categoria,
+            classe: json.classe
+        });
+        atletas.push(atleta);
+    } 
+    function Delete(){
+        atletas.splice(selected_index, 1);
+          
+     }
+    function List(){        
+        $("#tblList").html("");
+        $("#tblList").html(
+            "<thead>"+
+            "   <tr>"+
+            "   <th></th>"+
+            "   <th>Nome</th>"+
+            "   <th>Categoria</th>"+
+            "   <th>Valor</th>"+
+            "   <th>Dobra</th>"+
+            "   </tr>"+
+            "</thead>"+
+            "<tbody>"+
+            "</tbody>"
+            );
+        for(var i in atletas){
+            var atl = JSON.parse(atletas[i]);
+            $("#tblList tbody").append("<tr>"+
+                                         "  <td><button type='button' alt='Delete"+i+"' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + 
+                                         "  <td>"+atl.nome+"</td>" + 
+                                         "  <td>"+atl.graduacao+"-"+atl.categoria+"-"+atl.classe+"</td>" + 
+                                         "  <td>R$ "+parseFloat(atl.valor).format(2, 3, '.', ',')+"</td>" + 
+                                         "  <td>"+atl.dobra+"</td>" + 
+                                         "</tr>");
+                }
+      } 
+    
+   
+    $(document).on('click','.btnDelete',function(){
+        selected_index = parseInt($(this).attr("alt").replace("Delete", ""));
+        Delete();
+        List();
+        somatotal();
+        });
+   
+    $(document).ready(function() {
 
-	$(document).ready(function() {
+                        
+          $("#btAvancar").click(function(){
+             if(atletas.length > 0){
+                 var strjson = "[";
+                for(var i in atletas){
+                    var atl = JSON.parse(atletas[i]);
+                    alert(JSON.stringify(atl));
+                    strjson = strjson+JSON.stringify(atl)+',';
+                 }
+                  strjson = strjson+']';
+                 $("#itens").val(strjson);
+                 $("#frmInscricao").submit();
+             }else{
+                 alert("Você deve adicionar um ou mais atletas!");
+             }
+              
+          });  
+               
+          $("#btAdicionar").click(function(){
+              if($("#frmAtleta").valid()){
+                $("#addatleta").modal('hide');
+                AddAtleta();            
+                List();    
+                LimpaCampos();
+                somatotal();
+            }
+            }); 
+
+      
+                    
+       
         
        $("#telefone").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         
@@ -182,19 +327,13 @@
             placeholder : "0"
         }); 
         
-        $("#btAdicionar").click(function(){
-            if($("#frmAtleta").valid()){
-                if(confirm("Confirma a realização da inscrição dos atletas selecionados?")){
-                     $("#frmAtleta").submit();
-                }
-            }
-            
-        });
         $("#dobra").click(function() {
             if ($(this).prop("checked")) {
                 $("#valor").val($(this).attr("valorDobra"));
+                $("#valorReal").val($(this).attr("valorDobra"));
             } else {
                 $("#valor").val($(this).attr("valor"));
+                $("#valorReal").val($(this).attr("valor"));
             }
             
         });
@@ -248,11 +387,13 @@
                         classe : $(this).val()
                     }
                 }).done(function(retorno) {
-                    var json = JSON.parse(retorno);
+                   json = JSON.parse(retorno);
                     if ($("#dobra").prop("checked")) {
-                        $("#valor").val(json.dobra);                        
+                        $("#valor").val(json.dobra); 
+                        $("#valorReal").val(json.dobra);                       
                     } else {                        
                         $("#valor").val(json.valor);
+                        $("#valorReal").val(json.valor);
                     }
                     $("#dobra").attr("valorDobra",json.dobra);
                     $("#dobra").attr("valor",json.valor);
@@ -261,7 +402,8 @@
                 });
             }else{
                 $("#grupo").val(0);
-                $("#valor").val(0);                   
+                $("#valor").val(0);      
+                $("#valorReal").val(0);             
             }
              
         });
@@ -281,7 +423,7 @@
             }
         });
        
-		
-	});
+        
+    });
 
 </script>

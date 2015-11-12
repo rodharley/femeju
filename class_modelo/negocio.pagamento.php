@@ -23,7 +23,7 @@ class Pagamento extends Persistencia{
         
     }
     
-    public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$usuarioResponsavel,$itensPagamento){
+    public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$usuarioResponsavel="",$itensPagamento){
         $total = 0;
         foreach ($itensPagamento as $key => $item) {
             $total += $item->valor;
@@ -33,7 +33,7 @@ class Pagamento extends Persistencia{
         $this->dataPagamento = NULL;
         $this->bitPago = 0;
         $this->grupo = $grupo;
-        $this->responsavel = new Usuario($usuarioResponsavel);
+        $this->responsavel = $usuarioResponsavel == "" ? NULL : new Usuario($usuarioResponsavel);
         $this->tipo = new PagamentoTipo($tipoPagamento);
         $this->save();
         

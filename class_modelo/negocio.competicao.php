@@ -128,7 +128,46 @@ class Competicao extends Persistencia {
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
-
+    
+    public function gerarInscricaoA($atletas)
+   {
+            
+            $grupoC = new GrupoCompeticao();
+            $pag = new Pagamento();
+            $itensPagamento = array();
+            $idsInscricao = "0";
+            $insc = new Inscricao();
+             foreach ($atletas as $key => $arrAtleta) {                
+                //salva a inscricao
+                $insc = new Inscricao();
+                $insc->atleta = NULL;
+                $insc->nomeAtleta = utf8_decode($arrAtleta['nome']);
+                $insc->docAtleta = utf8_decode($arrAtleta['documento']);
+                $insc->telefoneAtleta = $arrAtleta['telefone'];
+                $insc->emailAtleta =utf8_decode($arrAtleta['email']);
+                $insc->dataInscricao = date("Y-m-d");
+                $insc->situacao = 0;
+                $grupoC->getById($arrAtleta['grupo']);
+                $insc->valor = $grupoC->valor;
+                $insc->dobra = $arrAtleta['dobra'] == "Sim" ? 1 : 0;
+                $insc->valorDobra = $arrAtleta['dobra'] == "Sim" ? $grupoC->dobra : 0;
+                $insc->competicao = $this;
+                $insc->grupoCompeticao = $grupoC;
+                $idsInscricao .= ",".$insc->save();   
+                
+                
+                //gera o item de pagamento
+                $item = new PagamentoItem();  
+                $item->atleta = NULL;
+                $item->valor = $arrAtleta['dobra'] == "Sim" ? $grupoC->valor+$grupoC->dobra : $grupoC->valor;
+                $item->custa = $this->custa;
+                $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".utf8_decode($arrAtleta['nome']);   
+                array_push($itensPagamento,$item);        
+                }
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$_SESSION['fmj.userId'],$itensPagamento);
+                $insc->atualizarPagamentos($idPagamento,$idsInscricao);
+                return $idPagamento;
+   }
 
 }
 
