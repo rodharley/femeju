@@ -44,6 +44,8 @@
 
 </div>
 </form>
+<span id="min">{MIN}</span>
+<span id="max">{MAX}</span>
 <script>
 	$(document).ready(function() {
 
@@ -51,8 +53,8 @@
         $("#peso").ionRangeSlider({
           min: 20,
           max: 250,
-          from: {MIN},
-          to: {MAX},
+          from: $("#min").html(),
+          to: $("#max").html(),
           type: 'double',
           step: 1,
           postfix: " Kg",
