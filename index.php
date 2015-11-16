@@ -4,6 +4,7 @@ date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.iso-8859-1', 'pt_BR.iso-8859-1', 'portuguese');
 header('Content-Type: text/html; charset=iso-8859-1');
 //setando a funcao de tratamento de erros geral
+
 function handleError($errno, $errstr, $errfile, $errline, array $errcontext)
 {
     // error was suppressed with the @-operator
@@ -14,8 +15,6 @@ function handleError($errno, $errstr, $errfile, $errline, array $errcontext)
     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 }
 set_error_handler('handleError',E_ALL);
-
-try{
 //classes do frame work
 require("class_arquitetura/conexao.php");
 require("class_arquitetura/biblioteca.php");
@@ -23,6 +22,8 @@ require("class_arquitetura/persistencia.php");
 require("class_arquitetura/template.php");
 require("class_arquitetura/mensagem.php");
 $conn = Conexao::init();
+try{
+
 
 
 //incluindo todas as classes e incicializando a conexao com o banco de dados
