@@ -1,6 +1,8 @@
 <?php
 class Perfil extends Persistencia{
+	const RESPONSAVEL = 3;    
 	var $descricao;
+    
 	
 	function listarPorPerfil(){
         return $this->getRows(0,999,array(),array("id"=>" >= ".$_SESSION['fmj.userPerfilId']));        

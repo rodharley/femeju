@@ -34,16 +34,15 @@ $root = new Persistencia();
 require("constantes.php");
 //carregando os controlers
 require("controllers.php");
-
 //finalizando os controlers
 require("shutdow.php");
 }catch(Exception $e){
     
     //print_r($e);
     //exit();
-    $TPL = new Template($root->URI."/templates/portal/layout.html");
-	$TPL->addFile("CONTEUDO", $root->URI."/templates/erro/erro500.html");
-	if ($root->desenvolvimento)
+    $TPL = new Template(URI."/templates/portal/layout.html");
+	$TPL->addFile("CONTEUDO", URI."/templates/erro/erro500.html");
+	if (DESENVOLVIMENTO)
 		$TPL->ALERT = "Mensagem:".$e->getMessage()."<br/>"."Arquivo:".$e->getFile()."<br/>Linha:".$e->getLine();
     $conn->connection->rollback();
     $TPL->show();

@@ -12,7 +12,7 @@ function enviarEmailRedefinirSenha($nome, $email,$idUsuario){
 		$tplEmail = new Template("templates/padrao/email.html");
 		$tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);
 		$tplEmail -> MENSAGEM = $mensagem;
-		return $this -> mail_html($email, $this -> remetente, "FEMEJU - Redefinição de Senha", $tplEmail -> showString());
+		return $this -> mail_html($email, REMETENTE, "FEMEJU - Redefinição de Senha", $tplEmail -> showString());
 }
 
 function enviarEmailNovoUsuario($nome, $email,$idUsuario){
@@ -20,21 +20,21 @@ function enviarEmailNovoUsuario($nome, $email,$idUsuario){
         $tplEmail = new Template("templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);
         $tplEmail -> MENSAGEM = $mensagem;
-        return $this -> mail_html($email, $this -> remetente, "FEMEJU - Cadastramento no Sistema", $tplEmail -> showString());
+        return $this -> mail_html($email, REMETENTE, "FEMEJU - Cadastramento no Sistema", $tplEmail -> showString());
 }
 function enviarEmailNovoUsuarioPortal($nome, $email,$idUsuario){
         $mensagem = "Sr(a). $nome, você foi cadastrado como usuário do sistema FEMEJU. Clique <a href='".URL . "/portal_servicos-ativar?id=" . $this -> md5_encrypt($idUsuario)."'>Aqui</a> para ativar seu usuário.";
         $tplEmail = new Template("templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);
         $tplEmail -> MENSAGEM = $mensagem;
-        return $this -> mail_html($email, $this -> remetente, "FEMEJU - Cadastramento no Sistema", $tplEmail -> showString());
+        return $this -> mail_html($email, REMETENTE, "FEMEJU - Cadastramento no Sistema", $tplEmail -> showString());
 }
 function enviarEmailNovaSenha($nome, $email,$senha){
         $mensagem = "Sr(a). $nome, sua nova senha para acesso é:<strong>$senha</strong>";
         $tplEmail = new Template("templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);        
         $tplEmail -> MENSAGEM = $mensagem;        
-        return $this -> mail_html($email, $this -> remetente, "FEMEJU - Nova Senha", $tplEmail -> showString());
+        return $this -> mail_html($email, REMETENTE, "FEMEJU - Nova Senha", $tplEmail -> showString());
 }
 
 function enviarEmailPortal($email,$mensagem){
@@ -43,7 +43,7 @@ function enviarEmailPortal($email,$mensagem){
         $tplEmail = new Template("../templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);        
         $tplEmail -> MENSAGEM = $email."<br/>".$mensagem;        
-        return $this -> mail_html($objConf->valor, $this -> remetente, "FEMEJU - Email do portal", $tplEmail -> showString());
+        return $this -> mail_html($objConf->valor, CONTATO, "FEMEJU - Email do portal", $tplEmail -> showString());
 }
 
 function enviarEmailPush($mensagem){
@@ -52,7 +52,7 @@ function enviarEmailPush($mensagem){
         $tplEmail = new Template("templates/padrao/email.html");
         $tplEmail -> ASSINATURA = str_replace("#url#",URL,Email::ASSINATURA);        
         $tplEmail -> MENSAGEM = $mensagem;        
-        return $this -> mail_html($objConf->valor, $this -> remetente, "FEMEJU - Notificação de Alteração", $tplEmail -> showString());
+        return $this -> mail_html($objConf->valor, REMETENTE, "FEMEJU - Notificação de Alteração", $tplEmail -> showString());
 }
 
 }

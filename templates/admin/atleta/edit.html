@@ -7,8 +7,7 @@
         </div>
         <div class="box-body">
 
-            <input type="hidden" name="id" id="id" value="{id}"/>
-             <input type="hidden" name="idPessoa" id="idPessoa" value="{ID_PESSOA}"/>
+            <input type="hidden" name="id" id="id" value="{id}"/>             
             <input type="hidden" name="acao" value="{ACAO}"/>
            
             <fieldset><legend>Dados Pessoais</legend>
@@ -128,13 +127,13 @@
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="webSite"><i class='fa'> </i><b>Web Site</b></label><BR>
-                        <input type="text" id="webSite" name="webSite" value="{WEB_SITE}" class="form-control url"/>
+                        <input type="text" id="webSite" name="webSite" value="{WEB_SITE}" class="form-control"/>
                     </div>
                 </div>  
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="midiaSocial"><i class='fa'> </i><b>Mídia Social</b></label><BR>
-                        <input type="text" id="midiaSocial" name="midiaSocial" value="{MIDIA_SOCIAL}" class="form-control url"/>
+                        <input type="text" id="midiaSocial" name="midiaSocial" value="{MIDIA_SOCIAL}" class="form-control"/>
                     </div>
                 </div>              
             </div>
@@ -405,6 +404,16 @@
 
 <script>
 
+    function cidadePorUf(){
+         $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                async:false,
+                data : {uf: $("#uf").val()},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+            });
+    }
 	$(document).ready(function() {
 	    
 	    $('#dataNascimento').datepicker();
@@ -449,27 +458,32 @@
                 $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
                 $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
             },
-            <!-- BEGIN BLOCK_NOVO_ATLETA2 -->
+            
             rules : {
-                nome: {
+                email: {
                 required: true,
                 remote: {
-                            url: "ajax/verifica_atleta.php?idPessoa="+$("#idPessoa").val(),
-                            type: "get",
+                            url: "ajax/usuario_verificaLogin.php",
+                            type: "post",
+                            data: {
+                              idUser: function() {
+                                return $("#id").val();
+                              }
+                            }
                             }
                 }
                 },
                 messages: {
-                    nome: {
-                    remote: "Pessoa ja cadastrada como atleta!"
+                    email: {
+                    remote: "E-mail já existe no sistema"
                     }
                 }
-                <!-- END BLOCK_NOVO_ATLETA2 -->
+                
         });
         
         <!-- BEGIN BLOCK_NOVO_ATLETA --> 
         var options = {
-        script: "ajax/json_pessoas.php?",
+        script: "ajax/json_pessoasNaoAtleta.php?",
         varname: "busca",
         json: true,
         maxresults: 35,
@@ -480,11 +494,22 @@
             data:{id:obj.id}
             }).done(function(retorno){
                 pessoa = JSON.parse(retorno);                
-                document.getElementById("idPessoa").value =pessoa.id;        
+                document.getElementById("id").value =pessoa.id;        
                 document.getElementById("sobrenome").value =pessoa.sobrenome;
                 document.getElementById("nome").value =pessoa.nome;
+                document.getElementById("nomeMeio").value =pessoa.nomeMeio;
                 document.getElementById("email").value =pessoa.email;
                 document.getElementById("telefoneCel").value =pessoa.telCelular;
+                document.getElementById("telefoneRes").value =pessoa.telResidencial;
+                document.getElementById("telefoneCom").value =pessoa.telComercial;
+                document.getElementById("filiacaoMae").value =pessoa.filiacaoMae;
+                document.getElementById("filiacaoPai").value =pessoa.filiacaoPai;
+                document.getElementById("endereco").value =pessoa.endereco;
+                document.getElementById("bairro").value =pessoa.bairro;
+                document.getElementById("uf").value =pessoa.cidade.uf.id;
+                cidadePorUf();
+                document.getElementById("cidade").value =pessoa.cidade.id;
+                document.getElementById("cep").value =pessoa.cep;
             });
         
          }

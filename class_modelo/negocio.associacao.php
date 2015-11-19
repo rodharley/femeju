@@ -72,7 +72,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->bairro = $_REQUEST['bairro'];
         $this->cep = $_REQUEST['cep'];
         $this->cidade = new Cidade($_REQUEST['cidade']);
-        $this->email = $_REQUEST['email'];
+        $this->email = $_REQUEST['email_a'];
         $this->webSite = $_REQUEST['website'];
         $this->midiaSocial = $_REQUEST['midiaSocial'];
         $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
@@ -89,20 +89,27 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $objPerfil = new Perfil();
         $objPerfil -> id = 3;
         $objUser -> perfil = $objPerfil;
-        if($_REQUEST['id_responsavel'] != ""){
+        if($_REQUEST['idResponsavel'] != ""){
             //recupera responsavel
-            $objPessoa->getById($_REQUEST['id_responsavel']);
+            $objPessoa->getById($_REQUEST['idResponsavel']);
             $objPessoa->nome = $_REQUEST['nome_responsavel'];
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
-            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->nomeMeio =  $_REQUEST['nomemeio_responsavel'];
+            $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
+            $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
+            $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->email =  $_REQUEST['email'];
+            $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
             $objPessoa->bitVerificado = 1;
             $id = $objPessoa->save();
             if(!$objUser->recuperaPorIdPessoa($objPessoa->id)){
+                $objUser->id = $id;    
                 $objUser -> senha = "";
                 $objUser -> ativo = 0;
                 $objUser -> pessoa = $objPessoa;
                 $objUser -> save();
+                $objUser->id = $id;
                 $email = new Email();
                 $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
             }
@@ -112,15 +119,21 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             
             $objPessoa->nome = $_REQUEST['nome_responsavel'];
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
-            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->nomeMeio =  $_REQUEST['nomemeio_responsavel'];
+            $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
+            $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
+            $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->email =  $_REQUEST['email'];
+            $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
             $objPessoa->bitVerificado = 1;
             $id = $objPessoa->save();     
-            
+            $objUser->id = $id;
             $objUser -> senha = "";
             $objUser -> ativo = 0;
             $objUser -> pessoa = $objPessoa;
             $objUser -> save();
+            $objUser->id = $id;
             $email = new Email();
             $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
         }
@@ -157,7 +170,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->bairro = $_REQUEST['bairro'];
         $this->cep = $_REQUEST['cep'];
         $this->cidade = new Cidade($_REQUEST['cidade']);
-        $this->email = $_REQUEST['email'];
+        $this->email = $_REQUEST['email_a'];
         $this->webSite = $_REQUEST['website'];
         $this->midiaSocial = $_REQUEST['midiaSocial'];
         $this->telefone1 = $this->limpaDigitos($_REQUEST['telefone1']);
@@ -190,19 +203,27 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $objPerfil = new Perfil();
         $objPerfil -> id = 3;
         $objUser -> perfil = $objPerfil;
-        if($_REQUEST['id_responsavel'] != ""){
+        if($_REQUEST['idResponsavel'] != ""){
             //recupera responsavel
-            $objPessoa->getById($_REQUEST['id_responsavel']);
+            $objPessoa->getById($_REQUEST['idResponsavel']);
             $objPessoa->nome = $_REQUEST['nome_responsavel'];
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
-            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $objPessoa->nomeMeio =  $_REQUEST['nomemeio_responsavel'];
+            $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
+            $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
+            $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->email =  $_REQUEST['email'];
+            $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $id = $objPessoa->save();
             if(!$objUser->recuperaPorIdPessoa($objPessoa->id)){
+                $objUser->id = $id;
                 $objUser -> senha = "";
                 $objUser -> ativo = 0;
                 $objUser -> pessoa = $objPessoa;
                 $objUser -> save();
+                $objUser->id = $id;
                 $email = new Email();
                 $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);            
             }
@@ -211,14 +232,21 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             //novo responsavel            
             $objPessoa->nome = $_REQUEST['nome_responsavel'];
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
-            $objPessoa->email =  $_REQUEST['email_responsavel'];
+            $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
+            $objPessoa->nomeMeio =  $_REQUEST['nomemeio_responsavel'];
+            $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
+            $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
+            $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->email =  $_REQUEST['email'];
+            $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $id = $objPessoa->save();     
-            
+            $objUser->id = $id;
             $objUser -> senha = "";
             $objUser -> ativo = 0;
             $objUser -> pessoa = $objPessoa;
             $objUser -> save();
+            $objUser->id = $id;
             $email = new Email();
             $email->enviarEmailNovoUsuario($objPessoa->nome,$objPessoa->email,$objUser->id);
         }

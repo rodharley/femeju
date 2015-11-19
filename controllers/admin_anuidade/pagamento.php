@@ -32,7 +32,7 @@ $TPL->ANO = $_REQUEST['ano'];
 
 
 if(isset($_REQUEST['todos']))
-$rsAtletas = $objA->listaPorAnuidadeAssociacao($obj->id,$_REQUEST['ano']);
+$rsAtletas = $objA->listaPorAssociacaoInativo($obj->id);
 else
 $rsAtletas = $objA->listaPorArrayIds($_REQUEST['atleta']);
 foreach ($rsAtletas as $key => $value) {

@@ -23,7 +23,7 @@ $TPL->addFile("CONTEUDO", "templates/admin/competicao/configuracao.html");
 $obj = new Competicao();
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $obCusta = new Custa();
-$TPL->LOADING = $obj->carregando;
+$TPL->LOADING = CARREGANDO;
 $TPL->TITULO = $obj->titulo;
 $TPL->DESCRICAO = $obj->descricao;
 $TPL->DATA = $obj->convdata($obj->dataEvento,"mtn");

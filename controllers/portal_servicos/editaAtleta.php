@@ -45,7 +45,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->SITUACAO = $objAtleta->getSituacao();
 	$TPL->block("BLOCK_STATUS");
 	
-    $TPL->ID_PESSOA = $objAtleta->pessoa->id;
+    
     $TPL->NOME = $objAtleta->pessoa->nome;
     $TPL->SOBRE_NOME = $objAtleta->pessoa->sobrenome;    
     $TPL->NOME_MEIO = $objAtleta->pessoa->nomeMeio;
@@ -109,8 +109,7 @@ if(isset($_REQUEST['id'])){
                   $TPL->block("BLOCK_CIDADE");
               }
 }ELSE{
-    $TPL->block("BLOCK_NOVO_ATLETA2");
-    $TPL->block("BLOCK_NOVO_ATLETA");
+    
 	$TPL->block("BLOCK_NEW");
 }
 foreach ($listaGrad as $key => $value) {

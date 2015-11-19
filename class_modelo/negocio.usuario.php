@@ -23,7 +23,7 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaTotal($busca = "",$perfil = "") {
-				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa WHERE 1 = 1 ";
+				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.id WHERE u.idPerfil != ".Perfil::RESPONSAVEL;
 		if ($busca != "")
 			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
         if($perfil != "")
@@ -35,7 +35,7 @@ class Usuario extends Persistencia {
 
 	function recuperaTotalPerfil($idPerfil, $busca = "") {
 		
-				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa WHERE u.idPerfil = $idPerfil";
+				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.id WHERE u.idPerfil = $idPerfil";
 		
 		if ($busca != "")
 			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
@@ -47,7 +47,7 @@ class Usuario extends Persistencia {
 	function listarUsuariosPerfil($idPerfil, $primeiro = 0, $quantidade = 9999, $busca = "") {
 
 		
-				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where u.idPerfil = $idPerfil";
+				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where u.idPerfil = $idPerfil";
 		
 		if ($busca != "")
 			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
@@ -59,7 +59,7 @@ class Usuario extends Persistencia {
 
 	function listarUsuarios($primeiro = 0, $quantidade = 9999, $busca = "", $perfil = "") {
 
-				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where 1 = 1";
+				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where u.idPerfil != ".Perfil::RESPONSAVEL;
 		
 		if ($busca != "")
 			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
@@ -159,7 +159,7 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaPorLogin($login, $idExclusao = "0") {
-	    $sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.idPessoa where p.email = '$login' and u.id != $idExclusao";
+	    $sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where p.email = '$login' and u.id != $idExclusao";
 	    $rs = $this->getSQL($sql);
         if(count($rs) > 0){
 	       $this->getById($rs[0]->id);		
@@ -169,7 +169,7 @@ class Usuario extends Persistencia {
 	}
     
     function recuperaPorIdPessoa($idPessoa) {
-        $sql = "select u.* from fmj_usuario u where u.idPessoa = $idPessoa";
+        $sql = "select u.* from fmj_usuario u where u.id = $idPessoa";
         $rs = $this->getSQL($sql);
         if(count($rs) > 0){
            $this->getById($rs[0]->id);      
@@ -210,6 +210,8 @@ class Usuario extends Persistencia {
 		//$senha = $_REQUEST['senha'] != "" ? $_REQUEST['senha'] : md5($this -> makePassword(8));
 		$pessoa = new Pessoa();
 		$pessoa->nome = $_REQUEST['nome'];
+        $pessoa->sobrenome = $_REQUEST['sobreNome'];
+        $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
 		$pessoa-> cpf = $strCPF;
 		$pessoa-> email = $_REQUEST['email'];
 		$pessoa-> telResidencial = str_replace("_","",$_REQUEST['telefone']);
@@ -226,7 +228,7 @@ class Usuario extends Persistencia {
 			$this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
 			$pessoa-> foto = $nomefoto;
 		}	
-        $pessoa->save();
+        $this->id = $pessoa->save(); 
         $this->pessoa = $pessoa;	
 		$this -> save();
         
@@ -291,6 +293,9 @@ class Usuario extends Persistencia {
             $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
 			$this -> perfil = $p;
 			$this -> pessoa -> nome = $_REQUEST['nome'];
+            $this->pessoa->nome = $_REQUEST['nome'];
+            $this->pessoa->sobrenome = $_REQUEST['sobreNome'];
+            $this->pessoa->nomeMeio = $_REQUEST['nomeMeio'];
 			$this -> pessoa -> telResidencial = str_replace("_","",$_REQUEST['telefone']);
 			$this -> pessoa -> telCelular = str_replace("_","",$_REQUEST['celular']);
 			$this -> pessoa -> cpf = $strCPF;

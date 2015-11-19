@@ -2,19 +2,13 @@
 class Persistencia extends Biblioteca{
 	public $id;
 	public $mensagem;
-	public $conn;
-    public $URI;
-    public $desenvolvimento;
-    public $remetente;  
-    public $carregando;
+	public $conn;    
+    
+    
     
     public function __construct($id = NULL){
         $this->id = $id;
-        $this->conn = Conexao::init();            
-        $this->desenvolvimento = true;      
-        $this->carregando = CARREGANDO;
-        $this->URI = URI;
-        $this->remetente = REMETENTE;        
+        $this->conn = Conexao::init();              
     }
     
   
@@ -53,15 +47,6 @@ class Persistencia extends Biblioteca{
     }
     
     
-	public function finalizar($tpl, $destino="templates/mensagem.html") {
-		if (isset($this -> mensagem)) {			
-				$tpl -> addFile("CONTEUDO", $destino);
-				$tpl -> TIPO = $this -> mensagem -> tipo;
-				$tpl -> MENSAGEM = $this -> mensagem -> texto;
-				$tpl -> show();
-				exit();		
-		}
-	}
 		
 	function getNumeroFormatado() {
 		return str_pad($this -> id, 6, "0", STR_PAD_LEFT);
@@ -154,7 +139,7 @@ class Persistencia extends Biblioteca{
 
 			$arrayOrder = array(0 => $clorder);
 			$arraywhere = array( $clfk => "=".$valueIdFk);
-			$xml2 = simplexml_load_file($this->URI."/xml/cfg.xml");
+			$xml2 = simplexml_load_file(URI."/xml/cfg.xml");
 			foreach ($xml2->children() as $elemento2){
 			if($elemento2['name'] == get_class($obj)){
 				$arrayrs =$obj->getClassRows($elemento2,$arrayOrder,$arraywhere);
@@ -194,7 +179,7 @@ class Persistencia extends Biblioteca{
 	}
 
 function xmlContruct($i,$objeto){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($objeto)){
 				return $this->xmlObject($elemento,$i,$objeto);
@@ -229,7 +214,7 @@ function xmlObject($elemento,$i,$objeto){
 	/*recupera um objeto da classe pelo id com lazy at� segundo nivel*/
 	function getById($id){
 		if(strlen($id) > 0){	
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				$sql = "select ".$this->getFieldsList($elemento)." from ".$elemento['tbname']." where ".$elemento['tbid']." = $id";
@@ -248,10 +233,31 @@ function xmlObject($elemento,$i,$objeto){
 			return false;
 		}
 	}
-
+    
+    /*recupera um objeto da classe pelo id com lazy at� segundo nivel*/
+    function consultaById($id){
+        if(strlen($id) > 0){    
+        $xml = simplexml_load_file(URI."/xml/cfg.xml");
+        foreach ($xml->children() as $elemento){
+            if($elemento['name'] == get_class($this)){
+                $sql = "select ".$elemento['tbid']." from ".$elemento['tbname']." where ".$elemento['tbid']." = $id";
+                $rs =  $this->DAO_ExecutarQuery($sql);
+                if($this->DAO_NumeroLinhas($rs) > 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        
+        }else{
+            return false;
+        }
+    }
+    
 	//metodo que recupera 1 registro por filtro e set o objeto
 	function getRow($filtro = array()){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				
@@ -282,7 +288,7 @@ function xmlObject($elemento,$i,$objeto){
 	
 	/*m�todo que recupera a lista de obejtos da classe */
 	function getRows($init=0,$limit=999, $order = array(), $filtro = array()){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				//configura a ordenacao
@@ -329,7 +335,7 @@ function xmlObject($elemento,$i,$objeto){
 
 /*m�todo que recupera a quantidade de objetos obejtos da classe */
 	function getNumRows($filtro = array()){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 					
@@ -359,7 +365,7 @@ function xmlObject($elemento,$i,$objeto){
 
 	/* m�todo que recupera uma array(lista) de objetos atraves de uma consulta sql*/
 	function getSQL($sql){	    
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				$rs =  $this->DAO_ExecutarQuery($sql);
@@ -419,12 +425,12 @@ function xmlObject($elemento,$i,$objeto){
 
 
 	function save(){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				//recupera o nome do atributo id da class
 				$id = $this->getIdElementXML($elemento);
-					if($this->$id != NULL){
+					if($this->consultaById($this->$id)){
 					//update
 					$sql = "update ".$elemento['tbname']." set ";
 					foreach($elemento->children() as $atributo){
@@ -448,7 +454,7 @@ function xmlObject($elemento,$i,$objeto){
 						}
 					}
 					$sql = substr($sql,0,strlen($sql)-2);
-					$sql .=  " where ".$elemento['tbid']." = ".$this->$id;
+					$sql .=  " where ".$elemento['tbid']." = ".$this->$id;                    
 					$this->DAO_ExecutarQuery($sql);
 				return $this->id;
 				}else{
@@ -493,7 +499,7 @@ function xmlObject($elemento,$i,$objeto){
 
 /*recupera um objeto da classe pelo id com lazy at� segundo nivel*/
 	function delete($id){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){
 				$sql = "delete from ".$elemento['tbname']." where ".$elemento['tbid']." = $id";              
@@ -515,7 +521,7 @@ function xmlObject($elemento,$i,$objeto){
 	}
 
 	function getClassElementXML($nameClass){
-		$xml = simplexml_load_file($this->URI."/xml/cfg.xml");
+		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			$name = substr($elemento['name'],0,strlen($elemento['name']));
 			if($name == $nameClass){
@@ -535,12 +541,7 @@ function xmlObject($elemento,$i,$objeto){
            }                        
         } 
         
-        unset($jsonarray['conn']);
-        unset($jsonarray['remetente']);
-        unset($jsonarray['carregando']);
-        unset($jsonarray['URI']);
-        unset($jsonarray['desenvolvimento']);
-        unset($jsonarray['mensagem']);
+        unset($jsonarray['conn']);        
         unset($jsonarray['HASH_URL']);
         unset($jsonarray['PAGINACAO']);
               

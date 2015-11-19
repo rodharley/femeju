@@ -1,6 +1,6 @@
 <script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
 <link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
-<form role="form" method="post" action="admin_associacao-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
+<form role="form" method="post" action="admin_associacao-action" id="frmEditAssociacao" enctype="multipart/form-data" autocomplete="off">
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">{LABEL}</h3>
@@ -8,6 +8,7 @@
         <div class="box-body">
 
             <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" id="idResponsavel" name="idResponsavel" value="{id_responsavel}"/>
             <input type="hidden" name="acao" value="{ACAO}"/>
 
             <div class="row">
@@ -114,16 +115,22 @@
             </fieldset>
              <fieldset><legend>Responsável</legend>
             <div class="row">
-            <div class="col-md-6 col-xs-6">
+            <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                         <label for="responsavel"><i class='fa'></i><b>Nome</b></label>
                         <input type="text" id="nome_responsavel" name="nome_responsavel" value="{nome_responsavel}" class="required form-control"/>
-                         <input type="hidden" id="id_responsavel" name="id_responsavel" value="{id_responsavel}" class="form-control"/>
+                                                  
                     </div>
             </div>
-             <div class="col-md-6 col-xs-6">
+             <div class="col-md-4 col-xs-12">
                  <div class="form-group">
-                        <label for="celular"><i class='fa'></i><b>Sobrenome</b></label>
+                        <label for="nomemeio_responsavel"><i class='fa'></i><b>Nome do Meio</b></label>
+                        <input type="text" id="nomemeio_responsavel" name="nomemeio_responsavel" value="{nomemeio_responsavel}" class="required form-control"/>
+                    </div>
+            </div>
+             <div class="col-md-4 col-xs-12">
+                 <div class="form-group">
+                        <label for="sobrenome_responsavel"><i class='fa'></i><b>Sobrenome</b></label>
                         <input type="text" id="sobrenome_responsavel" name="sobrenome_responsavel" value="{sobrenome_responsavel}" class="required form-control"/>
                     </div>
             </div>
@@ -131,8 +138,8 @@
             <div class="row">
             <div class="col-md-6 col-xs-6">
                 <div class="form-group">
-                        <label for="responsavel"><i class='fa'></i><b>E-mail</b></label>
-                        <input type="text" id="email_responsavel" name="email_responsavel" value="{email_responsavel}" class="required form-control"/>
+                        <label for="email"><i class='fa'></i><b>E-mail</b></label>
+                        <input type="text" id="email" name="email" value="{email_responsavel}" class="required form-control email"/>
                          
                     </div>
             </div>
@@ -142,7 +149,51 @@
                         <input type="text" id="celular_responsavel" name="celular_responsavel" value="{celular_responsavel}" class="required form-control"/>
                     </div>
             </div>
-            </div>           
+            </div>  
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="endereco_resp"><i class='fa'> </i><b>Logradouro</b></label>
+                        <input type="text" id="endereco_responsavel" name="endereco_responsavel" value="{endereco_resp}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="bairro_resp"><i class='fa'> </i><b>Bairro</b></label>
+                        <input type="text" id="bairro_responsavel" name="bairro_responsavel" value="{bairro_resp}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="uf_responsavel"><i class='fa'> </i><b>Estado</b></label>
+                         <select name="uf_responsavel" id="uf_responsavel" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_UF_RESP -->
+                            <option value="{id_uf}" {selectedUfresp}>{uf}</option>
+                            <!-- END BLOCK_UF_RESP -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="cidade_responsavel"><i class='fa'> </i><b>Cidade</b></label>
+                        <select name="cidade_responsavel" id="cidade_responsavel" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_CIDADE_RESP -->
+                            <option value="{id_cidade_resp}" {selectedCidaderesp}>{nome_cidade_resp}</option>
+                            <!-- END BLOCK_CIDADE_RESP -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="cep_responsavel"><i class='fa'> </i><b>CEP</b></label>
+                        <input type="text" id="cep_responsavel" name="cep_responsavel" value="{cep_resp}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>         
         </fieldset>
 <fieldset><legend>Contato</legend>
             <div class="row">
@@ -160,8 +211,8 @@
             </div>
             <div class="col-md-4 col-xs-4">
                 <div class="form-group">
-                        <label for="telefone2"><i class='fa'></i><b>E-mail</b></label>
-                        <input type="email" id="email" name="email" value="{email}" class="email form-control"/>
+                        <label for="email_a"><i class='fa'></i><b>E-mail</b></label>
+                        <input type="email" id="email_a" name="email_a" value="{email}" class="email form-control"/>
                     </div>
             </div>
             </div>   
@@ -203,7 +254,16 @@
     </div>
 </form>
 <script>
-
+    function carregaCidadeResp(){
+        $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                async:false,
+                data : {uf: $("#uf_responsavel").val()},                
+            }).done(function(msg) {
+                $("#cidade_responsavel").html(msg);
+            });
+    }
 	$(document).ready(function() {
         var options = {
     script: "ajax/json_pessoas.php?",
@@ -217,11 +277,19 @@
             data:{id:obj.id}
             }).done(function(retorno){
                 pessoa = JSON.parse(retorno);
-                document.getElementById("id_responsavel").value =pessoa.id;        
+                document.getElementById("idResponsavel").value =pessoa.id;        
+                document.getElementById("nomemeio_responsavel").value =pessoa.nomeMeio;
+                document.getElementById("endereco_responsavel").value =pessoa.endereco;
+                document.getElementById("bairro_responsavel").value =pessoa.bairro;
+                document.getElementById("uf_responsavel").value =pessoa.cidade.uf.id;
+                document.getElementById("nomemeio_responsavel").value =pessoa.nomeMeio;
                 document.getElementById("sobrenome_responsavel").value =pessoa.sobrenome;
                 document.getElementById("nome_responsavel").value =pessoa.nome;
-                document.getElementById("email_responsavel").value =pessoa.email;
+                document.getElementById("email").value =pessoa.email;
                 document.getElementById("celular_responsavel").value =pessoa.telCelular;
+                document.getElementById("cep_responsavel").value =pessoa.cep;
+                carregaCidadeResp();
+                document.getElementById("cidade_responsavel").value =pessoa.cidade.id;
             });
         
          }
@@ -234,10 +302,11 @@ var as = new bsn.AutoSuggest('nome_responsavel', options);
         $("#celular_responsavel").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#telefone1").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#cep").inputmask({ mask: "99.999-999"});
+        $("#cep_responsavel").inputmask({ mask: "99.999-999"});
         $("#telefone2").inputmask({ mask:["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#save").click(function() {
             
-            $("#frmEdit").submit();
+            $("#frmEditAssociacao").submit();
         });
         
 		$("#logomarca").fileinput({
@@ -281,6 +350,18 @@ var as = new bsn.AutoSuggest('nome_responsavel', options);
             });
 
         });
+        
+     $("#uf_responsavel").change(function(){
+            $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                data : {uf: $(this).val()},                
+            }).done(function(msg) {
+                $("#cidade_responsavel").html(msg);
+            });
+
+        });
+        
 	
 	$(".btExcluirImagem").click(function(){
 	   if(confirm("Tem certeza que deseja excluir essa imagem?")){
@@ -294,5 +375,41 @@ var as = new bsn.AutoSuggest('nome_responsavel', options);
 	     $(this).parent().hide('fade');  
 	   } 
 	});
+	
+	$("#frmEditAssociacao").validate({
+            errorClass : "help-inline",
+            errorElement : "div",
+            highlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').addClass('has-error');
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+            },
+            unhighlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error');
+                $(element).parents('.form-group').addClass('has-success');
+                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+            },
+            rules : {
+                email: {
+                required: true,
+                remote: {
+                            url: "ajax/usuario_verificaLogin.php",
+                            type: "post",
+                            data: {
+                              idUser: function() {
+                                return $("#idResponsavel").val();
+                              }
+                            }
+                }
+                }
+                },
+                messages: {
+                    email: {
+                    remote: "E-mail já existe no sistema"
+                    }
+                }
+        });
+	
+	
 	});
 </script>

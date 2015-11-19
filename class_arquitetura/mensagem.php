@@ -12,7 +12,7 @@ class Mensagem extends Persistencia
 	
 	
 	function getMensagem($id){
-	$xml = simplexml_load_file($this->URI."/xml/mensagem.xml");
+	$xml = simplexml_load_file(URI."/xml/mensagem.xml");
 		foreach ($xml->children() as $elemento){			
 			
 			if($elemento['id'] == $id){			

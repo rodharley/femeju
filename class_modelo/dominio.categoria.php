@@ -43,7 +43,7 @@ class Categoria{
                 return 'bolsaatleta';
                 break;
                 case $this::PRESIDENCIA:
-                return 'presidencia';
+                return 'afemeju';
                 break;
                 case $this::ARBITRAGEM:
                 return 'arbitragem';

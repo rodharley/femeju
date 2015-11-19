@@ -5,8 +5,7 @@ class Anuidade extends Persistencia{
 	var $anoReferencia;
 	var $atleta = NULL;
 	var $pagamento = NULL;
-	var $situacao;
-	var $dataVencimento;
+	var $situacao;	
     
     function listaPorAtleta($idAtleta){
         return $this->getRows(0,999,array("anoReferencia"=>"DESC"),array("atleta"=>"=".$idAtleta));
@@ -17,38 +16,17 @@ class Anuidade extends Persistencia{
 	    $ano = $_REQUEST['ano'];
         $vencimento = $this->convdata($_REQUEST['dataVencimento'], "ntm");
         $objAno = new Ano();
-        if(strlen($ano) == 4 && is_numeric($ano) ){
-            
+           if(strlen($ano) == 4 && is_numeric($ano) ){            
             if($objAno->getRow(array("anoReferencia"=>"=".$ano))){
                  $_SESSION['fmj.mensagem'] = 54;
-           return false; 
-            }else{  
-            
+                return false; 
+           }else{
             $objAno->dataVencimento = $vencimento;
             $objAno->anoReferencia = $ano;
             $objAno->save(); 
-            
-            
-            
-           $obAtleta = new Atleta();
-           $rs = $obAtleta->getRows();
-           foreach ($rs as $key => $value) {
-               if(!$this->getRow(array("anoReferencia"=>"=".$ano,"atleta"=>"=".$value->id))){
-               $this->id = null;    
-               $this->anoReferencia = $ano;
-                $this->pagamento = null;
-                $this->situacao = 0;
-                $this->dataVencimento = $vencimento;
-               $this->atleta = new Atleta($value->id);
-               $this->save();
-               if($ano >= Date("Y")){
-                $value->ativo = 0;
-                $value->save();
-               }
-               }
-           }
+            $obAtleta = new Atleta();
+            $obAtleta->desativarTodos();
             }
-           
            $_SESSION['fmj.mensagem'] = 50;
             return true; 
         }else{
@@ -60,8 +38,12 @@ class Anuidade extends Persistencia{
     function atualizarAnuidades($idPagamento,$ano){
          foreach ($_REQUEST['atleta'] as $key => $id) {
              $this->getRow(array("anoReferencia"=>"=".$ano,"atleta"=>"=".$id));
+             $this->anoReferencia = $ano;
              $this->pagamento = new Pagamento($idPagamento);
-             $this->save();
+             $this->atleta = new  Atleta($id);
+             $this->situacao = 0;  
+             $this->save();           
+             
          }
          return true;
     }

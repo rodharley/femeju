@@ -49,8 +49,7 @@ if(isset($_REQUEST['id'])){
     $objAtleta->getById($objAtleta->md5_decrypt($_REQUEST['id']));    
     $TPL->LABEL = "Alterar Atleta";
     $TPL->ACAO = "editar";
-    $TPL->id = $objAtleta->id;
-    $TPL->ID_PESSOA = $objAtleta->pessoa->id;
+    $TPL->id = $objAtleta->id;    
     $TPL->NOME = $objAtleta->pessoa->nome;
     $TPL->NOME_MEIO = $objAtleta->pessoa->nomeMeio;
     $TPL->SOBRE_NOME = $objAtleta->pessoa->sobrenome;
@@ -129,7 +128,7 @@ if(isset($_REQUEST['id'])){
 		
 $TPL->block("BLOCK_HISTORICO");		
 }ELSE{
-    $TPL->block("BLOCK_NOVO_ATLETA2");
+    
     $TPL->block("BLOCK_NOVO_ATLETA");
 }
 

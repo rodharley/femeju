@@ -31,6 +31,8 @@ $TPL->id = 0;
 $TPL->LOGOMARCA = "";
 $selectedUf = 0;
 $selectedCidade = 0;
+$selectedUf_resp = 0;
+$selectedCidade_resp = 0;
 $TPL->checkedAtivo = "checked";
 $TPL->checkedInativo = "";
 $listaUf = $uf->getRows();
@@ -58,6 +60,21 @@ if(isset($_REQUEST['id'])){
                   $TPL->block("BLOCK_CIDADE");
               }     
     }
+    
+    if($objAssociacao->responsavel->pessoa->cidade != null){
+         $selectedUf_resp   = $objAssociacao->responsavel->pessoa->cidade->uf->id;
+        $selectedCidade_resp = $objAssociacao->responsavel->pessoa->cidade->id;
+        $listaCidade = $cidade->getRows(0,9999,array("nome"=>"ASC"),array("uf"=>"=".$objAssociacao->responsavel->pessoa->cidade->uf->id));
+        foreach ($listaCidade as $key => $value) {
+                 $TPL->selectedCidaderesp = "";
+                  $TPL->nome_cidade_resp = $value->nome;
+                  $TPL->id_cidade_resp = $value->id;
+                  if($selectedCidade_resp == $value->id)
+                    $TPL->selectedCidaderesp = "selected";
+                  $TPL->block("BLOCK_CIDADE_RESP");
+              }     
+    }
+    
     $TPL->cep = $objAssociacao->cep;    
     $TPL->telefone1 = $objAssociacao->telefone1;
     $TPL->telefone2 = $objAssociacao->telefone2;
@@ -65,12 +82,15 @@ if(isset($_REQUEST['id'])){
     $TPL->website = $objAssociacao->webSite;
     $TPL->midiaSocial = $objAssociacao->midiaSocial;
 	$TPL->id = $objAssociacao->id;
-    $TPL->id_responsavel = $objAssociacao->responsavel->pessoa->id;
+    $TPL->id_responsavel = $objAssociacao->responsavel->id;    
     $TPL->nome_responsavel = $objAssociacao->responsavel->pessoa->nome;
+    $TPL->nomemeio_responsavel = $objAssociacao->responsavel->pessoa->nomeMeio;
     $TPL->sobrenome_responsavel = $objAssociacao->responsavel->pessoa->sobrenome;
     $TPL->email_responsavel = $objAssociacao->responsavel->pessoa->email;
     $TPL->celular_responsavel = $objAssociacao->responsavel->pessoa->telCelular;
-    
+    $TPL->endereco_resp = $objAssociacao->responsavel->pessoa->endereco;
+    $TPL->bairro_resp = $objAssociacao->responsavel->pessoa->bairro;
+    $TPL->cep_resp = $objAssociacao->responsavel->pessoa->cep;
 	$TPL->LOGOMARCA = "img/associacoes/".$objAssociacao->logomarca;
 	$TPL->LABEL = "Alterar Associação ".$objAssociacao->nome;
 	$TPL->ACAO = "editar";
@@ -88,11 +108,15 @@ if(isset($_REQUEST['id'])){
 
  foreach ($listaUf as $key => $value) {
      $TPL->selectedUf = "";
+     $TPL->selectedUfresp = "";
       $TPL->uf = $value->uf;
       $TPL->id_uf = $value->id;
       if($selectedUf == $value->id)
         $TPL->selectedUf = "selected";
+      if($selectedUf_resp == $value->id)
+        $TPL->selectedUfresp = "selected";
       $TPL->block("BLOCK_UF");
+      $TPL->block("BLOCK_UF_RESP");
   }     
 $TPL->show();
 ?>

@@ -23,7 +23,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 $TPL->addFile("CONTEUDO", "templates/relatorio/financeiro.html");
 $oEmpresa = new Empresa();
-$TPL->LOADING = $oEmpresa->carregando;
+$TPL->LOADING = CARREGANDO;
 $list = $oEmpresa->listarPorPerfil();
 foreach ($list as $key => $empresa) {
 	$TPL->VALUE_EMPRESA = $empresa->id;

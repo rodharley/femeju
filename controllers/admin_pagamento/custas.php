@@ -25,7 +25,7 @@ $TPL->addFile("CONTEUDO", "templates/admin/pagamento/custas.html");
 
   
  $TPL->checked_ativo = "checked='checked'";
- $TPL->LOADING = $custa->carregando;
+ $TPL->LOADING = CARREGANDO;
  $TPL->block("BLOCK_PESQUISAR");
 
 $TPL->ID_GRUPO = GrupoCusta::ANUIDADE;

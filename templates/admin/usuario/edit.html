@@ -9,35 +9,25 @@
 			<input type="hidden" name="acao" value="{ACAO}"/>
 			
 			<div class="row">
-				<div class="col-md-6 col-xs-12">
+				<div class="col-md-4 col-xs-12">
 					<div class="form-group">
 						<label for="nome"><i class='fa'></i><b>Nome</b></label>
 						<input type="text" id="nome" name="nome" placeholder="Nome" value="{nome}" class="required form-control"/>
 					</div>
 				</div>
-				<!-- BEGIN BLOCK_EDIT -->
-					<div class="col-md-6 col-xs-12">
-
-					<div class="form-group">
-						<label for="ativo"><i class='fa'></i><b>Ativo</b></label>
-
-					</div>
-					<div class="radio-inline">
-						<label>
-							<input type="radio" name="ativo" id="ativon" value="0" {checknao}/>
-							Não </label>
-					</div>
-					<div class="radio-inline">
-						<label>
-							<input type="radio" name="ativo" id="ativos" value="1" {checksim}/>
-							Sim </label>
-					</div>
-
-				</div>
-				<!-- END BLOCK_EDIT -->
-				</div>
-
-				
+				<div class="col-md-4 col-xs-12">
+                    <div class="form-group">
+                        <label for="nomeMeio"><i class='fa'></i><b>Nome do Meio</b></label>
+                        <input type="text" id="nomeMeio" name="nomeMeio" placeholder="Nome do Meio" value="{nomeMeio}" class="required form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="form-group">
+                        <label for="nome"><i class='fa'></i><b>Sobre Nome</b></label>
+                        <input type="text" id="sobreNome" name="sobreNome" placeholder="Sobre Nome" value="{sobreNome}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>				
 				<div class="row">
 				<div class="col-md-6 col-xs-12">
 					<div class="form-group">
@@ -83,12 +73,34 @@
 
 			</div>
 			<div class="row">				
-				<div class="col-md-12 col-xs-12">
+				<div class="col-md-6 col-xs-12">
 					<div class="form-group">
 						<label for="foto"><i class='fa'></i><b>Foto</b></label>
 						<input type="file"  name="foto" id="foto"/>
 					</div>
 				</div>
+				<!-- BEGIN BLOCK_EDIT -->
+                
+                    <div class="col-md-6 col-xs-12">
+
+                    <div class="form-group">
+                        <label for="ativo"><i class='fa'></i><b>Ativo</b></label>
+
+                    </div>
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" name="ativo" id="ativon" value="0" {checknao}/>
+                            Não </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" name="ativo" id="ativos" value="1" {checksim}/>
+                            Sim </label>
+                    </div>
+
+                </div>
+                
+                <!-- END BLOCK_EDIT -->
 			</div>
 			<fieldset><legend>Endereço</legend>
                 <div class="row">
@@ -219,8 +231,13 @@
 				email: {
                 required: true,
                 remote: {
-							url: "ajax/usuario_verificaLogin.php?idUser="+$("#id").val()+"&login=1"+$("#email").val(),
-							type: "get",
+							url: "ajax/usuario_verificaLogin.php",
+							type: "post",
+							data: {
+                              idUser: function() {
+                                return $("#id").val();
+                              }
+                            }
 							}
 				}
 				},

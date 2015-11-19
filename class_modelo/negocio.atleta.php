@@ -15,17 +15,17 @@ class Atleta extends Persistencia {
    var $graduacoes;
    var $anuidades;
    public function listaPorAssociacaoAtivos($associacao){
-       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.idPessoa where a.bitAtivo = 1 and a.idAssociacao = $associacao order by p.nome";
+       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 1 and a.idAssociacao = $associacao order by p.nome";
        return $this->getSQL($sql);
 }
 
 public function listaPorAssociacao($associacao){
-       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.idPessoa where a.idAssociacao = $associacao order by p.nome";
+       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.idAssociacao = $associacao order by p.nome";
        return $this->getSQL($sql);
 }
 
-public function listaPorAnuidadeAssociacao($associacao,$ano){
-       $sql = "select a.* from ".$this::TABELA." a inner join ".Anuidade::TABELA." n on n.idAtleta = a.id inner join ".Pessoa::TABELA." p on p.id = a.idPessoa where a.idAssociacao = $associacao and n.anoReferencia = $ano and n.idPagamento is NULL order by p.nome";
+public function listaPorAssociacaoInativo($associacao){
+       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 0 and a.idAssociacao = $associacao order by p.nome";
        return $this->getSQL($sql);
 }
 
@@ -35,7 +35,7 @@ public function listaPorArrayIds($arrayId){
     foreach ($arrayId as $key => $value) {
         $ids .= ",".$value;
     }
-       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.idPessoa where a.id in($ids) order by p.nome";
+       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.id in($ids) order by p.nome";
        return $this->getSQL($sql);
 }
 
@@ -71,7 +71,7 @@ public function listaAtivos(){
    
    function recuperaPorIdPessoa($idPessoa) {
         $id = isset($idPessoa) ? $idPessoa == "" ? "0" : $idPessoa  : "0";
-        $sql = "select u.* from ".$this::TABELA." u where u.idPessoa = $id";
+        $sql = "select u.* from ".$this::TABELA." u where u.id = $id";
         $rs = $this->getSQL($sql);
         if(count($rs) > 0){
            $this->getById($rs[0]->id);      
@@ -81,7 +81,7 @@ public function listaAtivos(){
     }
     
 	function pesquisarTotal($nome = "",$associacao = "",$ativo = "",$naoverf = "") {
-        $sql = "select count(a.id) as total from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao where 1 = 1 ";
+        $sql = "select count(a.id) as total from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao where 1 = 1 ";
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
 		if($naoverf != "")
@@ -96,7 +96,7 @@ public function listaAtivos(){
 
     function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$ativo = "",$naoverf = "") {
 
-        $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.idPessoa INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
+        $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
         if($naoverf != "")
             $sql .= " and p.bitVerificado = $naoverf";
         if($ativo != "")
@@ -120,19 +120,25 @@ public function listaAtivos(){
 		$_SESSION['fmj.mensagem'] = 46;
 	}
 	
+	function desativarTodos(){
+	    $sql = "update ".$this::TABELA." set bitAtivo = 0";
+	    $this->DAO_ExecutarDelete($sql);
+	    return true;
+	}
+	
     function Incluir() {
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
         $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
         $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
         $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
-        $graduacao = $_REQUEST['associacao'] != "" ? new Graduacao($_REQUEST['associacao']) : null;
+        $graduacao = $_REQUEST['graduacao'] != "" ? new Graduacao($_REQUEST['graduacao']) : null;
         $pessoa = new Pessoa();
         
-        if($this->recuperaPorIdPessoa($_REQUEST['idPessoa'])){
+        if($this->recuperaPorIdPessoa($_REQUEST['id'])){
            $_SESSION['fmj.mensagem'] = 44;
            return false; 
         }else{               
-            $pessoa->getById($_REQUEST['idPessoa']);
+            $pessoa->getById($_REQUEST['id']);
             $pessoa->nome =  $_REQUEST['nome'];
             $pessoa->sobrenome = $_REQUEST['sobrenome'];
             $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
@@ -171,6 +177,7 @@ public function listaAtivos(){
             }
             $idPessoa = $pessoa->save();            
             //salva o atleta
+            $this->id = $idPessoa;
             $this->numeroFemeju = $this->getProximoNumero();
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
             $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
@@ -258,14 +265,14 @@ function IncluirPortal() {
         $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
         $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
         $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
-        $graduacao = $_REQUEST['associacao'] != "" ? new Graduacao($_REQUEST['associacao']) : null;
+        $graduacao = $_REQUEST['graduacao'] != "" ? new Graduacao($_REQUEST['graduacao']) : null;
         $pessoa = new Pessoa();
         
-        if($this->recuperaPorIdPessoa($_REQUEST['idPessoa'])){
+        if($this->recuperaPorIdPessoa($_REQUEST['id'])){
            $_SESSION['fmj.mensagem'] = 44;
            return false; 
         }else{               
-            $pessoa->getById($_REQUEST['idPessoa']);
+            $pessoa->getById($_REQUEST['id']);
             $pessoa->nome =  $_REQUEST['nome'];
             $pessoa->sobrenome = $_REQUEST['sobrenome'];
             $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
@@ -304,6 +311,7 @@ function IncluirPortal() {
             }
             $idPessoa = $pessoa->save();            
             //salva o atleta
+            $this->id = $idPessoa;
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
             $this->dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'], "ntm");
             $this->registroConfederacao = $_REQUEST['registroConf'];

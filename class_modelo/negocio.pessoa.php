@@ -35,5 +35,10 @@ class Pessoa extends Persistencia {
         function getNomeCompleto(){
             return $this->nome.(strlen($this->nomeMeio) > 0 ? " ".$this->nomeMeio:"").(strlen($this->sobrenome) > 0 ? " ".$this->sobrenome:"");
         }
+        
+        function getPessoasNaoAtleta($nome){
+            $sql = "select p.* from ".$this::TABELA." p left outer join ".Atleta::TABELA." a on a.id = p.id where nome like '%$nome%' and a.id is null order by nome asc";
+            return $this->getSQL($sql);
+        }
 }
 ?>

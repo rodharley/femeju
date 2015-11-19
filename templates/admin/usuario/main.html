@@ -1,0 +1,108 @@
+<script>
+function usuario_pesquisar(){
+            $.ajax({
+                url : "ajax/admin_usuario_paginador.php",
+                type : "POST",
+                data : $("#frmPesquisa").serialize(),
+
+                beforeSend: function( ) {
+                    $('#boxUsuario').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#boxUsuario").html(msg);
+            });
+
+        }
+  function responsavel_pesquisar(){
+      
+            $.ajax({
+                url : "ajax/admin_responsavel_paginador.php",
+                type : "POST",
+                data : $("#frmPesquisar").serialize(),
+
+                beforeSend: function( ) {
+                    $('#boxResponsavel').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#boxResponsavel").html(msg);
+            });
+
+        }
+	$(document).ready(function() {
+		usuario_pesquisar();
+responsavel_pesquisar()
+		
+
+	});
+;
+</script>
+
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title">Usuários:</h3>
+		<div class="box-tools">
+			<form name="frmPesquisa" id="frmPesquisa" action="#" method="post" class="pull-right form form-inline">
+			    <label for="pefil">Perfil:</label>
+			    <select name="perfil" class="form-control input-sm">
+                    <option value="">Todos</option>
+                    <!-- BEGIN ITEM_PERFIL -->
+                    <option value="{ID_PERFIL}" {SELECTED_PERFIL}>{DESC_PERFIL}</option>
+                    <!-- END ITEM_PERFIL -->
+                </select>
+			<div class="input-group">				
+				<input type="text" name="pesquisa" class="form-control input-sm " style="width: 150px;" placeholder="Pesquisar" value=""/>
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-sm btn-default paginar" value="1">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+			<input type="hidden" name="pagina" id="pagina" value=""/>
+			</form>
+		</div>
+
+	</div>
+	<div class="box-body" id="boxUsuario">
+		
+	</div>
+</div>
+<div class="row">	
+	<div class="col-sm-12 text-right">		
+	    <p>
+		<button class="btn btn-default btVoltar" type="button"><i class="fa fa-backward"> </i> Voltar</button>
+		<a class="btn btn-primary" href="admin_usuario-editar"><i class="fa fa-plus"> </i> Adicionar Usuário</a>		
+		
+	   </p>
+	</div>
+</div>
+
+<div class="row">   
+    <div class="col-sm-12">  
+
+
+
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">Responsáveis:</h3>
+        <div class="box-tools">
+            <form name="frmPesquisar" id="frmPesquisar" action="#" method="post" class="pull-right form form-inline">
+            <input type="hidden" name="perfil" id="perfil" value="{ID_PERFIL_RESPONSAVEL}"/>    
+            <div class="input-group">               
+                <input type="text" name="pesquisa" class="form-control input-sm " style="width: 150px;" placeholder="Pesquisa" value=""/>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-sm btn-default paginar_resp" value="1">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" name="pagina" id="pagina_resp" value=""/>
+            </form>
+        </div>
+
+    </div>
+    <div class="box-body" id='boxResponsavel'>
+        
+    </div>
+</div>
+</div>
+</div>

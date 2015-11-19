@@ -41,6 +41,8 @@ if(isset($_REQUEST['id'])){
 	$usu->getById($usu->md5_decrypt($_REQUEST['id']));    
 	$TPL->cpf = $usu->pessoa->cpf;
 	$TPL->nome = $usu->pessoa->nome;
+    $TPL->nomeMeio = $usu->pessoa->nomeMeio;
+    $TPL->sobreNome = $usu->pessoa->sobrenome;
 	$TPL->email = $usu->pessoa->email;
 	$TPL->telefone = $usu->pessoa->telResidencial;
 	$TPL->celular = $usu->pessoa->telCelular;

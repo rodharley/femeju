@@ -23,6 +23,6 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 
 $TPL->addFile("CONTEUDO", "templates/admin/atleta/pesquisa.html");
-$TPL->LOADING = $obj->carregando;
+$TPL->LOADING = CARREGANDO;
 $TPL->show();
 ?>

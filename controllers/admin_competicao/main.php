@@ -25,7 +25,7 @@ $TPL->addFile("CONTEUDO", "templates/admin/competicao/lista.html");
 
   
  $TPL->checked_ativo = "checked='checked'";
- $TPL->LOADING = $custa->carregando;
+ $TPL->LOADING = CARREGANDO;
  $TPL->block("BLOCK_PESQUISAR");
 
 

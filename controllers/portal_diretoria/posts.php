@@ -8,7 +8,7 @@ $objDir = new Diretoria();
 $idDiretoria = $obj->md5_decrypt($_REQUEST['id']);
 $objDir->getById($idDiretoria);
 $ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : Date("Y");
-$TPL->LOADING = $obj->carregando;
+$TPL->LOADING = CARREGANDO;
 $TPL->PAGINA = 1; 
 $TPL->CATEGORIA = $idDiretoria;          
 $TPL->ANO = $ano;

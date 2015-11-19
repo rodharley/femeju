@@ -6,7 +6,7 @@ include("includes/include.mensagem.php");
 $TPL->addFile("CONTEUDO", "templates/portal/post/main.html");
 $obj = new Post();
 $ano = isset($_REQUEST['ano']) ? $_REQUEST['ano'] : Date("Y");
-$TPL->LOADING = $obj->carregando;
+$TPL->LOADING = CARREGANDO;
 $TPL->PAGINA = 1; 
 $TPL->CATEGORIA = $objCat->id;          
 $TPL->ANO = $ano;

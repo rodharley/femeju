@@ -20,7 +20,7 @@ $TPL->ID_ASSOCIACAO = $objAssociacao->id;
 $TPL->ANO = $_REQUEST['ano'];
 
 if(isset($_REQUEST['todos']))
-$rsAtletas = $objA->listaPorAnuidadeAssociacao($objAssociacao->id,$_REQUEST['ano']);
+$rsAtletas = $objA->listaPorAssociacaoInativo($objAssociacao->id);
 else
 $rsAtletas = $objA->listaPorArrayIds($_REQUEST['atleta']);
 foreach ($rsAtletas as $key => $value) {

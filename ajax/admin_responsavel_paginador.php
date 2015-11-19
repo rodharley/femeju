@@ -10,26 +10,12 @@ $perfil = new Perfil();
 
 
 $TPL = new Template("../templates/admin/usuario/list.html");
-$TPL->LOADING = $usu->carregando;
 $pesquisa = isset($_REQUEST['pesquisa']) ? $_REQUEST['pesquisa'] : "";
-$TPL->PESQUISA = $pesquisa;
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
-$idperfil = isset($_REQUEST['perfil']) ? $_REQUEST['perfil'] : "0";
-$totalPesquisa = $usu->recuperaTotal($pesquisa,$idperfil);
+$idperfil = isset($_REQUEST['perfil']) ? $_REQUEST['perfil'] : "";
+$totalPesquisa = $usu->recuperaTotalPerfil($idperfil,$pesquisa);
 $configPaginacao = $usu->paginar($totalPesquisa,$pagina);
-$alist = $usu->listarUsuarios($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$pesquisa,$idperfil);
-
-
-$rsPerfil = $perfil->getRows();
-foreach ($rsPerfil as $key => $value) {
-    $TPL->SELECTED_PERFIL = "";
-    $TPL->ID_PERFIL = $value->id;
-    $TPL->DESC_PERFIL = $value->descricao;
-    if($idperfil == $value->id)
-        $TPL->SELECTED_PERFIL = "SELECTED";
-    $TPL->block("ITEM_PERFIL");
-}
-
+$alist = $usu->listarUsuariosPerfil($idperfil,$configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$pesquisa);
 if (count($alist) > 0) {
 foreach($alist as $key => $usuario){
 	$TPL->nome = $usuario->pessoa->nome;
@@ -41,7 +27,7 @@ foreach($alist as $key => $usuario){
 	
 }
 }
-
+$TPL->paginar_class = 'paginar_resp';
 $TPL->TOTAL_PAGINAS = $configPaginacao['totalPaginas'];
 $TPL->PAGINA_ANTERIOR = $configPaginacao['paginaAnterior'];
 $TPL->PROXIMA_PAGINA = $configPaginacao['proximaPagina'];

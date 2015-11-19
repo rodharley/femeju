@@ -31,8 +31,7 @@ set
 	<class name="Anuidade" tbname="fmj_anuidade" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
-		<atrib tbname="situacao" type="int">situacao</atrib>
-		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>		
+		<atrib tbname="situacao" type="int">situacao</atrib>				
 		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
 		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>		
 	</class>
@@ -74,7 +73,7 @@ set
 		<atrib tbname="bitAtleta" type="int">bitAtleta</atrib>
 		<atrib tbname="bitArbitro" type="int">bitArbitro</atrib>
 		<atrib tbname="bitTecnico" type="int">bitTecnico</atrib>
-		<atrib tbname="idPessoa" type="fk" clrelation="Pessoa">pessoa</atrib>
+		<atrib tbname="id" type="fk" clrelation="Pessoa">pessoa</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">associacao</atrib>	
 		<atrib tbname="" type="set" clrelation="HistoricoGraduacao" clorder="data" clfk="atleta">graduacoes</atrib>
@@ -302,7 +301,7 @@ set
 		<atrib tbname="senha" type="txt">senha</atrib>		
 		<atrib tbname="ativo" type="int">ativo</atrib>
 		<atrib tbname="idPerfil" type="fk" clrelation="Perfil">perfil</atrib>
-		<atrib tbname="idPessoa" type="fk" clrelation="Pessoa">pessoa</atrib>
+		<atrib tbname="id" type="fk" clrelation="Pessoa">pessoa</atrib>
 				
 	</class>
 	<class name="Uf" tbname="fmj_uf" tbid="id" lazy="true">
