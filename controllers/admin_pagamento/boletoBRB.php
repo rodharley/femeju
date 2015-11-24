@@ -9,7 +9,7 @@ $pagamento->getById($pagamento->md5_decrypt($_REQUEST['id']));
 $descricaoPagamento = "";
 foreach ($pagamento->itens as $key => $item) {
     $custa->getById($item->custa);
-	$descricaoPagamento .= $item->descricaoItem."-".$custa->descricao."<br/>";
+	$descricaoPagamento .= $item->descricaoItem.",";
 }
 require 'plugins/openboleto/autoloader.php';
 
