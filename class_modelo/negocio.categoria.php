@@ -4,9 +4,10 @@ class CategoriaPeso extends Persistencia {
     var $maximo;
     var $minimo;
     var $ativo; 
+    var $classe;
 
-function listaAtivas(){
-	return $this->getRows(0,999,array("descricao"=>"ASC"),array("ativo"=>"=1"));
+function listaAtivasPorClasse($idClasse){
+	return $this->getRows(0,999,array("descricao"=>"ASC"),array("ativo"=>"=1","classe"=>"=".$idClasse));
 }
 	function Incluir() {     
         $this -> descricao = $_REQUEST['descricao'];
@@ -14,6 +15,7 @@ function listaAtivas(){
         $this -> maximo = $peso[1];
         $this -> minimo = $peso[0];
         $this->ativo = $_REQUEST['ativo'];
+        $this->classe = new Classe($_REQUEST['idClasse']);
         $this->save();      
         
     }

@@ -22,20 +22,25 @@ if(isset($_REQUEST['todos']))
 $rsAtletas = $objA->listaPorAssociacaoAtivos($objAssociacao->id);
 else
 $rsAtletas = $objA->listaPorArrayIds($_REQUEST['atleta']);
+$rsClasses = $objc->listaClasses();
+$TPL->DOBRA1 = $objc->dobra1;
+$TPL->DOBRA2 = $objc->dobra2;
+$TPL->DOBRA3 = $objc->dobra3;
+$TPL->VALOR_CUSTA = $objc->custa->valor;
 
+//classes
+       foreach ($rsClasses as $key2 => $grupo) {
+            $TPL->ID_CLA = $grupo->classe->id;
+            $TPL->LABEL_CLA = $grupo->classe->descricao;
+            $TPL->block("BLOCK_CLA");
+        }
 
 foreach ($rsAtletas as $key => $value) {
     if($value->graduacao != null){
     $TPL->ATLETA = $value->pessoa->getNomeCompleto();
     $TPL->ID_ATLETA = $value->id;
-    $TPL->GRAD_ATLETA = $value->graduacao->id;
-    $rsCategorias = $objGrupoCompeticao->listar($objc->id,$value->graduacao->id);
-    //categorias
-       foreach ($rsCategorias as $key2 => $grupo) {
-            $TPL->ID_CAT = $grupo->categoria->id;
-            $TPL->LABEL_CAT = $grupo->categoria->descricao;
-            $TPL->block("BLOCK_CAT");
-        }
+    $TPL->GRAD_ATLETA = $value->graduacao->id;    
+    
     
     $TPL->block("BLOCK_ATLETAS");
     

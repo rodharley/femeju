@@ -85,7 +85,8 @@ set
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="maximo" type="int">maximo</atrib>
 		<atrib tbname="minimo" type="int">minimo</atrib>
-		<atrib tbname="bitAtivo" type="int">ativo</atrib>									
+		<atrib tbname="bitAtivo" type="int">ativo</atrib>
+		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>									
 	</class>	
 	
 	<class name="Cidade" tbname="fmj_cidade" tbid="id" lazy="true">
@@ -107,7 +108,10 @@ set
 		<atrib tbname="dataEvento" type="txt">dataEvento</atrib>
 		<atrib tbname="tipo" type="int">tipo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
-		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>	
+		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>
+		<atrib tbname="dobra2" type="int">dobra2</atrib>
+		<atrib tbname="dobra1" type="int">dobra1</atrib>
+		<atrib tbname="dobra3" type="int">dobra3</atrib>	
 		<atrib tbname="idCusta" type="fk" clrelation="Custa">custa</atrib>			
 					
 	</class>	
@@ -152,12 +156,8 @@ set
 	</class>	
 	<class name="GrupoCompeticao" tbname="fmj_grupo_competicao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="idCompeticao" type="fk" clrelation="Competicao">competicao</atrib>
-		<atrib tbname="idCategoria" type="fk" clrelation="CategoriaPeso">categoria</atrib>
-		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
-		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>
-		<atrib tbname="valor" type="int">valor</atrib>
-		<atrib tbname="dobra" type="int">dobra</atrib>										
+		<atrib tbname="idCompeticao" type="fk" clrelation="Competicao">competicao</atrib>		
+		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>												
 	</class>
 	<class name="HistoricoGraduacao" tbname="fmj_historico_graduacao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -166,20 +166,26 @@ set
 		<atrib tbname="dataGraduacao" type="txt">data</atrib>				
 	</class>
 	<class name="Inscricao" tbname="fmj_inscricao_competicao" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>
-		<atrib tbname="idCompeticao" type="fk" clrelation="Competicao">competicao</atrib>
-		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
-		<atrib tbname="idGrupoCompeticao" type="fk" clrelation="GrupoCompeticao">grupoCompeticao</atrib>
-		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>	
+		<atrib tbname="id" type="id">id</atrib>		
 		<atrib tbname="nomeAtleta" type="txt">nomeAtleta</atrib>
-		<atrib tbname="dobra" type="int">dobra</atrib>
-		<atrib tbname="valor" type="int">valor</atrib>
-		<atrib tbname="valorDobra" type="int">valorDobra</atrib>
+		<atrib tbname="dobra1" type="int">dobra1</atrib>
+		<atrib tbname="dobra2" type="int">dobra2</atrib>
+		<atrib tbname="dobra3" type="int">dobra3</atrib>
+		<atrib tbname="valorDobra1" type="int">valorDobra1</atrib>
+		<atrib tbname="valorDobra2" type="int">valorDobra2</atrib>
+		<atrib tbname="valorDobra3" type="int">valorDobra3</atrib>
+		<atrib tbname="valor" type="int">valor</atrib>		
 		<atrib tbname="situacao" type="int">situacao</atrib>
 		<atrib tbname="dataInscricao" type="txt">dataInscricao</atrib>
 		<atrib tbname="docAtleta" type="txt">docAtleta</atrib>
 		<atrib tbname="emailAtleta" type="txt">emailAtleta</atrib>
-		<atrib tbname="telefoneAtleta" type="txt">telefoneAtleta</atrib>			
+		<atrib tbname="telefoneAtleta" type="txt">telefoneAtleta</atrib>
+		<atrib tbname="idCompeticao" type="fk" clrelation="Competicao">competicao</atrib>
+		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
+		<atrib tbname="idCategoria" type="fk" clrelation="CategoriaPeso">categoria</atrib>
+		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>
+		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
+		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>				
 	</class>
 	<class name="Log" tbname="fmj_log" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

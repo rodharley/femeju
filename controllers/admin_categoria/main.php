@@ -8,6 +8,12 @@ include("includes/include.montaMenu.php");
 $grad = new CategoriaPeso();
 
 include("includes/include.mensagem.php");
+
+if(!isset($_REQUEST['idClasse'])){
+    $_SESSION['fmj.mensagem'] = 63;
+    header("Location:admin_classe-main");
+    exit();
+}
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
@@ -26,9 +32,10 @@ $TPL->addFile("CONTEUDO", "templates/admin/categoria/list.html");
 
 
 
-$alist = $grad->getRows(0,9999,array("descricao"=>"ASC"));
+$alist = $grad->getRows(0,9999,array("descricao"=>"ASC"),array("classe"=>"=".$grad->md5_decrypt($_REQUEST['idClasse'])));
 $TPL->QUANTIDADE = count($alist);
 foreach($alist as $key => $gradario){
+    $TPL->classe = $gradario->classe->descricao;
 	$TPL->descricao = $gradario->descricao;
 	$TPL->ativo = $gradario->ativo ? "Sim" : "Não";
 	$TPL->colorSituacao = $gradario->ativo ? "success" : "danger";	
@@ -37,6 +44,6 @@ foreach($alist as $key => $gradario){
 	$TPL->ID_HASH = $grad->md5_encrypt($gradario->id);
 	$TPL->block("BLOCK_ITEM_LISTA");
 }
-
+$TPL->ID_CLASSE_HASH = $_REQUEST['idClasse'];
 $TPL->show();
 ?>

@@ -6,15 +6,26 @@ include("includes/include.mensagem.php");
 
 $objc = new Competicao();
 $objGrupoCompeticao = new GrupoCompeticao();
+$objGrad = new Graduacao();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idComp']));
-$rs = $objGrupoCompeticao->listar($objc->id);
+$rs = $objGrad->listaAtivas();
+$rsClasses = $objc->listaClasses();
 foreach ($rs as $key => $value) {
-	$TPL->ID_GRA = $value->graduacao->id;
-    $TPL->DESC_GRA = $value->graduacao->descricao;
+	$TPL->ID_GRA = $value->id;
+    $TPL->DESC_GRA = $value->descricao;
     $TPL->block("BLOCK_GRA");
 }
+foreach ($rsClasses as $key => $value) {
+    $TPL->ID_CLA = $value->classe->id;
+    $TPL->DESC_CLA = $value->classe->descricao;
+    $TPL->block("BLOCK_CLA");
+}
+$TPL->VALOR = $objc->custa->valor;
+$TPL->DOBRA_1 = $objc->dobra1;
+$TPL->DOBRA_2 = $objc->dobra2;
+$TPL->DOBRA_3 = $objc->dobra3;
 
 $TPL->LABEL = "preencha os dados dos atletas que deseja realizar a inscrição";
 $TPL->ID_COMPETICAO = $objc->id;

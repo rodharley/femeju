@@ -23,11 +23,14 @@ $TPL->addFile("CONTEUDO", "templates/admin/competicao/configuracao.html");
 $obj = new Competicao();
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $obCusta = new Custa();
-$TPL->LOADING = CARREGANDO;
+
 $TPL->TITULO = $obj->titulo;
 $TPL->DESCRICAO = $obj->descricao;
 $TPL->DATA = $obj->convdata($obj->dataEvento,"mtn");
 $TPL->ID = $obj->id;
+$TPL->dobra1 = $obj->dobra1;
+$TPL->dobra2 = $obj->dobra2;
+$TPL->dobra3 = $obj->dobra3;
 $TPL->checkedInscricaoOn = $obj->inscricaoAberta == 1 ? "checked" : "";
 $TPL->checkedInscricaoOff = $obj->inscricaoAberta == 0 ? "checked" : "";
 $TPL->checkedAtivo = $obj->ativo == 1 ? "checked" : "";
@@ -49,34 +52,27 @@ $rsCustas = $obCusta->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".Gru
 foreach ($rsCustas as $key => $value) {
     $TPL->ID_CUSTA = $value->id;
     if($value->id == $obj->custa->id){
-        $TPL->SELECTED_CUSTA = 'selected="selected"';
-        $TPL->VALOR_CUSTA = $obj->custa->valor;
+        $TPL->SELECTED_CUSTA = 'selected="selected"';        
     }else
        $TPL->SELECTED_CUSTA = '';
     $TPL->DESC_CUSTA = $value->titulo;
     $TPL->block("BLOCK_CUSTA");
 }
 
-$obCat = new CategoriaPeso();
+$rs = $obj->listaClasses();
+
 $obCla = new Classe();
-$obGra = new Graduacao();
-$rsCat = $obCat->getRows(0,999,array(),array("ativo"=>"=1"));
-foreach ($rsCat as $key => $value) {
-    $TPL->ID_CAT = $value->id;
-    $TPL->DESC_CAT = $value->descricao;
-    $TPL->block("BLOCK_CAT");
-}
 $rsCat = $obCla->getRows(0,999,array(),array("ativo"=>"=1"));
 foreach ($rsCat as $key => $value) {
     $TPL->ID_CLA = $value->id;
     $TPL->DESC_CLA = $value->descricao;
+    $TPL->CHECK_CLA = '';
+    foreach ($rs as $key2 => $grupo) {
+        if($value->id == $grupo->classe->id)
+            $TPL->CHECK_CLA = 'checked="checked"';
+    }
+    
     $TPL->block("BLOCK_CLA");
-}
-$rsCat = $obGra->getRows(0,999,array(),array("bitAtivo"=>"=1"));
-foreach ($rsCat as $key => $value) {
-    $TPL->ID_GRA = $value->id;
-    $TPL->DESC_GRA = $value->descricao;
-	$TPL->block("BLOCK_GRA");
 }
 
 

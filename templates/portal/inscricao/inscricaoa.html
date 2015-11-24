@@ -144,40 +144,59 @@
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
+                                <label for="classe"><i class='fa'> </i><b>Classe</b></label>
+                                <select id="classe" name="classe" class="form-control required">
+                                    <option value="">Selecione</option> 
+                                    <!-- BEGIN BLOCK_CLA -->
+                                    <option value="{ID_CLA}">{DESC_CLA}</option>
+                                    <!-- END BLOCK_CLA -->                                   
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
                                 <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
                                 <select id="categoria" name="categoria" class="form-control required">
                                     <option value="">Selecione</option>                                    
                                 </select>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="row">
-                        <div class="col-md-10 col-xs-10">
+                        <div class="col-md-4 col-xs-4">
                             <div class="form-group">
-                                <label for="classe"><i class='fa'> </i><b>Classe</b></label>
-                                <select id="classe" name="classe" class="form-control required">
-                                    <option value="">Selecione</option>                                    
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2">
-                            <div class="form-group">
-                                <label for="dobra"><i class='fa'> </i><b>Dobra</b></label>
-                                    <input type="checkbox" class="form-control" name="dobra" id="dobra" value="1" valorDobra="0" valor="0"/>
+                                <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>
+                                    <input type="checkbox" class=" dobra" name="dobra1" id="dobra1" value="1"  valor="{DOBRA_1}"/>
                                 </div>
                         </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
+                                    <input type="checkbox" class=" dobra" name="dobra2" id="dobra2" value="1"  valor="{DOBRA_2}"/>
+                                </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>
+                                    <input type="checkbox" class=" dobra" name="dobra3" id="dobra3" value="1" valor="{DOBRA_3}"/>
+                                </div>
+                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xs-6">
                             <div class="form-group">
-                                <label for="dobra"><i class='fa'> </i><b>Valor</b></label>
+                                <label for="valor"><i class='fa'> </i><b>Valor</b></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         R$
                                     </div>
-                                    <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="0"/>
-                                    <input type="hidden" id="valorReal" name="valorReal" value="0"/>
-                                    <input type="hidden" id="grupo" name="grupo" value="0"/>
+                                    <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="{VALOR}"/>
+                                    <input type="hidden" id="valorReal" name="valorReal" value="{VALOR}"/>
+                                    <input type="hidden" id="valorComp" name="valorComp" value="{VALOR}"/>                                    
                                 </div>
                                     
                                 </div>
@@ -204,41 +223,49 @@
 
     }
     
-    var atletas = [];
-     var json = {};
+    var atletas = [];     
     var selected_index = -1; 
     function LimpaCampos(){
         $("#nome").val("");
         $("#email").val("");
         $("#documento").val("");
-        $("#telefone").val("");
-        $("#grupo").val("0");
-        $("#valor").val("0");
-        $("#valorReal").val("0");
-        $("#dobra").prop("checked",false);
-        $("#dobra").attr("valorDobra",0);
-        $("#dobra").attr("valor",0);
+        $("#telefone").val("");        
+        $("#valor").val($("#valorComp").val());
+        $("#valorReal").val($("#valorComp").val());        
+        $("#dobra1").prop("checked",false);
+        $("#dobra2").prop("checked",false);
+        $("#dobra3").prop("checked",false);
         $("#graduacao").val("");
-        $("#categoria").html("<option value=''>Selecione</option>");
-        $("#classe").html("<option value=''>Selecione</option>");
-        json = {};
+        $("#classe").val("");
+        $("#categoria").html("<option value=''>Selecione</option>");        
+        
     }
     
     function AddAtleta(){
-        var isdobra = "Não";
-        if($("#dobra").prop("checked"))
-            isdobra = "Sim";
+        var isdobra1 = "Não";
+        var isdobra2 = "Não";
+        var isdobra3 = "Não";
+        if($("#dobra1").prop("checked"))
+            isdobra1 = "Sim";
+       if($("#dobra2").prop("checked"))
+            isdobra2 = "Sim";
+       if($("#dobra3").prop("checked"))
+            isdobra3 = "Sim";
         var atleta = JSON.stringify({
             nome    : $("#nome").val(),
             email  : $("#email").val(),
             documento : $("#documento").val(),
             telefone : $("#telefone").val(),
-            grupo : $("#grupo").val(),
+            classe : $("#classe").val(),
+            categoria : $("#categoria").val(),
+            graduacao : $("#graduacao").val(),
             valor : $("#valorReal").val(),
-            dobra : isdobra,
-            graduacao: json.graduacao,
-            categoria: json.categoria,
-            classe: json.classe
+            dobra1 : isdobra1,
+            dobra2 : isdobra2,
+            dobra3 : isdobra3,
+            nomeGraduacao: $("#graduacao").find('option:selected').text(),
+            nomeCategoria: $("#categoria").find('option:selected').text(),
+            nomeClasse: $("#classe").find('option:selected').text(),
         });
         atletas.push(atleta);
     } 
@@ -255,7 +282,9 @@
             "   <th>Nome</th>"+
             "   <th>Categoria</th>"+
             "   <th>Valor</th>"+
-            "   <th>Dobra</th>"+
+            "   <th>Dobra 1</th>"+
+            "   <th>Dobra 2</th>"+
+            "   <th>Dobra 3</th>"+
             "   </tr>"+
             "</thead>"+
             "<tbody>"+
@@ -266,9 +295,11 @@
             $("#tblList tbody").append("<tr>"+
                                          "  <td><button type='button' alt='Delete"+i+"' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + 
                                          "  <td>"+atl.nome+"</td>" + 
-                                         "  <td>"+atl.graduacao+"-"+atl.categoria+"-"+atl.classe+"</td>" + 
+                                         "  <td>"+atl.nomeGraduacao+"-"+atl.nomeCategoria+"-"+atl.nomeClasse+"</td>" + 
                                          "  <td>R$ "+parseFloat(atl.valor).format(2, 3, '.', ',')+"</td>" + 
-                                         "  <td>"+atl.dobra+"</td>" + 
+                                         "  <td>"+atl.dobra1+"</td>" +
+                                         "  <td>"+atl.dobra2+"</td>" +
+                                         "  <td>"+atl.dobra3+"</td>" + 
                                          "</tr>");
                 }
       } 
@@ -283,13 +314,66 @@
    
     $(document).ready(function() {
 
-                        
+             $("#telefone").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+        
+       $("#valor").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        }); 
+         $(".dobra").click(function() {
+            var valor = parseFloat($("#valorComp").val());
+            
+            $("input:checkbox.dobra").each(function(){
+               if($(this).prop("checked")){
+                   valor = valor+parseFloat($(this).attr("valor"));
+               }
+                
+            });
+            $("#valor").val(valor);
+            $("#valorReal").val(valor);
+        });
+          
+        
+
+        $("#classe").change(function() {
+            
+            if ($(this).val() != "") {
+                $.ajax({
+                    url : 'ajax/option_categoria_por_classe.php',
+                    data : {                        
+                        classe : $(this).val()
+                    }
+                }).done(function(retorno) {
+                   $("#categoria").html(retorno);
+                    
+                });
+            }else{
+                         
+            }
+             
+        });
+        
+        $("#btAdicionar").click(function(){
+              if($("#frmAtleta").valid()){
+                $("#addatleta").modal('hide');
+                AddAtleta();            
+                List();    
+                LimpaCampos();
+                somatotal();
+            }
+            }); 
+                                            
+                            
           $("#btAvancar").click(function(){
              if(atletas.length > 0){
                  var strjson = "[";
                 for(var i in atletas){
-                    var atl = JSON.parse(atletas[i]);
-                    alert(JSON.stringify(atl));
+                    var atl = JSON.parse(atletas[i]);                    
                     strjson = strjson+JSON.stringify(atl)+',';
                  }
                   strjson = strjson+']';
@@ -301,112 +385,15 @@
               
           });  
                
-          $("#btAdicionar").click(function(){
-              if($("#frmAtleta").valid()){
-                $("#addatleta").modal('hide');
-                AddAtleta();            
-                List();    
-                LimpaCampos();
-                somatotal();
-            }
-            }); 
+          
 
       
                     
        
         
-       $("#telefone").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+      
         
-       $("#valor").inputmask({
-            alias : "decimal",
-            groupSeparator : ".",
-            autoGroup : true,
-            digits : 2,
-            digitsOptional : false,
-            prefix : "",
-            placeholder : "0"
-        }); 
-        
-        $("#dobra").click(function() {
-            if ($(this).prop("checked")) {
-                $("#valor").val($(this).attr("valorDobra"));
-                $("#valorReal").val($(this).attr("valorDobra"));
-            } else {
-                $("#valor").val($(this).attr("valor"));
-                $("#valorReal").val($(this).attr("valor"));
-            }
-            
-        });
-        
-         $("#graduacao").change(function() {
-            
-            if ($(this).val() != "") {
-                $.ajax({
-                    url : 'ajax/option_grupo_competicao.php',
-                    data : {
-                        graduacao : $(this).val(),
-                        competicao : $("#idCompeticao").val(),
-                        nivel:1
-                    }
-                }).done(function(retorno) {
-                    $("#categoria").html(retorno);
-                });
-            }
-
-        });
-        
-        $("#categoria").change(function() {
-            
-            if ($(this).val() != "") {
-                $.ajax({
-                    url : 'ajax/option_grupo_competicao.php',
-                    data : {
-                        categoria : $(this).val(),
-                        graduacao : $("#graduacao").val(),
-                        competicao : $("#idCompeticao").val(),
-                        nivel:2
-                    }
-                }).done(function(retorno) {
-                    $("#classe").html(retorno);
-                });
-            }
-
-        });
-        
-        
-
-        $("#classe").change(function() {
-            
-            if ($(this).val() != "") {
-                $.ajax({
-                    url : 'ajax/json_grupo_competicao_valores.php',
-                    data : {
-                        graduacao : $("#graduacao").val(),
-                        categoria : $("#categoria").val(),
-                        competicao : $("#idCompeticao").val(),
-                        classe : $(this).val()
-                    }
-                }).done(function(retorno) {
-                   json = JSON.parse(retorno);
-                    if ($("#dobra").prop("checked")) {
-                        $("#valor").val(json.dobra); 
-                        $("#valorReal").val(json.dobra);                       
-                    } else {                        
-                        $("#valor").val(json.valor);
-                        $("#valorReal").val(json.valor);
-                    }
-                    $("#dobra").attr("valorDobra",json.dobra);
-                    $("#dobra").attr("valor",json.valor);
-                    $("#grupo").val(json.id);
-                    
-                });
-            }else{
-                $("#grupo").val(0);
-                $("#valor").val(0);      
-                $("#valorReal").val(0);             
-            }
-             
-        });
+       
 
         $("#frmAtleta").validate({
             errorClass : "help-inline",
@@ -420,7 +407,27 @@
                 $(element).parents('.form-group').addClass('has-success');
                 $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
                 $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
-            }
+            },
+            rules :{
+                dobra1:{
+                    required :function(element){
+                        return $("#dobra2").prop("checked");
+                        }
+                },
+                dobra2:{
+                    required :function(element){
+                        return $("#dobra3").prop("checked");
+                        }
+                } 
+            },
+            messages: {
+                    dobra1: {
+                    required: "Para selecionar a dobra 2 você deve selecionar a dobra 1."
+                    },
+                    dobra2: {
+                    required: "Para selecionar a dobra 3 você deve selecionar a dobra 2."
+                    }
+                }
         });
        
         

@@ -27,21 +27,7 @@ switch ($_REQUEST['acao']){
 		header("Location:admin_competicao");
         exit();
         break;  
-    case 'incluirCat' :
-        $conn->connection->autocommit(false);
-        $idComp = $comp->IncluirCategoria();
-         $conn->connection->commit();
-        break;	
-    case 'editarCat' :
-        $conn->connection->autocommit(false);
-        $idComp = $comp->AlterarCategoria();
-         $conn->connection->commit();
-        break;
-    case 'excluirCat' :
-        $conn->connection->autocommit(false);
-        $idComp = $comp->ExcluirCategoria();
-         $conn->connection->commit();
-        break;  
+    
 }
 }
 

@@ -9,6 +9,7 @@
                                     <table class="table table-striped table-hover data-table">
 					<thead>
 						<tr>
+							<th>Classe</th>
 							<th>Descrição</th>
 							<th>Peso Mínimo</th>
 							<th>Peso Máximo</th>
@@ -19,13 +20,14 @@
 					<tbody>
 						<!-- BEGIN BLOCK_ITEM_LISTA -->
 						<tr>
+							<td>{classe}</td>
 							<td>{descricao}</td>
 							<td>{minimo} Kg</td>
 							<td>{maximo} Kg</td>
 							<td><span class="label label-{colorSituacao}">{ativo}</span></td>
 							<td class="text-right">
 							<div class="btn-group">
-								<a type="button" class="btn btn-default" href="admin_categoria-editar?id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
+								<a type="button" class="btn btn-default" href="admin_categoria-editar?idClasse={ID_CLASSE_HASH}&id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
 								<a class="btn btn-danger excluir" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
 							</div>
 							</td>
@@ -37,10 +39,10 @@
                                 </div>
                                 <div class="panel-footer text-right">
             
-            <a class="btn btn-primary" href="admin_categoria-editar"><i class="fa fa-plus"></i> Adicionar</a>
-            <button class="btn btn-default btVoltar" type="button">
+            <a class="btn btn-primary" href="admin_categoria-editar?idClasse={ID_CLASSE_HASH}"><i class="fa fa-plus"></i> Adicionar</a>
+            <a class="btn btn-default" type="button" href="admin_classe-main">
                 Voltar
-            </button>
+            </a>
         </div>
                             </div>
 <script>

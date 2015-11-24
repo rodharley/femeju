@@ -44,10 +44,12 @@
                                 <table class="table">
                                     <tr>
                                         <th>Atleta</th>
-                                        <th>Categoria</th>
                                         <th>Classe</th>
-                                        <th>Dobra</th>
-                                        <th>Valor</th>
+                                        <th>Categoria</th>
+                                        <th>Dobra1</th>
+                                        <th>Dobra2</th>
+                                        <th>Dobra3</th>
+                                        <th>Valor R$</th>
                                     </tr>
                                     <!-- BEGIN BLOCK_ATLETAS -->
                                     <tr>
@@ -56,32 +58,42 @@
                                         {ATLETA} </td>
                                         <td>
                                         <div class="form-group">
-                                            <select name="categoria{ID_ATLETA}" id="categoria{ID_ATLETA}" class="form-control required categoria" idAtleta="{ID_ATLETA}" graduacao="{GRAD_ATLETA}">
+                                            <select name="classe{ID_ATLETA}" class="form-control required classe" idAtleta="{ID_ATLETA}" id="classe{ID_ATLETA}">
                                                 <option value=""></option>
-                                                <!-- BEGIN BLOCK_CAT -->
-                                                <option value="{ID_CAT}">{LABEL_CAT}</option>
-                                                <!-- END BLOCK_CAT -->
+                                                <!-- BEGIN BLOCK_CLA -->
+                                                <option value="{ID_CLA}">{LABEL_CLA}</option>
+                                                <!-- END BLOCK_CLA -->
                                             </select>
+                                            
                                         </div></td>
                                         <td>
                                         <div class="form-group">
-                                            <select name="classe{ID_ATLETA}" class="form-control required classe" idAtleta="{ID_ATLETA}" id="classe{ID_ATLETA}">
+                                            <select name="categoria{ID_ATLETA}" id="categoria{ID_ATLETA}" class="form-control required" idAtleta="{ID_ATLETA}">
                                                 <option value=""></option>
+                                                
                                             </select>
                                         </div></td>
                                         <td class="col-md-1"  class="text-center">
                                         <div class="form-group">
-                                            <input type="checkbox" name="dobra{ID_ATLETA}" id="dobra{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valorDobra="0" descValorDobra="0" valor="0" descValor="0" />
+                                            <input type="checkbox" name="dobra1{ID_ATLETA}" id="dobra1{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valor="{DOBRA1}"  />
+                                        </div></td>
+                                        <td class="col-md-1"  class="text-center">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="dobra2{ID_ATLETA}" id="dobra2{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valor="{DOBRA2}"  />
+                                        </div></td>
+                                        <td class="col-md-1"  class="text-center">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="dobra3{ID_ATLETA}" id="dobra3{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valor="{DOBRA3}"  />
                                         </div></td>
                                         <td class="col-md-2"  class="text-right">
-                                        <input type="text" id="valordesc_atleta{ID_ATLETA}" name="valordesc_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right"/>
-                                        <input type="hidden" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" value="0" class="camposoma"/>
-                                        <input type="hidden" id="grupo{ID_ATLETA}" name="grupo{ID_ATLETA}" value="0"/>
+                                        <input type="text" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right valorAtleta camposoma" value="{VALOR_CUSTA}"/>
+                                        <input type="hidden" id="valor_atleta_comp{ID_ATLETA}" name="valor_atleta_comp{ID_ATLETA}" disabled="disabled" value="{VALOR_CUSTA}"/>
+                                        <input type="hidden" id="graduacao{ID_ATLETA}" name="graduacao{ID_ATLETA}" value="{GRAD_ATLETA}"/>
                                         </td>
                                     </tr>
                                     <!-- END BLOCK_ATLETAS -->
                                     <tr>
-                                        <td class="text-right" colspan="4"> Total:</td>
+                                        <td class="text-right" colspan="6"> Total R$:</td>
                                         <td class="col-md-2"  class="text-right">
                                         <input type="text" id="total" name="total" disabled="disabled" class="form-control text-right"/>
                                         </td>
@@ -131,14 +143,68 @@
 	function somatotal() {
 		var total = 0;
 		$(".camposoma").each(function() {
-			total = total + eval($(this).val());
+			total = total + parseFloat($(this).val());
 		});
-		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+		$("#total").val(total);
 
 	}
 
 
 	$(document).ready(function() {
+	    
+	    
+	    $(".valorAtleta").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        }); 
+	    
+	    $("#total").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        }); 
+	    
+	    $(".classe").change(function() {
+            var atleta = $(this).attr("idAtleta");
+            if ($(this).val() != "") {
+                $.ajax({
+                    url : 'ajax/option_categoria_por_classe.php',
+                    data : {                        
+                        classe : $(this).val()
+                    }
+                }).done(function(retorno) {
+                    $("#categoria"+atleta).html(retorno);
+                    
+                });
+            }else{
+                $("#categoria"+atleta).html('<option value=""></option>');
+            }
+             
+        });
+	    
+	    $(".dobra").click(function() {
+            var atleta = $(this).attr("idAtleta");
+            var valor = parseFloat($("#valor_atleta_comp"+atleta).val());
+            if ($("#dobra1"+atleta).prop("checked")) 
+                valor += parseFloat($("#dobra1"+atleta).attr("valor"));
+            if ($("#dobra2"+atleta).prop("checked")) 
+                valor += parseFloat($("#dobra2"+atleta).attr("valor"));    
+            if ($("#dobra3"+atleta).prop("checked")) 
+                valor += parseFloat($("#dobra3"+atleta).attr("valor"));
+                
+            $("#valor_atleta"+atleta).val(valor);
+            somatotal();
+        });
+	    
 	    
 	    $("#btfinalizar").click(function(){
 	        if($("#frmInscricao").valid()){
@@ -148,74 +214,8 @@
 	        }
 	        
 	    });
-		$(".dobra").click(function() {
-			var atleta = $(this).attr("idAtleta");
-			if ($(this).prop("checked")) {
-				$("#valordesc_atleta" + atleta).val($(this).attr("descValorDobra"));
-				$("#valor_atleta" + atleta).val($(this).attr("valorDobra"));
-			} else {
-				$("#valordesc_atleta" + atleta).val($(this).attr("descValor"));
-				$("#valor_atleta" + atleta).val($(this).attr("valor"));
-			}
-			somatotal();
-		});
-		$(".categoria").change(function() {
-			var atleta = $(this).attr("idAtleta");
-			if ($(this).val() != "") {
-				$.ajax({
-					url : 'ajax/option_classe_de_grupo_competicao_por_categoria.php',
-					data : {
-						graduacao : $(this).attr("graduacao"),
-						categoria : $(this).val(),
-						competicao : $("#idCompeticao").val()
-					}
-				}).done(function(retorno) {
-					$("#classe" + atleta).html(retorno);
-				});
-			}
-
-		});
-
-		$(".classe").change(function() {
-			var atleta = $(this).attr("idAtleta");
-			if ($(this).val() != "") {
-				$.ajax({
-					url : 'ajax/json_grupo_competicao_valores.php',
-					data : {
-						graduacao : $("#categoria" + atleta).attr("graduacao"),
-						categoria : $("#categoria" + atleta).val(),
-						competicao : $("#idCompeticao").val(),
-						classe : $(this).val()
-					}
-				}).done(function(retorno) {
-					var json = JSON.parse(retorno);
-					if ($("#dobra" + atleta).prop("checked")) {
-						$("#valordesc_atleta" + atleta).val(json.dobraDesc);
-						$("#valor_atleta" + atleta).val(json.dobra);
-					} else {
-						$("#valordesc_atleta" + atleta).val(json.valorDesc);
-						$("#valor_atleta" + atleta).val(json.valor);
-
-					}
-					$("#dobra" + atleta).attr("valorDobra", json.dobra);
-					$("#dobra" + atleta).attr("descValorDobra", json.dobraDesc);
-					$("#dobra" + atleta).attr("valor", json.valor);
-					$("#dobra" + atleta).attr("descValor", json.valorDesc);
-					$("#grupo" + atleta).val(json.id);
-					
-				});
-			}else{
-			    $("#dobra" + atleta).attr("valorDobra", 0);
-                    $("#dobra" + atleta).attr("descValorDobra", 0);
-                    $("#dobra" + atleta).attr("valor", 0);
-                    $("#dobra" + atleta).attr("descValor", 0);
-                    $("#grupo" + atleta).val(0);
-                    $("#valordesc_atleta" + atleta).val(0);
-                        $("#valor_atleta" + atleta).val(0);
-                   
-			}
-             somatotal();
-		});
+		
+				
 
 		$("#frmInscricao").validate({
 			errorClass : "help-inline",

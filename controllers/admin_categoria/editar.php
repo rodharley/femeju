@@ -4,6 +4,12 @@ include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
+
+if(!isset($_REQUEST['idClasse'])){
+    $_SESSION['fmj.mensagem'] = 63;
+    header("Location:admin_classe-main");
+    exit();
+}
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
@@ -20,7 +26,12 @@ $TPL->BREADCRUMB = '<section class="content-header">
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/categoria/edit.html");
 $obj = new CategoriaPeso();
+$objClasse = new Classe();
 
+$objClasse->getById($obj->md5_decrypt($_REQUEST['idClasse']));
+
+$TPL->CLASSE= $objClasse->descricao;
+$TPL->ID_CLASSE = $objClasse->id;
 $TPL->LABEL = "Incluir Categoria";
 $TPL->ACAO = "incluir";
 $TPL->id = 0;

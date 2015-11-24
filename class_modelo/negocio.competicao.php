@@ -7,6 +7,9 @@ class Competicao extends Persistencia {
 	var $inscricaoAberta;
     var $ativo;
     var $tipo;
+    var $dobra1;
+    var $dobra2;
+    var $dobra3;
     VAR $custa = NULL;
     public function Incluir(){
         $this->descricao = $_REQUEST['descricao'];
@@ -21,49 +24,47 @@ class Competicao extends Persistencia {
     }
     
      public function Alterar(){
+      
          $this->getById($_REQUEST['id']);
         $this->descricao = $_REQUEST['descricao'];
         $this->tipo = $_REQUEST['tipo'];
         $this->titulo = $_REQUEST['titulo'];
         $this->custa = new Custa($_REQUEST['custa']);
+        $this->dobra1 = $this->money($_REQUEST['dobra1'], "bta");
+        $this->dobra2 = $this->money($_REQUEST['dobra2'], "bta");
+        $this->dobra3 = $this->money($_REQUEST['dobra3'], "bta");
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
         $this->inscricaoAberta = $_REQUEST['inscricao'];
         $this->ativo = $_REQUEST['ativo'];
-        return $this->save();
+        $this->save();
         
+        //apaga as categorias
+        $this->deletaClasses($this->id);
+        
+        foreach ($_REQUEST['classe'] as $key => $value) {
+        $this->insereClasse($value);
+        }
+        return true;
+      
     }
      
-     public function IncluirCategoria(){
-         $grupo = new GrupoCompeticao();
-         $grupo->competicao = new Competicao($_REQUEST['idCompeticao']);
-         $grupo->classe = new Classe($_REQUEST['classe']);
-         $grupo->graduacao = new Graduacao($_REQUEST['graduacao']);
-         $grupo->categoria = new Classe($_REQUEST['categoria']);
-         $grupo->valor = $_REQUEST['valor'] == "" ? 0 : $this->money($_REQUEST['valor'], "bta");
-         $grupo->dobra = $_REQUEST['dobra'] == "" ? 0 : $this->money($_REQUEST['dobra'], "bta");
-         $grupo->save();
-         
-     }
-     public function AlterarCategoria(){
-         $grupo = new GrupoCompeticao();
-         $grupo->getById($_REQUEST['idGrupo']);
-         $grupo->competicao = new Competicao($_REQUEST['idCompeticao']);
-         $grupo->classe = new Classe($_REQUEST['classe']);
-         $grupo->graduacao = new Graduacao($_REQUEST['graduacao']);
-         $grupo->categoria = new Classe($_REQUEST['categoria']);
-         $grupo->valor = $_REQUEST['valor'] == "" ? 0 : $this->money($_REQUEST['valor'], "bta");
-         $grupo->dobra = $_REQUEST['dobra'] == "" ? 0 : $this->money($_REQUEST['dobra'], "bta");
-         $grupo->save();
-         
-     }
+    function insereClasse($idClasse){
+        $grupo = new GrupoCompeticao();
+        $grupo->competicao = $this;
+        $grupo->classe = new Classe($idClasse);
+        $grupo->save();
+    } 
      
-     public function ExcluirCategoria(){
-         $grupo = new GrupoCompeticao();
-         if(!$grupo->delete($this->md5_decrypt($_REQUEST['id'])))
-            echo "Não é possível excluir esse registro pois o mesmo contém dados no sistema que não podem ser excluídos.";
-         
-     }
+     
+    function deletaClasses($id){
+        $sql = "delete from ".GrupoCompeticao::TABELA." where idCompeticao = ".$id;
+        $this->DAO_ExecutarDelete($sql);
+    }
     
+    function listaClasses(){
+        $grupo = new GrupoCompeticao();
+        return $grupo->getRows(0,999,array(),array("competicao"=>"=".$this->id));
+    }
     function pesquisarTotal($ativo = "") {
         $sql = "select count(id) as total from ".$this::TABELA." where 1 = 1 ";
         if($ativo != "")
@@ -107,19 +108,31 @@ class Competicao extends Persistencia {
                 $insc->emailAtleta =$atleta->pessoa->email;
                 $insc->dataInscricao = date("Y-m-d");
                 $insc->situacao = 0;
-                $grupoC->getById($_REQUEST['grupo'.$id]);
-                $insc->valor = $grupoC->valor;
-                $insc->dobra = isset($_REQUEST['dobra'.$id]) ? 1 : 0;
-                $insc->valorDobra = isset($_REQUEST['dobra'.$id]) ? $grupoC->dobra : 0;
+                
+                $insc->valor = $this->custa->valor;                
+                $insc->dobra1 = isset($_REQUEST['dobra1'.$id]) ? 1 : 0;
+                $insc->valorDobra1 = isset($_REQUEST['dobra1'.$id]) ? $this->dobra1 : 0;
+                $insc->dobra2 = isset($_REQUEST['dobra2'.$id]) ? 1 : 0;
+                $insc->valorDobra2 = isset($_REQUEST['dobra2'.$id]) ? $this->dobra2 : 0;
+                $insc->dobra3 = isset($_REQUEST['dobra3'.$id]) ? 1 : 0;
+                $insc->valorDobra3 = isset($_REQUEST['dobra3'.$id]) ? $this->dobra3 : 0;
+                
                 $insc->competicao = $this;
-                $insc->grupoCompeticao = $grupoC;
+                $insc->graduacao = new Graduacao($_REQUEST['graduacao'.$id]);
+                $insc->classe = new Classe($_REQUEST['classe'.$id]);
+                $insc->categoria = new CategoriaPeso($_REQUEST['categoria'.$id]);
                 $idsInscricao .= ",".$insc->save();   
                 
                 
                 //gera o item de pagamento
                 $item = new PagamentoItem();  
                 $item->atleta = $atleta;
-                $item->valor = isset($_REQUEST['dobra'.$id]) ? $grupoC->valor+$grupoC->dobra : $grupoC->valor;
+                //soma o valor total
+                $total = $this->custa->valor;
+                $total += isset($_REQUEST['dobra1'.$id]) ? $this->dobra1 : 0;
+                $total += isset($_REQUEST['dobra2'.$id]) ? $this->dobra2 : 0;
+                $total += isset($_REQUEST['dobra3'.$id]) ? $this->dobra3 : 0;
+                $item->valor = $total; 
                 $item->custa = $this->custa;
                 $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".$atleta->pessoa->getNomeCompleto();   
                 array_push($itensPagamento,$item);        
@@ -147,19 +160,30 @@ class Competicao extends Persistencia {
                 $insc->emailAtleta =utf8_decode($arrAtleta['email']);
                 $insc->dataInscricao = date("Y-m-d");
                 $insc->situacao = 0;
-                $grupoC->getById($arrAtleta['grupo']);
-                $insc->valor = $grupoC->valor;
-                $insc->dobra = $arrAtleta['dobra'] == "Sim" ? 1 : 0;
-                $insc->valorDobra = $arrAtleta['dobra'] == "Sim" ? $grupoC->dobra : 0;
+                $insc->valor = $this->custa->valor;                
+                $insc->dobra1 = $arrAtleta['dobra1'] == "Sim" ? 1 : 0;
+                $insc->valorDobra1 = $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 : 0;
+                $insc->dobra2 = $arrAtleta['dobra2'] == "Sim" ? 1 : 0;
+                $insc->valorDobra2 = $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 : 0;
+                $insc->dobra3 = $arrAtleta['dobra3'] == "Sim" ? 1 : 0;
+                $insc->valorDobra3 = $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 : 0;
                 $insc->competicao = $this;
-                $insc->grupoCompeticao = $grupoC;
+                $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
+                $insc->classe = new Classe($arrAtleta["classe"]);
+                $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
                 $idsInscricao .= ",".$insc->save();   
                 
                 
                 //gera o item de pagamento
                 $item = new PagamentoItem();  
                 $item->atleta = NULL;
-                $item->valor = $arrAtleta['dobra'] == "Sim" ? $grupoC->valor+$grupoC->dobra : $grupoC->valor;
+                
+                //soma o valor total
+                $total = $this->custa->valor;
+                $total += $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 : 0;
+                $total += $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 : 0;
+                $total += $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 : 0;
+                $item->valor = $total; 
                 $item->custa = $this->custa;
                 $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".utf8_decode($arrAtleta['nome']);   
                 array_push($itensPagamento,$item);        

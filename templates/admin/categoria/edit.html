@@ -5,7 +5,17 @@
 	</div>
 	<div class="box-body">
 			<input type="hidden" name="id" value="{id}"/>
+			<input type="hidden" name="idClasse" value="{ID_CLASSE}"/>
 			<input type="hidden" name="acao" value="{ACAO}"/>
+			<div class="row">
+			    <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="classe"><i class='fa'></i><b>Classe</b></label>
+                        <p class="form-control-static">{CLASSE}</p>
+                    </div>
+                </div>
+			</div>
+			
 			<div class="row">
 				<div class="col-md-8 col-xs-8">
 					<div class="form-group">
@@ -44,8 +54,8 @@
 
 </div>
 </form>
-<span id="min">{MIN}</span>
-<span id="max">{MAX}</span>
+<span id="min" class="hide">{MIN}</span>
+<span id="max" class="hide">{MAX}</span>
 <script>
 	$(document).ready(function() {
 

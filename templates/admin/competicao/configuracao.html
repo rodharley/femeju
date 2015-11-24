@@ -78,6 +78,62 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="valor"><i class='fa'> </i>Valor da Dobra 1</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        R$
+                                    </div>
+                                    <input type="text" class="form-control required" name="dobra1" id="dobra1" value="{dobra1}">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="valor"><i class='fa'> </i>Valor da Dobra 2</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        R$
+                                    </div>
+                                    <input type="text" class="form-control" name="dobra2" id="dobra2" value="{dobra2}"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="valor"><i class='fa'> </i>Valor da Dobra 3</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        R$
+                                    </div>
+                                    <input type="text" class="form-control" name="dobra3" id="dobra3" value="{dobra3}"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="dataEvento"><i class='fa'></i><b>Classes Associadas à competição:</b></label>                        
+                    </div>
+                     <!-- BEGIN BLOCK_CLA -->
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="classe[]" id="classes" value="{ID_CLA}" aria-label="{DESC_CLA}" {CHECK_CLA} >
+                         {DESC_CLA}
+                      </label>
+                    </div>         
+                     <!-- END BLOCK_CLA -->           
+                </div>
+            </div>
         </div>
         <div class="panel-footer text-right">
             <button class="btn btn-success" type="submit" >
@@ -86,174 +142,29 @@
         </div>
     </div>
 </form>
-<div class="box box-primary">
-    <div class="box-header">
-        <h3 class="box-title">Categorias</h3>
-    </div>
-    <div class="box-body" id="boxItens"></div>
-    <div class="panel-footer text-right">
-        <button class="btn btn-default btVoltar" type="button">
-            Voltar
-        </button>
-        <button class="btn btn-primary" type="button" id="btNovo">
-            Nova Categoria
-        </button>
-    </div>
 
-</div>
 
-<div class="modal fade" id="modalEdit">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form name="frmEditCategoria" id="frmEditCategoria" action="#" method="post" class="form">
-                <input type="hidden" name="valorCusta" id="valorCusta" value="{VALOR_CUSTA}" />
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Editar/Criar Categoria</h4>
-                </div>
-                <div class="modal-body" id="boxform">
 
-                    <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID}"/>
-                    <input type="hidden" name="idGrupo" id="idGrupo" value=""/>
-                    <input type="hidden" name="acao" id="acaoCat" value=""/>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="grupo"><i class='fa'> </i><b>Categoria</b></label>
-                                <Select name="categoria" id="categoria" class="form-control required">
-                                    <option value="">Selecione</option>
-                                    <!-- BEGIN BLOCK_CAT -->
-                                    <option value="{ID_CAT}">{DESC_CAT}</option>
-                                    <!-- END BLOCK_CAT -->
-                                </Select>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="classe"><i class='fa'> </i><b>Classe</b></label>
-                                <Select name="classe" id="classe" class="form-control required">
-                                    <option value="">Selecione</option> 
-                                    <!-- BEGIN BLOCK_CLA -->
-                                    <option value="{ID_CLA}">{DESC_CLA}</option>
-                                    <!-- END BLOCK_CLA -->                                   
-                                </Select>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
-                                <Select name="graduacao" id="graduacao" class="form-control required">
-                                    <option value="">Selecione</option>      
-                                    <!-- BEGIN BLOCK_GRA -->
-                                    <option value="{ID_GRA}">{DESC_GRA}</option>
-                                    <!-- END BLOCK_GRA -->                              
-                                </Select>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xs-6">
-                            <div class="form-group">
-                                <label for="valor"><i class='fa'> </i>Valor da Inscrição</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        R$
-                                    </div>
-                                    <input type="text" class="form-control required" name="valor" id="valor"/>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                            <div class="form-group">
-                                <label for="valor"><i class='fa'> </i>Valor da Dobra</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        R$
-                                    </div>
-                                    <input type="text" class="form-control" name="dobra" id="dobra"/>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btSalvar">
-                        Salvar
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Fechar
-                    </button>
-
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <script>
-	function pesquisar() {
-		$.ajax({
-			url : "ajax/admin_competicao_categorias.php",
-			type : "POST",
-			data : {
-				id : $("#id").val()
-			},
-			beforeSend : function() {
-				$('#boxItens').html('{LOADING}');
-			},
-		}).done(function(msg) {
-			$("#boxItens").html(msg);
-		});
-
-	}
+	
 
 
 	$(document).ready(function() {
 
 		$("#dataEvento").datepicker();
 
-		var jsonStr = '{"itens":[]}';
-		var objJson = JSON.parse(jsonStr);
+        $("#dobra3").inputmask({
+            alias : "decimal",
+            groupSeparator : ".",
+            autoGroup : true,
+            digits : 2,
+            digitsOptional : false,
+            prefix : "",
+            placeholder : "0"
+        });
+		
 
-		$("#btNovo").click(function() {
-			$("#acaoCat").val("incluirCat");
-			$("#categoria").val("");
-			$("#graduacao").val("");
-			$("#classe").val("");
-			$("#idGrupo").val("");
-			$("#valor").val($("#valorCusta").val());
-			$("#dobra").val($("#valorCusta").val());
-			$("#modalEdit").modal();
-		});
-
-		$("#btSalvar").click(function() {
-			if ($("#frmEditCategoria").valid()) {
-				$.ajax({
-					url : 'admin_competicao-action',
-					data : $("#frmEditCategoria").serialize(),
-					type : "POST"
-				}).done(function(resposta) {
-					$("#modalEdit").modal('hide');
-					pesquisar();
-				});
-
-			}
-		});
-
-		$("#valor").inputmask({
+		$("#dobra1").inputmask({
 			alias : "decimal",
 			groupSeparator : ".",
 			autoGroup : true,
@@ -262,7 +173,7 @@
 			prefix : "",
 			placeholder : "0"
 		});
-		$("#dobra").inputmask({
+		$("#dobra2").inputmask({
             alias : "decimal",
             groupSeparator : ".",
             autoGroup : true,
@@ -287,6 +198,6 @@
 			}
 		});
 
-		pesquisar();
+		
 	}); 
 </script>
