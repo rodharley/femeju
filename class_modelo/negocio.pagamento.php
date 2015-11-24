@@ -46,7 +46,7 @@ class Pagamento extends Persistencia{
     }
     
     function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimento = "") {
-        $sql = "select count(p.id) as total from ".$this::TABELA." p inner join fmj_usuario u on u.id = p.idResponsavel  inner join fmj_pessoa pe on pe.id = u.idPessoa where 1 = 1 ";
+        $sql = "select count(p.id) as total from ".$this::TABELA." p inner join fmj_pessoa pe on pe.id = p.idResponsavel where 1 = 1 ";
         if($grupo != "")
             $sql .= " and idGrupo = $grupo"; 
         if ($responsavel != "")
@@ -72,7 +72,7 @@ class Pagamento extends Persistencia{
     }
     function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "") {
 
-        $sql = "select p.* from ".$this::TABELA." p inner join fmj_usuario u on u.id = p.idResponsavel  inner join fmj_pessoa pe on pe.id = u.idPessoa where 1 = 1 ";
+        $sql = "select p.* from ".$this::TABELA." p inner join fmj_pessoa pe on pe.id = p.idResponsavel where 1 = 1 ";
         
         if($grupo != "")
             $sql .= " and idGrupo = $grupo"; 

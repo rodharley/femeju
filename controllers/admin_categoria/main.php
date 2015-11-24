@@ -1,5 +1,5 @@
 <?php
-$menu = 35;
+$menu = 36;
 include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
