@@ -16,14 +16,15 @@
             <div class="form-group">
                 <label for="tipoPagamento"><i class='fa'> </i><b>Tipo de Pagamento</b></label>
                 <div class="row">
-                    <div class="col-xs-2 col-md-2 text-center">
-                        <div class="thumbnail"> <img src="img/credit/boleto-brb.png" class="img-responsive" alt="boleto BRB">
-                            <input type="radio" class="form-control required" value="1" name="tipoPagamento" checked/> Boleto BRB </div>                            
-                    </div>
-                    <div class="col-xs-2 col-md-2 text-center">
-                        <div class="thumbnail"> <img src="img/credit/boleto-femeju.png" class="img-responsive" alt="boleto Femeju">
-                            <input type="radio" class="form-control required" value="2" name="tipoPagamento"/> Boleto Femeju </div>                            
-                    </div>
+                    <!-- BEGIN BLOCK_TIPO_PAG -->
+                                <div class="col-xs-2 col-md-2 text-center">
+                                    <div class="thumbnail">
+                                        <img src="img/credit/{IMG_PAG}" class="img-responsive" alt="{NOME_PAG}">
+                                        <input type="radio" class="form-control required" value="{ID_PAG}" name="tipoPagamento" checked/>
+                                        {NOME_PAG}
+                                    </div>
+                                </div>
+                                <!-- END BLOCK_TIPO_PAG -->
                 </div>
             </div>
              <table class="table">

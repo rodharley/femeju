@@ -11,6 +11,7 @@ class Pagamento extends Persistencia{
     var $tipo = NULL;
     var $responsavel = NULL;
     var $grupo;
+    var $descricao;
     var $itens = array();
     public function excluir($id){
         $this->getById($this->md5_decrypt($id));        
@@ -23,7 +24,7 @@ class Pagamento extends Persistencia{
         
     }
     
-    public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$usuarioResponsavel="",$itensPagamento){
+    public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$usuarioResponsavel="",$descricao, $itensPagamento){
         $total = 0;
         foreach ($itensPagamento as $key => $item) {
             $total += $item->valor;
@@ -33,6 +34,7 @@ class Pagamento extends Persistencia{
         $this->dataPagamento = NULL;
         $this->bitPago = 0;
         $this->grupo = $grupo;
+        $this->descricao = $descricao;
         $this->responsavel = $usuarioResponsavel == "" ? NULL : new Usuario($usuarioResponsavel);
         $this->tipo = new PagamentoTipo($tipoPagamento);
         $this->save();

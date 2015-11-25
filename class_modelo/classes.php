@@ -30,10 +30,12 @@ require("negocio.perfil.php");
 require("negocio.permissao.php");
 require("negocio.pessoa.php");
 require("negocio.post.php");
+require("negocio.tipoPagamento.php");
 require("negocio.usuario.php");
 require("negocio.uf.php");
 require("dominio.tipoCampeonato.php");
 require("dominio.categoria.php");
 require("dominio.grupoCusta.php");
+
 
 ?>

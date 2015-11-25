@@ -47,7 +47,7 @@ switch ($_REQUEST['acao']){
         $objAno->getByAno($_REQUEST['ano']);
         $conn->connection->autocommit(false);
         $itensPagamento = $obj->geraItensPagamento();        
-        $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$_SESSION['fmj.userId'],$itensPagamento);
+        $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$_SESSION['fmj.userId'],"Anuidade",$itensPagamento);
         $obj->atualizarAnuidades($idPagamento,$objAno->anoReferencia);
          $_SESSION['fmj.mensagem'] = 52;
         $conn->connection->commit();

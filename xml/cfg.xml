@@ -221,7 +221,8 @@ set
 		<atrib tbname="dataPagamento" type="txt">dataPagamento</atrib>
 		<atrib tbname="bitPago" type="int">bitPago</atrib>	
 		<atrib tbname="codigo" type="txt">codigo</atrib>
-		<atrib tbname="numeroFebraban" type="txt">numeroFebraban</atrib>	
+		<atrib tbname="numeroFebraban" type="txt">numeroFebraban</atrib>
+		<atrib tbname="descricao" type="txt">descricao</atrib>	
 		<atrib tbname="idGrupo" type="int">grupo</atrib>	
 		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>		
 		<atrib tbname="idResponsavel" type="fk" clrelation="Usuario">responsavel</atrib>
@@ -301,7 +302,12 @@ set
 		<atrib tbname="categoria" type="int">categoria</atrib>
 		<atrib tbname="ordem" type="int">ordem</atrib>						
 	</class>
-	
+	<class name="TipoPagamento" tbname="fmj_tipo_pagamento" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>	
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="imagem" type="txt">imagem</atrib>
+		<atrib tbname="arquivo" type="txt">arquivo</atrib>	
+	</class>
 	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="senha" type="txt">senha</atrib>		

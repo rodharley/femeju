@@ -47,5 +47,15 @@ foreach ($rsAtletas as $key => $value) {
     
     $TPL->block("BLOCK_ATLETAS");
 }
+
+//PAGAMENTOS
+$objTP = new TipoPagamento();
+$rspag = $objTP->getRows();
+foreach ($rspag as $key => $value) {
+    $TPL->ID_PAG = $value->id;
+    $TPL->IMG_PAG = $value->imagem;
+    $TPL->NOME_PAG = $value->descricao;
+    $TPL->block("BLOCK_TIPO_PAG");
+} 
 $TPL->show();
 ?>

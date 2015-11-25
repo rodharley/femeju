@@ -7,469 +7,419 @@
             <h2>Inscrição</h2>
         </div>
         <div class="panel panel-default">
-            <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
-                <input type="hidden" name="acao" id="acao" value="inscricaoa"/>
-                <input type="hidden" name="itens" id="itens" value=""/>
-                <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
-                <div class="panel-heading">
-                    <h4>{LABEL}</h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset>
-                        <legend>
-                            Competição
-                        </legend>
-                        <div class="row">
-                            <div class="col-md-8 col-xs-8">
-                                <div class="form-group">
-                                    <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
-                                    <p class="form-control-static">{TITULO_COMP}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-xs-4">
-                                <div class="form-group">
-                                    <label for="data"><i class='fa'> </i><b>Data</b></label>
-                                    <p class="form-control-static">{DATA_COMP}</p>
-                                </div>
+
+            <div class="panel-heading">
+                <h4>{LABEL}</h4>
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    <legend>
+                        Competição
+                    </legend>
+                    <div class="row">
+                        <div class="col-md-8 col-xs-8">
+                            <div class="form-group">
+                                <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
+                                <p class="form-control-static">
+                                    {TITULO_COMP}
+                                </p>
                             </div>
                         </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>
-                           Adicionar Atletas
-                        </legend>
-                    <button type="button" class="btn btn-success btn-sm" title="Adicionar Atleta" data-toggle="modal" data-target="#addatleta">
-  Adicionar <span class="glyphicon glyphicon-plus"> </span>
-</button>
-<table class="table table-condensed table-striped" id="tblList">
-</table>
-<div class="row">
-    <div class="col-md-8 text-right"></div>
-    <div class="col-md-4 text-right">
-        <input type="text" disabled="disabled" class="form-control disabled text-right" name="total" id="total" value="R$ 0,00"/>
-    </div>
-    
-</div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>forma de Pagamento</legend>
-                        <div class="form-group">
-                                    <label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
-                                    <div class="row">
-                                        <div class="col-xs-2 col-md-2 text-center">
-                                            <div class="thumbnail">
-                                                <img src="img/credit/boleto-brb.png" class="img-responsive" alt="boleto BRB">
-                                                <input type="radio" class="form-control required" value="1" name="tipoPagamento" checked/>
-                                                Boleto BRB
-                                            </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Data</b></label>
+                                <p class="form-control-static">
+                                    {DATA_COMP}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        Adicionar Atletas
+                    </legend>
+                    <div class="panel panel-default">
+                        <form role="form" method="post" action="#" id="frmAtleta" name="frmAtleta">
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="nome"><i class='fa'> </i><b>Nome Completo</b></label>
+                                            <input type="text" name="nome" id="nome" class="form-control required"/>
                                         </div>
-                                        <div class="col-xs-2 col-md-2 text-center">
-                                            <div class="thumbnail">
-                                                <img src="img/credit/boleto-femeju.png" class="img-responsive" alt="boleto Femeju">
-                                                <input type="radio" class="form-control required" value="2" name="tipoPagamento"/>
-                                                Boleto Femeju
-                                            </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="email"><i class='fa'> </i><b>E-mail</b></label>
+                                            <input type="text" name="email" id="email" class="form-control email required"/>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="documento"><i class='fa'> </i><b>Documento</b></label>
+                                            <input type="text" name="documento" id="documento" class="form-control required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="telefone"><i class='fa'> </i><b>Telefone</b></label>
+                                            <input type="text" name="telefone" id="telefone" class="form-control required"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
+                                            <select id="graduacao" name="graduacao" class="form-control required">
+                                                <option value="">Selecione</option>
+                                                <!-- BEGIN BLOCK_GRA -->
+                                                <option value="{ID_GRA}">{DESC_GRA}</option>
+                                                <!-- END BLOCK_GRA -->
+                                            </select>
+                                        </div>
+                                    </div>                               
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="classe"><i class='fa'> </i><b>Classe</b></label>
+                                            <select id="classe" name="classe" class="form-control required">
+                                                <option value="">Selecione</option>
+                                                <!-- BEGIN BLOCK_CLA -->
+                                                <option value="{ID_CLA}">{DESC_CLA}</option>
+                                                <!-- END BLOCK_CLA -->
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
+                                            <select id="categoria" name="categoria" class="form-control required">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                        <div class="form-group">
+                                            <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>
+                                            <input type="checkbox" class=" dobra" name="dobra1" id="dobra1" value="1"  valor="{DOBRA_1}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-xs-4">
+                                        <div class="form-group">
+                                            <label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
+                                            <input type="checkbox" class=" dobra" name="dobra2" id="dobra2" value="1"  valor="{DOBRA_2}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-xs-4">
+                                        <div class="form-group">
+                                            <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>
+                                            <input type="checkbox" class=" dobra" name="dobra3" id="dobra3" value="1" valor="{DOBRA_3}"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="valor"><i class='fa'> </i><b>Valor</b></label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    R$
+                                                </div>
+                                                <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="{VALOR}"/>
+                                                <input type="hidden" id="valorReal" name="valorReal" value="{VALOR}"/>
+                                                <input type="hidden" id="valorComp" name="valorComp" value="{VALOR}"/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Fechar
+                                </button>
+                                <button type="button" class="btn btn-success" id="btAdicionar">
+                                    Adicionar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-condensed table-striped" id="tblList"></table>
+                    <div class="row">
+                        <div class="col-md-8 text-right"></div>
+                        <div class="col-md-4 text-right">
+                            <input type="text" disabled="disabled" class="form-control disabled text-right" name="total" id="total" value="R$ 0,00"/>
+                        </div>
+
+                    </div>
+                </fieldset>
+                <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
+                    <input type="hidden" name="acao" id="acao" value="inscricaoa"/>
+                    <input type="hidden" name="itens" id="itens" value=""/>
+                    <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+                    <fieldset>
+                        <legend>
+                            forma de Pagamento
+                        </legend>
+                        <div class="form-group">
+                            <label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
+                            <div class="row">
+                                <!-- BEGIN BLOCK_TIPO_PAG -->
+                                <div class="col-xs-2 col-md-2 text-center">
+                                    <div class="thumbnail">
+                                        <img src="img/credit/{IMG_PAG}" class="img-responsive" alt="{NOME_PAG}">
+                                        <input type="radio" class="form-control required" value="{ID_PAG}" name="tipoPagamento" checked/>
+                                        {NOME_PAG}
+                                    </div>
+                                </div>
+                                <!-- END BLOCK_TIPO_PAG -->
+                            </div>
+                        </div>
                     </fieldset>
-                </div>
-                <div class="panel-footer text-right">
-                    <button class="btn btn-default btVoltar" type="button">
-                       <span class="glyphicon glyphicon-backward"> </span> Voltar
-                    </button>
-                    <button class="btn btn-primary" type="button" id="btAvancar">
-                        Avançar <span class="glyphicon glyphicon-forward"> </span>
-                    </button>
-                    
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="panel-footer text-right">
+                <button class="btn btn-default btVoltar" type="button">
+                    <span class="glyphicon glyphicon-backward"> </span> Voltar
+                </button>
+                <button class="btn btn-primary" type="button" id="btAvancar">
+                    Avançar <span class="glyphicon glyphicon-forward"> </span>
+                </button>
+
+            </div>
+
         </div>
 
     </div>
 
 </div>
-<div class="modal fade" id="addatleta">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <form role="form" method="post" action="#" id="frmAtleta" name="frmAtleta">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Adicionar Atleta</h4>
-      </div>
-      <div class="modal-body">
-       <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="nome"><i class='fa'> </i><b>Nome Completo</b></label>
-                                <input type="text" name="nome" id="nome" class="form-control required"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                                <input type="text" name="email" id="email" class="form-control email required"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xs-6">
-                            <div class="form-group">
-                                <label for="documento"><i class='fa'> </i><b>Documento</b></label>
-                                <input type="text" name="documento" id="documento" class="form-control required"/>
-                            </div>
-                        </div>                    
-                        <div class="col-md-6 col-xs-6">
-                            <div class="form-group">
-                                <label for="telefone"><i class='fa'> </i><b>Telefone</b></label>
-                                <input type="text" name="telefone" id="telefone" class="form-control required"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
-                                <select id="graduacao" name="graduacao" class="form-control required">
-                                    <option value="">Selecione</option>
-                                    <!-- BEGIN BLOCK_GRA -->
-                                    <option value="{ID_GRA}">{DESC_GRA}</option>
-                                    <!-- END BLOCK_GRA -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="classe"><i class='fa'> </i><b>Classe</b></label>
-                                <select id="classe" name="classe" class="form-control required">
-                                    <option value="">Selecione</option> 
-                                    <!-- BEGIN BLOCK_CLA -->
-                                    <option value="{ID_CLA}">{DESC_CLA}</option>
-                                    <!-- END BLOCK_CLA -->                                   
-                                </select>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
-                                <select id="categoria" name="categoria" class="form-control required">
-                                    <option value="">Selecione</option>                                    
-                                </select>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-xs-4">
-                            <div class="form-group">
-                                <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>
-                                    <input type="checkbox" class=" dobra" name="dobra1" id="dobra1" value="1"  valor="{DOBRA_1}"/>
-                                </div>
-                        </div>
-                        <div class="col-md-4 col-xs-4">
-                            <div class="form-group">
-                                <label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
-                                    <input type="checkbox" class=" dobra" name="dobra2" id="dobra2" value="1"  valor="{DOBRA_2}"/>
-                                </div>
-                        </div>
-                        <div class="col-md-4 col-xs-4">
-                            <div class="form-group">
-                                <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>
-                                    <input type="checkbox" class=" dobra" name="dobra3" id="dobra3" value="1" valor="{DOBRA_3}"/>
-                                </div>
-                        </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xs-6">
-                            <div class="form-group">
-                                <label for="valor"><i class='fa'> </i><b>Valor</b></label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        R$
-                                    </div>
-                                    <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="{VALOR}"/>
-                                    <input type="hidden" id="valorReal" name="valorReal" value="{VALOR}"/>
-                                    <input type="hidden" id="valorComp" name="valorComp" value="{VALOR}"/>                                    
-                                </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                   
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-success" id="btAdicionar">Adicionar</button>
-      </div>
-      </form>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+
 <script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
 <link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
 <script>
-    function somatotal() {
-        var total = 0;
-        for(var i in atletas){
-            var atl = JSON.parse(atletas[i]);
-            total = total + eval(parseFloat(atl.valor));
-        }
-        $("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+	function somatotal() {
+		var total = 0;
+		for (var i in atletas) {
+			var atl = JSON.parse(atletas[i]);
+			total = total + eval(parseFloat(atl.valor));
+		}
+		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
 
-    }
-    
-    var atletas = [];     
-    var selected_index = -1; 
-    function LimpaCampos(){
-        $("#nome").val("");
-        $("#email").val("");
-        $("#documento").val("");
-        $("#telefone").val("");        
-        $("#valor").val($("#valorComp").val());
-        $("#valorReal").val($("#valorComp").val());        
-        $("#dobra1").prop("checked",false);
-        $("#dobra2").prop("checked",false);
-        $("#dobra3").prop("checked",false);
-        $("#graduacao").val("");
-        $("#classe").val("");
-        $("#categoria").html("<option value=''>Selecione</option>");        
-        
-    }
-    
-    function AddAtleta(){
-        var isdobra1 = "Não";
-        var isdobra2 = "Não";
-        var isdobra3 = "Não";
-        if($("#dobra1").prop("checked"))
-            isdobra1 = "Sim";
-       if($("#dobra2").prop("checked"))
-            isdobra2 = "Sim";
-       if($("#dobra3").prop("checked"))
-            isdobra3 = "Sim";
-        var atleta = JSON.stringify({
-            nome    : $("#nome").val(),
-            email  : $("#email").val(),
-            documento : $("#documento").val(),
-            telefone : $("#telefone").val(),
-            classe : $("#classe").val(),
-            categoria : $("#categoria").val(),
-            graduacao : $("#graduacao").val(),
-            valor : $("#valorReal").val(),
-            dobra1 : isdobra1,
-            dobra2 : isdobra2,
-            dobra3 : isdobra3,
-            nomeGraduacao: $("#graduacao").find('option:selected').text(),
-            nomeCategoria: $("#categoria").find('option:selected').text(),
-            nomeClasse: $("#classe").find('option:selected').text(),
-        });
-        atletas.push(atleta);
-    } 
-    function Delete(){
-        atletas.splice(selected_index, 1);
-          
-     }
-    function List(){        
-        $("#tblList").html("");
-        $("#tblList").html(
-            "<thead>"+
-            "   <tr>"+
-            "   <th></th>"+
-            "   <th>Nome</th>"+
-            "   <th>Categoria</th>"+
-            "   <th>Valor</th>"+
-            "   <th>Dobra 1</th>"+
-            "   <th>Dobra 2</th>"+
-            "   <th>Dobra 3</th>"+
-            "   </tr>"+
-            "</thead>"+
-            "<tbody>"+
-            "</tbody>"
-            );
-        for(var i in atletas){
-            var atl = JSON.parse(atletas[i]);
-            $("#tblList tbody").append("<tr>"+
-                                         "  <td><button type='button' alt='Delete"+i+"' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + 
-                                         "  <td>"+atl.nome+"</td>" + 
-                                         "  <td>"+atl.nomeGraduacao+"-"+atl.nomeCategoria+"-"+atl.nomeClasse+"</td>" + 
-                                         "  <td>R$ "+parseFloat(atl.valor).format(2, 3, '.', ',')+"</td>" + 
-                                         "  <td>"+atl.dobra1+"</td>" +
-                                         "  <td>"+atl.dobra2+"</td>" +
-                                         "  <td>"+atl.dobra3+"</td>" + 
-                                         "</tr>");
-                }
-      } 
-    
-   
-    $(document).on('click','.btnDelete',function(){
-        selected_index = parseInt($(this).attr("alt").replace("Delete", ""));
-        Delete();
-        List();
-        somatotal();
-        });
-   
-    $(document).ready(function() {
+	}
 
-       
-       var options = {
-    script: "ajax/json_pessoas.php?",
-    varname: "busca",
-    json: true,
-    maxresults: 35,
-    callback: function (obj) {
-        var pessoa; 
-        $.ajax({
-            url:'ajax/json_pessoa.php',
-            data:{id:obj.id}
-            }).done(function(retorno){
-                pessoa = JSON.parse(retorno);
-                document.getElementById("idResponsavel").value =pessoa.id;        
-                document.getElementById("nomemeio_responsavel").value =pessoa.nomeMeio;
-                document.getElementById("endereco_responsavel").value =pessoa.endereco;
-                document.getElementById("bairro_responsavel").value =pessoa.bairro;
-                document.getElementById("uf_responsavel").value =pessoa.cidade.uf.id;
-                document.getElementById("nomemeio_responsavel").value =pessoa.nomeMeio;
-                document.getElementById("sobrenome_responsavel").value =pessoa.sobrenome;
-                document.getElementById("nome_responsavel").value =pessoa.nome;
-                document.getElementById("email").value =pessoa.email;
-                document.getElementById("celular_responsavel").value =pessoa.telCelular;
-                document.getElementById("cep_responsavel").value =pessoa.cep;
-                carregaCidadeResp();
-                document.getElementById("cidade_responsavel").value =pessoa.cidade.id;
-            });
-        
-         }
-    
-};
-var as = new bsn.AutoSuggest('nome', options);
-       
-       
-       
-       $("#telefone").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
-        
-       $("#valor").inputmask({
-            alias : "decimal",
-            groupSeparator : ".",
-            autoGroup : true,
-            digits : 2,
-            digitsOptional : false,
-            prefix : "",
-            placeholder : ""
-        }); 
-         $(".dobra").click(function() {
-            var valor = parseFloat($("#valorComp").val());
-            
-            $("input:checkbox.dobra").each(function(){
-               if($(this).prop("checked")){
-                   valor = valor+parseFloat($(this).attr("valor"));
-               }
-                
-            });
-            $("#valor").val(valor);
-            $("#valorReal").val(valor);
-        });
-          
-        
+	var atletas = [];
+	var selected_index = -1;
+	function LimpaCampos() {
+		$("#nome").val("");
+		$("#email").val("");
+		$("#documento").val("");
+		$("#telefone").val("");
+		$("#valor").val($("#valorComp").val());
+		$("#valorReal").val($("#valorComp").val());
+		$("#dobra1").prop("checked", false);
+		$("#dobra2").prop("checked", false);
+		$("#dobra3").prop("checked", false);
+		$("#graduacao").val("");
+		$("#classe").val("");
+		$("#categoria").html("<option value=''>Selecione</option>");
 
-        $("#classe").change(function() {
-            
-            if ($(this).val() != "") {
-                $.ajax({
-                    url : 'ajax/option_categoria_por_classe.php',
-                    data : {                        
-                        classe : $(this).val()
-                    }
-                }).done(function(retorno) {
-                   $("#categoria").html(retorno);
-                    
-                });
-            }else{
-                         
-            }
-             
-        });
-        
-        $("#btAdicionar").click(function(){
-              if($("#frmAtleta").valid()){
-                $("#addatleta").modal('hide');
-                AddAtleta();            
-                List();    
-                LimpaCampos();
-                somatotal();
-            }
-            }); 
-                                            
-                            
-          $("#btAvancar").click(function(){
-             if(atletas.length > 0){
-                 if(confirm("Confirma a inscrição na competição?")){
-                 var strjson = "[";
-                for(var i in atletas){
-                    var atl = JSON.parse(atletas[i]);                    
-                    strjson = strjson+JSON.stringify(atl)+',';
-                 }
-                  strjson = strjson+']';
-                 $("#itens").val(strjson);
-                 $("#frmInscricao").submit();
-                 }
-             }else{
-                 alert("Você deve adicionar um ou mais atletas!");
-             }
-              
-          });  
-               
-          
+	}
 
-      
-                    
-       
-        
-      
-        
-       
+	function AddAtleta() {
+		var isdobra1 = "Não";
+		var isdobra2 = "Não";
+		var isdobra3 = "Não";
+		if ($("#dobra1").prop("checked"))
+			isdobra1 = "Sim";
+		if ($("#dobra2").prop("checked"))
+			isdobra2 = "Sim";
+		if ($("#dobra3").prop("checked"))
+			isdobra3 = "Sim";
+		var atleta = JSON.stringify({
+			nome : $("#nome").val(),
+			email : $("#email").val(),
+			documento : $("#documento").val(),
+			telefone : $("#telefone").val(),
+			classe : $("#classe").val(),
+			categoria : $("#categoria").val(),
+			graduacao : $("#graduacao").val(),
+			valor : $("#valorReal").val(),
+			dobra1 : isdobra1,
+			dobra2 : isdobra2,
+			dobra3 : isdobra3,
+			nomeGraduacao : $("#graduacao").find('option:selected').text(),
+			nomeCategoria : $("#categoria").find('option:selected').text(),
+			nomeClasse : $("#classe").find('option:selected').text(),
+		});
+		atletas.push(atleta);
+	}
 
-        $("#frmAtleta").validate({
-            errorClass : "help-inline",
-            errorElement : "div",
-            highlight : function(element, errorClass, validClass) {
-                $(element).parents('.form-group').addClass('has-error');
-                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
-            },
-            unhighlight : function(element, errorClass, validClass) {
-                $(element).parents('.form-group').removeClass('has-error');
-                $(element).parents('.form-group').addClass('has-success');
-                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
-                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
-            },
-            rules :{
-                dobra1:{
-                    required :function(element){
-                        return $("#dobra2").prop("checked");
-                        }
-                },
-                dobra2:{
-                    required :function(element){
-                        return $("#dobra3").prop("checked");
-                        }
-                } 
-            },
-            messages: {
-                    dobra1: {
-                    required: "Para selecionar a dobra 2 você deve selecionar a dobra 1."
-                    },
-                    dobra2: {
-                    required: "Para selecionar a dobra 3 você deve selecionar a dobra 2."
-                    }
-                }
-        });
-       
-        
-    });
+	function Delete() {
+		atletas.splice(selected_index, 1);
+
+	}
+
+	function List() {
+		$("#tblList").html("");
+		$("#tblList").html("<thead>" + "   <tr>" + "   <th></th>" + "   <th>Nome</th>" + "   <th>Categoria</th>" + "   <th>Valor</th>" + "   <th>Dobra 1</th>" + "   <th>Dobra 2</th>" + "   <th>Dobra 3</th>" + "   </tr>" + "</thead>" + "<tbody>" + "</tbody>");
+		for (var i in atletas) {
+			var atl = JSON.parse(atletas[i]);
+			$("#tblList tbody").append("<tr>" + "  <td><button type='button' alt='Delete" + i + "' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + "  <td>" + atl.nome + "</td>" + "  <td>" + atl.nomeGraduacao + "-" + atl.nomeCategoria + "-" + atl.nomeClasse + "</td>" + "  <td>R$ " + parseFloat(atl.valor).format(2, 3, '.', ',') + "</td>" + "  <td>" + atl.dobra1 + "</td>" + "  <td>" + atl.dobra2 + "</td>" + "  <td>" + atl.dobra3 + "</td>" + "</tr>");
+		}
+	}
+
+
+	$(document).on('click', '.btnDelete', function() {
+		selected_index = parseInt($(this).attr("alt").replace("Delete", ""));
+		Delete();
+		List();
+		somatotal();
+	});
+
+	$(document).ready(function() {
+
+		var options = {
+			script : "ajax/json_pessoas.php?",
+			varname : "busca",
+			json : true,
+			maxresults : 35,
+			callback : function(obj) {
+				var pessoa;
+				$.ajax({
+					url : 'ajax/json_pessoa.php',
+					data : {
+						id : obj.id
+					}
+				}).done(function(retorno) {
+					pessoa = JSON.parse(retorno);
+					document.getElementById("nome").value = pessoa.nome+" "+pessoa.nomeMeio+" "+pessoa.sobrenome;
+					document.getElementById("email").value = pessoa.email;
+					document.getElementById("documento").value = pessoa.rg;
+					document.getElementById("telefone").value = pessoa.telCelular;					
+				});
+
+			}
+		};
+		var as = new bsn.AutoSuggest('nome', options);
+
+		$("#telefone").inputmask({
+			mask : ["+99 99 9999-9999", "+99 99 99999-9999"]
+		});
+
+		$("#valor").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : ""
+		});
+		$(".dobra").click(function() {
+			var valor = parseFloat($("#valorComp").val());
+
+			$("input:checkbox.dobra").each(function() {
+				if ($(this).prop("checked")) {
+					valor = valor + parseFloat($(this).attr("valor"));
+				}
+
+			});
+			$("#valor").val(valor.format(2,3,".",","));
+			$("#valorReal").val(valor.format(2,3,".",","));
+		});
+
+		$("#classe").change(function() {
+
+			if ($(this).val() != "") {
+				$.ajax({
+					url : 'ajax/option_categoria_por_classe.php',
+					data : {
+						classe : $(this).val()
+					}
+				}).done(function(retorno) {
+					$("#categoria").html(retorno);
+
+				});
+			} else {
+
+			}
+
+		});
+
+		$("#btAdicionar").click(function() {
+			if ($("#frmAtleta").valid()) {
+				AddAtleta();
+				List();
+				LimpaCampos();
+				somatotal();
+			}
+		});
+
+		$("#btAvancar").click(function() {
+			if (atletas.length > 0) {
+				if (confirm("Confirma a inscrição na competição?")) {
+					var strjson = "[";
+					for (var i in atletas) {
+						var atl = JSON.parse(atletas[i]);
+						strjson = strjson + JSON.stringify(atl) + ',';
+					}
+					strjson = strjson + ']';
+					$("#itens").val(strjson);
+					$("#frmInscricao").submit();
+				}
+			} else {
+				alert("Você deve adicionar um ou mais atletas!");
+			}
+
+		});
+
+		$("#frmAtleta").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			rules : {
+				dobra1 : {
+					required : function(element) {
+						return $("#dobra2").prop("checked");
+					}
+				},
+				dobra2 : {
+					required : function(element) {
+						return $("#dobra3").prop("checked");
+					}
+				}
+			},
+			messages : {
+				dobra1 : {
+					required : "Para selecionar a dobra 2 você deve selecionar a dobra 1."
+				},
+				dobra2 : {
+					required : "Para selecionar a dobra 3 você deve selecionar a dobra 2."
+				}
+			}
+		});
+
+	});
 
 </script>

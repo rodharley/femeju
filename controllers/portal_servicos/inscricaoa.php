@@ -27,6 +27,18 @@ $TPL->DOBRA_1 = $objc->dobra1;
 $TPL->DOBRA_2 = $objc->dobra2;
 $TPL->DOBRA_3 = $objc->dobra3;
 
+//PAGAMENTOS
+$objTP = new TipoPagamento();
+$rspag = $objTP->getRows();
+foreach ($rspag as $key => $value) {
+    $TPL->ID_PAG = $value->id;
+    $TPL->IMG_PAG = $value->imagem;
+    $TPL->NOME_PAG = $value->descricao;
+    $TPL->block("BLOCK_TIPO_PAG");
+} 
+
+
+
 $TPL->LABEL = "preencha os dados dos atletas que deseja realizar a inscrição";
 $TPL->ID_COMPETICAO = $objc->id;
 $TPL->TITULO_COMP = $objc->titulo;

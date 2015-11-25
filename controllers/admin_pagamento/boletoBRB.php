@@ -6,7 +6,7 @@ $pagamento = new Pagamento();
 $custa = new Custa();
 $brbarray = $conf->recuperaConfiguracoesBRB();
 $pagamento->getById($pagamento->md5_decrypt($_REQUEST['id']));
-$descricaoPagamento = "";
+$descricaoPagamento = $pagamento->descricao."<br/>";
 foreach ($pagamento->itens as $key => $item) {
     $custa->getById($item->custa);
 	$descricaoPagamento .= $item->descricaoItem.",";
