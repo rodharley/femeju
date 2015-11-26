@@ -28,7 +28,7 @@ $TPL->DOBRA_2 = $objc->dobra2;
 $TPL->DOBRA_3 = $objc->dobra3;
 
 //PAGAMENTOS
-$objTP = new TipoPagamento();
+$objTP = new PagamentoTipo();
 $rspag = $objTP->getRows();
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;

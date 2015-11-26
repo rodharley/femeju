@@ -1,14 +1,11 @@
-<form role="form" method="post" action="admin_anuidade-action" id="frmEdit" autocomplete="off">
+<form role="form" method="post" action="admin_ano-action" id="frmEdit" autocomplete="off">
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Nova Anuidade</h3>
         </div>
         <div class="box-body">
             <input type="hidden" name="acao" value="{ACAO}"/>
-            <div class="callout callout-info">
-                    <h4>Atenção</h4>
-                    <p>Ao Gerar nova anuidade todos os atletas ficarão com a situação Irregular para o ano gerado, se o ano for o mais atual a situação atual de todos os atletas também mudará</p>
-                  </div>
+            <input type="hidden" name="id" value="{ID}"/>            
             <div class="row">
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
@@ -38,9 +35,9 @@
 </form>
 <script>
 
-	$(document).ready(function() {
-	    $('#dataVencimento').datepicker();
-	    $("#ano").inputmask({ mask: "9999"});
+    $(document).ready(function() {
+        $('#dataVencimento').datepicker();
+        $("#ano").inputmask({ mask: "9999"});
         
-	});
+    });
 </script>

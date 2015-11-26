@@ -48,7 +48,7 @@ switch ($_REQUEST['acao']){
         $conn->connection->autocommit(false);
         $itensPagamento = $obj->geraItensPagamento();        
         $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$_SESSION['fmj.userId'],"Anuidade",$itensPagamento);
-        $obj->atualizarAnuidades($idPagamento,$objAno->anoReferencia);
+        $obj->atualizarAnuidades($idPagamento,$objAno);
          $_SESSION['fmj.mensagem'] = 52;
         $conn->connection->commit();
         header("Location:portal_servicos-guia?id=".$obj->md5_encrypt($idPagamento));

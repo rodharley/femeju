@@ -123,6 +123,7 @@ public function listaAtivos(){
 	function desativarTodos(){
 	    $sql = "update ".$this::TABELA." set bitAtivo = 0";
 	    $this->DAO_ExecutarDelete($sql);
+	    $_SESSION['fmj.mensagem'] = 66;
 	    return true;
 	}
 	

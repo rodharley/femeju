@@ -33,7 +33,8 @@ set
 		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
 		<atrib tbname="situacao" type="int">situacao</atrib>				
 		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
-		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>		
+		<atrib tbname="idPagamento" type="fk" clrelation="Pagamento">pagamento</atrib>
+		<atrib tbname="idAno" type="fk" clrelation="Ano">ano</atrib>				
 	</class>
 	<class name="Associacao" tbname="fmj_associacao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -301,13 +302,7 @@ set
 		<atrib tbname="data" type="txt">data</atrib>
 		<atrib tbname="categoria" type="int">categoria</atrib>
 		<atrib tbname="ordem" type="int">ordem</atrib>						
-	</class>
-	<class name="TipoPagamento" tbname="fmj_tipo_pagamento" tbid="id" lazy="true">
-		<atrib tbname="id" type="id">id</atrib>	
-		<atrib tbname="descricao" type="txt">descricao</atrib>
-		<atrib tbname="imagem" type="txt">imagem</atrib>
-		<atrib tbname="arquivo" type="txt">arquivo</atrib>	
-	</class>
+	</class>	
 	<class name="Usuario" tbname="fmj_usuario" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="senha" type="txt">senha</atrib>		

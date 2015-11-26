@@ -9,20 +9,13 @@ $pag = new Pagamento();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
-	case 'gerar' :
-		$conn->connection->autocommit(false);
-        $obj->gerar();
-        $conn->connection->commit();
-        header("Location:admin_anuidade");
-        exit();
-        break;
     case 'guia' :
         if(isset($_REQUEST['atleta'])){
         $objAno->getByAno($_REQUEST['ano']);
         $conn->connection->autocommit(false);
         $itensPagamento = $obj->geraItensPagamento();        
         $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$_SESSION['fmj.userId'],"Anuidade",$itensPagamento);
-        $obj->atualizarAnuidades($idPagamento,$objAno->anoReferencia);
+        $obj->atualizarAnuidades($idPagamento,$objAno);
          $_SESSION['fmj.mensagem'] = 52;
         $conn->connection->commit();
         header("Location:admin_pagamento-guia?id=".$obj->md5_encrypt($idPagamento));

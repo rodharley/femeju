@@ -67,6 +67,9 @@ Exemplos de mensagens:
 <mensagem id="61" type="success">Competição foi alterada com sucesso.</mensagem>
 <mensagem id="62" type="success">Competição foi excluída com sucesso.</mensagem>
 <mensagem id="63" type="warning">Classe Não selecionada.</mensagem>
+<mensagem id="64" type="success">Anuidade alterada com sucesso!</mensagem>
+<mensagem id="65" type="success">Anuidade excluída com sucesso!</mensagem>
+<mensagem id="66" type="success">atletas revogados com sucesso!</mensagem>
 </mensagens>
 
 

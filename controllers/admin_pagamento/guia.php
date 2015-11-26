@@ -48,5 +48,10 @@ foreach ($rsItens as $key => $item) {
     $TPL->VALOR_ITEM = "R$ ".$obj->money($item->valor,"atb");
     $TPL->block("BLOCK_ITEM");
 }
+
+if($obj->bitPago == 0){
+ $TPL->block("BLOCK_PAGAR");   
+}
+
 $TPL->show();
 ?>

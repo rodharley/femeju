@@ -5,6 +5,7 @@ class Anuidade extends Persistencia{
 	var $anoReferencia;
 	var $atleta = NULL;
 	var $pagamento = NULL;
+    var $ano = NULL;
 	var $situacao;	
     
     function listaPorAtleta($idAtleta){
@@ -12,33 +13,13 @@ class Anuidade extends Persistencia{
     }
     
     
-	function gerar(){
-	    $ano = $_REQUEST['ano'];
-        $vencimento = $this->convdata($_REQUEST['dataVencimento'], "ntm");
-        $objAno = new Ano();
-           if(strlen($ano) == 4 && is_numeric($ano) ){            
-            if($objAno->getRow(array("anoReferencia"=>"=".$ano))){
-                 $_SESSION['fmj.mensagem'] = 54;
-                return false; 
-           }else{
-            $objAno->dataVencimento = $vencimento;
-            $objAno->anoReferencia = $ano;
-            $objAno->save(); 
-            $obAtleta = new Atleta();
-            $obAtleta->desativarTodos();
-            }
-           $_SESSION['fmj.mensagem'] = 50;
-            return true; 
-        }else{
-           $_SESSION['fmj.mensagem'] = 51;
-           return false; 
-        }
-	}
+	
     
-    function atualizarAnuidades($idPagamento,$ano){
+    function atualizarAnuidades($idPagamento,$objAno){                
          foreach ($_REQUEST['atleta'] as $key => $id) {
-             $this->getRow(array("anoReferencia"=>"=".$ano,"atleta"=>"=".$id));
-             $this->anoReferencia = $ano;
+             $this->getRow(array("anoReferencia"=>"=".$objAno->anoReferencia,"atleta"=>"=".$id));
+             $this->anoReferencia = $objAno->anoReferencia;
+             $this->ano = $objAno;
              $this->pagamento = new Pagamento($idPagamento);
              $this->atleta = new  Atleta($id);
              $this->situacao = 0;  
@@ -46,6 +27,7 @@ class Anuidade extends Persistencia{
              
          }
          return true;
+        
     }
     
     function geraItensPagamento(){
