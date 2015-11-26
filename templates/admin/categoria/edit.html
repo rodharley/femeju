@@ -61,13 +61,14 @@
 
 			 /* ION SLIDER */
         $("#peso").ionRangeSlider({
-          min: 20,
+          min: 0,
           max: 250,
           from: $("#min").html(),
           to: $("#max").html(),
           type: 'double',
           step: 1,
           postfix: " Kg",
+          max_postfix: " (Abaixo de)", 
           prettify: false,
           hasGrid: true
         });

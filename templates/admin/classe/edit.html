@@ -28,7 +28,7 @@
 			<div class="row">
 			    <div class="col-sm-12">
                       <div class="form-group">
-                      <label for="peso"><i class='fa'></i><b>Peso</b></label>
+                      <label for="peso"><i class='fa'></i><b>Idade</b></label>
                       <input id="peso" type="text" name="peso" value="" class="required">
                       </div>
                     </div>
@@ -51,13 +51,14 @@
 
 			 /* ION SLIDER */
         $("#peso").ionRangeSlider({
-          min: 4,
+          min: 0,
           max: 100,
           from: $("#min").html(),
           to: $("#max").html(),
           type: 'double',
           step: 1,
           postfix: " Anos",
+          max_postfix: " (Abaixo de)",          
           prettify: false,
           hasGrid: true
         });
