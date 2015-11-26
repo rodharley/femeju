@@ -1,5 +1,5 @@
 <?php
-$menu = 32;
+$menu = 39;
 include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
@@ -12,27 +12,25 @@ include("includes/include.mensagem.php");
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
                         Pagamento
-                        <small>Pesquisa</small>
+                        <small>Competição</small>
                     </h1>
                    <ol class="breadcrumb">
                                         <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
                                         <li><a href="admin_pagamento"><i class="fa fa-credit-card"> </i> Pagamentos</a></li>
-                                         <li class="active">Pesquisa Pagamentos</li>
+                                         <li class="active">Competição</li>
                                     </ol>
                 </section>';
+$objc = new Competicao();
+$rs = $objc->listaAtivasAbertas();
+//TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
+$TPL->addFile("CONTEUDO", "templates/admin/pagamento/competicao.html");
 
-$TPL->addFile("CONTEUDO", "templates/admin/pagamento/pesquisa.html");
-
-$TPL->ID_GRUPO = GrupoCusta::ANUIDADE;
-$TPL->DESC_GRUPO = $grupo->getDescricao(GrupoCusta::ANUIDADE);
-$TPL->block("BLOCK_TIPO_CUSTA");
-
-$TPL->ID_GRUPO = GrupoCusta::COMPETICAO;
-$TPL->DESC_GRUPO = $grupo->getDescricao(GrupoCusta::COMPETICAO);
-$TPL->block("BLOCK_TIPO_CUSTA");
-
-$TPL->ID_GRUPO = GrupoCusta::OUTROS;
-$TPL->DESC_GRUPO = $grupo->getDescricao(GrupoCusta::OUTROS);
-$TPL->block("BLOCK_TIPO_CUSTA");
+foreach ($rs as $key => $value) {
+    $TPL->ID_COMPETICAO = $obj->md5_encrypt($value->id);
+	$TPL->TITULO = $value->titulo;
+    $TPL->DESCRICAO = $value->descricao;
+    $TPL->DATA = $objc->convdata($value->dataEvento,"mtn");    
+    $TPL->block("BLOCK_COMP");
+}
 $TPL->show();
 ?>

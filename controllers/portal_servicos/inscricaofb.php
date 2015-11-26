@@ -26,14 +26,9 @@ $rsClasses = $objc->listaClasses();
 $TPL->DOBRA1 = $objc->dobra1;
 $TPL->DOBRA2 = $objc->dobra2;
 $TPL->DOBRA3 = $objc->dobra3;
-$TPL->VALOR_CUSTA = $objc->custa->valor;
+$TPL->VALOR_CUSTA = $objc->money($objc->custa->valor,"atb");
 
-//classes
-       foreach ($rsClasses as $key2 => $grupo) {
-            $TPL->ID_CLA = $grupo->classe->id;
-            $TPL->LABEL_CLA = $grupo->classe->descricao;
-            $TPL->block("BLOCK_CLA");
-        }
+
 
 foreach ($rsAtletas as $key => $value) {
     if($value->graduacao != null){
@@ -41,6 +36,12 @@ foreach ($rsAtletas as $key => $value) {
     $TPL->ID_ATLETA = $value->id;
     $TPL->GRAD_ATLETA = $value->graduacao->id;    
     
+    //classes
+       foreach ($rsClasses as $key2 => $grupo) {
+            $TPL->ID_CLA = $grupo->classe->id;
+            $TPL->LABEL_CLA = $grupo->classe->descricao;
+            $TPL->block("BLOCK_CLA");
+        }
     
     $TPL->block("BLOCK_ATLETAS");
     
@@ -50,11 +51,13 @@ foreach ($rsAtletas as $key => $value) {
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
 $rspag = $objTP->getRows();
+$TPL->CHECKED = "checked='checked'";
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;
     $TPL->IMG_PAG = $value->imagem;
     $TPL->NOME_PAG = $value->descricao;
     $TPL->block("BLOCK_TIPO_PAG");
+    $TPL->CHECKED = "";
 } 
 
 

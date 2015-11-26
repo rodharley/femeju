@@ -51,11 +51,13 @@ foreach ($rsAtletas as $key => $value) {
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
 $rspag = $objTP->getRows();
+$TPL->CHECKED = "checked='checked'";
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;
     $TPL->IMG_PAG = $value->imagem;
     $TPL->NOME_PAG = $value->descricao;
     $TPL->block("BLOCK_TIPO_PAG");
+    $TPL->CHECKED = "";
 } 
 $TPL->show();
 ?>

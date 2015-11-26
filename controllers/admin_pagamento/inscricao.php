@@ -1,14 +1,28 @@
 <?php
-include("includes/include.lockPortal.php");
-$TPL = NEW Template("templates/portal/layout.html");
-include("includes/include.montaMenuPortal.php");
+$menu = 39;
+include("includes/include.lock.php");
+$TPL = NEW Template("templates/admin/main.html");
+include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
+//CONFIGURA O BREADCRUMB
+$TPL->BREADCRUMB = '<section class="content-header">
+                    <h1>
+                        Pagamento
+                        <small>Competição</small>
+                    </h1>
+                   <ol class="breadcrumb">
+                                        <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
+                                        <li><a href="admin_pagamento"><i class="fa fa-credit-card"> </i> Pagamentos</a></li>
+                                         <li class="active">Competição</li>
+                                    </ol>
+                </section>';
+
 
 $objc = new Competicao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objGrad = new Graduacao();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa.html");
+$TPL->addFile("CONTEUDO", "templates/admin/pagamento/inscricao.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idComp']));
 $rs = $objGrad->listaAtivas();
 $rsClasses = $objc->listaClasses();

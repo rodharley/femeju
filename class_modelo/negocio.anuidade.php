@@ -15,14 +15,20 @@ class Anuidade extends Persistencia{
     
 	
     
-    function atualizarAnuidades($idPagamento,$objAno){                
+    function atualizarAnuidades($idPagamento,$objAno){
+        $objPag = new Pagamento();
+        $objPag->getById($idPagamento);                
          foreach ($_REQUEST['atleta'] as $key => $id) {
+             $atleta = new  Atleta();
+             $atleta->getById($id);
+             $atleta->ativo = $objPag->bitPago;
+             $atleta->save();
              $this->getRow(array("anoReferencia"=>"=".$objAno->anoReferencia,"atleta"=>"=".$id));
              $this->anoReferencia = $objAno->anoReferencia;
              $this->ano = $objAno;
              $this->pagamento = new Pagamento($idPagamento);
-             $this->atleta = new  Atleta($id);
-             $this->situacao = 0;  
+             $this->atleta = $atleta;
+             $this->situacao = $objPag->bitPago;  
              $this->save();           
              
          }
@@ -38,7 +44,7 @@ class Anuidade extends Persistencia{
             $atleta = new Atleta();
             $atleta->getById($id);
             $item->atleta = $atleta;
-            $item->valor = $_REQUEST['valor_atleta'.$id];
+            $item->valor = $this->money($_REQUEST['valor_atleta'.$id],"bta");
             $item->custa = new Custa($_REQUEST['custa'.$id]);
             $item->descricaoItem = $atleta->pessoa->getNomeCompleto();
             array_push($itens,$item);

@@ -23,7 +23,9 @@ class Inscricao extends Persistencia {
     
     
     function atualizarPagamentos($idPagamento,$ids){
-         $sql = "update ".$this::TABELA." set idPagamento = ".$idPagamento." where id in (".$ids.")";
+        $objPag = new Pagamento();
+        $objPag->getById($idPagamento);
+         $sql = "update ".$this::TABELA." set idPagamento = ".$idPagamento.", situacao = ".$objPag->bitPago." where id in (".$ids.")";
          $this->DAO_ExecutarDelete($sql);
          return true;
     }

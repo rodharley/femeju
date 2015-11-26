@@ -534,7 +534,7 @@ function xmlObject($elemento,$i,$objeto){
             
         $jsonarray = array();
         foreach ($obj as $key => $value) {
-           if (!is_object($value)){
+           if (!is_object($value) && !is_array($value)){
             $jsonarray[$key] = utf8_encode($value);
            }else{
                $jsonarray[$key] = $this->objectToArray($value);

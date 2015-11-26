@@ -31,8 +31,14 @@ class Pagamento extends Persistencia{
         }    
         $this->valorTotal = $total;
         $this->dataVencimento = $dataVencimento;
-        $this->dataPagamento = NULL;
-        $this->bitPago = 0;
+        
+        if($total <= 0){
+            $this->bitPago = 1;
+            $this->dataPagamento = date("Y-m-d");
+        }else{
+            $this->bitPago = 0;
+            $this->dataPagamento = NULL;
+        }
         $this->grupo = $grupo;
         $this->descricao = $descricao;
         $this->responsavel = $usuarioResponsavel == "" ? NULL : new Usuario($usuarioResponsavel);

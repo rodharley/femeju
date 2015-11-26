@@ -134,7 +134,7 @@ class Competicao extends Persistencia {
                 $total += isset($_REQUEST['dobra3'.$id]) ? $this->dobra3 : 0;
                 $item->valor = $total; 
                 $item->custa = $this->custa;
-                $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".$atleta->pessoa->getNomeCompleto();   
+                $item->descricaoItem = $atleta->pessoa->getNomeCompleto();   
                 array_push($itensPagamento,$item);        
                 }
                 $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$_SESSION['fmj.userId'],$this->titulo, $itensPagamento);
@@ -150,10 +150,25 @@ class Competicao extends Persistencia {
             $itensPagamento = array();
             $idsInscricao = "0";
             $insc = new Inscricao();
+            
              foreach ($atletas as $key => $arrAtleta) {                
                 //salva a inscricao
                 $insc = new Inscricao();
-                $insc->atleta = NULL;
+                
+                if(isset($arrAtleta['id']) && $arrAtleta['id'] != ""){
+                
+                    $obAtleta = new Atleta();
+                    if($obAtleta->getById($arrAtleta['id'])){                        
+                        $insc->atleta = $obAtleta;
+                    }else{
+                        $insc->atleta = NULL;
+                           
+                    }
+                }else{
+                    $insc->atleta = NULL;
+                }
+                
+                
                 $insc->nomeAtleta = utf8_decode($arrAtleta['nome']);
                 $insc->docAtleta = utf8_decode($arrAtleta['documento']);
                 $insc->telefoneAtleta = $arrAtleta['telefone'];
@@ -171,6 +186,7 @@ class Competicao extends Persistencia {
                 $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
                 $insc->classe = new Classe($arrAtleta["classe"]);
                 $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
+                
                 $idsInscricao .= ",".$insc->save();   
                 
                 
@@ -185,7 +201,7 @@ class Competicao extends Persistencia {
                 $total += $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 : 0;
                 $item->valor = $total; 
                 $item->custa = $this->custa;
-                $item->descricaoItem = "Inscrição - Competição: ".$this->titulo.", Atleta: ".utf8_decode($arrAtleta['nome']);   
+                $item->descricaoItem = utf8_decode($arrAtleta['nome']);   
                 array_push($itensPagamento,$item);        
                 }
                 $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$_SESSION['fmj.userId'],$this->titulo,$itensPagamento);
