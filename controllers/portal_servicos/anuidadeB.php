@@ -13,7 +13,7 @@ $objAn = new Anuidade();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/anuidade/anuidadeB.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['idAssociacaoHash']));
-$rsCustas = $objC->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::ANUIDADE));
+$objC->getById(Custa::ANUIDADE_PADRAO);
 $TPL->NOME_ASSOCIACAO = $objAssociacao->nome;
 $TPL->LOGO_ASSOCIACAO = $objAssociacao->logomarca;
 $TPL->LABEL = "Anuidade";
@@ -28,11 +28,11 @@ foreach ($rsAtletas as $key => $value) {
     $TPL->ATLETA = $value->pessoa->getNomeCompleto();
     $TPL->ID_ATLETA = $value->id;
     //custas
-       foreach ($rsCustas as $key2 => $custa) {
-            $TPL->ID_CUSTA = $custa->id;
-            $TPL->LABEL_CUSTA = $custa->descricao;
+       
+            $TPL->ID_CUSTA = $objC->id;
+            $TPL->LABEL_CUSTA = $objC->descricao;
             $TPL->block("BLOCK_CUSTA");
-        }
+       
     
     $TPL->block("BLOCK_ATLETAS");
 }

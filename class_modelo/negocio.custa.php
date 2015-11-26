@@ -1,6 +1,7 @@
 <?php
 class Custa extends Persistencia{
     const TABELA = "fmj_custas";
+    const ANUIDADE_PADRAO = "1";
 	var $descricao;
     var $titulo;    
 	var $valor;

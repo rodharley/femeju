@@ -14,9 +14,12 @@ if (count($alist) > 0) {
 $json = "";
 
 foreach($alist as $key => $n){
+    $TPL->disabled = "";
     $TPL->GRUPO = $grupo->getDescricao($n->grupo);
     $TPL->TITULO = $n->titulo;
     $TPL->DESCRICAO = $n->descricao;
+    if($n->id == Custa::ANUIDADE_PADRAO)
+        $TPL->disabled = "disabled";
     $TPL->VALOR = "R$ ".$obj->money($n->valor,"atb");
     $json .= json_encode($obj->objectToArray($n)).",";
     $TPL->ID_HASH = $obj->md5_encrypt($n->id);
