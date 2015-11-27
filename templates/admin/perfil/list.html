@@ -1,3 +1,13 @@
+<script>
+    $(document).ready(function() {
+        $('.excluir').click(function() {
+            if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
+                window.location.href = 'admin_perfil-action?acao=excluir&id=' + $(this).attr("value");
+        });
+                
+    });
+
+</script>
 <div class="box box-primary">
                                 <div class="box-header">
                                     <h3 class="box-title">Perfis:</h3>
@@ -20,6 +30,7 @@
 							<td class="text-right">
 							<div class="btn-group">
 								<a type="button" class="btn btn-default" href="admin_perfil-editar?id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
+								<a class="btn btn-danger excluir {disabled}" href="#"  value="{ID_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
 							</div>
 							</td>
 						</tr>

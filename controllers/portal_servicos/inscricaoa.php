@@ -7,10 +7,17 @@ include("includes/include.mensagem.php");
 $objc = new Competicao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objGrad = new Graduacao();
+$associacao = new Associacao();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idComp']));
 $rs = $objGrad->listaAtivas();
+$rsacademias = $associacao->listaPorResponsavelAtivas($_SESSION['fmj.userId']);
+$idsAssoc = "0";
+foreach ($rsacademias as $key => $acad) {
+    $idsAssoc .= ",".$acad->id;
+}
+$TPL->IDS_ASSOCIACAO = $idsAssoc;
 $rsClasses = $objc->listaClasses();
 foreach ($rs as $key => $value) {
 	$TPL->ID_GRA = $value->id;

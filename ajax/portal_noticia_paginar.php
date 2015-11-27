@@ -16,9 +16,9 @@ foreach ($rsnot as $key => $noticia) {
     $TPL->data = $obj->convdata($noticia->data,"mtnh");
     $TPL->idhash = $obj->md5_encrypt($noticia->id);
     if($noticia->foto != "")
-    $TPL->block("BLOCK_NOTICIA_P1");
-    else
-    $TPL->block("BLOCK_NOTICIA_P2");
+    $TPL->block("BLOCK_NOTICIA_FOTO");
+    
+    $TPL->block("BLOCK_NOTICIA");
 }
 
 //$TPL->TOTAL_PAGINAS = $configPaginacao['totalPaginas'];

@@ -98,6 +98,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
             $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
             $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
@@ -123,6 +124,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
             $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
             $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
@@ -214,6 +216,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
             $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
             $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $id = $objPessoa->save();
@@ -238,6 +241,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
             $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
             $objPessoa->cep = $_REQUEST['cep_responsavel'];
+            $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $id = $objPessoa->save();     

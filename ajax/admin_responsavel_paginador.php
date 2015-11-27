@@ -18,7 +18,7 @@ $configPaginacao = $usu->paginar($totalPesquisa,$pagina);
 $alist = $usu->listarUsuariosPerfil($idperfil,$configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$pesquisa);
 if (count($alist) > 0) {
 foreach($alist as $key => $usuario){
-	$TPL->nome = $usuario->pessoa->nome;
+	$TPL->nome = $usuario->pessoa->nome." ".$usuario->pessoa->nomeMeio." ".$usuario->pessoa->sobrenome;
 	$TPL->cpf = $usu->formataCPFCNPJ($usuario->pessoa->cpf);
 	$TPL->perfil = $usuario->perfil->descricao;
 	$TPL->situacao = $usuario->ativo == 1 ? "Ativo" : "Inativo";

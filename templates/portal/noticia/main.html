@@ -2,56 +2,44 @@
     <div class="col-lg-12">
         <div class="page-header">
             <div class="pull-right">
-                                <img src="img/icones/noticias.png" />
-                            </div>
+                <img src="img/icones/noticias.png" />
+            </div>
             <h2>Notícias {ANO}</h2>
         </div>
-            <div class="row">            
-                <div class="col-sm-12">
-            <!-- BEGIN BLOCK_NOTICIA_P1 -->
-             <div class="divisao">
-                <div class="etiqueta">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="thumbnoticia" style="background-image: url('img/noticias/{imagem}');"></div>
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="caption">
-                                <h5>{titulo}</h5>
-                                <p>{sumario}</p>
-                                <p>{data}</p>
-                                <p><a href="portal_noticia-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a></p>
-                              </div>
-                        </div>
-                        </div>              
-                    </div>
-               </div>     
-            <!-- END BLOCK_NOTICIA_P1 -->
-            <!-- BEGIN BLOCK_NOTICIA_P2 -->
-             <div class="divisao">
-                <div class="etiqueta">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="caption">
-                                <h5>{titulo}</h5>
-                                <p>{sumario}</p>
-                                <p>{data}</p>
-                                <p><a href="portal_noticia-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a></p>
-                              </div>
-                        </div>
-                        </div>              
-                    </div>
-              </div>          
-            <!-- END BLOCK_NOTICIA_P2 -->
+        <div id="mod-noticias">
+        <!-- BEGIN BLOCK_NOTICIA -->
+        
+<div class="row">
+    <div class="col-sm-12">
+        <div style="margin-bottom:0px; padding-top:20px; border-top:1px solid #E3E3E8;min-height:120px;" class=" format-standard">
+            <!-- BEGIN BLOCK_NOTICIA_FOTO -->
+            <a class="post-format-s" title="Imagem" href="portal_noticia-detalhe?id={idhash}"><span> </span><img alt="Imagem" src="img/noticias/{imagem}" class="alignleft"></a>
+            <!-- END BLOCK_NOTICIA_FOTO -->
+            <header class="entry-header">
+                <h2 class="post-title-small"><a title="leia mais.." href="portal_noticia-detalhe?id={idhash}">{titulo}</a></h2>
+            </header>
+            <p>
+                {sumario}<a class="more_post" title="leia mais.." href="portal_noticia-detalhe?id={idhash}">...</a>
+            </p>
+            <div class="entry-info">
+
+                {data}  | <a title="leia mais.." href="portal_noticia-detalhe?id={idhash}">Ler mais</a>
+
+            </div>
+
         </div>
-            </div>        
+</div>
+</div>
+<!-- END BLOCK_NOTICIA -->
+
+  </div>      
         <!-- BEGIN BLOCK_PAGINACAO -->
         <nav>
             <ul class="pager">
                 <li class="previous {DISABLEL}">
                     <a href="#" class="paginar" value="{PAGINA_ANTERIOR}"><span aria-hidden="true">&larr;</span> Recentes</a>
                 </li>
-               <li class="center disabled">
+                <li class="center disabled">
                     <a href="#">{PAGINA}</a>
                 </li>
                 <!-- BEGIN BLOCK_ANO -->
@@ -65,41 +53,41 @@
             </ul>
         </nav>
         <!-- END BLOCK_PAGINACAO -->
-            
-          </div>
-        </div>
-        
-       
-        
-   
+
+    </div>
+</div>
+
 <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
 <input type="hidden" value="{ANO}" id="ano" name="ano"/>
 <script>
+	function pesquisar() {
+		$.ajax({
+			url : "ajax/portal_noticia_paginar.php",
+			type : "POST",
+			data : {
+				pagina : $("#pagina").val(),
+				ano : $("#ano").val()
+			},
+			beforeSend : function() {
+				$('#contentPortal').html('{LOADING}');
+			},
+		}).done(function(msg) {
+			$("#contentPortal").html(msg);
+		});
 
-    function pesquisar(){
-            $.ajax({
-                url : "ajax/portal_noticia_paginar.php",
-                type : "POST",
-                data : {pagina:$("#pagina").val(),ano:$("#ano").val()},
-                beforeSend: function( ) {
-                    $('#contentPortal').html('{LOADING}');
-                },
-            }).done(function(msg) {
-                $("#contentPortal").html(msg);
-            });
+	}
 
-        }
 
-    $(document).ready(function() {
-        {EXECUTA_PESQUISA}        
-        $(".paginar").click(function() {
-            $("#pagina").val($(this).attr("value"));
-            pesquisar();
-        });
-        $(".anualizar").click(function() {
-            $("#pagina").val("1");
-            $("#ano").val($(this).attr("value"));
-            pesquisar();
-        });
-    }); 
+	$(document).ready(function() { 
+	    {EXECUTA_PESQUISA}
+		$(".paginar").click(function() {
+			$("#pagina").val($(this).attr("value"));
+			pesquisar();
+		});
+		$(".anualizar").click(function() {
+			$("#pagina").val("1");
+			$("#ano").val($(this).attr("value"));
+			pesquisar();
+		});
+	}); 
 </script>

@@ -110,7 +110,23 @@ public function listaAtivos(){
         return $this -> getSQL($sql);
 
     }
-	
+    
+    
+        function pesquisarParaInscricao($nome = "",$associacao = "") {
+
+        $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 1 ";
+        
+        if ($nome != "")
+            $sql .= " and ( p.nome like '$nome' or p.nomeMeio like '$nome%' or p.sobrenome like '$nome%')";
+        if ($associacao != "")
+            $sql .= " and (a.idAssociacao in($associacao))";
+        
+        $sql .= "  order by p.nome limit 0,10";  
+        
+        return $this -> getSQL($sql);
+
+    }
+    	
 	function Verificar($id){
 		$this -> getById($id);
 		$this->numeroFemeju = $this->getProximoNumero();

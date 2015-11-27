@@ -294,11 +294,11 @@
 	$(document).ready(function() {
 
 		var options = {
-			script : "ajax/json_atletas.php?",
+			script : "ajax/json_atletas.php?associacao={IDS_ASSOCIACAO}&",
 			varname : "busca",
 			json : true,
 			noresults : "Nenhum atleta encontrado",
-			maxresults : 35,
+			maxresults : 5,
 			callback : function(obj) {
 				var atleta;
 				$.ajax({

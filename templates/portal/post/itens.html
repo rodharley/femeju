@@ -1,33 +1,32 @@
-<div class="row">            
-           <div class="col-sm-12" id="post">               
-                <!-- BEGIN BLOCK_POST -->
-                <div class="divisao">
-                <div class="etiqueta">                    
-                     <div class="row">
-                    
-                    <div class="col-lg-2" >
-                        
-                        <div class="thumb" style="background-image: url('{post_imagem}');"> </div>
-                        
-                    </div>
-                    
-                    <div class="col-lg-10" >
-                        <small class="pull-right">{post_data}</small>
-                        <p>{post_titulo}</p>
-                        <p><small>{post_mensagem}</small></p>                        
-                        <!-- BEGIN BLOCK_POST_ARQUIVO -->
-                        <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
-                        <!-- END BLOCK_POST_ARQUIVO -->
-                         <!-- BEGIN BLOCK_POST_DETALHE -->                           
-                        <a href="portal_post-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a>
-                        <!-- END BLOCK_POST_DETALHE -->                     
-                    </div>           
-                    </div>
-                </div>
-                </div>
-                <!-- END BLOCK_POST -->                
-           </div>
+        <div id="mod-noticias">
+       <!-- BEGIN BLOCK_POST -->
+        
+<div class="row">
+    <div class="col-sm-12">
+        <div style="margin-bottom:0px; padding-top:20px; border-top:1px solid #E3E3E8;min-height:120px;" class=" format-standard">
+            
+            <a class="post-format-s" title="Imagem" href="#"><span> </span><img alt="Imagem" src="{post_imagem}" class="alignleft"></a>
+            
+            <header class="entry-header">
+                <h2 class="post-title-small"><a title="leia mais.." href="#">{post_titulo}</a></h2>
+            </header>
+            <p>
+                {post_mensagem}
+            </p>
+            <!-- BEGIN BLOCK_POST_ARQUIVO -->
+            <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
+            <!-- END BLOCK_POST_ARQUIVO -->
+            <div class="entry-info">
+                {post_data}  <!-- BEGIN BLOCK_POST_DETALHE --> | <a title="leia mais.." href="portal_post-detalhe?id={idhash}">Ler mais</a> <!-- END BLOCK_POST_DETALHE -->
+            </div>
+
         </div>
+</div>
+</div>
+<!-- END BLOCK_POST --> 
+
+  </div>      
+        
         
          <nav>
             <ul class="pager">
@@ -47,6 +46,7 @@
                 </li>
             </ul>
         </nav> 
-                <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+
+<input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
 <input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
 <input type="hidden" value="{ANO}" id="ano" name="ano"/>

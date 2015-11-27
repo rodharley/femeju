@@ -7,37 +7,34 @@
             <h2>Galeria {ANO}</h2>
         </div>
         
-         <div class="row">            
-           <div class="col-sm-12" id="post">               
-                <!-- BEGIN BLOCK_POST -->
-                <div class="divisao">
-                <div class="etiqueta">                    
-                     <div class="row">
-                    
-                    <div class="col-lg-2" >                       
-                        <div class="thumb"> 
-                        	<!-- BEGIN BLOCK_IMG -->
-      <img src="img/galeria/{IMAGEM}" alt="{IMAGEM}" height="100%" class="img-responsive">
-      <!-- END BLOCK_IMG -->
-      <!-- BEGIN BLOCK_VIDEO -->
-      <video width="100%" height="100%">
-  		<source src="img/galeria/{IMAGEM}" type="video/mp4">
-  		</video>
-      <!-- END BLOCK_VIDEO -->
-                        	</div>                        
-                    </div>
-                    
-                    <div class="col-lg-10" >
-                        <span class="data pull-right">{post_data}</span>
-                        <h5>{post_titulo}</h5> 
-                        <p><a class="btn btn-default" href='portal_galeria-detalhe?id={ID_HASH}'>Visualizar</a></p>
-                    </div>           
-                    </div>
-                </div>
-                </div>
-                <!-- END BLOCK_POST -->                
-           </div>
+        <div id="mod-noticias">
+        <!-- BEGIN BLOCK_POST -->
+        
+<div class="row">
+    <div class="col-sm-12">
+        <div style="margin-bottom:0px; padding-top:20px; border-top:1px solid #E3E3E8;min-height:120px;" class=" format-standard">
+            
+            <a class="post-format-s" title="Imagem" href="portal_galeria-detalhe?id={ID_HASH}"><span> </span>
+                <img alt="Imagem" src="img/galeria/{IMAGEM}" class="alignleft"></a>
+            
+            <header class="entry-header">
+                <h2 class="post-title-small"><a title="ver" href="portal_galeria-detalhe?id={ID_HASH}">{post_titulo}</a></h2>
+            </header>
+            <div class="entry-info">
+                                {post_data}  | <a title="ver" href="portal_galeria-detalhe?id={ID_HASH}">Entrar</a>
+
+            </div>
+
         </div>
+</div>
+</div>
+<!-- END BLOCK_POST -->     
+
+  </div>
+        
+        
+        
+         
         
          <nav>
             <ul class="pager">

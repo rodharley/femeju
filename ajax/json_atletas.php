@@ -3,7 +3,7 @@ header("Content-Type: application/json", true);
 $menu = 0;
 include("configuraAjax.php");
 $pessoa= new Atleta();
-$rs = $pessoa->pesquisar(0,10,$_REQUEST['busca']);
+$rs = $pessoa->pesquisarParaInscricao($_REQUEST['busca'],isset($_REQUEST['associacao']) ? $_REQUEST['associacao'] :"");
 $lista = array();
 foreach ($rs as $key => $value) {
 	$a = array("id"=>$value->id,

@@ -186,10 +186,6 @@ border-top: solid 1px #fff;
 }
 
 .etiqueta .thumbnoticia {
-	background-size:cover;
-	background-repeat: no-repeat;	
-	background-position:center;
-	height: 6em;
 	width: 100%;
 }
 
@@ -206,6 +202,98 @@ border-top: solid 1px #fff;
 	font-weight: bold;
 	text-shadow: 1px 1px #000000;
 }
+
+#mod-noticias .alignleft {
+				float: left;
+				margin: 0 20px 10px 0;
+				max-width: 9em;
+				
+			}
+
+#mod-noticias .entry-header {
+				color: #999;
+				font-size: 12px;
+			}
+
+#mod-noticias .post-title-small {
+				font-size: 15px;
+				font-weight: 700;
+				line-height: 19px;
+				margin: 0 0 5px;
+				color: #e08e0b;
+			}
+#mod-noticias h2, h2.post-title-small a{
+				color: #e08e0b;				
+			}
+#mod-noticias h2, h2.post-title {
+				color: #e08e0b;
+				font-family: "Open Sans", sans, serif;
+				font-size: 23px;
+				font-weight: 400;
+				line-height: 30px;
+			}
+#mod-noticias h2, h2.post-title a{
+				color: #e08e0b;				
+			}
+
+#mod-noticias .more_post {
+    border-bottom: 1px solid #e3e3e8;
+    font-size: 14px !important;
+    line-height: 12px !important;
+    margin: 0 0 0 10px !important;
+    padding: 0 !important;
+}
+#mod-noticias h1, h1.post-title {
+    color: #6f7072;
+    font-family: "Open Sans",sans,serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 39px;
+}
+#mod-noticias h1, h1.post-title a{
+				color: #e08e0b;				
+			}
+
+#mod-noticias .post-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32px;
+    margin: 0 0 10px;
+}
+#mod-noticias h1, h1.post-title {
+    color: #6f7072;
+    font-family: "Open Sans",sans,serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 39px;
+}
+#mod-noticias .entry-info {
+    color: #999;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+    text-transform: capitalize;
+}
+
+#mod-noticias .divider-post {
+    border-bottom: 1px solid #e3e3e8;
+    display: inline-block;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    min-height: 1px;
+    position: relative;
+}
+
+#mod-noticias .entry-content {
+    margin-top: 20px;
+}
+
+
+#mod-noticias .entry-content p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
 /*destaques*/
 #destaques {
 	margin-top: 2em;

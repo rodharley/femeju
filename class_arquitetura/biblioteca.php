@@ -1,8 +1,8 @@
 <?php
 class Biblioteca {
 
-var $HASH_URL = 'jemejubruno';
-var $PAGINACAO = 10;
+var $HASH_URL = 'femejubruno';
+var $PAGINACAO = 15;
 
 function retorna_hora($data){
 	return substr($data, 10);

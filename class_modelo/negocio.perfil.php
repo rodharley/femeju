@@ -1,6 +1,8 @@
 <?php
 class Perfil extends Persistencia{
-	const RESPONSAVEL = 3;    
+	const RESPONSAVEL = 3;
+    const ADMINISTRADOR = 1;    
+    const ARBITRAGEM = 2;
 	var $descricao;
     
 	
@@ -8,7 +10,16 @@ class Perfil extends Persistencia{
         return $this->getRows(0,999,array(),array("id"=>" >= ".$_SESSION['fmj.userPerfilId']));        
     }
     
-    
+        function Excluir($id) {
+        $this->getById($this -> md5_decrypt($id));
+        if($this -> delete($this->id))
+        $_SESSION['fmj.mensagem'] = 67;
+        else
+        $_SESSION['fmj.mensagem'] = 17;
+        header("Location:admin_perfil-main");
+        exit();
+    }
+        
 	public function Alterar(){
 		$oAcesso = new Acesso();
 		$idPerfil = $this->md5_decrypt($_POST['id']);

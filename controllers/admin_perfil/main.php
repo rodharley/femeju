@@ -29,8 +29,11 @@ $TPL->addFile("CONTEUDO", "templates/admin/perfil/list.html");
 $alist = $perfil->getRows();
 $TPL->QUANTIDADE = count($alist);
 foreach($alist as $key => $perfilario){
+	$TPL->disabled = "";    
 	$TPL->nome = $perfilario->descricao;
 	$TPL->ID_HASH = $perfil->md5_encrypt($perfilario->id);
+    if($perfilario->id == Perfil::ADMINISTRADOR || $perfilario->id == Perfil::RESPONSAVEL || $perfilario->id == Perfil::ARBITRAGEM)
+    $TPL->disabled = "disabled";
 	$TPL->block("BLOCK_ITEM_LISTA");
 }
 

@@ -342,14 +342,22 @@ class Usuario extends Persistencia {
 			exit();
 		} else {
 			$this -> getById($_SESSION['fmj.userId']);
-			$this -> pessoa-> nome = $_REQUEST['nome'];
-			$this -> pessoa->cpf = $strCPF;
-			$this -> pessoa->email = $_REQUEST['email'];
-			$this -> pessoa -> telResidencial = str_replace("_","",$_REQUEST['telefone']);
+            $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
+            $this -> pessoa -> nome = $_REQUEST['nome'];
+            $this->pessoa->nome = $_REQUEST['nome'];
+            $this->pessoa->sobrenome = $_REQUEST['sobreNome'];
+            $this->pessoa->nomeMeio = $_REQUEST['nomeMeio'];
+            $this -> pessoa -> telResidencial = str_replace("_","",$_REQUEST['telefone']);
             $this -> pessoa -> telCelular = str_replace("_","",$_REQUEST['celular']);
-			if ($_REQUEST['senha'] != "")
-				$this -> senha = md5($_REQUEST['senha']);
-
+            $this -> pessoa -> cpf = $strCPF;
+            $this -> pessoa -> email = $_REQUEST['email'];
+            $this-> pessoa->endereco = $_REQUEST['endereco'];
+            $this-> pessoa->bairro = $_REQUEST['bairro'];
+            $this-> pessoa->cidade = $cidadeEndereco;
+            $this-> pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);
+            if ($_REQUEST['senha'] != "")
+                $this -> senha = md5($_REQUEST['senha']);
+            
 			//incluir imagem se ouver
 			if ($_FILES['foto']['name'] != "") {
 				if ($this -> pessoa -> foto != "pessoa.png")

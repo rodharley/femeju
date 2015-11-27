@@ -11,6 +11,9 @@ switch ($_REQUEST['acao']){
 		break;
      case 'incluir' :
         $perfil->Incluir();
+        break;
+     case 'excluir' :
+        $perfil->Excluir($_REQUEST['id']);
         break;  	
 }
 }

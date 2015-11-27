@@ -7,55 +7,9 @@
             <h2>{TITULO} {ANO}</h2>
         </div>
         <div id="boxitens">
-         <div class="row">            
-           <div class="col-sm-12" id="post">               
-                <!-- BEGIN BLOCK_POST -->
-                <div class="divisao">
-                <div class="etiqueta">                    
-                     <div class="row">
-                    
-                    <div class="col-lg-2" >
-                        
-                        <div class="thumb" style="background-image: url('{post_imagem}');"> </div>
-                        
-                    </div>
-                    
-                    <div class="col-lg-10" >
-                        <small class="pull-right">{post_data}</small>
-                        <p>{post_titulo}</p>
-                        <p><small>{post_mensagem}</small></p>                        
-                        <!-- BEGIN BLOCK_POST_ARQUIVO -->
-                        <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
-                        <!-- END BLOCK_POST_ARQUIVO -->
-                         <!-- BEGIN BLOCK_POST_DETALHE -->                           
-                        <a href="portal_post-detalhe?id={idhash}" class="btn btn-primary btn-xs">Ler mais</a>
-                        <!-- END BLOCK_POST_DETALHE -->                     
-                    </div>           
-                    </div>
-                </div>
-                </div>
-                <!-- END BLOCK_POST -->                
-           </div>
-        </div>
+         
         
-         <nav>
-            <ul class="pager">
-                <li class="previous {DISABLEL}">
-                    <a href="#" class="paginar" value="{PAGINA_ANTERIOR}"><span aria-hidden="true">&larr;</span> Recentes</a>
-                </li>
-               <li class="center disabled">
-                    <a href="#">Página {PAGINA}</a>
-                </li>
-               <!-- BEGIN BLOCK_ANO -->
-                <li class="center">
-                    <a href="#" class="anualizar" value="{ANO_V}">{ANO_V}</a>
-                </li>
-                <!-- END BLOCK_ANO -->
-                <li class="next {DISABLER}">
-                    <a href="#" class="paginar" value="{PROXIMA_PAGINA}">Anteriores <span aria-hidden="true">&rarr;</span></a>
-                </li>
-            </ul>
-        </nav>   
+      
         <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
 <input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
 <input type="hidden" value="{ANO}" id="ano" name="ano"/> 

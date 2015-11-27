@@ -43,7 +43,7 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="cnpj"><i class='fa'></i><b>CNPJ</b></label>
-                        <input type="text" id="cnpj" name="cnpj" value="{cnpj}" class="form-control"/>
+                        <input type="text" id="cnpj" name="cnpj" value="{cnpj}" class="cnpj form-control"/>
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6">
@@ -125,7 +125,7 @@
              <div class="col-md-4 col-xs-12">
                  <div class="form-group">
                         <label for="nomemeio_responsavel"><i class='fa'></i><b>Nome do Meio</b></label>
-                        <input type="text" id="nomemeio_responsavel" name="nomemeio_responsavel" value="{nomemeio_responsavel}" class="required form-control"/>
+                        <input type="text" id="nomemeio_responsavel" name="nomemeio_responsavel" value="{nomemeio_responsavel}" class="form-control"/>
                     </div>
             </div>
              <div class="col-md-4 col-xs-12">
@@ -136,16 +136,23 @@
             </div>
             </div>  
             <div class="row">
-            <div class="col-md-6 col-xs-6">
+            <div class="col-md-4 col-xs-12">
+                 <div class="form-group">
+                        <label for="cpf"><i class='fa'></i><b>CPF/CNPJ</b></label>
+                        <input type="text" id="cpf_responsavel" name="cpf_responsavel" placeholder="CPF" value="{cpf_responsavel}" class="cpfcnpj form-control"/>
+                    </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                         <label for="email"><i class='fa'></i><b>E-mail</b></label>
                         <input type="text" id="email" name="email" value="{email_responsavel}" class="required form-control email"/>
                          
                     </div>
             </div>
-             <div class="col-md-6 col-xs-6">
+            
+             <div class="col-md-4 col-xs-12">
                  <div class="form-group">
-                        <label for="celular"><i class='fa'></i><b>Telefone 1</b></label>
+                        <label for="celular"><i class='fa'></i><b>Celular</b></label>
                         <input type="text" id="celular_responsavel" name="celular_responsavel" value="{celular_responsavel}" class="required form-control"/>
                     </div>
             </div>
@@ -301,6 +308,7 @@ var as = new bsn.AutoSuggest('nome_responsavel', options);
         $("#cnpj").inputmask({ mask: "99.999.999-9999-99"});
         $("#celular_responsavel").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#telefone1").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
+        $("#cpf_responsavel").inputmask({ mask: ["999.999.999-99","99.999.999/9999-99"] });
         $("#cep").inputmask({ mask: "99.999-999"});
         $("#cep_responsavel").inputmask({ mask: "99.999-999"});
         $("#telefone2").inputmask({ mask:["+99 99 9999-9999","+99 99 99999-9999"]});

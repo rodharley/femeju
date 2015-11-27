@@ -84,6 +84,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->id = $objAssociacao->id;
     $TPL->id_responsavel = $objAssociacao->responsavel->id;    
     $TPL->nome_responsavel = $objAssociacao->responsavel->pessoa->nome;
+    $TPL->cpf_responsavel = $objAssociacao->responsavel->pessoa->cpf;
     $TPL->nomemeio_responsavel = $objAssociacao->responsavel->pessoa->nomeMeio;
     $TPL->sobrenome_responsavel = $objAssociacao->responsavel->pessoa->sobrenome;
     $TPL->email_responsavel = $objAssociacao->responsavel->pessoa->email;
