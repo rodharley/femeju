@@ -18,7 +18,7 @@ use OpenBoleto\Banco\Brb;
 use OpenBoleto\Agente;
 
 
-$sacado = new Agente($pagamento->responsavel->pessoa->getNomeCompleto(), $pagamento->responsavel->pessoa->cpf, $pagamento->responsavel->pessoa->endereco, $pagamento->responsavel->pessoa->bairro, $pagamento->responsavel->pessoa->cidade->nome, $pagamento->responsavel->pessoa->cidade->uf->uf);
+$sacado = new Agente($pagamento->nomeSacado, $pagamento->formataCPFCNPJ($pagamento->cpfSacado), $pagamento->enderecoSacado, $pagamento->bairroSacado, $pagamento->cidadeSacado, $pagamento->ufSacado);
 $cedente = new Agente('Femeju - Federação Metropolitana de Judo', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
 $boleto = new Brb(array(

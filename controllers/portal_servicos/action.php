@@ -46,8 +46,10 @@ switch ($_REQUEST['acao']){
         if(isset($_REQUEST['atleta'])){
         $objAno->getByAno($_REQUEST['ano']);
         $conn->connection->autocommit(false);
-        $itensPagamento = $obj->geraItensPagamento();        
-        $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$_SESSION['fmj.userId'],"Anuidade",$itensPagamento);
+        $itensPagamento = $obj->geraItensPagamento(); 
+        $resp = new Pessoa();
+        $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);        
+        $idPagamento = $pag->gerarPagamento(GrupoCusta::ANUIDADE,$_REQUEST['tipoPagamento'],$objAno->dataVencimento,$arrayResp,"Anuidade",$itensPagamento);
         $obj->atualizarAnuidades($idPagamento,$objAno);
          $_SESSION['fmj.mensagem'] = 52;
         $conn->connection->commit();

@@ -40,5 +40,17 @@ class Pessoa extends Persistencia {
             $sql = "select p.* from ".$this::TABELA." p left outer join ".Atleta::TABELA." a on a.id = p.id where nome like '%$nome%' and a.id is null order by nome asc";
             return $this->getSQL($sql);
         }
+        
+        function gerarArraySacado($idPessoa){
+            $this->getById($idPessoa);
+            $arrayResp = array();
+            $arrayResp['nome'] = $this->nome." ".$this->nomeMeio." ".$this->sobrenome;
+            $arrayResp['cpf'] = $this->cpf;
+            $arrayResp['endereco'] = $this->endereco;
+            $arrayResp['bairro'] = $this->bairro;
+            $arrayResp['cidade'] = $this->cidade != Null ? $this->cidade->nome : "Brasília";
+            $arrayResp['uf'] = $this->cidade != Null ? $this->cidade->uf->uf : "DF";
+            return $arrayResp;
+        }
 }
 ?>

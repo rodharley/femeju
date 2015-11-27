@@ -1,0 +1,392 @@
+
+      
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h4>{LABEL}</h4>
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    <legend>
+                        Pagamento
+                    </legend>
+                    <div class="row">
+                        <div class="col-md-8 col-xs-8">
+                            <div class="form-group">
+                                <label for="descricao"><i class='fa'> </i><b>Descrição</b></label>
+                                <input type="text" class="form-control required" name="descricao" id="descricao" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Data de Vencimento</b></label>
+                                
+                                    <input type="text" class="form-control required cpfcnpj" name="data" id="data" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+                 <fieldset>
+                    <legend>
+                        Sacado
+                    </legend>
+                    <div class="row">
+                        <div class="col-md-8 col-xs-8">
+                            <div class="form-group">
+                                <label for="nomeSacado"><i class='fa'> </i><b>Nome</b></label>
+                                <input type="text" class="form-control required" name="nomeSacado" id="nomeSacado" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="cpfSacado"><i class='fa'> </i><b>CPF/CNPJ</b></label>
+                                
+                                    <input type="text" class="form-control required" name="cpfcnpj" id="cpfcnpj" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-xs-8">
+                            <div class="form-group">
+                                <label for="endereco"><i class='fa'> </i><b>Endereço</b></label>
+                                <input type="text" class="form-control required" name="endereco" id="endereco" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="bairro"><i class='fa'> </i><b>Bairro</b></label>
+                                
+                                    <input type="text" class="form-control required" name="bairro" id="bairro" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="uf"><i class='fa'> </i><b>Estado</b></label>
+                         <select name="uf" id="uf" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_UF -->
+                            <option value="{id_uf}" {selectedUf}>{uf}</option>
+                            <!-- END BLOCK_UF -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-9 col-xs-9">
+                    <div class="form-group">
+                        <label for="cidade"><i class='fa'> </i><b>Cidade</b></label>
+                        <select name="cidade" id="cidade" class="required form-control">
+                            <option value="">Selecione</option>
+                            <!-- BEGIN BLOCK_CIDADE -->
+                            <option value="{id_cidade}" {selectedCidade}>{nome_cidade}</option>
+                            <!-- END BLOCK_CIDADE -->
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+                    </fieldset>
+                
+                <fieldset>
+                    <legend>
+                        Adicionar Itens 
+                    </legend>
+                    
+                    <div class="panel panel-success">
+                        <form role="form" method="post" action="#" id="frmAtleta" name="frmAtleta">
+                            <input type="hidden" name="idAtleta" id="idAtleta" class="" value=""/>
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="descricao"><i class='fa'> </i><b>Descrição</b></label>
+                                            <input type="text" name="nome" id="nome" class="form-control required"/>
+                                        </div>
+                                    </div>                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="documento"><i class='fa'> </i><b>Custa</b></label>
+                                            <select id="graduacao" name="graduacao" class="form-control required">
+                                                <option value="">Selecione</option>
+                                                <!-- BEGIN BLOCK_CUSTA -->
+                                                <option value="{ID_CUSTA}">{LABEL_CUSTA}</option>
+                                                <!-- END BLOCK_CUSTA -->
+                                            </select>
+                                        </div>
+                                    </div>                                    
+                                </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Fechar
+                                </button>
+                                <button type="button" class="btn btn-success" id="btAdicionar">
+                                    Adicionar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-condensed table-striped" id="tblList"></table>
+                    <div class="row">
+                        <div class="col-md-8 text-right">Total:</div>
+                        <div class="col-md-4 text-right">
+                            <input type="text" disabled="disabled" class="form-control disabled text-right" name="total" id="total" value="R$ 0,00"/>
+                        </div>
+
+                    </div>
+                    
+                </fieldset>
+                <form role="form" method="post" action="admin_pagamento-action" id="frmInscricao" class="form">
+                    <input type="hidden" name="acao" id="acao" value="inscricao"/>
+                    <input type="hidden" name="itens" id="itens" value=""/>
+                    <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+                    <fieldset>
+                        <legend>
+                            forma de Pagamento
+                        </legend>
+                        <div class="form-group">
+                            <label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
+                            <div class="row">
+                                <!-- BEGIN BLOCK_TIPO_PAG -->
+                                <div class="col-xs-2 col-md-2 text-center">
+                                    <div class="thumbnail">
+                                        <img src="img/credit/{IMG_PAG}" class="img-responsive" alt="{NOME_PAG}">
+                                        <input type="radio" class="form-control required" value="{ID_PAG}" name="tipoPagamento" {CHECKED}/>
+                                        {NOME_PAG}
+                                    </div>
+                                </div>
+                                <!-- END BLOCK_TIPO_PAG -->
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="panel-footer text-right">
+                <button class="btn btn-default btVoltar" type="button">
+                    <span class="glyphicon glyphicon-backward"> </span> Voltar
+                </button>
+                <button class="btn btn-primary" type="button" id="btAvancar">
+                    Concluir <span class="glyphicon glyphicon-forward"> </span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
+<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
+<script>
+	function somatotal() {
+		var total = 0;
+		for (var i in atletas) {
+			var atl = JSON.parse(atletas[i]);
+			total = total + eval(parseFloat(atl.valor));
+		}
+		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+
+	}
+
+	var atletas = [];
+	var selected_index = -1;
+	function LimpaCampos() {
+		$("#nome").val("");
+		$("#email").val("");
+		$("#idAtleta").val("");
+		$("#documento").val("");
+		$("#telefone").val("");
+		$("#valor").val($("#valorComp").val());
+		$("#valorReal").val($("#valorComp").val());
+		$('#dobra1').iCheck('uncheck');
+		$('#dobra2').iCheck('uncheck');
+		$('#dobra3').iCheck('uncheck');
+		$("#graduacao").val("");
+		$("#classe").val("");
+		$("#categoria").html("<option value=''>Selecione</option>");
+
+	}
+
+	function AddAtleta() {
+		var isdobra1 = "Não";
+		var isdobra2 = "Não";
+		var isdobra3 = "Não";
+		if ($("#dobra1").prop("checked"))
+			isdobra1 = "Sim";
+		if ($("#dobra2").prop("checked"))
+			isdobra2 = "Sim";
+		if ($("#dobra3").prop("checked"))
+			isdobra3 = "Sim";
+		var atleta = JSON.stringify({
+		    id: $("#idAtleta").val(),
+			nome : $("#nome").val(),
+			email : $("#email").val(),
+			documento : $("#documento").val(),
+			telefone : $("#telefone").val(),
+			classe : $("#classe").val(),
+			categoria : $("#categoria").val(),
+			graduacao : $("#graduacao").val(),
+			valor : $("#valorReal").val(),
+			dobra1 : isdobra1,
+			dobra2 : isdobra2,
+			dobra3 : isdobra3,
+			nomeGraduacao : $("#graduacao").find('option:selected').text(),
+			nomeCategoria : $("#categoria").find('option:selected').text(),
+			nomeClasse : $("#classe").find('option:selected').text(),
+		});
+		atletas.push(atleta);
+	}
+
+	function Delete() {
+		atletas.splice(selected_index, 1);
+
+	}
+
+	function List() {
+		$("#tblList").html("");
+		$("#tblList").html("<thead>" + "   <tr>" + "   <th></th>" + "   <th>Nome</th>" + "   <th>Categoria</th>" + "   <th>Valor</th>" + "   <th>Dobra 1</th>" + "   <th>Dobra 2</th>" + "   <th>Dobra 3</th>" + "   </tr>" + "</thead>" + "<tbody>" + "</tbody>");
+		for (var i in atletas) {
+			var atl = JSON.parse(atletas[i]);
+			$("#tblList tbody").append("<tr>" + "  <td><button type='button' alt='Delete" + i + "' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + "  <td>" + atl.nome + "</td>" + "  <td>" + atl.nomeGraduacao + "-" + atl.nomeCategoria + "-" + atl.nomeClasse + "</td>" + "  <td>R$ " + parseFloat(atl.valor).format(2, 3, '.', ',') + "</td>" + "  <td>" + atl.dobra1 + "</td>" + "  <td>" + atl.dobra2 + "</td>" + "  <td>" + atl.dobra3 + "</td>" + "</tr>");
+		}
+	}
+
+
+	$(document).on('click', '.btnDelete', function() {
+		selected_index = parseInt($(this).attr("alt").replace("Delete", ""));
+		Delete();
+		List();
+		somatotal();
+	});
+	
+	function cidadePorUf(){
+         $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                async:false,
+                data : {uf: $("#uf").val()},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+            });
+    }
+
+	$(document).ready(function() {
+        $('#data').datepicker();
+		$("#cpfcnpj").inputmask({ mask: ["999.999.999-99","99.999.999/9999-99"]});
+        
+        $("#uf").change(function(){
+            $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                data : {uf: $(this).val()},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+            });
+
+        });
+        
+        
+		$("#valor").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : ""
+		});
+		
+
+		
+
+		$("#btAdicionar").click(function() {
+			if ($("#frmAtleta").valid()) {
+				AddAtleta();
+				List();
+				LimpaCampos();
+				somatotal();
+			}
+		});
+
+		$("#btAvancar").click(function() {
+			if (atletas.length > 0) {
+				if (confirm("Confirma a inscrição na competição?")) {
+					var strjson = "[";
+					for (var i in atletas) {
+						var atl = JSON.parse(atletas[i]);
+						strjson = strjson + JSON.stringify(atl) + ',';
+					}
+					strjson = strjson + ']';
+					$("#itens").val(strjson);
+					if($("#frmInscricao").valid())
+					   $("#frmInscricao").submit();
+				}
+			} else {
+				alert("Você deve adicionar um ou mais atletas!");
+			}
+
+		});
+
+		$("#frmAtleta").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			rules : {
+				dobra1 : {
+					required : function(element) {
+						return $("#dobra2").prop("checked");
+					}
+				},
+				dobra2 : {
+					required : function(element) {
+						return $("#dobra3").prop("checked");
+					}
+				}
+			},
+			messages : {
+				dobra1 : {
+					required : "Para selecionar a dobra 2 você deve selecionar a dobra 1."
+				},
+				dobra2 : {
+					required : "Para selecionar a dobra 3 você deve selecionar a dobra 2."
+				}
+			}
+		});
+		
+		$('.dobra').on('ifChanged', function(event){
+            var valor = parseFloat($("#valorComp").val());
+
+            $("input:checkbox.dobra").each(function() {
+                
+                if ($(this).prop("checked")) {
+                    valor = valor + parseFloat($(this).attr("valor"));
+                }
+
+            });
+            $("#valor").val(valor.format(2,3,".",","));
+            $("#valorReal").val(valor.format(2,3,".",","));
+        });
+        
+        $("#nome").change(function(){
+            $("#idAtleta").val("");
+        });
+
+	});
+
+</script>

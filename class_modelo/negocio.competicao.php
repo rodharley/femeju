@@ -137,7 +137,9 @@ class Competicao extends Persistencia {
                 $item->descricaoItem = $atleta->pessoa->getNomeCompleto();   
                 array_push($itensPagamento,$item);        
                 }
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$_SESSION['fmj.userId'],$this->titulo, $itensPagamento);
+                $resp = new Pessoa();
+                $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);  
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$arrayResp,$this->titulo, $itensPagamento);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
@@ -204,7 +206,9 @@ class Competicao extends Persistencia {
                 $item->descricaoItem = utf8_decode($arrAtleta['nome']);   
                 array_push($itensPagamento,$item);        
                 }
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$_SESSION['fmj.userId'],$this->titulo,$itensPagamento);
+                $resp = new Pessoa();
+                $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']); 
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$arrayResp,$this->titulo,$itensPagamento);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }

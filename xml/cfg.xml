@@ -223,10 +223,15 @@ set
 		<atrib tbname="bitPago" type="int">bitPago</atrib>	
 		<atrib tbname="codigo" type="txt">codigo</atrib>
 		<atrib tbname="numeroFebraban" type="txt">numeroFebraban</atrib>
-		<atrib tbname="descricao" type="txt">descricao</atrib>	
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="nomeSacado" type="txt">nomeSacado</atrib>
+		<atrib tbname="cpfSacado" type="txt">cpfSacado</atrib>
+		<atrib tbname="enderecoSacado" type="txt">enderecoSacado</atrib>
+		<atrib tbname="bairroSacado" type="txt">bairroSacado</atrib>
+		<atrib tbname="cidadeSacado" type="txt">cidadeSacado</atrib>
+		<atrib tbname="ufSacado" type="txt">ufSacado</atrib>	
 		<atrib tbname="idGrupo" type="int">grupo</atrib>	
-		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>		
-		<atrib tbname="idResponsavel" type="fk" clrelation="Usuario">responsavel</atrib>
+		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>
 		<atrib tbname="" type="set" clrelation="PagamentoItem" clorder="descricaoItem" clfk="pagamento">itens</atrib>		
 	</class>
 	<class name="PagamentoItem" tbname="fmj_pagamento_item" tbid="id" lazy="true">

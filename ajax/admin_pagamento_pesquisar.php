@@ -12,7 +12,7 @@ foreach($alist as $key => $n){
     $TPL->valor = $objPag->money($n->valorTotal,"atb");
     $TPL->situacao = $n->bitPago == 1 ? "Pago" : "Em aberto";
     $TPL->colorSituacao = $n->bitPago == 1 ? "success" : "danger";
-    $TPL->responsavel = $n->responsavel->pessoa->nome;
+    $TPL->responsavel = $n->nomeSacado;
     $TPL->ID_HASH = $objPag->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
     

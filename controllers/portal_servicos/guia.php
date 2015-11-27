@@ -15,7 +15,7 @@ $TPL->addFile("CONTEUDO", "templates/portal/pagamento/guia.html");
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $TPL->ID_HASH = $obj->md5_encrypt($obj->id);
 $TPL->TIPO_CUSTA = $grupo->getDescricao($obj->grupo);
-$TPL->RESPONSAVEL = $obj->responsavel->pessoa->getNomeCompleto();
+$TPL->RESPONSAVEL = $obj->nomeSacado;
 $TPL->VALOR_TOTAL = "R$ ".$obj->money($obj->valorTotal,"atb");
 $TPL->DATA_VENC = $obj->convdata($obj->dataVencimento, "mtn");
 $TPL->IMG_TIPO = $obj->tipo->imagem;
