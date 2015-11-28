@@ -35,6 +35,7 @@ $TPL->DATA_VENC = $obj->convdata($obj->dataVencimento, "mtn");
 $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
+$TPL->DESCRICAO = $obj->descricao; 
 $TPL->SITUACAO = $obj->bitPago == 1 ? "Pago" : "Em aberto";
 $TPL->COLOR_SITUACAO = $obj->bitPago == 1 ? "success" : "danger";
 //boleto

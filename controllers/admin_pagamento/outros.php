@@ -50,6 +50,7 @@ foreach ($rspag as $key => $value) {
 //custas
        foreach ($rsCustas as $key2 => $custa) {
             $TPL->ID_CUSTA = $custa->id;
+            $TPL->VALOR = $custa->valor;
             $TPL->LABEL_CUSTA = $custa->descricao."- R$ ".$objC->money($custa->valor,"atb");
             $TPL->block("BLOCK_CUSTA");
         }

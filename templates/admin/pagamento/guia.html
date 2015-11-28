@@ -8,44 +8,54 @@
             <div class="row">
                 <div class="col-xs-3 col-md-3">
                     <label for="tipoPagamento"><i class='fa'> </i><b>Tipo de Pagamento</b></label>
+                   <div class="form-control-static">
                     <img src="img/credit/{IMG_TIPO}" class="img-responsive" alt="{DESC_TIPO}" title="{DESC_TIPO}" style="width: 5em;">
-
+					</div>
                 </div>
                 <div class="col-xs-3 col-md-3">
                     <div class="form-group">
                     <label for="tipoCusta"><i class='fa'> </i><b>Tipo de Custas</b></label>
-                    <br/>
-                    {TIPO_CUSTA}
+                    
+                   <div class="form-control-static"> {TIPO_CUSTA}</div>
                     </div>
                 </div>
                 <div class="col-xs-3 col-md-3">
                     <div class="form-group">
                     <label for="responsavel"><i class='fa'> </i><b>Responsavel</b></label>
-                    <br/>
-                    {RESPONSAVEL}
+                    
+                     <div class="form-control-static"> {RESPONSAVEL}</div>
                     </div>
                 </div>
                 <div class="col-xs-3 col-md-3">
                     <div class="form-group">
                     <label for="datavencimento"><i class='fa'> </i><b>Data de Vencimento</b></label>
-                    <br/>
-                    {DATA_VENC}
+                    
+                      <div class="form-control-static">{DATA_VENC}</div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-3 col-md-3">
+                <div class="col-xs-6 col-md-6">
                     <div class="form-group">
-                    <label for="situacao"><i class='fa'> </i><b>Situação</b></label>
-                    <br/>
-                    <span class="label label-{COLOR_SITUACAO}">{SITUACAO}</span>
+                    <label for="situacao"><i class='fa'> </i><b>Descrição</b></label>
+                    
+                     <div class="form-control-static"> {DESCRICAO}</div>
                     </div>
                 </div>
                 <div class="col-xs-3 col-md-3">
                     <div class="form-group">
                     <label for="datapagamento"><i class='fa'> </i><b>Data do Pagamento</b></label>
-                    <br/>
+                      <div class="form-control-static">
                     {DATA_PAGAMENTO}
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="form-group">
+                    <label for="situacao"><i class='fa'> </i><b>Situação</b></label>
+                    <div class="form-control-static">
+                    <span class="label label-{COLOR_SITUACAO}">{SITUACAO}</span>
+                    </div>
                     </div>
                 </div>
             </div>
