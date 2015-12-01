@@ -39,7 +39,9 @@ require("shutdow.php");
 }catch(Exception $e){
     
     //print_r($e);
+    //echo $_SERVER['HTTP_HOST'];
     //exit();
+
     $TPL = new Template(URI."/templates/portal/layout.html");
 	$TPL->addFile("CONTEUDO", URI."/templates/erro/erro500.html");
 	if (DESENVOLVIMENTO)

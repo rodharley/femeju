@@ -227,7 +227,7 @@ border-top: solid 1px #fff;
 			}
 #mod-noticias h2, h2.post-title {
 				color: #e08e0b;
-				font-family: "Open Sans", sans, serif;
+				
 				font-size: 23px;
 				font-weight: 400;
 				line-height: 30px;
@@ -245,7 +245,7 @@ border-top: solid 1px #fff;
 }
 #mod-noticias h1, h1.post-title {
     color: #6f7072;
-    font-family: "Open Sans",sans,serif;
+    
     font-size: 32px;
     font-weight: 400;
     line-height: 39px;
@@ -262,7 +262,7 @@ border-top: solid 1px #fff;
 }
 #mod-noticias h1, h1.post-title {
     color: #6f7072;
-    font-family: "Open Sans",sans,serif;
+    
     font-size: 32px;
     font-weight: 400;
     line-height: 39px;

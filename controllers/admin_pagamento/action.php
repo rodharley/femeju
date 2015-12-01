@@ -50,6 +50,19 @@ switch ($_REQUEST['acao']){
         }
         exit();
         break;     
+	case 'outros' :
+        if($itens = json_decode(utf8_encode(str_replace(",]", "]",$_REQUEST['itens'])),true)){
+            $conn->connection->autocommit(false);           
+            $idPagamento = $pag->gerarPagamentoOutros($itens);
+            $_SESSION['fmj.mensagem'] = 52;
+            header("Location:admin_pagamento-guia?id=".$comp->md5_encrypt($idPagamento));
+            $conn->connection->commit();
+        }else{
+            $_SESSION['fmj.mensagem'] = 55;
+            header("Location:admin_home-home");
+        }
+        exit();
+        break;     
 }
 }
 ?>

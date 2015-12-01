@@ -77,14 +77,14 @@ class Pagamento extends Persistencia{
     }
 
  function pesquisarPortalTotal($idResponsavel) {
-        $sql = "select count(p.id) as total from ".$this::TABELA." p inner join ".Pessoa::TABELA." pe on pe.cpf = p.cpfSacadp where pe.id = $idResponsavel";
+        $sql = "select count(p.id) as total from ".$this::TABELA." p inner join ".Pessoa::TABELA." pe on pe.cpf = p.cpfSacado where pe.id = $idResponsavel";
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
         
     }
  
  function pesquisarPortal($primeiro = 0, $quantidade = 9999, $idResponsavel) {
-        $sql = "select p.* from ".$this::TABELA." p inner join ".Pessoa::TABELA." pe on pe.cpf = p.cpfSacadp where pe.id = $idResponsavel";
+        $sql = "select p.* from ".$this::TABELA." p inner join ".Pessoa::TABELA." pe on pe.cpf = p.cpfSacado where pe.id = $idResponsavel";
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> getSQL($sql);
     }
@@ -104,5 +104,40 @@ class Pagamento extends Persistencia{
         return $this -> getSQL($sql);
 
     }
+	
+	public function gerarPagamentoOutros($itens)
+   {
+            
+            $grupoC = new GrupoCompeticao();
+            $pag = new Pagamento();
+            $itensPagamento = array();
+            $custa = new Custa();
+            $cidade = new Cidade();
+            $cidade->getById($_REQUEST['cidade']);
+			$dataPag = $this->convdata($_REQUEST['data'], "ntm");
+			
+             foreach ($itens as $key => $i) {                
+                //gera o item de pagamento
+                $item = new PagamentoItem();  
+                $item->atleta = NULL;
+                //soma o valor total
+                $custa->getById($i['custa']);
+                $total = $custa->valor;
+                $item->valor = $total; 
+                $item->custa = $custa;
+                $item->descricaoItem = utf8_decode($i['descricao']);   
+                array_push($itensPagamento,$item);        
+                }
+				$arrayResp = array();
+	            $arrayResp['nome'] = $_REQUEST['nomeSacado'];
+	            $arrayResp['cpf'] = $this->limpaDigitos($_REQUEST['cpfcnpj']);
+	            $arrayResp['endereco'] = $_REQUEST['endereco'];
+	            $arrayResp['bairro'] = $_REQUEST['bairro'];
+	            $arrayResp['cidade'] = $cidade->nome;
+	            $arrayResp['uf'] = $cidade->uf->uf;                
+ 
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::OUTROS,$_REQUEST['tipoPagamento'],$dataPag,$arrayResp,$_REQUEST['descricao'],$itensPagamento);
+                return $idPagamento;
+   }
 }
 ?>
