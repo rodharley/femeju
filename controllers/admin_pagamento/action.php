@@ -34,6 +34,8 @@ switch ($_REQUEST['acao']){
         $conn->connection->commit();
         exit();
         break; 
+  case 'baixa' :
+      break;
   case 'inscricao' :
         if($atletas = json_decode(utf8_encode(str_replace(",]", "]",$_REQUEST['itens'])),true)){
             $conn->connection->autocommit(false);

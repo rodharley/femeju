@@ -6,6 +6,7 @@ class Menu extends Persistencia {
 	var $ordem;
 	var $subMenus;
 	var $icone;
+    var $visivel;
 
 public function recuperaMenus($superior = null,$validos){
 	if($superior != null)

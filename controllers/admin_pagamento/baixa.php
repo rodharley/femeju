@@ -1,5 +1,5 @@
 <?php
-$menu = 31;
+$menu = 41;
 include("includes/include.lock.php");
 $TPL = NEW Template("templates/admin/main.html");
 include("includes/include.montaMenu.php");
@@ -25,7 +25,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
                                     </ol>
                 </section>';
 
-$TPL->addFile("CONTEUDO", "templates/admin/pagamento/guia.html");
+$TPL->addFile("CONTEUDO", "templates/admin/pagamento/baixa.html");
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $TPL->ID_HASH = $obj->md5_encrypt($obj->id);
 $TPL->TIPO_CUSTA = $grupo->getDescricao($obj->grupo);
@@ -34,11 +34,10 @@ $TPL->VALOR_TOTAL = "R$ ".$obj->money($obj->valorTotal,"atb");
 $TPL->DATA_VENC = $obj->convdata($obj->dataVencimento, "mtn");
 $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
-$TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
+$TPL->DATA_PAGAMENTO = Date("d/m/Y");
 $TPL->SITUACAO = $obj->bitPago == 1 ? "Pago" : "Em aberto";
 $TPL->COLOR_SITUACAO = $obj->bitPago == 1 ? "success" : "danger";
-//boleto
-$TPL->TIPO_PAG_ARQUIVO = $obj->tipo->arquivo;
+
 
 $rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$obj->id));    
 
@@ -49,13 +48,7 @@ foreach ($rsItens as $key => $item) {
     $TPL->block("BLOCK_ITEM");
 }
 
-$armenus = explode(",",$_SESSION['fmj.menu']);
-if(in_array(41, $armenus) && $obj->bitPago == 0){
-    $TPL->block("BLOCK_BAIXA");
-}
-if($obj->bitPago == 0){
- $TPL->block("BLOCK_PAGAR");   
-}
+
 
 $TPL->show();
 ?>

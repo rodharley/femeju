@@ -202,6 +202,7 @@ set
 		<atrib tbname="nome" type="txt">nome</atrib>
 		<atrib tbname="url" type="txt">url</atrib>
 		<atrib tbname="ordem" type="int">ordem</atrib>
+		<atrib tbname="visivel" type="int">visivel</atrib>
 		<atrib tbname="icone" type="txt">icone</atrib>
 		<atrib tbname="idMenuPai" type="fk" clrelation="Menu">menuPai</atrib>
 		<atrib tbname="" type="set" clrelation="Menu" clorder="id" clfk="menuPai">subMenus</atrib>
