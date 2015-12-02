@@ -35,6 +35,11 @@ switch ($_REQUEST['acao']){
         exit();
         break; 
   case 'baixa' :
+      $conn->connection->autocommit(false);           
+            $pag->baixaPagamento($pag->md5_decrypt($_REQUEST['id']));
+            $_SESSION['fmj.mensagem'] = 68;
+            $conn->connection->commit();
+            header("Location:admin_pagamento-main");            
       break;
   case 'inscricao' :
         if($atletas = json_decode(utf8_encode(str_replace(",]", "]",$_REQUEST['itens'])),true)){
@@ -42,8 +47,9 @@ switch ($_REQUEST['acao']){
             $comp->getById($_REQUEST['idCompeticao']);
             $idPagamento = $comp->gerarInscricaoA($atletas);
             $_SESSION['fmj.mensagem'] = 52;
-            header("Location:admin_pagamento-guia?id=".$comp->md5_encrypt($idPagamento));
             $conn->connection->commit();
+            header("Location:admin_pagamento-guia?id=".$comp->md5_encrypt($idPagamento));
+            
         }else{
             $_SESSION['fmj.mensagem'] = 55;
             header("Location:admin_home-home");
@@ -55,8 +61,9 @@ switch ($_REQUEST['acao']){
             $conn->connection->autocommit(false);           
             $idPagamento = $pag->gerarPagamentoOutros($itens);
             $_SESSION['fmj.mensagem'] = 52;
-            header("Location:admin_pagamento-guia?id=".$comp->md5_encrypt($idPagamento));
             $conn->connection->commit();
+            header("Location:admin_pagamento-guia?id=".$comp->md5_encrypt($idPagamento));
+            
         }else{
             $_SESSION['fmj.mensagem'] = 55;
             header("Location:admin_home-home");

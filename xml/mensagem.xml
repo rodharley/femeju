@@ -71,6 +71,7 @@ Exemplos de mensagens:
 <mensagem id="65" type="success">Anuidade excluída com sucesso!</mensagem>
 <mensagem id="66" type="success">atletas revogados com sucesso!</mensagem>
 <mensagem id="67" type="success">Perfil Excluído com sucesso.</mensagem>
+<mensagem id="68" type="success">Baixa realizada com sucesso.</mensagem>
 </mensagens>
 
 

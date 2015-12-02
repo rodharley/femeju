@@ -20,12 +20,16 @@ class Pagamento extends Persistencia{
     var $itens = array();
     public function excluir($id){
         $this->getById($this->md5_decrypt($id));        
+        if($this->bitPago == 0){
         if ($this -> delete($this -> id)){
             $log = new Log();
             $log->gerarLog("Exclusão de Pagamento");
             $_SESSION['fmj.mensagem'] = 53;            
         }else
             $_SESSION['fmj.mensagem'] = 17;
+        }else{
+            $_SESSION['fmj.mensagem'] = 17;
+        }
         
     }
     
@@ -63,15 +67,16 @@ class Pagamento extends Persistencia{
         return $this->id;
     }
     
-    function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimento = "") {
+    function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimento = "",$codigo="") {
         $sql = "select count(p.id) as total from ".$this::TABELA." p  where 1 = 1 ";
         if($grupo != "")
             $sql .= " and p.idGrupo = $grupo"; 
         if ($responsavel != "")
             $sql .= " and ( p.nomeSacado like '%$responsavel%')";
         if ($dataVencimento != "")
-            $sql .= " and ( p.dataVencimento =  '%$dataVencimento%')";
-        
+            $sql .= " and ( p.dataVencimento =  '$dataVencimento')";
+        if ($codigo != "")
+            $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
@@ -88,7 +93,7 @@ class Pagamento extends Persistencia{
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> getSQL($sql);
     }
-    function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "") {
+    function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "",$codigo="") {
 
         $sql = "select p.* from ".$this::TABELA." p where 1 = 1 ";
         
@@ -97,8 +102,9 @@ class Pagamento extends Persistencia{
         if ($responsavel != "")
             $sql .= " and ( p.nomeSacado like '%$responsavel%')";
         if ($dataVencimento != "")
-            $sql .= " and ( p.dataVencimento =  '%$dataVencimento%')";
-        
+            $sql .= " and ( p.dataVencimento =  '$dataVencimento')";
+        if ($codigo != "")
+            $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
         
         $sql .= "  order by p.id desc limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
@@ -138,6 +144,31 @@ class Pagamento extends Persistencia{
  
                 $idPagamento = $pag->gerarPagamento(GrupoCusta::OUTROS,$_REQUEST['tipoPagamento'],$dataPag,$arrayResp,$_REQUEST['descricao'],$itensPagamento);
                 return $idPagamento;
-   }
+                 }
+
+                function baixaPagamento($idPagamento){
+                    $this->getById($idPagamento);
+                    $this->dataPagamento = $this->convdata($_REQUEST['dataPagamento'], "ntm");
+                    $this->bitPago = 1;
+                    $this->save();
+                    switch ($this->grupo) {
+                        case GrupoCusta::COMPETICAO:
+                            $isncr = new Inscricao();
+                            $isncr->atualizarInscricoes($this->id);
+                            break;
+                        case GrupoCusta::ANUIDADE:
+                            $anu = new Anuidade();
+                            $anu->atualizarAnuidadePorPagamento($this->id);
+                            break;
+                        default:
+                            
+                            break;
+                    }
+                    
+                    //grava a log
+                    $log = new Log();
+                    $log->gerarLog("Baixa no pagamento de número : ".$this->codigo);
+                    
+                }
 }
 ?>

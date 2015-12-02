@@ -29,5 +29,13 @@ class Inscricao extends Persistencia {
          $this->DAO_ExecutarDelete($sql);
          return true;
     }
+    
+    function atualizarInscricoes($idPagamento){
+        $objPag = new Pagamento();
+        $objPag->getById($idPagamento);
+         $sql = "update ".$this::TABELA." set situacao = ".$objPag->bitPago." where idPagamento = ".$idPagamento;
+         $this->DAO_ExecutarDelete($sql);
+         return true;
+    }
 }
 ?>

@@ -6,6 +6,13 @@
         </div>
         <div class="box-body">
              <div class="row">
+                 <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="tipo"><i class='fa'> </i><b>Código do pagamento</b></label>
+                        <input type="text" class="form-control" name="codigo" id='codigo' />
+                        
+                    </div>
+                </div>
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="tipo"><i class='fa'> </i><b>Grupo de Custa</b></label>
@@ -76,4 +83,5 @@ function pesquisar(){
             pesquisar();
         });
 	}); 
+	$("#codigo").focus();
 </script>
