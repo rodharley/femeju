@@ -50,3 +50,19 @@
 <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
 <input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
 <input type="hidden" value="{ANO}" id="ano" name="ano"/>
+
+<script>
+
+       $(document).ready(function() {
+                
+        $(".paginar").click(function() {
+            $("#pagina").val($(this).attr("value"));
+            pesquisar();
+        });
+        $(".anualizar").click(function() {
+            $("#pagina").val("1");
+            $("#ano").val($(this).attr("value"));
+            pesquisar();
+        });
+    }); 
+</script>
