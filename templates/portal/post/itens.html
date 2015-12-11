@@ -62,6 +62,7 @@
         $(".anualizar").click(function() {
             $("#pagina").val("1");
             $("#ano").val($(this).attr("value"));
+            $("#label-ano").html($(this).attr("value"));
             pesquisar();
         });
     }); 
