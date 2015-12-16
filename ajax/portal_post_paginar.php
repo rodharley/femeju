@@ -10,7 +10,7 @@ $obj = new Post();
 $objCat = new Categoria($categoria);
 
 $totalPesquisa = $obj->listar3PortalTotal($ano,$categoria);
-$configPaginacao = $obj->paginar($totalPesquisa,$pagina,3);
+$configPaginacao = $obj->paginar($totalPesquisa,$pagina,$obj->PAGINACAO);
 $rspost = $obj->listar3Portal($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$ano,$categoria);
 $ARRano = $obj->listarArrayAnos($categoria);
 foreach ($rspost as $key => $post) {
