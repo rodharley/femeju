@@ -1,6 +1,6 @@
 <?php
 include("configuraAjaxSemLogin.php");
-$TPL = new Template("../templates/portal/diretoria/posts.html");
+$TPL = new Template("../templates/portal/diretoria/itens.html");
 
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $categoria = isset($_REQUEST['categoria']) ? $_REQUEST['categoria'] : 1;
@@ -11,7 +11,7 @@ $obj = new Post();
 $objCat = new Categoria($categoria);
 $objCat->pasta = "diretoria";
 $totalPesquisa = $obj->listar3PortalTotal($ano,$categoria);
-$configPaginacao = $obj->paginar($totalPesquisa,$pagina,6);
+$configPaginacao = $obj->paginar($totalPesquisa,$pagina,$obj->PAGINACAO);
 $rspost = $obj->listar3Portal($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$ano,$categoria);
 $ARRano = $obj->listarArrayAnos($categoria);
 foreach ($rspost as $key => $post) {
@@ -43,7 +43,7 @@ $TPL->PROXIMA_PAGINA = $configPaginacao['proximaPagina'];
 $TPL->PAGINA = $pagina;
 $TPL->ANO = $ano;
 $TPL->CATEGORIA = $objDir->id;   
-$TPL->TITULO = $objDir->descricao;
+//$TPL->TITULO = $objDir->descricao;
 
 foreach ($ARRano as $key => $ano) {
         $TPL->ANO_V = $ano;

@@ -1,0 +1,69 @@
+        <div id="mod-noticias">
+       <!-- BEGIN BLOCK_POST -->
+        
+<div class="row">
+    <div class="col-sm-12">
+        <div style="margin-bottom:0px; padding-top:20px; border-top:1px solid #E3E3E8;min-height:120px;" class=" format-standard">
+            
+            <a class="post-format-s" title="Imagem" href="#"><span> </span><img alt="Imagem" src="{post_imagem}" class="alignleft"></a>
+            
+            <header class="entry-header">
+                <h2 class="post-title-small"><a title="leia mais.." href="#">{post_titulo}</a></h2>
+            </header>
+            <p>
+                {post_mensagem}
+            </p>
+            <!-- BEGIN BLOCK_POST_ARQUIVO -->
+            <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
+            <!-- END BLOCK_POST_ARQUIVO -->
+            <div class="entry-info">
+                {post_data}  <!-- BEGIN BLOCK_POST_DETALHE --> | <a title="leia mais.." href="portal_diretoria-detalhe?id={idhash}">Ler mais</a> <!-- END BLOCK_POST_DETALHE -->
+            </div>
+
+        </div>
+</div>
+</div>
+<!-- END BLOCK_POST --> 
+
+  </div>      
+        
+        
+         <nav>
+            <ul class="pager">
+                <li class="previous {DISABLEL}">
+                    <a href="#" class="paginar" value="{PAGINA_ANTERIOR}"><span aria-hidden="true">&larr;</span> Recentes</a>
+                </li>
+               <li class="center disabled">
+                    <a href="#">Página {PAGINA}</a>
+                </li>
+               <!-- BEGIN BLOCK_ANO -->
+                <li class="center">
+                    <a href="#" class="anualizar" value="{ANO_V}">{ANO_V}</a>
+                </li>
+                <!-- END BLOCK_ANO -->
+                <li class="next {DISABLER}">
+                    <a href="#" class="paginar" value="{PROXIMA_PAGINA}">Anteriores <span aria-hidden="true">&rarr;</span></a>
+                </li>
+            </ul>
+        </nav> 
+
+<input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+<input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
+<input type="hidden" value="{ANO}" id="ano" name="ano"/>
+
+<script>
+
+       $(document).ready(function() {
+                
+        $(".paginar").click(function() {
+            $("#pagina").val($(this).attr("value"));
+            pesquisar();
+        });
+        $(".anualizar").click(function() {
+            $("#pagina").val("1");
+            $("#ano").val($(this).attr("value"));
+            $("#label-ano").html($(this).attr("value"));
+            pesquisar();
+        });
+    }); 
+</script>
