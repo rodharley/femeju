@@ -14,6 +14,7 @@ $TPL->ASSOCIACAO = $atleta->associacao->nome;
 $TPL->FOTO = $atleta->pessoa->foto;
 $TPL->REGISTRO = $atleta->getId(); 
 $TPL->GRADUACAO = $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa;
+$TPL->ID_HASH = $_REQUEST['id'];
 $dttime = strtotime($atleta->dataEmissaoCarteira);
 $mes = date("m",$dttime);
 $dia = date("d",$dttime);
