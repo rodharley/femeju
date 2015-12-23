@@ -2,7 +2,7 @@
 $TPL = NEW Template("templates/portal/layout.html");
 include("includes/include.montaMenuPortal.php");
 include("includes/include.mensagem.php");
-$TPL->addFile("CONTEUDO", "templates/portal/post/detalhe.html");
+$TPL->addFile("CONTEUDO", "templates/portal/diretoria/detalhe.html");
 $obj = new Post();
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $objCat = new Categoria($obj->categoria);

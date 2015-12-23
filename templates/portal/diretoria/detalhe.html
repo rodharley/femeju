@@ -8,23 +8,44 @@
             </div>
             <h2>{categoria}</h2>
         </div>
-        <div class="etiqueta">    
-        <small class="pull-right">Brasília, {data}</small>
-        <h3>{titulo}</h3>        
-        <p>{mensagem}</p>
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- BEGIN  BLOCK_IMG -->
-                <p class="text-center">
-                   <img src="img/{pasta}/{imagem}" alt="..."  width="50%"/>
-                    </p>
-                <!-- END  BLOCK_IMG -->
-                <p> {texto}</p>
-                <p>
-                    <a type="button" class="btn btn-default btn-xs" href="portal_diretoria-posts?id={ID_HASH}">Voltar</a>
-                </p>
+        <div id="mod-noticias">
+            <div class="row">
+                <div class="col-lg-12">
+                    <header class="entry-header">
+                        <h1 class="post-title"><a href="#">{titulo}</a></h1>
+                    </header><!-- .entry-header -->
+                    <div style="margin-top:0px;" class="entry-info">
+                        Brasília, {data}
+                        <p>
+                            {{mensagem}}
+                        </p>
+
+                        <div style="margin-bottom:0px; width: 100%;" class="divider-post"></div>
+                    </div>
+
+                    <div class="entry-content">
+
+                        <p>
+                            <!-- BEGIN  BLOCK_IMG -->
+                            <img src="img/{pasta}/{imagem}" alt="..." class="img-responsive" align="left"  style="margin:1em; vertical-align: text-top; max-width:25em;display:inline;"/>
+                            <!-- END  BLOCK_IMG -->
+                            {texto}
+                        </p>
+                        <!-- BEGIN BLOCK_POST_ARQUIVO -->
+                        <p>
+            <a href="{post_link}"  target="_blank"><span class="fb_icon {post_tipoArquivo}" aria-hidden="true"></span> {post_arquivo}</a>
+            </p>
+            <!-- END BLOCK_POST_ARQUIVO -->
+            
+                        <p>
+                            <a type="button" class="btn btn-default btn-xs" href="portal_diretoria-posts?id={ID_HASH}">Voltar</a>
+                        </p>
+                    </div><!-- .entry-content -->
+
+                </div>
+
             </div>
         </div>
-        </div>
+
     </div>
 </div>

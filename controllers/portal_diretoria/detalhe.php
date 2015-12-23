@@ -17,5 +17,11 @@ $TPL->ID_HASH = $obj->md5_encrypt($objDir->id);
 $TPL->data = $obj->convdata($obj->data,"mtnh");
 if($obj->imagem != "")
     $TPL->block("BLOCK_IMG");
+if($obj->arquivo != ""){
+        $TPL->post_link = "documentos/".$objCat->pasta."/".$obj->arquivo;
+        $TPL->post_tipoArquivo = "fb_".$obj->retornaTipo($obj->arquivo);
+        $TPL->post_arquivo = $obj->arquivo;
+        $TPL->block("BLOCK_POST_ARQUIVO");
+    }
 $TPL->show();
 ?>
