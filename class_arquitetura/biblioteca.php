@@ -1449,7 +1449,8 @@ function createthumb($orig_name, $name, $newname, $new_w, $new_h, $border=false,
     if(!file_exists($name))
         return false;
     $arr = explode(".",$orig_name);
-    $ext = $arr[count($arr)-1];	
+    $ext = strtolower($arr[count($arr)-1]);	
+	$img = false;
     if($ext=="jpeg" || $ext=="jpg"){
         $img = @imagecreatefromjpeg($name);
     } elseif($ext=="png"){
