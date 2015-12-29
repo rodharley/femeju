@@ -21,7 +21,7 @@ $fotoresize = $foto->resize(84, 113, 'fill');
 
 $carteiracomfoto = $carteira->merge($fotoresize,541,18,100);
 
-    $carteiracomfoto->output('jpg', 90);
+    $carteiracomfoto->output('jpg', 100);
 
 
 //header('Content-type: image/png');
