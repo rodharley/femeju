@@ -109,13 +109,23 @@
 		], overwriteInitial: true,
 		maxFileSize: 20000,
 		maxFilesNum: 1,
+		language: "pt-BR", 
 		allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
 		previewClass: "bg-warning",
 		allowedFileTypes: ["image"],
 		showUpload: false,
-		showCaption: false
-	});
-
+		showCaption: false,
+		showRemove:true
+	}).on('fileclear', function(event) {
+        $.ajax({
+            url:'ajax/admin_noticia_remove_image.php',
+            type:'post',
+            data:{id:"{id}"}
+        }).complete(function(){
+            
+        });
+});
+    
 
 
 	

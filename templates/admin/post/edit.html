@@ -115,8 +115,17 @@
 		previewClass: "bg-warning",
 		allowedFileTypes: ["image"],
 		showUpload: false,
+		language: "pt-BR", 
 		showCaption: false
-	});
+	}).on('fileclear', function(event) {
+        $.ajax({
+            url:'ajax/admin_post_remove_image.php',
+            type:'post',
+            data:{id:"{id}"}
+        }).complete(function(){
+            
+        });
+});
 
         $("#arquivo").fileinput({
         initialPreview: [
@@ -126,8 +135,17 @@
         maxFilesNum: 1,
         previewClass: "bg-warning",
         showUpload: false,
+        language: "pt-BR", 
         showCaption: false
-    });
+    }).on('fileclear', function(event) {
+        $.ajax({
+            url:'ajax/admin_post_remove_file.php',
+            type:'post',
+            data:{id:"{id}"}
+        }).complete(function(){
+            
+        });
+});
 
 	
 	});

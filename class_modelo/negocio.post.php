@@ -142,26 +142,26 @@ class Post extends Persistencia {
         }
         
         if(!isset($_REQUEST['haveimagem']) && $this -> imagem != ""){
-            $this -> apagaImagem($this -> imagem, "img/".$pasta."/");  
+            $this -> apagaImagem($this -> imagem, URI."/img/".$pasta."/");  
             $this -> imagem = ""; 
         }
         
         if(!isset($_REQUEST['havearquivo']) && $this -> arquivo != ""){
-            $this -> apagaImagem($this -> arquivo, "documentos/".$pasta."/");
+            $this -> apagaImagem($this -> arquivo, URI."/documentos/".$pasta."/");
             $this -> arquivo = "";   
         }
         
         //incluir imagem se ouver
         if ($_FILES['foto']['name'] != "") {
             if ($this -> imagem != "")
-                $this -> apagaImagem($this -> imagem, "img/".$pasta."/");
+                $this -> apagaImagem($this -> imagem, URI."/img/".$pasta."/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/".$pasta."/");
             $this -> uploadImagem($_FILES['foto'], $nomefoto, "img/".$pasta."/");
             $this -> imagem = $nomefoto;
         }
         if ($_FILES['arquivo']['name'] != "") {
             if ($this -> arquivo != "")
-                $this -> apagaImagem($this -> arquivo, "documentos/".$pasta."/");
+                $this -> apagaImagem($this -> arquivo, URI."/documentos/".$pasta."/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], "documentos/".$pasta."/");
             $this -> uploadImagem($_FILES['arquivo'], $nomefoto, "documentos/".$pasta."/");
             $this -> arquivo = $nomefoto;

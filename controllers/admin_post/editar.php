@@ -48,7 +48,7 @@ if(isset($_REQUEST['id'])){
 		$TPL->block("BLOCK_IMG");
 	}
     if(strlen($post->arquivo) > 0){
-        $TPL->IMG_ARQUIVO = "<input type='hidden' value='1' name='havearquivo'/><img src='img/".$pasta."/".$post->arquivo."' class='file-preview-image' alt='".$post->arquivo."' title='".$post->arquivo."'>";
+        $TPL->IMG_ARQUIVO = "<input type='hidden' value='1' name='havearquivo'/><img src='documentos/".$pasta."/".$post->arquivo."' class='file-preview-image' alt='".$post->arquivo."' title='".$post->arquivo."'>";
         $TPL->block("BLOCK_ARQ");
     }
    
