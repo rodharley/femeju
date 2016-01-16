@@ -46,10 +46,10 @@ foreach ($ARRano as $key => $ano) {
         $TPL->ANO_V = $ano;
         $TPL->block("BLOCK_ANO");
 }
-    if($pagina == 1)
+    if($pagina <= 1)
     $TPL->DISABLEL = "disabled";
     
-    if($pagina == $configPaginacao['totalPaginas'])
+    if($pagina >= $configPaginacao['totalPaginas'])
     $TPL->DISABLER = "disabled";
 
 $TPL->show();
