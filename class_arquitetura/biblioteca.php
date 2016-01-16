@@ -107,7 +107,7 @@ else
     $qtdPagina = $paginacao;
 if($pagina == "")
 $pagina = 1;
-$paginas = ceil($total / $qtdPagina);
+$paginas = $total > 0 ? ceil($total / $qtdPagina) : 1;
 $inicio =  $qtdPagina *($pagina-1);
 if($pagina < $paginas)
 $proximaPagina = $pagina+1;
