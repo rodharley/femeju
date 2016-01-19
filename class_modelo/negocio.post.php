@@ -115,6 +115,8 @@ class Post extends Persistencia {
             $this -> imagem = $nomefoto;
         }
         
+        
+        
         if ($_FILES['arquivo']['name'] != "") {
             //incluir imagem se ouver
             $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], URI."/documentos/".$pasta."/");
@@ -141,6 +143,8 @@ class Post extends Persistencia {
            $pasta = "diretoria"; 
         }
         
+        
+        
         if(!isset($_REQUEST['haveimagem']) && $this -> imagem != ""){
             $this -> apagaImagem($this -> imagem, URI."/img/".$pasta."/");  
             $this -> imagem = ""; 
@@ -163,7 +167,7 @@ class Post extends Persistencia {
             if ($this -> arquivo != "")
                 $this -> apagaImagem($this -> arquivo, URI."/documentos/".$pasta."/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], URI."/documentos/".$pasta."/");
-            $this -> uploadImagem($_FILES['arquivo'], $nomefoto, URI."/documentos/".$pasta."/");
+            $this -> uploadArquivo($_FILES['arquivo'], $nomefoto, URI."/documentos/".$pasta."/");
             $this -> arquivo = $nomefoto;
         }
         $this -> save();
