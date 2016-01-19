@@ -110,15 +110,15 @@ class Post extends Persistencia {
         
         if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
-            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/".$pasta."/");
-            $this -> uploadImagem($_FILES['foto'], $nomefoto, "img/".$pasta."/");
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], URI."/img/".$pasta."/");
+            $this -> uploadImagem($_FILES['foto'], $nomefoto, URI."/img/".$pasta."/");
             $this -> imagem = $nomefoto;
         }
         
         if ($_FILES['arquivo']['name'] != "") {
             //incluir imagem se ouver
-            $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], "documentos/".$pasta."/");
-            $this -> uploadArquivo($_FILES['arquivo'], $nomefoto, "documentos/".$pasta."/");
+            $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], URI."/documentos/".$pasta."/");
+            $this -> uploadArquivo($_FILES['arquivo'], $nomefoto, URI."/documentos/".$pasta."/");
             $this -> arquivo = $nomefoto;
         }
         $this -> save();
@@ -155,15 +155,15 @@ class Post extends Persistencia {
         if ($_FILES['foto']['name'] != "") {
             if ($this -> imagem != "")
                 $this -> apagaImagem($this -> imagem, URI."/img/".$pasta."/");
-            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/".$pasta."/");
-            $this -> uploadImagem($_FILES['foto'], $nomefoto, "img/".$pasta."/");
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], URI."/img/".$pasta."/");
+            $this -> uploadImagem($_FILES['foto'], $nomefoto, URI."/img/".$pasta."/");
             $this -> imagem = $nomefoto;
         }
         if ($_FILES['arquivo']['name'] != "") {
             if ($this -> arquivo != "")
                 $this -> apagaImagem($this -> arquivo, URI."/documentos/".$pasta."/");
-            $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], "documentos/".$pasta."/");
-            $this -> uploadImagem($_FILES['arquivo'], $nomefoto, "documentos/".$pasta."/");
+            $nomefoto = $this -> retornaNomeUnico($_FILES['arquivo']['name'], URI."/documentos/".$pasta."/");
+            $this -> uploadImagem($_FILES['arquivo'], $nomefoto, URI."/documentos/".$pasta."/");
             $this -> arquivo = $nomefoto;
         }
         $this -> save();
@@ -178,9 +178,9 @@ class Post extends Persistencia {
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
         if ($this -> imagem != "")
-                $this -> apagaImagem($this -> imagem, "img/".$pasta."/");
+                $this -> apagaImagem($this -> imagem, URI."/img/".$pasta."/");
         if ($this -> arquivo != "")
-                $this -> apagaImagem($this -> arquivo, "documentos/".$pasta."/");
+                $this -> apagaImagem($this -> arquivo, URI."/documentos/".$pasta."/");
         
         return $this -> delete($this -> id);
     }
