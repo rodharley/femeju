@@ -19,7 +19,7 @@ $dttime = strtotime($atleta->dataEmissaoCarteira);
 $mes = date("m",$dttime);
 $dia = date("d",$dttime);
 $ano = date("Y",$dttime);
-$val = mktime(0,0,0,$mes,$dia,$ano+1);
+$val = mktime(0,0,0,12,31,$ano);
 $TPL->DATA_EMISSAO = date("d",$val)." de ".$atleta->mesExtenso(date("m",$val))." de ".date("Y",$val);
 $TPL->block("BLOCK_CARTEIRA");
 }else{

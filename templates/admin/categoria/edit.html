@@ -36,10 +36,16 @@
 				
 			</div>
 			<div class="row">
-			    <div class="col-sm-12">
+			     <div class="col-sm-6">
                       <div class="form-group">
-                      <label for="peso"><i class='fa'></i><b>Peso</b></label>
-                      <input id="peso" type="text" name="peso" value="" class="required">
+                      <label for="pesomin"><i class='fa'></i><b>Peso Mínimo</b></label>                      
+                      <input id="pesomin" type="text" name="pesomin" value="{MIN}" class="required form-control">
+                      </div>
+                    </div>
+                <div class="col-sm-6">
+                      <div class="form-group">
+                      <label for="pesomax"><i class='fa'></i><b>Peso Mínimo</b></label>                      
+                      <input id="pesomax" type="text" name="pesomax" value="{MAX}" class="required form-control">
                       </div>
                     </div>
 			</div>
@@ -54,24 +60,12 @@
 
 </div>
 </form>
-<span id="min" class="hide">{MIN}</span>
-<span id="max" class="hide">{MAX}</span>
+
 <script>
 	$(document).ready(function() {
 
-			 /* ION SLIDER */
-        $("#peso").ionRangeSlider({
-          min: 0,
-          max: 250,
-          from: $("#min").html(),
-          to: $("#max").html(),
-          type: 'double',
-          step: 1,
-          postfix: " Kg",
-          max_postfix: " (Abaixo de)", 
-          prettify: false,
-          hasGrid: true
-        });
+		        $("#pesomax").inputmask({ mask: "999"}); 
+             $("#pesomin").inputmask({ mask: "999"});
 			
 		
 	});

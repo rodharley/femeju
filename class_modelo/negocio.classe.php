@@ -10,9 +10,8 @@ function listaAtivas(){
 }
 	function Incluir() {     
         $this -> descricao = $_REQUEST['descricao'];
-        $peso = explode(";", $_REQUEST['peso']);
-        $this -> maximo = $peso[1];
-        $this -> minimo = $peso[0];
+        $this -> maximo = $this->limpaDigitos($_REQUEST['idademax']);
+        $this -> minimo = $this->limpaDigitos($_REQUEST['idademin']);
         $this->ativo = $_REQUEST['ativo'];
         $this->save();      
         
@@ -21,9 +20,8 @@ function listaAtivas(){
 	function Alterar() {
 		$this-> getById($_REQUEST['id']);     
         $this -> descricao = $_REQUEST['descricao'];
-        $peso = explode(";", $_REQUEST['peso']);
-        $this -> maximo = $peso[1];
-        $this -> minimo = $peso[0];
+        $this -> maximo = $this->limpaDigitos($_REQUEST['idademax']);
+        $this -> minimo = $this->limpaDigitos($_REQUEST['idademin']);
         $this->ativo = $_REQUEST['ativo'];
         $this->save();
               

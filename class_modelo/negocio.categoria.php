@@ -11,9 +11,8 @@ function listaAtivasPorClasse($idClasse){
 }
 	function Incluir() {     
         $this -> descricao = $_REQUEST['descricao'];
-        $peso = explode(";", $_REQUEST['peso']);
-        $this -> maximo = $peso[1];
-        $this -> minimo = $peso[0];
+        $this -> maximo = $this->limpaDigitos($_REQUEST['pesomax']);
+        $this -> minimo = $this->limpaDigitos($_REQUEST['pesomin']);
         $this->ativo = $_REQUEST['ativo'];
         $this->classe = new Classe($_REQUEST['idClasse']);
         $this->save();      
@@ -23,9 +22,8 @@ function listaAtivasPorClasse($idClasse){
 	function Alterar() {
 		$this-> getById($_REQUEST['id']);     
         $this -> descricao = $_REQUEST['descricao'];
-        $peso = explode(";", $_REQUEST['peso']);
-        $this -> maximo = $peso[1];
-        $this -> minimo = $peso[0];
+        $this -> maximo = $this->limpaDigitos($_REQUEST['pesomax']);
+        $this -> minimo = $this->limpaDigitos($_REQUEST['pesomin']);
         $this->ativo = $_REQUEST['ativo'];
         $this->save();
               
