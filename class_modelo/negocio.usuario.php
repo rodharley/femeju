@@ -140,7 +140,7 @@ class Usuario extends Persistencia {
 				$user -> senha = md5($senha);
 				$objEmail = new Email();
 				
-				if ($objEmail->enviarEmailNovaSenha($user->nome,$user->email,$senha)) {
+				if ($objEmail->enviarEmailNovaSenha($user->pessoa->nome,$user->pessoa->email,$senha)) {
 					$user -> save();
 					$_SESSION['fmj.mensagem'] = 15;
 				} else {
