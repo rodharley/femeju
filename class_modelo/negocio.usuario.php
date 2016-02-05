@@ -132,7 +132,7 @@ class Usuario extends Persistencia {
 	}
 
 	function EnviarSenha($email) {
-		$lista = $this -> recuperaPorEmail($email);
+		$lista = $this -> recuperaPorLogin($email);
 		if (count($lista) > 0) {
 
 			foreach ($lista as $key => $user) {
