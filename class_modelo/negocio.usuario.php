@@ -154,7 +154,7 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaPorEmail($email, $idExclusao = "0") {
-		$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where p.email = '$login' and u.id != $idExclusao";
+		$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where p.email = '$email' and u.id != $idExclusao";
         $rs = $this->getSQL($sql);
 		return $rs;
 	}
