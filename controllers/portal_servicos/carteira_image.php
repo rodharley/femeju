@@ -10,10 +10,8 @@ $conf->getById(10);
 $atleta->getById($atleta->md5_decrypt($_REQUEST['id']));
 if($atleta->ativo == 1 ){
 $dttime = strtotime($atleta->dataEmissaoCarteira);
-$mes = date("m",$dttime);
-$dia = date("d",$dttime);
 $ano = date("Y",$dttime);
-$val = mktime(0,0,0,$mes,$dia,$ano+1);
+$val = mktime(0,0,0,12,31,$ano);
 
 
 //gera a imagem de fundo na cor das configuracoes;
