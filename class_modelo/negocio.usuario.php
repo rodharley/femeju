@@ -132,7 +132,7 @@ class Usuario extends Persistencia {
 	}
 
 	function EnviarSenha($email) {
-		$lista = $this -> recuperaPorLogin($email);
+		$lista = $this -> recuperaPorEmail($email);
 		if (count($lista) > 0) {
 
 			foreach ($lista as $key => $user) {
@@ -154,8 +154,9 @@ class Usuario extends Persistencia {
 	}
 
 	function recuperaPorEmail($email, $idExclusao = "0") {
-		$lista = $this -> getRows(0, 20, array(), array("email" => "='" . $email . "'", "id" => "!=" . $idExclusao));
-		return $lista;
+		$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where p.email = '$login' and u.id != $idExclusao";
+        $rs = $this->getSQL($sql);
+		return $rs;
 	}
 
 	function recuperaPorLogin($login, $idExclusao = "0") {
