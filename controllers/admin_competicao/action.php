@@ -17,15 +17,19 @@ switch ($_REQUEST['acao']){
      case 'incluir' :
          $conn->connection->autocommit(false);
         $idComp = $comp->Incluir();
-         $conn->connection->commit();
-		  $_SESSION['fmj.mensagem'] = 60;
+        $conn->connection->commit();
+        if($_REQUEST['competicao'] == 1){
+		$_SESSION['fmj.mensagem'] = 60;        
         header("Location:admin_competicao-configuracao?id=".$comp->md5_encrypt($idComp));
+        }else{
+            $_SESSION['fmj.mensagem'] = 70;     
+        header("Location:admin_competicao");    
+        }
         exit();
         break;
 	case 'excluir' :
         $comp->Excluir($_REQUEST['id']);
-		header("Location:admin_competicao");
-        exit();
+		exit();
         break;  
     
 }

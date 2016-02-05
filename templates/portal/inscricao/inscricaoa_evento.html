@@ -1,5 +1,11 @@
-
-      
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="pull-right">
+                <img src="img/icones/servicos.png" />
+            </div>
+            <h2>Inscrição</h2>
+        </div>
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -13,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-8 col-xs-8">
                             <div class="form-group">
-                                <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
+                                <label for="evento"><i class='fa'> </i><b>Evento</b></label>
                                 <p class="form-control-static">
                                     {TITULO_COMP}
                                 </p>
@@ -79,50 +85,8 @@
                                             </select>
                                         </div>
                                     </div>                               
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="classe"><i class='fa'> </i><b>Classe</b></label>
-                                            <select id="classe" name="classe" class="form-control required">
-                                                <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_CLA -->
-                                                <option value="{ID_CLA}">{DESC_CLA}</option>
-                                                <!-- END BLOCK_CLA -->
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
-                                            <select id="categoria" name="categoria" class="form-control required">
-                                                <option value="">Selecione</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>
-                                            <input type="checkbox" class=" dobra" name="dobra1" id="dobra1" value="1"  valor="{DOBRA_1}"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
-                                            <input type="checkbox" class=" dobra" name="dobra2" id="dobra2" value="1"  valor="{DOBRA_2}"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>
-                                            <input type="checkbox" class=" dobra" name="dobra3" id="dobra3" value="1" valor="{DOBRA_3}"/>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                 </div>
+                                
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">
                                         <div class="form-group">
@@ -141,8 +105,8 @@
                                 </div>
 
                             </div>
-                            <div class="panel-footer">
-                                  <button type="button" class="btn btn-success" id="btAdicionar">
+                            <div class="panel-footer">                              
+                                <button type="button" class="btn btn-success" id="btAdicionar">
                                     Adicionar
                                 </button>
                             </div>
@@ -157,8 +121,8 @@
 
                     </div>
                 </fieldset>
-                <form role="form" method="post" action="admin_pagamento-action" id="frmInscricao" class="form">
-                    <input type="hidden" name="acao" id="acao" value="inscricao"/>
+                <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
+                    <input type="hidden" name="acao" id="acao" value="inscricaoa"/>
                     <input type="hidden" name="itens" id="itens" value=""/>
                     <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
                     <fieldset>
@@ -187,13 +151,16 @@
                     <span class="glyphicon glyphicon-backward"> </span> Voltar
                 </button>
                 <button class="btn btn-primary" type="button" id="btAvancar">
-                    Concluir <span class="glyphicon glyphicon-forward"> </span>
+                    Avançar <span class="glyphicon glyphicon-forward"> </span>
                 </button>
 
             </div>
 
         </div>
 
+    </div>
+
+</div>
 
 <script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
 <link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
@@ -211,48 +178,28 @@
 	var atletas = [];
 	var selected_index = -1;
 	function LimpaCampos() {
+	    $("#idAtleta").val("");
 		$("#nome").val("");
 		$("#email").val("");
-		$("#idAtleta").val("");
 		$("#documento").val("");
 		$("#telefone").val("");
 		$("#valor").val($("#valorComp").val());
 		$("#valorReal").val($("#valorComp").val());
-		$('#dobra1').iCheck('uncheck');
-		$('#dobra2').iCheck('uncheck');
-		$('#dobra3').iCheck('uncheck');
 		$("#graduacao").val("");
-		$("#classe").val("");
-		$("#categoria").html("<option value=''>Selecione</option>");
-
+		
 	}
 
 	function AddAtleta() {
-		var isdobra1 = "Não";
-		var isdobra2 = "Não";
-		var isdobra3 = "Não";
-		if ($("#dobra1").prop("checked"))
-			isdobra1 = "Sim";
-		if ($("#dobra2").prop("checked"))
-			isdobra2 = "Sim";
-		if ($("#dobra3").prop("checked"))
-			isdobra3 = "Sim";
 		var atleta = JSON.stringify({
 		    id: $("#idAtleta").val(),
 			nome : $("#nome").val(),
 			email : $("#email").val(),
 			documento : $("#documento").val(),
 			telefone : $("#telefone").val(),
-			classe : $("#classe").val(),
-			categoria : $("#categoria").val(),
 			graduacao : $("#graduacao").val(),
 			valor : $("#valorReal").val(),
-			dobra1 : isdobra1,
-			dobra2 : isdobra2,
-			dobra3 : isdobra3,
 			nomeGraduacao : $("#graduacao").find('option:selected').text(),
-			nomeCategoria : $("#categoria").find('option:selected').text(),
-			nomeClasse : $("#classe").find('option:selected').text(),
+			
 		});
 		atletas.push(atleta);
 	}
@@ -264,10 +211,10 @@
 
 	function List() {
 		$("#tblList").html("");
-		$("#tblList").html("<thead>" + "   <tr>" + "   <th></th>" + "   <th>Nome</th>" + "   <th>Categoria</th>" + "   <th>Valor</th>" + "   <th>Dobra 1</th>" + "   <th>Dobra 2</th>" + "   <th>Dobra 3</th>" + "   </tr>" + "</thead>" + "<tbody>" + "</tbody>");
+		$("#tblList").html("<thead>" + "   <tr>" + "   <th></th>" + "   <th>Nome</th>" + "   <th>Graduação</th>" + "   <th>Valor</th>" + "   </tr>" + "</thead>" + "<tbody>" + "</tbody>");
 		for (var i in atletas) {
 			var atl = JSON.parse(atletas[i]);
-			$("#tblList tbody").append("<tr>" + "  <td><button type='button' alt='Delete" + i + "' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + "  <td>" + atl.nome + "</td>" + "  <td>" + atl.nomeGraduacao + "-" + atl.nomeCategoria + "-" + atl.nomeClasse + "</td>" + "  <td>R$ " + parseFloat(atl.valor).format(2, 3, '.', ',') + "</td>" + "  <td>" + atl.dobra1 + "</td>" + "  <td>" + atl.dobra2 + "</td>" + "  <td>" + atl.dobra3 + "</td>" + "</tr>");
+			$("#tblList tbody").append("<tr>" + "  <td><button type='button' alt='Delete" + i + "' class='btnDelete btn btn-danger'><span class='glyphicon glyphicon-trash'> </span></button> </td>" + "  <td>" + atl.nome + "</td>" + "  <td>" + atl.nomeGraduacao  + "</td>" + "  <td>R$ " + parseFloat(atl.valor).format(2, 3, '.', ',') + "</td>" + "</tr>");
 		}
 	}
 
@@ -282,11 +229,11 @@
 	$(document).ready(function() {
 
 		var options = {
-			script : "ajax/json_atletas.php?associacao=&",
+			script : "ajax/json_atletas.php?associacao={IDS_ASSOCIACAO}&",
 			varname : "busca",
 			json : true,
 			noresults : "Nenhum atleta encontrado",
-			maxresults : 35,
+			maxresults : 5,
 			callback : function(obj) {
 				var atleta;
 				$.ajax({
@@ -296,12 +243,12 @@
 					}
 				}).done(function(retorno) {
 					atleta = JSON.parse(retorno);
-					document.getElementById("nome").value = atleta.pessoa.nome+" "+atleta.pessoa.nomeMeio+" "+atleta.pessoa.sobrenome;
-					document.getElementById("email").value = atleta.pessoa.email;
-					document.getElementById("documento").value = atleta.pessoa.rg;
-					document.getElementById("telefone").value = atleta.pessoa.telCelular;		
+                    document.getElementById("nome").value = atleta.pessoa.nome+" "+atleta.pessoa.nomeMeio+" "+atleta.pessoa.sobrenome;
+                    document.getElementById("email").value = atleta.pessoa.email;
+                    document.getElementById("documento").value = atleta.pessoa.rg;
+                    document.getElementById("telefone").value = atleta.pessoa.telCelular;		
 					document.getElementById("idAtleta").value = atleta.pessoa.id;
-					document.getElementById("graduacao").value = atleta.graduacao.id;     			
+					document.getElementById("graduacao").value = atleta.graduacao.id; 			
 				});
 
 			}
@@ -322,7 +269,6 @@
 			placeholder : ""
 		});
 		$(".dobra").click(function() {
-		   
 			var valor = parseFloat($("#valorComp").val());
 
 			$("input:checkbox.dobra").each(function() {
@@ -372,8 +318,7 @@
 					}
 					strjson = strjson + ']';
 					$("#itens").val(strjson);
-					if($("#frmInscricao").valid())
-					   $("#frmInscricao").submit();
+					$("#frmInscricao").submit();
 				}
 			} else {
 				alert("Você deve adicionar um ou mais atletas!");
@@ -416,21 +361,7 @@
 			}
 		});
 		
-		$('.dobra').on('ifChanged', function(event){
-            var valor = parseFloat($("#valorComp").val());
-
-            $("input:checkbox.dobra").each(function() {
-                
-                if ($(this).prop("checked")) {
-                    valor = valor + parseFloat($(this).attr("valor"));
-                }
-
-            });
-            $("#valor").val(valor.format(2,3,".",","));
-            $("#valorReal").val(valor.format(2,3,".",","));
-        });
-        
-        $("#nome").change(function(){
+		$("#nome").change(function(){
             $("#idAtleta").val("");
         });
 

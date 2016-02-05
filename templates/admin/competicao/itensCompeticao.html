@@ -1,11 +1,12 @@
 <table class="table table-striped table-condensed">
         <tr>
-            <th>Título</th><th>Descrição</th><th>Ativo</th><th>Inscrição Aberta</th><th>Data</th><th>Ação</th>
+            <th>Título</th><th>Descrição</th><th>Competição</th><th>Ativo</th><th>Inscrição Aberta</th><th>Data</th><th>Ação</th>
         </tr>
         <!--BEGIN BLOCK_ITEM -->
         <tr>
             <td>{TITULO}</td>
             <td>{DESCRICAO}</td>
+            <td>{COMPETICAO}</td>
             <td><span class="label label-{COLOR_ATIVO}">{ATIVO}</span></td>
             <td><span class="label label-{COLOR_INSCRICAO}">{INSCRICAO}</span></td>
             <td>{DATA}</td>
@@ -38,8 +39,8 @@
        $('.excluir').click(function() {
     if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
              $.ajax({
-                url: 'admin_pagamento-action',
-                data: {id:$(this).attr("value"),acao:"excluirCusta"},
+                url: 'admin_competicao-action',
+                data: {id:$(this).attr("value"),acao:"excluir"},
                 type:"POST"
             }).done(function(resposta){
                if(resposta != "")

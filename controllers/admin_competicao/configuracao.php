@@ -75,6 +75,11 @@ foreach ($rsCat as $key => $value) {
     $TPL->block("BLOCK_CLA");
 }
 
+if($obj->competicao == 1){
+    $TPL->block("BLOCK_COMPETICAO_JS");
+    $TPL->block("BLOCK_COMPETICAO");
+}
+    
 
 $TPL->show();
 ?>

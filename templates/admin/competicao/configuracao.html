@@ -10,7 +10,7 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="titulo"><i class='fa'></i><b>Título</b></label>
-                        <input type="text" id="titulo" name="titulo" placeholder="Título da competição" value="{TITULO}" class="required form-control"/>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título do evento" value="{TITULO}" class="required form-control"/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
@@ -40,7 +40,7 @@
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="descricao"><i class='fa'></i><b>Descrição</b></label>
-                        <textarea type="text" id="descricao" name="descricao" placeholder="Descrição da competição" class="required form-control">{DESCRICAO}</textarea>
+                        <textarea type="text" id="descricao" name="descricao" placeholder="Descrição do evento" class="required form-control">{DESCRICAO}</textarea>
                     </div>
                 </div>
             </div>
@@ -78,6 +78,7 @@
                     </div>
                 </div>
             </div>
+            <!-- BEGIN BLOCK_COMPETICAO -->
             <div class="row">
                         <div class="col-md-4 col-xs-4">
                             <div class="form-group">
@@ -86,7 +87,7 @@
                                     <div class="input-group-addon">
                                         R$
                                     </div>
-                                    <input type="text" class="form-control required" name="dobra1" id="dobra1" value="{dobra1}">
+                                    <input type="text" class="form-control" name="dobra1" id="dobra1" value="{dobra1}">
 
                                 </div>
 
@@ -122,7 +123,7 @@
             <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
-                        <label for="dataEvento"><i class='fa'></i><b>Classes Associadas à competição:</b></label>                        
+                        <label for="dataEvento"><i class='fa'></i><b>Classes Associadas ao evento:</b></label>                        
                     </div>
                      <!-- BEGIN BLOCK_CLA -->
                     <div class="checkbox">
@@ -134,8 +135,12 @@
                      <!-- END BLOCK_CLA -->           
                 </div>
             </div>
+            <!-- END BLOCK_COMPETICAO -->
         </div>
         <div class="panel-footer text-right">
+           <a class="btn btn-default" href='admin_competicao'>
+                Voltar
+            </a>
             <button class="btn btn-success" type="submit" >
                 Salvar
             </button>
@@ -152,7 +157,7 @@
 	$(document).ready(function() {
 
 		$("#dataEvento").datepicker();
-
+        <!-- BEGIN BLOCK_COMPETICAO_JS -->
         $("#dobra3").inputmask({
             alias : "decimal",
             groupSeparator : ".",
@@ -182,21 +187,8 @@
             prefix : "",
             placeholder : ""
         });
-
-		$("#frmEditCategoria").validate({
-			errorClass : "help-inline",
-			errorElement : "div",
-			highlight : function(element, errorClass, validClass) {
-				$(element).parents('.form-group').addClass('has-error');
-				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
-			},
-			unhighlight : function(element, errorClass, validClass) {
-				$(element).parents('.form-group').removeClass('has-error');
-				$(element).parents('.form-group').addClass('has-success');
-				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
-				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
-			}
-		});
+ <!-- END BLOCK_COMPETICAO_JS -->
+		
 
 		
 	}); 

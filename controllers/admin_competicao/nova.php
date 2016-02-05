@@ -7,13 +7,13 @@ include("includes/include.mensagem.php");
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
-                        Competições
-                        <small>Nova Competição</small>
+                        Eventos
+                        <small>Novo Evento</small>
                     </h1>
                    <ol class="breadcrumb">
                                         <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
-                                        <li><a href="#"><i class="fa fa-trophy"> </i> Competições</a></li>
-                                         <li class="active">Nova Competição</li>
+                                        <li><a href="#"><i class="fa fa-trophy"> </i> Eventos</a></li>
+                                         <li class="active">Novo Evento</li>
                                     </ol>
                 </section>';
 

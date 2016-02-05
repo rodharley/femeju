@@ -12,12 +12,12 @@ include("includes/include.mensagem.php");
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
                         Pagamento
-                        <small>Competição</small>
+                        <small>Eventos e Competições</small>
                     </h1>
                    <ol class="breadcrumb">
                                         <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
                                         <li><a href="admin_pagamento"><i class="fa fa-credit-card"> </i> Pagamentos</a></li>
-                                         <li class="active">Competição</li>
+                                         <li class="active">Eventos e Competições</li>
                                     </ol>
                 </section>';
 $objc = new Competicao();
@@ -29,6 +29,7 @@ foreach ($rs as $key => $value) {
     $TPL->ID_COMPETICAO = $obj->md5_encrypt($value->id);
 	$TPL->TITULO = $value->titulo;
     $TPL->DESCRICAO = $value->descricao;
+    $TPL->NOMEARQUIVO = $value->competicao == 1 ? "inscricao" : "inscricaoEvento";
     $TPL->DATA = $objc->convdata($value->dataEvento,"mtn");    
     $TPL->block("BLOCK_COMP");
 }

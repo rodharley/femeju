@@ -8,6 +8,7 @@ $atleta = new Atleta();
 $associacao = new Associacao();
 $conf->getById(10);
 $atleta->getById($atleta->md5_decrypt($_REQUEST['id']));
+if($atleta->ativo == 1 ){
 $dttime = strtotime($atleta->dataEmissaoCarteira);
 $mes = date("m",$dttime);
 $dia = date("d",$dttime);
@@ -57,8 +58,9 @@ $canvas->writeText('15', '255', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('15', '295', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
 $canvas->writeText('150', '295',$atleta->convdata($atleta->pessoa->dataNascimento, "mtn"), 0);
 $canvas->writeText('15', '335', date("d",$val)." de ".$atleta->mesExtenso(date("m",$val))." de ".date("Y",$val), 0);
+$canvas->writeText('15', '355',"Válida CBJ", 0);
   
-  
+ 
 header('Content-Description: File Transfer');
 header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename=' . $atleta->getId().".png" ); 
@@ -67,9 +69,11 @@ header('Connection: Keep-Alive');
 header('Expires: 0');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 header('Pragma: public');
-  
-$carteiracomfotoeqrcode->output('jpg', 100);
 
+ $carteiracomfotoeqrcode->output('jpg', 100);
+}else{
+    echo "Situação Irregular, favor procurar a Femeju.";
+}
 
 //header('Content-type: image/png');
 //imagepng($imagem);

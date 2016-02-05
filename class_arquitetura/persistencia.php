@@ -367,8 +367,8 @@ function xmlObject($elemento,$i,$objeto){
 	function getSQL($sql){	    
 		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
-			if($elemento['name'] == get_class($this)){
-				$rs =  $this->DAO_ExecutarQuery($sql);
+			if($elemento['name'] == get_class($this)){			    
+				$rs =  $this->DAO_ExecutarQuery($sql);                
 				$arrayItens = array();
 				if($this->DAO_NumeroLinhas($rs) > 0){
 					while($arrayItem = $this->DAO_GerarArray($rs)){

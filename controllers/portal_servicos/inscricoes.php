@@ -7,15 +7,18 @@ include("includes/include.mensagem.php");
 $objc = new Competicao();
 $rs = $objc->listaAtivasAbertas();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/servicos/competicao.html");
-$TPL->LABEL = "Escolha a competição que deseja fazer a inscrição";
+$TPL->addFile("CONTEUDO", "templates/portal/servicos/evento.html");
+$TPL->LABEL = "Escolha o evento que deseja fazer a inscrição";
 foreach ($rs as $key => $value) {
     $TPL->ID_COMPETICAO = $obj->md5_encrypt($value->id);
 	$TPL->TITULO = $value->titulo;
     $TPL->DESCRICAO = $value->descricao;
     $TPL->DATA = $objc->convdata($value->dataEvento,"mtn");
     if($value->tipo == TipoCampeonato::ABERTO){
-        $TPL->CONTROLE = "inscricaoa";
+        if($value->competicao == 1)
+            $TPL->CONTROLE = "inscricaoa";
+        else
+            $TPL->CONTROLE = "inscricaoaEvento";
     $TPL->block("BLOCK_COMP");
     }
 }

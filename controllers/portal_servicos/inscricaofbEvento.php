@@ -8,7 +8,7 @@ $objAssociacao = new Associacao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objA = new Atleta();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaofb.html");
+$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaofb_evento.html");
 $objAssociacao->getById($_REQUEST['idAssociacao']);
 $objc->getById($_REQUEST['idCompeticao']);
 
@@ -21,10 +21,6 @@ if(isset($_REQUEST['todos']))
 $rsAtletas = $objA->listaPorAssociacaoAtivos($objAssociacao->id);
 else
 $rsAtletas = $objA->listaPorArrayIds($_REQUEST['atleta']);
-$rsClasses = $objc->listaClasses();
-$TPL->DOBRA1 = $objc->dobra1;
-$TPL->DOBRA2 = $objc->dobra2;
-$TPL->DOBRA3 = $objc->dobra3;
 $TPL->VALOR_CUSTA = $objc->money($objc->custa->valor,"atb");
 
 
@@ -34,13 +30,6 @@ foreach ($rsAtletas as $key => $value) {
     $TPL->ATLETA = $value->pessoa->getNomeCompleto();
     $TPL->ID_ATLETA = $value->id;
     $TPL->GRAD_ATLETA = $value->graduacao->id;    
-    
-    //classes
-       foreach ($rsClasses as $key2 => $grupo) {
-            $TPL->ID_CLA = $grupo->classe->id;
-            $TPL->LABEL_CLA = $grupo->classe->descricao;
-            $TPL->block("BLOCK_CLA");
-        }
     
     $TPL->block("BLOCK_ATLETAS");
     

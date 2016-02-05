@@ -9,7 +9,7 @@
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="titulo"><i class='fa'></i><b>Título</b></label>
-                        <input type="text" id="titulo" name="titulo" placeholder="Título da competição" value="" class="required form-control"/>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título do Evento" value="" class="required form-control"/>
                     </div>
                     </div>
                     </div>
@@ -17,14 +17,14 @@
 				<div class="col-md-12 col-xs-12">
 					<div class="form-group">
 						<label for="descricao"><i class='fa'></i><b>Descrição</b></label>
-						<textarea type="text" id="descricao" name="descricao" placeholder="Descrição da competição" class="required form-control"></textarea> 
+						<textarea type="text" id="descricao" name="descricao" placeholder="Descrição do evento" class="required form-control"></textarea> 
 					</div>
 				</div>
 			</div>
 			<div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
-                        <label for="tipo"><i class='fa'></i><b>Tipo de Competição</b></label>
+                        <label for="tipo"><i class='fa'></i><b>Tipo de Evento</b></label>
                         <select name="tipo" id="tipo" class="form-control required">
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_TIPO -->
@@ -50,8 +50,17 @@
 			<div class="row">
 			    <div class="col-md-6 col-xs-6">
                       <div class="form-group">
-                      <label for="dataEvento"><i class='fa'></i><b>Data da Competição</b></label>
+                      <label for="dataEvento"><i class='fa'></i><b>Data do Evento</b></label>
                       <input id="dataEvento" type="text" name="dataEvento" value="" class="required form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                      <div class="form-group">
+                      <label for="dataEvento"><i class='fa'></i><b>Competição</b></label>
+                      <div class="radio-group">
+                      <input id="competicao" type="radio" name="competicao" value="1" class="required"> Sim &nbsp;
+                      <input id="competicao" type="radio" name="competicao" value="0" class="required" checked="checked"> Não
+                      </div>
                       </div>
                     </div>
 			</div>

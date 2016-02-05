@@ -106,7 +106,7 @@ public function listaAtivos(){
         if ($associacao != "")
             $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
         
-        $sql .= "  order by p.nome limit $primeiro, $quantidade";        
+        $sql .= "  order by a.numeroFemeju desc limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
 
     }
@@ -117,12 +117,11 @@ public function listaAtivos(){
         $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 1 ";
         
         if ($nome != "")
-            $sql .= " and ( p.nome like '$nome' or p.nomeMeio like '$nome%' or p.sobrenome like '$nome%')";
+            $sql .= " and ( p.nome like '$nome%' or p.nomeMeio like '$nome%' or p.sobrenome like '$nome%')";
         if ($associacao != "")
             $sql .= " and (a.idAssociacao in($associacao))";
         
         $sql .= "  order by p.nome limit 0,10";  
-        
         return $this -> getSQL($sql);
 
     }

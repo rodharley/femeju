@@ -110,6 +110,7 @@ set
 		<atrib tbname="tipo" type="int">tipo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>
+		<atrib tbname="bitCompeticao" type="int">competicao</atrib>
 		<atrib tbname="dobra2" type="int">dobra2</atrib>
 		<atrib tbname="dobra1" type="int">dobra1</atrib>
 		<atrib tbname="dobra3" type="int">dobra3</atrib>	

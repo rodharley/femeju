@@ -1,38 +1,39 @@
 <?php
-include("includes/include.lockPortal.php");
-$TPL = NEW Template("templates/portal/layout_inscricao.html");
-
+$menu = 39;
+include("includes/include.lock.php");
+$TPL = NEW Template("templates/admin/main.html");
+include("includes/include.montaMenu.php");
 include("includes/include.mensagem.php");
+//CONFIGURA O BREADCRUMB
+$TPL->BREADCRUMB = '<section class="content-header">
+                    <h1>
+                        Pagamento
+                        <small>Eventos</small>
+                    </h1>
+                   <ol class="breadcrumb">
+                                        <li><a href="admin_home-home"><i class="fa fa-home"> </i> Home</a></li>
+                                        <li><a href="admin_pagamento"><i class="fa fa-credit-card"> </i> Pagamentos</a></li>
+                                         <li class="active">Evento</li>
+                                    </ol>
+                </section>';
+
 
 $objc = new Competicao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objGrad = new Graduacao();
-$associacao = new Associacao();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa.html");
-$objc->getById($objc->md5_decrypt($_REQUEST['idEvento']));
+$TPL->addFile("CONTEUDO", "templates/admin/pagamento/inscricaoEvento.html");
+$objc->getById($objc->md5_decrypt($_REQUEST['idComp']));
 $rs = $objGrad->listaAtivas();
-$rsacademias = $associacao->listaPorResponsavelAtivas($_SESSION['fmj.userId']);
-$idsAssoc = "0";
-foreach ($rsacademias as $key => $acad) {
-    $idsAssoc .= ",".$acad->id;
-}
-$TPL->IDS_ASSOCIACAO = $idsAssoc;
 $rsClasses = $objc->listaClasses();
 foreach ($rs as $key => $value) {
 	$TPL->ID_GRA = $value->id;
     $TPL->DESC_GRA = $value->descricao;
     $TPL->block("BLOCK_GRA");
 }
-foreach ($rsClasses as $key => $value) {
-    $TPL->ID_CLA = $value->classe->id;
-    $TPL->DESC_CLA = $value->classe->descricao;
-    $TPL->block("BLOCK_CLA");
-}
+
 $TPL->VALOR = $objc->custa->valor;
-$TPL->DOBRA_1 = $objc->dobra1;
-$TPL->DOBRA_2 = $objc->dobra2;
-$TPL->DOBRA_3 = $objc->dobra3;
+
 
 //PAGAMENTOS
 $objTP = new PagamentoTipo();

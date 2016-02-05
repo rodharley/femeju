@@ -1,7 +1,6 @@
 <?php
 include("includes/include.lockPortal.php");
-$TPL = NEW Template("templates/portal/layout.html");
-include("includes/include.montaMenuPortal.php");
+$TPL = NEW Template("templates/portal/layout_inscricao.html");
 include("includes/include.mensagem.php");
 
 $obj = new Pagamento();

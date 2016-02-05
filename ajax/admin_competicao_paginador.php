@@ -16,7 +16,8 @@ foreach($alist as $key => $n){
     $TPL->ATIVO = $n->ativo ? "Sim" : "Não";
     $TPL->COLOR_ATIVO = $n->ativo ? "success" : "danger";
     $TPL->INSCRICAO = $n->inscricaoAberta ? "Sim" : "Não";
-    $TPL->COLOR_INSCRICAO = $n->inscricaoAberta ? "success" : "danger"; 
+    $TPL->COLOR_INSCRICAO = $n->inscricaoAberta ? "success" : "danger";
+    $TPL->COMPETICAO = $n->competicao == 1 ? "Sim" : "Não"; 
     $TPL->DATA = $obj->convdata($n->dataEvento,"mtn");
     $TPL->ID_HASH = $obj->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM");

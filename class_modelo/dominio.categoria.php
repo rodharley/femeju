@@ -49,7 +49,7 @@ class Categoria{
                 return 'arbitragem';
                 break;
                 case $this::COMPETICOES:
-                return 'competicoes';
+                return 'eventos';
                 break;
                 case $this::AFEMEJU:
                 return 'afemeju';
@@ -91,7 +91,7 @@ class Categoria{
                 return 'Arbitragem';
                 break;
                 case $this::COMPETICOES:
-                return 'Competições';
+                return 'Eventos';
                 break;
                 case $this::AFEMEJU:
                 return 'A Femeju';

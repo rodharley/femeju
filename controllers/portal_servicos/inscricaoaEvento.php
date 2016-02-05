@@ -9,7 +9,7 @@ $objGrupoCompeticao = new GrupoCompeticao();
 $objGrad = new Graduacao();
 $associacao = new Associacao();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
-$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa.html");
+$TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa_evento.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idEvento']));
 $rs = $objGrad->listaAtivas();
 $rsacademias = $associacao->listaPorResponsavelAtivas($_SESSION['fmj.userId']);
@@ -18,21 +18,13 @@ foreach ($rsacademias as $key => $acad) {
     $idsAssoc .= ",".$acad->id;
 }
 $TPL->IDS_ASSOCIACAO = $idsAssoc;
-$rsClasses = $objc->listaClasses();
 foreach ($rs as $key => $value) {
 	$TPL->ID_GRA = $value->id;
     $TPL->DESC_GRA = $value->descricao;
     $TPL->block("BLOCK_GRA");
 }
-foreach ($rsClasses as $key => $value) {
-    $TPL->ID_CLA = $value->classe->id;
-    $TPL->DESC_CLA = $value->classe->descricao;
-    $TPL->block("BLOCK_CLA");
-}
+
 $TPL->VALOR = $objc->custa->valor;
-$TPL->DOBRA_1 = $objc->dobra1;
-$TPL->DOBRA_2 = $objc->dobra2;
-$TPL->DOBRA_3 = $objc->dobra3;
 
 //PAGAMENTOS
 $objTP = new PagamentoTipo();

@@ -17,10 +17,10 @@ class GrupoCusta{
                 return 'Anuidade';
                 break;
             case $this::COMPETICAO:
-                return 'Competicao';
+                return 'Evento/Competicao';
                 break;
             case $this::OUTROS:
-                return 'Outros';
+                return 'Geral';
                 break;                
             default:
                 return '';
