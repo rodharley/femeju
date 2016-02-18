@@ -89,12 +89,12 @@
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="ativo" id="ativon" value="0" {checknao}/>
+                            <input type="radio" name="ativo" id="ativon" value="0" class="form-control flat-blue" {checknao}/>
                             Não </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="ativo" id="ativos" value="1" {checksim}/>
+                            <input type="radio" name="ativo" id="ativos" value="1" class="form-control flat-blue" {checksim}/>
                             Sim </label>
                     </div>
 
@@ -194,12 +194,6 @@
 			showCaption: false
 		});
 
-
-		//Flat red color scheme for iCheck
-		$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-			checkboxClass : 'icheckbox_flat-red',
-			radioClass : 'iradio_flat-red'
-		});
 
 		$("#frmEditUsuario").validate({
 			errorClass : "help-inline",
