@@ -8,7 +8,7 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <form role="form" method="post" action="portal_servicos-action" id="frmEditAtleta">
+                <form role="form" method="post" action="portal_servicos-action" id="frmEditAtleta" target="_blank">
                     <input type="hidden" name="associacao" id="associacao" value="{ID_ASSOCIACAO}"/>
                     <input type="hidden" name="acao" id="acao" value="guia" />
                     <div class="box box-primary">
@@ -80,23 +80,18 @@
                                                 </td>
                                                 <td>
                                                 <div class="form-group">
-                                                    <select name="custa{ID_ATLETA}" class="form-control required custa" id="{ID_ATLETA}">
-                                                        <option value=""></option>
-                                                        <!-- BEGIN BLOCK_CUSTA -->
-                                                        <option value="{ID_CUSTA}">{LABEL_CUSTA}</option>
-                                                        <!-- END BLOCK_CUSTA -->
-                                                    </select>
+                                                    {LABEL_CUSTA}
+                                                    <input type="hidden" name="custa{ID_ATLETA}" id="{ID_ATLETA}" value="{ID_CUSTA}"/>                                                    
                                                 </div></td>
                                                 <td class="col-md-2"  class="text-right">
-                                                <input type="text" id="valordesc_atleta{ID_ATLETA}" name="valordesc_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right"/>
-                                                <input type="hidden" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" value="0" class="camposoma"/>
+                                                <input type="text" id="valordesc_atleta{ID_ATLETA}" name="valordesc_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right" value="R$ {VALOR_CUSTA}"/>                                                
                                                 </td>
                                             </tr>
                                             <!-- END BLOCK_ATLETAS -->
                                             <tr>
                                                 <td class="text-right" colspan="2"> Total:</td>
                                                 <td class="col-md-2"  class="text-right">
-                                                <input type="text" id="total" name="total" disabled="disabled" class="form-control text-right"/>
+                                                <input type="text" id="total" name="total" disabled="disabled" class="form-control text-right" value="R$ {VALOR_TOTAL_CUSTA}"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -125,50 +120,14 @@
 </div>
 
 <script>
-	function somatotal() {
-		var total = 0;
-		$(".camposoma").each(function() {
-			total = total + eval($(this).val());
-		});
-		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
-
-	}
+	
 
 
 	$(document).ready(function() {
 
-		$(".custa").change(function() {
-			var atleta = $(this).attr("id");
-			if (atleta != "") {
-				$.ajax({
-					url : 'ajax/json_anuidade_valorCusta.php',
-					data : {
-						custa : $(this).val()
-					}
-				}).done(function(retorno) {
-					var json = JSON.parse(retorno);
-					$("#valordesc_atleta" + atleta).val(json.valorDesc);
-					$("#valor_atleta" + atleta).val(json.valor);
-					somatotal();
-				});
-			}
+		
 
-		});
-
-		$("#ano").change(function() {
-
-			$.ajax({
-				url : 'ajax/option_atletas_por_associacao.php',
-				data : {
-					associacao : $("#associacao").val(),
-					ano : $(this).val()
-				}
-			}).done(function(retorno) {
-				$("#atleta").html(retorno);
-			});
-
-		});
-
+		
 		$("#frmEditAtleta").validate({
 			errorClass : "help-inline",
 			errorElement : "div",
@@ -190,6 +149,6 @@
 				}
 			}
 		});
-		somatotal();
+		
 	}); 
 </script>

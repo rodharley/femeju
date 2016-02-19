@@ -9,9 +9,7 @@ $associacao = new Associacao();
 $conf->getById(10);
 $atleta->getById($atleta->md5_decrypt($_REQUEST['id']));
 if($atleta->ativo == 1 ){
-$dttime = strtotime($atleta->dataEmissaoCarteira);
-$ano = date("Y",$dttime);
-$val = mktime(0,0,0,12,31,$ano);
+
 
 
 //gera a imagem de fundo na cor das configuracoes;
@@ -55,7 +53,7 @@ $canvas->writeText('15', '215', $atleta->associacao->nome, 0);
 $canvas->writeText('15', '255', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('15', '295', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
 $canvas->writeText('150', '295',$atleta->convdata($atleta->pessoa->dataNascimento, "mtn"), 0);
-$canvas->writeText('15', '335', date("d",$val)." de ".$atleta->mesExtenso(date("m",$val))." de ".date("Y",$val), 0);
+$canvas->writeText('15', '335', '31 de Dezembro de '.Date('Y'), 0);
 $canvas->writeText('15', '355',"Válida CBJ", 0);
   
  

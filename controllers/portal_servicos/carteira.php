@@ -46,13 +46,10 @@ $canvas->writeText('20', '34', $atleta->associacao->nome, 0);
 $canvas->writeText('20', '70', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('20', '106', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
 $canvas->writeText('220', '106', $atleta->convdata($atleta->pessoa->dataNascimento, "mtn"), 0);
-$dttime = strtotime($atleta->dataEmissaoCarteira);
-$ano = date("Y",$dttime);
-$val = mktime(0,0,0,12,31,$ano);
-$canvas->writeText('20', '142', date("d",$val)." de ".$atleta->mesExtenso(date("m",$val))." de ".date("Y",$val), 0);
+$canvas->writeText('20', '142', '31 de Dezembro de '.Date('Y'), 0);
 //registro
 $canvas->useFont('fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
-$canvas->writeText('350', '140', $atleta->pessoa->nome. ' ' . $atleta->pessoa->sobrenome, 0);
+$canvas->writeText('350', '140', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('350', '160', 'Registro Nº:'.$atleta->getId(), 0);
 
 

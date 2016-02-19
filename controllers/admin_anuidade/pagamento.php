@@ -41,7 +41,7 @@ foreach ($rsAtletas as $key => $value) {
     //custas
        foreach ($rsCustas as $key2 => $custa) {
             $TPL->ID_CUSTA = $custa->id;
-            $TPL->LABEL_CUSTA = $custa->descricao;
+            $TPL->LABEL_CUSTA = $custa->titulo;
             $TPL->block("BLOCK_CUSTA");
         }
     

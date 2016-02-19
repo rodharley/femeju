@@ -45,7 +45,8 @@ $TPL->CHECKED_ARBITRO = "";
 $listaUf = $uf->getRows();
 $listaGrad = $objGrad->getRows();
 $listaAssociacao = $objAssociacao->listaAtivas();
-if(isset($_REQUEST['id'])){    
+if(isset($_REQUEST['id'])){
+    $TPL->DISABLED_DATA_GRADUACAO = 'disabled';    
     $objAtleta->getById($objAtleta->md5_decrypt($_REQUEST['id']));    
     $TPL->LABEL = "Alterar Atleta";
     $TPL->ACAO = "editar";
@@ -102,6 +103,12 @@ if(isset($_REQUEST['id'])){
     $selectedCidade = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->id : 0;
     $selectedCidadeNaturalidade = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->id : 0;
     $TPL->GRADUACAO = $selectedGrad;
+    
+    //historico da graduacao
+    $hist = new HistoricoGraduacao();
+    $historico = $hist->getUltimo($objAtleta->id);
+    $TPL->DATA_GRADUACAO = $hist->convdata($historico->data,"mtn");
+    
     //foto
     if(strlen($objAtleta->pessoa->foto) > 0){
         $TPL->FOTO = "<img src='img/pessoas/".$objAtleta->pessoa->foto."' class='file-preview-image' alt='".$objAtleta->pessoa->foto."' title='".$objAtleta->pessoa->foto."'>";

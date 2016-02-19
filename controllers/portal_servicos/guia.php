@@ -31,7 +31,7 @@ $rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$obj->id));
 
 foreach ($rsItens as $key => $item) {
     $TPL->DESC_ITEM = $item->descricaoItem;
-    $TPL->CUSTA_ITEM = $item->custa->descricao;
+    $TPL->CUSTA_ITEM = $item->custa->titulo;
     $TPL->VALOR_ITEM = "R$ ".$obj->money($item->valor,"atb");
     $TPL->block("BLOCK_ITEM");
 }

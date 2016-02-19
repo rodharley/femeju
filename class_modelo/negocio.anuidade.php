@@ -39,6 +39,10 @@ class Anuidade extends Persistencia{
     function atualizarAnuidadePorPagamento($idPagamento){
         $objPag = new Pagamento();
         $objPag->getById($idPagamento);
+        foreach ($objPag->itens as $key => $item) {
+            $sql = "update ".Atleta::TABELA." set bitAtivo = ".$objPag->bitPago." where id = ".$item->atleta;
+         $this->DAO_ExecutarDelete($sql);
+        }
          $sql = "update ".$this::TABELA." set situacao = ".$objPag->bitPago." where idPagamento = ".$idPagamento;
          $this->DAO_ExecutarDelete($sql);
          return true;
@@ -52,8 +56,10 @@ class Anuidade extends Persistencia{
             $atleta = new Atleta();
             $atleta->getById($id);
             $item->atleta = $atleta;
-            $item->valor = $this->money($_REQUEST['valor_atleta'.$id],"bta");
-            $item->custa = new Custa($_REQUEST['custa'.$id]);
+            $custa = new Custa();
+            $custa->getById($_REQUEST['custa'.$id]);
+            $item->valor = $custa->valor;
+            $item->custa = $custa;
             $item->descricaoItem = $atleta->pessoa->getNomeCompleto();
             array_push($itens,$item);
         }

@@ -488,7 +488,9 @@ function xmlObject($elemento,$i,$objeto){
 					$sql .=  ")";
 					
 				$this->DAO_ExecutarQuery($sql);
-				$this->id = $this->DAO_recuperaUltimoIdInserido();
+                $provid = $this->DAO_recuperaUltimoIdInserido();
+                if($provid != 0)
+				    $this->id = $provid;
 				return $this->id;
 				}
 			}

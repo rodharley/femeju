@@ -25,7 +25,7 @@ public function listaPorAssociacao($associacao){
 }
 
 public function listaPorAssociacaoInativo($associacao){
-       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 0 and a.idAssociacao = $associacao order by p.nome";
+       $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 0 and  a.numeroFemeju is not null and a.idAssociacao = $associacao order by p.nome";
        return $this->getSQL($sql);
 }
 
@@ -206,6 +206,17 @@ public function listaAtivos(){
 			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
 			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
             $this->save();
+            
+            //gravar no historico da graduacao a primeira graduacao
+            if($graduacao != null){
+            $histGrad = new HistoricoGraduacao();
+            $histGrad->data = $this->convdata($_REQUEST['dataGraduacao'],"ntm");
+            $histGrad->atleta = $this;
+            $histGrad->graduacao = $graduacao;
+            $histGrad->save();
+            }
+            
+            
             $_SESSION['fmj.mensagem'] = 41;
             return true;
             }
@@ -325,7 +336,8 @@ function IncluirPortal() {
             $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
             $pessoa -> foto = $nomefoto;
             }
-            $idPessoa = $pessoa->save();            
+            $idPessoa = $pessoa->save(); 
+                    
             //salva o atleta
             $this->id = $idPessoa;
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
@@ -339,7 +351,15 @@ function IncluirPortal() {
 			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
 			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
 			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
-            $this->save();
+            $this->save();               
+            //gravar no historico da graduacao a primeira graduacao
+            if($graduacao != null){
+            $histGrad = new HistoricoGraduacao();
+            $histGrad->data = $this->convdata($_REQUEST['dataGraduacao'],"ntm");
+            $histGrad->atleta = $this;
+            $histGrad->graduacao = $graduacao;
+            $histGrad->save();
+            }
             $_SESSION['fmj.mensagem'] = 41;
             return true;
             }

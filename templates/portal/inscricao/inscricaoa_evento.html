@@ -246,7 +246,12 @@
                     document.getElementById("nome").value = atleta.pessoa.nome+" "+atleta.pessoa.nomeMeio+" "+atleta.pessoa.sobrenome;
                     document.getElementById("email").value = atleta.pessoa.email;
                     document.getElementById("documento").value = atleta.pessoa.rg;
-                    document.getElementById("telefone").value = atleta.pessoa.telCelular;		
+                    if(atleta.pessoa.telCelular != '')
+                        document.getElementById("telefone").value = atleta.pessoa.telCelular;
+                     else if(atleta.pessoa.telResidencial != '')
+                        document.getElementById("telefone").value = atleta.pessoa.telResidencial;
+                     else    
+                        document.getElementById("telefone").value = atleta.pessoa.telComercial;
 					document.getElementById("idAtleta").value = atleta.pessoa.id;
 					document.getElementById("graduacao").value = atleta.graduacao.id; 			
 				});

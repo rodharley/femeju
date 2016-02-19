@@ -21,7 +21,7 @@
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="nomeMeio"><i class='fa'> </i><b>Nome do Meio</b></label>
-                        <input type="text" id="nomeMeio" name="nomeMeio" placeholder="Nome do meio do Atleta" value="{NOME_MEIO}" class="required form-control"/>
+                        <input type="text" id="nomeMeio" name="nomeMeio" placeholder="Nome do meio do Atleta" value="{NOME_MEIO}" class="form-control"/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
@@ -330,7 +330,17 @@
                        
             </div> 
             </div>
+            
         </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6"></div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="dataGraduacao"><i class='fa'> </i><b>Data da Graduação</b></label>
+                        <input type="text" id="dataGraduacao" name="dataGraduacao" value="{DATA_GRADUACAO}" class="required form-control" {DISABLED_DATA_GRADUACAO}/>
+                    </div>
+                </div>
+            </div>
         </fieldset>
         <div class="box-footer text-center">
             <button class="btn btn-success" id="save" type="submit">
@@ -365,6 +375,7 @@
         </ul>                          
         </div>
         </div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -418,6 +429,7 @@
 	    
 	    $('#dataNascimento').datepicker();
         $('#dataFiliacao').datepicker();
+        $("#dataGraduacao").datepicker();
         $('#dataEmissaoCarteira').datepicker();
         $('#rgDataExp').datepicker();
         $('#passaporteDataVal').datepicker();

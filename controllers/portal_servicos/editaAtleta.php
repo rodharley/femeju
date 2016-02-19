@@ -83,6 +83,12 @@ if(isset($_REQUEST['id'])){
     $selectedCidade = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->id : 0;
     $selectedCidadeNaturalidade = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->id : 0;
     $TPL->GRADUACAO = $selectedGrad;
+    
+    //historico da graduacao
+    $hist = new HistoricoGraduacao();
+    $historico = $hist->getUltimo($objAtleta->id);
+    $TPL->DATA_GRADUACAO = $hist->convdata($historico->data,"mtn");
+    
     //foto
     if(strlen($objAtleta->pessoa->foto) > 0){
         $TPL->FOTO = "<img src='img/pessoas/".$objAtleta->pessoa->foto."' class='file-preview-image' alt='".$objAtleta->pessoa->foto."' title='".$objAtleta->pessoa->foto."'>";
