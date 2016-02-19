@@ -190,14 +190,14 @@
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
-                        <label for="rgOrgaoExpedidor"><i class='fa'> </i><b>Orgão Espedidor</b></label>
-                        <input type="text" id="rgOrgaoExpedidor" name="rgOrgaoExpedidor" value="{RG_ORGAO_EXP}" class="required form-control" {DISABLED}/>
+                        <label for="rgOrgaoExpedidor"><i class='fa'> </i><b>Orgão Emissor</b></label>
+                        <input type="text" id="rgOrgaoExpedidor" name="rgOrgaoExpedidor" value="{RG_ORGAO_EXP}" class="form-control" {DISABLED}/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
-                        <label for="rgDataExp"><i class='fa'> </i><b>Data Expedição</b></label>
-                        <input type="text" id="rgDataExp" name="rgDataExp" value="{RG_DATA_EXP}" class="required form-control" {DISABLED}/>
+                        <label for="rgDataExp"><i class='fa'> </i><b>Data Emissão</b></label>
+                        <input type="text" id="rgDataExp" name="rgDataExp" value="{RG_DATA_EXP}" class="form-control" {DISABLED}/>
                     </div>
                 </div>
                 </div>
@@ -435,7 +435,16 @@
                          depends: function () { return !$("#semrg").prop("checked"); }
                     } 
                 },
-                
+                rgOrgaoExpedidor :{
+                    required:{
+                         depends: function () { return !$("#semrg").prop("checked"); }
+                    } 
+                },
+                rgDataExp :{
+                    required:{
+                         depends: function () { return !$("#semrg").prop("checked"); }
+                    } 
+                },
                 email: {
                 required: true,
                 remote: {
