@@ -80,7 +80,7 @@ public function listaAtivos(){
             return false;
     }
     
-	function pesquisarTotal($nome = "",$associacao = "",$naoverf = "") {
+	function pesquisarTotal($nome = "",$associacao = "",$naoverf = "",$ativo = "") {
         $sql = "select count(a.id) as total from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao where 1 = 1 ";
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
@@ -94,7 +94,7 @@ public function listaAtivos(){
         return $this -> DAO_Result($rs, "total", 0);
     }
 
-    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$naoverf = "") {
+    function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$naoverf = "",$ativo = "") {
 
         $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where 1 = 1 ";
         if($naoverf != "")
