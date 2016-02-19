@@ -27,6 +27,7 @@ $obCusta = new Custa();
 $TPL->TITULO = $obj->titulo;
 $TPL->DESCRICAO = $obj->descricao;
 $TPL->DATA = $obj->convdata($obj->dataEvento,"mtn");
+$TPL->DATA_INSCRICAO = $obj->convdata($obj->dataInscricao,"mtn");
 $TPL->ID = $obj->id;
 $TPL->dobra1 = $obj->dobra1;
 $TPL->dobra2 = $obj->dobra2;

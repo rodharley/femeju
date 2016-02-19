@@ -5,6 +5,7 @@ class Competicao extends Persistencia {
     var $titulo;
     var $dataEvento;    
 	var $inscricaoAberta;
+    var $dataInscricao;
     var $ativo;
     var $tipo;
     var $dobra1;
@@ -12,6 +13,7 @@ class Competicao extends Persistencia {
     var $dobra3;
     var $custa = NULL;
     var $competicao;
+    
     public function Incluir(){
         $this->descricao = $_REQUEST['descricao'];
         $this->tipo = $_REQUEST['tipo'];
@@ -22,6 +24,7 @@ class Competicao extends Persistencia {
         $this->dobra2 = 0;
         $this->dobra3 = 0;
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
+        $this->dataInscricao = $this->convdata($_REQUEST['dataInscricao'], "ntm");
         $this->inscricaoAberta = 0;
         $this->ativo = 1;
         return $this->save();
@@ -41,6 +44,7 @@ class Competicao extends Persistencia {
         $this->dobra3 = $_REQUEST['dobra3'] != "" ? $this->money($_REQUEST['dobra3'], "bta") : 0;
         }
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
+        $this->dataInscricao = $this->convdata($_REQUEST['dataInscricao'], "ntm");
         $this->inscricaoAberta = $_REQUEST['inscricao'];
         $this->ativo = $_REQUEST['ativo'];
         $this->save();
@@ -105,7 +109,7 @@ class Competicao extends Persistencia {
 
     }
     public function listaAtivasAbertas(){
-        return $this->getRows(0,999,array(),array("ativo"=>"=1","inscricaoAberta"=>"=1"));
+        return $this->getRows(0,999,array(),array("ativo"=>"=1","inscricaoAberta"=>"=1", "dataInscricao"=>">='".date("Y-m-d")."'"));
     }
    
    public function gerarInscricaoF()

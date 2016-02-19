@@ -74,6 +74,9 @@ Exemplos de mensagens:
 <mensagem id="68" type="success">Baixa realizada com sucesso.</mensagem>
 <mensagem id="69" type="warning">Não é possível excluir o evento pois já possui atletas inscritos.</mensagem>
 <mensagem id="70" type="success">Evento foi criado com sucesso</mensagem>
+<mensagem id="71" type="success">Pessoa incluída com sucesso.</mensagem>
+<mensagem id="72" type="success">Pessoa alterada com sucesso.</mensagem>
+<mensagem id="73" type="success">Pessoa excluida com sucesso.</mensagem>
 </mensagens>
 
 

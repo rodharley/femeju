@@ -107,6 +107,7 @@ set
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="titulo" type="txt">titulo</atrib>
 		<atrib tbname="dataEvento" type="txt">dataEvento</atrib>
+		<atrib tbname="dataInscricao" type="txt">dataInscricao</atrib>
 		<atrib tbname="tipo" type="int">tipo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>

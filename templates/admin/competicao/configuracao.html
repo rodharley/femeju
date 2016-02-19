@@ -77,6 +77,12 @@
                         <input id="dataEvento" type="text" name="dataEvento" value="{DATA}" class="required form-control">
                     </div>
                 </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="dataEvento"><i class='fa'></i><b>Data limite da Inscrição</b></label>
+                        <input id="dataInscricao" type="text" name="dataInscricao" value="{DATA_INSCRICAO}" class="required form-control">
+                    </div>
+                </div>
             </div>
             <!-- BEGIN BLOCK_COMPETICAO -->
             <div class="row">
@@ -157,6 +163,7 @@
 	$(document).ready(function() {
 
 		$("#dataEvento").datepicker();
+		$("#dataInscricao").datepicker();
         <!-- BEGIN BLOCK_COMPETICAO_JS -->
         $("#dobra3").inputmask({
             alias : "decimal",
