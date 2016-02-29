@@ -89,7 +89,7 @@ class Pagamento extends Persistencia{
     }
  
  function pesquisarPortal($primeiro = 0, $quantidade = 9999, $idResponsavel) {
-        $sql = "select p.* from ".$this::TABELA." p inner join ".Pessoa::TABELA." pe on pe.cpf = p.cpfSacado where pe.id = $idResponsavel";
+        $sql = "select p.* from ".$this::TABELA." p inner join ".Pessoa::TABELA." pe on pe.cpf = p.cpfSacado where pe.id = $idResponsavel order by p.dataVencimento desc";
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> getSQL($sql);
     }
