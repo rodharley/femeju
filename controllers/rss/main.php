@@ -29,7 +29,7 @@ $item->addChild('pubDate', date('r',$dt));
 
 
 // Define o tipo de conteúdo e o charset
-//header("content-type: application/rss+xml; charset=utf-8");
+header("content-type: application/rss+xml; charset=utf-8");
 //header('Content-Type: text/xml');
 //header('Content-Type: application/xml');
 // Entrega o conteúdo do RSS completo:
