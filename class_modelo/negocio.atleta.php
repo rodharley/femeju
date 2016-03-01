@@ -264,7 +264,7 @@ public function listaAtivos(){
             if ($_FILES['foto']['name'] != "") {
             //incluir imagem se ouver
             if ($pessoa -> foto != "pessoa.png")
-                $this -> apagaImagem($this -> foto, "img/pessoas/");
+                $this -> apagaImagem($pessoa -> foto, "img/pessoas/");
             $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
             $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
             $pessoa -> foto = $nomefoto;
