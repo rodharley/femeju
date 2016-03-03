@@ -43,6 +43,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->descricao = $objAssociacao->descricao;
     $TPL->sigla = $objAssociacao->sigla;
     $TPL->cnpj = $objAssociacao->cnpj;
+    $TPL->identificacao = $objAssociacao->identificacao;
     if($objAssociacao->dataFiliacao != null)
         $TPL->dataFiliacao = $objAssociacao->convdata($objAssociacao->dataFiliacao,"mtn");
 	$TPL->endereco = $objAssociacao->endereco;

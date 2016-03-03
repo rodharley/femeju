@@ -23,7 +23,7 @@ $TPL->TELEFONE2 = $obj->formataTelefone($obj->telefone2);
 $TPL->EMAIL = $obj->email;     
 $TPL->URL_MIDIA = $obj->midiaSocial; 
 $TPL->WEB_SITE = $obj->webSite;   
-
+$TPL->CNPJ = strlen($obj->cnpj) != 0 ? $obj->cnpj : $obj->identificacao;
 //fotos
 foreach ($obj->fotos as $key => $foto) {
         $TPL->IMAGEM_FOTO = $foto->imagem;

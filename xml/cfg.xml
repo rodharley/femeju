@@ -50,6 +50,7 @@ set
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="sigla" type="txt">sigla</atrib>
 		<atrib tbname="cnpj" type="txt">cnpj</atrib>
+		<atrib tbname="identificacao" type="txt">identificacao</atrib>
 		<atrib tbname="logomarca" type="txt">logomarca</atrib>
 		<atrib tbname="website" type="txt">webSite</atrib>
 		<atrib tbname="midiaSocial" type="txt">midiaSocial</atrib>

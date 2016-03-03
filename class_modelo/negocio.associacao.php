@@ -5,6 +5,7 @@ class Associacao extends Persistencia {
     var $razaoSocial;
     var $sigla;
     var $cnpj;
+    var $identificacao;
     var $descricao;
     var $logomarca;
     var $dataFiliacao;
@@ -67,6 +68,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this -> logomarca = "";
         $this -> dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'],"ntm")." ".date("H:i:s");
         $this->sigla = $_REQUEST['sigla'];
+        $this->identificacao = $_REQUEST['identificacao'];
         $this->cnpj = $this->limpaDigitos($_REQUEST['cnpj']);
         $this->endereco = $_REQUEST['endereco'];
         $this->bairro = $_REQUEST['bairro'];
@@ -167,6 +169,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
         $this->ativo = $_REQUEST['ativo'];
         $this -> dataFiliacao = $this->convdata($_REQUEST['dataFiliacao'],"ntm")." ".date("H:i:s");
         $this->sigla = $_REQUEST['sigla'];
+        $this->identificacao = $_REQUEST['identificacao'];
         $this->cnpj = $this->limpaDigitos($_REQUEST['cnpj']);
         $this->endereco = $_REQUEST['endereco'];
         $this->bairro = $_REQUEST['bairro'];

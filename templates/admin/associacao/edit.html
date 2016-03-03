@@ -40,13 +40,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-xs-6">
+                <div class="col-md-4 col-xs-12">
                     <div class="form-group">
                         <label for="cnpj"><i class='fa'></i><b>CNPJ</b></label>
                         <input type="text" id="cnpj" name="cnpj" value="{cnpj}" class="cnpj form-control"/>
                     </div>
                 </div>
-                <div class="col-md-6 col-xs-6">
+                <div class="col-md-4 col-xs-12">
+                    <div class="form-group">
+                        <label for="cnpj"><i class='fa'></i><b>Identificação</b></label>
+                        <input type="text" id="identificacao" name="identificacao" value="{identificacao}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
                     <div class="form-group">
                         <label for="sigla"><i class='fa'></i><b>Sigla</b></label>
                         <input type="text" id="sigla" name="sigla" value="{sigla}" class="form-control"/>
@@ -398,6 +404,16 @@ var as = new bsn.AutoSuggest('nome_responsavel', options);
                 $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
             },
             rules : {
+                cnpj :{
+                    required:function() {
+                    return $("#identificacao").val() == "";
+                }    
+                },
+                identificacao :{
+                    required:function() {
+                    return $("#cnpj").val() == "";
+                }    
+                },
                 email: {
                 required: true,
                 remote: {
