@@ -74,6 +74,7 @@ set
 		<atrib tbname="bitAtleta" type="int">bitAtleta</atrib>
 		<atrib tbname="bitArbitro" type="int">bitArbitro</atrib>
 		<atrib tbname="bitTecnico" type="int">bitTecnico</atrib>
+		<atrib tbname="observacoes" type="txt">observacoes</atrib>
 		<atrib tbname="id" type="fk" clrelation="Pessoa">pessoa</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
 		<atrib tbname="idAssociacao" type="fk" clrelation="Associacao">associacao</atrib>	

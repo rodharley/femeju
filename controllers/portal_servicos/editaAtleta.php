@@ -83,7 +83,7 @@ if(isset($_REQUEST['id'])){
     $selectedCidade = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->id : 0;
     $selectedCidadeNaturalidade = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->id : 0;
     $TPL->GRADUACAO = $selectedGrad;
-    
+    $TPL->OBS = $objAtleta->observacoes;
     //historico da graduacao
     $hist = new HistoricoGraduacao();
     $historico = $hist->getUltimo($objAtleta->id);

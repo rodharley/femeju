@@ -89,6 +89,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->WEB_SITE =  $objAtleta->pessoa->webSite;
 	$TPL->MIDIA_SOCIAL =  $objAtleta->pessoa->midiaSocial;
 	$TPL->VACINAS = $objAtleta->pessoa->vacinas;
+    $TPL->OBS = $objAtleta->observacoes;
 	$TPL->RG = $objAtleta->pessoa->rg;
 	$TPL->RG_ORGAO_EXP = $objAtleta->pessoa->rgOrgaoExpedidor;
 	$TPL->RG_DATA_EXP = $objAtleta->convdata($objAtleta->pessoa->rgDataExp,"mtn");

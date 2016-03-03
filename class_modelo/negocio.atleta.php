@@ -14,6 +14,8 @@ class Atleta extends Persistencia {
    var $pessoa = NULL;
    var $graduacoes;
    var $anuidades;
+   var $observacoes;
+   
    public function listaPorAssociacaoAtivos($associacao){
        $sql = "select a.* from ".$this::TABELA." a inner join ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 1 and a.idAssociacao = $associacao order by p.nome";
        return $this->getSQL($sql);
@@ -205,6 +207,7 @@ public function listaAtivos(){
 			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
 			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
 			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
+            $this->observacoes = $_REQUEST['observacoes'];
             $this->save();
             
             //gravar no historico da graduacao a primeira graduacao
@@ -278,6 +281,7 @@ public function listaAtivos(){
 			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
 			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
 			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
+            $this->observacoes = $_REQUEST['observacoes'];
             $this->associacao = $associacao;
             $this->graduacao = $graduacao;
             $this->pessoa = $pessoa;
@@ -351,6 +355,7 @@ function IncluirPortal() {
 			$this->bitArbitro = isset($_REQUEST['bitArbitro'])?$_REQUEST['bitArbitro']:"0";
 			$this->bitAtleta = isset($_REQUEST['bitAtleta'])?$_REQUEST['bitAtleta']:"1";
 			$this->bitTecnico = isset($_REQUEST['bitTecnico'])?$_REQUEST['bitTecnico']:"0";
+            $this->observacoes = $_REQUEST['observacoes'];
             $this->save();               
             //gravar no historico da graduacao a primeira graduacao
             if($graduacao != null){

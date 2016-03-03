@@ -8,7 +8,6 @@ $obj->getById($obj->md5_decrypt($_REQUEST['id']));
 $TPL->NOME_ASSOCIACAO = $obj->nome;
 $TPL->DESCRICAO = $obj->descricao;
 $TPL->LOGOTIPO = $obj->logomarca != "" ? $obj->logomarca : "nologo.png";
-$TPL->RAZAO_SOCIAL = $obj->razaoSocial;
 $TPL->SIGLA = $obj->sigla;        
 $TPL->BAIRRO = $obj->bairro;
 $TPL->ENDERECO = $obj->endereco;
@@ -17,8 +16,7 @@ $TPL->CIDADE = $obj->cidade->nome;
 $TPL->ESTADO = $obj->cidade->uf->uf;
 }
 $TPL->CEP = $obj->formataCep($obj->cep);
-$TPL->DATA_FILIACAO = $obj->convdata($obj->dataFiliacao,"mtn");
-$TPL->NOME_RESPONSAVEL = $obj->responsavel->pessoa->nome;
+$TPL->NOME_RESPONSAVEL = $obj->responsavel->pessoa->getNomeCompleto();
 $TPL->CELULAR = $obj->formataTelefone($obj->responsavel->pessoa->telCelular);
 $TPL->TELEFONE1 = $obj->formataTelefone($obj->telefone1);
 $TPL->TELEFONE2 = $obj->formataTelefone($obj->telefone2);
