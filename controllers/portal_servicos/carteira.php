@@ -49,9 +49,30 @@ $canvas->writeText('220', '106', $atleta->convdata($atleta->pessoa->dataNascimen
 $canvas->writeText('20', '142', '31 de Dezembro de '.Date('Y'), 0);
 //registro
 $canvas->useFont('fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$strnomeFrente = $atleta->pessoa->getNomeCompleto();
+if(strlen($strnomeFrente) > 20){
+$str_linha1 = "";
+$str_linha2 = "";    
+$arraynome = explode(" ", $strnomeFrente);
+foreach ($arraynome as $key => $nome) {
+    
+    if(strlen($str_linha1.$arraynome[$key]) >= 20){
+      
+        $str_linha2 .= $arraynome[$key]." ";
+    }else{
+      
+        $str_linha1 .= $arraynome[$key]." ";
+    }    
+}    
+
+
+$canvas->writeText('350', '140', $str_linha1, 0);
+$canvas->writeText('350', '160', $str_linha2, 0);
+$canvas->writeText('350', '180', 'Registro Nº:'.$atleta->getId(), 0);    
+}else{
 $canvas->writeText('350', '140', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('350', '160', 'Registro Nº:'.$atleta->getId(), 0);
-
+}
 
 $carteiracomfotoeqrcodeAssinada->saveToFile("img/pessoas/carteira".$atleta->getId().".png");
 header("Location:plugins/mpdf/relatorios/carteira.php?id=".$atleta->getId());
