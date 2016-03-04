@@ -11,7 +11,7 @@ $user->getById($idUser);
 			$user->senha = md5($_REQUEST['senha']);
 			$user->save();
 			$_SESSION['fmj.mensagem'] = 14;
-			$user->login($user->email, $_POST['senha']);
+			$user->login($user->pessoa->email, $_POST['senha']);
 			header("Location:admin_home-home");
 			exit();
 		}else{
