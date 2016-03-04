@@ -1012,6 +1012,7 @@ function uploadArquivo($file,$nomeImagem,$diretorio){
 
 
 function formataTelefone($tel){
+   if(strlen($tel) > 0 ){ 
 if(strlen($tel) > 12){
 $p1 = substr($tel,0,2);
 $p2 = substr($tel,2,2);
@@ -1024,16 +1025,21 @@ $p3 = substr($tel,4,4);
 $p4 = substr($tel,8);    
 }
 return '+'.$p1.' '.$p2." ".$p3."-".$p4;
-
+   }else{
+    return '';       
+   }
 }
 
 function formataCep($cep){
-
+if(strlen($cep) > 0 ){ 
 $p1 = substr($cep,0,5);
 
 $p2 = substr($cep,5,3);
 
 return $p1.'-'.$p2;
+}else{
+    return '';       
+   }
 
 }
 

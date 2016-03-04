@@ -14,7 +14,7 @@ $user->getById($idUser);
 	}else{
 		if($user->ativo == "0"){
 				$TPL->id = $user->id;
-                $TPL->email = $user->email;
+                $TPL->email = $user->pessoa->email;
 		}else{
 			$_SESSION['fmj.mensagem'] = 13;
 			header("Location:admin_home-index");

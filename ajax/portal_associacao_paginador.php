@@ -10,7 +10,7 @@ $alist = $assoc->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->NOME = $n->nome;
-	$TPL->DESCRICAO = $n->descricao;    
+	$TPL->DESCRICAO = $n->bairro;    
     $TPL->LOGOTIPO = $n->logomarca != "" ? $n->logomarca : "nologo.png";
         
     

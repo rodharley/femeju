@@ -11,7 +11,7 @@ $alist = $obj->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->FOTO = $n->foto != "" ? $n->foto : "pessoa.png";
-    $TPL->NOME = $n->nome." ".$n->getNomeCompleto();
+    $TPL->NOME = $n->getNomeCompleto();
     $TPL->ID_HASH = $obj->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
     

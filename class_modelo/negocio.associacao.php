@@ -131,6 +131,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
             $objPessoa->bitVerificado = 1;
+            $objPessoa->foto = 'pessoa.png';
             $id = $objPessoa->save();     
             $objUser->id = $id;
             $objUser -> senha = "";
@@ -247,6 +248,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
+            $objPessoa->foto = 'pessoa.png';
             $id = $objPessoa->save();     
             $objUser->id = $id;
             $objUser -> senha = "";

@@ -54,15 +54,18 @@ if(strlen($strnomeFrente) > 20){
 $str_linha1 = "";
 $str_linha2 = "";    
 $arraynome = explode(" ", $strnomeFrente);
+$controle = 0;
 foreach ($arraynome as $key => $nome) {
     
-    if(strlen($str_linha1.$arraynome[$key]) >= 20){
-      
+    if(strlen($str_linha1.$arraynome[$key]) >= 20)
+        $controle = 1;    
+    
+    if($controle == 1){      
         $str_linha2 .= $arraynome[$key]." ";
-    }else{
-      
+    }else{      
         $str_linha1 .= $arraynome[$key]." ";
     }    
+        
 }    
 
 
