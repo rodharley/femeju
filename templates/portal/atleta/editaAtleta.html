@@ -9,7 +9,6 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <form role="form" method="post" action="portal_servicos-action" id="frmEditAtleta" enctype="multipart/form-data">
-                    <input type="hidden" name="id" id="id" value="{id}"/>
                     <input type="hidden" name="associacao" id="associacao" value="{ID_ASSOCIACAO}"/>
                     <input type="hidden" name="acao" value="{ACAO}"/>       
                     <div class="box box-primary">
@@ -33,6 +32,61 @@
                                 </div>
                                 </div>
                                 </fieldset>
+                                 <fieldset>
+                <legend>Documentos</legend>
+                <div class="row">   
+                 <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="cpf"><i class='fa'> </i><b>CPF</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semcpf" id="semcpf"/> Sem CPF</label>
+                        <input type="text" id="cpf" name="cpf" value="{CPF}" class="form-control cpf" {DISABLED}/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="rg"><i class='fa'> </i><b>RG</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semrg" id="semrg" /> Sem RG</label>
+                        <input type="text" id="rg" name="rg" value="{RG}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="rgOrgaoExpedidor"><i class='fa'> </i><b>Orgão Emissor</b></label>
+                        <input type="text" id="rgOrgaoExpedidor" name="rgOrgaoExpedidor" value="{RG_ORGAO_EXP}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="rgDataExp"><i class='fa'> </i><b>Data Emissão</b></label>
+                        <input type="text" id="rgDataExp" name="rgDataExp" value="{RG_DATA_EXP}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                </div>
+                <div class="row">   
+                 <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporte"><i class='fa'> </i><b>Passaporte</b></label>
+                        <input type="text" id="passaporte" name="passaporte" value="{PASSAPORTE}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporteDataVal"><i class='fa'> </i><b>Data Validade</b></label>
+                        <input type="text" id="passaporteDataVal" name="passaporteDataVal" value="{PASSAPORTE_VAL}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporteOrgao"><i class='fa'> </i><b>Orgão Espedidor</b></label>
+                        <input type="text" id="passaporteOrgao" name="passaporteOrgao" value="{PASSAPORTE_ORGAO_EXP}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporteDataExp"><i class='fa'> </i><b>Data Expedição</b></label>
+                        <input type="text" id="passaporteDataExp" name="passaporteDataExp" value="{PASSAPORTE_DATA_EXP}" class="form-control" {DISABLED}/>
+                    </div>
+                </div>
+                </div>
+            </fieldset> 
                                     
                                <fieldset><legend>Dados Pessoais</legend>
             <div class="row">
@@ -103,7 +157,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                        <input type="text" id="email" name="email" placeholder="E-mail do Atleta" value="{EMAIL}" class="email required form-control" {DISABLED}/>
+                        <input type="text" id="email" name="email" placeholder="E-mail do Atleta" value="{EMAIL}" class="email form-control" {DISABLED}/>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
@@ -180,61 +234,7 @@
                 </div>              
             </div>
             </fieldset>
-            <fieldset>
-            	<legend>Documentos</legend>
-            	<div class="row">   
-            	 <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="cpf"><i class='fa'> </i><b>CPF</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semcpf" id="semcpf"/> Sem CPF</label>
-                        <input type="text" id="cpf" name="cpf" value="{CPF}" class="form-control cpf" {DISABLED}/>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="rg"><i class='fa'> </i><b>RG</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semrg" id="semrg" /> Sem RG</label>
-                        <input type="text" id="rg" name="rg" value="{RG}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="rgOrgaoExpedidor"><i class='fa'> </i><b>Orgão Emissor</b></label>
-                        <input type="text" id="rgOrgaoExpedidor" name="rgOrgaoExpedidor" value="{RG_ORGAO_EXP}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="rgDataExp"><i class='fa'> </i><b>Data Emissão</b></label>
-                        <input type="text" id="rgDataExp" name="rgDataExp" value="{RG_DATA_EXP}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                </div>
-                <div class="row">   
-            	 <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="passaporte"><i class='fa'> </i><b>Passaporte</b></label>
-                        <input type="text" id="passaporte" name="passaporte" value="{PASSAPORTE}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="passaporteDataVal"><i class='fa'> </i><b>Data Validade</b></label>
-                        <input type="text" id="passaporteDataVal" name="passaporteDataVal" value="{PASSAPORTE_VAL}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="passaporteOrgao"><i class='fa'> </i><b>Orgão Espedidor</b></label>
-                        <input type="text" id="passaporteOrgao" name="passaporteOrgao" value="{PASSAPORTE_ORGAO_EXP}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="form-group">
-                        <label for="passaporteDataExp"><i class='fa'> </i><b>Data Expedição</b></label>
-                        <input type="text" id="passaporteDataExp" name="passaporteDataExp" value="{PASSAPORTE_DATA_EXP}" class="form-control" {DISABLED}/>
-                    </div>
-                </div>
-                </div>
-            </fieldset> 
+            
             <fieldset><legend>Endereço</legend>
                 <div class="row">
                 <div class="col-md-6 col-xs-6">
@@ -375,7 +375,7 @@
                         
                         <div class="panel-footer text-right">
                         	<!-- BEGIN BLOCK_NEW -->
-                            <button class="btn btn-success" id="save" type="submit">
+                            <button class="btn btn-success" id="save" type="button">
                 Salvar
             </button>
             <!-- END BLOCK_NEW -->
@@ -391,8 +391,6 @@
         </div>
     </div>
 </div>
-<script src="js/plugins/bsnAutoSuggest/bsn.AutoSuggest_2.1.3_comp.js"></script>
-<link href="css/bsnAutoSuggest/autosuggest_inquisitor.css" rel="stylesheet" type="text/css" />
 <script>
     function cidadePorUf(){
          $.ajax({
@@ -405,6 +403,32 @@
             });
     }
     $(document).ready(function() {
+        
+        $("#save").click(function(){
+            
+            if($("#frmEditAtleta").valid()){
+            var isnomeExiste = false;
+            $.ajax({
+                url : "ajax/pessoa_consultaNomesPessoa.php",
+                type : "POST",
+                data : {nome: $("#nome").val(),nomeMeio:$("#nomeMeio").val(),sobrenome:$("#sobrenome").val()},                
+            }).done(function(msg) {
+              if(msg == "1")
+                isnomeExiste = true;
+               else
+                isnomeExiste = false;
+            });
+            
+            if(isnomeExiste){
+                if(confirm("Já existe uma pessoa com o mesmo nome, nome do meio e sobrenome no sistema, desenja confirmar o cadastro?"))
+                    $("#frmEditAtleta").submit();
+            }else{
+                $("#frmEditAtleta").submit();
+            }
+            }
+        });
+        
+        
         $('#dataNascimento').datepicker();
         $('#dataGraduacao').datepicker();
         $('#dataFiliacao').datepicker();
@@ -437,7 +461,14 @@
                 cpf :{
                     required:{
                          depends: function () { return !$("#semcpf").prop("checked"); }
-                    } 
+                    },
+                    remote: {
+                            url: "ajax/pessoa_verificaCpf.php",
+                            type: "post",
+                            data: {
+                              idUser: 0
+                            }
+                            } 
                 },
                 rg :{
                     required:{
@@ -455,7 +486,7 @@
                     } 
                 },
                 email: {
-                required: true,
+                required: false,
                 remote: {
                             url: "ajax/usuario_verificaLogin.php",
                             type: "post",
@@ -465,51 +496,19 @@
                               }
                             }
                             }
-                }
+                }                
                 },
                 messages: {
                     email: {
-                    remote: "E-mail já existe no sistema!"
+                    remote: "E-mail já existe no portal!"
+                    },
+                    cpf: {
+                        remote: "CPF já existe no portal"
                     }
                 }
                 
         });
-        
-        
-        var options = {
-        script: "ajax/json_pessoasNaoAtleta.php?",
-        varname: "busca",
-        json: true,
-        maxresults: 35,
-        callback: function (obj) {
-        var pessoa; 
-        $.ajax({
-            url:'ajax/json_pessoa.php',
-            data:{id:obj.id}
-            }).done(function(retorno){
-                pessoa = JSON.parse(retorno);                
-                document.getElementById("id").value =pessoa.id;        
-                document.getElementById("sobrenome").value =pessoa.sobrenome;
-                document.getElementById("nome").value =pessoa.nome;
-                document.getElementById("nomeMeio").value =pessoa.nomeMeio;
-                document.getElementById("email").value =pessoa.email;
-                document.getElementById("telefoneCel").value =pessoa.telCelular;
-                document.getElementById("telefoneRes").value =pessoa.telResidencial;
-                document.getElementById("telefoneCom").value =pessoa.telComercial;
-                document.getElementById("filiacaoMae").value =pessoa.filiacaoMae;
-                document.getElementById("filiacaoPai").value =pessoa.filiacaoPai;
-                document.getElementById("endereco").value =pessoa.endereco;
-                document.getElementById("bairro").value =pessoa.bairro;
-                document.getElementById("uf").value =pessoa.cidade.uf.id;
-                cidadePorUf();
-                document.getElementById("cidade").value =pessoa.cidade.id;
-                document.getElementById("cep").value =pessoa.cep;
-            });
-        
-         }
-    
-        };
-        var as = new bsn.AutoSuggest('nome', options); 
+       
         $(".bt_belt").click(function(){
             $( ".bt_belt" ).each(function() {
               $( this ).removeClass( "btn-primary" );  

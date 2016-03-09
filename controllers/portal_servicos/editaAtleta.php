@@ -17,7 +17,6 @@ $TPL->LOGO_ASSOCIACAO = $objAssociacao->logomarca;
 $TPL->LABEL = "Novo Atleta";
 
 $TPL->ACAO = "incluirAlteta";
-$TPL->id = 0;
 $TPL->FOTO = "";
 $selectedUf = 0;
 $selectedUfNat = 0;
@@ -36,8 +35,7 @@ if(isset($_REQUEST['id'])){
     $objAtleta->getById($objAtleta->md5_decrypt($_REQUEST['id']));    
     $TPL->LABEL = "Alterar Atleta";
     $TPL->ACAO = "";
-    $TPL->id = $objAtleta->id;
-	$TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
+    $TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
 	$TPL->CHECKED_TECNICO = $objAtleta->bitTecnico ? "checked" : "";	
 	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : ""; 
 	if($objAtleta->numeroFemeju != NULL)
@@ -54,7 +52,7 @@ if(isset($_REQUEST['id'])){
     $TPL->DATA_NASCIMENTO = $objAtleta->convdata($objAtleta->pessoa->dataNascimento,"mtn");
     $TPL->SELECTED_FEMININO = $objAtleta->pessoa->sexo == "F" ? "selected" : "";
     $TPL->SELECTED_MASCULINO = $objAtleta->pessoa->sexo == "M" ? "selected" : "";
-    $TPL->CPF = $objAtleta->pessoa->cpf;
+    $TPL->CPF = strlen($objAtleta->pessoa->cpf) == 11 ? $objAtleta->pessoa->cpf : "";
     $TPL->TELEFONE_RES = $objAtleta->pessoa->telResidencial;
     $TPL->TELEFONE_CEL = $objAtleta->pessoa->telCelular;
     $TPL->ENDERECO = $objAtleta->pessoa->endereco;

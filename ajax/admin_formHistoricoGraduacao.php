@@ -20,7 +20,7 @@ if(isset($_REQUEST['idHistorico'])){
 
 foreach ($rsGrad as $key => $value) {
 	$TPL->ID_GRADUACAO = $value->id;
-	$TPL->LABEL_GRADUACAO = $value->faixa;
+	$TPL->LABEL_GRADUACAO = $value->faixa." ".$value->descricao;
 	$TPL->SELECTED = $idGradS == $value->id ? "selected" : "";
 	$TPL->block("BLOCK_GRADUACAO");
 }

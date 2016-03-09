@@ -186,5 +186,23 @@ function Excluir($id) {
             $_SESSION['fmj.mensagem'] = 17;
         
     }
+
+function ConsultaCPFExistente($cpf, $idExclusao = "0") {
+        $sql = "select * from fmj_pessoa where cpf = '$cpf' and id != $idExclusao";
+        $rs = $this->getSQL($sql);
+        if(count($rs) > 0){
+            return true;
+        }else
+            return false;
+    }
+function ConsultaNomesPessoa($nome,$nomeMeio,$sobrenome) {
+        $sql = "select * from fmj_pessoa where nome like '".utf8_decode($nome)."' and sobrenome like '".utf8_decode($sobrenome)."' and nomeMeio like '".utf8_decode($nomeMeio)."'";
+        $rs = $this->getSQL($sql);
+        if(count($rs) > 0){
+            return true;
+        }else
+            return false;
+    }
+
 }
 ?>

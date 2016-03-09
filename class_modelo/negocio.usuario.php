@@ -169,6 +169,8 @@ class Usuario extends Persistencia {
 			return false;
 	}
     
+    
+    
     function recuperaPorIdPessoa($idPessoa) {
         $sql = "select u.* from fmj_usuario u where u.id = $idPessoa";
         $rs = $this->getSQL($sql);

@@ -298,12 +298,7 @@ function IncluirPortal() {
         $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
         $graduacao = $_REQUEST['graduacao'] != "" ? new Graduacao($_REQUEST['graduacao']) : null;
         $pessoa = new Pessoa();
-        
-        if($this->recuperaPorIdPessoa($_REQUEST['id'])){
-           $_SESSION['fmj.mensagem'] = 44;
-           return false; 
-        }else{               
-            $pessoa->getById($_REQUEST['id']);
+            
             $pessoa->nome =  $_REQUEST['nome'];
             $pessoa->sobrenome = $_REQUEST['sobrenome'];
             $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
@@ -341,7 +336,10 @@ function IncluirPortal() {
             $pessoa -> foto = $nomefoto;
             }
             $idPessoa = $pessoa->save(); 
-                    
+            if($strCPF == ""){
+                $pessoa->cpf = $idPessoa;
+                $idPessoa = $pessoa->save();    
+            }        
             //salva o atleta
             $this->id = $idPessoa;
             $this->dataEmissaoCarteira = $this->convdata($_REQUEST['dataEmissaoCarteira'], "ntm");
@@ -367,7 +365,7 @@ function IncluirPortal() {
             }
             $_SESSION['fmj.mensagem'] = 41;
             return true;
-            }
+            
     }
 function Excluir($id) {
         $this -> getById($this -> md5_decrypt($id));

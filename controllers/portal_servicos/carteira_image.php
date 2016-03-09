@@ -30,7 +30,7 @@ $carteiracomfoto = $carteira->merge($fotoresize,218,13,100);
 
 
 //gera o qrcode
-QRcode::png($atleta->getId(),"img/pessoas/".$atleta->getId().".png",4,8,2);
+QRcode::png($atleta->getId()."-".$atleta->pessoa->getNomeCompleto(),"img/pessoas/".$atleta->getId().".png",4,8,2);
 $qrcode = WideImage::load('img/pessoas/'.$atleta->getId().".png");
 $qrcoderesize = $qrcode->resize(150, 150, 'fill');
 $carteiracomfotoeqrcode = $carteiracomfoto->merge($qrcoderesize,'50%-75',390,100);

@@ -2,52 +2,54 @@
     <div class="col-lg-12">
         <div class="page-header">
             <div class="pull-right">
-                                <img src="img/icones/{ICONE}.png" />
-                            </div>
+                <img src="img/icones/{ICONE}.png" />
+            </div>
             <h2>{TITULO} <span id="label-ano">{ANO}</span></h2>
         </div>
+        <div class="row">
+            <div class="col-sm-12" class="text-center">
+                {BOTOES}
+            </div>
+        </div>
         <div id="boxitens">
-         
+            <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
+            <input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
+            <input type="hidden" value="{ANO}" id="ano" name="ano"/>
+        </div>
         
-      
-        <input type="hidden" value="{PAGINA}" id="pagina" name="pagina"/>
-<input type="hidden" value="{CATEGORIA}" id="categoria" name="categoria"/>
-<input type="hidden" value="{ANO}" id="ano" name="ano"/> 
-        </div>                
-        <div class="row">            
-           <div class="col-sm-12" class="text-center">
-               {BOTOES}
-               </div>
-               </div>
-     </div>
- </div>
+    </div>
+</div>
 
 <script>
+	function pesquisar() {
+		$.ajax({
+			url : "ajax/portal_post_paginar.php",
+			type : "POST",
+			data : {
+				pagina : $("#pagina").val(),
+				ano : $("#ano").val(),
+				categoria : $("#categoria").val()
+			},
+			beforeSend : function() {
+				$('#boxitens').html('{LOADING}');
+			},
+		}).done(function(msg) {
+			$("#boxitens").html(msg);
+		});
 
-    function pesquisar(){
-            $.ajax({
-                url : "ajax/portal_post_paginar.php",
-                type : "POST",
-                data : {pagina:$("#pagina").val(),ano:$("#ano").val(),categoria:$("#categoria").val()},
-                beforeSend: function( ) {
-                    $('#boxitens').html('{LOADING}');
-                },
-            }).done(function(msg) {
-                $("#boxitens").html(msg);
-            });
+	}
 
-        }
 
-    $(document).ready(function() {
-        {EXECUTA_PESQUISA}        
-        $(".paginar").click(function() {
-            $("#pagina").val($(this).attr("value"));
-            pesquisar();
-        });
-        $(".anualizar").click(function() {
-            $("#pagina").val("1");
-            $("#ano").val($(this).attr("value"));
-            pesquisar();
-        });
-    }); 
+	$(document).ready(function() { 
+	    {EXECUTA_PESQUISA}
+		$(".paginar").click(function() {
+			$("#pagina").val($(this).attr("value"));
+			pesquisar();
+		});
+		$(".anualizar").click(function() {
+			$("#pagina").val("1");
+			$("#ano").val($(this).attr("value"));
+			pesquisar();
+		});
+	}); 
 </script>
