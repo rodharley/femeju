@@ -36,8 +36,8 @@ class Pessoa extends Persistencia {
             return $this->nome.(strlen($this->nomeMeio) > 0 ? " ".$this->nomeMeio:"").(strlen($this->sobrenome) > 0 ? " ".$this->sobrenome:"");
         }
         
-        function getPessoasNaoAtleta($nome){
-            $sql = "select p.* from ".$this::TABELA." p left outer join ".Atleta::TABELA." a on a.id = p.id where nome like '%$nome%' and a.id is null order by nome asc";
+        function getPessoasNaoAtleta($cpf){
+            $sql = "select p.* from ".$this::TABELA." p left outer join ".Atleta::TABELA." a on a.id = p.id where p.cpf like '$cpf%' and a.id is null order by nome asc";
             return $this->getSQL($sql);
         }
         
@@ -115,7 +115,13 @@ class Pessoa extends Persistencia {
             $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
             $this-> foto = $nomefoto;
             }
-            $idPessoa = $this->save();            
+            $idPessoa = $this->save(); 
+            
+            if($strCPF == ""){
+                $this->cpf = $idPessoa;
+                $idPessoa = $this->save();    
+            }
+                       
             
             $_SESSION['fmj.mensagem'] = 71;
             return true;
@@ -138,14 +144,18 @@ class Pessoa extends Persistencia {
             $this->email = $_REQUEST['email'];
             $this->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
             $this->sexo = $_REQUEST['sexo'];
-            $this->cpf = $strCPF;
+            if($strCPF != "" && strlen($strCPF) >= 11){
+                $this->cpf = $strCPF;    
+            }else{
+                $this->cpf = $this->id;
+            }
+            
             $this->telCelular = $this->limpaDigitos($_REQUEST['telefoneCel']);
             $this->telResidencial = $this->limpaDigitos($_REQUEST['telefoneRes']);
             $this->endereco = $_REQUEST['endereco'];
             $this->bairro = $_REQUEST['bairro'];
             $this->cidade = $cidadeEndereco;
             $this->cep = $this->limpaDigitos($_REQUEST['cep']);             
-            //$this-> foto = "pessoa.png";
             $this->bitVerificado = 1;            
             $this->filiacaoPai = $_REQUEST['filiacaoPai'];
             $this->filiacaoMae = $_REQUEST['filiacaoMae'];
@@ -195,8 +205,8 @@ function ConsultaCPFExistente($cpf, $idExclusao = "0") {
         }else
             return false;
     }
-function ConsultaNomesPessoa($nome,$nomeMeio,$sobrenome) {
-        $sql = "select * from fmj_pessoa where nome like '".utf8_decode($nome)."' and sobrenome like '".utf8_decode($sobrenome)."' and nomeMeio like '".utf8_decode($nomeMeio)."'";
+function ConsultaNomesPessoa($nome,$nomeMeio,$sobrenome, $idExclusao = "0") {
+        $sql = "select * from fmj_pessoa where nome like '".utf8_decode($nome)."' and sobrenome like '".utf8_decode($sobrenome)."' and nomeMeio like '".utf8_decode($nomeMeio)."' and id != $idExclusao";
         $rs = $this->getSQL($sql);
         if(count($rs) > 0){
             return true;

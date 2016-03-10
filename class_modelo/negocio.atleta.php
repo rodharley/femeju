@@ -193,7 +193,13 @@ public function listaAtivos(){
             $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
             $pessoa -> foto = $nomefoto;
             }
-            $idPessoa = $pessoa->save();            
+            $idPessoa = $pessoa->save();   
+            
+             if($strCPF == ""){
+                $pessoa->cpf = $idPessoa;
+                $idPessoa = $pessoa->save();    
+            }
+                     
             //salva o atleta
             $this->id = $idPessoa;
             $this->numeroFemeju = $this->getProximoNumero();
@@ -244,7 +250,11 @@ public function listaAtivos(){
             $pessoa->email = $_REQUEST['email'];
             $pessoa->dataNascimento = $this->convdata($_REQUEST['dataNascimento'], "ntm");
             $pessoa->sexo = $_REQUEST['sexo'];
-            $pessoa->cpf = $strCPF;
+            if($strCPF != "" && strlen($strCPF) >= 11){
+                $pessoa->cpf = $strCPF;    
+            }else{
+                $pessoa->cpf = $this->id;
+            }
             $pessoa->telCelular = $this->limpaDigitos($_REQUEST['telefoneCel']);
             $pessoa->telResidencial = $this->limpaDigitos($_REQUEST['telefoneRes']);
             $pessoa->endereco = $_REQUEST['endereco'];

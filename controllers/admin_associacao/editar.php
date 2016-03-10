@@ -8,6 +8,7 @@ include("includes/include.mensagem.php");
 $objAssociacao = new Associacao();
 $uf = new Uf();
 $cidade = new Cidade();
+$objUsuario = new Usuario(); 
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
@@ -33,9 +34,13 @@ $selectedUf = 0;
 $selectedCidade = 0;
 $selectedUf_resp = 0;
 $selectedCidade_resp = 0;
+$selected_resp = 0;
 $TPL->checkedAtivo = "checked";
 $TPL->checkedInativo = "";
 $listaUf = $uf->getRows();
+
+$listaResp =  $objUsuario->listarUsuariosPerfil();
+
 if(isset($_REQUEST['id'])){
 	$objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['id']));
 	$TPL->nome = $objAssociacao->nome;
@@ -44,6 +49,8 @@ if(isset($_REQUEST['id'])){
     $TPL->sigla = $objAssociacao->sigla;
     $TPL->cnpj = $objAssociacao->cnpj;
     $TPL->identificacao = $objAssociacao->identificacao;
+    $selected_resp = $objAssociacao->responsavel->id;
+    
     if($objAssociacao->dataFiliacao != null)
         $TPL->dataFiliacao = $objAssociacao->convdata($objAssociacao->dataFiliacao,"mtn");
 	$TPL->endereco = $objAssociacao->endereco;
@@ -83,16 +90,8 @@ if(isset($_REQUEST['id'])){
     $TPL->website = $objAssociacao->webSite;
     $TPL->midiaSocial = $objAssociacao->midiaSocial;
 	$TPL->id = $objAssociacao->id;
-    $TPL->id_responsavel = $objAssociacao->responsavel->id;    
-    $TPL->nome_responsavel = $objAssociacao->responsavel->pessoa->nome;
-    $TPL->cpf_responsavel = $objAssociacao->responsavel->pessoa->cpf;
-    $TPL->nomemeio_responsavel = $objAssociacao->responsavel->pessoa->nomeMeio;
-    $TPL->sobrenome_responsavel = $objAssociacao->responsavel->pessoa->sobrenome;
-    $TPL->email_responsavel = $objAssociacao->responsavel->pessoa->email;
-    $TPL->celular_responsavel = $objAssociacao->responsavel->pessoa->telCelular;
-    $TPL->endereco_resp = $objAssociacao->responsavel->pessoa->endereco;
-    $TPL->bairro_resp = $objAssociacao->responsavel->pessoa->bairro;
-    $TPL->cep_resp = $objAssociacao->responsavel->pessoa->cep;
+       
+    
 	$TPL->LOGOMARCA = "img/associacoes/".$objAssociacao->logomarca;
 	$TPL->LABEL = "Alterar Associação ".$objAssociacao->nome;
 	$TPL->ACAO = "editar";
@@ -119,6 +118,17 @@ if(isset($_REQUEST['id'])){
         $TPL->selectedUfresp = "selected";
       $TPL->block("BLOCK_UF");
       $TPL->block("BLOCK_UF_RESP");
+  }
+  
+   foreach ($listaResp as $key => $value) {
+      $TPL->ID_RESP = $value->id;
+      $TPL->LABEL_RESP = $objUsuario->formataCPFCNPJ($value->pessoa->cpf)."-".$value->pessoa->getNomeCompleto();
+      $TPL->CHECKED_RESP = "";
+      if($selected_resp == $value->id)
+        $TPL->CHECKED_RESP = "selected";
+      
+      $TPL->block("BLOCK_RESPONSAVEL");
+      
   }     
 $TPL->show();
 ?>

@@ -60,7 +60,7 @@ if(isset($_REQUEST['id'])){
 	$TPL->CHECKED_TECNICO = $objAtleta->bitTecnico ? "checked" : "";	
 	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : ""; 
     
-    $TPL->SEMCPFCHECKED = $objAtleta->pessoa->cpf == "" ? "checked" : "";
+    $TPL->SEMCPFCHECKED = strlen($objAtleta->pessoa->cpf) < 11 ? "checked" : "";
     $TPL->SEMRGCHECKED = $objAtleta->pessoa->rg == "" ? "checked" : "";
 	$TPL->NUMERO_FEMEJU = $objAtleta->getId();
 	if($objAtleta->pessoa->bitVerificado)
@@ -74,7 +74,7 @@ if(isset($_REQUEST['id'])){
     $TPL->DATA_NASCIMENTO = $objAtleta->convdata($objAtleta->pessoa->dataNascimento,"mtn");
     $TPL->SELECTED_FEMININO = $objAtleta->pessoa->sexo == "F" ? "selected" : "";
     $TPL->SELECTED_MASCULINO = $objAtleta->pessoa->sexo == "M" ? "selected" : "";
-    $TPL->CPF = $objAtleta->pessoa->cpf;
+    $TPL->CPF = strlen($objAtleta->pessoa->cpf) >= 11 ? $objAtleta->pessoa->cpf : "";
     $TPL->TELEFONE_RES = $objAtleta->pessoa->telResidencial;
     $TPL->TELEFONE_CEL = $objAtleta->pessoa->telCelular;
     $TPL->ENDERECO = $objAtleta->pessoa->endereco;
@@ -138,8 +138,7 @@ if(isset($_REQUEST['id'])){
 		
 		
 $TPL->block("BLOCK_HISTORICO");		
-}ELSE{
-    
+}else{
     $TPL->block("BLOCK_NOVO_ATLETA");
 }
 

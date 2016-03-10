@@ -38,7 +38,6 @@ $selectedAs = 0;
 $listaUf = $uf->getRows();
 
 if(isset($_REQUEST['id'])){
-    
     $objPessoa->getById($objPessoa->md5_decrypt($_REQUEST['id']));    
     $TPL->LABEL = "Alterar Pessoa";
     $TPL->ACAO = "editar";
@@ -46,14 +45,14 @@ if(isset($_REQUEST['id'])){
     $TPL->NOME = $objPessoa->nome;
     $TPL->NOME_MEIO = $objPessoa->nomeMeio;
     $TPL->SOBRE_NOME = $objPessoa->sobrenome;
-    $TPL->SEMCPFCHECKED = $objPessoa->cpf == "" ? "checked" : "";
+    $TPL->SEMCPFCHECKED = strlen($objPessoa->cpf) < 11 ? "checked" : "";
     $TPL->SEMRGCHECKED = $objPessoa->rg == "" ? "checked" : "";
 	$TPL->NACIONALIDADE = $objPessoa->nacionalidade;
     $TPL->EMAIL = $objPessoa->email;
     $TPL->DATA_NASCIMENTO = $objPessoa->convdata($objPessoa->dataNascimento,"mtn");
     $TPL->SELECTED_FEMININO = $objPessoa->sexo == "F" ? "selected" : "";
     $TPL->SELECTED_MASCULINO = $objPessoa->sexo == "M" ? "selected" : "";
-    $TPL->CPF = $objPessoa->cpf;
+    $TPL->CPF = strlen($objPessoa->cpf) >= 11 ? $objPessoa->cpf : "";
     $TPL->TELEFONE_RES = $objPessoa->telResidencial;
     $TPL->TELEFONE_CEL = $objPessoa->telCelular;
     $TPL->ENDERECO = $objPessoa->endereco;

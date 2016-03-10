@@ -32,7 +32,7 @@
 				<div class="col-md-6 col-xs-12">
 					<div class="form-group">
 						<label for="cpf"><i class='fa'></i><b>CPF/CNPJ</b></label>
-						<input type="text" id="cpf" name="cpf" placeholder="CPF" value="{cpf}" class="cpfcnpj form-control"/>
+						<input type="text" id="cpf" name="cpf" placeholder="CPF" value="{cpf}" class="cpfcnpj form-control required"/>
 					</div>
 				</div>
 
@@ -164,7 +164,7 @@
 
 		</div>
 		<div class="box-footer text-center">
-			<button class="btn btn-success" type="submit">
+			<button class="btn btn-success" type="button" id="save">
 				Salvar
 			</button>
 			<button class="btn btn-default btVoltar" type="button">
@@ -176,6 +176,31 @@
 </form>
 <script>
 	$(document).ready(function() {
+	    
+	     $("#save").click(function(){
+            
+            if($("#frmEditUsuario").valid()){
+            $.ajax({
+                url : "ajax/pessoa_consultaNomesPessoa.php",
+                type : "POST",
+                data : {nome: $("#nome").val(),nomeMeio:$("#nomeMeio").val(),sobrenome:$("#sobreNome").val()},                
+            }).done(function(msg) {
+                 if(msg == "1"){
+                if(confirm("Já existe uma pessoa com o mesmo nome, nome do meio e sobrenome no sistema, desenja confirmar o cadastro?"))
+                    $("#frmEditUsuario").submit();
+            }else{
+                $("#frmEditUsuario").submit();
+            }
+                
+                
+            });
+            
+           
+            }
+        });
+	    
+	    
+	    
 		$("#celular").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
         $("#telefone").inputmask({ mask: ["+99 99 9999-9999","+99 99 99999-9999"]});
 		$("#cpf").inputmask({ mask: ["999.999.999-99","99.999.999/9999-99"] });
@@ -209,6 +234,18 @@
 				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
 			},
 			rules : {
+			    cpf :{
+                    remote: {
+                            url: "ajax/pessoa_verificaCpf.php",
+                            type: "post",
+                            data: {
+                              idUser: function() {
+                                return $("#id").val();
+                              }
+                            }
+                            } 
+                },
+			    
 				email2 : {
 					equalTo : '[name="email"]'
 				},
@@ -239,7 +276,10 @@
 				messages: {
 					email: {
 					remote: "E-mail já existe no sistema"
-					}
+					},
+                    cpf: {
+                        remote: "CPF já existe no sistema"
+                    }
 				}
 		});
 		

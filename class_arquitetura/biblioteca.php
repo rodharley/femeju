@@ -459,6 +459,10 @@ else
 		}else{
 			$datasaida = "";
 		}
+		  
+		  if($this->limpaDigitos($datasaida) == "00000000")
+          return "";
+          else
 		  return $datasaida;
 
 		}
