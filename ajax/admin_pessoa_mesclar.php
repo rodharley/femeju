@@ -5,6 +5,13 @@ $TPL = new Template("../templates/admin/pessoa/list.html");
 $obj = new Pessoa();
 
 
+//excecuta Mesclagem de usuario
+$conn->connection->autocommit(false);
+$obj->mesclar($_REQUEST['mescla'],$_REQUEST['mantem']);
+$conn->connection->commit();
+
+$TPL->block("BLOCK_MESCLADO");
+
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $totalPesquisa = $obj->pesquisarTotal($_REQUEST['nome']);
 $configPaginacao = $obj->paginar($totalPesquisa,$pagina);

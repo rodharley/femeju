@@ -21,6 +21,7 @@
 				Pesquisar
 			</button>
 			<a class="btn btn-primary" href="admin_pessoa-editar"><i class="fa fa-plus"></i> Adicionar</a>
+			<a class="btn btn-warning" href="#" id="btMesclar"><i class="fa fa-share-alt"></i> Mesclar</a>
 			<button class="btn btn-default btVoltar" type="button">
 				Voltar
 			</button>
@@ -51,10 +52,70 @@
 
 		}
 
+    function execmesclar(){
+            $.ajax({
+                url : "ajax/admin_pessoa_mesclar.php",
+                type : "POST",
+                data : $("#frmPesquisa").serialize(),
+
+                beforeSend: function( ) {
+                    $('#resultado').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#resultado").html(msg);
+            });
+
+        }
+
 	$(document).ready(function() {
 
 		$("#btPesquisar").click(function() {
 			pesquisar();
+		});
+		
+		$("#btMesclar").click(function(){
+		    
+		    var mesclar = 0;
+		    var mantem = "0";
+		    var correto = false;
+		    
+		    $('input[type="radio"]').each(
+                function(){
+                   if($(this).prop('checked')){
+                     mantem = $(this).val();
+                   }
+                }
+            );
+		    
+		    
+		    $('input[type="checkbox"]').each(
+		        function(){
+		           if($(this).prop('checked')){
+		              mesclar++;
+		           
+		           if(mantem == $(this).val())
+		              correto = true;
+		           
+		           }
+		        }
+		    );
+		    
+		    
+            
+            if(mesclar < 2){
+                alert("Você deve selecionar ao menos duas pessoas!");
+                return false;
+              }
+            if(mantem == "0"){
+                alert("Você deve selecionar uma pessoa para manter!");
+                return false;
+             }
+             if(correto){
+                 execmesclar();
+             }else{
+                alert("Você deve selecionar uma pessoa para manter dentre os selecionados!");
+                return false;
+             }    
 		});
 	}); 
 </script>

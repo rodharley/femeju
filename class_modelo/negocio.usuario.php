@@ -1,5 +1,6 @@
 <?php
 class Usuario extends Persistencia {
+    const TABELA = "fmj_usuario";
 	var $perfil = NULL;	
 	var $senha;
 	var $ativo;

@@ -40,6 +40,15 @@ $carteiracomfotoeqrcodeAssinada = $carteiracomfotoeqrcode->merge($assintauraresi
 //escreve na carteirinha
 $canvas = $carteiracomfotoeqrcodeAssinada->getCanvas();
 
+//verso displays
+$canvas->useFont('fonts/SourceSansPro-Regular.ttf', '8', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$canvas->writeText('20', '16', "Associação", 0);
+$canvas->writeText('20', '52', "Nome", 0);
+$canvas->writeText('20', '88', "Graduação", 0);
+$canvas->writeText('200', '88', "Data de Nascimento", 0);
+$canvas->writeText('20', '124', "Validade", 0);
+$canvas->writeText('120', '184', "Assinatura Femeju", 0);
+
 //verso
 $canvas->useFont('fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
 $canvas->writeText('20', '34', $atleta->associacao->nome, 0);
@@ -47,6 +56,7 @@ $canvas->writeText('20', '70', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('20', '106', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
 $canvas->writeText('220', '106', $atleta->convdata($atleta->pessoa->dataNascimento, "mtn"), 0);
 $canvas->writeText('20', '142', '31 de Dezembro de '.Date('Y'), 0);
+
 //registro
 $canvas->useFont('fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
 $strnomeFrente = $atleta->pessoa->getNomeCompleto();

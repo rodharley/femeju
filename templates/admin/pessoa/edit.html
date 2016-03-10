@@ -285,7 +285,7 @@
             $.ajax({
                 url : "ajax/pessoa_consultaNomesPessoa.php",
                 type : "POST",
-                data : {nome: $("#nome").val(),nomeMeio:$("#nomeMeio").val(),sobrenome:$("#sobrenome").val()},                
+                data : {nome: $("#nome").val(),nomeMeio:$("#nomeMeio").val(),sobrenome:$("#sobrenome").val(),idUser:$("#id").val()},                
             }).done(function(msg) {
                  if(msg == "1"){
                 if(confirm("Já existe uma pessoa com o mesmo nome, nome do meio e sobrenome no sistema, desenja confirmar o cadastro?"))

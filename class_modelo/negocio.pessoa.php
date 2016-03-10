@@ -32,6 +32,105 @@ class Pessoa extends Persistencia {
 		var $midiaSocial;
 		var $telComercial;
         
+        
+        function mesclar($arrayPessoas, $idManter){
+            //monta a lista de usuarios sem o usuario que vai manter
+            $lista = "0";
+            foreach ($arrayPessoas as $key => $value) {
+                if($value != $idManter && $value != "0")
+                    $lista .= ",".$value;
+            }
+            
+            //migra as diretorias responsavel
+            $sql = "update fmj_diretoria set id = $idManter where idUsuarioResponsavel in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            
+            //migra as associacoes responsavel
+            $sql = "update ".Associacao::TABELA." set idResponsavel = $idManter where idResponsavel in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            
+            //deleta os historicos de graduacao de atletas a ser apagados
+            $sql = "delete from fmj_historico_graduacao where idAtleta in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            
+            //migra as inscricoes de competicoes dos atletas para o mantido
+            $sql = "update fmj_inscricao_competicao set idAtleta = $idManter where idAtleta in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            
+            //migra as logs de acesso do sistema
+            $sql = "update fmj_log set idusuario = $idManter where idusuario in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            
+            //migra os itens de pagamentos relacionados ao atletas
+            $sql = "update fmj_pagamento_item set idAtleta = $idManter where idAtleta in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            
+            
+            
+            
+            //migra os usuarios
+            $objUser = new Usuario();
+            if($objUser->getById($idManter)){
+                //se a pessoa a ser mantido ja for usuario
+                $sql = "delete from ".Usuario::TABELA." where id in(".$lista.")";
+                $this->DAO_ExecutarDelete($sql);    
+            }else{
+                //se não for usuário
+                $sql = "select u.* from ".Usuario::TABELA." u where id in(".$lista.")";
+                $rsUsers = $objUser->getSQL($sql);
+                $primeiro = 0;
+                foreach ($rsUsers as $key => $user) {
+                    if($primeiro == 0){
+                        $sql = "update ".Usuario::TABELA." set id = $idManter where id = ".$user->id;
+                        $this->DAO_ExecutarDelete($sql);
+                    }else{
+                        $sql = "delete from ".Usuario::TABELA." where id = ".$user->id;
+                        $this->DAO_ExecutarDelete($sql);        
+                    }
+                    $primeiro++;
+                }
+            }
+            
+            
+            //migra os atletas
+            $objAtleta = new Atleta();
+            if($objAtleta->getById($idManter)){
+                //se a pessoa a ser mantido ja for atleta
+                $sql = "delete from ".Anuidade::TABELA." where idAtleta in(".$lista.")";
+                $this->DAO_ExecutarDelete($sql);
+                                
+                $sql = "delete from ".Atleta::TABELA." where id in(".$lista.")";
+                $this->DAO_ExecutarDelete($sql);    
+            }else{
+                //se não for atleta
+                $sql = "select u.* from ".Atleta::TABELA." u where id in(".$lista.")";
+                $rsUsers = $objAtleta->getSQL($sql);
+                $primeiro = 0;
+                foreach ($rsUsers as $key => $user) {
+                    if($primeiro == 0){
+                        
+                        $sql = "update ".Anuidade::TABELA." set idAtleta = $idManter where id = ".$user->id;
+                        $this->DAO_ExecutarDelete($sql);
+                        $sql = "update ".Atleta::TABELA." set id = $idManter where id = ".$user->id;
+                        $this->DAO_ExecutarDelete($sql);
+                    }else{
+                        $sql = "delete from ".Anuidade::TABELA." where idAtleta = ".$user->id;
+                        $this->DAO_ExecutarDelete($sql);
+                        $sql = "delete from ".Atleta::TABELA." where id in(".$lista.")";
+                        $this->DAO_ExecutarDelete($sql);            
+                    }
+                    $primeiro++;
+                }
+            }
+            
+            //deleta as pessoas
+            $sql = "delete from ".$this::TABELA." where id in(".$lista.")";
+            $this->DAO_ExecutarDelete($sql);
+            return true;
+        }
+        
+        
+        
         function getNomeCompleto(){
             return $this->nome.(strlen($this->nomeMeio) > 0 ? " ".$this->nomeMeio:"").(strlen($this->sobrenome) > 0 ? " ".$this->sobrenome:"");
         }
