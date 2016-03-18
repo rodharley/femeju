@@ -95,6 +95,28 @@ public function listaAtivos(){
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
+    
+    function pesquisarCarteira($nome = "",$associacao = "",$numero = "",$range ="") {
+
+        $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where a.bitAtivo = 1 ";
+ 
+        if ($nome != "")
+            $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+        if ($associacao != "")
+            $sql .= " and ( x.id = $associacao )";
+        if ($numero != "")
+            $sql .= " and ( a.numeroFemeju in($numero) )";
+        if ($range != ""){
+            $arN = explode("-", $range);
+            $sql .= " and ( a.numeroFemeju >= ".$arN[0]." and a.numeroFemeju <= ".$arN[1].")";
+        }
+        $sql .= "  order by a.numeroFemeju desc";     
+        
+        return $this -> getSQL($sql);
+
+    }
+        
+    
 
     function pesquisar($primeiro = 0, $quantidade = 9999, $nome = "",$associacao = "",$naoverf = "",$ativo = "") {
 

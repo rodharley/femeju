@@ -1,0 +1,94 @@
+<form role="form" method="post" action="#" id="frmPesquisa">
+	<input type="hidden" name="pagina" id="pagina" value="1" />
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">Pesquisa Atletas</h3>
+		</div>
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="descricao"><i class='fa'></i><b>Nome</b></label>
+						<input type="text" id="nome" name="nome" placeholder="Nome do Atleta" value="" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="associacao"><i class='fa'></i><b>Associação</b></label>
+						<select name="associacao" id="associacao" class="form-control">
+						    <option value="">Selecione</option>
+						    <!-- BEGIN BLOCK_ASSOCIACAO -->
+						    <option value="{ID_ASS}">{LB_ASS}</option>
+						    <!-- END BLOCK_ASSOCIACAO -->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for=""><i class='fa'></i><b>Número Femeju <small>(Valores separados por vírgula)</small></b></label>
+                        <input type="text" id="numero" name="numero" placeholder="Números (1,2,3...)" value="" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for=""><i class='fa'></i><b>Range de Número Femeju</b></label>
+                        <input type="text" id="range" name="range" placeholder="Exemplo(1-5)" value="" class="form-control"/>                       
+                    </div>
+                </div>
+            </div>
+		</div>
+		<div class="panel-footer text-right">
+			<button class="btn btn-success" type="button" id="btPesquisar">
+				Pesquisar
+			</button>
+			<button class="btn btn-default btVoltar" type="button">
+				Voltar
+			</button>
+		</div>
+
+	</div>
+	</form>
+	<form role="form" method="post" action="admin_carteira-action" id="frmCarteira" target="_blank">
+	    <input type="hidden" name="acao" value="carteira" />
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">Resultado</h3>
+		</div>
+		<div class="box-body" id="resultado"></div>
+		<div class="panel-footer text-right">
+            <button class="btn btn-success" type="submit" id="btGerarArquivo">
+                Gerar Arquivo
+            </button>            
+        </div>
+	</div>
+</form>
+<script>
+
+	function pesquisar(){
+			$.ajax({
+				url : "ajax/admin_carteira_pesquisar.php",
+				type : "POST",
+				data : $("#frmPesquisa").serialize(),
+
+				beforeSend: function( ) {
+					$('#resultado').html('{LOADING}');
+		  		},
+			}).done(function(msg) {
+				$("#resultado").html(msg);
+			});
+
+		}
+
+	$(document).ready(function() {
+        $("#range").inputmask("99999-99999");
+		$("#btPesquisar").click(function() {
+			pesquisar();
+		});
+	}); 
+</script>

@@ -10,7 +10,7 @@ include("../mpdf.php");
 $mpdf=new mPDF('c','A4','','',20,20,30,25,5,5); 
 $mpdf->WriteHTML("<img src='../../../img/pessoas/carteira".$_GET['id'].".png'/>");
 $mpdf->mirrorMargins = 0;	// Use different Odd/Even headers and footers and mirror margins
-$mpdf->Output();
+$mpdf->Output('carteira_femeju.pdf','D');
 unlink("../../../img/pessoas/".$_GET['id'].".png");
 unlink("../../../img/pessoas/carteira".$_GET['id'].".png");
 exit;
