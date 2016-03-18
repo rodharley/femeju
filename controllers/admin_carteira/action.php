@@ -21,7 +21,7 @@ if (isset($_REQUEST['acao'])) {
                 $numeros .= $atleta ->numeroFemeju.",";    
                 //gera a imagem de fundo;
                 $rgb = $conf -> hex2rgb($conf -> valor);
-                $imagem = imagecreatetruecolor(322, 209);
+                $imagem = imagecreatetruecolor(325, 204);
                 $red = imagecolorallocate($imagem, $rgb[0], $rgb[1], $rgb[2]);
                 imagefill($imagem, 0, 0, $red);
 
@@ -30,14 +30,14 @@ if (isset($_REQUEST['acao'])) {
                 $carteira = $img -> merge($logo, 0, 0, 100);
                 $imagemAtleta = $atleta -> pessoa -> foto != "" ? $atleta -> pessoa -> foto : "pessoa.png";
                 $foto = WideImage::load('img/pessoas/' . $imagemAtleta);
-                $fotoresize = $foto -> resize(84, 113, 'fill');
-                $carteiracomfoto = $carteira -> merge($fotoresize, 220, 18, 100);
+                $fotoresize = $foto -> resize(80, 108, 'fill');
+                $carteiracomfoto = $carteira -> merge($fotoresize, 225, 18, 100);
 
                 //gera o qrcode
                 QRcode::png($atleta -> getId() . "-" . $atleta -> pessoa -> getNomeCompleto(), "img/pessoas/" . $atleta -> getId() . ".png", 4, 8, 2);
                 $qrcode = WideImage::load('img/pessoas/' . $atleta -> getId() . ".png");
                 $qrcoderesize = $qrcode -> resize(70, 70, 'fill');
-                $carteiracomfotoeqrcode = $carteiracomfoto -> merge($qrcoderesize, 225, 133, 100);
+                $carteiracomfotoeqrcode = $carteiracomfoto -> merge($qrcoderesize, 228, 130, 100);
                 unlink('img/pessoas/' . $atleta -> getId() . ".png");
                 
                 
@@ -67,12 +67,12 @@ if (isset($_REQUEST['acao'])) {
 
                     }
 
-                    $canvas -> writeText('40', '140', $str_linha1, 0);
-                    $canvas -> writeText('40', '160', $str_linha2, 0);
-                    $canvas -> writeText('40', '180', 'Registro Nº:' . $atleta -> getId(), 0);
+                    $canvas -> writeText('40', '135', $str_linha1, 0);
+                    $canvas -> writeText('40', '155', $str_linha2, 0);
+                    $canvas -> writeText('40', '175', 'Registro Nº:' . $atleta -> getId(), 0);
                 } else {
-                    $canvas -> writeText('40', '140', $atleta -> pessoa -> getNomeCompleto(), 0);
-                    $canvas -> writeText('40', '160', 'Registro Nº:' . $atleta -> getId(), 0);
+                    $canvas -> writeText('40', '135', $atleta -> pessoa -> getNomeCompleto(), 0);
+                    $canvas -> writeText('40', '155', 'Registro Nº:' . $atleta -> getId(), 0);
                 }
 
                 $carteiracomfotoeqrcode -> saveToFile("img/pessoas/carteira_frente" . $atleta -> getId() . ".png");
@@ -90,7 +90,7 @@ if (isset($_REQUEST['acao'])) {
                 $canvas -> writeText('20', '88', "Graduação", 0);
                 $canvas -> writeText('200', '88', "Data de Nascimento", 0);
                 $canvas -> writeText('20', '124', "Validade", 0);
-                $canvas -> writeText('120', '184', "Assinatura Femeju", 0);
+                $canvas -> writeText('120', '177', "Assinatura Femeju", 0);
 
                 //verso
                 $canvas -> useFont('fonts/SourceSansPro-Regular.ttf', '10', $verso -> allocateColor(0, 0, 0));
