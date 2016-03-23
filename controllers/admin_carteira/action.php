@@ -83,7 +83,7 @@ if (isset($_REQUEST['acao'])) {
                 
                 
                 
-                $carteiracomfotoeqrcode -> saveToFile("img/pessoas/carteira_frente" . $atleta -> getId() . ".png", 1, PNG_NO_FILTER);
+                $carteiracomfotoeqrcode -> saveToFile("img/pessoas/carteira_frente" . $atleta -> getId() . ".png", 0, PNG_NO_FILTER);
                 
                 //verso
                 $verso = WideImage::load('img/carteirinha_verso.png');
@@ -117,7 +117,7 @@ if (isset($_REQUEST['acao'])) {
                 
                 $carteiraverso = $carteiraverso -> rotate(270);
                 
-                $carteiraverso-> saveToFile("img/pessoas/carteira_verso" . $atleta -> getId() . ".png", 1, PNG_NO_FILTER);
+                $carteiraverso-> saveToFile("img/pessoas/carteira_verso" . $atleta -> getId() . ".png", 0, PNG_NO_FILTER);
                 
                 
 
