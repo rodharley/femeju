@@ -12,24 +12,25 @@ $atleta->getById($atleta->md5_decrypt($_REQUEST['id']));
 if($atleta->ativo == 1 ){
 //gera a imagem de fundo;
 $rgb= $conf->hex2rgb($conf->valor);
-$imagem = imagecreatetruecolor(643,209);
+$imagem = imagecreatetruecolor(650,204);
 $red = imagecolorallocate($imagem, $rgb[0],$rgb[1],$rgb[2]);
 imagefill($imagem,0,0,$red);
 
 $logo = WideImage::load('img/carteirinha.png');
+$carteiraf = $logo -> resize(650, 204, 'fill');
 $img = WideImage::load($imagem);
-$carteira = $img->merge($logo,0,0,100);
+$carteira = $img->merge($carteiraf,0,0,100);
 $imagemAtleta = $atleta->pessoa->foto != "" ? $atleta->pessoa->foto : "pessoa.png";
 $foto = WideImage::load('img/pessoas/'.$imagemAtleta);
 $fotoresize = $foto->resize(84, 113, 'fill');
-$carteiracomfoto = $carteira->merge($fotoresize,541,18,100);
+$carteiracomfoto = $carteira->merge($fotoresize,552,12,100);
 
 
 //gera o qrcode
 QRcode::png($atleta->getId()."-".$atleta->pessoa->getNomeCompleto(),"img/pessoas/".$atleta->getId().".png",4,8,2);
 $qrcode = WideImage::load('img/pessoas/'.$atleta->getId().".png");
 $qrcoderesize = $qrcode->resize(70, 70, 'fill');
-$carteiracomfotoeqrcode = $carteiracomfoto->merge($qrcoderesize,547,133,100);
+$carteiracomfotoeqrcode = $carteiracomfoto->merge($qrcoderesize,558,130,100);
 
 //assinatura do presidente
 $assinatura = WideImage::load('img/assinatura.png');
@@ -47,7 +48,7 @@ $canvas->writeText('20', '52', "Nome", 0);
 $canvas->writeText('20', '88', "Graduação", 0);
 $canvas->writeText('200', '88', "Data de Nascimento", 0);
 $canvas->writeText('20', '124', "Validade", 0);
-$canvas->writeText('120', '184', "Assinatura Femeju", 0);
+$canvas->writeText('120', '178', "Assinatura Femeju", 0);
 
 //verso
 $canvas->useFont('fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
@@ -87,7 +88,7 @@ $canvas->writeText('350', '140', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('350', '160', 'Registro Nº:'.$atleta->getId(), 0);
 }
 
-$carteiracomfotoeqrcodeAssinada->saveToFile("img/pessoas/carteira".$atleta->getId().".png");
+$carteiracomfotoeqrcodeAssinada->saveToFile("img/pessoas/carteira".$atleta->getId().".png", 0, PNG_NO_FILTER);
 header("Location:plugins/mpdf/relatorios/carteira.php?id=".$atleta->getId());
 exit;
 }else{
