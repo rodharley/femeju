@@ -26,18 +26,19 @@ if (isset($_REQUEST['acao'])) {
                 imagefill($imagem, 0, 0, $red);
 
                 $logo = WideImage::load('img/carteirinha_frente.png');
+                $carteiraf = $logo -> resize(325, 204, 'fill');
                 $img = WideImage::load($imagem);
-                $carteira = $img -> merge($logo, 0, 0, 100);
+                $carteira = $img -> merge($carteiraf, 0, 0, 100);
                 $imagemAtleta = $atleta -> pessoa -> foto != "" ? $atleta -> pessoa -> foto : "pessoa.png";
                 $foto = WideImage::load('img/pessoas/' . $imagemAtleta);
                 $fotoresize = $foto -> resize(80, 108, 'fill');
-                $carteiracomfoto = $carteira -> merge($fotoresize, 225, 18, 100);
+                $carteiracomfoto = $carteira -> merge($fotoresize, 230, 14, 100);
 
                 //gera o qrcode
                 QRcode::png($atleta -> getId() . "-" . $atleta -> pessoa -> getNomeCompleto(), "img/pessoas/" . $atleta -> getId() . ".png", 4, 8, 2);
                 $qrcode = WideImage::load('img/pessoas/' . $atleta -> getId() . ".png");
                 $qrcoderesize = $qrcode -> resize(70, 70, 'fill');
-                $carteiracomfotoeqrcode = $carteiracomfoto -> merge($qrcoderesize, 228, 130, 100);
+                $carteiracomfotoeqrcode = $carteiracomfoto -> merge($qrcoderesize, 235, 130, 100);
                 unlink('img/pessoas/' . $atleta -> getId() . ".png");
                 
                 
@@ -74,17 +75,24 @@ if (isset($_REQUEST['acao'])) {
                     $canvas -> writeText('40', '135', $atleta -> pessoa -> getNomeCompleto(), 0);
                     $canvas -> writeText('40', '155', 'Registro Nº:' . $atleta -> getId(), 0);
                 }
-
-                $carteiracomfotoeqrcode -> saveToFile("img/pessoas/carteira_frente" . $atleta -> getId() . ".png");
+                
+                $carteiracomfotoeqrcode = $carteiracomfotoeqrcode -> roundCorners(12);
+                
+                $carteiracomfotoeqrcode = $carteiracomfotoeqrcode -> rotate(270);
+                
+                
+                
+                
+                $carteiracomfotoeqrcode -> saveToFile("img/pessoas/carteira_frente" . $atleta -> getId() . ".png", 1, PNG_NO_FILTER);
                 
                 //verso
                 $verso = WideImage::load('img/carteirinha_verso.png');
-                
+                $carteirav = $verso -> resize(325, 204, 'fill');
                 //escreve na carteirinha
-                $canvas = $verso -> getCanvas();
+                $canvas = $carteirav -> getCanvas();
                 
                 //verso displays
-                $canvas -> useFont('fonts/SourceSansPro-Regular.ttf', '8', $verso -> allocateColor(0, 0, 0));
+                $canvas -> useFont('fonts/SourceSansPro-Regular.ttf', '8', $carteirav -> allocateColor(0, 0, 0));
                 $canvas -> writeText('20', '16', "Associação", 0);
                 $canvas -> writeText('20', '52', "Nome", 0);
                 $canvas -> writeText('20', '88', "Graduação", 0);
@@ -103,11 +111,13 @@ if (isset($_REQUEST['acao'])) {
             //assinatura do presidente
                 $assinatura = WideImage::load('img/assinatura.png');
                 $assintauraresize = $assinatura -> resize(84, 100, 'fill');
-                $carteiraverso = $verso -> merge($assintauraresize, 130, 138, 100);
+                $carteiraverso = $carteirav -> merge($assintauraresize, 130, 138, 100);
             
+                $carteiraverso = $carteiraverso -> roundCorners(12);
                 
+                $carteiraverso = $carteiraverso -> rotate(270);
                 
-                $carteiraverso-> saveToFile("img/pessoas/carteira_verso" . $atleta -> getId() . ".png");
+                $carteiraverso-> saveToFile("img/pessoas/carteira_verso" . $atleta -> getId() . ".png", 1, PNG_NO_FILTER);
                 
                 
 
