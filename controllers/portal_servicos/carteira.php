@@ -87,7 +87,7 @@ $canvas->writeText('350', '180', 'Registro Nº:'.$atleta->getId(), 0);
 $canvas->writeText('350', '140', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('350', '160', 'Registro Nº:'.$atleta->getId(), 0);
 }
-
+$carteiracomfotoeqrcodeAssinada = $carteiracomfotoeqrcodeAssinada -> roundCorners(12);
 $carteiracomfotoeqrcodeAssinada->saveToFile("img/pessoas/carteira".$atleta->getId().".png", 0, PNG_NO_FILTER);
 header("Location:plugins/mpdf/relatorios/carteira.php?id=".$atleta->getId());
 exit;
