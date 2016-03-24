@@ -104,10 +104,13 @@ public function listaAtivos(){
             $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
             $sql .= " and ( x.id = $associacao )";
-        if ($numero != "")
+        if ($numero != ""){
+            $numero = str_replace(";", ",", $numero);
             $sql .= " and ( a.numeroFemeju in($numero) )";
+            }
         if ($range != ""){
-            $arN = explode("-", $range);
+            $range = str_replace(";", ",", $range);
+            $arN = explode(",", $range);
             $sql .= " and ( a.numeroFemeju >= ".$arN[0]." and a.numeroFemeju <= ".$arN[1].")";
         }
         $sql .= "  order by a.numeroFemeju desc";     

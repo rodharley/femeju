@@ -13,9 +13,9 @@ if($key == 0)
     $mpdf=new mPDF('c','A4','','',0,0,0,0,5,5);
 else    
     $mpdf->AddPage();
-$mpdf->WriteHTML("<img src='../../../img/pessoas/carteira_frente".str_pad($value,5,"0",STR_PAD_LEFT).".png'/>");
+$mpdf->WriteHTML("<img src='../../../img/pessoas/carteira_frente".str_pad($value,5,"0",STR_PAD_LEFT).".png' width='204' height='325'/>");
 $mpdf->AddPage();
-$mpdf->WriteHTML("<img src='../../../img/pessoas/carteira_verso".str_pad($value,5,"0",STR_PAD_LEFT).".png'/>");
+$mpdf->WriteHTML("<img src='../../../img/pessoas/carteira_verso".str_pad($value,5,"0",STR_PAD_LEFT).".png' width='204' height='325'/>");
 unlink("../../../img/pessoas/carteira_frente".str_pad($value,5,"0",STR_PAD_LEFT).".png");
 unlink("../../../img/pessoas/carteira_verso".str_pad($value,5,"0",STR_PAD_LEFT).".png");    
 }
