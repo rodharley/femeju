@@ -113,7 +113,7 @@ public function listaAtivos(){
             $arN = explode(",", $range);
             $sql .= " and ( a.numeroFemeju >= ".$arN[0]." and a.numeroFemeju <= ".$arN[1].")";
         }
-        $sql .= "  order by a.numeroFemeju desc";     
+        $sql .= "  order by a.numeroFemeju desc limit 0,20";     
         
         return $this -> getSQL($sql);
 

@@ -16,6 +16,7 @@ if (isset($_REQUEST['acao'])) {
     switch ($_REQUEST['acao']) {
         case 'carteira' :
             $numeros = "";
+            //echo "<html><body style='margin:0;'>";
             foreach ($_REQUEST['atletas'] as $key => $value) {
                 $atleta -> getById($value);
                 $numeros .= $atleta ->numeroFemeju.",";    
@@ -120,9 +121,15 @@ if (isset($_REQUEST['acao'])) {
                 $carteiraverso-> saveToFile("img/pessoas/carteira_verso" . $atleta -> getId() . ".png", 0, PNG_NO_FILTER);
                 
                 
-
+            //echo "<img src='img/pessoas/carteira_frente".str_pad($atleta ->numeroFemeju,5,"0",STR_PAD_LEFT).".png' width='204' height='325'/>";
+            //echo "<span style='page-break-after: always;'></span>";
+            //echo "<img src='img/pessoas/carteira_verso".str_pad($atleta ->numeroFemeju,5,"0",STR_PAD_LEFT).".png' width='204' height='325'/>";
+            //echo "<span style='page-break-after: always;'></span>";
+            
             }
-
+            //echo "</body></html>";
+            
+            
             header("Location:plugins/mpdf/relatorios/carteiras.php?atletas=".substr($numeros,0,strlen($numeros)-1));
              
              
