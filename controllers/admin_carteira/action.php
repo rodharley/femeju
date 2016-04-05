@@ -74,7 +74,7 @@ if (isset($_REQUEST['acao'])) {
                     $canvas -> writeText('80', '350', 'Registro Nº:' . $atleta -> getId(), 0);
                 } else {
                     $canvas -> writeText('80', '270', $atleta -> pessoa -> getNomeCompleto(), 0);
-                    $canvas -> writeText('80', '270', 'Registro Nº:' . $atleta -> getId(), 0);
+                    $canvas -> writeText('80', '350', 'Registro Nº:' . $atleta -> getId(), 0);
                 }
                 
                 $carteiracomfotoeqrcode = $carteiracomfotoeqrcode -> roundCorners(12);
