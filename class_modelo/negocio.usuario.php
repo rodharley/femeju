@@ -215,6 +215,7 @@ class Usuario extends Persistencia {
         $this -> ativo = 0;
 		//$senha = $_REQUEST['senha'] != "" ? $_REQUEST['senha'] : md5($this -> makePassword(8));
 		$pessoa = new Pessoa();
+        $pessoa->ConsultaCPFExistente($strCPF);            
 		$pessoa->nome = $_REQUEST['nome'];
         $pessoa->sobrenome = $_REQUEST['sobreNome'];
         $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
@@ -413,6 +414,17 @@ class Usuario extends Persistencia {
             return false;
         }
 
+    }
+
+
+function ConsultaCPFExistente($cpf, $idExclusao = "0") {
+        $sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where p.cpf = '$cpf' and p.id != $idExclusao";
+        $rs = $this->getSQL($sql);
+        if(count($rs) > 0){
+            $this->getById($rs[0]->id);
+            return true;
+        }else
+            return false;
     }
 
 }

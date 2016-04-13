@@ -300,6 +300,7 @@ function ConsultaCPFExistente($cpf, $idExclusao = "0") {
         $sql = "select * from fmj_pessoa where cpf = '$cpf' and id != $idExclusao";
         $rs = $this->getSQL($sql);
         if(count($rs) > 0){
+            $this->getById($rs[0]->id);
             return true;
         }else
             return false;
