@@ -293,7 +293,60 @@
                 $("#cidade_responsavel").html(msg);
             });
     }
-	$(document).ready(function() {
+	    
+    $(document).ready(function() {
+        
+        
+        
+        
+         $("#cpf_responsavel").click(function(){
+            document.getElementById("idResponsavel").value ="0";        
+                document.getElementById("cpf_responsavel").value ="";
+                document.getElementById("email").value ="";           
+                document.getElementById("celular_responsavel").value ="";
+                document.getElementById("nome_responsavel").value ="";
+                document.getElementById("nomemeio_responsavel").value ="";
+                document.getElementById("sobrenome_responsavel").value ="";                
+                document.getElementById("endereco_responsavel").value ="";
+                document.getElementById("bairro_responsavel").value ="";     
+                document.getElementById("uf_responsavel").value ="";
+                carregaCidadeResp();
+                document.getElementById("cidade_responsavel").value ="";
+                document.getElementById("cep_responsavel").value ="";
+        });
+        
+        
+        
+        var options = {
+        script: "ajax/json_pessoasNaoUsuario.php?",
+        varname: "busca",
+        json: true,
+        maxresults: 35,
+        callback: function (obj) {
+        var pessoa; 
+        $.ajax({
+            url:'ajax/json_pessoa.php',
+            data:{id:obj.id}
+            }).done(function(retorno){
+                pessoa = JSON.parse(retorno);                
+                document.getElementById("email").value =pessoa.email;
+                document.getElementById("celular_responsavel").value =pessoa.telCelular;                
+                document.getElementById("sobrenome_responsavel").value =pessoa.sobrenome;
+                document.getElementById("nome_responsavel").value =pessoa.nome;
+                document.getElementById("nomemeio_responsavel").value =pessoa.nomeMeio;
+                document.getElementById("endereco_responsavel").value =pessoa.endereco;
+                document.getElementById("bairro_responsavel").value =pessoa.bairro;
+                document.getElementById("uf_responsavel").value =pessoa.cidade.uf.id;
+                carregaCidadeResp();
+                document.getElementById("cidade_responsavel").value =pessoa.cidade.id;
+                document.getElementById("cep_responsavel").value =pessoa.cep;
+            });
+        
+         }
+    
+        };
+        var as = new bsn.AutoSuggest('cpf_responsavel', options); 
+         
         
         $('#dataFiliacao').datepicker();
         $("#cnpj").inputmask({ mask: "99.999.999-9999-99"});
@@ -406,7 +459,7 @@
                 },
                 cpf_responsavel :{
                     remote: {
-                            url: "ajax/pessoa_verificaCpf.php",
+                            url: "ajax/usuario_verificaCpf.php",
                             type: "post",
                             data: {
                               idUser: function() {
@@ -433,7 +486,7 @@
                     remote: "E-mail já existe no sistema"
                     },
                     cpf_responsavel: {
-                    remote: "CPF/CNPJ já existe no sistema"
+                    remote: "CPF/CNPJ já existe como usuário do sistema, favor escolher na lista acima."
                     }
                     
                 }

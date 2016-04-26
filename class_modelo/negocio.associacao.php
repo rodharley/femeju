@@ -94,6 +94,8 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objUser->id = $_REQUEST['idResponsavel'];
         }else{
             //novo responsavel
+            $strCPF =$this->limpaDigitos($_REQUEST['cpf_responsavel']);
+            $objPessoa->ConsultaCPFExistente($strCPF);
             $objUser -> perfil = $objPerfil;
             $objPessoa->nome = $_REQUEST['nome_responsavel'];
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
@@ -101,7 +103,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
             $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
             $objPessoa->cep = $_REQUEST['cep_responsavel'];
-            $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
+            $objPessoa->cpf = $strCPF;
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->telCelular =  $this->limpaDigitos($_REQUEST['celular_responsavel']);
@@ -188,7 +190,9 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
              $objUser->id = $_REQUEST['idResponsavel'];
         }else{            
             //novo responsavel
-            $objUser -> perfil = $objPerfil;            
+            $strCPF =$this->limpaDigitos($_REQUEST['cpf_responsavel']);
+            $objPessoa->ConsultaCPFExistente($strCPF);             
+            $objUser -> perfil = $objPerfil;
             $objPessoa->nome = $_REQUEST['nome_responsavel'];
             $objPessoa->sobrenome =  $_REQUEST['sobrenome_responsavel'];
             $objPessoa->email =  $_REQUEST['email'];
@@ -197,7 +201,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objPessoa->endereco = $_REQUEST['endereco_responsavel'];
             $objPessoa->bairro = $_REQUEST['bairro_responsavel'];
             $objPessoa->cep = $_REQUEST['cep_responsavel'];
-            $objPessoa->cpf = $this->limpaDigitos($_REQUEST['cpf_responsavel']);
+            $objPessoa->cpf = $strCPF;
             $objPessoa->email =  $_REQUEST['email'];
             $objPessoa->cidade = new Cidade($_REQUEST['cidade_responsavel']);
             $objPessoa->foto = 'pessoa.png';
