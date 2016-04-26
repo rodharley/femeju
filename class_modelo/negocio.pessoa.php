@@ -139,6 +139,10 @@ class Pessoa extends Persistencia {
             $sql = "select p.* from ".$this::TABELA." p left outer join ".Atleta::TABELA." a on a.id = p.id where p.cpf like '$cpf%' and a.id is null order by nome asc";
             return $this->getSQL($sql);
         }
+        function getPessoasNaoUsuario($cpf){
+            $sql = "select p.* from ".$this::TABELA." p left outer join ".Usuario::TABELA." a on a.id = p.id where p.cpf like '$cpf%' and a.id is null order by nome asc";
+            return $this->getSQL($sql);
+        }
         
         function gerarArraySacado($idPessoa){
             $this->getById($idPessoa);

@@ -81,6 +81,8 @@ if(isset($_REQUEST['id'])){
     
     
 	$TPL->block("BLOCK_EDIT");
+}else{
+    $TPL->block("BLOCK_NOVO_USUARIO");
 }
 
 $rsPerfil = $perfil->getRows(0,999,array("id"=>"asc"),array());
