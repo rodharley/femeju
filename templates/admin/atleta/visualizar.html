@@ -1,0 +1,316 @@
+<form role="form" method="post" action="admin_atleta-action" id="frmEditAtleta" enctype="multipart/form-data" autocomplete="off">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+           <fieldset>
+                <legend>Documentos</legend>
+                <div class="row">   
+                 <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="cpf"><i class='fa'> </i><b>CPF </b></label>
+                         <p class="form-control-static">{CPF}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="rg"><i class='fa'> </i><b>RG</b></label>
+                        <p class="form-control-static">{RG}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="rgOrgaoExpedidor"><i class='fa'> </i><b>Orgão Emissor</b></label>
+                        <p class="form-control-static">{RG_ORGAO_EXP}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="rgDataExp"><i class='fa'> </i><b>Data Emissão</b></label>
+                        <p class="form-control-static">{RG_DATA_EXP}</p>
+                    </div>
+                </div>
+                </div>
+                <div class="row">   
+                 <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporte"><i class='fa'> </i><b>Passaporte</b></label>
+                        <p class="form-control-static">{PASSAPORTE}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporteDataVal"><i class='fa'> </i><b>Data Validade</b></label>
+                        <p class="form-control-static">{PASSAPORTE_VAL}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporteOrgao"><i class='fa'> </i><b>Orgão Espedidor</b></label>
+                        <p class="form-control-static">{PASSAPORTE_ORGAO_EXP}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="passaporteDataExp"><i class='fa'> </i><b>Data Expedição</b></label>
+                        <p class="form-control-static">{PASSAPORTE_DATA_EXP}</p>
+                    </div>
+                </div>
+                </div>
+            </fieldset>  
+            <fieldset><legend>Dados Pessoais</legend>
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="nome"><i class='fa'> </i><b>Nome</b></label>
+                        <p class="form-control-static">{NOME}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="nomeMeio"><i class='fa'> </i><b>Nome do Meio</b></label>
+                        <p class="form-control-static">{NOME_MEIO}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="sobrenome"><i class='fa'> </i><b>Sobre Nome</b></label>
+                        <p class="form-control-static">{SOBRE_NOME}</p>
+                    </div>
+                </div>                 
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="ativo"><i class='fa'> </i><b>Situação</b></label><br/>
+                         <p class="form-control-static">{ATIVO}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="nacionalidade"><i class='fa'> </i><b>Nome do Pai</b></label>
+                         <p class="form-control-static">{FILIACAO_PAI}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="nacionalidade"><i class='fa'> </i><b>Nacionalidade</b></label>
+                        <p class="form-control-static">{NACIONALIDADE}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                     <label for="ufnaturalidade"><i class='fa'> </i><b>UF Naturalidade</b></label>   
+                       <p class="form-control-static">{nome_uf_nat}</p>  
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="naturalidade"><i class='fa'> </i><b>Naturalidade </b></label>
+                         <p class="form-control-static">{nome_cidade_nat}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="nacionalidade"><i class='fa'> </i><b>Nome da Mãe</b></label>
+                         <p class="form-control-static">{FILIACAO_MAE}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="email"><i class='fa'> </i><b>E-mail</b></label>
+                         <p class="form-control-static">{EMAIL}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="dataNascimento"><i class='fa'> </i><b>Data de Nascimento</b></label>
+                         <p class="form-control-static">{DATA_NASCIMENTO}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label for="sexo"><i class='fa'> </i><b>Sexo</b></label><br/>
+                         <p class="form-control-static">{SEXO}</p>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="telefoneRes"><i class='fa'> </i><b>Telefone 1</b></label>
+                         <p class="form-control-static">{TELEFONE_RES}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="telefoneCel"><i class='fa'> </i><b>Telefone 2</b></label>
+                         <p class="form-control-static">{TELEFONE_CEL}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="telefoneCom"><i class='fa'> </i><b>Telefone 3</b></label>
+                       <p class="form-control-static">{TELEFONE_COM}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">                
+                <div class="col-md-6 col-xs-6">
+                     <div class="form-group">
+                        <label for="webSite"><i class='fa'> </i><b>Web Site</b></label><BR>
+                         <p class="form-control-static">{WEB_SITE}</p>
+                    </div>
+                </div>  
+                <div class="col-md-6 col-xs-6">
+                     <div class="form-group">
+                        <label for="midiaSocial"><i class='fa'> </i><b>Mídia Social</b></label><BR>
+                        <p class="form-control-static">{MIDIA_SOCIAL}</p>
+                    </div>
+                </div>              
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                     <div class="form-group">
+                        <label for="observacoes"><i class='fa'> </i><b>Observações</b></label>
+                         <p class="form-control-static">{OBS}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">                
+                <div class="col-md-6 col-xs-6">
+                     <div class="form-group">
+                        <label for="Foto"><i class='fa'> </i><b>Foto</b></label>
+                         <p class="form-control-static">{FOTO}</p>
+                    </div>
+                </div>  
+                <div class="col-md-6 col-xs-6">
+                     <div class="form-group">
+                        <label for="vacinas"><i class='fa'> </i><b>Vacinas</b></label>
+                         <p class="form-control-static">{VACINAS}</p>
+                    </div>
+                </div>              
+            </div>  
+            </fieldset>
+              
+            <fieldset><legend>Endereço</legend>
+                <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="endereco"><i class='fa'> </i><b>Logradouro</b></label>
+                         <p class="form-control-static">{ENDERECO}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="bairro"><i class='fa'> </i><b>Bairro</b></label>
+                        <p class="form-control-static">{BAIRRO}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="uf"><i class='fa'> </i><b>Estado</b></label>
+                         <p class="form-control-static"> {nome_uf}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="cidade"><i class='fa'> </i><b>Cidade</b></label>
+                         <p class="form-control-static">{nome_cidade}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="cep"><i class='fa'> </i><b>CEP</b></label>
+                       <p class="form-control-static">{CEP}</p>
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+            <fieldset><legend>Dados do Atleta</legend>
+           <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="ativo"><i class='fa'> </i><b>Tipo</b></label>
+                         <p class="form-control-static">{CHECKED_ATLETA}</p>
+                         <p class="form-control-static">{CHECKED_TECNICO}</p>
+                         <p class="form-control-static">{CHECKED_ARBITRO}</p>
+                    </div>
+                </div>            
+                <div class="col-md-3 col-xs-3">
+                     <div class="form-group">
+                        <label for="numeroFemeju"><i class='fa'> </i><b>Número</b></label>
+                         <p class="form-control-static">{NUMERO_FEMEJU}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                     <div class="form-group">
+                        <label for="verificado"><i class='fa'> </i><b>Verificado</b></label>
+                         <p class="form-control-static">{VERIFICADO}</p>
+                    </div>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="registroConf"><i class='fa'> </i><b>Registro na Confederação</b></label>
+                         <p class="form-control-static">{REGISTRO_CONF}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="dataFiliacao"><i class='fa'> </i><b>Data da Filiação</b></label>
+                         <p class="form-control-static">{DATA_FILIACAO}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="dataEmissaoCarteira"><i class='fa'> </i><b>Data da Emissão da Carteira</b></label>
+                         <p class="form-control-static">{DATA_EMISSAO_CART}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="associacao"><i class='fa'> </i><b>Associação</b></label>
+                        <p class="form-control-static">{associacao}</p>                       
+                    </div>
+            </div> 
+             <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                        <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
+                        <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                             <img id="belt_img_selected" style="background:{BELT_COLOR_SELECTED}; width:50px; height: 20px;" src="img/icones/belt_icon.png"/>
+                            <span id="belt_text_selected">{BELT_NAME_SELECTED}</span>
+                        </div></div>
+                       
+            </div> 
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6"></div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="dataGraduacao"><i class='fa'> </i><b>Data da Graduação</b></label>
+                        <p class="form-control-static">{DATA_GRADUACAO}</p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="box-footer text-center">
+            <button class="btn btn-default btVoltar" type="button">
+                Voltar
+            </button>
+        </div>
+
+    </div>
+</div>
+</form>

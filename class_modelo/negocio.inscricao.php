@@ -7,13 +7,14 @@ class Inscricao extends Persistencia {
 	var $docAtleta;
     var $dataInscricao;
     var $situacao;
-    var $dobra1;
-    var $dobra2;
-    var $dobra3;
+    
     var $valorDobra1;
     var $valorDobra2;
     var $valorDobra3;
     var $valor;    
+    var $dobra1 = NULL;
+    var $dobra2 = NULL;
+    var $dobra3 = NULL;
     var $competicao = NULL;
     var $atleta = NULL;
     var $graduacao = NULL;

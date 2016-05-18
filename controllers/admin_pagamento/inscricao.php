@@ -35,6 +35,9 @@ foreach ($rsClasses as $key => $value) {
     $TPL->ID_CLA = $value->classe->id;
     $TPL->DESC_CLA = $value->classe->descricao;
     $TPL->block("BLOCK_CLA");
+    $TPL->block("BLOCK_DOBRA1");
+    $TPL->block("BLOCK_DOBRA2");
+    $TPL->block("BLOCK_DOBRA3");
 }
 $TPL->VALOR = $objc->custa->valor;
 $TPL->DOBRA_1 = $objc->dobra1;

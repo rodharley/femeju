@@ -1,0 +1,1 @@
+ALTER TABLE `fmj_inscricao_competicao` CHANGE `dobra1` `dobra1` INT(11) NULL DEFAULT '0', CHANGE `dobra2` `dobra2` INT(11) NULL DEFAULT '0', CHANGE `dobra3` `dobra3` INT(11) NULL DEFAULT '0';

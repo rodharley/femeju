@@ -75,15 +75,30 @@
                                         </div></td>
                                         <td class="col-md-1"  class="text-center">
                                         <div class="form-group">
-                                            <input type="checkbox" name="dobra1{ID_ATLETA}" id="dobra1{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valor="{DOBRA1}"  />
+                                            <select name="dobra1{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="dobra1{ID_ATLETA}" valor="{DOBRA1}">
+                                                <option value=""></option>
+                                                <!-- BEGIN BLOCK_DOBRA1 -->
+                                                <option value="{ID_CLA}">{LABEL_CLA}</option>
+                                                <!-- END BLOCK_DOBRA1 -->
+                                            </select>
                                         </div></td>
                                         <td class="col-md-1"  class="text-center">
                                         <div class="form-group">
-                                            <input type="checkbox" name="dobra2{ID_ATLETA}" id="dobra2{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valor="{DOBRA2}"  />
+                                            <select name="dobra2{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="dobra2{ID_ATLETA}" valor="{DOBRA2}">
+                                                <option value=""></option>
+                                                <!-- BEGIN BLOCK_DOBRA2 -->
+                                                <option value="{ID_CLA}">{LABEL_CLA}</option>
+                                                <!-- END BLOCK_DOBRA2 -->
+                                            </select>
                                         </div></td>
                                         <td class="col-md-1"  class="text-center">
                                         <div class="form-group">
-                                            <input type="checkbox" name="dobra3{ID_ATLETA}" id="dobra3{ID_ATLETA}" value="1" class="form-control dobra" idAtleta="{ID_ATLETA}" valor="{DOBRA3}"  />
+                                            <select name="dobra3{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="dobra3{ID_ATLETA}" valor="{DOBRA3}">
+                                                <option value=""></option>
+                                                <!-- BEGIN BLOCK_DOBRA3 -->
+                                                <option value="{ID_CLA}">{LABEL_CLA}</option>
+                                                <!-- END BLOCK_DOBRA3 -->
+                                            </select>
                                         </div></td>
                                         <td class="col-md-2"  class="text-right">
                                         <input type="text" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right valorAtleta camposoma" value="{VALOR_CUSTA}"/>
@@ -186,14 +201,14 @@
              
         });
 	    
-	    $(".dobra").click(function() {
+	    $(".dobra").change(function() {
             var atleta = $(this).attr("idAtleta");
             var valor = parseFloat($("#valor_atleta_comp"+atleta).val());
-            if ($("#dobra1"+atleta).prop("checked")) 
+            if ($("#dobra1"+atleta).val() != "") 
                 valor += parseFloat($("#dobra1"+atleta).attr("valor"));
-            if ($("#dobra2"+atleta).prop("checked")) 
+            if ($("#dobra2"+atleta).val() != "") 
                 valor += parseFloat($("#dobra2"+atleta).attr("valor"));    
-            if ($("#dobra3"+atleta).prop("checked")) 
+            if ($("#dobra3"+atleta).val() != "") 
                 valor += parseFloat($("#dobra3"+atleta).attr("valor"));
                 
             $("#valor_atleta"+atleta).val(valor.format(2,3,".",","));
@@ -225,6 +240,7 @@
 				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
 				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
 			}
+			
 		});
 		somatotal();
 	});

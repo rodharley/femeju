@@ -135,12 +135,12 @@ class Competicao extends Persistencia {
                 $insc->competicao = $this;
                 $insc->graduacao = new Graduacao($_REQUEST['graduacao'.$id]);                
                 if($this->competicao == 1){ 
-                $insc->dobra1 = isset($_REQUEST['dobra1'.$id]) ? 1 : 0;
-                $insc->valorDobra1 = isset($_REQUEST['dobra1'.$id]) ? $this->dobra1 : 0;
-                $insc->dobra2 = isset($_REQUEST['dobra2'.$id]) ? 1 : 0;
-                $insc->valorDobra2 = isset($_REQUEST['dobra2'.$id]) ? $this->dobra2 : 0;
-                $insc->dobra3 = isset($_REQUEST['dobra3'.$id]) ? 1 : 0;
-                $insc->valorDobra3 = isset($_REQUEST['dobra3'.$id]) ? $this->dobra3 : 0;
+                $insc->dobra1 = $_REQUEST['dobra1'.$id] != "" ? new Classe($_REQUEST['dobra1'.$id]) : null;
+                $insc->valorDobra1 = $_REQUEST['dobra1'.$id] != "" ? $this->dobra1 : 0;
+                $insc->dobra2 = $_REQUEST['dobra2'.$id] != "" ? new Classe($_REQUEST['dobra2'.$id]) : null;
+                $insc->valorDobra2 = $_REQUEST['dobra2'.$id] != "" ? $this->dobra2 : 0;
+                $insc->dobra3 = $_REQUEST['dobra3'.$id] != "" ? new Classe($_REQUEST['dobra3'.$id]) : null;
+                $insc->valorDobra3 = $_REQUEST['dobra2'.$id] != "" ? $this->dobra3 : 0;
                 $insc->classe = new Classe($_REQUEST['classe'.$id]);
                 $insc->categoria = new CategoriaPeso($_REQUEST['categoria'.$id]);
                 }
@@ -155,9 +155,9 @@ class Competicao extends Persistencia {
                 //soma o valor total
                 $total = $this->custa->valor;
                 if($this->competicao == 1){  
-                $total += isset($_REQUEST['dobra1'.$id]) ? $this->dobra1 : 0;
-                $total += isset($_REQUEST['dobra2'.$id]) ? $this->dobra2 : 0;
-                $total += isset($_REQUEST['dobra3'.$id]) ? $this->dobra3 : 0;
+                $total += $_REQUEST['dobra1'.$id] != "" ? $this->dobra1 : 0;
+                $total += $_REQUEST['dobra2'.$id] != "" ? $this->dobra2 : 0;
+                $total += $_REQUEST['dobra3'.$id] != "" ? $this->dobra3 : 0;
                 }
                 $item->valor = $total; 
                 $item->custa = $this->custa;
@@ -166,7 +166,7 @@ class Competicao extends Persistencia {
                 }
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);  
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$arrayResp,$this->titulo, $itensPagamento);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataInscricao,$arrayResp,$this->titulo, $itensPagamento);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
@@ -208,11 +208,11 @@ class Competicao extends Persistencia {
                 $insc->competicao = $this;
                 $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
                 if($this->competicao == 1){                
-                $insc->dobra1 = $arrAtleta['dobra1'] == "Sim" ? 1 : 0;
+                $insc->dobra1 = $arrAtleta['dobra1'] == "Sim" ? new Classe($arrAtleta["classe1"]) : null;
                 $insc->valorDobra1 = $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 : 0;
-                $insc->dobra2 = $arrAtleta['dobra2'] == "Sim" ? 1 : 0;
+                $insc->dobra2 = $arrAtleta['dobra2'] == "Sim" ? new Classe($arrAtleta["classe2"]) : null;
                 $insc->valorDobra2 = $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 : 0;
-                $insc->dobra3 = $arrAtleta['dobra3'] == "Sim" ? 1 : 0;
+                $insc->dobra3 = $arrAtleta['dobra3'] == "Sim" ? new Classe($arrAtleta["classe3"]) : null;
                 $insc->valorDobra3 = $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 : 0;
                 $insc->classe = new Classe($arrAtleta["classe"]);
                 $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
@@ -238,7 +238,7 @@ class Competicao extends Persistencia {
                 }
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']); 
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataEvento,$arrayResp,$this->titulo,$itensPagamento);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataInscricao,$arrayResp,$this->titulo,$itensPagamento);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }

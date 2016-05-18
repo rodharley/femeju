@@ -40,6 +40,9 @@ foreach ($rsAtletas as $key => $value) {
             $TPL->ID_CLA = $grupo->classe->id;
             $TPL->LABEL_CLA = $grupo->classe->descricao;
             $TPL->block("BLOCK_CLA");
+            $TPL->block("BLOCK_DOBRA1");
+            $TPL->block("BLOCK_DOBRA2");
+            $TPL->block("BLOCK_DOBRA3");
         }
     
     $TPL->block("BLOCK_ATLETAS");

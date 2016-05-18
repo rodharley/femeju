@@ -173,9 +173,9 @@ set
 	<class name="Inscricao" tbname="fmj_inscricao_competicao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>		
 		<atrib tbname="nomeAtleta" type="txt">nomeAtleta</atrib>
-		<atrib tbname="dobra1" type="int">dobra1</atrib>
-		<atrib tbname="dobra2" type="int">dobra2</atrib>
-		<atrib tbname="dobra3" type="int">dobra3</atrib>
+		<atrib tbname="dobra1" type="fk" clrelation="Classe">dobra1</atrib>
+		<atrib tbname="dobra2" type="fk" clrelation="Classe">dobra2</atrib>
+		<atrib tbname="dobra3" type="fk" clrelation="Classe">dobra3</atrib>
 		<atrib tbname="valorDobra1" type="int">valorDobra1</atrib>
 		<atrib tbname="valorDobra2" type="int">valorDobra2</atrib>
 		<atrib tbname="valorDobra3" type="int">valorDobra3</atrib>

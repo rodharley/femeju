@@ -111,20 +111,37 @@
                                 <div class="row">
                                     <div class="col-md-4 col-xs-4">
                                         <div class="form-group">
-                                            <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>
-                                            <input type="checkbox" class=" dobra" name="dobra1" id="dobra1" value="1"  valor="{DOBRA_1}"/>
+                                            <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>                                            
+                                            
+                                            <select id="dobra1" name="dobra1" class="form-control dobra" valor="{DOBRA_1}">
+                                                <option value="">Selecione</option>
+                                                <!-- BEGIN BLOCK_DOBRA1 -->
+                                                <option value="{ID_CLA}">{DESC_CLA}</option>
+                                                <!-- END BLOCK_DOBRA1 -->
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-xs-4">
                                         <div class="form-group">
                                             <label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
-                                            <input type="checkbox" class=" dobra" name="dobra2" id="dobra2" value="1"  valor="{DOBRA_2}"/>
+                                            
+                                            <select id="dobra2" name="dobra2" class="form-control dobra" valor="{DOBRA_2}">
+                                                <option value="">Selecione</option>
+                                                <!-- BEGIN BLOCK_DOBRA2 -->
+                                                <option value="{ID_CLA}">{DESC_CLA}</option>
+                                                <!-- END BLOCK_DOBRA2 -->
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-xs-4">
                                         <div class="form-group">
-                                            <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>
-                                            <input type="checkbox" class=" dobra" name="dobra3" id="dobra3" value="1" valor="{DOBRA_3}"/>
+                                            <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>                                            
+                                            <select id="dobra3" name="dobra3" class="form-control dobra" valor="{DOBRA_3}">
+                                                <option value="">Selecione</option>
+                                                <!-- BEGIN BLOCK_DOBRA3 -->
+                                                <option value="{ID_CLA}">{DESC_CLA}</option>
+                                                <!-- END BLOCK_DOBRA3 -->
+                                            </select>
                                         </div>
                                     </div>
 
@@ -227,9 +244,9 @@
 		$("#telefone").val("");
 		$("#valor").val($("#valorComp").val());
 		$("#valorReal").val($("#valorComp").val());
-		$("#dobra1").prop("checked", false);
-		$("#dobra2").prop("checked", false);
-		$("#dobra3").prop("checked", false);
+		$("#dobra1").val("");
+		$("#dobra2").val("");
+		$("#dobra3").val("");
 		$("#graduacao").val("");
 		$("#classe").val("");
 		$("#categoria").html("<option value=''>Selecione</option>");
@@ -240,11 +257,11 @@
 		var isdobra1 = "Não";
 		var isdobra2 = "Não";
 		var isdobra3 = "Não";
-		if ($("#dobra1").prop("checked"))
+		if ($("#dobra1").val() != "")
 			isdobra1 = "Sim";
-		if ($("#dobra2").prop("checked"))
+		if ($("#dobra2").val() != "")
 			isdobra2 = "Sim";
-		if ($("#dobra3").prop("checked"))
+		if ($("#dobra3").val() != "")
 			isdobra3 = "Sim";
 		var atleta = JSON.stringify({
 		    id: $("#idAtleta").val(),
@@ -259,6 +276,9 @@
 			dobra1 : isdobra1,
 			dobra2 : isdobra2,
 			dobra3 : isdobra3,
+			classe1: $("#dobra1").val(),
+			classe2: $("#dobra2").val(),
+			classe3: $("#dobra3").val(),
 			nomeGraduacao : $("#graduacao").find('option:selected').text(),
 			nomeCategoria : $("#categoria").find('option:selected').text(),
 			nomeClasse : $("#classe").find('option:selected').text(),
@@ -336,11 +356,11 @@
 			prefix : "",
 			placeholder : ""
 		});
-		$(".dobra").click(function() {
+		$(".dobra").change(function() {
 			var valor = parseFloat($("#valorComp").val());
 
-			$("input:checkbox.dobra").each(function() {
-				if ($(this).prop("checked")) {
+			$("select.dobra").each(function() {
+				if ($(this).val() != "") {
 					valor = valor + parseFloat($(this).attr("valor"));
 				}
 
@@ -410,12 +430,12 @@
 			rules : {
 				dobra1 : {
 					required : function(element) {
-						return $("#dobra2").prop("checked");
+						return $("#dobra2").val() != "";
 					}
 				},
 				dobra2 : {
 					required : function(element) {
-						return $("#dobra3").prop("checked");
+						return $("#dobra3").val() != "";
 					}
 				}
 			},

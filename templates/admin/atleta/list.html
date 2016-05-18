@@ -37,7 +37,7 @@
                     <th>Nome</th>
                     <th>Situação</th>
                     <th>Associação</th>                 
-                    <th style="width: 180px;" class="text-center hidden-xs">Ação</th>
+                    <th class="text-center hidden-xs">Ação</th>
                     <th class="visible-xs">Ação</th>
                 </tr>
             </thead>
@@ -51,6 +51,7 @@
                     <td>{ASSOCIACAO}</td>
                     <td class="text-right hidden-xs" >
                     <div class="btn-group">
+                        <a type="button" class="btn btn-default" href="admin_atleta-visualizar?id={ID_HASH}" title="Editar" ><span class="fa fa-eye"></span></a>
                         <a type="button" class="btn btn-default" href="admin_atleta-editar?id={ID_HASH}" title="Editar" ><span class="fa fa-edit"></span></a>
                         <a type="button" target="_blank" class="btn btn-default" href="portal_servicos-carteira?id={ID_HASH}" title="Imprimir Carteira" ><span class="glyphicon glyphicon-print"></span></a>
                         <a type="button" target="_blank" class="btn btn-default" href="portal_servicos-carteira_image?id={ID_HASH}" title="Salvar Imagem" ><span class="glyphicon glyphicon-phone"></span></a>
@@ -62,6 +63,9 @@
                             <span class="fa fa-list"></span><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">                          
+                             <li>
+                                <a href="admin_atleta-visualizar?id={ID_HASH}"><span class="fa fa-eye"></span> Editar</a>
+                            </li>
                             <li>
                                 <a href="admin_atleta-editar?id={ID_HASH}"><span class="fa fa-edit"></span> Editar</a>
                             </li>
