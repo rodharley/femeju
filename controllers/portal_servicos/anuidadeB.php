@@ -40,7 +40,7 @@ foreach ($rsAtletas as $key => $value) {
 $TPL->VALOR_TOTAL_CUSTA = $objC->money($totalValor,"atb");
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
-$rspag = $objTP->getRows();
+$rspag = $objTP->getRows(0,10,array(),array("ativo"=>"=1"));
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;
     $TPL->IMG_PAG = $value->imagem;

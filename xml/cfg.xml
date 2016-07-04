@@ -252,6 +252,7 @@ set
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="imagem" type="txt">imagem</atrib>	
 		<atrib tbname="arquivo" type="txt">arquivo</atrib>
+		<atrib tbname="bitAtivo" type="txt">ativo</atrib>
 	</class>
 	<class name="Pagina" tbname="fmj_pagina" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	

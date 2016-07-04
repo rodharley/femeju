@@ -32,7 +32,7 @@ $TPL->addFile("CONTEUDO", "templates/admin/pagamento/outros.html");
 
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
-$rspag = $objTP->getRows();
+$rspag = $objTP->getRows(0,10,array(),array("ativo"=>"=1"));
 $TPL->CHECKED = "checked='checked'";
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;

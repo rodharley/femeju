@@ -52,7 +52,7 @@ foreach ($rsAtletas as $key => $value) {
 
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
-$rspag = $objTP->getRows();
+$rspag = $objTP->getRows(0,10,array(),array("ativo"=>"=1"));
 $TPL->CHECKED = "checked='checked'";
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;

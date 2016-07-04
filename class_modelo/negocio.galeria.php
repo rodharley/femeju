@@ -4,14 +4,14 @@ class Galeria extends Persistencia{
 	var $data;
     
     function Incluir() {
-        $this -> titulo = $_REQUEST['titulo'];
+        $this -> titulo = utf8_decode($_REQUEST['titulo']);
         $this -> data = $this->convdata($_REQUEST['data'],"ntm");
         $this -> save();
     }
 
     function Alterar() {
         $this -> getById($_REQUEST['id']);
-        $this -> titulo = $_REQUEST['titulo'];
+        $this -> titulo = utf8_decode($_REQUEST['titulo']);
         $this -> data = $this->convdata($_REQUEST['data'],"ntm");
         $this -> save();
     }
