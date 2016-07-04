@@ -6,6 +6,7 @@ $pag = new Pagamento();
 $custa = new Custa();
 $comp = new Competicao;
 $inscricao = new Inscricao();
+$tipoPag = new PagamentoTipo();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
@@ -69,7 +70,12 @@ switch ($_REQUEST['acao']){
             header("Location:admin_home-home");
         }
         exit();
-        break;     
+        break;  
+	case 'ativarTipo' :
+		$tipoPag->getById($_REQUEST['id']);
+		$tipoPag->ativo = $_REQUEST['ativar'] == 'false' ? 1 : 0;
+		$tipoPag->save();
+		break;   
 }
 }
 ?>
