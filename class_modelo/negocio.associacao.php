@@ -22,8 +22,14 @@ class Associacao extends Persistencia {
     var $ativo;
     var $fotos = array();
 
-public function listaAtivas(){
-    return $this->getRows(0,9999,array(),array("ativo"=>"=1"));
+public function listaAtivas($ordem = ""){
+	if($ordem != "")	
+	$arrayOrdem  = array($ordem=>"asc");
+	else {
+		$arrayOrdem = array();
+	}
+	
+    return $this->getRows(0,9999,$arrayOrdem,array("ativo"=>"=1"));
 }
 public function listaPorResponsavelAtivas($responsavel){
     return $this->getRows(0,9999,array(),array("ativo"=>"=1","responsavel"=>"=$responsavel"));

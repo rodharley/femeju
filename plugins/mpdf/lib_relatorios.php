@@ -9,10 +9,9 @@ class libRelatorio {
 <tr>
 <td rowspan="2" class="leftHeader"><img src="'.$logo.'" width="126px" /></td>
 <td rowspan="2" class="centerHeader">'.$titulo.'</td>
-<td class="rightHeader" colspan="2"></td>
+<td class="rightHeader"></td>
 </tr>
 <tr>
-<td class="rightHeader">Pág:<br/>{PAGENO} de {nbpg}</td>
 <td class="rightHeader">Data:<br/>'.$data.'</td>
 </tr>
 </table>
@@ -21,37 +20,23 @@ class libRelatorio {
 	}
 	
 	
-public function rodapePadrao($empresa){
+public function rodapePadrao(){
 
-if($empresa->id != NULL){
-		$strfooter = '<htmlpagefooter name="Footer">
+$strfooter = '<htmlpagefooter name="Footer">
 <table class="footer">
 <tr>
-<td>CNPJ:'.$empresa->cnpj.' - '.$empresa->razaoSocial.
-'<br/>'.$empresa->logradouro.' - '.$empresa->bairro.' - '.$empresa->cidade->nome.'-'.$empresa->cidade->uf->uf.
-'<br/>CEP: '.$empresa->cep.' - Telefone: '.$empresa->telefone.' - Email: '.$empresa->email.
-'</td>
+<td>dados da empresa</td>
+<td width="10%">Pág:<br/>{PAGENO} de {nbpg}</td>
 </tr>
 </table>
 </htmlpagefooter>';
-}else{
-		$strfooter = '<htmlpagefooter name="Footer">
-<table class="footer">
-<tr>
-<td><center>
-Cadmo Engenharia</center>
-</td>
-</tr>
-</table>
-</htmlpagefooter>';	
-}
 return $strfooter;
 	}
 
-public function setCabecalhoRodapePadrao($empresa,$logo,$titulo,$data=""){
+public function setCabecalhoRodapePadrao($logo,$titulo,$data=""){
 	$string = '<!--mpdf	';
 	$string .= $this->cabecalhoPadrao($titulo,$logo,$data);
-	$string .= $this->rodapePadrao($empresa);
+	$string .= $this->rodapePadrao();
 $string .= '<sethtmlpageheader name="Header" page="O" value="on" show-this-page="1" />
 <sethtmlpageheader name="Header" page="E" value="on" />
 <sethtmlpagefooter name="Footer" page="O" value="on" show-this-page="1" />

@@ -111,6 +111,12 @@ class Competicao extends Persistencia {
     public function listaAtivasAbertas(){
         return $this->getRows(0,999,array(),array("ativo"=>"=1","inscricaoAberta"=>"=1", "dataInscricao"=>">='".date("Y-m-d")."'"));
     }
+	public function listaAtivas(){
+        return $this->getRows(0,999,array(),array("ativo"=>"=1"));
+    }
+	public function listaTodas(){
+        return $this->getRows(0,99999,array("dataInscricao"=>"desc"),array());
+    }
    
    public function gerarInscricaoF()
    {
