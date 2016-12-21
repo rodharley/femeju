@@ -53,7 +53,7 @@ $canvas->writeText('15', '215', $atleta->associacao->nome, 0);
 $canvas->writeText('15', '255', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('15', '295', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
 $canvas->writeText('150', '295',$atleta->convdata($atleta->pessoa->dataNascimento, "mtn"), 0);
-$canvas->writeText('15', '335', '31 de Dezembro de '.Date('Y'), 0);
+$canvas->writeText('15', '335', '31 de Dezembro de 2017', 0);
 $canvas->writeText('15', '355',"Válida CBJ", 0);
   
  

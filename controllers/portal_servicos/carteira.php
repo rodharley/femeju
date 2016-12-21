@@ -56,7 +56,7 @@ $canvas->writeText('20', '34', $atleta->associacao->nome, 0);
 $canvas->writeText('20', '70', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('20', '106', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
 $canvas->writeText('220', '106', $atleta->convdata($atleta->pessoa->dataNascimento, "mtn"), 0);
-$canvas->writeText('20', '142', '31 de Dezembro de '.Date('Y'), 0);
+$canvas->writeText('20', '142', '31 de Dezembro de 2017', 0);
 
 //registro
 $canvas->useFont('fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
