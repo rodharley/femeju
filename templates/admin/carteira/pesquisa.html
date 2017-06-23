@@ -85,7 +85,12 @@
 
 		}
 
-	$(document).ready(function() {        
+	$(document).ready(function() {    
+		document.addEventListener('keypress', function(e) {
+			if (e.which == 13) {
+				pesquisar();
+			}
+		}, false);    
 		$("#btPesquisar").click(function() {
 			pesquisar();
 		});

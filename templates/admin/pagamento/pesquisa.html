@@ -71,6 +71,11 @@
 </form>
 <script>
 function pesquisar(){
+			$("#pagina").val("1");			
+			executaPesquisa();
+		}
+
+function executaPesquisa(){
             $.ajax({
                 url : "ajax/admin_pagamento_pesquisar.php",
                 type : "POST",
@@ -85,7 +90,11 @@ function pesquisar(){
 
         }
 	$(document).ready(function() {		
-
+		document.addEventListener('keypress', function(e) {
+			if (e.which == 13) {
+				pesquisar();
+			}
+		}, false);
 		$("#dataVencimento").datepicker();
 		$("#btPesquisar").click(function() {
             pesquisar();

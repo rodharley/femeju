@@ -7,27 +7,22 @@
         });
 		$(".paginar").click(function(){
 			$("#pagina").val($(this).attr("value"));
-			pesquisar();
+			executaPesquisa();
 		});
-		function pesquisar(){
-			$.ajax({
-				url : "ajax/noticia_paginador.php",
-				type : "POST",
-				data : $("#frmPesquisa").serialize(),
-
-				beforeSend: function( ) {
-					$('#resultado').html('{LOADING}');
-		  		},
-			}).done(function(msg) {
-				$("#resultado").html(msg);
-			});
-
-		}
+		
 
 	});
 
 </script>
+<!-- BEGIN BLOCK_PAGINACAO2 -->
+	
+                                        <ul class="pagination pagination-sm no-margin pull-ce">
+                                            <li><a href="#" value="{PAGINA_ANTERIOR}" class="paginar">&laquo;</a></li>
+                                            <li><a href="#">{PAGINA}/{TOTAL_PAGINAS}</a></li>
+                                            <li><a href="#" value="{PROXIMA_PAGINA}" class="paginar">&raquo;</a></li>
+                                        </ul>
 
+	<!-- END BLOCK_PAGINACAO2 -->
 
 		<table class="table table-striped table-hover data-table">
 			<thead>
