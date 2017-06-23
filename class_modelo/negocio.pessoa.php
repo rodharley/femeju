@@ -160,8 +160,8 @@ class Pessoa extends Persistencia {
         $sql = "select count(a.id) as total from ".$this::TABELA." a where 1 = 1 ";
          
         if ($nome != "")
-            $sql .= " and ( a.nome like '%$nome%' or a.nomeMeio like '%$nome%' or a.sobrenome like '%$nome%' or a.endereco like '%$nome%' or a.bairro like '%$nome%')";
-        
+            $sql .= " and (concat(a.nome,' ', a.nomeMeio,' ', a.sobrenome) like '%$nome%' or a.endereco like '%$nome%' or a.bairro like '%$nome%')";
+       
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
@@ -171,7 +171,7 @@ class Pessoa extends Persistencia {
         $sql = "select a.* from ".$this::TABELA." a where 1 = 1 ";
          
         if ($nome != "")
-            $sql .= " and ( a.nome like '%$nome%' or a.nomeMeio like '%$nome%' or a.sobrenome like '%$nome%' or a.endereco like '%$nome%' or a.bairro like '%$nome%')";
+            $sql .= " and ( concat(a.nome,' ', a.nomeMeio,' ', a.sobrenome) like '%$nome%' or a.endereco like '%$nome%' or a.bairro like '%$nome%')";
         
         $sql .= "  order by a.nome desc limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);

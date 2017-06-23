@@ -127,7 +127,7 @@ class Persistencia extends Biblioteca{
 		$field = $atributo["tbname"];
 		$tbIdent = $class["tbid"];
 
-
+		$atrb = $atributo[0];
 
 		if($atributo["type"] == "set" && $class['lazy'] == "true"){
 			$clfk = substr($atributo['clfk'],0,strlen($atributo['clfk']));
@@ -143,7 +143,7 @@ class Persistencia extends Biblioteca{
 			foreach ($xml2->children() as $elemento2){
 			if($elemento2['name'] == get_class($obj)){
 				$arrayrs =$obj->getClassRows($elemento2,$arrayOrder,$arraywhere);
-				$this->$atributo[0] = $arrayrs;
+				$this->$atrb = $arrayrs;
 			}
 			}
 
@@ -152,10 +152,10 @@ class Persistencia extends Biblioteca{
 				$strClass = substr($atributo['clrelation'],0,strlen($atributo['clrelation']));
 				$obj = new $strClass;
 				$obj->getById($arrayValues["$field"]);
-				$this->$atributo[0] = $obj;
+				$this->$atrb = $obj;
 				unset($obj);
-			}else{
-				$this->$atributo[0] = $arrayValues["$field"];
+			}else{								
+				$this->$atrb = $arrayValues["$field"];			
 			}
 
 		}
@@ -169,10 +169,11 @@ class Persistencia extends Biblioteca{
 	/*seta o bean sem lazy */
 	function setBeanUnlazy($arrayValues,$class){
 		foreach ($class->children() as $atributo){
+		$atrb =	$atributo[0];
 		if($atributo["type"] != "set"){
 		$field = $atributo["tbname"];
 		$tbIdent = $class["tbid"];
-		$this->$atributo[0] = $arrayValues["$field"];
+		$this->$atrb = $arrayValues["$field"];
 		}
 		}
 	return true;
@@ -277,6 +278,7 @@ function xmlObject($elemento,$i,$objeto){
 				if($this->DAO_NumeroLinhas($rs) > 0){
 					$arrayItem = $this->DAO_GerarArray($rs);
 					$this->setBean($arrayItem,$elemento);
+					
 					return true;
 				}else
 					return false;
@@ -434,21 +436,25 @@ function xmlObject($elemento,$i,$objeto){
 					//update
 					$sql = "update ".$elemento['tbname']." set ";
 					foreach($elemento->children() as $atributo){
+						$atrb = $atributo[0];
 						if($atributo['type'] != "id" && $atributo['type'] != "set"){
 							$sql .= $atributo['tbname']." = ";							
 							if($atributo['type'] == "fk" && $elemento['lazy'] == "true"){
 								$elementFk = $this->getClassElementXML($atributo['clrelation']);
 								$idfk = $this->getIdElementXML($elementFk);
-								if($this->$atributo[0] != NULL)
-								$sql .= $this->$atributo[0]->$idfk;
+								if($this->$atrb != NULL)
+								$sql .= $this->$atrb->$idfk;
 								else
 								$sql .= 'NULL';
 								$sql .= ", ";
 							}else{
-								if($atributo['type'] == "txt" || $atributo['type'] == "dat")
-									$sql .= "'".$this->conn->real_escape_string($this->$atributo[0])."'";
-								else	
-									$sql .= strlen($this->$atributo[0]) > 0 ? $this->$atributo[0] : "NULL";
+								if($atributo['type'] == "txt"){
+									$sql .= "'".$this->conn->real_escape_string($this->$atrb)."'";
+								}elseif ($atributo['type'] == "dat") {
+									$sql .= strlen($this->$atrb) > 0 ? "'".$this->conn->real_escape_string($this->$atrb)."'" : "NULL";
+								}else{	
+									$sql .= strlen($this->$atrb) > 0 ? $this->$atrb : "NULL";
+								}
 								$sql .= ", ";
 							}
 						}
@@ -462,21 +468,25 @@ function xmlObject($elemento,$i,$objeto){
 					$sql = "insert into ".$elemento['tbname']." (";
 					$campos = "";
 					foreach($elemento->children() as $atributo){
+						$atrb = $atributo[0];
 						if($atributo['type'] != "id" && $atributo['type'] != "set"){
 							$sql .= $atributo['tbname'].", ";
 							if($atributo['type'] == "fk" && $elemento['lazy'] == "true"){
 								$elementFk = $this->getClassElementXML($atributo['clrelation']);
 								$idfk = $this->getIdElementXML($elementFk);
-								if($this->$atributo[0] != NULL)
-								$campos .= $this->$atributo[0]->$idfk;
+								if($this->$atrb != NULL)
+								$campos .= $this->$atrb->$idfk;
 								else
 								$campos .= 'NULL';
 								$campos .= ", ";
 							}else{
-								if($atributo['type'] == "txt" || $atributo['type'] == "dat")
-									$campos .= "'".$this->conn->real_escape_string($this->$atributo[0])."'";
-								else
-									$campos .= strlen($this->$atributo[0]) > 0 ? $this->$atributo[0] : "NULL";
+								if($atributo['type'] == "txt"){
+									$campos .= "'".$this->conn->real_escape_string($this->$atrb)."'";
+								}elseif ($atributo['type'] == "dat") {	
+									$campos .= strlen($this->$atrb) > 0 ? "'".$this->conn->real_escape_string($this->$atrb)."'" : "NULL";
+								}else{
+									$campos .= strlen($this->$atrb) > 0 ? $this->$atrb : "NULL";
+								}
 								$campos .= ", ";
 							}
 						}

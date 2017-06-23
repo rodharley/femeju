@@ -35,9 +35,19 @@ foreach ($rsClasses as $key => $value) {
     $TPL->ID_CLA = $value->classe->id;
     $TPL->DESC_CLA = $value->classe->descricao;
     $TPL->block("BLOCK_CLA");
-    $TPL->block("BLOCK_DOBRA1");
-    $TPL->block("BLOCK_DOBRA2");
-    $TPL->block("BLOCK_DOBRA3");
+	
+	$categoria = new CategoriaPeso();
+	$rsCategs = $categoria->listaAtivasPorClasse($value->classe->id);
+	foreach ($rsCategs as $key2 => $value2) {
+		$TPL->ID_CAT = $value2->id;
+		$TPL->DESC_CAT = $value2->descricao;
+		$TPL->block("BLOCK_DOBRA1_CAT");
+		$TPL->block("BLOCK_DOBRA2_CAT");
+		$TPL->block("BLOCK_DOBRA3_CAT");
+	}
+    $TPL->block("BLOCK_DOBRA1_CL");
+    $TPL->block("BLOCK_DOBRA2_CL");
+    $TPL->block("BLOCK_DOBRA3_CL");
 }
 $TPL->VALOR = $objc->custa->valor;
 $TPL->DOBRA_1 = $objc->dobra1;

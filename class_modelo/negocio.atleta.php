@@ -89,9 +89,9 @@ public function listaAtivos(){
 		if($naoverf != "")
             $sql .= " and p.bitVerificado = $naoverf"; 
         if ($nome != "")
-            $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+            $sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
-            $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
+            $sql .= " and (concat(x.nome, ' ', x.sigla) like '%$associacao%')";
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
@@ -101,7 +101,7 @@ public function listaAtivos(){
         $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id INNER JOIN ".Associacao::TABELA." x on x.id = a.idAssociacao  where a.bitAtivo = 1 ";
  
         if ($nome != "")
-            $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+            $sql .= " and ( concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
             $sql .= " and ( x.id = $associacao )";
         if ($numero != ""){
@@ -129,9 +129,9 @@ public function listaAtivos(){
         if($ativo != "")
             $sql .= " and a.bitAtivo = $ativo"; 
         if ($nome != "")
-            $sql .= " and ( p.nome like '%$nome%' or p.nomeMeio like '%$nome%' or p.sobrenome like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
+            $sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$nome%' or p.endereco like '%$nome%' or p.bairro like '%$nome%')";
         if ($associacao != "")
-            $sql .= " and ( x.nome like '%$associacao%' or x.sigla like '%$associacao%' )";
+            $sql .= " and (concat(x.nome, ' ', x.sigla) like '%$associacao%')";
         
         $sql .= "  order by a.numeroFemeju desc limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
@@ -144,7 +144,7 @@ public function listaAtivos(){
         $sql = "select a.* from ".$this::TABELA." a INNER JOIN ".Pessoa::TABELA." p on p.id = a.id where a.bitAtivo = 1 ";
         
         if ($nome != "")
-            $sql .= " and ( p.nome like '$nome%' or p.nomeMeio like '$nome%' or p.sobrenome like '$nome%')";
+            $sql .= " and ( concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$nome%')";
         if ($associacao != "")
             $sql .= " and (a.idAssociacao in($associacao))";
         

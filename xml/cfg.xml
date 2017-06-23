@@ -21,7 +21,7 @@ set
 	<class name="Ano" tbname="fmj_ano" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="anoReferencia" type="int">anoReferencia</atrib>
-		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>		
+		<atrib tbname="dataVencimento" type="dat">dataVencimento</atrib>		
 	</class>
 	<class name="Acesso" tbname="fmj_acesso" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -46,7 +46,7 @@ set
 		<atrib tbname="descricao" type="txt">descricao</atrib>		
 		<atrib tbname="cep" type="txt">cep</atrib>
 		<atrib tbname="bairro" type="txt">bairro</atrib>		
-		<atrib tbname="dataFiliacao" type="txt">dataFiliacao</atrib>
+		<atrib tbname="dataFiliacao" type="dat">dataFiliacao</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="sigla" type="txt">sigla</atrib>
 		<atrib tbname="cnpj" type="txt">cnpj</atrib>
@@ -67,8 +67,8 @@ set
 	
 	<class name="Atleta" tbname="fmj_atleta" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>		
-		<atrib tbname="dataFiliacao" type="txt">dataFiliacao</atrib>
-		<atrib tbname="dataEmissaoCarteira" type="txt">dataEmissaoCarteira</atrib>	
+		<atrib tbname="dataFiliacao" type="dat">dataFiliacao</atrib>
+		<atrib tbname="dataEmissaoCarteira" type="dat">dataEmissaoCarteira</atrib>	
 		<atrib tbname="registroConfederacao" type="txt">registroConfederacao</atrib>		
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>		
 		<atrib tbname="numeroFemeju" type="int">numeroFemeju</atrib>
@@ -108,8 +108,8 @@ set
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="descricao" type="txt">descricao</atrib>
 		<atrib tbname="titulo" type="txt">titulo</atrib>
-		<atrib tbname="dataEvento" type="txt">dataEvento</atrib>
-		<atrib tbname="dataInscricao" type="txt">dataInscricao</atrib>
+		<atrib tbname="dataEvento" type="dat">dataEvento</atrib>
+		<atrib tbname="dataInscricao" type="dat">dataInscricao</atrib>
 		<atrib tbname="tipo" type="int">tipo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>
@@ -142,7 +142,7 @@ set
 	<class name="Galeria" tbname="fmj_galeria" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="titulo" type="txt">titulo</atrib>
-		<atrib tbname="data" type="txt">data</atrib>				
+		<atrib tbname="data" type="dat">data</atrib>				
 	</class>
 	<class name="GaleriaImagem" tbname="fmj_galeria_imagem" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -168,20 +168,20 @@ set
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="idAtleta" type="fk" clrelation="Atleta">atleta</atrib>
 		<atrib tbname="idGraduacao" type="fk" clrelation="Graduacao">graduacao</atrib>
-		<atrib tbname="dataGraduacao" type="txt">data</atrib>				
+		<atrib tbname="dataGraduacao" type="dat">data</atrib>				
 	</class>
 	<class name="Inscricao" tbname="fmj_inscricao_competicao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>		
 		<atrib tbname="nomeAtleta" type="txt">nomeAtleta</atrib>
-		<atrib tbname="dobra1" type="fk" clrelation="Classe">dobra1</atrib>
-		<atrib tbname="dobra2" type="fk" clrelation="Classe">dobra2</atrib>
-		<atrib tbname="dobra3" type="fk" clrelation="Classe">dobra3</atrib>
+		<atrib tbname="dobra1" type="fk" clrelation="CategoriaPeso">dobra1</atrib>
+		<atrib tbname="dobra2" type="fk" clrelation="CategoriaPeso">dobra2</atrib>
+		<atrib tbname="dobra3" type="fk" clrelation="CategoriaPeso">dobra3</atrib>
 		<atrib tbname="valorDobra1" type="int">valorDobra1</atrib>
 		<atrib tbname="valorDobra2" type="int">valorDobra2</atrib>
 		<atrib tbname="valorDobra3" type="int">valorDobra3</atrib>
 		<atrib tbname="valor" type="int">valor</atrib>		
 		<atrib tbname="situacao" type="int">situacao</atrib>
-		<atrib tbname="dataInscricao" type="txt">dataInscricao</atrib>
+		<atrib tbname="dataInscricao" type="dat">dataInscricao</atrib>
 		<atrib tbname="docAtleta" type="txt">docAtleta</atrib>
 		<atrib tbname="emailAtleta" type="txt">emailAtleta</atrib>
 		<atrib tbname="telefoneAtleta" type="txt">telefoneAtleta</atrib>
@@ -198,7 +198,7 @@ set
 		<atrib tbname="url" type="txt">url</atrib>
 		<atrib tbname="navegador" type="txt">navegador</atrib>
 		<atrib tbname="texto" type="txt">texto</atrib>
-		<atrib tbname="data" type="txt">data</atrib>
+		<atrib tbname="data" type="dat">data</atrib>
 		<atrib tbname="idusuario" type="fk" clrelation="Usuario">usuario</atrib>		
 	</class>	
 	<class name="Menu" tbname="fmj_menu" tbid="id" lazy="true">
@@ -217,14 +217,14 @@ set
 		<atrib tbname="sumario" type="txt">sumario</atrib>
 		<atrib tbname="texto" type="txt">texto</atrib>
 		<atrib tbname="foto" type="txt">foto</atrib>
-		<atrib tbname="data" type="txt">data</atrib>
+		<atrib tbname="data" type="dat">data</atrib>
 		<atrib tbname="principal" type="int">principal</atrib>				
 	</class>
 	<class name="Pagamento" tbname="fmj_pagamento" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="valorTotal" type="int">valorTotal</atrib>
-		<atrib tbname="dataVencimento" type="txt">dataVencimento</atrib>
-		<atrib tbname="dataPagamento" type="txt">dataPagamento</atrib>
+		<atrib tbname="dataVencimento" type="dat">dataVencimento</atrib>
+		<atrib tbname="dataPagamento" type="dat">dataPagamento</atrib>
 		<atrib tbname="bitPago" type="int">bitPago</atrib>	
 		<atrib tbname="codigo" type="txt">codigo</atrib>
 		<atrib tbname="numeroFebraban" type="txt">numeroFebraban</atrib>
@@ -282,7 +282,7 @@ set
 		<atrib tbname="telCelular" type="txt">telCelular</atrib>
 		<atrib tbname="telResidencial" type="txt">telResidencial</atrib>		
 		<atrib tbname="email" type="txt">email</atrib>
-		<atrib tbname="dataNascimento" type="txt">dataNascimento</atrib>
+		<atrib tbname="dataNascimento" type="dat">dataNascimento</atrib>
 		<atrib tbname="foto" type="txt">foto</atrib>
 		<atrib tbname="cpf" type="txt">cpf</atrib>	
 		<atrib tbname="nacionalidade" type="txt">nacionalidade</atrib>	
@@ -292,11 +292,11 @@ set
 		<atrib tbname="filiacaoMae" type="txt">filiacaoMae</atrib>
 		<atrib tbname="rg" type="txt">rg</atrib>
 		<atrib tbname="rgOrgaoExpedidor" type="txt">rgOrgaoExpedidor</atrib>
-		<atrib tbname="rgDataExp" type="txt">rgDataExp</atrib>
+		<atrib tbname="rgDataExp" type="dat">rgDataExp</atrib>
 		<atrib tbname="passaporte" type="txt">passaporte</atrib>
-		<atrib tbname="passaporteDataVal" type="txt">passaporteDataVal</atrib>
+		<atrib tbname="passaporteDataVal" type="dat">passaporteDataVal</atrib>
 		<atrib tbname="passaporteOrgao" type="txt">passaporteOrgao</atrib>
-		<atrib tbname="passaporteDataExp" type="txt">passaporteDataExp</atrib>			
+		<atrib tbname="passaporteDataExp" type="dat">passaporteDataExp</atrib>			
 		<atrib tbname="vacinas" type="txt">vacinas</atrib>
 		<atrib tbname="webSite" type="txt">webSite</atrib>
 		<atrib tbname="midiaSocial" type="txt">midiaSocial</atrib>
@@ -310,7 +310,7 @@ set
 		<atrib tbname="texto" type="txt">texto</atrib>
 		<atrib tbname="arquivo" type="txt">arquivo</atrib>
 		<atrib tbname="imagem" type="txt">imagem</atrib>
-		<atrib tbname="data" type="txt">data</atrib>
+		<atrib tbname="data" type="dat">data</atrib>
 		<atrib tbname="categoria" type="int">categoria</atrib>
 		<atrib tbname="ordem" type="int">ordem</atrib>						
 	</class>	

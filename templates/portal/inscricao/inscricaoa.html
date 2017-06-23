@@ -55,7 +55,7 @@
                                     <div class="col-md-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                                            <input type="text" name="email" id="email" class="form-control email required"/>
+                                            <input type="text" name="email" id="email" class="form-control email"/>
                                         </div>
                                     </div>
                                 </div>
@@ -115,9 +115,13 @@
                                             
                                             <select id="dobra1" name="dobra1" class="form-control dobra" valor="{DOBRA_1}">
                                                 <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_DOBRA1 -->
-                                                <option value="{ID_CLA}">{DESC_CLA}</option>
-                                                <!-- END BLOCK_DOBRA1 -->
+                                                <!-- BEGIN BLOCK_DOBRA1_CL -->
+                                                <optgroup label="{DESC_CLA}">
+                                                <!-- BEGIN BLOCK_DOBRA1_CAT -->
+                                                <option value="{ID_CAT}">{DESC_CAT}</option>
+                                                <!-- END BLOCK_DOBRA1_CAT -->
+                                                </optgroup>
+                                                <!-- END BLOCK_DOBRA1_CL -->
                                             </select>
                                         </div>
                                     </div>
@@ -127,9 +131,13 @@
                                             
                                             <select id="dobra2" name="dobra2" class="form-control dobra" valor="{DOBRA_2}">
                                                 <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_DOBRA2 -->
-                                                <option value="{ID_CLA}">{DESC_CLA}</option>
-                                                <!-- END BLOCK_DOBRA2 -->
+                                               <!-- BEGIN BLOCK_DOBRA2_CL -->
+                                                <optgroup label="{DESC_CLA}">
+                                                <!-- BEGIN BLOCK_DOBRA2_CAT -->
+                                                <option value="{ID_CAT}">{DESC_CAT}</option>
+                                                <!-- END BLOCK_DOBRA2_CAT -->
+                                                </optgroup>
+                                                <!-- END BLOCK_DOBRA2_CL -->
                                             </select>
                                         </div>
                                     </div>
@@ -138,9 +146,13 @@
                                             <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>                                            
                                             <select id="dobra3" name="dobra3" class="form-control dobra" valor="{DOBRA_3}">
                                                 <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_DOBRA3 -->
-                                                <option value="{ID_CLA}">{DESC_CLA}</option>
-                                                <!-- END BLOCK_DOBRA3 -->
+                                                <!-- BEGIN BLOCK_DOBRA3_CL -->
+                                                <optgroup label="{DESC_CLA}">
+                                                <!-- BEGIN BLOCK_DOBRA3_CAT -->
+                                                <option value="{ID_CAT}">{DESC_CAT}</option>
+                                                <!-- END BLOCK_DOBRA3_CAT -->
+                                                </optgroup>
+                                                <!-- END BLOCK_DOBRA3_CL -->
                                             </select>
                                         </div>
                                     </div>

@@ -7,22 +7,8 @@
         });
         $(".paginar").click(function(){
             $("#pagina").val($(this).attr("value"));
-            pesquisar();
-        });
-        function pesquisar(){
-            $.ajax({
-                url : "ajax/admin_atleta_pesquisar.php",
-                type : "POST",
-                data : $("#frmPesquisa").serialize(),
-
-                beforeSend: function( ) {
-                    $('#resultado').html('{LOADING}');
-                },
-            }).done(function(msg) {
-                $("#resultado").html(msg);
-            });
-
-        }
+            executaPesquisa();
+        });       
 
     });
 

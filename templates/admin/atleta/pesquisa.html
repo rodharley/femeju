@@ -57,6 +57,11 @@
 <script>
 
 	function pesquisar(){
+			$("#pagina").val("1");			
+			executaPesquisa();
+		}
+
+	function executaPesquisa(){					
 			$.ajax({
 				url : "ajax/admin_atleta_pesquisar.php",
 				type : "POST",
@@ -70,7 +75,6 @@
 			});
 
 		}
-
 	$(document).ready(function() {
 
 		$("#btPesquisar").click(function() {

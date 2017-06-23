@@ -134,7 +134,7 @@
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                        <input type="text" id="email" name="email" placeholder="E-mail do Pessoa" value="{EMAIL}" class="email required form-control"/>
+                        <input type="text" id="email" name="email" placeholder="E-mail da Pessoa" value="{EMAIL}" class="email form-control"/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
@@ -361,7 +361,7 @@
                     } 
                 },
                 email: {
-                required: true,
+                required: false,
                 remote: {
                             url: "ajax/usuario_verificaLogin.php",
                             type: "post",

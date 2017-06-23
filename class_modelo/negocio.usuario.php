@@ -26,7 +26,7 @@ class Usuario extends Persistencia {
 	function recuperaTotal($busca = "",$perfil = "") {
 				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.id WHERE u.idPerfil != ".Perfil::RESPONSAVEL;
 		if ($busca != "")
-			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
+			$sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$busca%' or p.cpf like '$busca%')";
         if($perfil != "")
         $sql .= " and (u.idPerfil = $perfil)";
 		$rs = $this -> DAO_ExecutarQuery($sql);
@@ -39,7 +39,7 @@ class Usuario extends Persistencia {
 				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.id WHERE u.idPerfil = $idPerfil";
 		
 		if ($busca != "")
-			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
+			$sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$busca%' or p.cpf like '$busca%')";
 
 		$rs = $this -> DAO_ExecutarQuery($sql);
 		return $this -> DAO_Result($rs, "total", 0);
@@ -53,9 +53,10 @@ class Usuario extends Persistencia {
             $sql .= " and (u.idPerfil = $idPerfil) ";
         
 		if ($busca != "")
-			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
+			$sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$busca%' or p.cpf like '$busca%')";
 
 		$sql .= "  order by p.nome limit $primeiro, $quantidade";
+		
 		return $this -> getSQL($sql);
 
 	}
@@ -65,7 +66,7 @@ class Usuario extends Persistencia {
 				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where u.idPerfil != ".Perfil::RESPONSAVEL;
 		
 		if ($busca != "")
-			$sql .= " and (p.nome like '$busca%' or p.cpf like '$busca%')";
+			$sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$busca%' or p.cpf like '$busca%')";
         if($perfil != "")
         $sql .= " and (u.idPerfil = $perfil)";
 		$sql .= "  order by p.nome limit $primeiro, $quantidade";
