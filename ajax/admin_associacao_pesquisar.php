@@ -26,6 +26,7 @@ $TPL->PAGINA_ANTERIOR = $configPaginacao['paginaAnterior'];
 $TPL->PROXIMA_PAGINA = $configPaginacao['proximaPagina'];
 $TPL->PAGINA = $pagina;
 if($configPaginacao['totalPaginas'] > 1){
+$TPL->block("BLOCK_PAGINACAO2");	
 $TPL->block("BLOCK_PAGINACAO");
 }
 $TPL->show();
