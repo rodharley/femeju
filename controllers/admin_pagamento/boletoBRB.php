@@ -19,10 +19,10 @@ use OpenBoleto\Agente;
 
 
 $sacado = new Agente($pagamento->nomeSacado, $pagamento->formataCPFCNPJ($pagamento->cpfSacado), $pagamento->enderecoSacado, $pagamento->bairroSacado, $pagamento->cidadeSacado, $pagamento->ufSacado);
-$cedente = new Agente('Femeju - FederaÁ„o Metropolitana de Judo', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'BrasÌlia', 'DF');
+$cedente = new Agente('Femeju - FederaÁ„o Metropolitana de Judo', '00.416.487/0001-98', 'CLS 403 Lj 23', '71000-000', 'BrasÌlia', 'DF');
 
 $boleto = new Brb(array(
-    // Par√¢metros obrigat√≥rios
+
     'dataVencimento' => new DateTime($pagamento->dataVencimento),
     'valor' => $pagamento->valorTotal,
     'sequencial' => $pagamento->id, // At√© 6 d√≠gitos

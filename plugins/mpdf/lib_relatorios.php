@@ -25,7 +25,7 @@ public function rodapePadrao(){
 $strfooter = '<htmlpagefooter name="Footer">
 <table class="footer">
 <tr>
-<td>dados da empresa</td>
+<td>Judô Brasília - Federação Metropolitana de Judô - FEMEJU</td>
 <td width="10%">Pág:<br/>{PAGENO} de {nbpg}</td>
 </tr>
 </table>

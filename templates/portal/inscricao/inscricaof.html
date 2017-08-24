@@ -41,18 +41,22 @@
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
                                 <label for="atleta"><i class='fa'> </i><b>Selecione</b></label>
-                                <Select name="atleta[]" id="atleta" class="form-control" multiple="multiple">
-                                    <!-- BEGIN BLOCK_ATLETAS -->
-                                    <option value="{ID_ATLETA}">{ATLETA}</option>
-                                    <!-- END BLOCK_ATLETAS -->
-
-                                </Select>
-                            </div>
-                            <div class="checkbox">
+                                <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="1" name="todos" id="todos" />
+                                    <input type="checkbox" value="1" name="todos" id="todos" class="flat-blue" />
                                     Todos </label>
                             </div>
+                                    <!-- BEGIN BLOCK_ATLETAS -->
+                                     <div class="checkbox">
+									    <label>
+									      <input type="checkbox" name="atleta[]" value="{ID_ATLETA}" class="flat-blue"> {ATLETA}
+									    </label>
+									  </div>
+                                    
+                                    <!-- END BLOCK_ATLETAS -->
+
+                            </div>
+                            
                         </div>
 
                     </div>
@@ -86,13 +90,9 @@
 	$(document).ready(function() {
         
          $("#btAvancar").click(function(){
-            if(document.getElementById("atleta").options.length ==0){
-                alert("Nenhum Atleta selecionado!");
-                return false;
-            }else{
+            
                 $("#frmInscricao").submit();
-                return true;
-            }
+            
              });
         
 		$("#frmInscricao").validate({

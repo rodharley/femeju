@@ -11,6 +11,7 @@ $rs = $objc->listaAtivasAbertas();
 $TPL->addFile("CONTEUDO", "templates/portal/servicos/evento.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['associacao']));
 $TPL->LABEL = "Escolha o evento que deseja fazer a inscrição";
+$TPL->LABEL_TIPO ="Fechados";
 $TPL->ID_ASSOCIACAO = $objAssociacao->id;
 $TPL->ID_ASSOCIACAO_HASH = $_REQUEST['associacao'];
 foreach ($rs as $key => $value) {
@@ -18,16 +19,10 @@ foreach ($rs as $key => $value) {
 	$TPL->TITULO = $value->titulo;
     $TPL->DESCRICAO = $value->descricao;
     $TPL->DATA = $objc->convdata($value->dataEvento,"mtn");
-    if($value->tipo == TipoCampeonato::FECHADO)
+    if($value->tipo == TipoCampeonato::FECHADO){
         $TPL->CONTROLE = "inscricaof";
-    else{
-        if($value->competicao == 1)
-            $TPL->CONTROLE = "inscricaoa";
-        else
-            $TPL->CONTROLE = "inscricaoaEvento";  
-        
+        $TPL->block("BLOCK_COMP");    
     }
-    $TPL->block("BLOCK_COMP");
 }
 $TPL->show();
 ?>

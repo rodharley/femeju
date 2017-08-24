@@ -9,6 +9,7 @@ $rs = $objc->listaAtivasAbertas();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/servicos/evento.html");
 $TPL->LABEL = "Escolha o evento que deseja fazer a inscrição";
+$TPL->LABEL_TIPO ="Abertos";
 foreach ($rs as $key => $value) {
     $TPL->ID_COMPETICAO = $obj->md5_encrypt($value->id);
 	$TPL->TITULO = $value->titulo;
