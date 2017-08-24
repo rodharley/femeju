@@ -43,8 +43,11 @@
 	</div>
 </form>
 <script>
-
-	function pesquisar(){
+function pesquisar(){
+			$("#pagina").val("1");			
+			executaPesquisa();
+		}
+	function executaPesquisa(){
 			$.ajax({
 				url : "ajax/admin_associacao_pesquisar.php",
 				type : "POST",
@@ -60,7 +63,11 @@
 		}
 
 	$(document).ready(function() {
-
+		document.addEventListener('keypress', function(e) {
+			if (e.which == 13) {
+				pesquisar();
+			}
+		}, false);
 		$("#btPesquisar").click(function() {
 			pesquisar();
 		});

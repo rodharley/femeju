@@ -25,15 +25,14 @@
 				<div class="col-md-12 col-xs-12">
 					<div class="form-group">
 						<div class="checkbox">
-						<label for="naoVerficado">
-							<input type="checkbox" id="naoVerficado" name="naoVerficado" value="1" class="form-control flat-blue"/>
-							<b>Não Verificados</b>						
-						</label>
+							<label for="naoVerficado">
+								<input type="checkbox" id="naoVerficado" name="naoVerficado" value="1" class="form-control flat-blue"/>
+								<b>Não Verificados</b> </label>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 		<div class="panel-footer text-right">
 			<a class="btn btn-default" href="documentos/formulario_atleta.pdf" target="_blank"><i class="fa fa-file"></i> Formulário</a>
@@ -55,27 +54,34 @@
 	</div>
 </form>
 <script>
+	function pesquisar() {
+		$("#pagina").val("1");
+		executaPesquisa();
+	}
 
-	function pesquisar(){
-			$("#pagina").val("1");			
-			executaPesquisa();
-		}
+	function executaPesquisa() {
+		$.ajax({
+			url : "ajax/admin_atleta_pesquisar.php",
+			type : "POST",
+			data : $("#frmPesquisa").serialize(),
 
-	function executaPesquisa(){					
-			$.ajax({
-				url : "ajax/admin_atleta_pesquisar.php",
-				type : "POST",
-				data : $("#frmPesquisa").serialize(),
+			beforeSend : function() {
+				$('#resultado').html('{LOADING}');
+			},
+		}).done(function(msg) {
+			$("#resultado").html(msg);
+		});
 
-				beforeSend: function( ) {
-					$('#resultado').html('{LOADING}');
-		  		},
-			}).done(function(msg) {
-				$("#resultado").html(msg);
-			});
+	}
 
-		}
+
 	$(document).ready(function() {
+
+		document.addEventListener('keypress', function(e) {
+			if (e.which == 13) {
+				pesquisar();
+			}
+		}, false);
 
 		$("#btPesquisar").click(function() {
 			pesquisar();

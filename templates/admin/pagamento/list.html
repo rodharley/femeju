@@ -7,22 +7,9 @@
         });
         $(".paginar").click(function(){
             $("#pagina").val($(this).attr("value"));
-            pesquisar();
+            executaPesquisa();
         });
-       function pesquisar(){
-            $.ajax({
-                url : "ajax/admin_pagamento_pesquisar.php",
-                type : "POST",
-                data : $("#frmPesquisa").serialize(),
-
-                beforeSend: function( ) {
-                    $('#resultado').html('{LOADING}');
-                },
-            }).done(function(msg) {
-                $("#resultado").html(msg);
-            });
-
-        }
+       
 
     });
 
