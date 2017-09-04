@@ -58,7 +58,11 @@ foreach ($rspag as $key => $value) {
     $TPL->CHECKED = "";
 } 
 
-
+if($objc->percentDesconto > 0){
+	$TPL->PERCENT = $objc->percentDesconto;
+	$TPL->DATA_DESCONTO = $objc -> convdata($objc -> dataDesconto, "mtn");
+	$TPL->block("BLOCK_DESCONTO");
+}
 
 $TPL->LABEL = "preencha os dados dos atletas que deseja realizar a inscrição";
 $TPL->ID_COMPETICAO = $objc->id;

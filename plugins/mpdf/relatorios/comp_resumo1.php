@@ -23,7 +23,7 @@ $oeve -> getById($_REQUEST['evento']);
 $sql = "select a.* from " . Associacao::TABELA . " a inner join " . Atleta::TABELA . " b on b.idAssociacao = a.id inner join " . Inscricao::TABELA . " c on c.idAtleta = b.id where c.idCompeticao = " . $_REQUEST['evento'];
 $sql .= " group by a.id";
 $rs = $oAss -> getSQL($sql);
-$sqli = "select i.* from " . Inscricao::TABELA . " i where i.idCompeticao = " . $_REQUEST['evento'] . " order by i.idClasse, i.idCategoria";
+$sqli = "select i.* from " . Inscricao::TABELA . " i where i.idCompeticao = " . $_REQUEST['evento'];
 $rsInsc = $oInsc -> getSQL($sqli);
 
 $totalAtletas = count($rsInsc);

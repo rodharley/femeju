@@ -17,6 +17,11 @@ $TPL -> ID_ASSOCIACAO = $objAssociacao -> id;
 $TPL -> ID_COMPETICAO = $objc -> id;
 $TPL -> TITULO_COMP = $objc -> titulo;
 $TPL -> DATA_COMP = $objc -> convdata($objc -> dataEvento, "mtn");
+if($objc->percentDesconto > 0){
+	$TPL->PERCENT = $objc->percentDesconto;
+	$TPL->DATA_DESCONTO = $objc -> convdata($objc -> dataDesconto, "mtn");
+	$TPL->block("BLOCK_DESCONTO");
+}
 if (isset($_REQUEST['todos']))
 	$rsAtletas = $objA -> listaPorAssociacaoAtivos($objAssociacao -> id);
 else

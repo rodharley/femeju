@@ -6,6 +6,9 @@ class Competicao extends Persistencia {
     var $dataEvento;    
 	var $inscricaoAberta;
     var $dataInscricao;
+	var $dataPagamento;
+	var $dataDesconto;
+	var $percentDesconto;
     var $ativo;
     var $tipo;
     var $dobra1;
@@ -25,6 +28,9 @@ class Competicao extends Persistencia {
         $this->dobra3 = 0;
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
         $this->dataInscricao = $this->convdata($_REQUEST['dataInscricao'], "ntm");
+		$this->dataPagamento = $this->convdata($_REQUEST['dataPagamento'], "ntm");
+        $this->dataDesconto = $this->convdata($_REQUEST['dataDesconto'], "ntm");
+		$this->percentDesconto = str_replace("_", "", $_REQUEST['percentDesconto']);
         $this->inscricaoAberta = 0;
         $this->ativo = 1;
         return $this->save();
@@ -45,6 +51,9 @@ class Competicao extends Persistencia {
         }
         $this->dataEvento = $this->convdata($_REQUEST['dataEvento'], "ntm");
         $this->dataInscricao = $this->convdata($_REQUEST['dataInscricao'], "ntm");
+		$this->dataPagamento = $this->convdata($_REQUEST['dataPagamento'], "ntm");
+        $this->dataDesconto = $this->convdata($_REQUEST['dataDesconto'], "ntm");
+		$this->percentDesconto = str_replace("_", "", $_REQUEST['percentDesconto']);
         $this->inscricaoAberta = $_REQUEST['inscricao'];
         $this->ativo = $_REQUEST['ativo'];
         $this->save();
@@ -126,9 +135,22 @@ class Competicao extends Persistencia {
             $itensPagamento = array();
             $idsInscricao = "0";
             $insc = new Inscricao();
+			
              foreach ($_REQUEST['atleta' ] as $key => $id) {
                 $atleta->getById($id);
-                //salva a inscricao
+				 
+				 
+				 //verificar se tem desconto e esta no prazo. Se tiver calcula os valores em cima dele
+				$dataVencimento  = $this->dataPagamento;
+				$desconto = 0;
+				if($this->dataDesconto != ""){
+					if(date("Ymd") <= str_replace("-", "", $this->dataDesconto)){
+						$dataVencimento  = $this->dataDesconto;
+						$desconto = $this->money(($this->percentDesconto/100),"bta");
+					}
+				}
+				 
+			         //salva a inscricao
                 $insc = new Inscricao();
                 $insc->atleta = $atleta;
                 $insc->nomeAtleta = $atleta->pessoa->getNomeCompleto();
@@ -137,16 +159,18 @@ class Competicao extends Persistencia {
                 $insc->emailAtleta =$atleta->pessoa->email;
                 $insc->dataInscricao = date("Y-m-d");
                 $insc->situacao = 0;                
-                $insc->valor = $this->custa->valor;
+                $insc->valor = $this->money($this->custa->valor - ($this->custa->valor*$desconto),"bta");
                 $insc->competicao = $this;
-                $insc->graduacao = new Graduacao($_REQUEST['graduacao'.$id]);                
+                $insc->graduacao = new Graduacao($_REQUEST['graduacao'.$id]);
+								
+				                
                 if($this->competicao == 1){ 
                 $insc->dobra1 = $_REQUEST['dobra1'.$id] != "" ? new Classe($_REQUEST['dobra1'.$id]) : null;
-                $insc->valorDobra1 = $_REQUEST['dobra1'.$id] != "" ? $this->dobra1 : 0;
+                $insc->valorDobra1 = $_REQUEST['dobra1'.$id] != "" ? $this->money($this->dobra1-($this->dobra1*$desconto),"bta") : 0;
                 $insc->dobra2 = $_REQUEST['dobra2'.$id] != "" ? new Classe($_REQUEST['dobra2'.$id]) : null;
-                $insc->valorDobra2 = $_REQUEST['dobra2'.$id] != "" ? $this->dobra2 : 0;
+                $insc->valorDobra2 = $_REQUEST['dobra2'.$id] != "" ? $this->money($this->dobra2 -($this->dobra2*$desconto),"bta"): 0;
                 $insc->dobra3 = $_REQUEST['dobra3'.$id] != "" ? new Classe($_REQUEST['dobra3'.$id]) : null;
-                $insc->valorDobra3 = $_REQUEST['dobra2'.$id] != "" ? $this->dobra3 : 0;
+                $insc->valorDobra3 = $_REQUEST['dobra2'.$id] != "" ? $this->money($this->dobra3 -($this->dobra3*$desconto),"bta") : 0;
                 $insc->classe = new Classe($_REQUEST['classe'.$id]);
                 $insc->categoria = new CategoriaPeso($_REQUEST['categoria'.$id]);
                 }
@@ -159,20 +183,22 @@ class Competicao extends Persistencia {
                 $item = new PagamentoItem();  
                 $item->atleta = $atleta;
                 //soma o valor total
-                $total = $this->custa->valor;
+                $total = $this->money($this->custa->valor - ($this->custa->valor*$desconto),"bta");
                 if($this->competicao == 1){  
-                $total += $_REQUEST['dobra1'.$id] != "" ? $this->dobra1 : 0;
-                $total += $_REQUEST['dobra2'.$id] != "" ? $this->dobra2 : 0;
-                $total += $_REQUEST['dobra3'.$id] != "" ? $this->dobra3 : 0;
+                $total += $_REQUEST['dobra1'.$id] != "" ? $this->money($this->dobra1 -($this->dobra1*$desconto),"bta") : 0;
+                $total += $_REQUEST['dobra2'.$id] != "" ? $this->money($this->dobra2 -($this->dobra2*$desconto),"bta") : 0;
+                $total += $_REQUEST['dobra3'.$id] != "" ? $this->money($this->dobra3 -($this->dobra3*$desconto),"bta") : 0;
                 }
-                $item->valor = $total; 
+                $item->valor = $this->money($total,"bta"); 
                 $item->custa = $this->custa;
                 $item->descricaoItem = $atleta->pessoa->getNomeCompleto();   
                 array_push($itensPagamento,$item);        
                 }
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);  
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataInscricao,$arrayResp,$this->titulo, $itensPagamento);
+				
+				
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo, $itensPagamento);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
@@ -189,6 +215,19 @@ class Competicao extends Persistencia {
              foreach ($atletas as $key => $arrAtleta) {                
                 //salva a inscricao
                 $insc = new Inscricao();
+				
+				
+				 //verificar se tem desconto e esta no prazo. Se tiver calcula os valores em cima dele
+				$dataVencimento  = $this->dataPagamento;
+				$desconto = 0;
+				if($this->dataDesconto != ""){
+					if(date("Ymd") <= str_replace("-", "", $this->dataDesconto)){
+						$dataVencimento  = $this->dataDesconto;
+						$desconto = ($this->percentDesconto/100);
+					}
+				}
+				
+				
                 
                 if(isset($arrAtleta['id']) && $arrAtleta['id'] != ""){
                 
@@ -210,16 +249,16 @@ class Competicao extends Persistencia {
                 $insc->emailAtleta =utf8_decode($arrAtleta['email']);
                 $insc->dataInscricao = date("Y-m-d");
                 $insc->situacao = 0;
-                $insc->valor = $this->custa->valor;                
+                $insc->valor = $this->custa->valor - ($this->custa->valor*$desconto);                
                 $insc->competicao = $this;
                 $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
                 if($this->competicao == 1){                
                 $insc->dobra1 = $arrAtleta['dobra1'] == "Sim" ? new Classe($arrAtleta["classe1"]) : null;
-                $insc->valorDobra1 = $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 : 0;
+                $insc->valorDobra1 = $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 -($this->dobra1*$desconto) : 0;
                 $insc->dobra2 = $arrAtleta['dobra2'] == "Sim" ? new Classe($arrAtleta["classe2"]) : null;
-                $insc->valorDobra2 = $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 : 0;
+                $insc->valorDobra2 = $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 -($this->dobra2*$desconto) : 0;
                 $insc->dobra3 = $arrAtleta['dobra3'] == "Sim" ? new Classe($arrAtleta["classe3"]) : null;
-                $insc->valorDobra3 = $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 : 0;
+                $insc->valorDobra3 = $arrAtleta['dobra3'] == "Sim" ? $this->dobra3  -($this->dobra3*$desconto) : 0;
                 $insc->classe = new Classe($arrAtleta["classe"]);
                 $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
                 }
@@ -231,11 +270,11 @@ class Competicao extends Persistencia {
                 $item->atleta = NULL;
                 
                 //soma o valor total
-                $total = $this->custa->valor;
+                $total = $this->custa->valor- ($this->custa->valor*$desconto);
                  if($this->competicao == 1){  
-                $total += $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 : 0;
-                $total += $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 : 0;
-                $total += $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 : 0;
+                $total += $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 -($this->dobra1*$desconto) : 0;
+                $total += $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 -($this->dobra2*$desconto) : 0;
+                $total += $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 -($this->dobra3*$desconto) : 0;
                  }
                 $item->valor = $total; 
                 $item->custa = $this->custa;
@@ -244,7 +283,7 @@ class Competicao extends Persistencia {
                 }
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']); 
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$this->dataInscricao,$arrayResp,$this->titulo,$itensPagamento);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo,$itensPagamento);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }

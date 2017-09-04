@@ -1,0 +1,81 @@
+<form role="form" method="post" action="#" id="frmPesquisa">
+    <input type="hidden" name="pagina" id="pagina" value="1" />
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Pesquisa Despesas</h3>
+        </div>
+        <div class="box-body">
+             <div class="row">
+                 <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="tipo"><i class='fa'> </i><b>Descrição</b></label>
+                        <input type="text" class="form-control" name="descricao" id='descricao' />
+                        
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="dataVencimento"><i class='fa'> </i><b>Data de Vencimento</b></label>
+                        <input type="text" value="" name="dataVencimento" id="dataVencimento" class="form-control"/>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label for="responsavel"><i class='fa'> </i><b>Responsável</b></label>
+                        <input type="text" value="" name="responsavel" id="responsavel" class="form-control"/>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default btVoltar" type="button">
+                Voltar
+            </button>
+            <button class="btn btn-success" type="button" id="btPesquisar">
+                Pesquisar
+            </button>
+        </div>
+    </div>
+    
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Resultado</h3>
+        </div>
+        <div class="box-body" id="resultado"></div>
+    </div>
+</form>
+<script>
+function pesquisar(){
+			$("#pagina").val("1");			
+			executaPesquisa();
+		}
+
+function executaPesquisa(){
+            $.ajax({
+                url : "ajax/admin_despesa_pesquisar.php",
+                type : "POST",
+                data : $("#frmPesquisa").serialize(),
+
+                beforeSend: function( ) {
+                    $('#resultado').html('{LOADING}');
+                },
+            }).done(function(msg) {
+                $("#resultado").html(msg);
+            });
+
+        }
+	$(document).ready(function() {		
+		document.addEventListener('keypress', function(e) {
+			if (e.which == 13) {
+				pesquisar();
+			}
+		}, false);
+		$("#dataVencimento").datepicker();
+		$("#btPesquisar").click(function() {
+            pesquisar();
+        });
+	}); 
+	$("#descricao").focus();
+</script>

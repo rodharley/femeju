@@ -2,7 +2,7 @@
 include("includes/include.lockPortal.php");
 include("plugins/wideimage/WideImage.php");
 include('plugins/phpqrcode/qrlib.php');
-include("plugins/mpdf/mpdf.php");
+//include("plugins/mpdf/mpdf.php");
 
 $conf = new Configuracoes();
 $atleta = new Atleta();

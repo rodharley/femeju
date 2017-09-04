@@ -110,6 +110,9 @@ set
 		<atrib tbname="titulo" type="txt">titulo</atrib>
 		<atrib tbname="dataEvento" type="dat">dataEvento</atrib>
 		<atrib tbname="dataInscricao" type="dat">dataInscricao</atrib>
+		<atrib tbname="dataPagamento" type="dat">dataPagamento</atrib>
+		<atrib tbname="dataDesconto" type="dat">dataDesconto</atrib>
+		<atrib tbname="percentDesconto" type="int">percentDesconto</atrib>
 		<atrib tbname="tipo" type="int">tipo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
 		<atrib tbname="bitInscricaoAberta" type="int">inscricaoAberta</atrib>
@@ -132,6 +135,29 @@ set
 		<atrib tbname="valor" type="int">valor</atrib>
 		<atrib tbname="idGrupo" type="int">grupo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>				
+	</class>
+	<class name="DespesaGrupo" tbname="fmj_despesa_grupo" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="data_inicio" type="dat">dataInicio</atrib>
+		<atrib tbname="parcelas" type="int">parcelas</atrib>
+		<atrib tbname="valor" type="int">valor</atrib>		
+		<atrib tbname="idUsuario" type="fk" clrelation="Usuario">usuario</atrib>
+		
+	</class>
+	<class name="Despesa" tbname="fmj_despesa" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="descricao" type="txt">descricao</atrib>
+		<atrib tbname="data" type="dat">data</atrib>
+		<atrib tbname="valor" type="int">valor</atrib>	
+		<atrib tbname="parcela" type="int">parcela</atrib>		
+		<atrib tbname="idGrupo" type="fk" clrelation="DespesaGrupo">grupo</atrib>
+		
+	</class>
+	<class name="Diploma" tbname="fmj_diploma" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="titulo" type="txt">titulo</atrib>
+		<atrib tbname="layout" type="txt">layout</atrib>
 	</class>
 	<class name="Diretoria" tbname="fmj_diretoria" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

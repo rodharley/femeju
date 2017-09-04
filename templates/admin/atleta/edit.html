@@ -14,13 +14,13 @@
                 <div class="row">   
                  <div class="col-md-3 col-xs-3">
                     <div class="form-group">
-                        <label for="cpf"><i class='fa'> </i><b>CPF </b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semcpf" id="semcpf" {SEMCPFCHECKED}/> Sem CPF</label>
-                        <input type="text" id="cpf" name="cpf" value="{CPF}" class="form-control cpfcnpj"/>
+                        <label for="cpf"><i class='fa'> </i><b>CPF </b>
+                        <input type="text" id="cpf" name="cpf" value="{CPF}" class="form-control cpfcnpj required"/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
-                        <label for="rg"><i class='fa'> </i><b>RG</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semrg" id="semrg" {SEMRGCHECKED}/> Sem RG</label>
+                        <label for="rg"><i class='fa'> </i><b>RG</b>
                         <input type="text" id="rg" name="rg" value="{RG}" class="form-control"/>
                     </div>
                 </div>
@@ -440,24 +440,7 @@
         
         $("#save").click(function(){
             
-            if($("#frmEditAtleta").valid()){
-            $.ajax({
-                url : "ajax/pessoa_consultaNomesPessoa.php",
-                type : "POST",
-                data : {nome: $("#nome").val(),nomeMeio:$("#nomeMeio").val(),sobrenome:$("#sobrenome").val(),idUser:$("#id").val()},                
-            }).done(function(msg) {
-                 if(msg == "1"){
-                if(confirm("Já existe uma pessoa com o mesmo nome, nome do meio e sobrenome no sistema, deseja confirmar o cadastro?"))
-                    $("#frmEditAtleta").submit();
-            }else{
-                $("#frmEditAtleta").submit();
-            }
-                
-                
-            });
-            
-           
-            }
+           $("#frmEditAtleta").submit();
         });
         
         
@@ -508,9 +491,7 @@
             
             rules : {
                 cpf :{
-                    required:{
-                         depends: function () { return !$("#semcpf").prop("checked"); }
-                    } ,
+                    required:true,
                     remote: {
                             url: "ajax/pessoa_verificaCpf.php",
                             type: "post",
@@ -520,22 +501,7 @@
                               }
                             }
                             } 
-                },
-                rg :{
-                    required:{
-                         depends: function () { return !$("#semrg").prop("checked"); }
-                    } 
-                },
-                rgOrgaoExpedidor :{
-                    required:{
-                         depends: function () { return !$("#semrg").prop("checked"); }
-                    } 
-                },
-                rgDataExp :{
-                    required:{
-                         depends: function () { return !$("#semrg").prop("checked"); }
-                    } 
-                },
+                },                
                 email: {
                 remote: {
                             url: "ajax/usuario_verificaLogin.php",

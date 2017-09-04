@@ -1,0 +1,98 @@
+
+      <form role="form" method="post" action="admin_despesa-action" id="frmDespesa" class="form">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h4>{LABEL}</h4>
+            </div>
+            <div class="panel-body">
+            	
+                    <input type="hidden" name="acao" id="acao" value="lancar"/>
+      
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="descricao"><i class='fa'> </i><b>Descrição</b></label>
+                                <input type="text" class="form-control required" name="descricao" id="descricao" />
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Data da primeira parcela </b></label>
+                                
+                                    <input type="text" class="form-control required" name="dataInicio" id="dataInicio" />
+                                
+                            </div>
+                        </div>
+                         <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Quantidade de Parcelas</b></label>
+                                
+                                    <input type="text" class="form-control required" name="parcelas" id="parcelas" value="1" />
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Valor da parcela</b></label>
+                                
+                                    <input type="text" class="form-control required" name="valor" id="valor" />
+                                
+                            </div>
+                        </div>
+                    </div>
+           
+            </div>
+            <div class="panel-footer text-right">
+                <button class="btn btn-default btVoltar" type="button">
+                    <span class="glyphicon glyphicon-backward"> </span> Voltar
+                </button>
+                <button class="btn btn-primary" type="submit" id="btSalvar">
+                    Salvar
+                </button>
+
+            </div>
+
+        </div>
+</form> 
+
+<script>
+	
+
+	$(document).ready(function() {
+        $('#dataInicio').datepicker();
+        
+        $("#parcelas").inputmask("[99]9");
+		
+		$("#valor").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : ""
+		});
+		
+		
+		$("#frmDespesa").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			
+		});
+
+	});
+
+</script>

@@ -174,5 +174,16 @@ class Pagamento extends Persistencia{
                     $log->gerarLog("Baixa no pagamento de número : ".$this->codigo);
                     
                 }
+
+function getPagamentosDeCompeticao($idCompeticao){
+         return $this->getSQL("SELECT p.* FROM `fmj_pagamento` p inner join fmj_inscricao_competicao i on i.idPagamento = p.id WHERE i.idCompeticao = $idCompeticao group by i.idPagamento");         
+    }
+
+function pesquisaRelatorio($datai,$dataf){
+	$sql = "select d.* from ".Pagamento::TABELA." d where d.bitPago = 1 and d.dataPagamento between '$datai' and '$dataf'";
+	return $this->getSQL($sql);
 }
+
+}
+
 ?>

@@ -180,6 +180,7 @@ class Pessoa extends Persistencia {
     
     function Incluir() {
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+		if(!$this->ConsultaCPFExistente($strCPF)){
         $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
         $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
             $this->nome =  $_REQUEST['nome'];
@@ -220,21 +221,27 @@ class Pessoa extends Persistencia {
             }
             $idPessoa = $this->save(); 
             
-            if($strCPF == ""){
+            /*if($strCPF == ""){
                 $this->cpf = $idPessoa;
                 $idPessoa = $this->save();    
-            }
+            }*/
                        
             
             $_SESSION['fmj.mensagem'] = 71;
             return true;
+            }else{
+            	$_SESSION['fmj.mensagem'] = 76;
+            return false;
             }
+           }
         
         
         
         function Alterar() {
         $this->getById($_REQUEST['id']);
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+		
+		if(!$this->ConsultaCPFExistente($strCPF,$_REQUEST['id'])){
         $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
         $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
         
@@ -285,7 +292,10 @@ class Pessoa extends Persistencia {
             $this->save();
             $_SESSION['fmj.mensagem'] = 72;
             return true;
-            
+            }else{
+            	$_SESSION['fmj.mensagem'] = 76;
+            return false;
+            }
         }
 
 function Excluir($id) {

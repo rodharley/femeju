@@ -1,0 +1,76 @@
+<form role="form" method="post" action="admin_diploma-action" id="frmEdit" enctype="multipart/form-data" autocomplete="off">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+
+            <input type="hidden" name="id" id="id" value="{id}"/>
+            <input type="hidden" name="acao" value="{ACAO}"/>
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="titulo"><i class='fa'></i><b>Título</b></label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título do Diploma" value="{titulo}" class="required form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="texto"><i class='fa'></i><b>Diploma</b></label><br/>
+                        <div class="alert alert-info">
+                        	<b>Dica</b><br/>
+                        <small >Para cada campo do arquivo utilizar: "#CAMPO1#, #CAMPO2#, etc.."</small>
+                        </div>
+                        <div id="summernote">{texto}
+                        </div>
+                        <input type="text" name="texto" id="texto" class="required" style="width: 0px; border:none;"/>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer text-center">
+            <a class="btn btn-success" id="save">
+                Salvar
+            </a>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </div>
+</form>
+<link href="css/summernote.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<script src="js/summernote.min.js"></script>
+<script>
+	$(document).ready(function() {
+      
+       
+        
+        $('#summernote').summernote({
+            height : 600, // set editor height
+
+            minHeight : null, // set minimum height of editor
+            maxHeight : null, // set maximum height of editor
+
+            focus : true,                 // set focus to editable area after initializing summernote
+        });
+        
+        $("#save").click(function() {
+            var aHTML = $('#summernote').code();
+            
+            $("#texto").val(aHTML);
+            if($("#texto").val() == "<br>")
+                $("#texto").val("");
+            
+            $("#frmEdit").submit();
+        });
+        
+		
+});
+    
+
+</script>

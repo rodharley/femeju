@@ -84,6 +84,27 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-5 col-xs-5">
+                    <div class="form-group">
+                        <label for="dataPagamento"><i class='fa'></i><b>Data Limite de Pagamento</b></label>
+                        <input id="dataPagamento" type="text" name="dataPagamento" value="{DATA_PAGAMENTO}" class="form-control required">
+                    </div>
+                </div>
+                <div class="col-md-5 col-xs-5">
+                    <div class="form-group">
+                        <label for="dataDesconto"><i class='fa'></i><b>Data de Pagamento com Desconto</b></label>
+                        <input id="dataDesconto" type="text" name="dataDesconto" value="{DATA_DESCONTO}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="percentDesconto"><i class='fa'></i><b>Desconto %</b></label>
+                        <input type="text" value="{DESCONTO}" name="percentDesconto" id="percentDesconto" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
             <!-- BEGIN BLOCK_COMPETICAO -->
             <div class="row">
                         <div class="col-md-4 col-xs-4">
@@ -164,6 +185,10 @@
 
 		$("#dataEvento").datepicker();
 		$("#dataInscricao").datepicker();
+		 $("#dataPagamento").datepicker();
+        $("#dataDesconto").datepicker();
+        $("#percentDesconto").inputmask('[9]99');
+        $("#percentDesconto")
         <!-- BEGIN BLOCK_COMPETICAO_JS -->
         $("#dobra3").inputmask({
             alias : "decimal",

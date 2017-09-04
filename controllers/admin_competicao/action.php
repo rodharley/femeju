@@ -3,6 +3,7 @@ $menu =37;
 include("includes/include.lock.php");
 //INSTACIA CLASSES
 $comp = new Competicao();
+$inscr = new Inscricao();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
@@ -31,7 +32,18 @@ switch ($_REQUEST['acao']){
         $comp->Excluir($_REQUEST['id']);
 		exit();
         break;  
-    
+    case 'excluir_competicao' :		
+        $conn->connection->autocommit(false);
+        $idComp = $inscr->ExcluirInscricao($inscr->md5_decrypt($_REQUEST['idPag']));        
+		if($idComp != 0){
+			$conn->connection->commit();
+		$_SESSION['fmj.mensagem'] = 74;
+		}else{
+		$_SESSION['fmj.mensagem'] = 75;	
+		}		
+        header("Location:admin_competicao-inscricoes?id=".$_REQUEST['idComp']);
+        exit();
+		break;
 }
 }
 

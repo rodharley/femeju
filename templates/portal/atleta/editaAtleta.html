@@ -37,13 +37,13 @@
                 <div class="row">   
                  <div class="col-md-3 col-xs-3">
                     <div class="form-group">
-                        <label for="cpf"><i class='fa'> </i><b>CPF</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semcpf" id="semcpf"/> Sem CPF</label>
-                        <input type="text" id="cpf" name="cpf" value="{CPF}" class="form-control cpf" {DISABLED}/>
+                        <label for="cpf"><i class='fa'> </i><b>CPF</b>
+                        <input type="text" id="cpf" name="cpf" value="{CPF}" class="form-control cpf required" {DISABLED}/>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
-                        <label for="rg"><i class='fa'> </i><b>RG</b>&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-control flat-blue" name="semrg" id="semrg" /> Sem RG</label>
+                        <label for="rg"><i class='fa'> </i><b>RG</b>
                         <input type="text" id="rg" name="rg" value="{RG}" class="form-control" {DISABLED}/>
                     </div>
                 </div>
@@ -455,9 +455,7 @@
             
             rules : {
                 cpf :{
-                    required:{
-                         depends: function () { return !$("#semcpf").prop("checked"); }
-                    },
+                    required: true,
                     remote: {
                             url: "ajax/pessoa_verificaCpf.php",
                             type: "post",
@@ -465,41 +463,24 @@
                               idUser: 0
                             }
                             } 
-                },
-                rg :{
-                    required:{
-                         depends: function () { return !$("#semrg").prop("checked"); }
-                    } 
-                },
-                rgOrgaoExpedidor :{
-                    required:{
-                         depends: function () { return !$("#semrg").prop("checked"); }
-                    } 
-                },
-                rgDataExp :{
-                    required:{
-                         depends: function () { return !$("#semrg").prop("checked"); }
-                    } 
-                },
+                },                
                 email: {
                 required: false,
                 remote: {
                             url: "ajax/usuario_verificaLogin.php",
                             type: "post",
                             data: {
-                              idUser: function() {
-                                return $("#id").val();
-                              }
+                              idUser: 0
                             }
                             }
                 }                
                 },
                 messages: {
                     email: {
-                    remote: "E-mail já existe no portal!"
+                    remote: "E-mail de atleta já consta no sistema Femeju!"
                     },
                     cpf: {
-                        remote: "CPF já existe no portal"
+                        remote: "CPF já consta no sistema Femeju!"
                     }
                 }
                 

@@ -1,0 +1,81 @@
+<form role="form" method="post" action="plugins/mpdf/relatorios/diploma.php" id="frmRelat" enctype="multipart/form-data" autocomplete="off" target="_blank">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{LABEL}</h3>
+        </div>
+        <div class="box-body">
+        	 <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="titulo"><i class='fa'></i><b>Diploma</b></label>
+                        <select class="required form-control" name="diploma">
+                        	<option value="">Selecione o diploma</option>
+                        	<!-- BEGIN BLOCK_DIPLOMA -->
+                        	<option value="{id}">{titulo}</option>
+                        	<!-- END BLOCK_DIPLOMA -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="foto"><i class='fa'></i><b>Arquivo</b></label>
+                        <input type="file" class="required" name="arquivo" id="arquivo"/>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-12 col-xs-12">
+                	<div class="alert alert-info">
+                        	<b>Dica</b><br/>
+                        <small >Arquivos formato csv (Campos separados por ";", cada linha um diploma)</small>
+                        </div>
+                	
+                	</div></div>   
+        </div>
+        <div class="box-footer text-center">
+            <button class="btn btn-success" type="submit">
+                Gerar
+            </button>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+        </div>
+
+    </div>
+</form>
+<script>
+	$(document).ready(function() {
+        
+        $("#arquivo").fileinput({
+		maxFileSize: 20000,
+		maxFilesNum: 1,
+		language: "pt-BR", 
+		allowedFileExtensions: ["csv", "txt"],
+		previewClass: "bg-warning",
+		allowedFileTypes: ["text"],
+		showUpload: false,
+		showCaption: false,
+		showRemove:false
+	});    
+	
+	$("#frmRelat").validate({
+            errorClass : "help-inline",
+            errorElement : "div",
+            highlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').addClass('has-error');
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+            },
+            unhighlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error');
+                $(element).parents('.form-group').addClass('has-success');
+                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+            }
+         });    
+		
+});
+    
+
+</script>

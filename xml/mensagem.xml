@@ -74,9 +74,18 @@ Exemplos de mensagens:
 <mensagem id="68" type="success">Baixa realizada com sucesso.</mensagem>
 <mensagem id="69" type="warning">Não é possível excluir o evento pois já possui atletas inscritos.</mensagem>
 <mensagem id="70" type="success">Evento foi criado com sucesso</mensagem>
-<mensagem id="71" type="success">Pessoa incluída com sucesso.</mensagem>
-<mensagem id="72" type="success">Pessoa alterada com sucesso.</mensagem>
-<mensagem id="73" type="success">Pessoa excluida com sucesso.</mensagem>
+<mensagem id="71" type="success">Pessoa incluída com sucesso!</mensagem>
+<mensagem id="72" type="success">Pessoa alterada com sucesso!</mensagem>
+<mensagem id="73" type="success">Pessoa excluida com sucesso!</mensagem>
+<mensagem id="74" type="success">Inscrição cancelada com sucesso!</mensagem>
+<mensagem id="75" type="warning">Não é possível excluir a inscrição pois a mesma já está paga.</mensagem>
+<mensagem id="76" type="warning">Não é possível incluir a pessoa pois o cpf já consta na base.</mensagem>
+<mensagem id="77" type="success">Despesa cadastrada com sucesso!</mensagem>
+<mensagem id="78" type="success">Despesa alterada com sucesso!</mensagem>
+<mensagem id="79" type="success">Despesa Excluída com sucesso!</mensagem>
+<mensagem id="80" type="success">Diploma cadastrado com sucesso!</mensagem>
+<mensagem id="81" type="success">Diploma alterado com sucesso!</mensagem>
+<mensagem id="82" type="success">Diploma Excluído com sucesso!</mensagem>
 </mensagens>
 
 

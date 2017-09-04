@@ -171,6 +171,8 @@ public function listaAtivos(){
 	
     function Incluir() {
         $strCPF = $this -> limpaCpf($_REQUEST['cpf']);
+		$objPessoa = new Pessoa();
+		
         $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
         $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
         $associacao = $_REQUEST['associacao'] != "" ? new Associacao($_REQUEST['associacao']) : null;
@@ -220,10 +222,10 @@ public function listaAtivos(){
             }
             $idPessoa = $pessoa->save();   
             
-             if($strCPF == ""){
+             /*if($strCPF == ""){
                 $pessoa->cpf = $idPessoa;
                 $idPessoa = $pessoa->save();    
-            }
+            }*/
                      
             //salva o atleta
             $this->id = $idPessoa;

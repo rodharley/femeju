@@ -1,0 +1,136 @@
+
+      <form role="form" method="post" action="admin_despesa-action" id="frmDespesa" class="form">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h4>{LABEL}</h4>
+            </div>
+            <div class="panel-body">            	
+                    <input type="hidden" name="acao" id="acao" value="alterar"/>
+      				<input type="hidden" name="id" id="id" value="{ID}"/>
+      				
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="descricao"><i class='fa'> </i><b>Descrição</b></label>
+                                <input type="text" class="form-control required" name="descricao" id="descricao" value="{DESCRICAO}" />
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Data da primeira parcela </b></label>
+                                
+                                    <input type="text" class="form-control required date" name="dataInicio" id="dataInicio" value="{DATA}" />
+                                
+                            </div>
+                        </div>
+                         <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Quantidade de Parcelas</b></label>
+                                
+                                    <input type="text" class="form-control required" name="parcelas" id="parcelas" value="{PARCELAS}" />
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="form-group">
+                                <label for="data"><i class='fa'> </i><b>Valor da parcela</b></label>
+                                
+                                    <input type="text" class="form-control required valor " name="valor" id="valor" value="{VALOR}" />
+                                
+                            </div>
+                        </div>
+                      </div>
+          
+            </div>
+            <div class="panel-footer text-right">
+                <button class="btn btn-default btVoltar" type="button">
+                    <span class="glyphicon glyphicon-backward"> </span> Voltar
+                </button>
+                <button class="btn btn-primary" type="submit" id="btSalvar">
+                    Salvar e Recriar Lancamentos
+                </button>
+
+            </div>
+
+        </div>
+         <fieldset>
+           	<legend>Lançamentos</legend>
+           	<input type="hidden" name="id_hash" id="id_hash" value="{ID_HASH}"/>
+           	<table class="table table-bordered table-condensed table-striped">
+           		<tr><th>Parcela</th><th>Data</th><th>Valor</th><th width="1%">-</th></tr>
+           		<!-- BEGIN BLOCK_PARCELA -->
+           		<tr><td>{PARCELA}</td><td><input type="text" value="{DATA_P}" valor="{DATA_P}" id="{ID_P}" class="form-control date savepdata"/></td>
+           			<td><input type="text" id="{ID_P}" value="{VALOR_P}" valor="{VALOR_P}" class="form-control valor savepvalor"/></td>
+           			<td><a class="btn btn-danger excluirp" href="#"  value="{ID_HASH_P}"  title="Excluir Parcela"><span class="fa fa-trash-o"> </span></a></td></tr>
+           		<!-- END BLOCK_PARCELA -->
+           	</table>
+           </fieldset>
+</form> 
+
+<script>
+	
+
+	$(document).ready(function() {
+        
+        $(".date").datepicker();
+        
+        $("#parcelas").inputmask("[99]9");
+		
+		$(".valor").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : ""
+		});
+		
+		$(".savepdata").focusout(function(){
+			if($(this).val() != $(this).attr("valor")){
+			$.ajax({
+				url:'admin_despesa-action?acao=savedata&id='+$(this).attr("id")+'&data='+$(this).val(),
+				TYPE:'GET'
+			}).done(function(msg) {
+                alert("Salvo com sucesso!")
+            });
+           }
+		});
+		$(".savepvalor").focusout(function(){
+			if($(this).val() != $(this).attr("valor")){
+			$.ajax({
+				url:'admin_despesa-action?acao=savevalor&id='+$(this).attr("id")+'&valor='+$(this).val(),
+				TYPE:'GET'
+			}).done(function(msg) {
+                alert("Salvo com sucesso!")
+            });
+           }
+		});
+		
+		$(".excluirp").click(function(){			
+			if (confirm("Tem certeza que deseja excluir esse registro do sistema?")){
+				window.location.href = 'admin_despesa-action?acao=excluirp&id='+$("#id_hash").val()+'&idp='+$(this).attr("value");
+				}				
+		});
+		$("#frmDespesa").validate({
+			errorClass : "help-inline",
+			errorElement : "div",
+			highlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').addClass('has-error');
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+			},
+			unhighlight : function(element, errorClass, validClass) {
+				$(element).parents('.form-group').removeClass('has-error');
+				$(element).parents('.form-group').addClass('has-success');
+				$(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+				$(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+			},
+			
+		});
+
+	});
+
+</script>

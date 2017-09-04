@@ -63,7 +63,7 @@
                                     <div class="col-md-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="documento"><i class='fa'> </i><b>Documento</b></label>
-                                            <input type="text" name="documento" id="documento" class="form-control required"/>
+                                            <input type="text" name="documento" id="documento" class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-xs-6">
@@ -120,6 +120,10 @@
                         </div>
 
                     </div>
+                    <!-- BEGIN BLOCK_DESCONTO -->
+								<br />
+								<strong><center>Desconto de <font color="green" size="12">{PERCENT}%</font> para inscrições pagas até <font color="red" size="5">{DATA_DESCONTO}</font></center></strong>
+								<!-- END BLOCK_DESCONTO -->
                 </fieldset>
                 <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
                     <input type="hidden" name="acao" id="acao" value="inscricaoa"/>

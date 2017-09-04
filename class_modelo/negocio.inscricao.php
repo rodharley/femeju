@@ -38,5 +38,30 @@ class Inscricao extends Persistencia {
          $this->DAO_ExecutarDelete($sql);
          return true;
     }
+	function getInscricoes($idCompeticao,$idPagamento){
+         return $this->getRows(0,9999,array(),array("competicao"=>"=".$idCompeticao,"pagamento"=>"=".$idPagamento));         
+    }
+	
+	function ExcluirInscricao($idPagamento){
+		$objPag = new Pagamento();
+		$objPag->getById($idPagamento);
+		if($objPag->bitPago == 0){
+		$sql = "select * from ".Inscricao::TABELA." where idPagamento = ".$idPagamento;
+		$rs = $this->getSQL($sql);
+		$idCompeticao = 0;
+		 $log = new Log();        
+		foreach ($rs as $key => $inscr) {
+			$idCompeticao = $inscr->competicao->id;
+			$log->gerarLog("Exclusão de Inscrição do responsavel: ".$objPag->nomeSacado.", Atleta: ".$inscr->nomeAtleta);	
+			$this->delete($inscr->id);
+		}
+		
+		$objPag->excluir($idPagamento);
+		return $idCompeticao;
+		}else{
+			return 0;
+		}		
+		
+	}
 }
 ?>

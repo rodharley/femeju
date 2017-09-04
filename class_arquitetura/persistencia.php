@@ -289,7 +289,7 @@ function xmlObject($elemento,$i,$objeto){
 	}
 	
 	/*m�todo que recupera a lista de obejtos da classe */
-	function getRows($init=0,$limit=999, $order = array(), $filtro = array()){
+	function getRows($init=0,$limit=9999, $order = array(), $filtro = array()){
 		$xml = simplexml_load_file(URI."/xml/cfg.xml");
 		foreach ($xml->children() as $elemento){
 			if($elemento['name'] == get_class($this)){

@@ -58,10 +58,7 @@ if(isset($_REQUEST['id'])){
     $TPL->CHECKED_INATIVO = !$objAtleta->ativo ? "checked" : "";
     $TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
 	$TPL->CHECKED_TECNICO = $objAtleta->bitTecnico ? "checked" : "";	
-	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : ""; 
-    
-    $TPL->SEMCPFCHECKED = strlen($objAtleta->pessoa->cpf) < 11 ? "checked" : "";
-    $TPL->SEMRGCHECKED = $objAtleta->pessoa->rg == "" ? "checked" : "";
+	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : "";
 	$TPL->NUMERO_FEMEJU = $objAtleta->getId();
 	if($objAtleta->pessoa->bitVerificado)
 	$TPL->VERIFICADO  = "Sim";

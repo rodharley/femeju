@@ -45,8 +45,8 @@ if(isset($_REQUEST['id'])){
     $TPL->NOME = $objPessoa->nome;
     $TPL->NOME_MEIO = $objPessoa->nomeMeio;
     $TPL->SOBRE_NOME = $objPessoa->sobrenome;
-    $TPL->SEMCPFCHECKED = strlen($objPessoa->cpf) < 11 ? "checked" : "";
-    $TPL->SEMRGCHECKED = $objPessoa->rg == "" ? "checked" : "";
+    //$TPL->SEMCPFCHECKED = strlen($objPessoa->cpf) < 11 ? "checked" : "";
+    //$TPL->SEMRGCHECKED = $objPessoa->rg == "" ? "checked" : "";
 	$TPL->NACIONALIDADE = $objPessoa->nacionalidade;
     $TPL->EMAIL = $objPessoa->email;
     $TPL->DATA_NASCIMENTO = $objPessoa->convdata($objPessoa->dataNascimento,"mtn");
