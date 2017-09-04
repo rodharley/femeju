@@ -88,3 +88,33 @@ ALTER TABLE `fmj_despesa_grupo`
 ALTER TABLE `fmj_despesa_grupo` CHANGE `data_fim` `parcelas` INT NOT NULL;
 ALTER TABLE `fmj_despesa` ADD `parcela` INT NOT NULL AFTER `valor`;
 ALTER TABLE `fmj_despesa` DROP FOREIGN KEY `fk_grupo_despesa_despesa`; ALTER TABLE `fmj_despesa` ADD CONSTRAINT `fk_grupo_despesa_despesa` FOREIGN KEY (`idGrupo`) REFERENCES `fmj_despesa_grupo`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE `fmj_diploma` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `layout` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `fmj_diploma`
+--
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `fmj_diploma`
+--
+ALTER TABLE `fmj_diploma`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `fmj_diploma`
+--
+ALTER TABLE `fmj_diploma`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
