@@ -6,7 +6,7 @@ $objPag = new Pagamento();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $totalPesquisa = $objPag->pesquisarTotal($_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm"),$_REQUEST['codigo'],$_REQUEST['status']);
 $configPaginacao = $objPag->paginar($totalPesquisa,$pagina);
-$alist = $objPag->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm",$_REQUEST['codigo'],$_REQUEST['status']);
+$alist = $objPag->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm"),$_REQUEST['codigo'],$_REQUEST['status']);
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->valor = $objPag->money($n->valorTotal,"atb");
@@ -16,7 +16,7 @@ foreach($alist as $key => $n){
     $TPL->responsavel = $n->nomeSacado;
     $TPL->ID_HASH = $objPag->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
-    
+
 }
 }
 
