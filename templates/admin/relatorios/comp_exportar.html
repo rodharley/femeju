@@ -1,0 +1,73 @@
+<form role="form" method="post" action="admin_relatorios-comp_exportarb" id="frmRelat" autocomplete="off" target="_blank">	
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title">Selecione o Evento/Competição</h3>
+	</div>
+	<div class="box-body">		
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+                        <label for="evento"><i class='fa'></i><b>Evento/Competição</b></label>
+					<select class="form-control required" name="evento">
+						<!-- BEGIN BLOCK_EVENTO -->
+						<option value="{ID}">{TITULO}</option>
+						<!-- END BLOCK_EVENTO -->
+					</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+                        <label for="razaoSocial"><i class='fa'></i><b>Associação</b></label>
+					<select class="form-control" name="associacao" >
+						<option value="">Todas</option>
+						<!-- BEGIN BLOCK_ASSOCIACAO -->
+						<option value="{ID_ASS}">{TITULO_ASS}</option>
+						<!-- END BLOCK_ASSOCIACAO -->
+					</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+                        <label for="razaoSocial"><i class='fa'></i><b>Somente pagos</b></label><br/>
+					    <input type="checkbox" value="1" name="pago" class="form-control flat-blue"/>
+					</div>
+				</div>
+			</div>
+
+	</div>
+	<div class="panel-footer text-right">
+		<button class="btn btn-success" id="gerar" type="submit">
+                Gerar
+            </button>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+	</div>
+		
+</div>
+</form>
+<script>
+	$(document).ready(function() {
+		
+		$("#frmRelat").validate({
+            errorClass : "help-inline",
+            errorElement : "div",
+            highlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').addClass('has-error');
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+            },
+            unhighlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error');
+                $(element).parents('.form-group').addClass('has-success');
+                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+            }
+         });
+
+	});
+
+</script>

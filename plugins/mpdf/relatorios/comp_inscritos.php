@@ -39,7 +39,7 @@ foreach ($rs as $key => $value) {
 	$rsInsc = $oInsc -> getSQL($sqli);
 	
 	foreach ($rsInsc as $key2 => $inscricao) {
-		$html .= "<tr><td>".$inscricao->classe->descricao."</td><td>".$inscricao->categoria->descricao."</td><td>".$inscricao->atleta->pessoa->nome."</td><td>".$inscricao->atleta->getId()."</td>";
+		$html .= "<tr><td>".$inscricao->classe->descricao."</td><td>".$inscricao->categoria->descricao."</td><td>".$inscricao->atleta->pessoa->nome." ".$inscricao->atleta->pessoa->nomeMeio." ".$inscricao->atleta->pessoa->sobrenome."</td><td>".$inscricao->atleta->getId()."</td>";
 		if($inscricao->dobra1 != null) $html .= "<td>".$inscricao->dobra1->classe->descricao.'-'.$inscricao->dobra1->descricao."</td>"; else $html .= "<td>-</td>";
 		if($inscricao->dobra2 != null) $html .= "<td>".$inscricao->dobra2->classe->descricao.'-'.$inscricao->dobra2->descricao."</td>"; else $html .= "<td>-</td>";
 		if($inscricao->dobra3 != null) $html .= "<td>".$inscricao->dobra3->classe->descricao.'-'.$inscricao->dobra3->descricao."</td>"; else $html .= "<td>-</td>";
