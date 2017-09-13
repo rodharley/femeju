@@ -21,6 +21,8 @@ class Inscricao extends Persistencia {
     var $classe = NULL;
     var $categoria = NULL;
     var $pagamento = NULL;   
+	var $responsavel = NULL;   
+	var $associacao = NULL;   
     
     
     function atualizarPagamentos($idPagamento,$ids){
@@ -62,6 +64,21 @@ class Inscricao extends Persistencia {
 			return 0;
 		}		
 		
+	}
+	function atualizarValoresInscricoes(){
+		$pag = new Pagamento();
+		$pag->getById($_REQUEST['idPagamento']);
+		$custa = $pag->itens[0];
+		print_r( $custa);
+		exit();
+		foreach ($_REQUEST['inscricao'] as $key => $idInscricao) {
+			$this->getById($idInscricao);
+			$this->valor = $this->money($_REQUEST['valor'][$key],"bta");
+			$this->valorDobra1 = $this->money($_REQUEST['valor_dobra1'][$key],"bta");
+			$this->valorDobra2 = $this->money($_REQUEST['valor_dobra2'][$key],"bta");
+			$this->valorDobra3 = $this->money($_REQUEST['valor_dobra3'][$key],"bta");
+			
+		}
 	}
 }
 ?>

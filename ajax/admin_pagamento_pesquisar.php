@@ -4,13 +4,15 @@ include("configuraAjax.php");
 $TPL = new Template("../templates/admin/pagamento/list.html");
 $objPag = new Pagamento();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
-$totalPesquisa = $objPag->pesquisarTotal($_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm"),$_REQUEST['codigo'],$_REQUEST['status']);
+$totalPesquisa = $objPag->pesquisarTotal($_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm"),$_REQUEST['codigo'],$_REQUEST['status'],$_REQUEST['especial']);
 $configPaginacao = $objPag->paginar($totalPesquisa,$pagina);
-$alist = $objPag->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm"),$_REQUEST['codigo'],$_REQUEST['status']);
+$alist = $objPag->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['tipo'],$_REQUEST['responsavel'],$objPag->convdata($_REQUEST['dataVencimento'],"ntm"),$_REQUEST['codigo'],$_REQUEST['status'],$_REQUEST['especial']);
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->valor = $objPag->money($n->valorTotal,"atb");
     $TPL->situacao = $n->bitPago == 1 ? "Pago" : "Em aberto";
+	$TPL->especial = $n->bitEspecial == 1 ? "Sim" : "Não";
+	$TPL->colorEspecial = $n->bitEspecial == 1 ? $n->bitResolvido ? "success" : "danger" : "default";
     $TPL->colorSituacao = $n->bitPago == 1 ? "success" : "danger";
     $TPL->DISABLED = $n->bitPago == 1 ? "disabled" : "";
     $TPL->responsavel = $n->nomeSacado;

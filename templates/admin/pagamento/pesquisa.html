@@ -1,95 +1,102 @@
 <form role="form" method="post" action="#" id="frmPesquisa">
-    <input type="hidden" name="pagina" id="pagina" value="1" />
-    <div class="box box-primary">
-        <div class="box-header">
-            <h3 class="box-title">Pesquisa Pagamentos</h3>
-        </div>
-        <div class="box-body">
-             <div class="row">
-                 <div class="col-md-12 col-xs-12">
-                    <div class="form-group">
-                        <label for="tipo"><i class='fa'> </i><b>Código do pagamento</b></label>
-                        <input type="text" class="form-control" name="codigo" id='codigo' />
-                        
-                    </div>
-                </div>
-                <div class="col-md-12 col-xs-12">
-                    <div class="form-group">
-                        <label for="tipo"><i class='fa'> </i><b>Grupo de Custa</b></label>
-                        <Select name="tipo" id="tipo" class="form-control">
-                            <option value="">Selecione</option>
-                            <!-- BEGIN BLOCK_TIPO_CUSTA -->
-                            <option value="{ID_GRUPO}">{DESC_GRUPO}</option>
-                            <!-- END BLOCK_TIPO_CUSTA -->
-                        </Select>                       
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-xs-6">
-                    <div class="form-group">
-                        <label for="responsavel"><i class='fa'> </i><b>Responsável</b></label>
-                        <input type="text" value="" name="responsavel" id="responsavel" class="form-control"/>
-                    </div>
-                </div><div class="col-md-6 col-xs-6">
-                    <div class="form-group">
-                        <label for="status"><i class='fa'> </i><b>Status</b></label>
-                        <p class="form-control-static"><input type="radio" class="required form-control flat-blue" name="status" value=""checked="checked"/> Todos &nbsp;&nbsp;
-                        <input type="radio" class="required form-control flat-blue" name="status" value="1"/> Pago &nbsp;&nbsp;
-                        <input type="radio" class="required form-control flat-blue"  name="status" value="0"/> Em Aberto
-                        </p>
-                    </div>
-                </div>
-            </div>
-           <div class="row">
-                <div class="col-md-12 col-xs-12">
-                    <div class="form-group">
-                        <label for="dataVencimento"><i class='fa'> </i><b>Data de Vencimento</b></label>
-                        <input type="text" value="" name="dataVencimento" id="dataVencimento" class="form-control"/>
-                    </div>
-                </div>
-            </div>
+	<input type="hidden" name="pagina" id="pagina" value="1" />
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">Pesquisa Pagamentos</h3>
+		</div>
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="tipo"><i class='fa'> </i><b>Código do pagamento</b></label>
+						<input type="text" class="form-control" name="codigo" id='codigo' />
 
-        </div>
-        <div class="panel-footer text-right">
-            <button class="btn btn-default btVoltar" type="button">
-                Voltar
-            </button>
-            <button class="btn btn-success" type="button" id="btPesquisar">
-                Pesquisar
-            </button>
-        </div>
-    </div>
-    
-    <div class="box box-primary">
-        <div class="box-header">
-            <h3 class="box-title">Resultado</h3>
-        </div>
-        <div class="box-body" id="resultado"></div>
-    </div>
+					</div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="tipo"><i class='fa'> </i><b>Grupo de Custa</b></label>
+						<Select name="tipo" id="tipo" class="form-control">
+							<option value="">Selecione</option>
+							<!-- BEGIN BLOCK_TIPO_CUSTA -->
+							<option value="{ID_GRUPO}">{DESC_GRUPO}</option>
+							<!-- END BLOCK_TIPO_CUSTA -->
+						</Select>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-xs-6">
+					<div class="form-group">
+						<label for="responsavel"><i class='fa'> </i><b>Responsável</b></label>
+						<input type="text" value="" name="responsavel" id="responsavel" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-6">
+					<div class="form-group">
+						<label for="status"><i class='fa'> </i><b>Status</b></label>
+						<p class="form-control-static">
+							<input type="radio" class="required form-control flat-blue" name="status" value=""checked="checked"/>
+							Todos &nbsp;&nbsp;
+							<input type="radio" class="required form-control flat-blue" name="status" value="1"/>
+							Pago &nbsp;&nbsp;
+							<input type="radio" class="required form-control flat-blue"  name="status" value="0"/>
+							Em Aberto
+						</p>
+					</div>
+				</div>
+			</div>			
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group">
+						<label for="dataVencimento"><i class='fa'> </i><b>Data de Vencimento</b></label>
+						<input type="text" value="" name="dataVencimento" id="dataVencimento" class="form-control"/>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="panel-footer text-right">
+			<button class="btn btn-default btVoltar" type="button">
+				Voltar
+			</button>
+			<button class="btn btn-success" type="button" id="btPesquisar">
+				Pesquisar
+			</button>
+		</div>
+	</div>
+
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">Resultado</h3>
+		</div>
+		<div class="box-body" id="resultado"></div>
+	</div>
 </form>
 <script>
-function pesquisar(){
-			$("#pagina").val("1");			
-			executaPesquisa();
-		}
+	function pesquisar() {
+		$("#pagina").val("1");
+		executaPesquisa();
+	}
 
-function executaPesquisa(){
-            $.ajax({
-                url : "ajax/admin_pagamento_pesquisar.php",
-                type : "POST",
-                data : $("#frmPesquisa").serialize(),
+	function executaPesquisa() {
+		$.ajax({
+			url : "ajax/admin_pagamento_pesquisar.php",
+			type : "POST",
+			data : $("#frmPesquisa").serialize(),
 
-                beforeSend: function( ) {
-                    $('#resultado').html('{LOADING}');
-                },
-            }).done(function(msg) {
-                $("#resultado").html(msg);
-            });
+			beforeSend : function() {
+				$('#resultado').html('{LOADING}');
+			},
+		}).done(function(msg) {
+			$("#resultado").html(msg);
+		});
 
-        }
-	$(document).ready(function() {		
+	}
+
+
+	$(document).ready(function() {
 		document.addEventListener('keypress', function(e) {
 			if (e.which == 13) {
 				pesquisar();
@@ -97,8 +104,8 @@ function executaPesquisa(){
 		}, false);
 		$("#dataVencimento").datepicker();
 		$("#btPesquisar").click(function() {
-            pesquisar();
-        });
-	}); 
-	$("#codigo").focus();
+			pesquisar();
+		});
+	});
+	$("#codigo").focus(); 
 </script>

@@ -13,11 +13,11 @@ $TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa_evento.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idEvento']));
 $rs = $objGrad->listaAtivas();
 $rsacademias = $associacao->listaPorResponsavelAtivas($_SESSION['fmj.userId']);
-$idsAssoc = "0";
+/*$idsAssoc = "0";
 foreach ($rsacademias as $key => $acad) {
     $idsAssoc .= ",".$acad->id;
-}
-$TPL->IDS_ASSOCIACAO = $idsAssoc;
+}*/
+$TPL->IDS_ASSOCIACAO = $objc->md5_decrypt($_REQUEST['idAssoc']);
 foreach ($rs as $key => $value) {
 	$TPL->ID_GRA = $value->id;
     $TPL->DESC_GRA = $value->descricao;

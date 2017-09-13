@@ -14,7 +14,7 @@
             <div class="panel-body">
                 <fieldset>
                     <legend>
-                        Competição
+                        Evento
                     </legend>
                     <div class="row">
                         <div class="col-md-8 col-xs-8">
@@ -124,11 +124,11 @@
 								<br />
 								<strong><center>Desconto de <font color="green" size="12">{PERCENT}%</font> para inscrições pagas até <font color="red" size="5">{DATA_DESCONTO}</font></center></strong>
 								<!-- END BLOCK_DESCONTO -->
-                </fieldset>
                 <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
                     <input type="hidden" name="acao" id="acao" value="inscricaoa"/>
                     <input type="hidden" name="itens" id="itens" value=""/>
                     <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+                    <input type="hidden" name="idAssociacao" id="idAssociacao" class="" value="{IDS_ASSOCIACAO}"/>
                     <fieldset>
                         <legend>
                             forma de Pagamento
@@ -148,6 +148,18 @@
                             </div>
                         </div>
                     </fieldset>
+                    <div class="row">
+							<div class="col-md-12 col-xs-12">
+								<div class="form-group">
+									<label for="atleta"><i class='fa'> </i><b>Inscrição de Atletas Especiais</b></label>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="1" name="especial" id="especial" class="flat-blue" />
+											Selecione aqui se os atletas possuem prerrogativas de descontos especiais na FEMEJU </label>
+									</div>
+								</div>
+							</div>
+						</div>
                 </form>
             </div>
             <div class="panel-footer text-right">

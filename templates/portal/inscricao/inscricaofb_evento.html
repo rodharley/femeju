@@ -8,6 +8,7 @@
         </div>
         <div class="panel panel-default">
             <form role="form" method="post" action="portal_servicos-action" id="frmInscricao">
+            	<input type="hidden" name="especial" id="especial" value="{ESPECIAL}"/>
                 <input type="hidden" name="idAssociacao" id="idAssociacao" value="{ID_ASSOCIACAO}"/>
                 <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
                 <input type="hidden" name="acao" id="acao" value="inscricaof"/>
@@ -17,12 +18,12 @@
                 <div class="panel-body">
                     <fieldset>
                         <legend>
-                            Competição
+                            Evento
                         </legend>
                         <div class="row">
                             <div class="col-md-8 col-xs-8">
                                 <div class="form-group">
-                                    <label for="competicao"><i class='fa'> </i><b>Competição</b></label>
+                                    <label for="competicao"><i class='fa'> </i><b>Evento</b></label>
                                     <p class="form-control-static">{TITULO_COMP}</p>
                                 </div>
                             </div>
@@ -39,6 +40,16 @@
                         <legend>
                             Configurar Atletas
                         </legend>
+                        <!-- BEGIN BLOCK_ESPECIAL -->
+						<div class="row">
+							<div class="col-md-12 col-xs-12">
+								
+								<br />
+								<strong><center>Os descontos dos atletas especiais serão verificados. <br/>Após realizar a inscrição, aguarde o contato da femeju informando a atualização do boleto de pagamento.</center></strong>
+								<br/><br/><br/>
+								</div>
+								</div>
+						<!-- END BLOCK_ESPECIAL -->
                         <div class="row">
                             <div class="col-md-12 col-xs-12">
                                 <table class="table">

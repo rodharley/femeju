@@ -174,7 +174,8 @@ class Competicao extends Persistencia {
                 $insc->classe = new Classe($_REQUEST['classe'.$id]);
                 $insc->categoria = new CategoriaPeso($_REQUEST['categoria'.$id]);
                 }
-                
+                $insc->responsavel = new Usuario($_SESSION['fmj.userId']);
+				$insc->associacao = new Associacao($_REQUEST['idAssociacao']);
                 
                 $idsInscricao .= ",".$insc->save();   
                 
@@ -198,7 +199,7 @@ class Competicao extends Persistencia {
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);  
 				
 				
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo, $itensPagamento);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo, $itensPagamento,isset($_REQUEST['especial']) ? 1 : 0);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
@@ -262,6 +263,8 @@ class Competicao extends Persistencia {
                 $insc->classe = new Classe($arrAtleta["classe"]);
                 $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
                 }
+				$insc->responsavel = new Usuario($_SESSION['fmj.userId']);
+				$insc->associacao = new Associacao($_REQUEST['idAssociacao']);
                 $idsInscricao .= ",".$insc->save();   
                 
                 
@@ -283,7 +286,7 @@ class Competicao extends Persistencia {
                 }
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']); 
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo,$itensPagamento);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo,$itensPagamento,isset($_REQUEST['especial']) ? 1 : 0);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }

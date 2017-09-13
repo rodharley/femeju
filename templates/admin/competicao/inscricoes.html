@@ -12,21 +12,23 @@
 						<!-- BEGIN BLOCK_PAGAMENTO -->
 						<table class="table table-striped table-condensed table-bordered">
 						<tr>
-							<th >Responsavel</th><th>Data da Inscrição</th><th class="text-center">Pago</th><th class="text-center">-</th>
+							<th >Responsavel</th><th>Data da Inscrição</th><th class="text-center">Pago</th><th class="text-center">Especial</th><th class="text-center">-</th>
 						</tr>
 						<tr>
 							<td>{NOME_RESP}</td><td>{DATA_INSCRICAO}</td><td class="text-center"><span class="label label-{COLOR_PAGO}">{PAGO}</span></td>
-							<td width="1%" class="text-center">
+							<td class="text-center"><span class="label label-{colorEspecial}">{especial}</span></td>
+							<td width="" class="text-center">
             				<div class="btn-group">                
+				<!-- BEGIN BLOCK_EDITAR --><a class="btn btn-default btn-sm editar" href="#"  value="{ID_PAGAMENTO_HASH}&idComp={ID_COMP_HASH}"  title="Editar"><span class="fa fa-edit"> </span></a><!-- END BLOCK_EDITAR -->            					
                 <a class="btn btn-danger btn-sm excluir" href="#"  value="{ID_PAGAMENTO_HASH}&idComp={ID_COMP_HASH}"  title="Excluir"><span class="fa fa-trash-o"> </span></a>
             </div></td>							
 						</tr>
 						<tr>
-							<th></th><th colspan="3">Atletas Inscritos</th >							
+							<th colspan="5">Atletas Inscritos</th >							
 						</tr>
 						<!-- BEGIN BLOCK_INSCRICAO -->
 						<tr>							
-							<td></td><td colspan="3">{NOME_ATLETA}</td>							
+							<td colspan="5">{NOME_ATLETA}</td>							
 						</tr>
 						<!-- END BLOCK_INSCRICAO -->
 						</table>
@@ -51,6 +53,11 @@
 			if(confirm("Tem certeza que deseja excluir essa inscrição e o pagamento?")){
 				window.location.href = 'admin_competicao-action?acao=excluir_competicao&idPag='+$(this).attr("value");
 			}
+		});
+		$(".editar").click(function(){
+			
+				window.location.href = 'admin_inscricao-editar?idPag='+$(this).attr("value");
+			
 		});
 	
 

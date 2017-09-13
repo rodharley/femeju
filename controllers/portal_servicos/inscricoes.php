@@ -15,6 +15,7 @@ foreach ($rs as $key => $value) {
 	$TPL->TITULO = $value->titulo;
     $TPL->DESCRICAO = $value->descricao;
     $TPL->DATA = $objc->convdata($value->dataEvento,"mtn");
+	$TPL->ID_ASSOCIACAO_HASH = $_REQUEST['associacao'];
     if($value->tipo == TipoCampeonato::ABERTO){
         if($value->competicao == 1)
             $TPL->CONTROLE = "inscricaoa";

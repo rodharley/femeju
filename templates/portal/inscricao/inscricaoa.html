@@ -1,239 +1,259 @@
 <div class="row">
-    <div class="col-lg-12">
-        <div class="page-header">
-            <div class="pull-right">
-                <img src="img/icones/servicos.png" />
-            </div>
-            <h2>Inscrição</h2>
-        </div>
-        <div class="panel panel-default">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<div class="pull-right">
+				<img src="img/icones/servicos.png" />
+			</div>
+			<h2>Inscrição</h2>
+		</div>
+		<div class="panel panel-default">
 
-            <div class="panel-heading">
-                <h4>{LABEL}</h4>
-            </div>
-            <div class="panel-body">
-                <fieldset>
-                    <legend>
-                        Competição
-                    </legend>
-                    <div class="row">
-                        <div class="col-md-8 col-xs-8">
-                            <div class="form-group">
-                                <label for="evento"><i class='fa'> </i><b>Evento</b></label>
-                                <p class="form-control-static">
-                                    {TITULO_COMP}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-xs-4">
-                            <div class="form-group">
-                                <label for="data"><i class='fa'> </i><b>Data</b></label>
-                                <p class="form-control-static">
-                                    {DATA_COMP}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>
-                        Adicionar Atletas
-                    </legend>
-                    <div class="panel panel-default">
-                        <form role="form" method="post" action="#" id="frmAtleta" name="frmAtleta">
-                            <input type="hidden" name="idAtleta" id="idAtleta" class="" value=""/>
-                            <div class="panel-body">
+			<div class="panel-heading">
+				<h4>{LABEL}</h4>
+			</div>
+			<div class="panel-body">
+				<fieldset>
+					<legend>
+						Competição
+					</legend>
+					<div class="row">
+						<div class="col-md-8 col-xs-8">
+							<div class="form-group">
+								<label for="evento"><i class='fa'> </i><b>Evento</b></label>
+								<p class="form-control-static">
+									{TITULO_COMP}
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-xs-4">
+							<div class="form-group">
+								<label for="data"><i class='fa'> </i><b>Data</b></label>
+								<p class="form-control-static">
+									{DATA_COMP}
+								</p>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>
+						Adicionar Atletas
+					</legend>
+					<form role="form" method="post" action="#" id="frmAtleta" name="frmAtleta">
+						
+						<div class="panel panel-default">
 
-                                <div class="row">
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="nome"><i class='fa'> </i><b>Nome Completo</b></label>
-                                            <input type="text" name="nome" id="nome" class="form-control required"/>
-                                        </div>
-                                    </div>
+							<input type="hidden" name="idAtleta" id="idAtleta" class="" value=""/>
 
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                                            <input type="text" name="email" id="email" class="form-control email required"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="documento"><i class='fa'> </i><b>Documento</b></label>
-                                            <input type="text" name="documento" id="documento" class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="telefone"><i class='fa'> </i><b>Telefone</b></label>
-                                            <input type="text" name="telefone" id="telefone" class="form-control required"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
-                                            <select id="graduacao" name="graduacao" class="form-control required">
-                                                <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_GRA -->
-                                                <option value="{ID_GRA}">{DESC_GRA}</option>
-                                                <!-- END BLOCK_GRA -->
-                                            </select>
-                                        </div>
-                                    </div>                               
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="classe"><i class='fa'> </i><b>Classe</b></label>
-                                            <select id="classe" name="classe" class="form-control required">
-                                                <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_CLA -->
-                                                <option value="{ID_CLA}">{DESC_CLA}</option>
-                                                <!-- END BLOCK_CLA -->
-                                            </select>
-                                        </div>
+							<div class="panel-body">
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
-                                            <select id="categoria" name="categoria" class="form-control required">
-                                                <option value="">Selecione</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>                                            
-                                            
-                                            <select id="dobra1" name="dobra1" class="form-control dobra" valor="{DOBRA_1}">
-                                                <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_DOBRA1_CL -->
-                                                <optgroup label="{DESC_CLA}">
-                                                <!-- BEGIN BLOCK_DOBRA1_CAT -->
-                                                <option value="{ID_CAT}">{DESC_CAT}</option>
-                                                <!-- END BLOCK_DOBRA1_CAT -->
-                                                </optgroup>
-                                                <!-- END BLOCK_DOBRA1_CL -->
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
-                                            
-                                            <select id="dobra2" name="dobra2" class="form-control dobra" valor="{DOBRA_2}">
-                                                <option value="">Selecione</option>
-                                               <!-- BEGIN BLOCK_DOBRA2_CL -->
-                                                <optgroup label="{DESC_CLA}">
-                                                <!-- BEGIN BLOCK_DOBRA2_CAT -->
-                                                <option value="{ID_CAT}">{DESC_CAT}</option>
-                                                <!-- END BLOCK_DOBRA2_CAT -->
-                                                </optgroup>
-                                                <!-- END BLOCK_DOBRA2_CL -->
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>                                            
-                                            <select id="dobra3" name="dobra3" class="form-control dobra" valor="{DOBRA_3}">
-                                                <option value="">Selecione</option>
-                                                <!-- BEGIN BLOCK_DOBRA3_CL -->
-                                                <optgroup label="{DESC_CLA}">
-                                                <!-- BEGIN BLOCK_DOBRA3_CAT -->
-                                                <option value="{ID_CAT}">{DESC_CAT}</option>
-                                                <!-- END BLOCK_DOBRA3_CAT -->
-                                                </optgroup>
-                                                <!-- END BLOCK_DOBRA3_CL -->
-                                            </select>
-                                        </div>
-                                    </div>
+								<div class="row">
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="nome"><i class='fa'> </i><b>Nome Completo</b></label>
+											<input type="text" name="nome" id="nome" class="form-control required"/>
+										</div>
+									</div>
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label for="valor"><i class='fa'> </i><b>Valor</b></label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    R$
-                                                </div>
-                                                <input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="{VALOR}"/>
-                                                <input type="hidden" id="valorReal" name="valorReal" value="{VALOR}"/>
-                                                <input type="hidden" id="valorComp" name="valorComp" value="{VALOR}"/>
-                                            </div>
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="email"><i class='fa'> </i><b>E-mail</b></label>
+											<input type="text" name="email" id="email" class="form-control email required"/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="documento"><i class='fa'> </i><b>Documento</b></label>
+											<input type="text" name="documento" id="documento" class="form-control"/>
+										</div>
+									</div>
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="telefone"><i class='fa'> </i><b>Telefone</b></label>
+											<input type="text" name="telefone" id="telefone" class="form-control required"/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
+											<select id="graduacao" name="graduacao" class="form-control required">
+												<option value="">Selecione</option>
+												<!-- BEGIN BLOCK_GRA -->
+												<option value="{ID_GRA}">{DESC_GRA}</option>
+												<!-- END BLOCK_GRA -->
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="classe"><i class='fa'> </i><b>Classe</b></label>
+											<select id="classe" name="classe" class="form-control required">
+												<option value="">Selecione</option>
+												<!-- BEGIN BLOCK_CLA -->
+												<option value="{ID_CLA}">{DESC_CLA}</option>
+												<!-- END BLOCK_CLA -->
+											</select>
+										</div>
 
-                                        </div>
-                                    </div>
-                                </div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 col-xs-12">
+										<div class="form-group">
+											<label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
+											<select id="categoria" name="categoria" class="form-control required">
+												<option value="">Selecione</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="dobra1"><i class='fa'> </i><b>Dobra 1</b></label>
 
-                            </div>
-                            <div class="panel-footer">                              
-                                <button type="button" class="btn btn-success" id="btAdicionar">
-                                    Adicionar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <table class="table table-condensed table-striped" id="tblList"></table>
-                    <div class="row">
-                        <div class="col-md-8 text-right"></div>
-                        <div class="col-md-4 text-right">
-                            <input type="text" disabled="disabled" class="form-control disabled text-right" name="total" id="total" value="R$ 0,00"/>
-                        </div>
+											<select id="dobra1" name="dobra1" class="form-control dobra" valor="{DOBRA_1}">
+												<option value="">Selecione</option>
+												<!-- BEGIN BLOCK_DOBRA1_CL -->
+												<optgroup label="{DESC_CLA}">
+													<!-- BEGIN BLOCK_DOBRA1_CAT -->
+													<option value="{ID_CAT}">{DESC_CAT}</option>
+													<!-- END BLOCK_DOBRA1_CAT -->
+												</optgroup>
+												<!-- END BLOCK_DOBRA1_CL -->
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="dobra2"><i class='fa'> </i><b>Dobra 2</b></label>
 
-                    </div>
-                    <!-- BEGIN BLOCK_DESCONTO -->
-								<br />
-								<strong><center>Desconto de <font color="green" size="12">{PERCENT}%</font> para inscrições pagas até <font color="red" size="5">{DATA_DESCONTO}</font></center></strong>
-								<!-- END BLOCK_DESCONTO -->
-                </fieldset>
-                <form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
-                    <input type="hidden" name="acao" id="acao" value="inscricaoa"/>
-                    <input type="hidden" name="itens" id="itens" value=""/>
-                    <input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
-                    <fieldset>
-                        <legend>
-                            forma de Pagamento
-                        </legend>
-                        <div class="form-group">
-                            <label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
-                            <div class="row">
-                                <!-- BEGIN BLOCK_TIPO_PAG -->
-                                <div class="col-xs-2 col-md-2 text-center">
-                                    <div class="thumbnail">
-                                        <img src="img/credit/{IMG_PAG}" class="img-responsive" alt="{NOME_PAG}">
-                                        <input type="radio" class="form-control required" value="{ID_PAG}" name="tipoPagamento" {CHECKED}/>
-                                        {NOME_PAG}
-                                    </div>
-                                </div>
-                                <!-- END BLOCK_TIPO_PAG -->
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="panel-footer text-right">
-                <button class="btn btn-default btVoltar" type="button">
-                    <span class="glyphicon glyphicon-backward"> </span> Voltar
-                </button>
-                <button class="btn btn-primary" type="button" id="btAvancar">
-                    Avançar <span class="glyphicon glyphicon-forward"> </span>
-                </button>
+											<select id="dobra2" name="dobra2" class="form-control dobra" valor="{DOBRA_2}">
+												<option value="">Selecione</option>
+												<!-- BEGIN BLOCK_DOBRA2_CL -->
+												<optgroup label="{DESC_CLA}">
+													<!-- BEGIN BLOCK_DOBRA2_CAT -->
+													<option value="{ID_CAT}">{DESC_CAT}</option>
+													<!-- END BLOCK_DOBRA2_CAT -->
+												</optgroup>
+												<!-- END BLOCK_DOBRA2_CL -->
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4 col-xs-4">
+										<div class="form-group">
+											<label for="dobra3"><i class='fa'> </i><b>Dobra 3</b></label>
+											<select id="dobra3" name="dobra3" class="form-control dobra" valor="{DOBRA_3}">
+												<option value="">Selecione</option>
+												<!-- BEGIN BLOCK_DOBRA3_CL -->
+												<optgroup label="{DESC_CLA}">
+													<!-- BEGIN BLOCK_DOBRA3_CAT -->
+													<option value="{ID_CAT}">{DESC_CAT}</option>
+													<!-- END BLOCK_DOBRA3_CAT -->
+												</optgroup>
+												<!-- END BLOCK_DOBRA3_CL -->
+											</select>
+										</div>
+									</div>
 
-            </div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-xs-6">
+										<div class="form-group">
+											<label for="valor"><i class='fa'> </i><b>Valor</b></label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													R$
+												</div>
+												<input type="text" disabled="disabled" class="form-control disabled" name="valor" id="valor" value="{VALOR}"/>
+												<input type="hidden" id="valorReal" name="valorReal" value="{VALOR}"/>
+												<input type="hidden" id="valorComp" name="valorComp" value="{VALOR}"/>
+											</div>
 
-        </div>
+										</div>
+									</div>
+								</div>
 
-    </div>
+							</div>
+							<div class="panel-footer">
+								<button type="button" class="btn btn-success" id="btAdicionar">
+									Adicionar
+								</button>
+							</div>
+
+						</div>
+					</form>
+					<table class="table table-condensed table-striped" id="tblList"></table>
+					<div class="row">
+						<div class="col-md-8 text-right"></div>
+						<div class="col-md-4 text-right">
+							<input type="text" disabled="disabled" class="form-control disabled text-right" name="total" id="total" value="R$ 0,00"/>
+						</div>
+
+					</div>
+					<!-- BEGIN BLOCK_DESCONTO -->
+					<br />
+					<strong>
+					<center>
+						Desconto de <font color="green" size="12">{PERCENT}%</font> para inscrições pagas até <font color="red" size="5">{DATA_DESCONTO}</font>
+					</center></strong>
+					<!-- END BLOCK_DESCONTO -->
+				</fieldset>
+				<form role="form" method="post" action="portal_servicos-actionOpen" id="frmInscricao" class="form">
+					<input type="hidden" name="acao" id="acao" value="inscricaoa"/>
+					<input type="hidden" name="itens" id="itens" value=""/>
+					<input type="hidden" name="idCompeticao" id="idCompeticao" value="{ID_COMPETICAO}"/>
+					<input type="hidden" name="idAssociacao" id="idAssociacao" class="" value="{IDS_ASSOCIACAO}"/>
+					<fieldset>
+						<legend>
+							forma de Pagamento
+						</legend>
+						<div class="form-group">
+							<label for="tipoPagamento"><i class='fa'> </i><b>Selecione</b></label>
+							<div class="row">
+								<!-- BEGIN BLOCK_TIPO_PAG -->
+								<div class="col-xs-2 col-md-2 text-center">
+									<div class="thumbnail">
+										<img src="img/credit/{IMG_PAG}" class="img-responsive" alt="{NOME_PAG}">
+										<input type="radio" class="form-control required" value="{ID_PAG}" name="tipoPagamento" {CHECKED}/>
+										{NOME_PAG}
+									</div>
+								</div>
+								<!-- END BLOCK_TIPO_PAG -->
+							</div>
+						</div>
+					</fieldset>
+					<div class="row">
+							<div class="col-md-12 col-xs-12">
+								<div class="form-group">
+									<label for="atleta"><i class='fa'> </i><b>Inscrição de Atletas Especiais</b></label>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="1" name="especial" id="especial" class="flat-blue" />
+											Selecione aqui se os atletas possuem prerrogativas de descontos especiais na FEMEJU </label>
+									</div>
+								</div>
+							</div>
+						</div>
+				</form>
+			</div>
+			<div class="panel-footer text-right">
+				<button class="btn btn-default btVoltar" type="button">
+					<span class="glyphicon glyphicon-backward"> </span> Voltar
+				</button>
+				<button class="btn btn-primary" type="button" id="btAvancar">
+					Avançar <span class="glyphicon glyphicon-forward"> </span>
+				</button>
+
+			</div>
+
+		</div>
+
+	</div>
 
 </div>
 
@@ -253,7 +273,7 @@
 	var atletas = [];
 	var selected_index = -1;
 	function LimpaCampos() {
-	    $("#idAtleta").val("");
+		$("#idAtleta").val("");
 		$("#nome").val("");
 		$("#email").val("");
 		$("#documento").val("");
@@ -280,7 +300,7 @@
 		if ($("#dobra3").val() != "")
 			isdobra3 = "Sim";
 		var atleta = JSON.stringify({
-		    id: $("#idAtleta").val(),
+			id : $("#idAtleta").val(),
 			nome : $("#nome").val(),
 			email : $("#email").val(),
 			documento : $("#documento").val(),
@@ -292,9 +312,9 @@
 			dobra1 : isdobra1,
 			dobra2 : isdobra2,
 			dobra3 : isdobra3,
-			classe1: $("#dobra1").val(),
-			classe2: $("#dobra2").val(),
-			classe3: $("#dobra3").val(),
+			classe1 : $("#dobra1").val(),
+			classe2 : $("#dobra2").val(),
+			classe3 : $("#dobra3").val(),
 			nomeGraduacao : $("#graduacao").find('option:selected').text(),
 			nomeCategoria : $("#categoria").find('option:selected').text(),
 			nomeClasse : $("#classe").find('option:selected').text(),
@@ -341,18 +361,18 @@
 					}
 				}).done(function(retorno) {
 					atleta = JSON.parse(retorno);
-                    document.getElementById("nome").value = atleta.pessoa.nome+" "+atleta.pessoa.nomeMeio+" "+atleta.pessoa.sobrenome;
-                    document.getElementById("email").value = atleta.pessoa.email;
-                    document.getElementById("documento").value = atleta.pessoa.rg;
-                    if(atleta.pessoa.telCelular != '')
-                        document.getElementById("telefone").value = atleta.pessoa.telCelular;
-                     else if(atleta.pessoa.telResidencial != '')
-                        document.getElementById("telefone").value = atleta.pessoa.telResidencial;
-                     else    
-                        document.getElementById("telefone").value = atleta.pessoa.telComercial;
-                    
+					document.getElementById("nome").value = atleta.pessoa.nome + " " + atleta.pessoa.nomeMeio + " " + atleta.pessoa.sobrenome;
+					document.getElementById("email").value = atleta.pessoa.email;
+					document.getElementById("documento").value = atleta.pessoa.rg;
+					if (atleta.pessoa.telCelular != '')
+						document.getElementById("telefone").value = atleta.pessoa.telCelular;
+					else if (atleta.pessoa.telResidencial != '')
+						document.getElementById("telefone").value = atleta.pessoa.telResidencial;
+					else
+						document.getElementById("telefone").value = atleta.pessoa.telComercial;
+
 					document.getElementById("idAtleta").value = atleta.pessoa.id;
-					document.getElementById("graduacao").value = atleta.graduacao.id; 			
+					document.getElementById("graduacao").value = atleta.graduacao.id;
 				});
 
 			}
@@ -381,8 +401,8 @@
 				}
 
 			});
-			$("#valor").val(valor.format(2,3,".",","));
-			$("#valorReal").val(valor.format(2,3,".",","));
+			$("#valor").val(valor.format(2, 3, ".", ","));
+			$("#valorReal").val(valor.format(2, 3, ".", ","));
 		});
 
 		$("#classe").change(function() {
@@ -464,10 +484,10 @@
 				}
 			}
 		});
-		
-		$("#nome").change(function(){
-            $("#idAtleta").val("");
-        });
+
+		$("#nome").change(function() {
+			$("#idAtleta").val("");
+		});
 
 	});
 

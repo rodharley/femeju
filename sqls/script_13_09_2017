@@ -1,0 +1,2 @@
+ALTER TABLE `fmj_inscricao_competicao` ADD `idResponsavel` BIGINT NULL AFTER `idCategoria`, ADD `idAssociacao` BIGINT NULL AFTER `idResponsavel`;
+ALTER TABLE `fmj_pagamento` ADD `bitEspecial` TINYINT NOT NULL DEFAULT '0' AFTER `ufSacado`, ADD `bitResolvido` TINYINT NOT NULL DEFAULT '0' AFTER `bitEspecial`, ADD INDEX `idx_especial` (`bitEspecial`, `bitResolvido`);

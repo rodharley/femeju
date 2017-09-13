@@ -37,6 +37,22 @@ foreach ($rspag as $key => $pagamento) {
 		$TPL->PAGO = 'Sim';
 		$TPL->COLOR_PAGO = 'success';
 	}
+	if($pagamento->bitEspecial == 1){	
+	$TPL->especial = "Sim";
+		if($pagamento->bitResolvido == 1){
+			$TPL->colorEspecial = "success";
+		}else{
+			$TPL->block("BLOCK_EDITAR");
+			$TPL->colorEspecial = "danger";
+		}
+	}else{
+	$TPL->especial = "Não";
+	$TPL->colorEspecial = "default";
+	}
+	
+	
+	
+	
 	$TPL->ID_PAGAMENTO_HASH = $obj->md5_encrypt($pagamento->id);	
 foreach ($rs as $key2 => $inscricao) {
 	$TPL->ID_COMP_HASH = $obj->md5_encrypt($inscricao-> competicao->id);	

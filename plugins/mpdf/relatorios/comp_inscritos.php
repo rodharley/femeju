@@ -50,8 +50,8 @@ foreach ($rs as $key => $value) {
 
 
 //atletas sem ligacao com associacao
-	$html .= "ATLETAS SEM ASSOCIAÇÃO<hr/>";
-	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th></tr>";
+	$html .= "ATLETAS MODALIDADE ABERTA<hr/>";
+	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>Associação do Responsável</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th></tr>";
 	$sqli = "select i.* from ".Inscricao::TABELA." i where i.idAtleta is null and i.idCompeticao = ".$_REQUEST['evento'];
 	if(isset($_REQUEST['pago'])){
 	$sqli .= " and i.situacao = 1 ";
@@ -60,7 +60,7 @@ foreach ($rs as $key => $value) {
 	$rsInsc = $oInsc -> getSQL($sqli);
 	
 	foreach ($rsInsc as $key2 => $inscricao) {
-		$html .= "<tr><td>".$inscricao->classe->descricao."</td><td>".$inscricao->categoria->descricao."</td><td>".$inscricao->nomeAtleta."</td><td>".$inscricao->id."</td>";
+		$html .= "<tr><td>".$inscricao->classe->descricao."</td><td>".$inscricao->categoria->descricao."</td><td>".$inscricao->nomeAtleta."</td><td>".$inscricao->id."</td><td>".$inscricao->associacao->nome."</td>";
 		if($inscricao->dobra1 != null) $html .= "<td>".$inscricao->dobra1->classe->descricao.'-'.$inscricao->dobra1->descricao."</td>"; else $html .= "<td>-</td>";
 		if($inscricao->dobra2 != null) $html .= "<td>".$inscricao->dobra2->classe->descricao.'-'.$inscricao->dobra2->descricao."</td>"; else $html .= "<td>-</td>";
 		if($inscricao->dobra3 != null) $html .= "<td>".$inscricao->dobra3->classe->descricao.'-'.$inscricao->dobra3->descricao."</td>"; else $html .= "<td>-</td>";

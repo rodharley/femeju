@@ -1,0 +1,105 @@
+<form role="form" method="post" action="admin_inscricao-action" id="frmInscricao">
+	<input type="hidden" name="idPagamento" value="{ID_PAGAMENTO}" />
+	<input type="hidden" name="acao" value="salvar" />
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<table class="table">
+				<tr>
+					<th>Atleta</th>
+					<th>Classe</th>
+					<th colspan="2">Categoria</th>	
+				</tr>
+				<!-- BEGIN BLOCK_ATLETAS -->
+				<tbody>
+					<tr>
+						<td>
+						
+						<input type="hidden" name="inscricao[]" value="{ID_INSCRICAO}" />
+						{ATLETA} </td>
+						<td>
+						<div class="form-group">
+							{CLASSE}
+						</div></td>
+						<td colspan="2">
+						<div class="form-group">
+							{CATEGORIA}
+						</div></td>
+
+					</tr>
+					<tr>
+						<td style="border-top: none;">
+						<div class="form-group">
+							<label>Dobra 1:</label>
+							{DESCRICAO_DOBRA1}
+							<input type="text" value="{VALOR_DOBRA1}" {disabled1}  class="form-control money" name="valor_dobra1[]" />
+						</div></td>
+						<td  style="border-top: none;">
+						<div class="form-group">
+							<label>Dobra 2:</label>
+							{DESCRICAO_DOBRA2}
+							<input type="text" value="{VALOR_DOBRA2}" {disabled2} class="form-control money" name="valor_dobra2[]" />
+						</div></td>
+						<td  style="border-top: none;">
+						<div class="form-group">
+							<label>Dobra 3:</label>
+							{DESCRICAO_DOBRA3}
+							<input type="text" value="{VALOR_DOBRA3}" {disabled3} class="form-control money" name="valor_dobra3[]" />
+						</div></td>
+						<td class="col-md-2 text-right"  style="border-top: none;" ><label>Inscrição R$:</label>
+						<input type="text" value="{VALOR}" class="form-control money" name="valor[]" />
+						</td>
+					</tr>
+				</tbody>
+				<!-- END BLOCK_ATLETAS -->
+				<tr>
+					<td class="text-right" colspan="3"><label>Total Geral R$:</label></td>
+					<td class="col-md-2 text-right">
+					<div class="form-group">
+						<input type="text" id="total" name="total" disabled="disabled" class="form-control text-right"/>
+					</div></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel-footer text-right">
+			<button class="btn btn-default btVoltar" type="button">
+				<span class="glyphicon glyphicon-backward"> </span> Voltar
+			</button>
+			<button class="btn btn-success" type="submit" id="btfinalizar">
+				Salvar e Liberar Boleto
+			</button>
+		</div>
+	</div>
+</form>
+<script>
+	function somatotal() {
+		var total = 0;
+		$(".money").each(function() {
+			total = total + parseFloat($(this).val());
+		});
+		$("#total").val("R$ " + (total.format(2, 3, '.', ',')));
+
+	}
+
+
+	$(document).ready(function() {
+
+		$(".money").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : ""
+		});
+
+		$(".money").change(function() {
+			if($(this).val() == "")
+				$(this).val(0);
+			somatotal();
+
+		});
+		somatotal();
+	}); 
+</script>

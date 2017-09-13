@@ -1,5 +1,6 @@
 <form role="form" method="post" action="#" id="frmEdit">
-    <input type="hidden" name="acao" id="acao" value="guia" />
+    <input type="hidden" name="acao" id="acao" value="salvar" />
+    <input type="hidden" name="idPagamento" id="idPagamento" value="{ID_PAGAMENTO}" />
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Guia de Pagamento</h3>
@@ -77,7 +78,7 @@
                 <!-- END BLOCK_ITEM -->
                 <tr>
                     <td class="text-right" colspan="2"> Total:</td>
-                    <td class="col-md-2"  class="text-right"><h3 class="text-right">{VALOR_TOTAL}</h3></td>
+                    <td class="col-md-2"  class="text-right"><h3 class="text-right" id="valorTotal">{VALOR_TOTAL}</h3></td>
                 </tr>
             </table>
                 </div>
@@ -86,7 +87,7 @@
         <div class="panel-footer text-right">
             <button class="btn btn-default btVoltar" type="button">
                 Voltar
-            </button>
+            </button>            
             <!-- BEGIN BLOCK_BAIXA -->
             <a class="btn btn-primary" href="admin_pagamento-baixa?id={ID_HASH}">
                 <i class="fa fa-money"> </i>

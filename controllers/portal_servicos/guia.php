@@ -36,7 +36,11 @@ foreach ($rsItens as $key => $item) {
     $TPL->block("BLOCK_ITEM");
 }
 if($obj->bitPago == 0){
- $TPL->block("BLOCK_PAGAR");   
+	if($obj->bitResolvido == 1){
+ 		$TPL->block("BLOCK_PAGAR");
+	}else{
+		$TPL->block("BLOCK_AGUARDE");
+	}   
 }
 
 $TPL->show();

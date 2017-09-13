@@ -13,10 +13,10 @@ $TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idEvento']));
 $rs = $objGrad->listaAtivas();
 $rsacademias = $associacao->listaPorResponsavelAtivas($_SESSION['fmj.userId']);
-$idsAssoc = "0";
-foreach ($rsacademias as $key => $acad) {
+$idsAssoc = $objc->md5_decrypt($_REQUEST['idAssoc']);
+/*foreach ($rsacademias as $key => $acad) {
     $idsAssoc .= ",".$acad->id;
-}
+}*/
 $TPL->IDS_ASSOCIACAO = $idsAssoc;
 $rsClasses = $objc->listaClasses();
 foreach ($rs as $key => $value) {

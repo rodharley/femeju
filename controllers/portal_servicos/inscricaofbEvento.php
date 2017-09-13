@@ -22,7 +22,11 @@ if($objc->percentDesconto > 0){
 	$TPL->DATA_DESCONTO = $objc -> convdata($objc -> dataDesconto, "mtn");
 	$TPL->block("BLOCK_DESCONTO");
 }
-
+$TPL->ESPECIAL = 0;
+if(isset($_REQUEST['especial'])){
+	$TPL->ESPECIAL = 1;
+	$TPL->block("BLOCK_ESPECIAL");
+}
 if(isset($_REQUEST['todos']))
 $rsAtletas = $objA->listaPorAssociacaoAtivos($objAssociacao->id);
 else

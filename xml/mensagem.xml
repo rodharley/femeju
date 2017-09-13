@@ -86,6 +86,7 @@ Exemplos de mensagens:
 <mensagem id="80" type="success">Diploma cadastrado com sucesso!</mensagem>
 <mensagem id="81" type="success">Diploma alterado com sucesso!</mensagem>
 <mensagem id="82" type="success">Diploma Excluído com sucesso!</mensagem>
+<mensagem id="83" type="success">Inscrição alterada e liberada para o responsável com sucesso!</mensagem>
 </mensagens>
 
 

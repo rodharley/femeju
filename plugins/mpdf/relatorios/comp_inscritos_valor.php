@@ -58,8 +58,8 @@ foreach ($rs as $key => $value) {
 
 //atletas sem ligacao com associacao
 	$subtotal = 0;
-	$html .= "ATLETAS SEM ASSOCIAÇÃO<hr/>";
-	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th><th>Valor</th></tr>";
+	$html .= "ATLETAS MODALIDADE ABERTA<hr/>";
+	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>Associação do Responsável</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th><th>Valor</th></tr>";
 	$sqli = "select i.* from ".Inscricao::TABELA." i where i.idAtleta is null and i.idCompeticao = ".$_REQUEST['evento'];
 	if(isset($_REQUEST['pago'])){
 	$sqli .= " and i.situacao = 1 ";
@@ -69,7 +69,7 @@ foreach ($rs as $key => $value) {
 	
 	foreach ($rsInsc as $key2 => $inscricao) {
 		$valorAtleta = $inscricao->valor+$inscricao->valorDobra1+$inscricao->valorDobra2+$inscricao->valorDobra3;
-		$html .= "<tr><td>".$inscricao->classe->descricao."</td><td>".$inscricao->categoria->descricao."</td><td>".$inscricao->nomeAtleta."</td><td>".$inscricao->id."</td>";
+		$html .= "<tr><td>".$inscricao->classe->descricao."</td><td>".$inscricao->categoria->descricao."</td><td>".$inscricao->nomeAtleta."</td><td>".$inscricao->id."</td><td>".$inscricao->associacao->nome."</td>";
 		if($inscricao->dobra1 != null) $html .= "<td>".$inscricao->dobra1->classe->descricao.'-'.$inscricao->dobra1->descricao."</td>"; else $html .= "<td>-</td>";
 		if($inscricao->dobra2 != null) $html .= "<td>".$inscricao->dobra2->classe->descricao.'-'.$inscricao->dobra2->descricao."</td>"; else $html .= "<td>-</td>";
 		if($inscricao->dobra3 != null) $html .= "<td>".$inscricao->dobra3->classe->descricao.'-'.$inscricao->dobra3->descricao."</td>"; else $html .= "<td>-</td>";
@@ -78,9 +78,9 @@ foreach ($rs as $key => $value) {
 		$total += $valorAtleta;
 		$subtotal += $valorAtleta;
 	}
-	$html .="<tr><td colspan='7' style='text-align:right;'>Total Atletas:</td><td style='text-align:right;'>R$ ".$oAss->money($subtotal,"atb")."</td></tr>";
+	$html .="<tr><td colspan='8' style='text-align:right;'>Total Atletas:</td><td style='text-align:right;'>R$ ".$oAss->money($subtotal,"atb")."</td></tr>";
 	$html .= "</table>";
-	$html .="<table class='grade' ><tr><td colspan='7' style='text-align:right;'>Total:</td><td width='20%' style='text-align:right;'>R$ ".$oAss->money($total,"atb")."</td></tr></table>";
+	$html .="<table class='grade' ><tr><td style='text-align:right;'>Total:</td><td width='20%' style='text-align:right;'>R$ ".$oAss->money($total,"atb")."</td></tr></table>";
 
 //==============================================================
 //==============================================================

@@ -6,6 +6,8 @@ class Pagamento extends Persistencia{
     var $dataVencimento;
     var $dataPagamento;
     var $bitPago;  
+	var $bitResolvido;
+	var $bitEspecial;
     var $codigo; 
     var $numeroFebraban;       
     var $tipo = NULL;
@@ -33,14 +35,14 @@ class Pagamento extends Persistencia{
         
     }
     
-    public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$arrayResponsavel,$descricao, $itensPagamento){
+    public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$arrayResponsavel,$descricao, $itensPagamento,$especial=0){
         $total = 0;
         foreach ($itensPagamento as $key => $item) {
             $total += $item->valor;
         }    
         $this->valorTotal = $total;
         $this->dataVencimento = $dataVencimento;
-        
+        $this->bitResolvido = 1;
         if($total <= 0){
             $this->bitPago = 1;
             $this->dataPagamento = date("Y-m-d");
@@ -48,6 +50,10 @@ class Pagamento extends Persistencia{
             $this->bitPago = 0;
             $this->dataPagamento = NULL;
         }
+		if($especial == 1){
+			$this->bitResolvido = 0;
+		}
+		
         $this->grupo = $grupo;
         $this->descricao = $descricao;
         $this->nomeSacado = $arrayResponsavel['nome'];
@@ -57,6 +63,7 @@ class Pagamento extends Persistencia{
         $this->cidadeSacado = $arrayResponsavel['cidade'];
         $this->ufSacado = $arrayResponsavel['uf'];        
         $this->tipo = new PagamentoTipo($tipoPagamento);
+		$this->bitEspecial = $especial;		
         $this->save();
         
         foreach ($itensPagamento as $key => $item) {
@@ -67,7 +74,7 @@ class Pagamento extends Persistencia{
         return $this->id;
     }
     
-    function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimento = "",$codigo="",$status="") {
+    function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimento = "",$codigo="",$status="",$especial="") {
         $sql = "select count(p.id) as total from ".$this::TABELA." p  where 1 = 1 ";
         if($grupo != "")
             $sql .= " and p.idGrupo = $grupo"; 
@@ -79,6 +86,9 @@ class Pagamento extends Persistencia{
             $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
         if ($status != "")
             $sql .= " and ( p.bitPago = $status )";
+		if($especial != ""){			
+		 	$sql .= " and ( p.bitResolvido = $especial )";
+		}
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> DAO_Result($rs, "total", 0);
     }
@@ -95,7 +105,7 @@ class Pagamento extends Persistencia{
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> getSQL($sql);
     }
-    function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "",$codigo="",$status="") {
+    function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "",$codigo="",$status="",$especial="") {
 
         $sql = "select p.* from ".$this::TABELA." p where 1 = 1 ";
         
@@ -109,7 +119,9 @@ class Pagamento extends Persistencia{
             $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
         if ($status != "")
             $sql .= " and ( p.bitPago = $status )";
-        
+        if($especial != ""){			
+		 	$sql .= " and ( p.bitResolvido = $especial )";
+		}
         $sql .= "  order by p.id desc limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
 
