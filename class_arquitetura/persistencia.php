@@ -150,7 +150,7 @@ class Persistencia extends Biblioteca{
 		}else{
 			if($atributo["type"] == "fk" && $class['lazy'] == "true" && strlen($arrayValues["$field"]) > 0 ){
 				$strClass = substr($atributo['clrelation'],0,strlen($atributo['clrelation']));
-				$obj = new $strClass;
+				$obj = new $strClass;				
 				$obj->getById($arrayValues["$field"]);
 				$this->$atrb = $obj;
 				unset($obj);

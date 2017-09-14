@@ -10,8 +10,9 @@ switch ($_REQUEST['acao']){
 	case 'salvar' :
 		$conn->connection->autocommit(false);
 		$inscr->atualizarValoresInscricoes();
-        //$_SESSION['fmj.mensagem'] = 83;
-        //header("Location:admin_competicao");
+		$conn->connection->commit();
+        $_SESSION['fmj.mensagem'] = 83;
+        header("Location:admin_competicao");
         exit();
 		break;
 }

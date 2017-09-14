@@ -127,6 +127,10 @@ class Pagamento extends Persistencia{
 
     }
 	
+	function deleteItens(){
+		$sql = "delete from ".PagamentoItem::TABELA." where idPagamento = ".$this->id;
+		$this->DAO_ExecutarDelete($sql);
+	}
 	public function gerarPagamentoOutros($itens)
    {
             
@@ -191,6 +195,9 @@ function getPagamentosDeCompeticao($idCompeticao){
          return $this->getSQL("SELECT p.* FROM `fmj_pagamento` p inner join fmj_inscricao_competicao i on i.idPagamento = p.id WHERE i.idCompeticao = $idCompeticao group by i.idPagamento");         
     }
 
+function getPagamentosEspeciaisPendentes(){
+	return $this->getSQL("SELECT p.* FROM `fmj_pagamento` p WHERE bitEspecial = 1 and bitResolvido = 0");
+}
 function pesquisaRelatorio($datai,$dataf){
 	$sql = "select d.* from ".Pagamento::TABELA." d where d.bitPago = 1 and d.dataPagamento between '$datai' and '$dataf'";
 	return $this->getSQL($sql);

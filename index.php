@@ -38,9 +38,9 @@ require("controllers.php");
 require("shutdow.php");
 }catch(Exception $e){
     
-    //print_r($e);
-    //echo $_SERVER['HTTP_HOST'];
-    //exit();
+    print_r($e);
+    echo URI."/templates/portal/layout.html";
+    exit();
 
     $TPL = new Template(URI."/templates/portal/layout.html");
 	$TPL->addFile("CONTEUDO", URI."/templates/erro/erro500.html");

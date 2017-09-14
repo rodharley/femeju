@@ -1,5 +1,6 @@
 <?php
 class PagamentoItem extends Persistencia{
+	const TABELA = "fmj_pagamento_item";    
 	var $valor;
     var $atleta = null;
     var $custa = null;

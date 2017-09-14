@@ -41,7 +41,7 @@ class Inscricao extends Persistencia {
          return true;
     }
 	function getInscricoes($idCompeticao,$idPagamento){
-         return $this->getRows(0,9999,array(),array("competicao"=>"=".$idCompeticao,"pagamento"=>"=".$idPagamento));         
+         return $this->getSQL("select * from fmj_inscricao_competicao where idPagamento =".$idPagamento);         
     }
 	
 	function ExcluirInscricao($idPagamento){
@@ -68,17 +68,31 @@ class Inscricao extends Persistencia {
 	function atualizarValoresInscricoes(){
 		$pag = new Pagamento();
 		$pag->getById($_REQUEST['idPagamento']);
-		$custa = $pag->itens[0];
-		print_r( $custa);
-		exit();
+		$pag->deleteItens();
+		$custa = $pag->itens[0]->custa;		
+		$valorTotal=0;
+		$log = new Log();
 		foreach ($_REQUEST['inscricao'] as $key => $idInscricao) {
 			$this->getById($idInscricao);
 			$this->valor = $this->money($_REQUEST['valor'][$key],"bta");
-			$this->valorDobra1 = $this->money($_REQUEST['valor_dobra1'][$key],"bta");
-			$this->valorDobra2 = $this->money($_REQUEST['valor_dobra2'][$key],"bta");
-			$this->valorDobra3 = $this->money($_REQUEST['valor_dobra3'][$key],"bta");
+			$this->valorDobra1 = isset($_REQUEST['valor_dobra1'][$key]) ? $this->money($_REQUEST['valor_dobra1'][$key],"bta"):0;
+			$this->valorDobra2 = isset($_REQUEST['valor_dobra2'][$key]) ? $this->money($_REQUEST['valor_dobra2'][$key],"bta") : 0;
+			$this->valorDobra3 = isset($_REQUEST['valor_dobra3'][$key]) ? $this->money($_REQUEST['valor_dobra3'][$key],"bta"):0;
+			$this->save();
+			$item = new PagamentoItem();
+			$item->pagamento = $pag;
+			$item->custa = new Custa($custa);
+			$item->atleta = $this->atleta;
+			$item->descricaoItem = $this->nomeAtleta;
+			$item->valor = $this->valor+$this->valorDobra1+$this->valorDobra2+$this->valorDobra3;
+			$item->save();
+			$valorTotal += $item->valor;
 			
+		$log->gerarLog("Atualização de valor de item de pagamento ".$pag->nomeSacado." Atleta: ".$item->descricaoItem);
 		}
+		$pag->bitResolvido = 1;
+		$pag->valorTotal = $valorTotal;
+		$pag->save();
 	}
 }
 ?>

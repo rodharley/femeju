@@ -1,2 +1,5 @@
 ALTER TABLE `fmj_inscricao_competicao` ADD `idResponsavel` BIGINT NULL AFTER `idCategoria`, ADD `idAssociacao` BIGINT NULL AFTER `idResponsavel`;
-ALTER TABLE `fmj_pagamento` ADD `bitEspecial` TINYINT NOT NULL DEFAULT '0' AFTER `ufSacado`, ADD `bitResolvido` TINYINT NOT NULL DEFAULT '0' AFTER `bitEspecial`, ADD INDEX `idx_especial` (`bitEspecial`, `bitResolvido`);
+ALTER TABLE `fmj_pagamento` ADD `bitEspecial` TINYINT NOT NULL DEFAULT '0' AFTER `ufSacado`, ADD `bitResolvido` TINYINT NOT NULL DEFAULT '1' AFTER `bitEspecial`, ADD INDEX `idx_especial` (`bitEspecial`, `bitResolvido`);
+UPDATE `fmj_menu` SET `ordem` = '2' WHERE `fmj_menu`.`id` = 36;
+INSERT INTO `fmj_menu` (`id`, `idMenuPai`, `nome`, `ordem`, `url`, `icone`, `visivel`) VALUES (NULL, '34', 'Aprovar Inscrições Especiais', '3', 'admin_inscricao', '', '1');
+UPDATE `fmj_menu` SET `ordem` = '4' WHERE `fmj_menu`.`id` = 45;
