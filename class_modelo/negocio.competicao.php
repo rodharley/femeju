@@ -199,7 +199,7 @@ class Competicao extends Persistencia {
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);  
 				
 				
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo, $itensPagamento,isset($_REQUEST['especial']) ? 1 : 0);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo, $itensPagamento,isset($_REQUEST['especial']) ? $_REQUEST['especial'] : 0);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
@@ -286,7 +286,7 @@ class Competicao extends Persistencia {
                 }
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']); 
-                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo,$itensPagamento,isset($_REQUEST['especial']) ? 1 : 0);
+                $idPagamento = $pag->gerarPagamento(GrupoCusta::COMPETICAO,$_REQUEST['tipoPagamento'],$dataVencimento,$arrayResp,$this->titulo,$itensPagamento,isset($_REQUEST['especial']) ? $_REQUEST['especial'] : 0);
                 $insc->atualizarPagamentos($idPagamento,$idsInscricao);
                 return $idPagamento;
    }
