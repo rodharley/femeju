@@ -208,6 +208,7 @@ set
 		<atrib tbname="valor" type="int">valor</atrib>		
 		<atrib tbname="situacao" type="int">situacao</atrib>
 		<atrib tbname="dataInscricao" type="dat">dataInscricao</atrib>
+		<atrib tbname="data_nascimento" type="dat">dataNascimento</atrib>
 		<atrib tbname="docAtleta" type="txt">docAtleta</atrib>
 		<atrib tbname="emailAtleta" type="txt">emailAtleta</atrib>
 		<atrib tbname="telefoneAtleta" type="txt">telefoneAtleta</atrib>

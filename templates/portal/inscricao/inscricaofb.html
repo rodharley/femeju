@@ -58,21 +58,25 @@
 						<div class="row">
 							<div class="col-md-12 col-xs-12">
 								<table class="table">
-									<tr>
-										<th>Atleta</th>
-										<th>Classe</th>
-										<th>Categoria</th>
-										<th class="text-right">Valor R$</th>
-									</tr>
 									<!-- BEGIN BLOCK_ATLETAS -->
 									<tbody id="linha{ID_ATLETA}">
 										<tr>
-											<td><a class="btn btn-xs btn-danger bt_excluir" title="Excluir" value="{ID_ATLETA}"  ><span  class="glyphicon glyphicon-trash"></span></a>
-											<input type="hidden" name="atleta[]" value="{ID_ATLETA}" class="form-control" />
-											{ATLETA} </td>
+											<td>
+											<input type="hidden" name="atleta[]" value="{ID_ATLETA}" />
+											<input type="hidden" name="classe{ID_ATLETA}" id="classe{ID_ATLETA}" value=""  />
+											<input type="hidden" name="dobra1{ID_ATLETA}" id="dobra1{ID_ATLETA}" value=""  />
+											<input type="hidden" name="dobra2{ID_ATLETA}" id="dobra2{ID_ATLETA}"  value=""  />
+											<input type="hidden" name="dobra3{ID_ATLETA}" id="dobra3{ID_ATLETA}" value=""  />											
+											<div class="form-group">
+												<label>Atleta:</label>
+												<a class="btn btn-xs btn-danger bt_excluir" title="Excluir" value="{ID_ATLETA}"  ><span  class="glyphicon glyphicon-trash"></span></a>
+												<p class="form-control-static" id="nome{ID_ATLETA}">{ATLETA}</p>
+												</div>
+												 </td>
 											<td>
 											<div class="form-group">
-												<select name="classe{ID_ATLETA}" class="form-control required classe" idAtleta="{ID_ATLETA}" id="classe{ID_ATLETA}">
+												<label>Classe:</label>
+												<select name="selclasse{ID_ATLETA}" class="form-control required classe" idAtleta="{ID_ATLETA}" id="selclasse{ID_ATLETA}">
 													<option value=""></option>
 													<!-- BEGIN BLOCK_CLA -->
 													<option value="{ID_CLA}">{LABEL_CLA}</option>
@@ -82,18 +86,24 @@
 											</div></td>
 											<td>
 											<div class="form-group">
+												<label>Categoria:</label>
 												<select name="categoria{ID_ATLETA}" id="categoria{ID_ATLETA}" class="form-control required" idAtleta="{ID_ATLETA}">
 													<option value=""></option>
 
 												</select>
 											</div></td>
-											<td>&nbsp;</td>
+											<td class="text-right">												
+												<div class="form-group">
+												<label>Data de Nascimento:</label>
+												<p class="form-control-static" id="datanasc{ID_ATLETA}">{DATA_NASCIMENTO_ATLETA}</p>
+												</div>
+												</td>
 										</tr>
 										<tr>
 											<td style="border-top: none;">
 											<div class="form-group">
 												<label>Dobra 1:</label>
-												<select name="dobra1{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="dobra1{ID_ATLETA}" valor="{DOBRA1}">
+												<select name="seldobra1{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="seldobra1{ID_ATLETA}" valor="{DOBRA1}">
 													<option value=""></option>
 													<!-- BEGIN BLOCK_DOBRA1_CL -->
 													<optgroup label="{LABEL_CLA}">
@@ -107,7 +117,7 @@
 											<td  style="border-top: none;">
 											<div class="form-group">
 												<label>Dobra 2:</label>
-												<select name="dobra2{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="dobra2{ID_ATLETA}" valor="{DOBRA2}">
+												<select name="seldobra2{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="seldobra2{ID_ATLETA}" valor="{DOBRA2}">
 													<option value=""></option>
 													<!-- BEGIN BLOCK_DOBRA2_CL -->
 													<optgroup label="{LABEL_CLA}">
@@ -121,7 +131,7 @@
 											<td  style="border-top: none;">
 											<div class="form-group">
 												<label>Dobra 3:</label>
-												<select name="dobra3{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="dobra3{ID_ATLETA}" valor="{DOBRA3}">
+												<select name="seldobra3{ID_ATLETA}" class="form-control dobra" idAtleta="{ID_ATLETA}" id="seldobra3{ID_ATLETA}" valor="{DOBRA3}">
 													<option value=""></option>
 													<!-- BEGIN BLOCK_DOBRA3_CL -->
 													<optgroup label="{LABEL_CLA}">
@@ -228,7 +238,7 @@
 				$.ajax({
 					url : 'ajax/option_categoria_por_classe.php',
 					data : {
-						classe : $(this).val()
+						classe : $(this).val().split(";")[0]
 					}
 				}).done(function(retorno) {
 					$("#categoria" + atleta).html(retorno);
@@ -243,19 +253,90 @@
 		$(".dobra").change(function() {
 			var atleta = $(this).attr("idAtleta");
 			var valor = parseFloat($("#valor_atleta_comp" + atleta).val());
-			if ($("#dobra1" + atleta).val() != "")
-				valor += parseFloat($("#dobra1" + atleta).attr("valor"));
-			if ($("#dobra2" + atleta).val() != "")
-				valor += parseFloat($("#dobra2" + atleta).attr("valor"));
-			if ($("#dobra3" + atleta).val() != "")
-				valor += parseFloat($("#dobra3" + atleta).attr("valor"));
+			if ($("#seldobra1" + atleta).val() != "")
+				valor += parseFloat($("#seldobra1" + atleta).attr("valor"));
+			if ($("#seldobra2" + atleta).val() != "")
+				valor += parseFloat($("#seldobra2" + atleta).attr("valor"));
+			if ($("#seldobra3" + atleta).val() != "")
+				valor += parseFloat($("#seldobra3" + atleta).attr("valor"));
 
 			$("#valor_atleta" + atleta).val(valor.format(2, 3, ".", ","));
 			somatotal();
 		});
 
-		$("#btfinalizar").click(function() {
+		$("#btfinalizar").click(function() {			
+			
 			if ($("#frmInscricao").valid()) {
+				
+				var mensagemErro = "";
+				
+				$('input[name="atleta[]"]').each(function(){				
+					var data = $("#datanasc"+$(this).val()).html();
+					if(data != ""){
+						var idade = gregorianAge(datebrtous(data));
+						
+						//valida a classe
+						var arrayClasse = $("#selclasse"+$(this).val()).val().split(';');
+						var id = arrayClasse[0];
+						var maximo = arrayClasse[1];
+						var minimo = arrayClasse[2];
+						if(idade < minimo || idade > maximo){	
+								mensagemErro = $("#nome"+$(this).val()).html()+" - Idade não compatível com a classe selecionada!";
+								
+						}	
+						$("#classe"+$(this).val()).val(id);
+						
+						//valida a dobra 1
+						if($("#seldobra1"+$(this).val()).val() != ""){
+						var arrayClasse = $("#seldobra1"+$(this).val()).val().split(';');
+						var id = arrayClasse[0];
+						var maximo = arrayClasse[1];
+						var minimo = arrayClasse[2];
+						if(idade < minimo || idade > maximo){	
+								mensagemErro = $("#nome"+$(this).val()).html()+" - Idade não compatível com a dobra 1 selecionada!";
+								
+						}
+						
+						$("#dobra1"+$(this).val()).val(id);
+							
+						}
+						
+						//valida a dobra 2
+						if($("#seldobra2"+$(this).val()).val() != ""){
+						var arrayClasse = $("#seldobra2"+$(this).val()).val().split(';');
+						var id = arrayClasse[0];
+						var maximo = arrayClasse[1];
+						var minimo = arrayClasse[2];
+						if(idade < minimo || idade > maximo){	
+								mensagemErro = $("#nome"+$(this).val()).html()+" - Idade não compatível com a dobra 2 selecionada!";
+								
+						}	
+						
+						$("#dobra2"+$(this).val()).val(id);
+						}
+						
+						//valida a dobra 3
+						if($("#seldobra3"+$(this).val()).val() != ""){
+						var arrayClasse = $("#seldobra3"+$(this).val()).val().split(';');
+						var id = arrayClasse[0];
+						var maximo = arrayClasse[1];
+						var minimo = arrayClasse[2];
+						if(idade < minimo || idade > maximo){	
+								mensagemErro = $("#nome"+$(this).val()).html()+" - Idade não compatível com a dobra 3 selecionada!";
+								
+						}	
+						$("#dobra3"+$(this).val()).val(id);
+						}				
+						
+					}
+					
+				});
+				
+				if(mensagemErro != ""){
+					alert(mensagemErro);
+					return false;
+				}
+				
 				if (confirm("Confirma a realização da inscrição dos atletas selecionados?")) {
 					$("#frmInscricao").submit();
 				}

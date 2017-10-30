@@ -25,13 +25,13 @@ foreach ($rs as $key => $value) {
     $TPL->block("BLOCK_GRA");
 }
 foreach ($rsClasses as $key => $value) {
-    $TPL->ID_CLA = $value->classe->id;
-    $TPL->DESC_CLA = $value->classe->descricao;
+    $TPL->ID_CLA = $value->classe->id.";".$value->classe->maximo.";".$value->classe->minimo;
+    $TPL->DESC_CLA = $value->classe->descricao." - de ".$value->classe->minimo." à ".$value->classe->maximo." anos";
     $TPL->block("BLOCK_CLA");    
 	$categoria = new CategoriaPeso();
 	$rsCategs = $categoria->listaAtivasPorClasse($value->classe->id);
 	foreach ($rsCategs as $key2 => $value2) {
-		$TPL->ID_CAT = $value2->id;
+		$TPL->ID_CAT = $value2->id.";".$value->classe->maximo.";".$value->classe->minimo;
 		$TPL->DESC_CAT = $value2->descricao;
 		$TPL->block("BLOCK_DOBRA1_CAT");
 		$TPL->block("BLOCK_DOBRA2_CAT");

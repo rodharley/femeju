@@ -194,7 +194,7 @@ class Competicao extends Persistencia {
                 $item->custa = $this->custa;
                 $item->descricaoItem = $atleta->pessoa->getNomeCompleto();   
                 array_push($itensPagamento,$item);        
-                }
+                }				
                 $resp = new Pessoa();
                 $arrayResp = $resp->gerarArraySacado($_SESSION['fmj.userId']);  
 				
@@ -249,6 +249,7 @@ class Competicao extends Persistencia {
                 $insc->telefoneAtleta = $arrAtleta['telefone'];
                 $insc->emailAtleta =utf8_decode($arrAtleta['email']);
                 $insc->dataInscricao = date("Y-m-d");
+				$insc->dataNascimento = $this->convdata($arrAtleta['dataNascimento'],"ntm");
                 $insc->situacao = 0;
                 $insc->valor = $this->custa->valor - ($this->custa->valor*$desconto);                
                 $insc->competicao = $this;
@@ -264,7 +265,11 @@ class Competicao extends Persistencia {
                 $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
                 }
 				$insc->responsavel = new Usuario($_SESSION['fmj.userId']);
+				if(isset($_REQUEST['idAssociacao'])){
 				$insc->associacao = new Associacao($_REQUEST['idAssociacao']);
+				}else{
+					$insc->associacao = null;
+				}
                 $idsInscricao .= ",".$insc->save();   
                 
                 

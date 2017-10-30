@@ -1,0 +1,1 @@
+ALTER TABLE `fmj_inscricao_competicao` ADD `data_nascimento` DATE NULL AFTER `idAssociacao`, ADD INDEX `idx_data_nascimento` (`data_nascimento`);

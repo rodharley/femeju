@@ -145,7 +145,7 @@ public function listaAtivos(){
         
         if ($nome != "")
             $sql .= " and ( concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$nome%')";
-        if ($associacao != "0")
+        if ($associacao != "")
             $sql .= " and (a.idAssociacao in($associacao))";
         
         $sql .= "  order by p.nome limit 0,10";  

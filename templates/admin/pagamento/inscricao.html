@@ -79,8 +79,16 @@
                                             </select>
                                         </div>
                                     </div>                               
+                                    <div class="col-md-6 col-xs-6">                                        
+										<div class="form-group">
+					                        <label for="dataNascimento"><i class='fa'></i><b>Data de Nascimento</b></label>
+					                        <input id="dataNascimento" type="text" name="dataNascimento" value="" class="required form-control">
+					                    </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 col-xs-6">
-                                        <div class="form-group">
+                                       <div class="form-group">
                                             <label for="classe"><i class='fa'> </i><b>Classe</b></label>
                                             <select id="classe" name="classe" class="form-control required">
                                                 <option value="">Selecione</option>
@@ -89,11 +97,8 @@
                                                 <!-- END BLOCK_CLA -->
                                             </select>
                                         </div>
-
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12">
+                                    <div class="col-md-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="categoria"><i class='fa'> </i><b>Categoria</b></label>
                                             <select id="categoria" name="categoria" class="form-control required">
@@ -247,6 +252,7 @@
 		$("#valorReal").val($("#valorComp").val());
 		$("#dobra1").val("");
         $("#dobra2").val("");
+        $("#dataNascimento").val("");
         $("#dobra3").val("");
 		$("#graduacao").val("");
 		$("#classe").val("");
@@ -270,16 +276,17 @@
 			email : $("#email").val(),
 			documento : $("#documento").val(),
 			telefone : $("#telefone").val(),
-			classe : $("#classe").val(),
+			classe : $("#classe").val().split(';')[0],
 			categoria : $("#categoria").val(),
 			graduacao : $("#graduacao").val(),
 			valor : $("#valorReal").val(),
 			dobra1 : isdobra1,
             dobra2 : isdobra2,
             dobra3 : isdobra3,
-            classe1: $("#dobra1").val(),
-            classe2: $("#dobra2").val(),
-            classe3: $("#dobra3").val(),
+            classe1: $("#dobra1").val().split(';')[0],
+            classe2: $("#dobra2").val().split(';')[0],
+            classe3: $("#dobra3").val().split(';')[0],
+            dataNascimento : $("#dataNascimento").val(), 
 			nomeGraduacao : $("#graduacao").find('option:selected').text(),
 			nomeCategoria : $("#categoria").find('option:selected').text(),
 			nomeClasse : $("#classe").find('option:selected').text(),
@@ -331,7 +338,8 @@
 					document.getElementById("documento").value = atleta.pessoa.rg;
 					document.getElementById("telefone").value = atleta.pessoa.telCelular;		
 					document.getElementById("idAtleta").value = atleta.pessoa.id;
-					document.getElementById("graduacao").value = atleta.graduacao.id;     			
+					document.getElementById("graduacao").value = atleta.graduacao.id; 
+					document.getElementById("dataNascimento").value = atleta.pessoa.dataNascimento;     			
 				});
 
 			}
@@ -370,12 +378,13 @@
 
 		
 		$("#classe").change(function() {
-
+			
 			if ($(this).val() != "") {
+				var arrayClasse = $(this).val().split(';');
 				$.ajax({
 					url : 'ajax/option_categoria_por_classe.php',
 					data : {
-						classe : $(this).val()
+						classe : arrayClasse[0]
 					}
 				}).done(function(retorno) {
 					$("#categoria").html(retorno);
@@ -389,6 +398,50 @@
 
 		$("#btAdicionar").click(function() {
 			if ($("#frmAtleta").valid()) {
+				
+				var idade = gregorianAge(datebrtous($("#dataNascimento").val()));
+				//testa se a classe é da idade do atleta:
+				var arrayClasse = $("#classe").val().split(';');
+				var id = arrayClasse[0];
+				var maximo = arrayClasse[1];
+				var minimo = arrayClasse[2];
+				if(idade < minimo || idade > maximo){	
+						alert("Idade não compatível com a classe selecionada!");
+						return false;	
+				}	
+				
+				if($("#dobra1").val() != ""){
+					var arrayClasse = $("#dobra1").val().split(';');
+					var id = arrayClasse[0];
+					var maximo = arrayClasse[1];
+					var minimo = arrayClasse[2];	
+					if(idade < minimo || idade > maximo){	
+						alert("Idade não compatível com a dobra 1 selecionada!");
+						return false;	
+					}	
+				}
+				if($("#dobra2").val() != ""){
+					var arrayClasse = $("#dobra2").val().split(';');
+					var id = arrayClasse[0];
+					var maximo = arrayClasse[1];
+					var minimo = arrayClasse[2];	
+					if(idade < minimo || idade > maximo){	
+						alert("Idade não compatível com a dobra 2 selecionada!");
+						return false;	
+					}	
+					
+				}
+				if($("#dobra3").val() != ""){
+					var arrayClasse = $("#dobra3").val().split(';');
+					var id = arrayClasse[0];
+					var maximo = arrayClasse[1];
+					var minimo = arrayClasse[2];	
+					if(idade < minimo || idade > maximo){	
+						alert("Idade não compatível com a dobra 3 selecionada!");
+						return false;	
+					}	
+				}	
+				
 				AddAtleta();
 				List();
 				LimpaCampos();

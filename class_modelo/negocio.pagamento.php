@@ -36,10 +36,11 @@ class Pagamento extends Persistencia{
     }
     
     public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$arrayResponsavel,$descricao, $itensPagamento,$especial=0){
-        $total = 0;
-        foreach ($itensPagamento as $key => $item) {
+        $total = 0.0;
+        foreach ($itensPagamento as $key => $item) {        	
             $total += $item->valor;
         }    
+		//$total = $this->money($total,"bta");		
         $this->valorTotal = $total;
         $this->dataVencimento = $dataVencimento;
         $this->bitResolvido = 1;
@@ -63,7 +64,8 @@ class Pagamento extends Persistencia{
         $this->cidadeSacado = $arrayResponsavel['cidade'];
         $this->ufSacado = $arrayResponsavel['uf'];        
         $this->tipo = new PagamentoTipo($tipoPagamento);
-		$this->bitEspecial = $especial;		
+		$this->bitEspecial = $especial;	
+			
         $this->save();
         
         foreach ($itensPagamento as $key => $item) {

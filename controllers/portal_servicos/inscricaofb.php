@@ -42,18 +42,19 @@ foreach ($rsAtletas as $key => $value) {
 	if ($value -> graduacao != null) {
 		$TPL -> ATLETA = $value -> pessoa -> getNomeCompleto();
 		$TPL -> ID_ATLETA = $value -> id;
+		$TPL-> DATA_NASCIMENTO_ATLETA = $objA->convdata($value -> pessoa -> dataNascimento,"mtn");
 		$TPL -> GRAD_ATLETA = $value -> graduacao -> id;
 
 		//classes
 		foreach ($rsClasses as $key2 => $grupo) {
-			$TPL -> ID_CLA = $grupo -> classe -> id;
-			$TPL -> LABEL_CLA = $grupo -> classe -> descricao;
+			$TPL -> ID_CLA = $grupo -> classe -> id.";".$grupo->classe->maximo.";".$grupo->classe->minimo;
+			$TPL -> LABEL_CLA = $grupo -> classe -> descricao." - de ".$grupo->classe->minimo." à ".$grupo->classe->maximo." anos";;
 			$TPL -> block("BLOCK_CLA");
 
 			$categoria = new CategoriaPeso();
 			$rsCategs = $categoria -> listaAtivasPorClasse($grupo -> classe -> id);
 			foreach ($rsCategs as $key3 => $value2) {
-				$TPL -> ID_CAT = $value2 -> id;
+				$TPL -> ID_CAT = $value2 -> id.";".$grupo->classe->maximo.";".$grupo->classe->minimo;
 				$TPL -> DESC_CAT = $value2 -> descricao;
 				$TPL -> block("BLOCK_DOBRA1_CAT");
 				$TPL -> block("BLOCK_DOBRA2_CAT");

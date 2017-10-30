@@ -55,7 +55,7 @@ foreach ($rs as $key => $value) {
 	$html .= "</table>";
 }
 
-
+if($oeve->tipo == 2){
 //atletas sem ligacao com associacao
 	$subtotal = 0;
 	$html .= "ATLETAS MODALIDADE ABERTA<hr/>";
@@ -80,6 +80,7 @@ foreach ($rs as $key => $value) {
 	}
 	$html .="<tr><td colspan='8' style='text-align:right;'>Total Atletas:</td><td style='text-align:right;'>R$ ".$oAss->money($subtotal,"atb")."</td></tr>";
 	$html .= "</table>";
+	}
 	$html .="<table class='grade' ><tr><td style='text-align:right;'>Total:</td><td width='20%' style='text-align:right;'>R$ ".$oAss->money($total,"atb")."</td></tr></table>";
 
 //==============================================================
