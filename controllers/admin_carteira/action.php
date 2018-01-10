@@ -107,7 +107,7 @@ if (isset($_REQUEST['acao'])) {
                 $canvas -> writeText('40', '140', $atleta -> pessoa -> getNomeCompleto(), 0);
                 $canvas -> writeText('40', '212', $atleta -> graduacao -> descricao . " - " . $atleta -> graduacao -> faixa, 0);
                 $canvas -> writeText('440', '212', $atleta -> convdata($atleta -> pessoa -> dataNascimento, "mtn"), 0);
-                $canvas -> writeText('40', '284', '31 de Dezembro de 2017', 0);
+                $canvas -> writeText('40', '284', '31 de Dezembro de '.Date("Y"), 0);
             
             //assinatura do presidente
                 $assinatura = WideImage::load('img/assinatura.png');

@@ -65,5 +65,9 @@ class Anuidade extends Persistencia{
         }
         return $itens;
     }
+	
+	function getAnuidadeAtual(){
+		return $this->getRow(array("anoReferencia"=>Date("Y")));
+	}
 }
 ?>
