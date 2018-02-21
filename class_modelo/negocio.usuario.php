@@ -5,7 +5,7 @@ class Usuario extends Persistencia {
 	var $senha;
 	var $ativo;
 	var $pessoa = null;
-	
+	var $responsavel;
 
 	function LogOff() {
 		
@@ -17,14 +17,14 @@ class Usuario extends Persistencia {
 		unset($_SESSION['fmj.userFoto']);
 		unset($_SESSION['fmj.userPerfil']);
 		unset($_SESSION['fmj.userPerfilId']);
-		unset($_SESSION['fmj.menu']);
+		unset($_SESSION['fmj.userResponsavel']);
         unset($_SESSION['start']);
         unset($_SESSION['expire']);
          session_destroy();
 	}
 
 	function recuperaTotal($busca = "",$perfil = "") {
-				$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.id WHERE u.idPerfil != ".Perfil::RESPONSAVEL;
+		$sql = "select count(u.id) as total from fmj_usuario u inner join fmj_pessoa p on p.id = u.id WHERE u.idPerfil != ". Perfil::EXTERNO;
 		if ($busca != "")
 			$sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$busca%' or p.cpf like '$busca%')";
         if($perfil != "")
@@ -60,10 +60,19 @@ class Usuario extends Persistencia {
 		return $this -> getSQL($sql);
 
 	}
+	function listarUsuariosResponsavel() {
+
+		
+				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where u.responsavel = 1";
+				$sql .= "  order by p.nome";
+		
+		return $this -> getSQL($sql);
+
+	}
 
 	function listarUsuarios($primeiro = 0, $quantidade = 9999, $busca = "", $perfil = "") {
 
-				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where u.idPerfil != ".Perfil::RESPONSAVEL;
+				$sql = "select u.* from fmj_usuario u inner join fmj_pessoa p on p.id = u.id where u.idPerfil != ". Perfil::EXTERNO;
 		
 		if ($busca != "")
 			$sql .= " and (concat(p.nome,' ', p.nomeMeio,' ', p.sobrenome) like '%$busca%' or p.cpf like '$busca%')";
@@ -88,6 +97,7 @@ class Usuario extends Persistencia {
 					$_SESSION['fmj.userPerfil'] = $this -> perfil -> descricao;
 					$_SESSION['fmj.userFoto'] = $this -> pessoa->foto;
 					$_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;		
+					$_SESSION['fmj.userResponsavel'] = $this -> responsavel;	
 					$_SESSION['start'] = time(); // Taking now logged in time.
                         // Ending a session in 30 minutes from the starting time.
                     $_SESSION['expire'] = $_SESSION['start'] + (1800);			
@@ -214,6 +224,7 @@ class Usuario extends Persistencia {
 		$this -> perfil = $p;
 		$this -> senha = "";
         $this -> ativo = 0;
+		$this->responsavel = isset($_REQUEST['responsavel']) ? 1 : 0;
 		//$senha = $_REQUEST['senha'] != "" ? $_REQUEST['senha'] : md5($this -> makePassword(8));
 		$pessoa = new Pessoa();
         $pessoa->ConsultaCPFExistente($strCPF);            
@@ -264,6 +275,7 @@ class Usuario extends Persistencia {
 			$p -> id = $_REQUEST['perfil'];
             $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
 			$this -> perfil = $p;
+			$this->responsavel = isset($_REQUEST['responsavel']) ? 1 : 0;
 			$this -> pessoa -> nome = $_REQUEST['nome'];
             $this->pessoa->nome = $_REQUEST['nome'];
             $this->pessoa->sobrenome = $_REQUEST['sobreNome'];
@@ -374,7 +386,8 @@ class Usuario extends Persistencia {
                     $_SESSION['fmj.userNome'] = $this -> nome;
                     $_SESSION['fmj.userPerfil'] = $this -> perfil -> descricao;
                     $_SESSION['fmj.userFoto'] = $this -> foto;
-                    $_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;                  
+                    $_SESSION['fmj.userPerfilId'] = $this -> perfil -> id;      
+					$_SESSION['fmj.userResponsavel'] = $this -> responsavel;            
                     //grava a log
                 $log = new Log();
                 

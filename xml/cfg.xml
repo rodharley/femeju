@@ -294,8 +294,7 @@ set
 	<class name="Perfil" tbname="fmj_perfil" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="nome" type="txt">descricao</atrib>	
-	</class>	
-	
+	</class>
 	<class name="Permissao" tbname="fmj_permissao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
 		<atrib tbname="idAcademia" type="fk" clrelation="Academia">academia</atrib>
@@ -349,8 +348,10 @@ set
 		<atrib tbname="id" type="id">id</atrib>	
 		<atrib tbname="senha" type="txt">senha</atrib>		
 		<atrib tbname="ativo" type="int">ativo</atrib>
+		<atrib tbname="responsavel" type="int">responsavel</atrib>
 		<atrib tbname="idPerfil" type="fk" clrelation="Perfil">perfil</atrib>
 		<atrib tbname="id" type="fk" clrelation="Pessoa">pessoa</atrib>
+
 				
 	</class>
 	<class name="Uf" tbname="fmj_uf" tbid="id" lazy="true">

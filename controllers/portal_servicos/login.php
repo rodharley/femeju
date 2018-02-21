@@ -6,8 +6,7 @@ if($user->login($_POST['login'], $_POST['senha'])){
         else
     	header("Location:portal_servicos-main");
 	exit();
-}else{
-    	
+}else{    	
 	header("Location:portal_servicos-entrar");
 }
 

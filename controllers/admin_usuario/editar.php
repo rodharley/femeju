@@ -61,7 +61,9 @@ if(isset($_REQUEST['id'])){
 	$TPL->checknao = "checked='checked'";
 	$TPL->checksim = "";
 	}
-
+	if($usu->responsavel == 1){
+	$TPL->ISRESPONSAVEL = "checked='checked'";		
+	}
 
 	if(strlen($usu->pessoa->foto) > 0){
 		$TPL->IMG_USER = "<img src='img/pessoas/".$usu->pessoa->foto."' class='file-preview-image' alt='".$usu->pessoa->foto."' title='".$usu->pessoa->foto."'>";

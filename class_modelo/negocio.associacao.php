@@ -119,6 +119,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objUser->id = $id;
             $objUser -> senha = "";
             $objUser -> ativo = 0;
+			$objUser -> responsavel = 1;
             $objUser -> pessoa = $objPessoa;
             $objUser -> save();
             $objUser->id = $id;
@@ -216,6 +217,7 @@ function pesquisarTotal($nome = "",$sigla = "",$ativo = "") {
             $objUser->id = $id;
             $objUser -> senha = "";
             $objUser -> ativo = 0;
+			$objUser -> responsavel = 1;
             $objUser -> pessoa = $objPessoa;
             $objUser -> save();
             $objUser->id = $id;

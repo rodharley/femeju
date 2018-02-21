@@ -26,11 +26,11 @@ $TPL->BREADCRUMB = '<section class="content-header">
 
 $TPL->addFile("CONTEUDO", "templates/admin/usuario/main.html");
 $TPL->LOADING = CARREGANDO;
-$TPL->ID_PERFIL_RESPONSAVEL = Perfil::RESPONSAVEL;
+$TPL->ID_PERFIL_RESPONSAVEL = Perfil::EXTERNO;
 $rsPerfil = $perfil->getRows();
 foreach ($rsPerfil as $key => $value) {
    
-   if($value->id != Perfil::RESPONSAVEL){
+   if($value->id != Perfil::EXTERNO){
     $TPL->ID_PERFIL = $value->id;
     $TPL->DESC_PERFIL = $value->descricao;    
     $TPL->block("ITEM_PERFIL");

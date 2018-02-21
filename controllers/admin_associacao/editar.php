@@ -39,7 +39,7 @@ $TPL->checkedAtivo = "checked";
 $TPL->checkedInativo = "";
 $listaUf = $uf->getRows();
 
-$listaResp =  $objUsuario->listarUsuariosPerfil();
+$listaResp =  $objUsuario->listarUsuariosResponsavel();
 
 if(isset($_REQUEST['id'])){
 	$objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['id']));

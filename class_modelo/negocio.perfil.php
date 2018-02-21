@@ -1,6 +1,6 @@
 <?php
 class Perfil extends Persistencia{
-	const RESPONSAVEL = 3;
+	const EXTERNO = 3;
     const ADMINISTRADOR = 1;    
     const ARBITRAGEM = 2;
 	var $descricao;
