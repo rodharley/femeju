@@ -20,6 +20,7 @@ class Pagamento extends Persistencia{
     var $cidadeSacado;
     var $ufSacado;
     var $itens = array();
+	var $forma;
     public function excluir($id){
         $this->getById($this->md5_decrypt($id));        
         if($this->bitPago == 0){
@@ -41,7 +42,7 @@ class Pagamento extends Persistencia{
             $total += $item->valor;
         }    
 		//$total = $this->money($total,"bta");		
-        $this->valorTotal = $total;
+        $this->valorTotal = $this->money($total,"bta");
         $this->dataVencimento = $dataVencimento;
         $this->bitResolvido = 1;
         if($total <= 0){
@@ -171,6 +172,7 @@ class Pagamento extends Persistencia{
                 function baixaPagamento($idPagamento){
                     $this->getById($idPagamento);
                     $this->dataPagamento = $this->convdata($_REQUEST['dataPagamento'], "ntm");
+					$this->forma = $_REQUEST['forma'];
                     $this->bitPago = 1;
                     $this->save();
                     switch ($this->grupo) {

@@ -40,7 +40,7 @@ $boleto = new Femeju(array(
         $descricaoPagamento
     ),
     'instrucoes' => array( // Ate 8
-        $brbarray[17],        
+        $descricaoPagamento."<br/>".$brbarray[17],        
     ),
 
     // Parâmetros opcionais

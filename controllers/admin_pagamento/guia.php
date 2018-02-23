@@ -38,6 +38,7 @@ $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
 $TPL->DESCRICAO = $obj->descricao; 
 $TPL->SITUACAO = $obj->bitPago == 1 ? "Pago" : "Em aberto";
 $TPL->COLOR_SITUACAO = $obj->bitPago == 1 ? "success" : "danger";
+$TPL->FORMA = $obj->forma;
 //boleto
 $TPL->TIPO_PAG_ARQUIVO = $obj->tipo->arquivo;
 
@@ -56,6 +57,8 @@ if(in_array(41, $armenus) && $obj->bitPago == 0){
 }
 if($obj->bitPago == 0){
  $TPL->block("BLOCK_PAGAR");   
+}else{
+$TPL->block("BLOCK_BOLETO");   	
 }
 
 $TPL->show();

@@ -16,6 +16,7 @@ foreach($alist as $key => $n){
     $TPL->colorSituacao = $n->bitPago == 1 ? "success" : "danger";
     $TPL->DISABLED = $n->bitPago == 1 ? "disabled" : "";
     $TPL->responsavel = $n->nomeSacado;
+	$TPL->codigo = $n->numeroFebraban;
     $TPL->ID_HASH = $objPag->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
 

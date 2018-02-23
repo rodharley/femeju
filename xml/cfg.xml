@@ -268,7 +268,8 @@ set
 		<atrib tbname="idTipoPagamento" type="fk" clrelation="PagamentoTipo">tipo</atrib>
 		<atrib tbname="" type="set" clrelation="PagamentoItem" clorder="descricaoItem" clfk="pagamento">itens</atrib>
 		<atrib tbname="bitEspecial" type="int">bitEspecial</atrib>	
-		<atrib tbname="bitResolvido" type="int">bitResolvido</atrib>			
+		<atrib tbname="bitResolvido" type="int">bitResolvido</atrib>		
+		<atrib tbname="forma" type="txt">forma</atrib>	
 	</class>
 	<class name="PagamentoItem" tbname="fmj_pagamento_item" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

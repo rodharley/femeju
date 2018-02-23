@@ -251,7 +251,7 @@ class Competicao extends Persistencia {
                 $insc->dataInscricao = date("Y-m-d");
 				$insc->dataNascimento = $this->convdata($arrAtleta['dataNascimento'],"ntm");
                 $insc->situacao = 0;
-                $insc->valor = $this->custa->valor - ($this->custa->valor*$desconto);                
+                $insc->valor = $this->money($this->custa->valor - ($this->custa->valor*$desconto),"bta");                
                 $insc->competicao = $this;
                 $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
                 if($this->competicao == 1){                
@@ -278,13 +278,13 @@ class Competicao extends Persistencia {
                 $item->atleta = NULL;
                 
                 //soma o valor total
-                $total = $this->custa->valor- ($this->custa->valor*$desconto);
+                $total = $this->custa->valor - ($this->custa->valor*$desconto);
                  if($this->competicao == 1){  
                 $total += $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 -($this->dobra1*$desconto) : 0;
                 $total += $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 -($this->dobra2*$desconto) : 0;
                 $total += $arrAtleta['dobra3'] == "Sim" ? $this->dobra3 -($this->dobra3*$desconto) : 0;
                  }
-                $item->valor = $total; 
+                $item->valor = $this->money($total,"bta"); 
                 $item->custa = $this->custa;
                 $item->descricaoItem = utf8_decode($arrAtleta['nome']);   
                 array_push($itensPagamento,$item);        

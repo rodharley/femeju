@@ -55,7 +55,7 @@ foreach ($rs as $key => $value) {
 	$html .= "</table>";
 }
 
-if($oeve->tipo == 2){
+if($oeve->tipo == 2 && $_REQUEST['associacao'] == ""){
 //atletas sem ligacao com associacao
 	$subtotal = 0;
 	$html .= "ATLETAS MODALIDADE ABERTA<hr/>";

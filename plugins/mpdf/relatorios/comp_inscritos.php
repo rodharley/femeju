@@ -48,7 +48,7 @@ foreach ($rs as $key => $value) {
 	$html .= "</table>";
 }
 
-if($oeve->tipo == 2){
+if($oeve->tipo == 2 && $_REQUEST['associacao'] == ""){
 //atletas sem ligacao com associacao
 	$html .= "ATLETAS CADASTRADOS SEM ASSOCIAÇÃO<hr/>";
 	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>Associação do Responsável</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th></tr>";
