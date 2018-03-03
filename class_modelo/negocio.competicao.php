@@ -113,7 +113,7 @@ class Competicao extends Persistencia {
         if($ativo != "")
             $sql .= " and bitAtivo = $ativo";
         
-        $sql .= "  order by dataEvento asc limit $primeiro, $quantidade";        
+        $sql .= "  order by dataEvento desc limit $primeiro, $quantidade";        
         return $this -> getSQL($sql);
 
     }

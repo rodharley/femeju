@@ -21,15 +21,15 @@ class Pagamento extends Persistencia{
     var $ufSacado;
     var $itens = array();
 	var $forma;
-    public function excluir($id){
+    public function cancelar($id){
         $this->getById($this->md5_decrypt($id));        
         if($this->bitPago == 0){
-        if ($this -> delete($this -> id)){
+        	$this -> bitPago = 2;
+        	$this -> save();
             $log = new Log();
-            $log->gerarLog("Exclusão de Pagamento");
+            $log->gerarLog("Cancelamento de Pagamento");
             $_SESSION['fmj.mensagem'] = 53;            
-        }else
-            $_SESSION['fmj.mensagem'] = 17;
+        
         }else{
             $_SESSION['fmj.mensagem'] = 17;
         }
@@ -77,14 +77,16 @@ class Pagamento extends Persistencia{
         return $this->id;
     }
     
-    function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimento = "",$codigo="",$status="",$especial="") {
+    function pesquisarTotal($grupo = "",$responsavel = "",$dataVencimentoI = "",$dataVencimentoF = "",$codigo="",$status="",$especial="") {
         $sql = "select count(p.id) as total from ".$this::TABELA." p  where 1 = 1 ";
         if($grupo != "")
             $sql .= " and p.idGrupo = $grupo"; 
         if ($responsavel != "")
             $sql .= " and ( p.nomeSacado like '%$responsavel%')";
-        if ($dataVencimento != "")
-            $sql .= " and ( p.dataVencimento =  '$dataVencimento')";
+        if ($dataVencimentoI != "")
+            $sql .= " and ( p.dataVencimento >= '$dataVencimentoI')";
+		if ($dataVencimentoF != "")
+            $sql .= " and ( p.dataVencimento <= '$dataVencimentoF')";
         if ($codigo != "")
             $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
         if ($status != "")
@@ -108,7 +110,7 @@ class Pagamento extends Persistencia{
         $rs = $this -> DAO_ExecutarQuery($sql);
         return $this -> getSQL($sql);
     }
-    function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimento = "",$codigo="",$status="",$especial="") {
+    function pesquisar($primeiro = 0, $quantidade = 9999, $grupo = "",$responsavel = "",$dataVencimentoI = "",$dataVencimentoF = "",$codigo="",$status="",$especial="") {
 
         $sql = "select p.* from ".$this::TABELA." p where 1 = 1 ";
         
@@ -116,8 +118,10 @@ class Pagamento extends Persistencia{
             $sql .= " and idGrupo = $grupo"; 
         if ($responsavel != "")
             $sql .= " and ( p.nomeSacado like '%$responsavel%')";
-        if ($dataVencimento != "")
-            $sql .= " and ( p.dataVencimento =  '$dataVencimento')";
+        if ($dataVencimentoI != "")
+            $sql .= " and ( p.dataVencimento >= '$dataVencimentoI')";
+		if ($dataVencimentoF != "")
+            $sql .= " and ( p.dataVencimento <= '$dataVencimentoF')";
         if ($codigo != "")
             $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
         if ($status != "")

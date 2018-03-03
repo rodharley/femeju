@@ -2,8 +2,8 @@
     $(document).ready(function() {
         
         $('.excluir').click(function() {
-            if (confirm("Tem certeza que deseja excluir esse registro e todas as suas dependências do sistema?"))
-                window.location.href = 'admin_pagamento-action?acao=excluir&id=' + $(this).attr("value");
+            if (confirm("Tem certeza que deseja cancelar esse pagamento?"))
+                window.location.href = 'admin_pagamento-action?acao=cancelar&id=' + $(this).attr("value");
         });
         $(".paginar").click(function(){
             $("#pagina").val($(this).attr("value"));

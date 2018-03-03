@@ -24,8 +24,5 @@ foreach ($rsAnos as $key3 => $anuidade) {
     $TPL -> block("BLOCK_ANO");
 
 }
-
- 
-
 $TPL->show();
 ?>

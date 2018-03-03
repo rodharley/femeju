@@ -16,6 +16,8 @@ foreach($alist as $key => $n){
    	$TPL->NOME = $n->pessoa->nome." ".$n->pessoa->nomeMeio." ".$n->pessoa->sobrenome;
     $TPL->SITUACAO = $n->ativo == 1 ? "Regular" : "Irregular";
     $TPL->COLOR_SITUACAO = $n->ativo == 1 ? "success" : "danger";
+	$TPL->GRADUACAO = $n->graduacao == null ? "Não Definido" : $n->graduacao ->faixa;
+    $TPL->COLOR_GRADUACAO = $n->graduacao == null ? "default" : $n->graduacao ->imagem;
     $TPL->ASSOCIACAO = $n->associacao->nome;
     $TPL->ID_HASH = $obj->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");

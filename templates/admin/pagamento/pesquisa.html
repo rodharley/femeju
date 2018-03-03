@@ -43,15 +43,23 @@
 							Pago &nbsp;&nbsp;
 							<input type="radio" class="required form-control flat-blue"  name="status" value="0"/>
 							Em Aberto
+							<input type="radio" class="required form-control flat-blue"  name="status" value="2"/>
+							Cancelado
 						</p>
 					</div>
 				</div>
 			</div>			
 			<div class="row">
-				<div class="col-md-12 col-xs-12">
+				<div class="col-md-6 col-xs-66">
 					<div class="form-group">
-						<label for="dataVencimento"><i class='fa'> </i><b>Data de Vencimento</b></label>
-						<input type="text" value="" name="dataVencimento" id="dataVencimento" class="form-control"/>
+						<label for="dataVencimento"><i class='fa'> </i><b>De:(Data de Vencimento)</b></label>
+						<input type="text" value="" name="dataVencimentoI" id="dataVencimentoI" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-66">
+					<div class="form-group">
+						<label for="dataVencimento"><i class='fa'> </i><b>Até:(Data de Vencimento)</b></label>
+						<input type="text" value="" name="dataVencimentoF" id="dataVencimentoF" class="form-control"/>
 					</div>
 				</div>
 			</div>
@@ -102,7 +110,8 @@
 				pesquisar();
 			}
 		}, false);
-		$("#dataVencimento").datepicker();
+		$("#dataVencimentoI").datepicker();
+		$("#dataVencimentoF").datepicker();
 		$("#btPesquisar").click(function() {
 			pesquisar();
 		});

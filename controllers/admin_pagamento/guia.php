@@ -36,8 +36,21 @@ $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
 $TPL->DESCRICAO = $obj->descricao; 
-$TPL->SITUACAO = $obj->bitPago == 1 ? "Pago" : "Em aberto";
-$TPL->COLOR_SITUACAO = $obj->bitPago == 1 ? "success" : "danger";
+if($obj->bitPago == 1)  
+    $TPL->SITUACAO = "Pago";
+	else if ($obj->bitPago == 0)
+	$TPL->SITUACAO = "Em aberto";
+	else {
+	$TPL->SITUACAO = "Cancelado";
+	} 
+if($obj->bitPago == 1)  
+    $TPL->COLOR_SITUACAO = "success";
+	else if ($obj->bitPago == 0)
+	$TPL->COLOR_SITUACAO = "warning";
+	else {
+	$TPL->COLOR_SITUACAO = "danger";
+	} 
+
 $TPL->FORMA = $obj->forma;
 //boleto
 $TPL->TIPO_PAG_ARQUIVO = $obj->tipo->arquivo;
@@ -57,7 +70,8 @@ if(in_array(41, $armenus) && $obj->bitPago == 0){
 }
 if($obj->bitPago == 0){
  $TPL->block("BLOCK_PAGAR");   
-}else{
+}
+if($obj->bitPago == 1){
 $TPL->block("BLOCK_BOLETO");   	
 }
 

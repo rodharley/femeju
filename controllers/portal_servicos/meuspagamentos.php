@@ -19,8 +19,20 @@ $alist = $objPag->pesquisarPortal($configPaginacao['primeiroRegistro'],$configPa
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->valor = $objPag->money($n->valorTotal,"atb");
-    $TPL->situacao = $n->bitPago == 1 ? "Pago" : "Em aberto";
-    $TPL->colorSituacao = $n->bitPago == 1 ? "success" : "danger";
+    if($n->bitPago == 1)  
+    $TPL->situacao = "Pago";
+	else if ($n->bitPago == 0)
+	$TPL->situacao = "Em aberto";
+	else {
+	$TPL->situacao = "Cancelado";
+	} 
+	if($n->bitPago == 1)  
+    $TPL->colorSituacao = "success";
+	else if ($n->bitPago == 0)
+	$TPL->colorSituacao = "warning";
+	else {
+	$TPL->colorSituacao = "danger";
+	} 
     $TPL->DATA_VENC = $objPag->convdata($n->dataVencimento, "mtn");
     $TPL->ID_HASH = $objPag->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");

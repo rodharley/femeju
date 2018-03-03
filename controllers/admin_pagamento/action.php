@@ -10,9 +10,9 @@ $tipoPag = new PagamentoTipo();
 //ACOES
 if(isset($_REQUEST['acao'])){
 switch ($_REQUEST['acao']){
-	case 'excluir' :
+	case 'cancelar' :
 		$conn->connection->autocommit(false);
-        $pag->excluir($_REQUEST['id']);
+        $pag->cancelar($_REQUEST['id']);
         $conn->connection->commit();
         header("Location:admin_pagamento");
         exit();

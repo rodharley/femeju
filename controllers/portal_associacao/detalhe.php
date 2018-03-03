@@ -15,7 +15,7 @@ if($obj->cidade != null){
 $TPL->CIDADE = $obj->cidade->nome;
 $TPL->ESTADO = $obj->cidade->uf->uf;
 }
-$TPL->CEP = $obj->formataCep($obj->cep);
+$TPL->CEP = $obj->cep;
 $TPL->NOME_RESPONSAVEL = $obj->responsavel->pessoa->getNomeCompleto();
 $TPL->CELULAR = $obj->formataTelefone($obj->responsavel->pessoa->telCelular);
 $TPL->TELEFONE1 = $obj->formataTelefone($obj->telefone1);
