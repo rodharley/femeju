@@ -33,7 +33,10 @@ foreach ($rspag as $key => $pagamento) {
 	$TPL->NOME_RESP = $pagamento->nomeSacado;
 	if($pagamento->bitPago == 0){
 		$TPL->PAGO = 'Não';
-		$TPL->COLOR_PAGO = 'danger';
+		$TPL->COLOR_PAGO = 'warning';
+	}else if ($pagamento->bitPago == 2)	{
+		$TPL->PAGO = 'Cancelado';
+		$TPL->COLOR_PAGO = 'danger';	
 	}else{
 		$TPL->PAGO = 'Sim';
 		$TPL->COLOR_PAGO = 'success';

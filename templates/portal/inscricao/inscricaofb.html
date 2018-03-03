@@ -94,7 +94,7 @@
 											</div></td>
 											<td class="text-right">												
 												<div class="form-group">
-												<label>Data de Nascimento:</label>
+												<label>Idade em {ANO_ATUAL}: {IDADE}</label>
 												<p class="form-control-static" id="datanasc{ID_ATLETA}">{DATA_NASCIMENTO_ATLETA}</p>
 												</div>
 												</td>
@@ -272,8 +272,9 @@
 				
 				$('input[name="atleta[]"]').each(function(){				
 					var data = $("#datanasc"+$(this).val()).html();
+
 					if(data != ""){
-						var idade = gregorianAge(datebrtous(data));
+						var idade = gregorianAge(datebrtous("01/01/"+data.substring(6,10)));
 						
 						//valida a classe
 						var arrayClasse = $("#selclasse"+$(this).val()).val().split(';');

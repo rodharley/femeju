@@ -58,7 +58,7 @@ class Inscricao extends Persistencia {
 			$this->delete($inscr->id);
 		}
 		
-		$objPag->excluir($idPagamento);
+		$objPag->cancelar($idPagamento);
 		return $idCompeticao;
 		}else{
 			return 0;

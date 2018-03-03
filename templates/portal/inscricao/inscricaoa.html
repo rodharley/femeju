@@ -436,7 +436,7 @@
 			
 			if ($("#frmAtleta").valid()) {
 				
-				var idade = gregorianAge(datebrtous($("#dataNascimento").val()));
+				var idade = gregorianAge(datebrtous("01/01/"+$("#dataNascimento").val().substring(6,10)));
 				//testa se a classe é da idade do atleta:
 				var arrayClasse = $("#classe").val().split(';');
 				var id = arrayClasse[0];

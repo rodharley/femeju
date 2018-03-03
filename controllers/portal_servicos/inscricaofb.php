@@ -42,7 +42,11 @@ foreach ($rsAtletas as $key => $value) {
 	if ($value -> graduacao != null) {
 		$TPL -> ATLETA = $value -> pessoa -> getNomeCompleto();
 		$TPL -> ID_ATLETA = $value -> id;
-		$TPL-> DATA_NASCIMENTO_ATLETA = $objA->convdata($value -> pessoa -> dataNascimento,"mtn");
+		$anoatual = Date("Y");
+		$anoNascimento = substr($value -> pessoa -> dataNascimento, 0,4);
+		$TPL->ANO_ATUAL = $anoatual;
+		$TPL->IDADE = $anoatual - $anoNascimento;
+		$TPL-> DATA_NASCIMENTO_ATLETA = $objA->convdata($value -> pessoa -> dataNascimento, "mtn");
 		$TPL -> GRAD_ATLETA = $value -> graduacao -> id;
 
 		//classes
