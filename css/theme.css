@@ -1,3 +1,5 @@
+@import 'colors.css';
+
 body {
 	 background-image: url('../img/backgrounds/texturetastic_gray.png');
 	 height:100%;	  
@@ -16,7 +18,7 @@ legend {
 	padding: 0.5em;
 	font-size: 1.2em;
 	font-weight: bold;
-	color:#E08E0B;
+	color:var(--cor-principal);
 }
 
 .wrapper {
@@ -48,7 +50,7 @@ legend {
 }
 .header{
 	min-height: 65px;
-	border-bottom: solid 3px #E08E0B;
+	border-bottom: solid 3px var(--cor-principal);
 	height: 65px;
 	padding-top:7px;
 	background-image: url('../img/backgrounds/irongrip.png');
@@ -102,7 +104,7 @@ border-top: solid 1px #fff;
 }
 
 .btn-laterais:hover{
-	background-color: #E08E0B;
+	background-color: var(--cor-principal);
 	border: solid 1px #FFF;
 	color: #FFFFFF;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
@@ -134,7 +136,7 @@ border-top: solid 1px #fff;
 }
 
 .boxbanners{
-	background-color: #E08E0B;
+	background-color: var(--cor-principal);
 	border: 1px solid #FFFFFF;
     box-shadow:0 20px 20px rgba(0, 0, 0, 0.6);
     
@@ -158,7 +160,7 @@ border-top: solid 1px #fff;
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
 	min-height: 6em;
 	border: solid 1px #e8e8e8;
-	border-right: solid 4px #E08E0B;	
+	border-right: solid 4px var(--cor-principal);	
 	padding: 0.5em;
 }
 .etiqueta .thumb {
@@ -177,7 +179,7 @@ border-top: solid 1px #fff;
 	background-position:center;	
 	margin:0em;
 	height: 15em;
-	border:solid 2px #E08E0B;	
+	border:solid 2px var(--cor-principal);	
 }
 
 .noticia-home:hover{
@@ -220,20 +222,20 @@ border-top: solid 1px #fff;
 				font-weight: 700;
 				line-height: 19px;
 				margin: 0 0 5px;
-				color: #e08e0b;
+				color: var(--cor-principal);
 			}
 #mod-noticias h2, h2.post-title-small a{
-				color: #e08e0b;				
+				color: var(--cor-principal);				
 			}
 #mod-noticias h2, h2.post-title {
-				color: #e08e0b;
+				color: var(--cor-principal);
 				
 				font-size: 23px;
 				font-weight: 400;
 				line-height: 30px;
 			}
 #mod-noticias h2, h2.post-title a{
-				color: #e08e0b;				
+				color: var(--cor-principal);				
 			}
 
 #mod-noticias .more_post {
@@ -251,7 +253,7 @@ border-top: solid 1px #fff;
     line-height: 39px;
 }
 #mod-noticias h1, h1.post-title a{
-				color: #e08e0b;				
+				color: var(--cor-principal);				
 			}
 
 #mod-noticias .post-title {
@@ -304,12 +306,12 @@ border-top: solid 1px #fff;
 	min-height: 2em;
 }
 #destaques .itemDestaque{
-	border-right: solid 1px #E08E0B;
+	border-right: solid 1px var(--cor-principal);
 	min-height: 12em; 
 	border-top: dashed 1px #E8e8e8;
 }
 #destaques .itemDestaque:hover{
-	background-color: #E08E0B;
+	background-color: var(--cor-principal);
 	border: solid 1px #FFF;
 	color: #FFFFFF;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
@@ -321,7 +323,7 @@ border-top: solid 1px #fff;
 	
 }
 #destaques .itemDestaqueFinal:hover{
-	background-color: #E08E0B;
+	background-color: var(--cor-principal);
 	border: solid 1px #FFF;
 	color: #FFFFFF;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);

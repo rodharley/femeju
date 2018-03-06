@@ -17,6 +17,7 @@ class Configuracoes extends Persistencia {
     const BRB_DV_CC = 15;
     const BRB_DV_AG = 16;
     const BRB_INSTRUCOES = 17;
+	const ID_COR_PORTAL = 18;
    var $valor;
    var $descricao;     
         
@@ -25,6 +26,14 @@ class Configuracoes extends Persistencia {
           $this->getById($value);
           $this->valor = $_REQUEST['configuracao'][$key];
           $this->save();
+		  
+		  //MUDA A COR DO PORTAL NO CSS
+		  if($value == 18){
+		  	$file = fopen("css/colors.css", "w+");
+			  fwrite($file, ":root {--cor-principal: ".$this->valor.";}");
+			  fclose($file);
+		  }
+		  
       }
 	  
 	  if ($_FILES['assinatura']['name'] != "") {

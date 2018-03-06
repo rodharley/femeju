@@ -1,0 +1,1 @@
+INSERT INTO `fmj_configuracoes` (`id`, `descricao`, `valor`) VALUES (NULL, 'Cor Principal do Portal', '#E08E0B');

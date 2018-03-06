@@ -29,7 +29,7 @@ foreach ($rs as $key => $value) {
     $TPL->VALOR_CONF = $value->valor;
     $TPL->DESC_CONF = $value->descricao;
     $TPL->ID_CONF = $value->id;
-	if($value->id ==  10){
+	if($value->id ==  10 || $value->id ==  18){
 		$TPL->block("BLOCK_ITEM_CONF_COLOR");
 	}elseif($value->id == 11){
 		if(strlen($value->valor) > 0){
