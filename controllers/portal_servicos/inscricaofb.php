@@ -17,15 +17,15 @@ $TPL -> ID_ASSOCIACAO = $objAssociacao -> id;
 $TPL -> ID_COMPETICAO = $objc -> id;
 $TPL -> TITULO_COMP = $objc -> titulo;
 $TPL -> DATA_COMP = $objc -> convdata($objc -> dataEvento, "mtn");
-if($objc->percentDesconto > 0){
-	$TPL->PERCENT = $objc->percentDesconto;
-	$TPL->DATA_DESCONTO = $objc -> convdata($objc -> dataDesconto, "mtn");
-	$TPL->block("BLOCK_DESCONTO");
+if ($objc -> percentDesconto > 0) {
+	$TPL -> PERCENT = $objc -> percentDesconto;
+	$TPL -> DATA_DESCONTO = $objc -> convdata($objc -> dataDesconto, "mtn");
+	$TPL -> block("BLOCK_DESCONTO");
 }
-$TPL->ESPECIAL = 0;
-if(isset($_REQUEST['especial'])){
-	$TPL->ESPECIAL = 1;
-	$TPL->block("BLOCK_ESPECIAL");
+$TPL -> ESPECIAL = 0;
+if (isset($_REQUEST['especial'])) {
+	$TPL -> ESPECIAL = 1;
+	$TPL -> block("BLOCK_ESPECIAL");
 }
 
 if (isset($_REQUEST['todos']))
@@ -43,31 +43,40 @@ foreach ($rsAtletas as $key => $value) {
 		$TPL -> ATLETA = $value -> pessoa -> getNomeCompleto();
 		$TPL -> ID_ATLETA = $value -> id;
 		$anoatual = Date("Y");
-		$anoNascimento = substr($value -> pessoa -> dataNascimento, 0,4);
-		$TPL->ANO_ATUAL = $anoatual;
-		$TPL->IDADE = $anoatual - $anoNascimento;
-		$TPL-> DATA_NASCIMENTO_ATLETA = $objA->convdata($value -> pessoa -> dataNascimento, "mtn");
+		$anoNascimento = substr($value -> pessoa -> dataNascimento, 0, 4);
+		$TPL -> ANO_ATUAL = $anoatual;
+		$idade = $anoatual - $anoNascimento;
+		$TPL -> IDADE = $idade;
+		$TPL -> DATA_NASCIMENTO_ATLETA = $objA -> convdata($value -> pessoa -> dataNascimento, "mtn");
 		$TPL -> GRAD_ATLETA = $value -> graduacao -> id;
+		$TPL -> GENERO_ATLETA = $value -> pessoa -> sexo;
 
 		//classes
 		foreach ($rsClasses as $key2 => $grupo) {
-			$TPL -> ID_CLA = $grupo -> classe -> id.";".$grupo->classe->maximo.";".$grupo->classe->minimo;
-			$TPL -> LABEL_CLA = $grupo -> classe -> descricao." - de ".$grupo->classe->minimo." à ".$grupo->classe->maximo." anos";;
-			$TPL -> block("BLOCK_CLA");
+			if ($idade <= $grupo -> classe -> maximo && $idade >= $grupo -> classe -> minimo) {
+				$objClassGrad = new ClasseGraduacao();
+				if ($objClassGrad -> getRow(array("classe" => "=" . $grupo -> classe -> id, "graduacao" => "=" . $value -> graduacao -> id))) {
 
-			$categoria = new CategoriaPeso();
-			$rsCategs = $categoria -> listaAtivasPorClasse($grupo -> classe -> id);
-			foreach ($rsCategs as $key3 => $value2) {
-				$TPL -> ID_CAT = $value2 -> id.";".$grupo->classe->maximo.";".$grupo->classe->minimo;
-				$TPL -> DESC_CAT = $value2 -> descricao;
-				$TPL -> block("BLOCK_DOBRA1_CAT");
-				$TPL -> block("BLOCK_DOBRA2_CAT");
-				$TPL -> block("BLOCK_DOBRA3_CAT");
+					$TPL -> ID_CLA = $grupo -> classe -> id . ";" . $grupo -> classe -> maximo . ";" . $grupo -> classe -> minimo;
+					$TPL -> LABEL_CLA = $grupo -> classe -> descricao . " - de " . $grupo -> classe -> minimo . " à " . $grupo -> classe -> maximo . " anos";
+					;
+					$TPL -> block("BLOCK_CLA");
+
+					$categoria = new CategoriaPeso();
+					$rsCategs = $categoria -> listaAtivasPorClasseGenero($grupo -> classe -> id, $value -> pessoa -> sexo);
+					foreach ($rsCategs as $key3 => $value2) {
+						$TPL -> ID_CAT = $value2 -> id . ";" . $grupo -> classe -> maximo . ";" . $grupo -> classe -> minimo;
+						$TPL -> DESC_CAT = $value2 -> descricao;
+						$TPL -> block("BLOCK_DOBRA1_CAT");
+						$TPL -> block("BLOCK_DOBRA2_CAT");
+						$TPL -> block("BLOCK_DOBRA3_CAT");
+					}
+
+					$TPL -> block("BLOCK_DOBRA1_CL");
+					$TPL -> block("BLOCK_DOBRA2_CL");
+					$TPL -> block("BLOCK_DOBRA3_CL");
+				}
 			}
-
-			$TPL -> block("BLOCK_DOBRA1_CL");
-			$TPL -> block("BLOCK_DOBRA2_CL");
-			$TPL -> block("BLOCK_DOBRA3_CL");
 		}
 
 		$TPL -> block("BLOCK_ATLETAS");

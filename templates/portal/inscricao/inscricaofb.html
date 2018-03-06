@@ -146,6 +146,7 @@
 											<input type="text" id="valor_atleta{ID_ATLETA}" name="valor_atleta{ID_ATLETA}" disabled="disabled" class="form-control text-right valorAtleta camposoma" value="{VALOR_CUSTA}"/>
 											<input type="hidden" id="valor_atleta_comp{ID_ATLETA}" name="valor_atleta_comp{ID_ATLETA}" disabled="disabled" value="{VALOR_CUSTA}"/>
 											<input type="hidden" id="graduacao{ID_ATLETA}" name="graduacao{ID_ATLETA}" value="{GRAD_ATLETA}"/>
+											<input type="hidden" id="genero{ID_ATLETA}" name="genero{ID_ATLETA}" value="{GENERO_ATLETA}"/>
 											</td>
 										</tr>
 									</tbody>
@@ -238,7 +239,8 @@
 				$.ajax({
 					url : 'ajax/option_categoria_por_classe.php',
 					data : {
-						classe : $(this).val().split(";")[0]
+						classe : $(this).val().split(";")[0],
+						genero: $("#genero" + atleta).val()
 					}
 				}).done(function(retorno) {
 					$("#categoria" + atleta).html(retorno);

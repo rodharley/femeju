@@ -18,15 +18,16 @@ $idsAssoc = $objc->md5_decrypt($_REQUEST['idAssoc']);
     $idsAssoc .= ",".$acad->id;
 }*/
 $TPL->IDS_ASSOCIACAO = $idsAssoc;
-$rsClasses = $objc->listaClasses();
+//$rsClasses = $objc->listaClasses();
 foreach ($rs as $key => $value) {
 	$TPL->ID_GRA = $value->id;
     $TPL->DESC_GRA = $value->descricao;
     $TPL->block("BLOCK_GRA");
 }
+/*
 foreach ($rsClasses as $key => $value) {
     $TPL->ID_CLA = $value->classe->id.";".$value->classe->maximo.";".$value->classe->minimo;
-    $TPL->DESC_CLA = $value->classe->descricao." - de ".$value->classe->minimo." à ".$value->classe->maximo." anos";
+    $TPL->DESC_CLA = $value->classe->descricao." - de ".$value->classe->minimo." Ã  ".$value->classe->maximo." anos";
     $TPL->block("BLOCK_CLA");    
 	$categoria = new CategoriaPeso();
 	$rsCategs = $categoria->listaAtivasPorClasse($value->classe->id);
@@ -40,7 +41,8 @@ foreach ($rsClasses as $key => $value) {
 	$TPL->block("BLOCK_DOBRA1_CL");
     $TPL->block("BLOCK_DOBRA2_CL");
     $TPL->block("BLOCK_DOBRA3_CL");
-}
+}*/
+
 $TPL->VALOR = $objc->custa->valor;
 $TPL->DOBRA_1 = $objc->dobra1;
 $TPL->DOBRA_2 = $objc->dobra2;

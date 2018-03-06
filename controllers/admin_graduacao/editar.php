@@ -40,7 +40,22 @@ if(isset($_REQUEST['id'])){
 	$TPL->ativosim = $obj->bitAtivo ? "checked" : "";
 	$TPL->ativonao = !$obj->bitAtivo ? "checked" : ""; 
   $TPL->cor = $obj->imagem;
+  $rs = $obj->listaClasses();
 }
 
+$obCla = new Classe();
+$rsCat = $obCla->getRows(0,999,array(),array("ativo"=>"=1"));
+foreach ($rsCat as $key => $value) {
+    $TPL->ID_CLA = $value->id;
+    $TPL->DESC_CLA = $value->descricao;
+    $TPL->CHECK_CLA = '';
+    if(isset($_REQUEST['id'])){
+    foreach ($rs as $key2 => $grupo) {
+        if($value->id == $grupo->classe->id)
+            $TPL->CHECK_CLA = 'checked="checked"';
+    }
+	}
+    $TPL->block("BLOCK_CLA");
+}
 $TPL->show();
 ?>

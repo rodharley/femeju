@@ -97,6 +97,7 @@ class Competicao extends Persistencia {
         $grupo = new GrupoCompeticao();
         return $grupo->getRows(0,999,array(),array("competicao"=>"=".$this->id));
     }
+	
     function pesquisarTotal($ativo = "") {
         $sql = "select count(id) as total from ".$this::TABELA." where 1 = 1 ";
         if($ativo != "")
@@ -256,11 +257,11 @@ class Competicao extends Persistencia {
                 $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
                 if($this->competicao == 1){                
                 $insc->dobra1 = $arrAtleta['dobra1'] == "Sim" ? new Classe($arrAtleta["classe1"]) : null;
-                $insc->valorDobra1 = $arrAtleta['dobra1'] == "Sim" ? $this->dobra1 -($this->dobra1*$desconto) : 0;
+                $insc->valorDobra1 = $this->money($arrAtleta['dobra1'] == "Sim" ? $this->dobra1 -($this->dobra1*$desconto) : 0,"bta");
                 $insc->dobra2 = $arrAtleta['dobra2'] == "Sim" ? new Classe($arrAtleta["classe2"]) : null;
-                $insc->valorDobra2 = $arrAtleta['dobra2'] == "Sim" ? $this->dobra2 -($this->dobra2*$desconto) : 0;
+                $insc->valorDobra2 = $this->money($arrAtleta['dobra2'] == "Sim" ? $this->dobra2 -($this->dobra2*$desconto) : 0,"bta");
                 $insc->dobra3 = $arrAtleta['dobra3'] == "Sim" ? new Classe($arrAtleta["classe3"]) : null;
-                $insc->valorDobra3 = $arrAtleta['dobra3'] == "Sim" ? $this->dobra3  -($this->dobra3*$desconto) : 0;
+                $insc->valorDobra3 = $this->money($arrAtleta['dobra3'] == "Sim" ? $this->dobra3  -($this->dobra3*$desconto) : 0,"bta");
                 $insc->classe = new Classe($arrAtleta["classe"]);
                 $insc->categoria = new CategoriaPeso($arrAtleta["categoria"]);
                 }

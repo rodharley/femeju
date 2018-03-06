@@ -89,6 +89,7 @@ set
 		<atrib tbname="maximo" type="int">maximo</atrib>
 		<atrib tbname="minimo" type="int">minimo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>
+		<atrib tbname="genero" type="txt">genero</atrib>
 		<atrib tbname="idClasse" type="fk" clrelation="Classe">classe</atrib>									
 	</class>	
 	
@@ -103,6 +104,11 @@ set
 		<atrib tbname="maximo" type="int">maximo</atrib>
 		<atrib tbname="minimo" type="int">minimo</atrib>
 		<atrib tbname="bitAtivo" type="int">ativo</atrib>									
+	</class>
+	<class name="ClasseGraduacao" tbname="fmj_classe_graduacao" tbid="id" lazy="true">
+		<atrib tbname="id" type="id">id</atrib>
+		<atrib tbname="id_graduacao" type="fk" clrelation="Graduacao">graduacao</atrib>		
+		<atrib tbname="id_classe" type="fk" clrelation="Classe">classe</atrib>												
 	</class>
 	<class name="Competicao" tbname="fmj_competicao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
@@ -184,6 +190,7 @@ set
 		<atrib tbname="carenciaMin" type="int">carenciaMin</atrib>
 		<atrib tbname="ordem" type="int">ordem</atrib>
 		<atrib tbname="bitAtivo" type="int">bitAtivo</atrib>
+		<!--atrib tbname="" type="set" clrelation="ClasseGraduacao" clorder="classe" clfk="graduacao">classes</atrib-->
 	</class>	
 	<class name="GrupoCompeticao" tbname="fmj_grupo_competicao" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

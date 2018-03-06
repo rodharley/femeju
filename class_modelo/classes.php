@@ -8,6 +8,7 @@ require("negocio.atleta.php");
 require("negocio.categoria.php");
 require("negocio.cidade.php");
 require("negocio.classe.php");
+require("negocio.classeGraduacao.php");
 require("negocio.competicao.php");
 require("negocio.configuracoes.php");
 require("negocio.custa.php");

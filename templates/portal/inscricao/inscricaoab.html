@@ -63,17 +63,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-2 col-xs-2">
-										<div class="form-group">
-											<label for="sexo"><i class='fa'> </i><b>Sexo</b></label>
-											<select class="form-control required" name="sexo" id="sexo">
-					                            <option value="" selected>Selecione</option>
-					                            <option value="F" >Feminino</option>
-					                            <option value="M" >Masculino</option>
-                        					</select>
-										</div>
-									</div>
-									<div class="col-md-4 col-xs-4">
+									<div class="col-md-6 col-xs-6">
 										<div class="form-group">
 											<label for="documento"><i class='fa'> </i><b>Documento</b></label>
 											<input type="text" name="documento" id="documento" class="form-control"/>
@@ -391,10 +381,6 @@
 
 					document.getElementById("idAtleta").value = atleta.pessoa.id;
 					document.getElementById("graduacao").value = atleta.graduacao.id;
-					document.getElementById("dataNascimento").value = atleta.pessoa.dataNascimento;
-					document.getElementById("sexo").value = atleta.pessoa.sexo;
-					carregaClasses();
-					carregaDobras();
 				});
 
 			}
@@ -434,15 +420,14 @@
 				$.ajax({
 					url : 'ajax/option_categoria_por_classe.php',
 					data : {
-						classe : arrayClasse[0],
-						genero : $("#sexo").val()
+						classe : arrayClasse[0]
 					}
 				}).done(function(retorno) {
 					$("#categoria").html(retorno);
 
 				});
 			} else {
-				$("#categoria").html("<option value=''>Selecione</option>");
+
 			}
 
 		});
@@ -559,60 +544,9 @@
 		$("#nome").change(function() {
 			$("#idAtleta").val("");
 		});
-		$("#graduacao").change(function() {
-			carregaClasses();
-			carregaDobras();
-		});
-		$("#dataNascimento").change(function() {
-			carregaClasses();
-			carregaDobras();
-		});
-		$("#sexo").change(function() {		
-			carregaClasses();	
-			carregaDobras();
-		});
 
 	});
 	
 	
-function carregaClasses(){
-	if($("#dataNascimento").val() != "" && $("#graduacao").val() != ""){
-		var idade = gregorianAge(datebrtous("01/01/"+$("#dataNascimento").val().substring(6,10)));
-				$.ajax({
-					url : 'ajax/option_classes_por_graduacao_idade.php',
-					data : {
-						idade : idade,
-						graduacao : $("#graduacao").val()
-					}
-				}).done(function(retorno) {
-					$("#classe").html(retorno);
-					$("#categoria").val("<option value=''>Selecione</option>");
-				});
-			
 
-	}else{
-		$("#classe").val("<option value=''>Selecione</option>");
-		$("#categoria").val("<option value=''>Selecione</option>");
-	}
-}
-function carregaDobras(){
-	if($("#dataNascimento").val() != "" && $("#graduacao").val() != ""){
-		var idade = gregorianAge(datebrtous("01/01/"+$("#dataNascimento").val().substring(6,10)));
-				$.ajax({
-					url : 'ajax/option_categorias_por_graduacao_idade_genero.php',
-					data : {
-						genero : $("#sexo").val(),
-						idade : idade,
-						graduacao : $("#graduacao").val()
-					}
-				}).done(function(retorno) {
-					$(".dobra").html(retorno);
-					
-				});
-			
-
-	}else{
-		$("#.dobra").val("<option value=''>Selecione</option>");		
-	}
-}
 </script>

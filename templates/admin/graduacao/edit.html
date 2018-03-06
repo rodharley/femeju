@@ -60,7 +60,21 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="classe[]"><i class='fa'></i><b>Classes Associadas a Graduação:</b></label>                        
+                    </div>
+                     <!-- BEGIN BLOCK_CLA -->
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"  class="flat-blue" name="classe[]" id="classes" value="{ID_CLA}" aria-label="{DESC_CLA}" {CHECK_CLA} >
+                         {DESC_CLA}
+                      </label>
+                    </div>         
+                     <!-- END BLOCK_CLA -->           
+                </div>
+            </div>
 	</div>
 <div class="panel-footer text-center">
 	<button class="btn btn-success" type="submit">Salvar</button>
