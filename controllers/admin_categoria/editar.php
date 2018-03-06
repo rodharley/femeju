@@ -37,6 +37,8 @@ $TPL->ACAO = "incluir";
 $TPL->id = 0;
 $TPL->ativosim = "checked";
 $TPL->ativonao = ""; 
+$TPL->checkfeminino = "checked";
+$TPL->checkmasculino = "";
 $TPL->MIN = "50";
 $TPL->MAX = "58";
 
@@ -49,6 +51,8 @@ if(isset($_REQUEST['id'])){
    
 	$TPL->ativosim = $obj->ativo ? "checked" : "";
 	$TPL->ativonao = !$obj->ativo ? "checked" : "";
+	$TPL->checkfeminino = $obj->genero == "F" ? "checked" : "";
+	$TPL->checkmasculino = $obj->genero == "M" ? "checked" : "";
     $TPL->MIN = $obj->minimo;
     $TPL->MAX = $obj->maximo;
      
