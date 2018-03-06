@@ -11,7 +11,7 @@ $lista = $obj->listaAtivasPorClasseGenero($classe,$genero);
 $lista = $obj->listaAtivasPorClasse($classe);
 }
 foreach ($lista as $key => $value) {
-   echo "<option value='".$value->id."'>".$value->descricao."</option>";	
+   echo "<option value='".$value->id."'>".$value->descricao." Peso:".$value -> minimo."Kg até ".$value -> maximo . "Kg"."</option>";	
 }
 exit();
 ?>

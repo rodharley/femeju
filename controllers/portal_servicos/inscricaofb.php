@@ -66,7 +66,7 @@ foreach ($rsAtletas as $key => $value) {
 					$rsCategs = $categoria -> listaAtivasPorClasseGenero($grupo -> classe -> id, $value -> pessoa -> sexo);
 					foreach ($rsCategs as $key3 => $value2) {
 						$TPL -> ID_CAT = $value2 -> id . ";" . $grupo -> classe -> maximo . ";" . $grupo -> classe -> minimo;
-						$TPL -> DESC_CAT = $value2 -> descricao;
+						$TPL -> DESC_CAT = $value2 -> descricao." Peso:".$value2 -> minimo."Kg até ".$value2 -> maximo . "Kg";
 						$TPL -> block("BLOCK_DOBRA1_CAT");
 						$TPL -> block("BLOCK_DOBRA2_CAT");
 						$TPL -> block("BLOCK_DOBRA3_CAT");

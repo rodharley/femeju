@@ -16,7 +16,7 @@ foreach ($lista as $key => $value) {
 			$lista = $objCat -> listaAtivasPorClasse($value -> classe->id);
 		}
 		foreach ($lista as $key2 => $value2) {
-			echo "<option value='" . $value2 -> id . "'>" . $value2 -> descricao . "</option>";
+			echo "<option value='" . $value2 -> id . "'>" . $value2 -> descricao." Peso:".$value2 -> minimo."Kg até ".$value2 -> maximo . "Kg" . "</option>";
 		}
 		echo "</optgroup>";
 	}
