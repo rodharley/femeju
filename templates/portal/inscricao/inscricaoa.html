@@ -581,6 +581,7 @@ function carregaClasses(){
 				$.ajax({
 					url : 'ajax/option_classes_por_graduacao_idade.php',
 					data : {
+						idcompeticao: $("#idCompeticao").val(),
 						idade : idade,
 						graduacao : $("#graduacao").val()
 					}
@@ -603,6 +604,7 @@ function carregaDobras(){
 					data : {
 						genero : $("#sexo").val(),
 						idade : idade,
+						idcompeticao: $("#idCompeticao").val(),
 						graduacao : $("#graduacao").val()
 					}
 				}).done(function(retorno) {
