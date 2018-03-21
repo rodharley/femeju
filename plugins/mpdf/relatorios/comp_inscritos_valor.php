@@ -36,6 +36,8 @@ foreach ($rs as $key => $value) {
 	$sqli = "select i.* from ".Inscricao::TABELA." i inner join ".Atleta::TABELA." a on a.id = i.idAtleta where a.idAssociacao = ".$value->id." and i.idCompeticao = ".$_REQUEST['evento'];
 	if(isset($_REQUEST['pago'])){
 	$sqli .= " and i.situacao = 1 ";
+	}else{
+	$sqli .= " and i.situacao < 2 ";	
 	}
 	$sqli .= " order by i.idClasse, i.idCategoria";
 	$rsInsc = $oInsc -> getSQL($sqli);
@@ -63,6 +65,8 @@ if($oeve->tipo == 2 && $_REQUEST['associacao'] == ""){
 	$sqli = "select i.* from ".Inscricao::TABELA." i where i.idAtleta is null and i.idCompeticao = ".$_REQUEST['evento'];
 	if(isset($_REQUEST['pago'])){
 	$sqli .= " and i.situacao = 1 ";
+	}else{
+	$sqli .= " and i.situacao < 2 ";	
 	}
 	$sqli .= " order by i.idClasse, i.idCategoria";
 	$rsInsc = $oInsc -> getSQL($sqli);

@@ -25,6 +25,7 @@ class Pagamento extends Persistencia{
         $this->getById($this->md5_decrypt($id));        
         if($this->bitPago == 0){
         	$this -> bitPago = 2;
+			
         	$this -> save();
             $log = new Log();
             $log->gerarLog("Cancelamento de Pagamento");

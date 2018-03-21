@@ -47,12 +47,12 @@ foreach ($rs as $key => $associacao) {
 	foreach ($rsInsc as $key => $inscricao) {
 		$valorAtleta = $inscricao->valor+$inscricao->valorDobra1+$inscricao->valorDobra2+$inscricao->valorDobra3;
 		$valorTotalAtletas += $valorAtleta;
-		if ($inscricao -> situacao == 0) {
-			$totalAtletaNaoPago++;
-			$valorTotalNaoPago += $valorAtleta;
-		} else {
+		if ($inscricao -> situacao == 1) {
 			$totalAtletaPago++;
 			$valorTotalPago += $valorAtleta;
+		} else {
+			$totalAtletaNaoPago++;
+			$valorTotalNaoPago += $valorAtleta;
 		}
 		$totalAtletasGeral++;
 		if ($inscricao -> dobra1 != null)
