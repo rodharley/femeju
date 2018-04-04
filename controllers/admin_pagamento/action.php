@@ -13,7 +13,7 @@ switch ($_REQUEST['acao']){
 	case 'cancelar' :
 		$conn->connection->autocommit(false);
         $pag->cancelar($_REQUEST['id']);
-		$inscricao->atualizarInscricoes($_REQUEST['id']);
+		$inscricao->atualizarInscricoes($pag->md5_decrypt($_REQUEST['id']));
         $conn->connection->commit();
         header("Location:admin_pagamento");
         exit();

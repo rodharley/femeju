@@ -44,7 +44,7 @@ $TPL->CHECKED_TECNICO = "";
 $TPL->CHECKED_ARBITRO = "";
 $listaUf = $uf->getRows();
 $listaGrad = $objGrad->getRows();
-$listaAssociacao = $objAssociacao->listaAtivas();
+$listaAssociacao = $objAssociacao->listaAtivas("nome");
 if(isset($_REQUEST['id'])){
     $TPL->DISABLED_DATA_GRADUACAO = 'disabled';    
     $objAtleta->getById($objAtleta->md5_decrypt($_REQUEST['id']));    
