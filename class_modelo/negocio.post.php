@@ -101,7 +101,7 @@ class Post extends Persistencia {
         $this -> imagem = "";
         $this -> arquivo = "";
         $this -> categoria = $this->md5_decrypt($_REQUEST['categoria']);
-        if($this -> categoria < 20){
+        if($this -> categoria < 25){
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
         }else{
@@ -136,7 +136,7 @@ class Post extends Persistencia {
         $this -> texto = $_REQUEST['texto'];
         $this -> ordem = $_REQUEST['ordem']  == "" ? 999 : $this->limpaDigitos($_REQUEST['ordem']);
         $this -> data = $this->convdata($_REQUEST['data'],"ntm")." ".date("H:i:s");
-        if($this -> categoria < 20){
+        if($this -> categoria < 25){
         $obCat = new Categoria();
         $pasta = $obCat->retornaPasta($this->categoria);
         }else{
