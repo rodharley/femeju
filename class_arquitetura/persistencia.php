@@ -437,7 +437,7 @@ function xmlObject($elemento,$i,$objeto){
 					$sql = "update ".$elemento['tbname']." set ";
 					foreach($elemento->children() as $atributo){
 						$atrb = $atributo[0];
-						if($atributo['type'] != "id" && $atributo['type'] != "set"){
+						if($atributo['type'] != "id" && $atributo['type'] != "set" && $atributo['type'] != "def"){
 							$sql .= $atributo['tbname']." = ";							
 							if($atributo['type'] == "fk" && $elemento['lazy'] == "true"){
 								$elementFk = $this->getClassElementXML($atributo['clrelation']);
@@ -469,7 +469,7 @@ function xmlObject($elemento,$i,$objeto){
 					$campos = "";
 					foreach($elemento->children() as $atributo){
 						$atrb = $atributo[0];
-						if($atributo['type'] != "id" && $atributo['type'] != "set"){
+						if($atributo['type'] != "id" && $atributo['type'] != "set" && $atributo['type'] != "def"){
 							$sql .= $atributo['tbname'].", ";
 							if($atributo['type'] == "fk" && $elemento['lazy'] == "true"){
 								$elementFk = $this->getClassElementXML($atributo['clrelation']);

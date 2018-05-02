@@ -1,0 +1,57 @@
+<form role="form" method="post" action="plugins/mpdf/relatorios/arquivo_brb.php" id="frmRelat" autocomplete="off" target="_blank">
+	<input type="hidden" name="titulo" value="Relatório de Inscritos" />
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title">Informe o período desejado</h3>
+	</div>
+	<div class="box-body">		
+			
+			<div class="row">
+				<div class="col-md-6 col-xs-6">
+					<div class="form-group">
+                        <label for="razaoSocial"><i class='fa'></i><b>Data Início</b></label>
+					<input type="text" class="form-control date required" name="datai" id="datai" value="{DATAI}" />
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-6">
+					<div class="form-group">
+                        <label for="data"><i class='fa'></i><b>Data Fim</b></label>
+					<input type="text" class="form-control date required" name="dataf" id="dataf" value="{DATAF}" />
+					</div>
+				</div>
+			</div>			
+
+	</div>
+	<div class="panel-footer text-right">
+		<button class="btn btn-success" id="gerar" type="submit">
+                Gerar
+            </button>
+            <button class="btn btn-default btVoltar" type="button">
+                Cancelar
+            </button>
+	</div>
+		
+</div>
+</form>
+<script>
+	$(document).ready(function() {
+		$(".date").datepicker();
+		
+		$("#frmRelat").validate({
+            errorClass : "help-inline",
+            errorElement : "div",
+            highlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').addClass('has-error');
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-times-circle-o");
+            },
+            unhighlight : function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error');
+                $(element).parents('.form-group').addClass('has-success');
+                $(element).parents('.form-group').children("label").children("i").removeClass("fa-times-circle-o");
+                $(element).parents('.form-group').children("label").children("i").addClass("fa-check");
+            }
+         });
+
+	});
+
+</script>

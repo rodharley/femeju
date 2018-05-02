@@ -19,6 +19,7 @@ class Pagamento extends Persistencia{
     var $bairroSacado;
     var $cidadeSacado;
     var $ufSacado;
+	var $dataEmissao;
     var $itens = array();
 	var $forma;
     public function cancelar($id){
