@@ -57,12 +57,16 @@ foreach ($rs as $key => $value) {
 	$html .= "</table>";
 }
 
-if($oeve->tipo == 2 && $_REQUEST['associacao'] == ""){
+if($oeve->tipo == 2){
 //atletas sem ligacao com associacao
 	$subtotal = 0;
 	$html .= "ATLETAS MODALIDADE ABERTA<hr/>";
 	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>Associação do Responsável</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th><th>Valor</th></tr>";
 	$sqli = "select i.* from ".Inscricao::TABELA." i where i.idAtleta is null and i.idCompeticao = ".$_REQUEST['evento'];
+	
+	if($_REQUEST['associacao'] != ""){
+	$sqli .= " and i.idAssociacao = ".$_REQUEST['associacao'];	
+	}
 	if(isset($_REQUEST['pago'])){
 	$sqli .= " and i.situacao = 1 ";
 	}else{

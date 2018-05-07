@@ -21,10 +21,14 @@ $logo = '../../../img/logo.png';
 $mpdftags = $lib -> setCabecalhoRodapePadrao($logo, $_REQUEST['titulo']);
 $oeve->getById($_REQUEST['evento']);
 $sql = "select a.* from " . Associacao::TABELA . " a inner join " . Atleta::TABELA . " b on b.idAssociacao = a.id inner join " . Inscricao::TABELA . " c on c.idAtleta = b.id where c.idCompeticao = " . $_REQUEST['evento'];
+
 if($_REQUEST['associacao'] != ""){
 $sql .= " and a.id = ".$_REQUEST['associacao'];
 }
 $sql .= " group by a.id";
+
+//echo $_REQUEST['associacao'].$sql;
+//exit();
 
 $rs = $oAss -> getSQL($sql);
 $html = "<h2>".$oeve->titulo."</h2>";
@@ -50,11 +54,14 @@ foreach ($rs as $key => $value) {
 	$html .= "</table>";
 }
 
-if($oeve->tipo == 2 && $_REQUEST['associacao'] == ""){
+if($oeve->tipo == 2){
 //atletas sem ligacao com associacao
 	$html .= "ATLETAS CADASTRADOS SEM ASSOCIAÇÃO<hr/>";
 	$html .= "<table class='grade' ><tr><th>Classe</th><th>Categoria</th><th>Atleta</th><th>Número</th><th>Associação do Responsável</th><th>1ª dobra</th><th>2ª dobra</th><th>3ª dobra</th></tr>";
-	$sqli = "select i.* from ".Inscricao::TABELA." i where i.idAtleta is null and i.idCompeticao = ".$_REQUEST['evento'];
+	$sqli = "select i.* from ".Inscricao::TABELA." i where i.idAtleta is null and i.idCompeticao = ".$_REQUEST['evento'];	
+	if($_REQUEST['associacao'] != ""){
+	$sqli .= " and i.idAssociacao = ".$_REQUEST['associacao'];	
+	}
 	if(isset($_REQUEST['pago'])){
 	$sqli .= " and i.situacao = 1 ";
 	}else{

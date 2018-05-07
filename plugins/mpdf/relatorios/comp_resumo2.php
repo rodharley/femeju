@@ -20,7 +20,14 @@ $lib = new libRelatorio();
 $logo = '../../../img/logo.png';
 $mpdftags = $lib -> setCabecalhoRodapePadrao($logo, $_REQUEST['titulo']);
 $oeve -> getById($_REQUEST['evento']);
-$sql = "select a.* from " . Associacao::TABELA . " a inner join " . Atleta::TABELA . " b on b.idAssociacao = a.id inner join " . Inscricao::TABELA . " c on c.idAtleta = b.id where c.idCompeticao = " . $_REQUEST['evento'];
+
+if($oeve->tipo == 2){
+$sql = "select a.* from " . Associacao::TABELA . " a inner join " . Inscricao::TABELA . " c on c.idAssociacao = a.id where c.idCompeticao = " . $_REQUEST['evento'];	
+}else{
+$sql = "select a.* from " . Associacao::TABELA . " a inner join " . Atleta::TABELA . " b on b.idAssociacao = a.id inner join " . Inscricao::TABELA . " c on c.idAtleta = b.id where c.idCompeticao = " . $_REQUEST['evento'];	
+}
+
+
 $sql .= " group by a.id";
 $rs = $oAss -> getSQL($sql);
 $html = "<h2>".$oeve->titulo."</h2>";
@@ -33,8 +40,13 @@ foreach ($rs as $key => $associacao) {
 	
 	
 	
-	$rs = $oAss -> getSQL($sql);
-	$sqli = "select i.* from " . Inscricao::TABELA . " i inner join " . Atleta::TABELA . " a on a.id = i.idAtleta  where a.idAssociacao = ".$associacao->id." and i.idCompeticao = " . $_REQUEST['evento'] ;
+	//$rs = $oAss -> getSQL($sql);
+	if($oeve->tipo == 2){
+		$sqli = "select i.* from " . Inscricao::TABELA . " i  where i.idAssociacao = ".$associacao->id." and i.idCompeticao = " . $_REQUEST['evento'] ;
+	}else{
+	$sqli = "select i.* from " . Inscricao::TABELA . " i inner join " . Atleta::TABELA . " a on a.id = i.idAtleta  where a.idAssociacao = ".$associacao->id." and i.idCompeticao = " . $_REQUEST['evento'] ;			
+	}
+	
 	$rsInsc = $oInsc -> getSQL($sqli);
 	
 	$totalAtletas = count($rsInsc);

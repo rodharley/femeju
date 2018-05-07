@@ -17,7 +17,7 @@ $oConf = new Configuracoes();
 $oPag = new Pagamento();
 $brb = $oConf->recuperaConfiguracoesBRB();
 //recupera os pagamentos em aberto do período:
-$pagamentos = $oPag->pesquisar(0,9999,"","","","","","0","");
+$pagamentos = $oPag->pesquisarBoletosBrb($oPag->convdata($_REQUEST['datai'],"ntm"),$oPag->convdata($_REQUEST['dataf'],"ntm"));
 $totalRegistros =  count($pagamentos)+1;
 //cria o header
 $arquivo = "DCB001077".$brb[12].date("YYmd").date("His").$totalRegistros."\r\n";
@@ -35,7 +35,7 @@ foreach ($pagamentos as $key => $pagamento) {
 	$linha .=  str_pad($pagamento->bairroSacado, 15, ' ', STR_PAD_RIGHT);
 	$linha .=  str_pad($pagamento->cidadeSacado, 22, ' ', STR_PAD_RIGHT);
 	$linha .=  str_pad($pagamento->ufSacado, 2, ' ', STR_PAD_RIGHT);
-	$linha .=  "00000000";	
+	$linha .=  "00000000";
 	$linha .=  strlen($pagamento->cpfSacado) > 11 ? "2" :"1";
 	$linha .=  str_pad($pagamento->cpfSacado, 14, ' ', STR_PAD_RIGHT);
 	$linha .=  "    ";
@@ -65,7 +65,7 @@ foreach ($pagamentos as $key => $pagamento) {
 	$linha .=  "01";
 	$linha .=  "0";
 	$linha .=  "         ";
-	
+
 	$arquivo .= $linha."\r\n";
 	}
 }
