@@ -25,15 +25,14 @@ function sendNvpRequest(array $requestNvp)
  
     //Executando a operação
     $curl = curl_init();
- echo $apiEndpoint;
+ 
     curl_setopt($curl, CURLOPT_URL, $apiEndpoint);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($requestNvp));
  
-    $response = urldecode(curl_exec($curl));
- print_r($response);
+    $response = urldecode(curl_exec($curl)or die( curl_error() )); 
     curl_close($curl);
  
     //Tratando a resposta
@@ -112,8 +111,8 @@ if (isset($responseNvp['ACK']) && $responseNvp['ACK'] == 'Success') {
 } else {
     //Opz, alguma coisa deu errada.
     //Verifique os logs de erro para depuração.
-    //unset($_SESSION['idPagamento']);
-    //header('Location: ' . PAYPAL_CANCELURL);
+    unset($_SESSION['idPagamento']);
+    header('Location: ' . PAYPAL_CANCELURL);
 	exit();
 }
 }
