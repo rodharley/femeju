@@ -96,7 +96,8 @@ if ($this->sandbox = true) {
  
 //Envia a requisição e obtém a resposta da PayPal
 $responseNvp = $this->sendNvpRequest($requestNvp);
- 
+ print_r($responseNvp);
+ exit();
 //Se a operação tiver sido bem sucedida, redirecionamos o cliente para o
 //ambiente de pagamento.
 if (isset($responseNvp['ACK']) && $responseNvp['ACK'] == 'Success') {
