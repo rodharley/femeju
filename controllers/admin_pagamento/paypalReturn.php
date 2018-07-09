@@ -4,6 +4,7 @@ include("includes/include.lock.php");
 $pagamento = new Pagamento();
 $paypal = new Paypal(PAYPAL_SANDBOX);
 $pagamento->getById($_SESSION['idPagamento']);
+$descricaoPagamento = $pagamento->descricao."<br/>";
 
 $requestNvp = array(
     'USER' => PAYPAL_USER,
@@ -13,7 +14,7 @@ $requestNvp = array(
     'VERSION' => '114.0',
     'METHOD'=> 'DoExpressCheckoutPayment',
  	'TOKEN' => $_GET['token'],
- 	'PAYERID' => $_GET['7SPWZAK7UTXGW'],
+ 	'PAYERID' => $_GET['PayerID'],
     'PAYMENTREQUEST_0_PAYMENTACTION' => 'SALE',
     'PAYMENTREQUEST_0_AMT' => $pagamento->valorTotal,
     'PAYMENTREQUEST_0_CURRENCYCODE' => 'BRL',

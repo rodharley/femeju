@@ -3,6 +3,7 @@ class Paypal {
 	
 	var $sandbox;
 	
+	
 public function __construct($sandbox = true){
         $this->sandbox = $sandbox;                      
     }	
@@ -30,10 +31,9 @@ function sendNvpRequest(array $requestNvp)
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POST, true);
-	curl_setopt($curl, CURLOPT_SSLVERSION, 6);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($requestNvp));
  
-    $response = urldecode(curl_exec($curl)or die( curl_error($curl) )); 
+    $response = urldecode(curl_exec($curl)); 
     curl_close($curl);
  
     //Tratando a resposta
@@ -64,7 +64,7 @@ function sendNvpRequest(array $requestNvp)
 
 function setExpressCheckout($requestNvp){
 	//Vai usar o Sandbox, ou produção?
-
+	$urlsite = 'http://'.$_SERVER['HTTP_HOST'].'/';
  	$user = PAYPAL_USER;
     $pswd = PAYPAL_PSWD;
     $signature = PAYPAL_SIGNATURE;
@@ -113,13 +113,14 @@ if (isset($responseNvp['ACK']) && $responseNvp['ACK'] == 'Success') {
     //Opz, alguma coisa deu errada.
     //Verifique os logs de erro para depuração.
     unset($_SESSION['idPagamento']);
-    header('Location: ' . PAYPAL_CANCELURL);
+    header('Location: ' . $urlsite.PAYPAL_CANCELURL);
 	exit();
 }
 }
 
 
 function doExpressCheckoutPayment($requestNvp){
+	$urlsite = 'http://'.$_SERVER['HTTP_HOST'].'/';
  	$user = PAYPAL_USER;
     $pswd = PAYPAL_PSWD;
     $signature = PAYPAL_SIGNATURE;
@@ -134,20 +135,21 @@ if ($this->sandbox = true) {
  
 //Envia a requisição e obtém a resposta da PayPal
 $responseNvp = $this->sendNvpRequest($requestNvp); 
+
 //Se a operação tiver sido bem sucedida, redirecionamos o cliente para o
 //ambiente de pagamento.
-if (isset($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS']) && $responseNvp['PAYMENTINFO_0_PAYMENTSTATUS'] == 'COMPLETED') {
+if (isset($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS']) && strtolower($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS']) == 'completed') {
 	$pagamento = new Pagamento();	
 	$pagamento->getById($_SESSION['idPagamento']);
-	$pagamento->numeroFebraban = $responseNvp['TRANSACTIONID'];
+	$pagamento->numeroFebraban = $responseNvp['PAYMENTINFO_0_TRANSACTIONID'];
 	$pagamento->bitPago =1;
 	$pagamento->codigo = $responseNvp['PAYMENTINFO_0_PAYMENTSTATUS'].'-'.$responseNvp['PAYMENTINFO_0_PENDINGREASON'];	
 	$pagamento->save();
-    header('Location: ' . PAYPAL_TICKETURL);
+    header('Location: ' . $urlsite.PAYPAL_TICKETURL);
 	exit();
 } else {    
     unset($_SESSION['idPagamento']);
-    header('Location: ' . PAYPAL_CANCELURL);
+    header('Location: ' . $urlsite.PAYPAL_CANCELURL);
 	exit();
 }
 }

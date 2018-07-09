@@ -9,7 +9,7 @@ $_SESSION['idPagamento'] = $idPagamento;
 $pagamento->getById($_SESSION['idPagamento']);
 $descricaoPagamento = $pagamento->descricao."<br/>";
 
-
+$urlsite = 'http://'.$_SERVER['HTTP_HOST'].'/';
 $requestNvp = array(
     'USER' => PAYPAL_USER,
     'PWD' => PAYPAL_PSWD,
@@ -28,11 +28,11 @@ $requestNvp = array(
     'L_PAYMENTREQUEST_0_AMT0' => $pagamento->valorTotal,
     'L_PAYMENTREQUEST_0_QTY0' => '1',
     'L_PAYMENTREQUEST_0_ITEMAMT' => $pagamento->valorTotal,
-    'RETURNURL' => PAYPAL_RETURNURL,
-    'CANCELURL' => PAYPAL_CANCELURL,
+    'RETURNURL' => $urlsite.PAYPAL_RETURNURL,
+    'CANCELURL' => $urlsite.PAYPAL_CANCELURL,
     'BUTTONSOURCE' => 'JUDO BRASÍLIA',
     'LOCALECODE' => 'pt_BR',
-    'LOGOIMG' => 'http://judobrasilia.com.br/img/icon_gr.png'
+    'LOGOIMG' => $urlsite.'/img/icon_gr.png'
 ); 
 
 $paypal->setExpressCheckout($requestNvp);
