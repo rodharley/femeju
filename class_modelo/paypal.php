@@ -112,8 +112,8 @@ if (isset($responseNvp['ACK']) && $responseNvp['ACK'] == 'Success') {
 } else {
     //Opz, alguma coisa deu errada.
     //Verifique os logs de erro para depuração.
-    unset($_SESSION['idPagamento']);
-    header('Location: ' . PAYPAL_CANCELURL);
+    //unset($_SESSION['idPagamento']);
+    //header('Location: ' . PAYPAL_CANCELURL);
 	exit();
 }
 }
