@@ -32,7 +32,7 @@ function sendNvpRequest(array $requestNvp)
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($requestNvp));
  
-    $response = urldecode(curl_exec($curl)or die( curl_error() )); 
+    $response = urldecode(curl_exec($curl)or die( curl_error($curl) )); 
     curl_close($curl);
  
     //Tratando a resposta
