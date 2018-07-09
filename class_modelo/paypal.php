@@ -25,7 +25,7 @@ function sendNvpRequest(array $requestNvp)
  
     //Executando a operação
     $curl = curl_init();
- 
+ echo $apiEndpoint;
     curl_setopt($curl, CURLOPT_URL, $apiEndpoint);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -33,7 +33,7 @@ function sendNvpRequest(array $requestNvp)
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($requestNvp));
  
     $response = urldecode(curl_exec($curl));
- 
+ print_r($response);
     curl_close($curl);
  
     //Tratando a resposta
@@ -96,8 +96,7 @@ if ($this->sandbox = true) {
  
 //Envia a requisição e obtém a resposta da PayPal
 $responseNvp = $this->sendNvpRequest($requestNvp);
- print_r($responseNvp);
- exit();
+
 //Se a operação tiver sido bem sucedida, redirecionamos o cliente para o
 //ambiente de pagamento.
 if (isset($responseNvp['ACK']) && $responseNvp['ACK'] == 'Success') {
