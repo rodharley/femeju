@@ -1,11 +1,11 @@
 <?php
 $menu = 0;
 include("includes/include.lock.php");
-$idPagamento = $pagamento->md5_decrypt($_REQUEST['id']);
-$_SESSION['idPagamento'] = $idPagamento;
 $pagamento = new Pagamento();
 $paypal = new Paypal(PAYPAL_SANDBOX);
-$custa = new Custa();
+
+$idPagamento = $pagamento->md5_decrypt($_REQUEST['id']);
+$_SESSION['idPagamento'] = $idPagamento;
 $pagamento->getById($_SESSION['idPagamento']);
 $descricaoPagamento = $pagamento->descricao."<br/>";
 
