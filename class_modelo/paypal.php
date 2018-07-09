@@ -30,6 +30,7 @@ function sendNvpRequest(array $requestNvp)
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POST, true);
+	curl_setopt($curl, CURLOPT_SSLVERSION, 6);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($requestNvp));
  
     $response = urldecode(curl_exec($curl)or die( curl_error($curl) )); 
