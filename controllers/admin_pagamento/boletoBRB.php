@@ -3,12 +3,12 @@ $menu = 0;
 include("includes/include.lock.php");
 $conf = new Configuracoes();
 $pagamento = new Pagamento();
-$custa = new Custa();
+
 $brbarray = $conf->recuperaConfiguracoesBRB();
 $pagamento->getById($pagamento->md5_decrypt($_REQUEST['id']));
 $descricaoPagamento = $pagamento->descricao."<br/>";
 foreach ($pagamento->itens as $key => $item) {
-    $custa->getById($item->custa);
+    
 	$descricaoPagamento .= $item->descricaoItem.",";
 }
 require 'plugins/openboleto/autoloader.php';

@@ -39,6 +39,6 @@ require("negocio.uf.php");
 require("dominio.tipoCampeonato.php");
 require("dominio.categoria.php");
 require("dominio.grupoCusta.php");
-
+require("paypal.php");
 
 ?>
