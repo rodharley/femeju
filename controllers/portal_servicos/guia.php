@@ -21,21 +21,33 @@ $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DESCRICAO = $obj->descricao; 
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
-if($obj->bitPago == 1)  
+if($obj->bitPago == 1) { 
     $TPL->SITUACAO = "Pago";
-	else if ($obj->bitPago == 0)
+	$TPL->COLOR_SITUACAO = "success";
+	
+	}else if ($obj->bitPago == 0){
 	$TPL->SITUACAO = "Em aberto";
-	else {
-	$TPL->SITUACAO = "Cancelado";
-	} 
-if($obj->bitPago == 1)  
-    $TPL->COLOR_SITUACAO = "success";
-	else if ($obj->bitPago == 0)
 	$TPL->COLOR_SITUACAO = "warning";
-	else {
+	if($obj->bitResolvido == 1){
+ 		$TPL->block("BLOCK_PAGAR");
+	}else{
+		$TPL->block("BLOCK_AGUARDE");
+	}   
+	
+	}else {
+	$TPL->SITUACAO = "Cancelado";
 	$TPL->COLOR_SITUACAO = "danger";
 	} 
 
+if($obj->tipo->id == 3){
+	$TPL->PAYPAL_TRANSACTION_ID = $obj->numeroFebraban;
+	$status = explode("-", $obj->codigo);
+	if(count($status) > 1){
+	$TPL->PAYPAL_STATUS = $status[0];
+	$TPL->PAY_PAL_DESCRICAO = $status[1];
+	}
+	$TPL->block('BLOCK_PAYPAL');
+	}
 //boleto
 $TPL->TIPO_PAG_ARQUIVO = $obj->tipo->arquivo;
 
@@ -47,13 +59,7 @@ foreach ($rsItens as $key => $item) {
     $TPL->VALOR_ITEM = "R$ ".$obj->money($item->valor,"atb");
     $TPL->block("BLOCK_ITEM");
 }
-if($obj->bitPago == 0){
-	if($obj->bitResolvido == 1){
- 		$TPL->block("BLOCK_PAGAR");
-	}else{
-		$TPL->block("BLOCK_AGUARDE");
-	}   
-}
+
 
 $TPL->show();
 ?>

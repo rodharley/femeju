@@ -1,8 +1,7 @@
 <?php
 include("includes/include.lockPortal.php");
-$TPL = NEW Template("templates/portal/layout_inscricao.html");
-$TPL->addFile("CONTEUDO", "templates/admin/pagamento/paypalTicket.html");
-
+$pag = new Pagamento();
+header('Location: ' . 'portal_servicos-guia?id='.$pag->md5_encrypt($_SESSION['idPagamento']));
 unset($_SESSION['idPagamento']);
-$TPL->show();
+
 ?>

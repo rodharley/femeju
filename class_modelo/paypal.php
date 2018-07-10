@@ -111,8 +111,11 @@ if (isset($responseNvp['ACK']) && $responseNvp['ACK'] == 'Success') {
 	exit();
 } else {
     //Opz, alguma coisa deu errada.
-    //Verifique os logs de erro para depuração.
-    unset($_SESSION['idPagamento']);
+    //Verifique os logs de erro para depuração.   
+    $pagamento = new Pagamento();	
+	$pagamento->getById($_SESSION['idPagamento']);
+	$pagamento->codigo = "ERROR-Erro PayPal";	
+	$pagamento->save();  
     header('Location: ' . $urlsite.PAYPAL_CANCELURL);
 	exit();
 }
@@ -147,8 +150,11 @@ if (isset($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS']) && strtolower($responseNv
 	$pagamento->save();
     header('Location: ' . $urlsite.PAYPAL_TICKETURL);
 	exit();
-} else {    
-    unset($_SESSION['idPagamento']);
+} else {
+	$pagamento = new Pagamento();	
+	$pagamento->getById($_SESSION['idPagamento']);
+	$pagamento->codigo = substr($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS'].'-'.$responseNvp['PAYMENTINFO_0_PENDINGREASON'],0,50);	
+	$pagamento->save();  
     header('Location: ' . $urlsite.PAYPAL_CANCELURL);
 	exit();
 }

@@ -36,19 +36,28 @@ $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
 $TPL->DESCRICAO = $obj->descricao; 
-if($obj->bitPago == 1)  
+
+
+if($obj->bitPago == 1) { 
     $TPL->SITUACAO = "Pago";
-	else if ($obj->bitPago == 0)
+	$TPL->COLOR_SITUACAO = "success";
+	
+	}else if ($obj->bitPago == 0){
 	$TPL->SITUACAO = "Em aberto";
-	else {
+	$TPL->COLOR_SITUACAO = "warning";	
+	}else {
 	$TPL->SITUACAO = "Cancelado";
-	} 
-if($obj->bitPago == 1)  
-    $TPL->COLOR_SITUACAO = "success";
-	else if ($obj->bitPago == 0)
-	$TPL->COLOR_SITUACAO = "warning";
-	else {
 	$TPL->COLOR_SITUACAO = "danger";
+	}
+	
+if($obj->tipo->id == 3){
+		$TPL->PAYPAL_TRANSACTION_ID = $obj->numeroFebraban;
+		$status = explode("-", $obj->codigo);
+		if(count($status) > 1){
+		$TPL->PAYPAL_STATUS = $status[0];
+		$TPL->PAY_PAL_DESCRICAO = $status[1];
+		}
+		$TPL->block('BLOCK_PAYPAL');
 	} 
 
 $TPL->FORMA = $obj->forma;
@@ -71,7 +80,7 @@ if(in_array(41, $armenus) && $obj->bitPago == 0){
 if($obj->bitPago == 0){
  $TPL->block("BLOCK_PAGAR");   
 }
-if($obj->bitPago == 1){
+if($obj->bitPago == 1 && $obj->tipo->id == 1){
 $TPL->block("BLOCK_BOLETO");   	
 }
 

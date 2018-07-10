@@ -10,7 +10,7 @@
                 <div class="col-xs-3 col-md-3">
                     <label for="tipoPagamento"><i class='fa'> </i><b>Tipo de Pagamento</b></label>
                    <div class="form-control-static">
-                    <img src="img/credit/{IMG_TIPO}" class="img-responsive" alt="{DESC_TIPO}" title="{DESC_TIPO}" style="width: 5em;">
+                    <img src="img/credit/{IMG_TIPO}" class="img-responsive" alt="{DESC_TIPO}" title="{DESC_TIPO}" >
 					</div>
                 </div>
                 <div class="col-xs-3 col-md-3">
@@ -71,6 +71,32 @@
                     </div>
                 </div>
             </div>
+             <!-- BEGIN BLOCK_PAYPAL -->
+            <div class="row">
+                <div class="col-xs-3 col-md-3">
+                    <div class="form-group">
+                    <label for="situacao"><i class='fa'> </i><b>Código da Transação</b></label>
+                    <div class="form-control-static">
+                    {PAYPAL_TRANSACTION_ID}
+                    </div></div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="form-group">
+                    <label for="datapagamento"><i class='fa'> </i><b>Status</b></label>
+                    <div class="form-control-static">
+                    {PAYPAL_STATUS}
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                    <label for="situacao"><i class='fa'> </i><b>Descrição Status</b></label>
+                   <div class="form-control-static">
+                    {PAY_PAL_DESCRICAO}
+                   </div></div>
+                </div>
+            </div>
+            <!-- END BLOCK_PAYPAL -->
             <div class="row">
                 <div class="col-xs-12 col-md-12">
             <table class="table">
@@ -106,7 +132,7 @@
             </a>
             <!-- END BLOCK_BAIXA -->
             <!-- BEGIN BLOCK_PAGAR -->
-            <a class="btn btn-success" href="admin_pagamento-{TIPO_PAG_ARQUIVO}?id={ID_HASH}" target="_blank">
+            <a class="btn btn-success" href="admin_pagamento-{TIPO_PAG_ARQUIVO}?id={ID_HASH}">
                 <i class="fa fa-barcode"> </i>
                 Pagar
             </a>
