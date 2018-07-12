@@ -80,7 +80,7 @@ if(in_array(41, $armenus) && $obj->bitPago == 0){
 if($obj->bitPago == 0){
  $TPL->block("BLOCK_PAGAR");   
 }
-if($obj->bitPago == 1 && $obj->tipo->id == 1){
+if($obj->bitPago == 1 && $obj->tipo->id < 3){
 $TPL->block("BLOCK_BOLETO");   	
 }
 

@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+            <h3 class="box-title"><img src="img/logo.png" height="60" /> {TIPO} de Pagamento em Dinheiro</h3>
+        </div>
+        <div class="panel-body">
+        	<!-- BEGIN BLOCK_RECEBEMOS -->
+        	<div class="row">
+                <div class="col-xs-12 col-md-12">
+                	Recebemos do(a) Sr(a). {RECEBEMOS} os valores descriminados abaixo referente a:<br/><br/><br/>
+                	</div>
+                	</div>
+            <!-- END BLOCK_RECEBEMOS -->
+            <div class="row">
+                <div class="col-xs-3 col-md-3">
+                    <div class="form-group">
+                    <label for="tipoCusta"><i class="fa"> </i><b>Tipo de Custas</b></label>
+                    
+                   <div class="form-control-static"> {TIPO_CUSTA}</div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                    <label for="responsavel"><i class="fa"> </i><b>Responsavel</b></label>
+                    
+                     <div class="form-control-static"> {RESPONSAVEL}</div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="form-group">
+                    <label for="datavencimento"><i class="fa"> </i><b>Data de Vencimento</b></label>
+                    
+                      <div class="form-control-static">{DATA_VENC}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                    <label for="situacao"><i class="fa"> </i><b>Descrição</b></label>
+                    
+                     <div class="form-control-static">{DESCRICAO}</div>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-xs-12 col-md-12">
+            <table class="table">
+                <tr>
+                    <th>Item</th>
+                    <th>Custa</th>
+                    <th>Valor</th>
+                </tr>
+                <!-- BEGIN BLOCK_ITEM -->
+                <tr>
+                    <td>{DESC_ITEM}</td>
+                    <td>{CUSTA_ITEM}</td>
+                    <TD class="text-right">{VALOR_ITEM}</TD>
+                    
+                </tr>
+                <!-- END BLOCK_ITEM -->
+                <tr>
+                    <td class="text-right" colspan="2" > Total:</td>
+                    <td class="col-md-3"  class="text-right"><h3 class="text-right">{VALOR_TOTAL}</h3></td>
+                </tr>
+            </table>
+                </div>
+                </div>
+        </div>
+        <div class="panel-footer text-right">
+            <a class="btn btn-default btVoltar" href="javascript:print();">
+                IMPRIMIR
+            </a>            
+            
+            </div>
+</div>

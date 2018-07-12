@@ -1,73 +1,35 @@
 <?php
 $menu = 0;
 include("includes/include.lock.php");
-$conf = new Configuracoes();
-$pagamento = new Pagamento();
+$TPL = NEW Template("templates/portal/layout_inscricao.html");
 
-$brbarray = $conf->recuperaConfiguracoesBRB();
+$pagamento = new Pagamento();
+$obItem = new PagamentoItem();
 $pagamento->getById($pagamento->md5_decrypt($_REQUEST['id']));
 $descricaoPagamento = $pagamento->descricao."<br/>";
-foreach ($pagamento->itens as $key => $item) {
-    
-	$descricaoPagamento .= $item->descricaoItem.",";
-}
-require 'plugins/openboleto/autoloader.php';
+$grupo = new GrupoCusta();
+	$TPL->addFile("CONTEUDO", "templates/portal/pagamento/guiaFemeju.html");
+	
+	if($pagamento->bitPago == 1){
+	$TPL->TIPO = "Recibo";
+	$TPL->block("BLOCK_RECEBEMOS");
+	}else{
+	$TPL->TIPO = "Guia";
+	}
+	
+	$TPL->DESCRICAO = $descricaoPagamento;
+	$TPL->TIPO_CUSTA = $grupo->getDescricao($pagamento->grupo);
+	$TPL->RESPONSAVEL = $pagamento->nomeSacado;
+	$TPL->RECEBEMOS = $pagamento->nomeSacado;
+	$TPL->DATA_VENC = $pagamento->convdata($pagamento->dataVencimento, "mtn");
+	$TPL->VALOR_TOTAL = "R$ ".$pagamento->money($pagamento->valorTotal,"atb");
+	$rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$pagamento->id));    
+	foreach ($rsItens as $key => $item) {    
+   $TPL->DESC_ITEM = $item->descricaoItem;
+    $TPL->CUSTA_ITEM = $item->custa->titulo;
+    $TPL->VALOR_ITEM = "R$ ".$pagamento->money($item->valor,"atb");
+    $TPL->block("BLOCK_ITEM");	
+	}
 
 
-use OpenBoleto\Banco\Femeju;
-use OpenBoleto\Agente;
-
-
-$sacado = new Agente($pagamento->nomeSacado, $pagamento->formataCPFCNPJ($pagamento->cpfSacado), $pagamento->enderecoSacado, $pagamento->bairroSacado, $pagamento->cidadeSacado, $pagamento->ufSacado);
-$cedente = new Agente('Femeju - Federa��o Metropolitana de Judo', '00.416.487/0001-98', 'CLS 403 Lj 23', '71000-000', 'Bras�lia', 'DF');
-
-$boleto = new Femeju(array(
-    // Parâmetros obrigatórios
-    'dataVencimento' => new DateTime($pagamento->dataVencimento),
-    'valor' => $pagamento->valorTotal,
-    'sequencial' => $pagamento->id, // Até 6 dígitos
-    'sacado' => $sacado,
-    'cedente' => $cedente,
-    'agencia' => $brbarray[13], // Até 3 dígitos
-    'carteira' => $brbarray[14], // 1 ou 2
-    'conta' => $brbarray[12], // Até 7 dígitos
-
-    // Parâmetros recomendáveis
-    'logoPath' => 'img/logo.png', // Logo da sua empresa
-    'contaDv' => $brbarray[15],
-    'agenciaDv' => $brbarray[16],
-    'descricaoDemonstrativo' => array( // Ate 5
-        $descricaoPagamento
-    ),
-    'instrucoes' => array( // Ate 8
-        $descricaoPagamento."<br/>".$brbarray[17],        
-    ),
-
-    // Parâmetros opcionais
-    //'resourcePath' => '../resources',
-    //'moeda' => Brb::MOEDA_REAL,
-    //'dataDocumento' => new DateTime(),
-    //'dataProcessamento' => new DateTime(),
-    //'contraApresentacao' => true,
-    //'pagamentoMinimo' => 23.00,
-    //'aceite' => 'N',
-    //'especieDoc' => 'ABC',
-    //'numeroDocumento' => '123.456.789',
-    //'usoBanco' => 'Uso banco',
-    //'layout' => 'layout.phtml',
-    //'logoPath' => 'http://boletophp.com.br/img/opensource-55x48-t.png',
-    //'sacadorAvalista' => new Agente('Antônio da Silva', '02.123.123/0001-11'),
-    //'descontosAbatimentos' => 123.12,
-    //'moraMulta' => 123.12,
-    //'outrasDeducoes' => 123.12,
-    //'outrosAcrescimos' => 123.12,
-    //'valorCobrado' => 123.12,
-    //'valorUnitario' => 123.12,
-    //'quantidade' => 1,
-));
-$nossoNumero = $boleto->gerarNossoNumero();
-$numeroFebraban = $boleto->getNumeroFebraban();
-$pagamento->codigo = $nossoNumero;
-$pagamento->numeroFebraban = $numeroFebraban;
-$pagamento->save();
-echo $boleto->getOutput();
+$TPL->show();

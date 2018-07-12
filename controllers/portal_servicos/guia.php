@@ -21,10 +21,12 @@ $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DESCRICAO = $obj->descricao; 
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
-if($obj->bitPago == 1) { 
+if($obj->bitPago == 1 ) { 
     $TPL->SITUACAO = "Pago";
 	$TPL->COLOR_SITUACAO = "success";
-	
+	if($obj->tipo->id < 3){
+	$TPL->block("BLOCK_RECIBO");
+	}
 	}else if ($obj->bitPago == 0){
 	$TPL->SITUACAO = "Em aberto";
 	$TPL->COLOR_SITUACAO = "warning";

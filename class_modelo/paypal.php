@@ -143,9 +143,11 @@ $responseNvp = $this->sendNvpRequest($requestNvp);
 //ambiente de pagamento.
 if (isset($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS']) && strtolower($responseNvp['PAYMENTINFO_0_PAYMENTSTATUS']) == 'completed') {
 	$pagamento = new Pagamento();	
-	$pagamento->getById($_SESSION['idPagamento']);
+	$_REQUEST['dataPagamento'] = date("d/m/Y");
+	$_REQUEST['forma'] = 'Paypal';
+	$pagamento->baixaPagamento($_SESSION['idPagamento']);
 	$pagamento->numeroFebraban = $responseNvp['PAYMENTINFO_0_TRANSACTIONID'];
-	$pagamento->bitPago =1;
+	$pagamento->bitPago =1;	
 	$pagamento->codigo = $responseNvp['PAYMENTINFO_0_PAYMENTSTATUS'].'-'.$responseNvp['PAYMENTINFO_0_PENDINGREASON'];	
 	$pagamento->save();
     header('Location: ' . $urlsite.PAYPAL_TICKETURL);
