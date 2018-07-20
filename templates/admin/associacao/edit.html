@@ -14,19 +14,19 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="nome"><i class='fa'></i><b>Nome</b></label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome da associação" value="{nome}" class="required form-control"/>
+                        <input type="text" id="nome" name="nome" placeholder="Nome da associação" value="{nome}" class="required form-control" {disabled}/>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="razaoSocial"><i class='fa'></i><b>Razão Social</b></label>
-                        <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Razão social da associação" value="{razaoSocial}" class="form-control"/>
+                        <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Razão social da associação" value="{razaoSocial}" class="form-control"  {disabled} />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="ativo"><i class='fa'></i><b>Ativo</b></label><br/>
-                        <input type="radio" class="required form-control flat-blue" name="ativo" value="1" {checkedAtivo}/> Ativo &nbsp;&nbsp;<input type="radio" class="required form-control"  name="ativo" value="0" {checkedInativo}/> Inativo
+                        <input type="radio" class="required form-control flat-blue" name="ativo" value="1" {checkedAtivo}  {disabled} /> Ativo &nbsp;&nbsp;<input type="radio" class="required form-control" name="ativo" value="0" {checkedInativo}  {disabled} /> Inativo
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="descricao"><i class='fa'></i><b>Descrição</b></label>
-                        <input type="text" id="descricao" name="descricao" placeholder="Descrição" value="{descricao}" maxlength="200" class="form-control"/>
+                        <input type="text" id="descricao" name="descricao" placeholder="Descrição" value="{descricao}" maxlength="200" class="form-control" {disabled} />
                     </div>
                 </div>
             </div>
@@ -42,19 +42,19 @@
                 <div class="col-md-4 col-xs-12">
                     <div class="form-group">
                         <label for="cnpj"><i class='fa'></i><b>CNPJ</b></label>
-                        <input type="text" id="cnpj" name="cnpj" value="{cnpj}" class="cnpj form-control"/>
+                        <input type="text" id="cnpj" name="cnpj" value="{cnpj}" class="cnpj form-control" {disabled} />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12">
                     <div class="form-group">
                         <label for="cnpj"><i class='fa'></i><b>Identificação</b></label>
-                        <input type="text" id="identificacao" name="identificacao" value="{identificacao}" class="form-control"/>
+                        <input type="text" id="identificacao" name="identificacao" value="{identificacao}" class="form-control" {disabled} />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12">
                     <div class="form-group">
                         <label for="sigla"><i class='fa'></i><b>Sigla</b></label>
-                        <input type="text" id="sigla" name="sigla" value="{sigla}" class="form-control"/>
+                        <input type="text" id="sigla" name="sigla" value="{sigla}" class="form-control" {disabled} />
                     </div>
                 </div>
             </div>
@@ -62,13 +62,13 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="dataFiliacao"><i class='fa'></i><b>Data da filiação</b></label>
-                        <input type="text" id="dataFiliacao" name="dataFiliacao" value="{dataFiliacao}" class="required form-control"/>
+                        <input type="text" id="dataFiliacao" name="dataFiliacao" value="{dataFiliacao}" class="required form-control" {disabled} />
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="logomarca"><i class='fa'></i><b>Logomarca</b></label><BR>
-                        <input type="file"  name="logomarca" id="logomarca"/>
+                        <input type="file"  name="logomarca" id="logomarca" {disabled} />
                     </div>
                 </div>
             </div>
@@ -77,13 +77,13 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="endereco"><i class='fa'></i><b>Logradouro</b></label>
-                        <input type="text" id="endereco" name="endereco" value="{endereco}" class="required form-control"/>
+                        <input type="text" id="endereco" name="endereco" value="{endereco}" class="required form-control" {disabled} />
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="bairro"><i class='fa'></i><b>Bairro</b></label>
-                        <input type="text" id="bairro" name="bairro" value="{bairro}" class="required form-control"/>
+                        <input type="text" id="bairro" name="bairro" value="{bairro}" class="required form-control" {disabled} />
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 <div class="col-md-2 col-xs-2">
                     <div class="form-group">
                         <label for="uf"><i class='fa'></i><b>Estado</b></label>
-                         <select name="uf" id="uf" class="required form-control">
+                         <select name="uf" id="uf" class="required form-control" {disabled} >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_UF -->
                             <option value="{id_uf}" {selectedUf}>{uf}</option>
@@ -102,7 +102,7 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="cidade"><i class='fa'></i><b>Cidade</b></label>
-                        <select name="cidade" id="cidade" class="required form-control">
+                        <select name="cidade" id="cidade" class="required form-control" {disabled} >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_CIDADE -->
                             <option value="{id_cidade}" {selectedCidade}>{nome_cidade}</option>
@@ -113,7 +113,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="cep"><i class='fa'></i><b>CEP</b></label>
-                        <input type="text" id="cep" name="cep" value="{cep}" class="form-control"/>
+                        <input type="text" id="cep" name="cep" value="{cep}" class="form-control"  {disabled} />
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
             <div class="col-md-12 col-xs-12">
                 <div class="form-group">
                         <label for="cpf"><i class='fa'></i><b>Selecione</b></label>
-                        <select name="idResponsavel" id="idResponsavel" class="required form-control">
+                        <select name="idResponsavel" id="idResponsavel" class="required form-control"  {disabled} >
                             <option value="">selecione</option>
                             <option value="0" style="background-color: #00a65a; color:#ffffff; font-size: 1.5em">NOVO REPONSÁVEL</option>
                             <!-- BEGIN BLOCK_RESPONSAVEL -->
@@ -138,13 +138,13 @@
             <div class="col-md-4 col-xs-12">
                  <div class="form-group">
                         <label for="cpf"><i class='fa'></i><b>CPF/CNPJ</b></label>
-                        <input type="text" id="cpf_responsavel" name="cpf_responsavel" placeholder="CPF" value="{cpf_responsavel}" class="cpf form-control required"/>
+                        <input type="text" id="cpf_responsavel" name="cpf_responsavel" placeholder="CPF" value="{cpf_responsavel}" class="cpf form-control required" {disabled} />
                     </div>
             </div>
             <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                         <label for="email"><i class='fa'></i><b>E-mail</b></label>
-                        <input type="text" id="email" name="email" value="{email_responsavel}" class="required form-control email"/>
+                        <input type="text" id="email" name="email" value="{email_responsavel}" class="required form-control email" {disabled} />
                          
                     </div>
             </div>
@@ -152,7 +152,7 @@
              <div class="col-md-4 col-xs-12">
                  <div class="form-group">
                         <label for="celular"><i class='fa'></i><b>Celular</b></label>
-                        <input type="text" id="celular_responsavel" name="celular_responsavel" value="{celular_responsavel}" class="required form-control"/>
+                        <input type="text" id="celular_responsavel" name="celular_responsavel" value="{celular_responsavel}" class="required form-control" {disabled} />
                     </div>
             </div>
             </div> 
@@ -160,20 +160,20 @@
             <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                         <label for="responsavel"><i class='fa'></i><b>Nome</b></label>
-                        <input type="text" id="nome_responsavel" name="nome_responsavel" value="{nome_responsavel}" class="required form-control"/>
+                        <input type="text" id="nome_responsavel" name="nome_responsavel" value="{nome_responsavel}" class="required form-control" {disabled} />
                                                   
                     </div>
             </div>
              <div class="col-md-4 col-xs-12">
                  <div class="form-group">
                         <label for="nomemeio_responsavel"><i class='fa'></i><b>Nome do Meio</b></label>
-                        <input type="text" id="nomemeio_responsavel" name="nomemeio_responsavel" value="{nomemeio_responsavel}" class="form-control"/>
+                        <input type="text" id="nomemeio_responsavel" name="nomemeio_responsavel" value="{nomemeio_responsavel}" class="form-control" {disabled} />
                     </div>
             </div>
              <div class="col-md-4 col-xs-12">
                  <div class="form-group">
                         <label for="sobrenome_responsavel"><i class='fa'></i><b>Sobrenome</b></label>
-                        <input type="text" id="sobrenome_responsavel" name="sobrenome_responsavel" value="{sobrenome_responsavel}" class="required form-control"/>
+                        <input type="text" id="sobrenome_responsavel" name="sobrenome_responsavel" value="{sobrenome_responsavel}" class="required form-control" {disabled} />
                     </div>
             </div>
             </div>  
@@ -182,13 +182,13 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="endereco_resp"><i class='fa'> </i><b>Logradouro</b></label>
-                        <input type="text" id="endereco_responsavel" name="endereco_responsavel" value="{endereco_resp}" class="required form-control"/>
+                        <input type="text" id="endereco_responsavel" name="endereco_responsavel" value="{endereco_resp}" class="required form-control" {disabled} />
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="bairro_resp"><i class='fa'> </i><b>Bairro</b></label>
-                        <input type="text" id="bairro_responsavel" name="bairro_responsavel" value="{bairro_resp}" class="required form-control"/>
+                        <input type="text" id="bairro_responsavel" name="bairro_responsavel" value="{bairro_resp}" class="required form-control" {disabled} />
                     </div>
                 </div>
             </div>
@@ -196,7 +196,7 @@
                 <div class="col-md-2 col-xs-2">
                     <div class="form-group">
                         <label for="uf_responsavel"><i class='fa'> </i><b>Estado</b></label>
-                         <select name="uf_responsavel" id="uf_responsavel" class="required form-control">
+                         <select name="uf_responsavel" id="uf_responsavel" class="required form-control" {disabled} >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_UF_RESP -->
                             <option value="{id_uf}" {selectedUfresp}>{uf}</option>
@@ -207,7 +207,7 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="cidade_responsavel"><i class='fa'> </i><b>Cidade</b></label>
-                        <select name="cidade_responsavel" id="cidade_responsavel" class="required form-control">
+                        <select name="cidade_responsavel" id="cidade_responsavel" class="required form-control" {disabled} >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_CIDADE_RESP -->
                             <option value="{id_cidade_resp}" {selectedCidaderesp}>{nome_cidade_resp}</option>
@@ -218,7 +218,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="cep_responsavel"><i class='fa'> </i><b>CEP</b></label>
-                        <input type="text" id="cep_responsavel" name="cep_responsavel" value="{cep_resp}" class="required form-control"/>
+                        <input type="text" id="cep_responsavel" name="cep_responsavel" value="{cep_resp}" class="required form-control"  {disabled} />
                     </div>
                 </div>
             </div>    
@@ -229,19 +229,19 @@
             <div class="col-md-4 col-xs-4">
                 <div class="form-group">
                         <label for="telefone1"><i class='fa'></i><b>Telefone 1</b></label>
-                        <input type="text" id="telefone1" name="telefone1" value="{telefone1}" class="required form-control"/>
+                        <input type="text" id="telefone1" name="telefone1" value="{telefone1}" class="required form-control" {disabled} />
                     </div>
             </div>
             <div class="col-md-4 col-xs-4">
                 <div class="form-group">
                         <label for="telefone2"><i class='fa'></i><b>Telefone 2</b></label>
-                        <input type="text" id="telefone2" name="telefone2" value="{telefone2}" class="form-control"/>
+                        <input type="text" id="telefone2" name="telefone2" value="{telefone2}" class="form-control" {disabled} />
                     </div>
             </div>
             <div class="col-md-4 col-xs-4">
                 <div class="form-group">
                         <label for="email_a"><i class='fa'></i><b>E-mail</b></label>
-                        <input type="email" id="email_a" name="email_a" value="{email}" class="email form-control"/>
+                        <input type="email" id="email_a" name="email_a" value="{email}" class="email form-control" {disabled} />
                     </div>
             </div>
             </div>   
@@ -249,13 +249,13 @@
                 <div class="col-md-6 col-xs-6">
                 <div class="form-group">
                         <label for="midiaSocial"><i class='fa'></i><b>Web Site</b></label>
-                        <input type="text" id="website" name="website" value="{website}" class="form-control"/>
+                        <input type="text" id="website" name="website" value="{website}" class="form-control" {disabled} />
                     </div>
             </div>
              <div class="col-md-6 col-xs-6">
                 <div class="form-group">
                         <label for="midiaSocial"><i class='fa'></i><b>Mídia Social</b></label>
-                        <input type="text" id="midiaSocial" name="midiaSocial" value="{midiaSocial}" class="form-control"/>
+                        <input type="text" id="midiaSocial" name="midiaSocial" value="{midiaSocial}" class="form-control" {disabled}/>
                     </div>
             </div> 
             </div>           
@@ -265,14 +265,14 @@
                 <div class="col-md-12 col-xs-12">
                      <div class="form-group">
                         <label for="Fotos"><i class='fa'></i><b>Fotos</b></label><BR>
-                        <input type="file"  name="fotos[]" id="fotos" multiple="multiple"/>
+                        <input type="file"  name="fotos[]" id="fotos" multiple="multiple" {disabled}/>
                     </div>
                 </div>
             </div>
         </fieldset> 
         </div>
         <div class="box-footer text-center">
-            <a class="btn btn-success" id="save">
+            <a class="btn btn-success" id="save" {disabled}>
                 Salvar
             </a>
             <button class="btn btn-default btVoltar" type="button">
