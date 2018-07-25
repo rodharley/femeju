@@ -10,13 +10,13 @@
 				<div class="col-md-6 col-xs-6">
 					<div class="form-group">
                         <label for="razaoSocial"><i class='fa'></i><b>Data Início</b></label>
-					<input type="text" class="form-control date required" name="datai" id="datai" value="{DATAI}" />
+					<input type="text" class="form-control required" name="datai" id="datai" value="{DATAI}" />
 					</div>
 				</div>
 				<div class="col-md-6 col-xs-6">
 					<div class="form-group">
                         <label for="data"><i class='fa'></i><b>Data Fim</b></label>
-					<input type="text" class="form-control date required" name="dataf" id="dataf" value="{DATAF}" />
+					<input type="text" class="form-control required" name="dataf" id="dataf" value="{DATAF}" />
 					</div>
 				</div>
 			</div>			
@@ -35,8 +35,8 @@
 </form>
 <script>
 	$(document).ready(function() {
-		$(".date").datepicker();
-		
+		$("#dataf").datepicker();
+		$("#datai").datepicker();
 		$("#frmRelat").validate({
             errorClass : "help-inline",
             errorElement : "div",
