@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.iso-8859-1', 'pt_BR.iso-8859-1', 'portuguese');
 header('Content-Type: text/html; charset=iso-8859-1');
@@ -27,7 +28,9 @@ try{
 
 
 //incluindo todas as classes e incicializando a conexao com o banco de dados
+require ("plugins/autoload.php"); 
 require("class_modelo/classes.php");
+// caminho relacionado a SDK
 $root = new Persistencia();
 
 //recuperando as variaveis constantes controller e acao

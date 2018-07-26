@@ -1,6 +1,8 @@
 <?php
 $menu = 32;
 include("includes/include.lock.php");
+
+
 //INSTACIA CLASSES
 $pag = new Pagamento();
 $custa = new Custa();

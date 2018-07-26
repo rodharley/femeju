@@ -277,7 +277,11 @@ set
 		<atrib tbname="bitEspecial" type="int">bitEspecial</atrib>	
 		<atrib tbname="bitResolvido" type="int">bitResolvido</atrib>		
 		<atrib tbname="forma" type="txt">forma</atrib>
+		<atrib tbname="telefone" type="txt">telefone</atrib>
 		<atrib tbname="data_emissao" type="def">dataEmissao</atrib>	
+		<atrib tbname="gn_url_boleto" type="txt">gnUrlBoleto</atrib>
+		<atrib tbname="gn_chargeid" type="int">gnChargeId</atrib>
+		<atrib tbname="gn_status" type="txt">gnStatus</atrib>
 	</class>
 	<class name="PagamentoItem" tbname="fmj_pagamento_item" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>

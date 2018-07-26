@@ -12,7 +12,7 @@ $objAn = new Anuidade();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/pagamento/guia.html");
 $obj->getById($obj->md5_decrypt($_REQUEST['id']));
-$TPL->ID_HASH = $obj->md5_encrypt($obj->id);
+//$TPL->ID_HASH = $obj->md5_encrypt($obj->id);
 $TPL->TIPO_CUSTA = $grupo->getDescricao($obj->grupo);
 $TPL->RESPONSAVEL = $obj->nomeSacado;
 $TPL->VALOR_TOTAL = "R$ ".$obj->money($obj->valorTotal,"atb");
@@ -42,6 +42,7 @@ if($obj->bitPago == 1 ) {
 	} 
 
 if($obj->tipo->id == 3){
+	$TPL->URL_PAGAMENTO = 'admin_pagamento-'.$obj->tipo->arquivo.'?id='.$obj->md5_encrypt($obj->id);
 	$TPL->PAYPAL_TRANSACTION_ID = $obj->numeroFebraban;
 	$status = explode("-", $obj->codigo);
 	if(count($status) > 1){
@@ -49,9 +50,14 @@ if($obj->tipo->id == 3){
 	$TPL->PAY_PAL_DESCRICAO = $status[1];
 	}
 	$TPL->block('BLOCK_PAYPAL');
+	} else if($obj->tipo->id == 2){
+		$TPL->URL_PAGAMENTO = 'admin_pagamento-'.$obj->tipo->arquivo.'?id='.$obj->md5_encrypt($obj->id);
+	}else{
+		$TPL->URL_PAGAMENTO = $obj->gnUrlBoleto;
 	}
-//boleto
-$TPL->TIPO_PAG_ARQUIVO = $obj->tipo->arquivo;
+
+
+
 
 $rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$obj->id));    
 

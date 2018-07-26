@@ -98,7 +98,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-9 col-xs-9">
+                <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="cidade"><i class='fa'> </i><b>Cidade</b></label>
                         <select name="cidade" id="cidade" class="required form-control">
@@ -109,7 +109,14 @@
                         </select>
                     </div>
                 </div>
-                
+                <div class="col-md-3 col-xs-3">
+                            <div class="form-group">
+                                <label for="telefone"><i class='fa'> </i><b>Telefone</b></label>
+                                
+                                    <input type="text" class="form-control required" name="telefone" id="telefone" />
+                                
+                            </div>
+                        </div>
             </div>
                     </fieldset>
                </form> 
@@ -245,7 +252,7 @@
 	$(document).ready(function() {
         $('#data').datepicker();
 		$("#cpfcnpj").inputmask({ mask: ["999.999.999-99","99.999.999/9999-99"]});
-        
+        $("#telefone").inputmask({ mask: ["99 9999-9999","99 99999-9999"]});
         $("#uf").change(function(){
             $.ajax({
                 url : "ajax/cidadesPorUf.php",

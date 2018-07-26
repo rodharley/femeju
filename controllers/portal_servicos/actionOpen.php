@@ -1,4 +1,5 @@
 <?php
+
 //INSTACIA CLASSES
 $usu = new Usuario();
 $atleta = new Atleta();

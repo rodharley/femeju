@@ -153,6 +153,7 @@ class Pessoa extends Persistencia {
             $arrayResp['bairro'] = $this->bairro;
             $arrayResp['cidade'] = $this->cidade != Null ? $this->cidade->nome : "Brasília";
             $arrayResp['uf'] = $this->cidade != Null ? $this->cidade->uf->uf : "DF";
+			$arrayResp['telefone'] = isset($_REQUEST['telefone']) ? $_REQUEST['telefone']: $this->telCelular != "" ? $this->telCelular : $this->telResidencial ;
             return $arrayResp;
         }
         

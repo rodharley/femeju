@@ -1,6 +1,10 @@
 <?php
+use Gerencianet\Exception\GerencianetException;
+use Gerencianet\Gerencianet;
 class Pagamento extends Persistencia{
+	
 	const TABELA = "fmj_pagamento";
+
 
 	var $valorTotal;
     var $dataVencimento;
@@ -22,6 +26,10 @@ class Pagamento extends Persistencia{
 	var $dataEmissao;
     var $itens = array();
 	var $forma;
+	var $telefone;
+	var $gnStatus;
+	var $gnChargeId;
+	var $gnUrlBoleto;
     public function cancelar($id){
         $this->getById($this->md5_decrypt($id));
         if($this->bitPago == 0){
@@ -57,7 +65,7 @@ class Pagamento extends Persistencia{
 		if($especial == 1){
 			$this->bitResolvido = 0;
 		}
-
+		
         $this->grupo = $grupo;
         $this->descricao = $descricao;
         $this->nomeSacado = $arrayResponsavel['nome'];
@@ -66,16 +74,107 @@ class Pagamento extends Persistencia{
         $this->bairroSacado = $arrayResponsavel['bairro'];
         $this->cidadeSacado = $arrayResponsavel['cidade'];
         $this->ufSacado = $arrayResponsavel['uf'];
+		$this->telefone = $arrayResponsavel['telefone'];
         $this->tipo = new PagamentoTipo($tipoPagamento);
 		$this->bitEspecial = $especial;
-
-        $this->save();
+		$this->save();
 
         foreach ($itensPagamento as $key => $item) {
          $item->pagamento = $this;
          $item->save();
 
         }
+
+		//trata por tipo de pagamento:
+		if($tipoPagamento == 1){
+		
+			$urlsite = 'http://'.$_SERVER['HTTP_HOST'].'/';
+			$options = [
+			  'client_id' => GN_CLIENTID,
+			  'client_secret' => GN_CLIENTSECRET,
+			  'sandbox' => GN_SANDBOX // altere conforme o ambiente (true = desenvolvimento e false = producao)
+			];
+			
+			$itensGN = array();
+			foreach ($itensPagamento as $key => $item) {
+				$itemadd = [
+				    'name' => utf8_encode($item->descricaoItem), // nome do item, produto ou serviço
+				    'amount' => 1, // quantidade
+				    'value' => intval($this->limpaDigitos($item->valor))// valor (1000 = R$ 10,00)
+				];
+				$itensGN[$key]=$itemadd;
+			}
+			$metadata = ['notification_url'=>$urlsite.GN_NOTIFICATIONURL];
+			$body  =  [
+			    'items' => $itensGN,
+			    'metadata' => $metadata
+			];
+			
+			try {
+				//registra o pagamento
+			    $api = new Gerencianet($options);
+			    $charge = $api->createCharge([], $body);
+			 //Array ( [code] => 200 [data] => Array ( [charge_id] => 448859 [status] => new [total] => 2000 [custom_id] => [created_at] => 2018-07-26 11:33:30 ) ) 
+
+				$this->gnStatus = $charge['data']['status'];
+				$this->gnChargeId = $charge['data']['charge_id'];
+				
+				
+					//seta boleto
+					// $charge_id refere-se ao ID da transação gerada anteriormente
+						$params = [
+						  'id' => intval($this->gnChargeId)
+						];
+	 					
+						$customer = [
+						  'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"), // nome do cliente
+						  'cpf' => $this->cpfSacado , // cpf válido do cliente
+						  'phone_number' => strlen($this->limpaDigitos($this->telefone)) > 11 ? substr($this->limpaDigitos($this->telefone),2) : str_pad($this->limpaDigitos($this->telefone),11,"0",STR_PAD_LEFT) // telefone do cliente
+						];
+ 
+						$bankingBillet = [
+						  'expire_at' => $this->dataVencimento, // data de vencimento do boleto (formato: YYYY-MM-DD)
+						  'customer' => $customer
+						];
+						 
+						$payment = [
+						  'banking_billet' => $bankingBillet // forma de pagamento (banking_billet = boleto)
+						];
+						 
+						$body = [
+						  'payment' => $payment
+						];
+			
+						 $charge = $api->payCharge($params, $body);
+						//Array ( [code] => 200 [data] => Array ( [barcode] => 00000.00000 00000.000000 00000.000000 0 00000000000000 [link] => https://visualizacaosandbox.gerencianet.com.br/emissao/43219_1_CACA2/A4XB-43219-305988-MAXI8 [expire_at] => 2018-07-26 [charge_id] => 449048 [status] => waiting [total] => 6000 [payment] => banking_billet ) ) 
+						$this->gnStatus = $charge['data']['status'];
+						$this->numeroFebraban = $charge['data']['barcode'];
+						$this->gnUrlBoleto = $charge['data']['link'];
+						$this->save();
+						
+			} catch (GerencianetException $e) {
+			    print_r($e->code);
+			    print_r($e->error);
+			    print_r($e->errorDescription);
+				exit();
+				//grava a log     
+				$_SESSION['fmj.param1'] =  $e->error;             
+				$_SESSION['fmj.mensagem'] = 85;
+    			header("Location:portal_servicos-entrar");
+				exit();
+				
+			} catch (Exception $e) {
+			    print_r($e->getMessage());
+				exit();
+				
+				$_SESSION['fmj.mensagem'] = 85;
+				$_SESSION['fmj.param1'] =  print_r($e->getMessage());
+    			header("Location:portal_servicos-entrar");
+				exit();
+			}
+			
+			
+		}
         return $this->id;
     }
 
@@ -170,7 +269,7 @@ class Pagamento extends Persistencia{
 	            $arrayResp['bairro'] = $_REQUEST['bairro'];
 	            $arrayResp['cidade'] = $cidade->nome;
 	            $arrayResp['uf'] = $cidade->uf->uf;
-
+				$arrayResp['telefone'] = $_REQUEST['telefone'];
                 $idPagamento = $pag->gerarPagamento(GrupoCusta::OUTROS,$_REQUEST['tipoPagamento'],$dataPag,$arrayResp,$_REQUEST['descricao'],$itensPagamento);
                 return $idPagamento;
                  }

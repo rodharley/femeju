@@ -451,7 +451,7 @@ function xmlObject($elemento,$i,$objeto){
 								if($atributo['type'] == "txt"){
 									$sql .= "'".$this->conn->real_escape_string($this->$atrb)."'";
 								}elseif ($atributo['type'] == "dat") {
-									$sql .= strlen($this->$atrb) > 0 ? "'".$this->conn->real_escape_string($this->$atrb)."'" : "NULL";
+									$sql .= strlen($this->$atrb) > 0 ? $this->$atrb != '0000-00-00' ? "'".$this->conn->real_escape_string($this->$atrb)."'" : "NULL" : "NULL";
 								}else{	
 									$sql .= strlen($this->$atrb) > 0 ? $this->$atrb : "NULL";
 								}
