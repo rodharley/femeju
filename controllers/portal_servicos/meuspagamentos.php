@@ -35,6 +35,7 @@ foreach($alist as $key => $n){
 	} 
     $TPL->DATA_VENC = $objPag->convdata($n->dataVencimento, "mtn");
     $TPL->ID_HASH = $objPag->md5_encrypt($n->id);
+    $TPL->CONTROLE = $n->controle;
     $TPL->block("BLOCK_ITEM_LISTA");
     
 }

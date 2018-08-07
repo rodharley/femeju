@@ -34,7 +34,7 @@ foreach($alist as $key => $n){
 	} 
     $TPL->DISABLED = $n->bitPago == 0 ? "" : "disabled";
     $TPL->responsavel = $n->nomeSacado;
-	$TPL->codigo = $n->numeroFebraban;
+	$TPL->codigo = $n->controle;	
     $TPL->ID_HASH = $objPag->md5_encrypt($n->id);
     $TPL->block("BLOCK_ITEM_LISTA");
 

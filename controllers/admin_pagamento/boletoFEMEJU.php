@@ -17,6 +17,7 @@ $grupo = new GrupoCusta();
 	$TPL->TIPO = "Guia";
 	}
 	
+	$TPL->CONTROLE = $pagamento->controle;
 	$TPL->DESCRICAO = $descricaoPagamento;
 	$TPL->TIPO_CUSTA = $grupo->getDescricao($pagamento->grupo);
 	$TPL->RESPONSAVEL = $pagamento->nomeSacado;

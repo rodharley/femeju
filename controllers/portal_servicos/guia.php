@@ -21,6 +21,7 @@ $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DESCRICAO = $obj->descricao; 
 $TPL->DATA_PAGAMENTO = $obj->convdata($obj->dataPagamento, "mtn");
+$TPL->CONTROLE = $obj->controle;
 if($obj->bitPago == 1 ) { 
     $TPL->SITUACAO = "Pago";
 	$TPL->COLOR_SITUACAO = "success";

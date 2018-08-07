@@ -30,6 +30,8 @@ class Pagamento extends Persistencia{
 	var $gnStatus;
 	var $gnChargeId;
 	var $gnUrlBoleto;
+	var $controle;
+	
     public function cancelar($id){
         $this->getById($this->md5_decrypt($id));
         if($this->bitPago == 0){
@@ -45,6 +47,39 @@ class Pagamento extends Persistencia{
         }
 
     }
+	
+	public function gerarNumeroControle(){
+		$this->getById($this->id);
+		$controle = "";
+		
+		if($this->tipo->id == PagamentoTipo::BOLETO)
+		$controle = "B";
+		else if($this->tipo->id == PagamentoTipo::DINHEIRO)
+		$controle = "D";
+		else
+		$controle = "P";
+		
+		$sql = "SELECT * FROM  ".Pagamento::TABELA." where id = (SELECT  max(id) as id from ".Pagamento::TABELA." where id != ".$this->id.")";
+				
+		$rs = $this->DAO_ExecutarQuery($sql);
+		$arrayUltimoPag = $this->DAO_GerarArray($rs);
+		if(strlen($arrayUltimoPag['controle']) == 10){
+			$tipo = substr($arrayUltimoPag['controle'],0,1);
+			$numero = intval(substr($arrayUltimoPag['controle'],1,5));
+			$ano  = substr($arrayUltimoPag['controle'],6);
+			if($ano == substr($this->dataEmissao, 0,4)){
+				$numerof = str_pad(($numero+1),5,"0",STR_PAD_LEFT);				
+				$controle .= $numerof.substr($this->dataEmissao, 0,4); 
+			}else{
+				$controle .= "00001".substr($this->dataEmissao, 0,4);
+			}
+		}else{
+			$controle .= "00001".substr($this->dataEmissao, 0,4);
+		}
+		$this->controle = $controle;
+		$this->save();
+		
+	}
 
     public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$arrayResponsavel,$descricao, $itensPagamento,$especial=0){
         $total = 0.0;
@@ -78,7 +113,10 @@ class Pagamento extends Persistencia{
         $this->tipo = new PagamentoTipo($tipoPagamento);
 		$this->bitEspecial = $especial;
 		$this->save();
-
+		
+		//gera numero de controle
+		$this->gerarNumeroControle();
+		
         foreach ($itensPagamento as $key => $item) {
          $item->pagamento = $this;
          $item->save();
@@ -189,7 +227,7 @@ class Pagamento extends Persistencia{
 		if ($dataVencimentoF != "")
             $sql .= " and ( p.dataVencimento <= '$dataVencimentoF')";
         if ($codigo != "")
-            $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
+            $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo' or p.controle like '%$codigo%')";
         if ($status != "")
             $sql .= " and ( p.bitPago = $status )";
 		if($especial != ""){
@@ -224,7 +262,7 @@ class Pagamento extends Persistencia{
 		if ($dataVencimentoF != "")
             $sql .= " and ( p.dataVencimento <= '$dataVencimentoF')";
         if ($codigo != "")
-            $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo')";
+            $sql .= " and ( p.numeroFebraban =  '$codigo' or p.codigo = '$codigo' or p.controle like '%$codigo%')";
         if ($status != "")
             $sql .= " and ( p.bitPago = $status )";
         if($especial != ""){
