@@ -282,6 +282,7 @@ set
 		<atrib tbname="gn_url_boleto" type="txt">gnUrlBoleto</atrib>
 		<atrib tbname="gn_chargeid" type="int">gnChargeId</atrib>
 		<atrib tbname="gn_status" type="txt">gnStatus</atrib>
+		<atrib tbname="controle" type="txt">controle</atrib>
 	</class>
 	<class name="PagamentoItem" tbname="fmj_pagamento_item" tbid="id" lazy="true">
 		<atrib tbname="id" type="id">id</atrib>
