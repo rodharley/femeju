@@ -70,7 +70,7 @@ function setExpressCheckout($requestNvp){
     $signature = PAYPAL_SIGNATURE;
 //Baseado no ambiente, sandbox ou produção, definimos as credenciais
 //e URLs da API.
-if ($this->sandbox = true) {
+if (PAYPAL_SANDBOX == true) {
     //credenciais da API para o Sandbox
 /*
     $user = 'conta-business_api1.test.com';
@@ -129,7 +129,7 @@ function doExpressCheckoutPayment($requestNvp){
     $signature = PAYPAL_SIGNATURE;
 //Baseado no ambiente, sandbox ou produção, definimos as credenciais
 //e URLs da API.
-if ($this->sandbox = true) {
+if (PAYPAL_SANDBOX == true) {
     $paypalURL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 } else {
     $paypalURL = 'https://www.paypal.com/cgi-bin/webscr';
