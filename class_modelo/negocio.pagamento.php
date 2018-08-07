@@ -274,10 +274,10 @@ class Pagamento extends Persistencia{
                 return $idPagamento;
                  }
 
-                function baixaPagamento($idPagamento){
+                function baixaPagamento($idPagamento,$data=""){
                     $this->getById($idPagamento);
-                    $this->dataPagamento = $this->convdata($_REQUEST['dataPagamento'], "ntm");
-					$this->forma = $_REQUEST['forma'];
+                    $this->dataPagamento = $data == "" ? $this->convdata($_REQUEST['dataPagamento'], "ntm"):$data;
+					$this->forma = isset($_REQUEST['forma']) ? $_REQUEST['forma'] : "";
                     $this->bitPago = 1;
                     $this->save();
                     switch ($this->grupo) {
@@ -326,6 +326,10 @@ function pesquisarBoletosBrb($dataVencimentoI = "",$dataVencimentoF = "") {
 
         return $this -> getSQL($sql);
 
+    }
+    
+    function getByChargeId($chargeId){
+    	return $this->getRow(array("gnChargeId"=>"=".$chargeId));
     }
 
 }
