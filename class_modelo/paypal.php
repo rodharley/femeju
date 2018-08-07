@@ -21,7 +21,7 @@ public function __construct($sandbox = true){
 function sendNvpRequest(array $requestNvp)
 {
     //Endpoint da API
-    $apiEndpoint  = 'https://api-3t.' . ($this->sandbox? 'sandbox.': null);
+    $apiEndpoint  = 'https://api-3t.' . (PAYPAL_SANDBOX ? 'sandbox.': null);
     $apiEndpoint .= 'paypal.com/nvp';
  
     //Executando a operação
