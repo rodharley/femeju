@@ -91,7 +91,7 @@ class Pagamento extends Persistencia{
 			$item = new PagamentoItem();
 			$item->valor = $this->money($taxas['12'], "bta");
 			if($item->valor > 0){
-			$item->descricaoItem = "Taxa de Pagamento Boleto";
+			$item->descricaoItem = "Encargos Finaceiros";
 			$item->custa = new Custa(12);					
 			array_push($itensPagamento,$item);
 			}	
@@ -100,7 +100,7 @@ class Pagamento extends Persistencia{
 			$item = new PagamentoItem();
 			$item->valor = $this->money($taxas['13'], "bta");
 			if($item->valor > 0){
-			$item->descricaoItem = "Taxa de Pagamento Paypal";
+			$item->descricaoItem = "Encargos Finaceiros";
 			$item->custa = new Custa(12);
 			array_push($itensPagamento,$item);
 			}
