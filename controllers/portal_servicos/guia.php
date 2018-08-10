@@ -53,6 +53,8 @@ if($obj->tipo->id == 3){
 	$TPL->block('BLOCK_PAYPAL');
 	} else if($obj->tipo->id == 2){
 		$TPL->URL_PAGAMENTO = 'admin_pagamento-'.$obj->tipo->arquivo.'?id='.$obj->md5_encrypt($obj->id);
+		$TPL->INFO_AD = $obj->numeroFebraban;
+		$TPL->block("BLOCK_INFO_AD");
 	}else{
 		$TPL->URL_PAGAMENTO = $obj->gnUrlBoleto;
 	}

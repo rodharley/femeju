@@ -316,6 +316,8 @@ class Pagamento extends Persistencia{
                     $this->getById($idPagamento);
                     $this->dataPagamento = $data == "" ? $this->convdata($_REQUEST['dataPagamento'], "ntm"):$data;
 					$this->forma = isset($_REQUEST['forma']) ? $_REQUEST['forma'] : "";
+					if($_REQUEST['descricao'] != "")
+						$this->numeroFebraban = $_REQUEST['descricao'];
                     $this->bitPago = 1;
                     $this->save();
                     switch ($this->grupo) {
