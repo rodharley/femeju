@@ -8,6 +8,7 @@ $objc = new Competicao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objGrad = new Graduacao();
 $associacao = new Associacao();
+$objConf = new Configuracoes();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaoa_evento.html");
 $objc->getById($objc->md5_decrypt($_REQUEST['idEvento']));
@@ -18,6 +19,9 @@ foreach ($rsacademias as $key => $acad) {
     $idsAssoc .= ",".$acad->id;
 }*/
 $TPL->IDS_ASSOCIACAO = $objc->md5_decrypt($_REQUEST['idAssoc']);
+$taxas = $objConf->recuperaConfiguracoesTaxa();
+$TPL->TAXA_PP = $taxas[13];
+$TPL->TAXA_GN = $taxas[12];
 foreach ($rs as $key => $value) {
 	$TPL->ID_GRA = $value->id;
     $TPL->DESC_GRA = $value->descricao;
@@ -29,7 +33,7 @@ $TPL->VALOR = $objc->custa->valor;
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
 $rspag = $objTP->getRows(0,10,array(),array("ativo"=>"=1"));
-$TPL->CHECKED = "checked='checked'";
+//$TPL->CHECKED = "checked='checked'";
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;
     $TPL->IMG_PAG = $value->imagem;

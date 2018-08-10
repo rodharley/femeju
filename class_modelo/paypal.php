@@ -62,6 +62,30 @@ function sendNvpRequest(array $requestNvp)
 }
 
 
+function reelbolson($requestNVP){
+/*
+	USER= API_username
+2
+PWD = API_password
+3
+SIGNATURE= API_signature
+4
+VERSION=108.0
+5
+METHOD=â€�RefundTransactionâ€œ
+6
+TRANSACTIONID=XXXXXXXXXXXXX
+7
+REFUNDTYPE=PARTIAL
+8
+NOTE=â€�Motivo do reembolsoâ€�
+9
+AMT=##.##*/
+
+	
+	
+}
+
 function setExpressCheckout($requestNvp){
 	//Vai usar o Sandbox, ou produção?
 	$urlsite = 'http://'.$_SERVER['HTTP_HOST'].'/';

@@ -2,6 +2,7 @@
 class Custa extends Persistencia{
     const TABELA = "fmj_custas";
     const ANUIDADE_PADRAO = "1";
+	const TAXAS = "12";
 	var $descricao;
     var $titulo;    
 	var $valor;

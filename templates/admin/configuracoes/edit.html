@@ -16,6 +16,17 @@
                 </div>
             </div>                       
             <!-- END BLOCK_ITEM_CONF -->  
+            <!-- BEGIN BLOCK_ITEM_CONF_DINHEIRO -->
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="texto"><i class='fa'></i><b>{DESC_CONF}</b></label>
+                        <input type="text" class="form-control required dinheiro" name='configuracao[]' value="{VALOR_CONF}"/>                    
+                        <input type="hidden"  name="id[]" value="{ID_CONF}"/>
+                    </div>
+                </div>
+            </div>                       
+            <!-- END BLOCK_ITEM_CONF_DINHEIRO -->  
             <!-- BEGIN BLOCK_ITEM_CONF_UPLOAD -->
             <div class="row">
                 <div class="col-md-12 col-xs-12">
@@ -71,6 +82,16 @@
 		showCaption: false,
 		language: 'pt-BR'
 	});
+	
+	$(".dinheiro").inputmask({
+			alias : "decimal",
+			groupSeparator : ".",
+			autoGroup : true,
+			digits : 2,
+			digitsOptional : false,
+			prefix : "",
+			placeholder : ""
+		});
 
       });
     </script>

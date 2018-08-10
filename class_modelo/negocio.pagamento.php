@@ -83,6 +83,29 @@ class Pagamento extends Persistencia{
 
     public function gerarPagamento($grupo,$tipoPagamento,$dataVencimento,$arrayResponsavel,$descricao, $itensPagamento,$especial=0){
         $total = 0.0;
+		
+		//gera taxas de pagamento em itens
+		$objConf = new Configuracoes();
+		$taxas = $objConf->recuperaConfiguracoesTaxa();
+		if($tipoPagamento == PagamentoTipo::BOLETO){
+			$item = new PagamentoItem();
+			$item->valor = $this->money($taxas['12'], "bta");
+			if($item->valor > 0){
+			$item->descricaoItem = "Taxa de Pagamento Boleto";
+			$item->custa = new Custa(12);					
+			array_push($itensPagamento,$item);
+			}	
+		}
+		if($tipoPagamento == PagamentoTipo::PAYPAL){
+			$item = new PagamentoItem();
+			$item->valor = $this->money($taxas['13'], "bta");
+			if($item->valor > 0){
+			$item->descricaoItem = "Taxa de Pagamento Paypal";
+			$item->custa = new Custa(12);
+			array_push($itensPagamento,$item);
+			}
+		}
+		
         foreach ($itensPagamento as $key => $item) {
             $total += $item->valor;
         }
@@ -116,6 +139,9 @@ class Pagamento extends Persistencia{
 		
 		//gera numero de controle
 		$this->gerarNumeroControle();
+		
+		
+		
 		
         foreach ($itensPagamento as $key => $item) {
          $item->pagamento = $this;

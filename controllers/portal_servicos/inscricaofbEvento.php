@@ -7,11 +7,14 @@ $objc = new Competicao();
 $objAssociacao = new Associacao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objA = new Atleta();
+$objConf = new Configuracoes();
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/inscricao/inscricaofb_evento.html");
 $objAssociacao->getById($_REQUEST['idAssociacao']);
 $objc->getById($_REQUEST['idCompeticao']);
-
+$taxas = $objConf->recuperaConfiguracoesTaxa();
+$TPL->TAXA_PP = $taxas[13];
+$TPL->TAXA_GN = $taxas[12];
 $TPL->LABEL = "Preencha as informações adicionais da inscrição e confirme";
 $TPL->ID_ASSOCIACAO = $objAssociacao->id;
 $TPL->ID_COMPETICAO = $objc->id;
@@ -49,7 +52,7 @@ foreach ($rsAtletas as $key => $value) {
 //PAGAMENTOS
 $objTP = new PagamentoTipo();
 $rspag = $objTP->getRows(0,10,array(),array("ativo"=>"=1"));
-$TPL->CHECKED = "checked='checked'";
+//$TPL->CHECKED = "checked='checked'";
 foreach ($rspag as $key => $value) {
     $TPL->ID_PAG = $value->id;
     $TPL->IMG_PAG = $value->imagem;

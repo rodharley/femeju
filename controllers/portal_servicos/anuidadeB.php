@@ -9,11 +9,16 @@ $objAssociacao = new Associacao();
 $objA = new Atleta();
 $objC = new Custa();
 $objAn = new Anuidade();
+$objConf = new Configuracoes();
 
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/portal/anuidade/anuidadeB.html");
 $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['idAssociacaoHash']));
 $objC->getById(Custa::ANUIDADE_PADRAO);
+$taxas = $objConf->recuperaConfiguracoesTaxa();
+$TPL->TAXA_PP = $taxas[13];
+$TPL->TAXA_GN = $taxas[12];
+
 $TPL->NOME_ASSOCIACAO = $objAssociacao->nome;
 $TPL->LOGO_ASSOCIACAO = $objAssociacao->logomarca;
 $TPL->LABEL = "Anuidade";
