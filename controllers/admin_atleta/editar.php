@@ -9,7 +9,7 @@ $objAtleta = new Atleta();
 $uf = new Uf();
 $cidade = new Cidade();
 $objAssociacao = new Associacao();
-$objGrad = new Graduacao;
+
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>
@@ -43,7 +43,7 @@ $TPL->CHECKED_ATLETA = "";
 $TPL->CHECKED_TECNICO = "";
 $TPL->CHECKED_ARBITRO = "";
 $listaUf = $uf->getRows();
-$listaGrad = $objGrad->getRows();
+//$listaGrad = $objGrad->getRows();
 $listaAssociacao = $objAssociacao->listaAtivas("nome");
 if(isset($_REQUEST['id'])){
     $TPL->DISABLED_DATA_GRADUACAO = 'disabled';    
@@ -97,10 +97,15 @@ if(isset($_REQUEST['id'])){
     $selectedUfNat = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->uf->id:0;
     $selectedUf = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->uf->id: 0;    
     $selectedGrad = $objAtleta->graduacao != null ? $objAtleta->graduacao->id : 0; 
+	$TPL->BELT_COLOR_SELECTED = $objAtleta->graduacao != null ? $objAtleta->graduacao->imagem :"";        
+    $TPL->BELT_NAME_SELECTED = $objAtleta->graduacao != null ? $objAtleta->graduacao->descricao :"";
+	
+	
     $selectedAs = $objAtleta->associacao != null ? $objAtleta->associacao->id : 0;
     $selectedCidade = $objAtleta->pessoa->cidade != null ? $objAtleta->pessoa->cidade->id : 0;
     $selectedCidadeNaturalidade = $objAtleta->pessoa->naturalidade != null ? $objAtleta->pessoa->naturalidade->id : 0;
     $TPL->GRADUACAO = $selectedGrad;
+	
     
     //historico da graduacao
     $hist = new HistoricoGraduacao();
@@ -135,12 +140,14 @@ if(isset($_REQUEST['id'])){
 		
 		
 $TPL->block("BLOCK_HISTORICO");		
+$TPL->block("BLOCK_EDITA_SCRIPT");
 }else{
     $TPL->block("BLOCK_NOVO_ATLETA");
 }
 
 
 
+/*
 foreach ($listaGrad as $key => $value) {
     $TPL->BELT_COLOR = $value->imagem;
     if($selectedGrad == $value->id){
@@ -151,7 +158,8 @@ foreach ($listaGrad as $key => $value) {
     $TPL->BELT_FAIXA = $value->faixa;
     $TPL->BELT_ID = $value->id;
 	$TPL->block("BLOCK_BELT");
-}
+}*/
+
  foreach ($listaUf as $key => $value) {
      $TPL->selectedUf = "";
      $TPL->selectedUf_nat = "";

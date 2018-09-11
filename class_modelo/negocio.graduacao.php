@@ -12,6 +12,10 @@ function listaAtivas(){
 	return $this->getRows(0,999,array("ordem"=>"ASC"),array("bitAtivo"=>"=1"));
 }
 
+function listaAtivasPorIdade($idade){
+	return $this->getRows(0,999,array("ordem"=>"ASC"),array("bitAtivo"=>"=1","idadeMin"=>"<=".$idade));
+}
+
 function listaClasses(){
 	$obj = new ClasseGraduacao();
 	return $obj->getRows(0,999,array("classe"=>"ASC"),array("graduacao"=>"=".$this->id));
