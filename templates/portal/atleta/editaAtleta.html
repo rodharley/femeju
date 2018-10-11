@@ -10,7 +10,8 @@
             <div class="panel-body">
                 <form role="form" method="post" action="portal_servicos-action" id="frmEditAtleta" enctype="multipart/form-data">
                     <input type="hidden" name="associacao" id="associacao" value="{ID_ASSOCIACAO}"/>
-                    <input type="hidden" name="acao" value="{ACAO}"/>       
+                    <input type="hidden" name="acao" value="{ACAO}"/>   
+                    <input type="hidden" name="id" value="{ID_ATLETA}"/>    
                     <div class="box box-primary">
                         <div class="box-header">
                             <h3 class="box-title">{LABEL}</h3>
@@ -44,19 +45,19 @@
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="rg"><i class='fa'> </i><b>RG</b>
-                        <input type="text" id="rg" name="rg" value="{RG}" class="form-control" {DISABLED}/>
+                        <input type="text" id="rg" name="rg" value="{RG}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="rgOrgaoExpedidor"><i class='fa'> </i><b>Orgão Emissor</b></label>
-                        <input type="text" id="rgOrgaoExpedidor" name="rgOrgaoExpedidor" value="{RG_ORGAO_EXP}" class="form-control" {DISABLED}/>
+                        <input type="text" id="rgOrgaoExpedidor" name="rgOrgaoExpedidor" value="{RG_ORGAO_EXP}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="rgDataExp"><i class='fa'> </i><b>Data Emissão</b></label>
-                        <input type="text" id="rgDataExp" name="rgDataExp" value="{RG_DATA_EXP}" class="form-control" {DISABLED}/>
+                        <input type="text" id="rgDataExp" name="rgDataExp" value="{RG_DATA_EXP}" class="form-control" />
                     </div>
                 </div>
                 </div>
@@ -64,25 +65,25 @@
                  <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporte"><i class='fa'> </i><b>Passaporte</b></label>
-                        <input type="text" id="passaporte" name="passaporte" value="{PASSAPORTE}" class="form-control" {DISABLED}/>
+                        <input type="text" id="passaporte" name="passaporte" value="{PASSAPORTE}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporteDataVal"><i class='fa'> </i><b>Data Validade</b></label>
-                        <input type="text" id="passaporteDataVal" name="passaporteDataVal" value="{PASSAPORTE_VAL}" class="form-control" {DISABLED}/>
+                        <input type="text" id="passaporteDataVal" name="passaporteDataVal" value="{PASSAPORTE_VAL}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporteOrgao"><i class='fa'> </i><b>Orgão Espedidor</b></label>
-                        <input type="text" id="passaporteOrgao" name="passaporteOrgao" value="{PASSAPORTE_ORGAO_EXP}" class="form-control" {DISABLED}/>
+                        <input type="text" id="passaporteOrgao" name="passaporteOrgao" value="{PASSAPORTE_ORGAO_EXP}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-3">
                     <div class="form-group">
                         <label for="passaporteDataExp"><i class='fa'> </i><b>Data Expedição</b></label>
-                        <input type="text" id="passaporteDataExp" name="passaporteDataExp" value="{PASSAPORTE_DATA_EXP}" class="form-control" {DISABLED}/>
+                        <input type="text" id="passaporteDataExp" name="passaporteDataExp" value="{PASSAPORTE_DATA_EXP}" class="form-control" />
                     </div>
                 </div>
                 </div>
@@ -93,19 +94,19 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="nome"><i class='fa'> </i><b>Nome</b></label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome do Atleta" value="{NOME}" class="required form-control" {DISABLED}/>
+                        <input type="text" id="nome" name="nome" placeholder="Nome do Atleta" value="{NOME}" class="required form-control" />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="nomeMeio"><i class='fa'> </i><b>Nome do Meio</b></label>
-                        <input type="text" id="nomeMeio" name="nomeMeio" placeholder="Nome do meio do Atleta" value="{NOME_MEIO}" class="form-control" {DISABLED}/>
+                        <input type="text" id="nomeMeio" name="nomeMeio" placeholder="Nome do meio do Atleta" value="{NOME_MEIO}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="sobrenome"><i class='fa'> </i><b>Sobre Nome</b></label>
-                        <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobre nome do atleta" value="{SOBRE_NOME}" class="required form-control" {DISABLED}/>
+                        <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobre nome do atleta" value="{SOBRE_NOME}" class="required form-control" />
                     </div>
                 </div>                
             </div>
@@ -113,13 +114,13 @@
             	<div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="nacionalidade"><i class='fa'> </i><b>Nome do Pai</b></label>
-                        <input type="text" id="filiacaoPai" name="filiacaoPai" placeholder="Nome do pai do atleta" value="{FILIACAO_PAI}" class="form-control" {DISABLED}/>
+                        <input type="text" id="filiacaoPai" name="filiacaoPai" placeholder="Nome do pai do atleta" value="{FILIACAO_PAI}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="nacionalidade"><i class='fa'> </i><b>Nome da Mãe</b></label>
-                        <input type="text" id="filiacaoMae" name="filiacaoMae" placeholder="Nome da mãe do atleta" value="{FILIACAO_MAE}" class="form-control" {DISABLED}/>
+                        <input type="text" id="filiacaoMae" name="filiacaoMae" placeholder="Nome da mãe do atleta" value="{FILIACAO_MAE}" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -127,13 +128,13 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="nacionalidade"><i class='fa'> </i><b>Nacionalidade</b></label>
-                        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="País de nascimento do Atleta" value="{NACIONALIDADE}" class="required form-control" {DISABLED}/>
+                        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="País de nascimento do Atleta" value="{NACIONALIDADE}" class="required form-control" />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                      <label for="ufnaturalidade"><i class='fa'> </i><b>UF Naturalidade</b></label><br/>   
-                      <select name="ufnaturalidade" id="ufnaturalidade" class="required form-control" {DISABLED}>
+                      <select name="ufnaturalidade" id="ufnaturalidade" class="required form-control" >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_UF_NATURALIDADE -->
                             <option value="{id_uf}" {selectedUf_nat}>{uf}</option>
@@ -144,7 +145,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="naturalidade"><i class='fa'> </i><b>Naturalidade </b></label>
-                        <select name="naturalidade" id="naturalidade" class="required form-control" {DISABLED}>
+                        <select name="naturalidade" id="naturalidade" class="required form-control" >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_CIDADE_NATURALIDADE -->
                             <option value="{id_cidade_nat}" {selectedCidadeNaturalidade}>{nome_cidade_nat}</option>
@@ -157,7 +158,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="email"><i class='fa'> </i><b>E-mail</b></label>
-                        <input type="text" id="email" name="email" placeholder="E-mail do Atleta" value="{EMAIL}" class="email form-control" {DISABLED}/>
+                        <input type="text" id="email" name="email" placeholder="E-mail do Atleta" value="{EMAIL}" class="email form-control" />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
@@ -181,19 +182,19 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="telefoneRes"><i class='fa'> </i><b>Telefone Residencial</b></label>
-                        <input type="text" id="telefoneRes" name="telefoneRes" value="{TELEFONE_RES}" class="form-control" {DISABLED}/>
+                        <input type="text" id="telefoneRes" name="telefoneRes" value="{TELEFONE_RES}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="telefoneCel"><i class='fa'> </i><b>Telefone Celular</b></label>
-                        <input type="text" id="telefoneCel" name="telefoneCel" value="{TELEFONE_CEL}" class="form-control" {DISABLED}/>
+                        <input type="text" id="telefoneCel" name="telefoneCel" value="{TELEFONE_CEL}" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="telefoneCom"><i class='fa'> </i><b>Telefone Comercial</b></label>
-                        <input type="text" id="telefoneCom" name="telefoneCom" value="{TELEFONE_COM}" class="form-control" {DISABLED}/>
+                        <input type="text" id="telefoneCom" name="telefoneCom" value="{TELEFONE_COM}" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -201,13 +202,13 @@
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="webSite"><i class='fa'> </i><b>Web Site</b></label><BR>
-                        <input type="text" id="webSite" name="webSite" value="{WEB_SITE}" class="form-control" {DISABLED}/>
+                        <input type="text" id="webSite" name="webSite" value="{WEB_SITE}" class="form-control" />
                     </div>
                 </div>  
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="midiaSocial"><i class='fa'> </i><b>Mídia Social</b></label><BR>
-                        <input type="text" id="midiaSocial" name="midiaSocial" value="{MIDIA_SOCIAL}" class="form-control" {DISABLED}/>
+                        <input type="text" id="midiaSocial" name="midiaSocial" value="{MIDIA_SOCIAL}" class="form-control" />
                     </div>
                 </div>              
             </div>
@@ -215,7 +216,7 @@
                 <div class="col-md-12 col-xs-12">
                     <div class="form-group">
                         <label for="dataGraduacao"><i class='fa'> </i><b>Observações</b></label>
-                        <textarea name="observacoes" id="observacoes" class="form-control" rows="7" {DISABLED}>{OBS}</textarea>                        
+                        <textarea name="observacoes" id="observacoes" class="form-control" rows="7" >{OBS}</textarea>                        
                     </div>
                 </div>
             </div>
@@ -223,13 +224,13 @@
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="Foto"><i class='fa'> </i><b>Foto</b></label><BR>
-                        <input type="file"  name="foto" id="foto" {DISABLED} />
+                        <input type="file"  name="foto" id="foto"  />
                     </div>
                 </div>  
                 <div class="col-md-6 col-xs-6">
                      <div class="form-group">
                         <label for="vacinas"><i class='fa'> </i><b>Vacinas</b></label><BR>
-                        <textarea class="form-control" name="vacinas" id='vacinas' rows="7" {DISABLED}>{VACINAS}</textarea>
+                        <textarea class="form-control" name="vacinas" id='vacinas' rows="7" >{VACINAS}</textarea>
                     </div>
                 </div>              
             </div>
@@ -240,13 +241,13 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="endereco"><i class='fa'> </i><b>Logradouro</b></label>
-                        <input type="text" id="endereco" name="endereco" value="{ENDERECO}" class="required form-control" {DISABLED}/>
+                        <input type="text" id="endereco" name="endereco" value="{ENDERECO}" class="required form-control" />
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="bairro"><i class='fa'> </i><b>Bairro</b></label>
-                        <input type="text" id="bairro" name="bairro" value="{BAIRRO}" class="required form-control" {DISABLED}/>
+                        <input type="text" id="bairro" name="bairro" value="{BAIRRO}" class="required form-control" />
                     </div>
                 </div>
             </div>
@@ -254,7 +255,7 @@
                 <div class="col-md-2 col-xs-2">
                     <div class="form-group">
                         <label for="uf"><i class='fa'> </i><b>Estado</b></label>
-                         <select name="uf" id="uf" class="required form-control" {DISABLED}>
+                         <select name="uf" id="uf" class="required form-control" >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_UF -->
                             <option value="{id_uf}" {selectedUf}>{uf}</option>
@@ -265,7 +266,7 @@
                 <div class="col-md-6 col-xs-6">
                     <div class="form-group">
                         <label for="cidade"><i class='fa'> </i><b>Cidade</b></label>
-                        <select name="cidade" id="cidade" class="required form-control" {DISABLED}>
+                        <select name="cidade" id="cidade" class="required form-control" >
                             <option value="">Selecione</option>
                             <!-- BEGIN BLOCK_CIDADE -->
                             <option value="{id_cidade}" {selectedCidade}>{nome_cidade}</option>
@@ -276,7 +277,7 @@
                 <div class="col-md-4 col-xs-4">
                     <div class="form-group">
                         <label for="cep"><i class='fa'> </i><b>CEP</b></label>
-                        <input type="text" id="cep" name="cep" value="{CEP}" class="required form-control" {DISABLED}/>
+                        <input type="text" id="cep" name="cep" value="{CEP}" class="required form-control" />
                     </div>
                 </div>
             </div>
@@ -342,11 +343,16 @@
                 <div class="form-group">
                         <label for="graduacao"><i class='fa'> </i><b>Graduação</b></label>
                         <div class="row">
-                            <div class="col-md-12 col-xs-12">
-                                <input type="hidden" name="graduacao" id="graduacao" value="{GRADUACAO}" class="required form-control"  {DISABLED} />
-                        <!-- BEGIN BLOCK_BELT -->
-                        <div class="btn btn-{BELT_BTN} bt_belt" value="{BELT_ID}"><img style="background:{BELT_COLOR}; width:50px; height: 20px;" src="img/icones/{BELT_IMG}"/><br/> {BELT_NAME}</div>
-                        <!-- END BLOCK_BELT -->
+                        <div class="col-md-12 col-xs-12">
+                        <input type="hidden" name="graduacao" id="graduacao" value="{GRADUACAO}" class="required form-control"  {DISABLED} />
+                        <div id="box_graduacao"><!-- BEGIN BLOCK_GRADUACAO_NEW -->
+                        Selecione a data de nascimento
+                        <!-- END BLOCK_GRADUACAO_NEW -->
+                        
+                        <!-- BEGIN BLOCK_GRADUACAO_EDITA -->
+                        <div class="btn btn-{BELT_BTN}" value="{BELT_ID}"><img style="background:{BELT_COLOR}; width:50px; height: 20px;" src="img/icones/{BELT_IMG}"/><br/> {BELT_FAIXA} - {BELT_NAME}</div>
+                        <!-- END BLOCK_GRADUACAO_EDITA -->
+                        </div>
                         </div>
                     </div>
             </div> 
@@ -374,12 +380,12 @@
                         </div>
                         
                         <div class="panel-footer text-right">
-                        	<!-- BEGIN BLOCK_NEW -->
+                        	
                             <button class="btn btn-success" id="save" type="button">
                             	
                 Salvar
             </button>            
-            <!-- END BLOCK_NEW -->
+           
             <button class="btn btn-default btVoltar" type="button">
                 Voltar
             </button>
@@ -405,11 +411,25 @@
     }
     $(document).ready(function() {
         
+        
+        
+        $("#dataNascimento").change(function(){
+
+            $.ajax({
+                url : "ajax/portal_atleta_edita_graduacao.php",
+                type : "POST",
+                data : {data: $(this).val(),selected: $("#graduacao").val()},                
+            }).done(function(msg) {
+                $("#box_graduacao").html(msg);
+            });
+
+        });
+        
         $("#save").click(function(){
             
             if($("#frmEditAtleta").valid()){
             $.ajax({
-                url : "ajax/pessoa_consultaNomesPessoa.php",
+                url : "ajax/pessoa_consultaNomesPessoa.php?idUser={ID_ATLETA}",
                 type : "POST",
                 data : {nome: $("#nome").val(),nomeMeio:$("#nomeMeio").val(),sobrenome:$("#sobrenome").val()},                
             }).done(function(msg) {
@@ -460,7 +480,7 @@
                             url: "ajax/pessoa_verificaCpf.php",
                             type: "post",
                             data: {
-                              idUser: 0
+                              idUser: {ID_ATLETA}
                             }
                             } 
                 },                
@@ -470,7 +490,7 @@
                             url: "ajax/usuario_verificaLogin.php",
                             type: "post",
                             data: {
-                              idUser: 0
+                              idUser: {ID_ATLETA}
                             }
                             }
                 }                
@@ -486,18 +506,7 @@
                 
         });
        
-        $(".bt_belt").click(function(){
-            $( ".bt_belt" ).each(function() {
-              $( this ).removeClass( "btn-primary" );  
-              $( this ).addClass( "btn-default" );
-              $( this ).find("img").attr("src",'img/icones/belt_icon.png');
-            });            
-            $( this ).addClass( "btn-primary" );
-            $( this ).removeClass( "btn-default" );
-           $( this ).find("img").attr("src",'img/icones/belt_icon_select.png');
-            
-            $("#graduacao").val($(this).attr("value"));
-        });
+        
         
         
     

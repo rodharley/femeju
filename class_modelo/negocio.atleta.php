@@ -409,6 +409,58 @@ function IncluirPortal() {
             return true;
             
     }
+
+
+function EditaPortal() {
+        $this->getById($_REQUEST['id']);
+        $cidadeNascimento = $_REQUEST['naturalidade'] != "" ? new Cidade($_REQUEST['naturalidade']) : null;
+        $cidadeEndereco = $_REQUEST['cidade'] != "" ? new Cidade($_REQUEST['cidade']) : null;
+        
+        $pessoa = new Pessoa();
+            $pessoa->getById($this->pessoa->id);
+            $pessoa->nome =  $_REQUEST['nome'];
+            $pessoa->sobrenome = $_REQUEST['sobrenome'];
+            $pessoa->nomeMeio = $_REQUEST['nomeMeio'];
+            $pessoa->nacionalidade = $_REQUEST['nacionalidade'];
+            $pessoa->naturalidade = $cidadeNascimento;
+            $pessoa->email = $_REQUEST['email'];
+            $pessoa->telCelular = $this->limpaDigitos($_REQUEST['telefoneCel']);
+            $pessoa->telResidencial = $this->limpaDigitos($_REQUEST['telefoneRes']);
+            $pessoa->endereco = $_REQUEST['endereco'];
+            $pessoa->bairro = $_REQUEST['bairro'];
+            $pessoa->cidade = $cidadeEndereco;
+            $pessoa->cep = $this->limpaDigitos($_REQUEST['cep']);             
+            
+				
+			$pessoa ->filiacaoPai = $_REQUEST['filiacaoPai'];
+			$pessoa ->filiacaoMae = $_REQUEST['filiacaoMae'];
+			$pessoa ->rg = $_REQUEST['rg'];
+			$pessoa ->rgOrgaoExpedidor = $_REQUEST['rgOrgaoExpedidor'];
+			$pessoa ->rgDataExp = $this->convdata($_REQUEST['rgDataExp'], "ntm");
+			$pessoa ->passaporte = $_REQUEST['passaporte'];
+			$pessoa ->passaporteDataVal = $this->convdata($_REQUEST['passaporteDataVal'], "ntm");
+			$pessoa ->passaporteOrgao = $_REQUEST['passaporteOrgao'];
+			$pessoa ->passaporteDataExp = $this->convdata($_REQUEST['passaporteDataExp'], "ntm");		
+			$pessoa ->vacinas = $_REQUEST['vacinas'];
+			$pessoa ->webSite = $_REQUEST['webSite'];
+			$pessoa ->midiaSocial = $_REQUEST['midiaSocial'];
+			$pessoa ->telComercial  = $this->limpaDigitos($_REQUEST['telefoneCom']);
+			if ($_FILES['foto']['name'] != "") {
+            //incluir imagem se ouver
+            $nomefoto = $this -> retornaNomeUnico($_FILES['foto']['name'], "img/pessoas/");
+            $this -> salvarFoto($_FILES['foto'], $nomefoto, "img/pessoas/");
+            $pessoa -> foto = $nomefoto;
+            }
+            $idPessoa = $pessoa->save(); 
+            
+            //salva o atleta   			
+            $this->observacoes = $_REQUEST['observacoes'];
+            $this->save();               
+            //gravar no historico da graduacao a primeira graduacao
+                        $_SESSION['fmj.mensagem'] = 42;
+            return true;
+            
+        }
 function Excluir($id) {
         $this -> getById($this -> md5_decrypt($id));
         if ($this -> delete($this -> id)){

@@ -1,0 +1,17 @@
+<!-- BEGIN BLOCK_BELT -->
+<div class="btn btn-{BELT_BTN} bt_belt" value="{BELT_ID}"><img style="background:{BELT_COLOR}; width:50px; height: 20px;" src="img/icones/{BELT_IMG}"/><br/> {BELT_FAIXA} - {BELT_NAME}</div>
+<!-- END BLOCK_BELT -->
+<script>
+	$(".bt_belt").click(function(){
+            $( ".bt_belt" ).each(function() {
+              $( this ).removeClass( "btn-primary" );  
+              $( this ).addClass( "btn-default" );
+              $( this ).find("img").attr("src",'img/icones/belt_icon.png');
+            });            
+            $( this ).addClass( "btn-primary" );
+            $( this ).removeClass( "btn-default" );
+           $( this ).find("img").attr("src",'img/icones/belt_icon_select.png');
+            
+            $("#graduacao").val($(this).attr("value"));
+        });
+</script>

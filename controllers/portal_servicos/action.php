@@ -27,8 +27,12 @@ switch ($_REQUEST['acao']){
 	case 'meusDados' :
 		$usu->AlterarMeusDados();
 		break;
-    case 'incluirAlteta' :
+    case 'incluirAtleta' :
         $atleta->IncluirPortal();
+        header("Location:portal_servicos-main");
+        break;
+		case 'editaAtleta' :
+        $atleta->EditaPortal();
         header("Location:portal_servicos-main");
         break;
     case 'inscricaof' :

@@ -15,8 +15,8 @@ $objAssociacao->getById($objAssociacao->md5_decrypt($_REQUEST['associacao']));
 $TPL->NOME_ASSOCIACAO = $objAssociacao->nome;
 $TPL->LOGO_ASSOCIACAO = $objAssociacao->logomarca;
 $TPL->LABEL = "Novo Atleta";
-
-$TPL->ACAO = "incluirAlteta";
+$TPL->ID_ATLETA = 0;
+$TPL->ACAO = "incluirAtleta";
 $TPL->FOTO = "";
 $selectedUf = 0;
 $selectedUfNat = 0;
@@ -27,15 +27,15 @@ $TPL->CHECKED_ATLETA = "";
 $TPL->CHECKED_TECNICO = "";
 $TPL->CHECKED_ARBITRO = "";
 $listaUf = $uf->getRows();
-$listaGrad = $objGrad->getRows();
 $listaAssociacao = $objAssociacao->listaAtivas();
 $TPL->ID_ASSOCIACAO = $objAssociacao->id;
 if(isset($_REQUEST['id'])){
+	$TPL->ID_ATLETA = $objAtleta->md5_decrypt($_REQUEST['id']);
+	$TPL->ACAO = "editaAtleta";
 	$TPL->DISABLED = "disabled";    
     $objAtleta->getById($objAtleta->md5_decrypt($_REQUEST['id']));    
     $TPL->LABEL = "Alterar Atleta";
-    $TPL->ACAO = "";
-    $TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
+   $TPL->CHECKED_ATLETA = $objAtleta->bitAtleta ? "checked" : "";
 	$TPL->CHECKED_TECNICO = $objAtleta->bitTecnico ? "checked" : "";	
 	$TPL->CHECKED_ARBITRO = $objAtleta->bitArbitro ? "checked" : ""; 
 	if($objAtleta->numeroFemeju != NULL)
@@ -112,23 +112,20 @@ if(isset($_REQUEST['id'])){
                     $TPL->selectedCidade = "selected";
                   $TPL->block("BLOCK_CIDADE");
               }
-}ELSE{
-    
-	$TPL->block("BLOCK_NEW");
-}
-foreach ($listaGrad as $key => $value) {
-    $TPL->BELT_COLOR = $value->imagem;
-    if($selectedGrad == $value->id){
+if($objAtleta->graduacao != null){
+	$TPL->BELT_COLOR = $objAtleta->graduacao->imagem;   
+    $TPL->BELT_NAME = $objAtleta->graduacao->descricao;
+    $TPL->BELT_FAIXA = $objAtleta->graduacao->faixa;
+    $TPL->BELT_ID = $objAtleta->graduacao->id;
         $TPL->BELT_BTN = "primary";
         $TPL->BELT_IMG = "belt_icon_select.png";
-    }else{
-        $TPL->BELT_BTN = "default";
-        $TPL->BELT_IMG = "belt_icon.png";
-    }
-    $TPL->BELT_NAME = $value->descricao;
-    $TPL->BELT_ID = $value->id;
-    $TPL->block("BLOCK_BELT");
 }
+$TPL->block("BLOCK_GRADUACAO_EDITA");
+}ELSE{
+    
+$TPL->block("BLOCK_GRADUACAO_NEW");	
+}
+
  foreach ($listaUf as $key => $value) {
      $TPL->selectedUf = "";
      $TPL->selectedUf_nat = "";
