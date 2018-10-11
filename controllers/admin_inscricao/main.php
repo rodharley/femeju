@@ -22,7 +22,17 @@ $TPL->addFile("CONTEUDO", "templates/admin/inscricao/main.html");
 
 $oInsc = new Inscricao();
 $oPag = new Pagamento();
-$rspag = $oPag->getPagamentosEspeciaisPendentes();
+$oComp = new Competicao();
+$rscomp = $oComp->listaAtivas();
+foreach ($rscomp as $key => $competicao) {
+	$TPL->COMPETICAO_NOME = $competicao->titulo;
+	$TPL->COMPETICAO_ID = $oComp->md5_encrypt($competicao->id);
+	$TPL->block("BLOCK_ITEM_COMP");
+	
+}
+if(isset($_REQUEST['idCompeticao'])){
+$rspag = $oPag->getPagamentosEspeciaisPendentes($oPag->md5_decrypt($_REQUEST['idCompeticao']));
+
 foreach ($rspag as $key => $pagamento) {
 	$TPL->ID_PAGAMENTO_HASH = $oPag->md5_encrypt($pagamento->id);
 	$rs = $oInsc->getInscricoes(0,$pagamento->id);
@@ -61,6 +71,6 @@ foreach ($rs as $key2 => $inscricao) {
 $TPL->block("BLOCK_PAGAMENTO");
 }
 
-
+}
 $TPL->show();
 ?>

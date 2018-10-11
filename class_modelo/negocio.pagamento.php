@@ -371,8 +371,12 @@ function getPagamentosDeCompeticao($idCompeticao){
          return $this->getSQL("SELECT p.* FROM `fmj_pagamento` p inner join fmj_inscricao_competicao i on i.idPagamento = p.id WHERE i.idCompeticao = $idCompeticao group by i.idPagamento");
     }
 
-function getPagamentosEspeciaisPendentes(){
-	return $this->getSQL("SELECT p.* FROM `fmj_pagamento` p WHERE bitEspecial = 1 and bitResolvido = 0");
+function getPagamentosEspeciaisPendentes($idCompeticao = ""){
+	$sql = "SELECT p.* FROM fmj_pagamento p inner join fmj_inscricao_competicao c on c.idPagamento = p.id WHERE p.bitEspecial = 1 and p.bitResolvido = 0";
+	if($idCompeticao != ""){
+		$sql .= " and c.idCompeticao = ".$idCompeticao;
+	}	
+	return $this->getSQL($sql);
 }
 function pesquisaRelatorio($datai,$dataf){
 	$sql = "select d.* from ".Pagamento::TABELA." d where d.bitPago = 1 and d.dataPagamento between '$datai' and '$dataf'";
