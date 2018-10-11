@@ -18,7 +18,11 @@ $TPL->ASSOCIACAO = $associacao->nome;
 $TPL->ID_ASS_RASH = $_REQUEST['associacao'];
 foreach ($rsAtletas as $key => $a) {
 	$TPL->NOME_ATLETA = $a->pessoa->getNomeCompleto();    
+    if($a->graduacao != null){
     $TPL->FAIXA = $a->graduacao->faixa;
+	}else{
+	$TPL->FAIXA = 'não cadastrada';	
+	}
     $TPL->ID_RASH = $associacao->md5_encrypt($a->id);
     $TPL->block("BLOCK_ATLETA");
 }
