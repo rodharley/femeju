@@ -32,6 +32,16 @@ class Inscricao extends Persistencia {
          $this->DAO_ExecutarDelete($sql);
          return true;
     }
+	
+	function consultaInscricao($idAtleta, $idCompeticao){
+		$sql = "select idAtleta from ".$this::TABELA." where idAtleta =".$idAtleta." and idCompeticao =".$idCompeticao;
+		$rs = $this->DAO_ExecutarQuery($sql);
+		if($this->DAO_NumeroLinhas($rs) > 0){
+		return true;
+		}else {
+			return false;
+		}
+	}
     
     function atualizarInscricoes($idPagamento){
         $objPag = new Pagamento();

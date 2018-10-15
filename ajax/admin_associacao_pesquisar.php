@@ -11,7 +11,7 @@ $alist = $objAssociacao->pesquisar($configPaginacao['primeiroRegistro'],$configP
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
     $TPL->logo = $n->logomarca != "" ? $n->logomarca : "nologo.png";
-    $TPL->nome = $n->nome;
+    $TPL->nome = $n->getId()."-".$n->nome;
     $TPL->situacao = $n->ativo == 1 ? "Ativo" : "Inativo";
     $TPL->colorSituacao = $n->ativo == 1 ? "success" : "danger";
     $TPL->responsavel = $n->responsavel->pessoa->nome;

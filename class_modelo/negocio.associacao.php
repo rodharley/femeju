@@ -244,6 +244,11 @@ function Excluir($id) {
             $_SESSION['fmj.mensagem'] = 17;
         
     }
+
+ public function getId(){
+      return str_pad($this->id,5,"0",STR_PAD_LEFT);
+  }
+  
    
 }
 ?>

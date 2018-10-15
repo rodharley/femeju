@@ -4,6 +4,7 @@ $TPL = NEW Template("templates/portal/layout_inscricao.html");
 include("includes/include.mensagem.php");
 
 $objc = new Competicao();
+$objI = new Inscricao();
 $objAssociacao = new Associacao();
 $objGrupoCompeticao = new GrupoCompeticao();
 $objA = new Atleta();
@@ -27,7 +28,13 @@ foreach ($rsAtletas as $key => $value) {
     if($value->graduacao != null){
     $TPL->ATLETA = $value->pessoa->getNomeCompleto();
     $TPL->ID_ATLETA = $value->id;
-    
+	if($objI->consultaInscricao($value->id, $objc->id)){
+	$TPL->INSCRITO = "text-danger";
+		$TPL->TXT_INSCRITO = " (Já inscrito)";
+	}else{
+		$TPL->TXT_INSCRITO = "";
+		$TPL->INSCRITO = "";
+	}
     $TPL->block("BLOCK_ATLETAS");
     
     }
