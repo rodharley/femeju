@@ -256,7 +256,7 @@ break;
 				if($valor != ""){
 				$number = str_replace('.','',$valor);
 				$final1 = str_replace(',','.',$number);				
-				$final = number_format($final1, 2, '.',',');//strpos($final1, ".") ? $final1 : $final1.".00";
+				$final = number_format($final1, 2, '.','');//strpos($final1, ".") ? $final1 : $final1.".00";
 				}else{
 				$final = "0.00";
 				}
