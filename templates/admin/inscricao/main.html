@@ -7,6 +7,7 @@
 			<div class="row">
 				<div class="col-md-12 col-xs-12">
 					<select name="idCompeticao" id="idCompeticao">
+						<option value="">SELECIONE</option>
 						<!-- BEGIN BLOCK_ITEM_COMP -->
 						<option value="{COMPETICAO_ID}">{COMPETICAO_NOME}</option>
 						<!-- END BLOCK_ITEM_COMP -->
@@ -75,7 +76,9 @@
 
 		});
 		$("#idCompeticao").change(function(){
+			if($(this).val() != ""){
 			window.location.href = 'admin_inscricao?idCompeticao=' + $(this).val();
+			}
 		});
 
 	}); 

@@ -20,7 +20,7 @@ $TPL->BREADCRUMB = '<section class="content-header">
 //TRATA O CONTEUDO------------------------------------------------------------------------------------------------------------
 $TPL->addFile("CONTEUDO", "templates/admin/inscricao/main.html");
 
-$oInsc = new Inscricao();
+//$oInsc = new Inscricao();
 $oPag = new Pagamento();
 $oComp = new Competicao();
 $rscomp = $oComp->listaAtivas();
@@ -32,10 +32,9 @@ foreach ($rscomp as $key => $competicao) {
 }
 if(isset($_REQUEST['idCompeticao'])){
 $rspag = $oPag->getPagamentosEspeciaisPendentes($oPag->md5_decrypt($_REQUEST['idCompeticao']));
-
 foreach ($rspag as $key => $pagamento) {
 	$TPL->ID_PAGAMENTO_HASH = $oPag->md5_encrypt($pagamento->id);
-	$rs = $oInsc->getInscricoes(0,$pagamento->id);
+	//$rs = $oInsc->getInscricoes(0,$pagamento->id);
 	$TPL->DATA_INSCRICAO = $oPag->convdata($pagamento->dataVencimento,"mtn");
 	$TPL->NOME_RESP = $pagamento->nomeSacado;
 	if($pagamento->bitPago == 0){
@@ -62,12 +61,14 @@ foreach ($rspag as $key => $pagamento) {
 	
 	
 		
+/*
 foreach ($rs as $key2 => $inscricao) {
 	$TPL->NOME_EVENTO = $inscricao->competicao->titulo;	
 	$TPL->NOME_ATLETA = $inscricao->nomeAtleta;
 	
 	$TPL->block("BLOCK_INSCRICAO");
-}
+}*/
+
 $TPL->block("BLOCK_PAGAMENTO");
 }
 
