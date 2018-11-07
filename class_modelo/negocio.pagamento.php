@@ -376,6 +376,7 @@ function getPagamentosEspeciaisPendentes($idCompeticao = ""){
 	if($idCompeticao != ""){
 		$sql .= " and c.idCompeticao = ".$idCompeticao;
 	}	
+	$sql .= "  group by c.idPagamento";
 	return $this->getSQL($sql);
 }
 function pesquisaRelatorio($datai,$dataf){
