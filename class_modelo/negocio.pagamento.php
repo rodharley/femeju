@@ -189,7 +189,7 @@ class Pagamento extends Persistencia{
 						$params = [
 						  'id' => intval($this->gnChargeId)
 						];
-	 					if(str_len($this->cpfSacado) != 11){
+	 					if(strlen($this->cpfSacado) != 11){
 							 $juridical_person = [
 									'corporate_name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"),
 									'cnpj' => $this->cpfSacado
