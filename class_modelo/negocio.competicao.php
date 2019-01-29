@@ -250,12 +250,13 @@ class Competicao extends Persistencia {
                 $insc->telefoneAtleta = $arrAtleta['telefone'];
                 $insc->emailAtleta =utf8_decode($arrAtleta['email']);
                 $insc->dataInscricao = date("Y-m-d");
-				$insc->dataNascimento = $this->convdata($arrAtleta['dataNascimento'],"ntm");
+				
                 $insc->situacao = 0;
                 $insc->valor = $this->money($this->custa->valor - ($this->custa->valor*$desconto),"bta");                
                 $insc->competicao = $this;
                 $insc->graduacao = new Graduacao($arrAtleta["graduacao"]);
-                if($this->competicao == 1){                
+                if($this->competicao == 1){     
+                $insc->dataNascimento = $this->convdata($arrAtleta['dataNascimento'],"ntm");           
                 $insc->dobra1 = $arrAtleta['dobra1'] == "Sim" ? new Classe($arrAtleta["classe1"]) : null;
                 $insc->valorDobra1 = $this->money($arrAtleta['dobra1'] == "Sim" ? $this->dobra1 -($this->dobra1*$desconto) : 0,"bta");
                 $insc->dobra2 = $arrAtleta['dobra2'] == "Sim" ? new Classe($arrAtleta["classe2"]) : null;
