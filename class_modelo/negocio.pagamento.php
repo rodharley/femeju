@@ -162,7 +162,7 @@ class Pagamento extends Persistencia{
 			$itensGN = array();
 			foreach ($itensPagamento as $key => $item) {
 				$itemadd = [
-				    'name' => utf8_encode($item->descricaoItem), // nome do item, produto ou serviço
+				    'name' => utf8_encode($item->descricaoItem), // nome do item, produto ou serviï¿½o
 				    'amount' => 1, // quantidade
 				    'value' => intval($this->limpaDigitos($item->valor))// valor (1000 = R$ 10,00)
 				];
@@ -185,16 +185,28 @@ class Pagamento extends Persistencia{
 				
 				
 					//seta boleto
-					// $charge_id refere-se ao ID da transação gerada anteriormente
+					// $charge_id refere-se ao ID da transaï¿½ï¿½o gerada anteriormente
 						$params = [
 						  'id' => intval($this->gnChargeId)
 						];
-	 					
-						$customer = [
-						  'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"), // nome do cliente
-						  'cpf' => $this->cpfSacado , // cpf válido do cliente
-						  'phone_number' => strlen($this->limpaDigitos($this->telefone)) > 11 ? substr($this->limpaDigitos($this->telefone),2) : str_pad($this->limpaDigitos($this->telefone),11,"0",STR_PAD_LEFT) // telefone do cliente
-						];
+	 					if(str_len($this->cpfSacado) != 11){
+							 $juridical_person = [
+									'corporate_name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"),
+									'cnpj' => $this->cpfSacado
+							 ];
+							$customer = [
+								'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"), // nome do cliente								
+								'phone_number' => strlen($this->limpaDigitos($this->telefone)) > 11 ? substr($this->limpaDigitos($this->telefone),2) : str_pad($this->limpaDigitos($this->telefone),11,"0",STR_PAD_LEFT), // telefone do cliente						
+								'juridical_person' =>  $juridical_person
+							];
+						 }else{
+							$customer = [
+								'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"), // nome do cliente
+								'cpf' => $this->cpfSacado , // cpf vï¿½lido do cliente
+								'phone_number' => strlen($this->limpaDigitos($this->telefone)) > 11 ? substr($this->limpaDigitos($this->telefone),2) : str_pad($this->limpaDigitos($this->telefone),11,"0",STR_PAD_LEFT) // telefone do cliente						
+							  ];
+						 }
+						
  
 						$bankingBillet = [
 						  'expire_at' => $this->dataVencimento, // data de vencimento do boleto (formato: YYYY-MM-DD)
@@ -363,7 +375,7 @@ class Pagamento extends Persistencia{
 
                     //grava a log
                     $log = new Log();
-                    $log->gerarLog("Baixa no pagamento de número : ".$this->codigo);
+                    $log->gerarLog("Baixa no pagamento de nï¿½mero : ".$this->codigo);
 
                 }
 
