@@ -177,7 +177,8 @@ class Pagamento extends Persistencia{
 			try {
 				//registra o pagamento
 			    $api = new Gerencianet($options);
-			    $charge = $api->createCharge([], $body);
+				$charge = $api->createCharge([], $body);
+				
 			 //Array ( [code] => 200 [data] => Array ( [charge_id] => 448859 [status] => new [total] => 2000 [custom_id] => [created_at] => 2018-07-26 11:33:30 ) ) 
 
 				$this->gnStatus = $charge['data']['status'];
@@ -189,22 +190,36 @@ class Pagamento extends Persistencia{
 						$params = [
 						  'id' => intval($this->gnChargeId)
 						];
+						//trata o telefone
+						$phone_number = $this->limpaDigitos($this->telefone);
+						if(strlen($phone_number) == 11){
+							$phone_number = substr($phone_number,0,2).'9'.substr($phone_number,3,8);
+						}else if(strlen($phone_number) > 11){
+							$phone_number = substr($phone_number,0,2).'9'.substr($phone_number,3,8);
+						}else if (strlen($phone_number) < 10){
+							$phone_number = str_pad($phone_number,10,"0",STR_PAD_LEFT);
+						} 
+						
+
 	 					if(strlen($this->cpfSacado) != 11){
+
 							 $juridical_person = [
-									'corporate_name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"),
+									'corporate_name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado." Femeju"),
 									'cnpj' => $this->cpfSacado
 							 ];
 							$customer = [
 								'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"), // nome do cliente								
-								'phone_number' => strlen($this->limpaDigitos($this->telefone)) > 11 ? substr($this->limpaDigitos($this->telefone),2) : str_pad($this->limpaDigitos($this->telefone),11,"0",STR_PAD_LEFT), // telefone do cliente						
+								'phone_number' => $phone_number,
 								'juridical_person' =>  $juridical_person
 							];
 						 }else{
+
 							$customer = [
-								'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado+" Femeju"), // nome do cliente
-								'cpf' => $this->cpfSacado , // cpf v�lido do cliente
-								'phone_number' => strlen($this->limpaDigitos($this->telefone)) > 11 ? substr($this->limpaDigitos($this->telefone),2) : str_pad($this->limpaDigitos($this->telefone),11,"0",STR_PAD_LEFT) // telefone do cliente						
+								'name' => count(explode(" ", $this->nomeSacado)) > 1 ? utf8_encode($this->nomeSacado) : utf8_encode($this->nomeSacado." Femeju"), // nome do cliente
+								'cpf' => $this->cpfSacado , // cpf valido do cliente
+								'phone_number' => $phone_number
 							  ];
+							 
 						 }
 						
  
@@ -220,6 +235,8 @@ class Pagamento extends Persistencia{
 						$body = [
 						  'payment' => $payment
 						];
+
+
 			
 						 $charge = $api->payCharge($params, $body);
 						//Array ( [code] => 200 [data] => Array ( [barcode] => 00000.00000 00000.000000 00000.000000 0 00000000000000 [link] => https://visualizacaosandbox.gerencianet.com.br/emissao/43219_1_CACA2/A4XB-43219-305988-MAXI8 [expire_at] => 2018-07-26 [charge_id] => 449048 [status] => waiting [total] => 6000 [payment] => banking_billet ) ) 
