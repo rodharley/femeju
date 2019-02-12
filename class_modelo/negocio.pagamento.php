@@ -91,7 +91,7 @@ class Pagamento extends Persistencia{
 			$item = new PagamentoItem();
 			$item->valor = $this->money($taxas['12'], "bta");
 			if($item->valor > 0){
-			$item->descricaoItem = "Encargos Financeiros";
+			$item->descricaoItem = "Tarifa Bancária";
 			$item->custa = new Custa(19);					
 			array_push($itensPagamento,$item);
 			}	
@@ -100,7 +100,7 @@ class Pagamento extends Persistencia{
 			$item = new PagamentoItem();
 			$item->valor = $this->money($taxas['13'], "bta");
 			if($item->valor > 0){
-			$item->descricaoItem = "Encargos Financeiros";
+			$item->descricaoItem = "Tarifa Bancária";
 			$item->custa = new Custa(19);
 			array_push($itensPagamento,$item);
 			}
@@ -338,23 +338,29 @@ class Pagamento extends Persistencia{
             $grupoC = new GrupoCompeticao();
             $pag = new Pagamento();
             $itensPagamento = array();
-            $custa = new Custa();
+            
             $cidade = new Cidade();
             $cidade->getById($_REQUEST['cidade']);
 			$dataPag = $this->convdata($_REQUEST['data'], "ntm");
 
              foreach ($itens as $key => $i) {
                 //gera o item de pagamento
-                $item = new PagamentoItem();
+				$item = new PagamentoItem();
+				$custa = new Custa();
                 $item->atleta = NULL;
                 //soma o valor total
-                $custa->getById($i['custa']);
+				$custa->getById($i['custa']);
+				
+				
                 $total = $custa->valor;
                 $item->valor = $total;
                 $item->custa = $custa;
                 $item->descricaoItem = utf8_decode($i['descricao']);
-                array_push($itensPagamento,$item);
-                }
+				
+				$itensPagamento[$key] =$item;
+				
+				}
+
 				$arrayResp = array();
 	            $arrayResp['nome'] = $_REQUEST['nomeSacado'];
 	            $arrayResp['cpf'] = $this->limpaDigitos($_REQUEST['cpfcnpj']);

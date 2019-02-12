@@ -32,7 +32,7 @@ foreach ($rsAnos as $key3 => $anuidade) {
 
 }
 
-$rsa = $obj -> listaAtivas();
+$rsa = $obj -> listaAtivas("nome");
 foreach ($rsa as $key => $value) {
     $TPL -> ASS_ID = $value -> id;
     $TPL -> ASS_LABEL = $value -> nome;

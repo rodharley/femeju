@@ -5,9 +5,9 @@ $TPL = new Template("../templates/admin/atleta/list.html");
 $obj = new Atleta();
 $pagina = isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1;
 $naov = isset($_REQUEST['naoVerficado']) ? "0" : "";
-$totalPesquisa = $obj->pesquisarTotal($_REQUEST['nome'],$_REQUEST['sigla'],$_REQUEST['numero'],$naov);
+$totalPesquisa = $obj->pesquisarTotal(utf8_decode($_REQUEST['nome']),$_REQUEST['sigla'],$_REQUEST['numero'],$naov);
 $configPaginacao = $obj->paginar($totalPesquisa,$pagina);
-$alist = $obj->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],$_REQUEST['nome'],$_REQUEST['sigla'],$_REQUEST['numero'],$naov);
+$alist = $obj->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['quantidadePorPagina'],utf8_decode($_REQUEST['nome']),$_REQUEST['sigla'],$_REQUEST['numero'],$naov);
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){

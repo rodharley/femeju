@@ -10,27 +10,33 @@ $descricaoPagamento = $pagamento->descricao."<br/>";
 $grupo = new GrupoCusta();
 	$TPL->addFile("CONTEUDO", "templates/portal/pagamento/guiaFemeju.html");
 	
+for ($i=0; $i < 2; $i++) { 
 	if($pagamento->bitPago == 1){
-	$TPL->TIPO = "Recibo";
-	$TPL->block("BLOCK_RECEBEMOS");
-	}else{
-	$TPL->TIPO = "Guia";
-	}
+		$TPL->TIPO = "Recibo";
+		$TPL->block("BLOCK_RECEBEMOS");
+		}else{
+		$TPL->TIPO = "Guia";
+		}
+		
 	
-	$TPL->CONTROLE = $pagamento->controle;
-	$TPL->DESCRICAO = $descricaoPagamento;
-	$TPL->TIPO_CUSTA = $grupo->getDescricao($pagamento->grupo);
-	$TPL->RESPONSAVEL = $pagamento->nomeSacado;
-	$TPL->RECEBEMOS = $pagamento->nomeSacado;
-	$TPL->DATA_VENC = $pagamento->convdata($pagamento->dataVencimento, "mtn");
-	$TPL->VALOR_TOTAL = "R$ ".$pagamento->money($pagamento->valorTotal,"atb");
-	$rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$pagamento->id));    
-	foreach ($rsItens as $key => $item) {    
-   $TPL->DESC_ITEM = $item->descricaoItem;
-    $TPL->CUSTA_ITEM = $item->custa->titulo;
-    $TPL->VALOR_ITEM = "R$ ".$pagamento->money($item->valor,"atb");
-    $TPL->block("BLOCK_ITEM");	
-	}
+		$TPL->CONTROLE = $pagamento->controle;
+		$TPL->DESCRICAO = $descricaoPagamento;
+		$TPL->TIPO_CUSTA = $grupo->getDescricao($pagamento->grupo);
+		$TPL->RESPONSAVEL = $pagamento->nomeSacado;
+		$TPL->RECEBEMOS = $pagamento->nomeSacado;
+		$TPL->DATA_VENC = $pagamento->convdata($pagamento->dataVencimento, "mtn");
+		$TPL->VALOR_TOTAL = "R$ ".$pagamento->money($pagamento->valorTotal,"atb");
+		$rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$pagamento->id));    
+		foreach ($rsItens as $key => $item) {    
+	   $TPL->DESC_ITEM = $item->descricaoItem;
+		$TPL->CUSTA_ITEM = $item->custa->titulo;
+		$TPL->VALOR_ITEM = "R$ ".$pagamento->money($item->valor,"atb");
+		$TPL->block("BLOCK_ITEM");	
+		}
+	
+		$TPL->block("BLOCK_VIA");
+}
 
-
+	
+	
 $TPL->show();

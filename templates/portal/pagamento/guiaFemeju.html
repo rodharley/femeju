@@ -1,39 +1,32 @@
+ <!-- BEGIN BLOCK_VIA -->   
 <div class="panel panel-default">
 	<div class="panel-heading">
-            <h3 class="box-title"><img src="img/logo.png" height="60" /> {TIPO} de Pagamento em Dinheiro</h3>
+            <div class="row">
+                    <div class="col-xs-2 col-md-2">
+                            <img src="img/logo.png" height="60" />
+                        </div>
+                        <div class="col-xs-10 col-md-10">
+                                
+                                        Razão social: Federação Metropolitana de Janeiro - Femeju<br/>
+                                        CNPJ: 00.416.487/0001-98<br/>
+                                        Endereço: QRO A fundo do conjunto F ginásio de esportes<br/>
+                                        Candangolândia-DF                                        
+                            </div>
+                            </div>
+            
         </div>
         <div class="panel-body">
+                <h3 class="text-right">             
+                        {TIPO} de Pagamento
+                </h3>
+            
         	<!-- BEGIN BLOCK_RECEBEMOS -->
         	<div class="row">
                 <div class="col-xs-12 col-md-12">
                 	Recebemos do(a) Sr(a). {RECEBEMOS} os valores descriminados abaixo referente a:<br/><br/><br/>
                 	</div>
                 	</div>
-            <!-- END BLOCK_RECEBEMOS -->
-            <div class="row">
-                <div class="col-xs-3 col-md-3">
-                    <div class="form-group">
-                    <label for="tipoCusta"><i class="fa"> </i><b>Tipo de Custas</b></label>
-                    
-                   <div class="form-control-static"> {TIPO_CUSTA}</div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-md-6">
-                    <div class="form-group">
-                    <label for="responsavel"><i class="fa"> </i><b>Responsavel</b></label>
-                    
-                     <div class="form-control-static"> {RESPONSAVEL}</div>
-                    </div>
-                </div>
-                <div class="col-xs-3 col-md-3">
-                    <div class="form-group">
-                    <label for="datavencimento"><i class="fa"> </i><b>Data de Vencimento</b></label>
-                    
-                      <div class="form-control-static">{DATA_VENC}</div>
-                    </div>
-                </div>
-            </div>
-            
+            <!-- END BLOCK_RECEBEMOS -->                     
             <div class="row">
             	<div class="col-xs-3 col-md-3">
                     <div class="form-group">
@@ -50,6 +43,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row">                   
+                    <div class="col-xs-3 col-md-3">
+                        <b>Tipo de Custas:</b><br/> {TIPO_CUSTA}
+                        </div>                
+                    <div class="col-xs-6 col-md-6">
+                        <b>Responsavel:</b><br/>{RESPONSAVEL}                    
+                    </div>
+                    <div class="col-xs-3 col-md-3 text-right">
+                    <b>Data de Vencimento:</b><br/>{DATA_VENC}
+                    </div>
+                </div>
              <div class="row">
                 <div class="col-xs-12 col-md-12">
             <table class="table">
@@ -68,16 +72,14 @@
                 <!-- END BLOCK_ITEM -->
                 <tr>
                     <td class="text-right" colspan="2" > Total:</td>
-                    <td class="col-md-3"  class="text-right"><h3 class="text-right">{VALOR_TOTAL}</h3></td>
+                    <td class="text-right"><b>{VALOR_TOTAL}</b></td>
                 </tr>
             </table>
                 </div>
                 </div>
+           
         </div>
-        <div class="panel-footer text-right">
-            <a class="btn btn-default btVoltar" href="javascript:print();">
-                IMPRIMIR
-            </a>            
-            
-            </div>
+        
+        
 </div>
+ <!-- END BLOCK_VIA-->

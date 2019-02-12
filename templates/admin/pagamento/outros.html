@@ -250,6 +250,46 @@
     }
 
 	$(document).ready(function() {
+        var options = {
+			script : "ajax/json_pessoasbynome.php?",
+			varname : "busca",
+			json : true,
+			noresults : "Nenhuma pessoa encontrado",
+			maxresults : 35,
+			callback : function(obj) {
+				var atleta;
+				$.ajax({
+					url : 'ajax/json_pessoa.php',
+					data : {
+						id : obj.id
+					}
+				}).done(function(retorno) {
+					atleta = JSON.parse(retorno);
+					document.getElementById("nomeSacado").value = atleta.nome+" "+atleta.nomeMeio+" "+atleta.sobrenome;
+					document.getElementById("cpfcnpj").value =  atleta.cpf; 			
+                    document.getElementById("endereco").value =  atleta.endereco; 
+                    document.getElementById("bairro").value =  atleta.bairro; 
+                    document.getElementById("telefone").value =  atleta.telResidencial; 
+                    document.getElementById("uf").value = atleta.cidade.uf.id;
+                    $.ajax({
+                url : "ajax/cidadesPorUf.php",
+                type : "POST",
+                data : {uf:atleta.cidade.uf.id},                
+            }).done(function(msg) {
+                $("#cidade").html(msg);
+                document.getElementById("cidade").value = atleta.cidade.id;
+            });
+                });
+                
+
+			}
+		};
+		var as = new bsn.AutoSuggest('nomeSacado', options);
+
+
+
+
+
         $('#data').datepicker();
 		$("#cpfcnpj").inputmask({ mask: ["999.999.999-99","99.999.999/9999-99"]});
         $("#telefone").inputmask({ mask: ["99 9999-9999","99 99999-9999"]});
