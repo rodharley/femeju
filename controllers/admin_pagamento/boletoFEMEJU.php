@@ -10,7 +10,7 @@ $descricaoPagamento = $pagamento->descricao."<br/>";
 $grupo = new GrupoCusta();
 	$TPL->addFile("CONTEUDO", "templates/portal/pagamento/guiaFemeju.html");
 	
-for ($i=0; $i < 2; $i++) { 
+
 	if($pagamento->bitPago == 1){
 		$TPL->TIPO = "Recibo";
 		$TPL->block("BLOCK_RECEBEMOS");
@@ -34,8 +34,7 @@ for ($i=0; $i < 2; $i++) {
 		$TPL->block("BLOCK_ITEM");	
 		}
 	
-		$TPL->block("BLOCK_VIA");
-}
+
 
 	
 	
