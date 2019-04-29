@@ -17,6 +17,7 @@ $TPL->TIPO_CUSTA = $grupo->getDescricao($obj->grupo);
 $TPL->RESPONSAVEL = $obj->nomeSacado;
 $TPL->VALOR_TOTAL = "R$ ".$obj->money($obj->valorTotal,"atb");
 $TPL->DATA_VENC = $obj->convdata($obj->dataVencimento, "mtn");
+$TPL->DATA_GERACAO = $obj->convdata(substr($obj->dataEmissao,0,10), "mtn");
 $TPL->IMG_TIPO = $obj->tipo->imagem;
 $TPL->DESC_TIPO = $obj->tipo->descricao;
 $TPL->DESCRICAO = $obj->descricao; 

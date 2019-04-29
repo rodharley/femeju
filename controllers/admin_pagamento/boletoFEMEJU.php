@@ -25,6 +25,7 @@ $grupo = new GrupoCusta();
 		$TPL->RESPONSAVEL = $pagamento->nomeSacado;
 		$TPL->RECEBEMOS = $pagamento->nomeSacado;
 		$TPL->DATA_VENC = $pagamento->convdata($pagamento->dataVencimento, "mtn");
+		$TPL->DATA_GERACAO = $pagamento->convdata(substr($pagamento->dataEmissao,0,10), "mtn");
 		$TPL->VALOR_TOTAL = "R$ ".$pagamento->money($pagamento->valorTotal,"atb");
 		$rsItens = $obItem->getRows(0,9999,array(),array("pagamento"=>"=".$pagamento->id));    
 		foreach ($rsItens as $key => $item) {    

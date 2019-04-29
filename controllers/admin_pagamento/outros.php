@@ -8,7 +8,7 @@ $uf = new Uf();
 $cidade = new Cidade();
 $listaUf = $uf->getRows();
 $objC = new Custa();
-$rsCustas = $objC->getRows(0,999,array(),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::OUTROS));
+$rsCustas = $objC->getRows(0,999,array("descricao"=>"ASC"),array("ativo"=>"=1","grupo"=>"=".GrupoCusta::OUTROS));
 //CONFIGURA O BREADCRUMB
 $TPL->BREADCRUMB = '<section class="content-header">
                     <h1>

@@ -24,7 +24,8 @@ switch ($_REQUEST['acao']){
         exit();
 		break;
 	case 'verificar' :
-        $conn->connection->autocommit(false);
+		$conn->connection->autocommit(false);
+		$obj->Alterar();
         $obj->Verificar($_REQUEST['id']);
         $conn->connection->commit();
         header("Location:admin_atleta-main");

@@ -137,7 +137,7 @@ public function listaAtivos(){
         if ($numero != "")
             $sql .= " and (a.numeroFemeju  like '$numero%')";
         
-        $sql .= "  order by p.nome, p.sobrenome limit $primeiro, $quantidade";     
+        $sql .= "  order by p.id desc limit $primeiro, $quantidade";     
     
         return $this -> getSQL($sql);
 
