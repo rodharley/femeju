@@ -171,7 +171,7 @@ class Competicao extends Persistencia {
                 $insc->dobra2 = $_REQUEST['dobra2'.$id] != "" ? new Classe($_REQUEST['dobra2'.$id]) : null;
                 $insc->valorDobra2 = $_REQUEST['dobra2'.$id] != "" ? $this->money($this->dobra2 -($this->dobra2*$desconto),"bta"): 0;
                 $insc->dobra3 = $_REQUEST['dobra3'.$id] != "" ? new Classe($_REQUEST['dobra3'.$id]) : null;
-                $insc->valorDobra3 = $_REQUEST['dobra2'.$id] != "" ? $this->money($this->dobra3 -($this->dobra3*$desconto),"bta") : 0;
+                $insc->valorDobra3 = $_REQUEST['dobra3'.$id] != "" ? $this->money($this->dobra3 -($this->dobra3*$desconto),"bta") : 0;
                 $insc->classe = new Classe($_REQUEST['classe'.$id]);
                 $insc->categoria = new CategoriaPeso($_REQUEST['categoria'.$id]);
                 }
