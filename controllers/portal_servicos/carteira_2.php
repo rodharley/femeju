@@ -2,7 +2,7 @@
 include("includes/include.lockPortal.php");
 include("plugins/wideimage/WideImage.php");
 include('plugins/phpqrcode/qrlib.php');
-include("plugins/mpdf/mpdf.php");
+
 $conf = new Configuracoes();
 $atleta = new Atleta();
 $associacao = new Associacao();
@@ -39,7 +39,7 @@ $carteiracomfotoeqrcodeAssinada = $carteiracomfotoeqrcode->merge($assintauraresi
 $canvas = $carteiracomfotoeqrcodeAssinada->getCanvas();
 
 //verso
-$canvas->useFont('fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
 $canvas->writeText('20', '34', $atleta->associacao->nome, 0);
 $canvas->writeText('20', '70', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('20', '106', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
@@ -49,13 +49,13 @@ $ano = date("Y",$dttime);
 $val = mktime(0,0,0,12,31,$ano);
 $canvas->writeText('20', '142', date("d",$val)." de ".$atleta->mesExtenso(date("m",$val))." de ".date("Y",$val), 0);
 //registro
-$canvas->useFont('fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
 $canvas->writeText('350', '140', $atleta->pessoa->nome. ' ' . $atleta->pessoa->sobrenome, 0);
-$canvas->writeText('350', '160', 'Registro Nº:'.$atleta->getId(), 0);
+$canvas->writeText('350', '160', 'Registro Nï¿½:'.$atleta->getId(), 0);
 
 
 $carteiracomfotoeqrcodeAssinada->saveToFile("img/pessoas/carteira".$atleta->getId().".png");
-header("Location:plugins/mpdf/relatorios/carteira.php?id=".$atleta->getId());
+header("Location:relatorios/carteira.php?id=".$atleta->getId());
 exit;
 
 //header('Content-type: image/png');

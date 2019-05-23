@@ -39,16 +39,16 @@ $carteiracomfotoeqrcode = $carteiracomfoto->merge($qrcoderesize,'50%-75',390,100
 $canvas = $carteiracomfotoeqrcode->getCanvas();
 
 //registro
-$canvas->useFont('fonts/SourceSansPro-Bold.ttf', '15', $carteiracomfotoeqrcode->allocateColor(0, 0, 0));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Bold.ttf', '15', $carteiracomfotoeqrcode->allocateColor(0, 0, 0));
 $canvas->writeText('15', '160', 'Registro Nº:'.$atleta->getId(), 0);
 
-$canvas->useFont('fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcode->allocateColor(255, 255, 255));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcode->allocateColor(255, 255, 255));
 $canvas->writeText('15', '200', 'Associação', 0);
 $canvas->writeText('15', '240', 'Atleta', 0);
 $canvas->writeText('15', '280', 'Graduação', 0);
 $canvas->writeText('150', '280', 'Data de Nascimento', 0);
 $canvas->writeText('15', '320', 'Validade', 0);
-$canvas->useFont('fonts/SourceSansPro-Regular.ttf', '12', $carteiracomfotoeqrcode->allocateColor(0, 0, 0));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '12', $carteiracomfotoeqrcode->allocateColor(0, 0, 0));
 $canvas->writeText('15', '215', $atleta->associacao->nome, 0);
 $canvas->writeText('15', '255', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('15', '295', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);

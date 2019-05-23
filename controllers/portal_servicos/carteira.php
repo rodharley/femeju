@@ -2,7 +2,6 @@
 include("includes/include.lockPortal.php");
 include("plugins/wideimage/WideImage.php");
 include('plugins/phpqrcode/qrlib.php');
-//include("plugins/mpdf/mpdf.php");
 
 $conf = new Configuracoes();
 $atleta = new Atleta();
@@ -42,16 +41,16 @@ $carteiracomfotoeqrcodeAssinada = $carteiracomfotoeqrcode->merge($assintauraresi
 $canvas = $carteiracomfotoeqrcodeAssinada->getCanvas();
 
 //verso displays
-$canvas->useFont('fonts/SourceSansPro-Regular.ttf', '8', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
-$canvas->writeText('20', '16', "Associação", 0);
+$canvas->useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '8', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$canvas->writeText('20', '16', "Associaï¿½ï¿½o", 0);
 $canvas->writeText('20', '52', "Nome", 0);
-$canvas->writeText('20', '88', "Graduação", 0);
+$canvas->writeText('20', '88', "Graduaï¿½ï¿½o", 0);
 $canvas->writeText('200', '88', "Data de Nascimento", 0);
 $canvas->writeText('20', '124', "Validade", 0);
 $canvas->writeText('120', '178', "Assinatura Femeju", 0);
 
 //verso
-$canvas->useFont('fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '10', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
 $canvas->writeText('20', '34', $atleta->associacao->nome, 0);
 $canvas->writeText('20', '70', $atleta->pessoa->getNomeCompleto(), 0);
 $canvas->writeText('20', '106', $atleta->graduacao->descricao." - ".$atleta->graduacao->faixa, 0);
@@ -59,7 +58,7 @@ $canvas->writeText('220', '106', $atleta->convdata($atleta->pessoa->dataNascimen
 $canvas->writeText('20', '142', '31 de Dezembro de '.Date("Y"), 0);
 
 //registro
-$canvas->useFont('fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
+$canvas->useFont(URI.'/fonts/SourceSansPro-Bold.ttf', '12', $carteiracomfotoeqrcodeAssinada->allocateColor(0, 0, 0));
 $strnomeFrente = $atleta->pessoa->getNomeCompleto();
 if(strlen($strnomeFrente) > 20){
 $str_linha1 = "";
@@ -82,17 +81,17 @@ foreach ($arraynome as $key => $nome) {
 
 $canvas->writeText('350', '140', $str_linha1, 0);
 $canvas->writeText('350', '160', $str_linha2, 0);
-$canvas->writeText('350', '180', 'Registro Nº:'.$atleta->getId(), 0);    
+$canvas->writeText('350', '180', 'Registro Nï¿½:'.$atleta->getId(), 0);    
 }else{
 $canvas->writeText('350', '140', $atleta->pessoa->getNomeCompleto(), 0);
-$canvas->writeText('350', '160', 'Registro Nº:'.$atleta->getId(), 0);
+$canvas->writeText('350', '160', 'Registro Nï¿½:'.$atleta->getId(), 0);
 }
 $carteiracomfotoeqrcodeAssinada = $carteiracomfotoeqrcodeAssinada -> roundCorners(12);
 $carteiracomfotoeqrcodeAssinada->saveToFile("img/pessoas/carteira".$atleta->getId().".png", 0, PNG_NO_FILTER);
-header("Location:plugins/mpdf/relatorios/carteira.php?id=".$atleta->getId());
+header("Location:relatorios/carteira.php?id=".$atleta->getId());
 exit;
 }else{
-    echo "Situação Irregular, favor procurar a Femeju.";
+    echo "Situaï¿½ï¿½o Irregular, favor procurar a Femeju.";
 }
 //header('Content-type: image/png');
 //imagepng($imagem);

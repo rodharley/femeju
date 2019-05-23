@@ -3,7 +3,7 @@ $menu = 43;
 include ("includes/include.lock.php");
 include ("plugins/wideimage/WideImage.php");
 include ('plugins/phpqrcode/qrlib.php');
-include ("plugins/mpdf/mpdf.php");
+
 
 //INSTACIA CLASSES
  $objH = new HistoricoGraduacao();
@@ -49,7 +49,8 @@ if (isset($_REQUEST['acao'])) {
                 
                 
                 //registro
-                $canvas -> useFont('fonts/SourceSansPro-Bold.ttf', '20', $carteiracomfotoeqrcode -> allocateColor(0, 0, 0));
+                $canvas -> useFont(URI.'/fonts/SourceSansPro-Bold.ttf', '20', $carteiracomfotoeqrcode -> allocateColor(0, 0, 0));
+                
                 $strnomeFrente = $atleta -> pessoa -> getNomeCompleto();
                 if (strlen($strnomeFrente) > 20) {
                     $str_linha1 = "";
@@ -68,15 +69,16 @@ if (isset($_REQUEST['acao'])) {
                         }
 
                     }
-
+                    
                     $canvas -> writeText('80', '270', $str_linha1, 0);
+                    
                     $canvas -> writeText('80', '310', $str_linha2, 0);
                     $canvas -> writeText('80', '350', 'Registro Nº:' . $atleta -> getId(), 0);
                 } else {
                     $canvas -> writeText('80', '270', $atleta -> pessoa -> getNomeCompleto(), 0);
                     $canvas -> writeText('80', '350', 'Registro Nº:' . $atleta -> getId(), 0);
                 }
-                
+
                 $carteiracomfotoeqrcode = $carteiracomfotoeqrcode -> roundCorners(12);
                 
                 $carteiracomfotoeqrcode = $carteiracomfotoeqrcode -> rotate(270);
@@ -91,9 +93,9 @@ if (isset($_REQUEST['acao'])) {
                 $carteirav = $verso -> resize(650, 408, 'fill');
                 //escreve na carteirinha
                 $canvas = $carteirav -> getCanvas();
-                
+                   
                 //verso displays
-                $canvas -> useFont('fonts/SourceSansPro-Regular.ttf', '16', $carteirav -> allocateColor(0, 0, 0));
+                $canvas -> useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '16', $carteirav -> allocateColor(0, 0, 0));
                 $canvas -> writeText('40', '32', "Associação", 0);
                 $canvas -> writeText('40', '104', "Nome", 0);
                 $canvas -> writeText('40', '178', "Graduação", 0);
@@ -102,7 +104,7 @@ if (isset($_REQUEST['acao'])) {
                 $canvas -> writeText('240', '354', "Assinatura Femeju", 0);
 
                 //verso
-                $canvas -> useFont('fonts/SourceSansPro-Regular.ttf', '20', $verso -> allocateColor(0, 0, 0));
+                $canvas -> useFont(URI.'/fonts/SourceSansPro-Regular.ttf', '20', $verso -> allocateColor(0, 0, 0));
                 $canvas -> writeText('40', '68', $atleta -> associacao -> nome, 0);
                 $canvas -> writeText('40', '140', $atleta -> pessoa -> getNomeCompleto(), 0);
                 $canvas -> writeText('40', '212', $atleta -> graduacao -> descricao . " - " . $atleta -> graduacao -> faixa, 0);
@@ -130,7 +132,7 @@ if (isset($_REQUEST['acao'])) {
             //echo "</body></html>";
             
             
-            header("Location:plugins/mpdf/relatorios/carteiras.php?atletas=".substr($numeros,0,strlen($numeros)-1));
+            header("Location:relatorios/carteiras.php?atletas=".substr($numeros,0,strlen($numeros)-1));
              
              
             exit ;
