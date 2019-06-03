@@ -30,7 +30,7 @@ if (isset($_REQUEST['acao'])) {
                 $carteiraf = $logo -> resize(650, 408, 'fill');
                 $img = WideImage::load($imagem);
                 $carteira = $img -> merge($carteiraf, 0, 0, 100);
-                $imagemAtleta = $atleta -> pessoa -> foto != "" ? $atleta -> pessoa -> foto : "pessoa.png";
+                $imagemAtleta = $atleta ->  pessoa -> getNomeFoto('img/pessoas/');
                 $foto = WideImage::load('img/pessoas/' . $imagemAtleta);
                 $fotoresize = $foto -> resize(160, 216, 'fill');
                 $carteiracomfoto = $carteira -> merge($fotoresize, 460, 28, 100);

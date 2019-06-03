@@ -130,7 +130,10 @@ class Pessoa extends Persistencia {
         }
         
         
-        
+       
+        function getNomeFoto($caminho){
+            return $this->foto != "" ? file_exists($caminho.$this->foto) ?  $this->foto : "pessoa.png" : "pessoa.png";
+        }
         function getNomeCompleto(){
             return $this->nome.(strlen($this->nomeMeio) > 0 ? " ".$this->nomeMeio:"").(strlen($this->sobrenome) > 0 ? " ".$this->sobrenome:"");
         }

@@ -7,7 +7,7 @@ $alist = $obj->pesquisarCarteira($_REQUEST['nome'],$_REQUEST['associacao'],$_REQ
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
-    $TPL->FOTO = $n->pessoa->foto != "" ? $n->pessoa->foto : "pessoa.png";
+    $TPL->FOTO = $n-> pessoa -> getNomeFoto('img/pessoas/');
     $TPL->NUMERO = $n->getId();
    	$TPL->NOME = $n->pessoa->nome." ".$n->pessoa->nomeMeio." ".$n->pessoa->sobrenome;    
     $TPL->ASSOCIACAO = $n->associacao->nome;
