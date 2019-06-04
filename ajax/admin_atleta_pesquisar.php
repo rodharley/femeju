@@ -11,7 +11,7 @@ $alist = $obj->pesquisar($configPaginacao['primeiroRegistro'],$configPaginacao['
 
 if (count($alist) > 0) {
 foreach($alist as $key => $n){
-    $TPL->FOTO = $n->pessoa -> getNomeFoto('img/pessoas/');;
+    $TPL->FOTO = $n->pessoa -> getNomeFoto('../img/pessoas/');;
     $TPL->NUMERO = $n->getId();
    	$TPL->NOME = $n->pessoa->nome." ".$n->pessoa->nomeMeio." ".$n->pessoa->sobrenome;
     $TPL->SITUACAO = $n->ativo == 1 ? "Regular" : "Irregular";
